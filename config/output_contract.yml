@@ -1,0 +1,506 @@
+artifacts:
+  - path: data/derived/quarterly_panel.csv
+    kind: csv
+    headline_sample_columns:
+      - quarter
+      - tdc_bank_only_qoq
+      - total_deposits_bank_qoq
+      - other_component_qoq
+      - cb_nonts_qoq
+      - foreign_nonts_qoq
+      - bill_share
+      - bank_absorption_share
+      - tga_qoq
+      - reserves_qoq
+      - fedfunds
+      - unemployment
+      - inflation
+      - lag_tdc_bank_only_qoq
+      - lag_total_deposits_bank_qoq
+      - lag_tga_qoq
+      - lag_reserves_qoq
+      - lag_bill_share
+      - lag_fedfunds
+      - lag_unemployment
+      - lag_inflation
+    required_columns:
+      - quarter
+      - tdc_bank_only_qoq
+      - total_deposits_bank_qoq
+      - other_component_qoq
+      - bank_credit_private_qoq
+      - cb_nonts_qoq
+      - foreign_nonts_qoq
+      - domestic_nonfinancial_mmf_reallocation_qoq
+      - domestic_nonfinancial_repo_reallocation_qoq
+      - bill_share
+      - bank_absorption_share
+      - reserve_drain_pressure
+      - quarter_index
+      - slr_tight
+      - tga_qoq
+      - reserves_qoq
+      - fedfunds
+      - unemployment
+      - inflation
+      - lag_tdc_bank_only_qoq
+      - lag_total_deposits_bank_qoq
+      - lag_bank_credit_private_qoq
+      - lag_tga_qoq
+      - lag_reserves_qoq
+      - lag_bill_share
+      - lag_fedfunds
+      - lag_unemployment
+      - lag_inflation
+  - path: output/accounting/accounting_summary.csv
+    kind: csv
+    required_columns:
+      - metric
+      - value
+      - notes
+  - path: output/accounting/quarters_tdc_exceeds_total.csv
+    kind: csv
+    required_columns:
+      - quarter
+      - tdc_bank_only_qoq
+      - total_deposits_bank_qoq
+      - other_component_qoq
+  - path: output/shocks/unexpected_tdc.csv
+    kind: csv
+    required_columns:
+      - quarter
+      - tdc_bank_only_qoq
+      - tdc_fitted
+      - tdc_residual
+      - tdc_residual_z
+      - model_name
+      - train_start_obs
+      - train_condition_number
+      - train_target_sd
+      - train_resid_sd
+      - fitted_to_target_scale_ratio
+      - shock_flag
+  - path: output/models/lp_irf.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/lp_irf_regimes.csv
+    kind: csv
+    required_columns:
+      - regime
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/regime_diagnostics_summary.json
+    kind: json
+    required_keys:
+      - informative_regime_count
+      - stable_regime_count
+      - regimes
+      - takeaways
+  - path: output/models/tdc_sensitivity_ladder.csv
+    kind: csv
+    required_columns:
+      - treatment_variant
+      - treatment_role
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/control_set_sensitivity.csv
+    kind: csv
+    required_columns:
+      - control_variant
+      - control_role
+      - control_columns
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/shock_sample_sensitivity.csv
+    kind: csv
+    required_columns:
+      - sample_variant
+      - sample_role
+      - sample_filter
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/total_minus_other_contrast.csv
+    kind: csv
+    required_columns:
+      - scope
+      - variant
+      - role
+      - horizon
+      - beta_total
+      - beta_other
+      - beta_implied
+      - beta_direct
+      - gap_implied_minus_direct
+      - abs_gap
+      - n_total
+      - n_other
+      - n_direct
+      - sample_mismatch_flag
+  - path: output/models/structural_proxy_evidence.csv
+    kind: csv
+    required_columns:
+      - scope
+      - context
+      - horizon
+      - other_outcome
+      - other_beta
+      - other_se
+      - other_lower95
+      - other_upper95
+      - other_ci_excludes_zero
+      - proxy_outcome
+      - proxy_beta
+      - proxy_se
+      - proxy_lower95
+      - proxy_upper95
+      - proxy_ci_excludes_zero
+      - other_sign
+      - proxy_sign
+      - sign_alignment
+      - evidence_label
+      - proxy_share_of_other_beta
+  - path: output/models/structural_proxy_evidence_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - key_horizons
+      - takeaways
+  - path: output/models/proxy_coverage_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - covered_channel_families
+      - major_uncovered_channel_families
+      - history_limits
+      - key_horizons
+      - published_regime_contexts
+      - release_caveat
+      - takeaways
+  - path: output/models/proxy_unit_audit.json
+    kind: json
+    required_keys:
+      - status
+      - source_series
+      - derived_proxies
+      - takeaways
+  - path: output/models/shock_diagnostics_summary.json
+    kind: json
+    required_keys:
+      - estimand_interpretation
+      - sample_comparison
+      - impact_response_comparison
+      - treatment_variant_comparisons
+      - largest_disagreement_quarters
+      - takeaways
+  - path: output/models/direct_identification_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - shock_definition
+      - horizon_evidence
+      - first_stage_checks
+      - sample_fragility
+      - answer_ready
+      - reasons
+      - warnings
+      - answer_ready_when
+  - path: output/models/result_readiness_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_assessment
+      - reasons
+      - warnings
+      - diagnostics
+      - key_estimates
+      - answer_ready_when
+  - path: output/models/pass_through_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - headline_answer
+      - sample_policy
+      - baseline_horizons
+      - core_treatment_variants
+      - core_control_variants
+      - shock_sample_variants
+      - structural_proxy_context
+      - proxy_coverage_context
+      - published_regime_contexts
+      - readiness_reasons
+      - readiness_warnings
+  - path: output/manifests/raw_downloads.json
+    kind: json
+    required_keys:
+      - runs
+  - path: output/manifests/reused_artifacts.json
+    kind: json
+    required_keys:
+      - artifacts
+  - path: output/manifests/pipeline_run.json
+    kind: json
+    required_keys:
+      - command
+      - outputs
+  - path: site/data/overview.json
+    kind: json
+    required_keys:
+      - headline_metrics
+      - sample
+      - main_findings
+      - caveats
+      - evidence_tiers
+      - artifacts
+  - path: site/data/accounting_summary.csv
+    kind: csv
+    required_columns:
+      - metric
+      - value
+      - notes
+  - path: site/data/quarters_tdc_exceeds_total.csv
+    kind: csv
+    required_columns:
+      - quarter
+      - tdc_bank_only_qoq
+      - total_deposits_bank_qoq
+      - other_component_qoq
+  - path: site/data/unexpected_tdc.csv
+    kind: csv
+    required_columns:
+      - quarter
+      - tdc_bank_only_qoq
+      - tdc_fitted
+      - tdc_residual
+      - tdc_residual_z
+      - model_name
+      - train_start_obs
+      - train_condition_number
+      - train_target_sd
+      - train_resid_sd
+      - fitted_to_target_scale_ratio
+      - shock_flag
+  - path: site/data/lp_irf.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/lp_irf_regimes.csv
+    kind: csv
+    required_columns:
+      - regime
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/regime_diagnostics_summary.json
+    kind: json
+    required_keys:
+      - informative_regime_count
+      - stable_regime_count
+      - regimes
+      - takeaways
+  - path: site/data/tdc_sensitivity_ladder.csv
+    kind: csv
+    required_columns:
+      - treatment_variant
+      - treatment_role
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/control_set_sensitivity.csv
+    kind: csv
+    required_columns:
+      - control_variant
+      - control_role
+      - control_columns
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/shock_sample_sensitivity.csv
+    kind: csv
+    required_columns:
+      - sample_variant
+      - sample_role
+      - sample_filter
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/total_minus_other_contrast.csv
+    kind: csv
+    required_columns:
+      - scope
+      - variant
+      - role
+      - horizon
+      - beta_total
+      - beta_other
+      - beta_implied
+      - beta_direct
+      - gap_implied_minus_direct
+      - abs_gap
+      - n_total
+      - n_other
+      - n_direct
+      - sample_mismatch_flag
+  - path: site/data/structural_proxy_evidence.csv
+    kind: csv
+    required_columns:
+      - scope
+      - context
+      - horizon
+      - other_outcome
+      - other_beta
+      - other_se
+      - other_lower95
+      - other_upper95
+      - other_ci_excludes_zero
+      - proxy_outcome
+      - proxy_beta
+      - proxy_se
+      - proxy_lower95
+      - proxy_upper95
+      - proxy_ci_excludes_zero
+      - other_sign
+      - proxy_sign
+      - sign_alignment
+      - evidence_label
+      - proxy_share_of_other_beta
+  - path: site/data/structural_proxy_evidence_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - key_horizons
+      - takeaways
+  - path: site/data/proxy_coverage_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - covered_channel_families
+      - major_uncovered_channel_families
+      - history_limits
+      - key_horizons
+      - published_regime_contexts
+      - release_caveat
+      - takeaways
+  - path: site/data/proxy_unit_audit.json
+    kind: json
+    required_keys:
+      - status
+      - source_series
+      - derived_proxies
+      - takeaways
+  - path: site/data/shock_diagnostics_summary.json
+    kind: json
+    required_keys:
+      - estimand_interpretation
+      - sample_comparison
+      - impact_response_comparison
+      - treatment_variant_comparisons
+      - largest_disagreement_quarters
+      - takeaways
+  - path: site/data/direct_identification_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - shock_definition
+      - horizon_evidence
+      - first_stage_checks
+      - sample_fragility
+      - answer_ready
+      - reasons
+      - warnings
+      - answer_ready_when
+  - path: site/data/result_readiness_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_assessment
+      - reasons
+      - warnings
+      - diagnostics
+      - key_estimates
+      - answer_ready_when
+  - path: site/data/pass_through_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - headline_answer
+      - sample_policy
+      - baseline_horizons
+      - core_treatment_variants
+      - core_control_variants
+      - shock_sample_variants
+      - structural_proxy_context
+      - proxy_coverage_context
+      - published_regime_contexts
+      - readiness_reasons
+      - readiness_warnings
+canonical_aliases:
+  tdc_qoq: tdc_bank_only_qoq
+  total_deposits_qoq: total_deposits_bank_qoq
+shock_column: tdc_residual_z

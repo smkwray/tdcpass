@@ -1,0 +1,12 @@
+project:
+  name: tdcpass
+  created: '2026-03-29'
+  question: Does unexpected TDC raise matched total deposits or crowd out other deposit-creating
+    channels?
+  headline_frequency: quarterly
+  headline_universe: bank_only
+  main_treatment: tdc_bank_only_qoq
+  main_outcome: total_deposits_bank_qoq
+  main_estimator: local_projections_hac
+  main_shock_method: expanding_window_ols_residual
+  optional_sibling_cache_reuse: true

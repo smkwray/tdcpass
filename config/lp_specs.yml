@@ -1,0 +1,180 @@
+specs:
+  baseline:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    shock_column: tdc_residual_z
+    outcomes:
+    - tdc_bank_only_qoq
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    - bank_credit_private_qoq
+    - cb_nonts_qoq
+    - foreign_nonts_qoq
+    - domestic_nonfinancial_mmf_reallocation_qoq
+    - domestic_nonfinancial_repo_reallocation_qoq
+    controls:
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+  regimes:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    shock_column: tdc_residual_z
+    outcomes:
+    - tdc_bank_only_qoq
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    - bank_credit_private_qoq
+    - cb_nonts_qoq
+    - foreign_nonts_qoq
+    - domestic_nonfinancial_mmf_reallocation_qoq
+    - domestic_nonfinancial_repo_reallocation_qoq
+    controls:
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    regime_columns:
+    - bank_absorption_share
+    - bill_share
+    - reserve_drain_pressure
+  sensitivity:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    outcomes:
+    - tdc_bank_only_qoq
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    - bank_credit_private_qoq
+    - cb_nonts_qoq
+    - foreign_nonts_qoq
+    - domestic_nonfinancial_mmf_reallocation_qoq
+    - domestic_nonfinancial_repo_reallocation_qoq
+    controls:
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    shock_variants:
+      baseline:
+        shock_column: tdc_residual_z
+        treatment_role: core
+      bank_only_long_burnin:
+        shock_column: tdc_long_burnin_residual_z
+        treatment_role: core
+      bank_only_no_bill_share:
+        shock_column: tdc_no_bill_share_residual_z
+        treatment_role: exploratory
+      legacy_totaldep_long_burnin:
+        shock_column: tdc_legacy_totaldep_residual_z
+        treatment_role: exploratory
+      broad_depository:
+        shock_column: tdc_broad_depository_residual_z
+        treatment_role: exploratory
+  control_sensitivity:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    shock_column: tdc_residual_z
+    outcomes:
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    - bank_credit_private_qoq
+    - cb_nonts_qoq
+    - foreign_nonts_qoq
+    - domestic_nonfinancial_mmf_reallocation_qoq
+    - domestic_nonfinancial_repo_reallocation_qoq
+    control_variants:
+      headline_lagged_macro:
+        control_role: headline
+        controls:
+        - lag_fedfunds
+        - lag_unemployment
+        - lag_inflation
+      lagged_macro_plus_bill:
+        control_role: core
+        controls:
+        - lag_fedfunds
+        - lag_unemployment
+        - lag_inflation
+        - lag_bill_share
+      lagged_macro_plus_trend:
+        control_role: exploratory
+        controls:
+        - lag_fedfunds
+        - lag_unemployment
+        - lag_inflation
+        - quarter_index
+  sample_sensitivity:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    shock_column: tdc_residual_z
+    outcomes:
+    - tdc_bank_only_qoq
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    - bank_credit_private_qoq
+    - cb_nonts_qoq
+    - foreign_nonts_qoq
+    - domestic_nonfinancial_mmf_reallocation_qoq
+    - domestic_nonfinancial_repo_reallocation_qoq
+    controls:
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    sample_variants:
+      all_usable_shocks:
+        sample_role: headline
+        exclude_flagged_shocks: false
+        flag_column: shock_flag
+      drop_flagged_shocks:
+        sample_role: exploratory
+        exclude_flagged_shocks: true
+        flag_column: shock_flag

@@ -1,0 +1,199 @@
+series:
+- key: tdc_bank_only_qoq
+  display_name: TDC, bank-only, quarterly change
+  role: treatment
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_or_sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Preferred headline treatment.
+- key: tdc_broad_depository_qoq
+  display_name: TDC, broad depository alternative, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_or_sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Sensitivity only.
+- key: total_deposits_bank_qoq
+  display_name: Total bank deposits, matched quarterly change
+  role: outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_derived_match
+  quality_tier: tier_1_direct
+  notes: Headline outcome.
+- key: tga_qoq
+  display_name: Treasury General Account quarterly change
+  role: control
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h41_or_fred
+  quality_tier: tier_1_direct
+  notes: Quarterly control for Treasury cash movements.
+- key: reserves_qoq
+  display_name: Reserve balances quarterly change
+  role: control
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h41_or_fred
+  quality_tier: tier_1_direct
+  notes: Quarterly control for reserve-side balance-sheet conditions.
+- key: other_component_qoq
+  display_name: Non-TDC deposit component, quarterly change
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as total deposits minus TDC.
+- key: bank_credit_private_qoq
+  display_name: Bank private-credit / non-Treasury proxy, quarterly change
+  role: structural_proxy
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_or_h8_proxy
+  quality_tier: tier_2_constructed
+  notes: Mechanism cross-check built from FRED bank credit minus Treasury and agency securities with explicit per-series unit audit. This proxy has a shorter public history than the headline sample and should not gate the headline quarterly panel.
+- key: cb_nonts_qoq
+  display_name: Central-bank non-Treasury channel proxy, quarterly change
+  role: structural_proxy
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_or_h41_proxy
+  quality_tier: tier_2_constructed
+  notes: Mechanism cross-check.
+- key: foreign_nonts_qoq
+  display_name: Foreign non-Treasury channel proxy, quarterly change
+  role: structural_proxy
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_proxy
+  quality_tier: tier_2_constructed
+  notes: Mechanism cross-check.
+- key: domestic_nonfinancial_mmf_reallocation_qoq
+  display_name: Domestic nonfinancial MMF reallocation proxy, quarterly change
+  role: structural_proxy
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_proxy
+  quality_tier: tier_2_constructed
+  notes: Sign-normalized decline in domestic nonfinancial money market fund holdings; positive values indicate portfolio shifts that could support deposit increases.
+- key: domestic_nonfinancial_repo_reallocation_qoq
+  display_name: Domestic nonfinancial repo reallocation proxy, quarterly change
+  role: structural_proxy
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_proxy
+  quality_tier: tier_2_constructed
+  notes: Sign-normalized decline in domestic nonfinancial repo assets; positive values indicate cash reallocations that could support deposit increases.
+- key: bill_share
+  display_name: Bill-heavy issuance share
+  role: regime
+  frequency: quarterly
+  units: share
+  status: planned_v1
+  preferred_source: fiscaldata_auctions_query
+  quality_tier: tier_2_constructed
+  notes: Quarterly bill share from Treasury auction offering amounts by issue date; regime overlay, not standalone mechanism proof.
+- key: bank_absorption_share
+  display_name: Bank absorption share
+  role: regime
+  frequency: quarterly
+  units: share
+  status: planned_v1
+  preferred_source: sibling_tsyparty_or_proxy
+  quality_tier: tier_3_inferred
+  notes: Regime overlay.
+- key: reserve_drain_pressure
+  display_name: Reserve-drain pressure
+  role: regime
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: fred_reserves_proxy
+  quality_tier: tier_2_constructed
+  notes: Transparent regime overlay equal to negative lagged reserve growth; longer-history liquidity-pressure split for headline regime LPs.
+- key: quarter_index
+  display_name: Quarter index
+  role: control
+  frequency: quarterly
+  units: index
+  status: planned_v1
+  preferred_source: constructed_from_panel_order
+  quality_tier: tier_1_direct
+  notes: Monotonic quarter-order index used only for exploratory trend-stress LP diagnostics.
+- key: slr_tight
+  display_name: Bank balance-sheet space / SLR tightness proxy
+  role: regime
+  frequency: quarterly
+  units: indicator
+  status: planned_v1
+  preferred_source: sibling_slrwatch_or_internal_proxy
+  quality_tier: tier_3_inferred
+  notes: Regime overlay.
+- key: tdc_fitted
+  display_name: Fitted bank-only TDC path
+  role: derived_shock_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: model
+  quality_tier: tier_2_constructed
+  notes: Expanding-window fitted value for the headline TDC treatment.
+- key: tdc_residual
+  display_name: Unexpected bank-only TDC residual
+  role: derived_shock_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: model
+  quality_tier: tier_2_constructed
+  notes: Expanding-window residual from the headline TDC forecast model.
+- key: tdc_residual_z
+  display_name: Standardized unexpected bank-only TDC residual
+  role: derived_shock
+  frequency: quarterly
+  units: standard_deviation
+  status: planned_v1
+  preferred_source: model
+  quality_tier: tier_2_constructed
+  notes: Standardized headline shock used in baseline local projections.
+- key: fedfunds
+  display_name: Federal Funds Rate
+  role: control
+  frequency: monthly_or_quarterly
+  units: percent
+  status: planned_v1
+  preferred_source: fred
+  quality_tier: tier_1_direct
+  notes: Macro control.
+- key: unemployment
+  display_name: Unemployment rate
+  role: control
+  frequency: monthly_or_quarterly
+  units: percent
+  status: planned_v1
+  preferred_source: fred
+  quality_tier: tier_1_direct
+  notes: Macro control.
+- key: inflation
+  display_name: Inflation / CPI growth
+  role: control
+  frequency: monthly_or_quarterly
+  units: percent_change
+  status: planned_v1
+  preferred_source: fred
+  quality_tier: tier_1_direct
+  notes: Macro control.

@@ -1,0 +1,81 @@
+siblings:
+  tdcest:
+    search_roots:
+    - $TDCEST_ROOT
+    - $REPO_ROOT/../tdcest
+    - $REPO_ROOT/../../tdcest
+    artifacts:
+    - key: tdc_quarterly_main
+      globs:
+      - data/**/*.csv
+      - data/**/*.parquet
+      - site/**/*.json
+      - output/**/*.csv
+      - outputs/**/*.csv
+      name_keywords:
+      - tdc
+      - quarter
+      - bank
+  tsyparty:
+    search_roots:
+    - $TSYPARTY_ROOT
+    - $REPO_ROOT/../tsyparty
+    - $REPO_ROOT/../../tsyparty
+    artifacts:
+    - key: holder_or_counterparty_artifacts
+      globs:
+      - outputs/**/*.csv
+      - site/**/*.json
+      - data/**/*.csv
+      name_keywords:
+      - party
+      - holder
+      - share
+      - bank
+  wamest:
+    search_roots:
+    - $WAMEST_ROOT
+    - $REPO_ROOT/../wamest
+    - $REPO_ROOT/../../wamest
+    artifacts:
+    - key: maturity_artifacts
+      globs:
+      - web/**/*.json
+      - data/**/*.csv
+      - outputs/**/*.csv
+      name_keywords:
+      - maturity
+      - bill
+      - wam
+  qrawatch:
+    search_roots:
+    - $QRAWATCH_ROOT
+    - $REPO_ROOT/../qrawatch
+    - $REPO_ROOT/../../qrawatch
+    artifacts:
+    - key: issuance_composition_artifacts
+      globs:
+      - site/**/*.json
+      - data/**/*.csv
+      - outputs/**/*.csv
+      name_keywords:
+      - bill
+      - coupon
+      - composition
+      - qra
+  slrwatch:
+    search_roots:
+    - $SLRWATCH_ROOT
+    - $REPO_ROOT/../slrwatch
+    - $REPO_ROOT/../../slrwatch
+    artifacts:
+    - key: constraint_regime_artifacts
+      globs:
+      - site/**/*.json
+      - output/**/*.csv
+      - data/**/*.csv
+      name_keywords:
+      - slr
+      - constraint
+      - treasury
+      - deposit

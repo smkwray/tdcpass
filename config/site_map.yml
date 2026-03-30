@@ -1,0 +1,17 @@
+sections:
+- id: overview
+  title: Overview
+- id: accounting
+  title: Accounting
+- id: shocks
+  title: Unexpected TDC
+- id: irfs
+  title: Impulse Responses
+- id: regimes
+  title: Regimes
+- id: sensitivity
+  title: Sensitivity
+- id: methods
+  title: Methods
+- id: limits
+  title: Limits

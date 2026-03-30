@@ -1,0 +1,41 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.DS_Store
+.env
+
+# Never publish local orchestration state.
+do/
+
+# Non-public working material.
+docs/
+prompts/
+
+# No public site yet.
+site/
+
+*.plan.md
+plan.md
+plans/
+*.pyo
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+data/raw/*
+!data/raw/.gitkeep
+
+data/cache/*
+!data/cache/.gitkeep
+
+data/derived/*
+!data/derived/.gitkeep
+
+data/examples/*
+!data/examples/.gitkeep
+
+output/*
+!output/.gitkeep

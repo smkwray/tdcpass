@@ -1,0 +1,61 @@
+sources:
+  fred_api:
+    type: api
+    base_url: https://api.stlouisfed.org/fred
+    docs_url: https://fred.stlouisfed.org/docs/api/fred/
+    auth_env: FRED_API_KEY
+    notes: Used for macro controls and many H.8/H.4.1 access paths.
+  frb_z1:
+    type: official_release
+    landing_url: https://www.federalreserve.gov/releases/z1/
+    ddp_choose_url: https://www.federalreserve.gov/datadownload/choose.aspx?rel=z1
+    notes: Quarterly Financial Accounts backbone for TDC construction.
+  frb_h8:
+    type: official_release
+    landing_url: https://www.federalreserve.gov/releases/h8/
+    about_url: https://www.federalreserve.gov/releases/h8/about.htm
+    notes: Weekly bank balance-sheet series and some monthly aggregates.
+  frb_h41:
+    type: official_release
+    landing_url: https://www.federalreserve.gov/releases/h41/
+    ddp_choose_url: https://www.federalreserve.gov/datadownload/choose.aspx?rel=h41
+    notes: Weekly TGA and reserve-balance context.
+  fiscaldata_api:
+    type: api
+    base_url: https://api.fiscaldata.treasury.gov/services/api/fiscal_service/
+    docs_url: https://fiscaldata.treasury.gov/api-documentation/
+    notes: Issuance mix, auction timing, debt operations.
+  fdic_bankfind:
+    type: api
+    docs_url: https://api.fdic.gov/banks/docs
+    notes: Optional later bank-panel branch.
+  ffiec_call_reports:
+    type: landing_page
+    landing_url: https://cdr.ffiec.gov/
+    notes: Optional later bank-panel branch.
+  ncua_call_reports:
+    type: landing_page
+    landing_url: https://ncua.gov/analysis/credit-union-corporate-call-report-data
+    notes: Broad-depository sensitivity, optional.
+canonical_starter_series:
+- key: tga_weekly
+  provider: fred
+  series_id: WTREGEN
+- key: reserve_balances_weekly
+  provider: fred
+  series_id: WRESBAL
+- key: on_rrp_weekly
+  provider: fred
+  series_id: RRPONTSYD
+- key: deposits_all_banks_weekly
+  provider: fred
+  series_id: DPSACBW027SBOG
+- key: bank_credit_weekly
+  provider: fred
+  series_id: TOTBKCR
+- key: loans_leases_weekly
+  provider: fred
+  series_id: TOTLL
+- key: treasury_agency_nonmbs_weekly
+  provider: fred
+  series_id: TNMACBW027SBOG

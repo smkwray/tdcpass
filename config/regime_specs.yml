@@ -1,0 +1,16 @@
+regimes:
+  bank_absorption:
+    column: bank_absorption_share
+    type: threshold
+    threshold: median
+    publication_role: diagnostic_only
+  bill_heavy:
+    column: bill_share
+    type: threshold
+    threshold: median
+    publication_role: published
+  reserve_drain:
+    column: reserve_drain_pressure
+    type: threshold
+    threshold: median
+    publication_role: published

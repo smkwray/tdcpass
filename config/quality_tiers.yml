@@ -1,0 +1,10 @@
+tiers:
+  tier_1_direct:
+    label: Direct official series
+    description: Observed series from official releases or official APIs.
+  tier_2_constructed:
+    label: Transparent transformation
+    description: Arithmetic or documented transformations of official series.
+  tier_3_inferred:
+    label: Model-based or inferred
+    description: Counterparty inference, regime proxies, or model-based quantities.
