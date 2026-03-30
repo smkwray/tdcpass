@@ -13,6 +13,7 @@ Current posture:
 - reproducible public-data pipeline
 - quarterly, bank-only headline design
 - explicit diagnostics for identification and mechanism caveats
+- headline panel currently spans `2003Q2` to `2025Q4`, with usable shock observations from `2009Q2` to `2025Q4`
 - no published site yet
 
 The current empirical bundle should be read as a **methods and reproducibility preview**, not as a settled pass-through or crowd-out result.

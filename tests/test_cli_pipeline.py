@@ -75,6 +75,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
+        "output/models/sample_construction_summary.json",
     ]:
         if rel.endswith("accounting_summary.csv"):
             _write_csv(source_root / rel, ["metric", "value", "notes"], [["share_other_negative", 0.0, "stub"]])
@@ -167,6 +168,19 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                     "readiness_warnings": [],
                 },
             )
+        elif rel.endswith("sample_construction_summary.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "full_panel": {"rows": 1},
+                    "headline_sample": {"rows": 1},
+                    "usable_shock_sample": {"rows": 0},
+                    "shock_definition": {"shock_column": "tdc_residual_z"},
+                    "headline_sample_truncation": {"dropped_rows_from_full_panel": 0},
+                    "extended_column_coverage": [],
+                    "takeaways": ["stub"],
+                },
+            )
         elif rel.endswith("direct_identification_summary.json"):
             _write_json(
                 source_root / rel,
@@ -234,3 +248,15 @@ def test_demo_command_still_exists() -> None:
     parser = build_parser()
     parsed = parser.parse_args(["demo"])
     assert parsed.command == "demo"
+
+
+def test_pipeline_run_supports_offline_raw_fixture(tmp_path: Path) -> None:
+    fixture_root = Path(__file__).resolve().parent / "fixtures" / "offline_raw_fixture"
+    dest_root = tmp_path / "offline-dest"
+
+    exit_code = main(["pipeline", "run", "--root", str(dest_root), "--raw-fixture-root", str(fixture_root), "--reuse-mode", "rebuild"])
+
+    assert exit_code == 0
+    assert (dest_root / "data" / "derived" / "quarterly_panel.csv").exists()
+    assert (dest_root / "output" / "models" / "sample_construction_summary.json").exists()
+    assert (dest_root / "output" / "manifests" / "pipeline_run.json").exists()

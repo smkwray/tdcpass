@@ -8,6 +8,8 @@ from tdcpass.analysis.structural_proxy_evidence import PROXY_OUTCOMES
 
 
 def _lp_row(df: pd.DataFrame, *, outcome: str, horizon: int) -> dict[str, Any] | None:
+    if df.empty or "outcome" not in df.columns or "horizon" not in df.columns:
+        return None
     sample = df[(df["outcome"] == outcome) & (df["horizon"] == horizon)]
     if sample.empty:
         return None

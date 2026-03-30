@@ -25,9 +25,12 @@ def _doctor(args: argparse.Namespace | None = None) -> int:
     required = [
         root / "README.md",
         root / "config" / "project.yml",
+        root / "config" / "output_contract.yml",
+        root / "config" / "regime_specs.yml",
         root / "config" / "series_registry.yml",
         root / "config" / "shock_specs.yml",
         root / "config" / "lp_specs.yml",
+        root / "docs" / "output_schema.md",
     ]
     missing = [str(path.relative_to(root)) for path in required if not path.exists()]
     payload = {
@@ -127,6 +130,7 @@ def _pipeline_run(args: argparse.Namespace) -> int:
         source_root=Path(args.source_root) if args.source_root else None,
         contract_path=Path(args.contract) if args.contract else None,
         reuse_mode=args.reuse_mode,
+        raw_fixture_root=Path(args.raw_fixture_root) if args.raw_fixture_root else None,
     )
     print(json.dumps(result, indent=2))
     return 0
@@ -149,6 +153,7 @@ def build_parser() -> argparse.ArgumentParser:
     pipeline_run.add_argument("--source-root", default=None, help="Source bundle root containing quarterly inputs")
     pipeline_run.add_argument("--contract", default=None, help="Override the output contract path")
     pipeline_run.add_argument("--reuse-mode", default=None, help="Sibling cache reuse mode: discover, rebuild, copy, or symlink")
+    pipeline_run.add_argument("--raw-fixture-root", default=None, help="Offline frozen raw-data fixture root for a reproducible rebuild")
     pipeline_run.set_defaults(func=_pipeline_run)
 
     discover = subparsers.add_parser("discover-cache", help="Search sibling repos for reusable local artifacts")

@@ -72,6 +72,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/total_minus_other_contrast.csv",
         "output/models/structural_proxy_evidence.csv",
         "output/models/proxy_unit_audit.json",
+        "output/models/sample_construction_summary.json",
     }
     json_artifacts = {
         "output/models/regime_diagnostics_summary.json",
@@ -127,6 +128,19 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "status": "ok",
                     "source_series": [],
                     "derived_proxies": [],
+                    "takeaways": ["stub"],
+                },
+            )
+        elif rel.endswith("sample_construction_summary.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "full_panel": {"rows": 1},
+                    "headline_sample": {"rows": 1},
+                    "usable_shock_sample": {"rows": 0},
+                    "shock_definition": {"shock_column": "tdc_residual_z"},
+                    "headline_sample_truncation": {"dropped_rows_from_full_panel": 0},
+                    "extended_column_coverage": [],
                     "takeaways": ["stub"],
                 },
             )

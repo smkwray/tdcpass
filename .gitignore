@@ -10,7 +10,9 @@ __pycache__/
 do/
 
 # Non-public working material.
-docs/
+docs/*
+!docs/output_schema.md
+!docs/research_design.md
 prompts/
 
 # No public site yet.

@@ -28,6 +28,35 @@ def _write_z1_zip(path: Path) -> None:
         archive.writestr("csv/all_sectors_levels_q.csv", frame.to_csv(index=False))
 
 
+def _write_z1_multitable_zip(path: Path) -> None:
+    all_sectors = pd.DataFrame(
+        {
+            "date": ["2000Q1", "2000Q2", "2000Q3", "2000Q4", "2001Q1"],
+            "FL763123005": [10.0, 12.0, 16.0, 18.0, 21.0],
+            "FL764100005": [100.0, 110.0, 121.0, 127.0, 133.0],
+            "FL313020005": [20.0, 22.0, 24.0, 26.0, 28.0],
+            "FL313030003": [5.0, 6.0, 7.0, 7.5, 8.0],
+            "FL313030505": [3.0, 3.5, 4.0, 4.5, 5.0],
+            "FL264000005": [50.0, 51.0, 53.0, 54.0, 56.0],
+            "FL383034005": [80.0, 79.0, 78.0, 76.0, 75.0],
+            "FL382051005": [40.0, 39.0, 38.0, 37.0, 35.0],
+        }
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr(
+            "csv/l201.csv",
+            all_sectors[["date", "FL764100005", "FL264000005"]].to_csv(index=False),
+        )
+        archive.writestr(
+            "csv/l203.csv",
+            all_sectors[["date", "FL763123005", "FL313020005"]].to_csv(index=False),
+        )
+        archive.writestr("csv/l204.csv", all_sectors[["date", "FL313030003"]].to_csv(index=False))
+        archive.writestr("csv/l205.csv", all_sectors[["date", "FL313030505"]].to_csv(index=False))
+        archive.writestr("csv/all_sectors_levels_q.csv", all_sectors.to_csv(index=False))
+
+
 def _write_fred_csv(path: Path, *, header: str, rows: list[tuple[str, float]]) -> None:
     frame = pd.DataFrame(rows, columns=["DATE", header])
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -96,6 +125,7 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert result.raw_download_manifest_path.exists()
     assert result.reused_artifacts_path.exists()
     assert result.proxy_unit_audit_path.exists()
+    assert result.sample_construction_summary_path.exists()
     assert set(build_panel._required_panel_columns()).issubset(frame.columns)
     assert frame["quarter"].iloc[0] == "2000Q3"
     assert frame.loc[frame["quarter"] == "2000Q3", "bank_credit_private_qoq"].isna().all()
@@ -112,6 +142,13 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert bank_credit_source["scale_divisor"] == 1.0
     tga_source = next(item for item in proxy_unit_audit["source_series"] if item["series_key"] == "tga_level")
     assert tga_source["scale_divisor"] == 1000.0
+    sample_summary = json.loads(result.sample_construction_summary_path.read_text(encoding="utf-8"))
+    assert sample_summary["full_panel"]["rows"] == 5
+    assert sample_summary["headline_sample"]["rows"] == len(frame)
+    assert sample_summary["headline_sample"]["start_quarter"] == "2000Q3"
+    assert all(item["column"] != "quarter" for item in sample_summary["headline_sample_truncation"]["columns"])
+    extended_bank_credit = next(item for item in sample_summary["extended_column_coverage"] if item["column"] == "bank_credit_private_qoq")
+    assert extended_bank_credit["headline_sample_missing_obs"] > 0
 
 
 def test_reused_tdc_series_accepts_legacy_alias(tmp_path: Path) -> None:
@@ -121,3 +158,28 @@ def test_reused_tdc_series_accepts_legacy_alias(tmp_path: Path) -> None:
     frame = build_panel._load_reused_tdc_series(payload)
     assert frame is not None
     assert list(frame.columns) == ["quarter", "tdc_bank_only_qoq"]
+
+
+def test_build_public_quarterly_panel_from_offline_raw_fixture(tmp_path: Path, monkeypatch) -> None:
+    fixture_root = Path(__file__).resolve().parent / "fixtures" / "offline_raw_fixture"
+    monkeypatch.setattr(build_panel, "build_cache_reuse_provenance", lambda reuse_mode=None: {"reuse_mode": "rebuild", "reused_artifacts": [], "fresh_downloads": []})
+
+    result = build_panel.build_public_quarterly_panel(base_dir=tmp_path, fixture_root=fixture_root, reuse_mode="rebuild")
+
+    assert result.panel_path.exists()
+    manifest = json.loads(result.raw_download_manifest_path.read_text(encoding="utf-8"))
+    assert len(manifest["runs"]) == 9
+    assert all(entry["params"]["mode"] == "raw_fixture" for entry in manifest["runs"])
+
+
+def test_read_z1_levels_normalizes_live_multitable_zip_layout(tmp_path: Path) -> None:
+    z1_zip = tmp_path / "fixtures" / "z1_multitable.zip"
+    _write_z1_multitable_zip(z1_zip)
+
+    frame = build_panel._read_z1_levels(z1_zip, build_panel.Z1_SERIES)
+
+    assert "quarter" in frame.columns
+    assert "date" not in frame.columns
+    assert frame["quarter"].tolist() == ["2000Q1", "2000Q2", "2000Q3", "2000Q4", "2001Q1"]
+    assert frame["domestic_nonfinancial_mmf_level"].notna().all()
+    assert frame["domestic_nonfinancial_repo_level"].notna().all()

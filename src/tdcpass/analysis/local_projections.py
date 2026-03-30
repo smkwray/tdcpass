@@ -51,6 +51,20 @@ def _run_lp_on_sample(
         raise KeyError(f"Missing required columns: {missing}")
 
     rows: list[dict[str, float | int | str]] = []
+    output_columns = [
+        *(list(extra_row_fields.keys()) if extra_row_fields else []),
+        "outcome",
+        "horizon",
+        "beta",
+        "se",
+        "lower95",
+        "upper95",
+        "n",
+        "spec_name",
+        "shock_column",
+        "shock_scale",
+        "response_type",
+    ]
     shock_scale = "rolling_oos_standard_deviation" if shock_col.endswith("_z") else "raw_unit"
     response_type = "cumulative_sum_h0_to_h" if cumulative else "lead_h"
     for outcome in outcome_cols:
@@ -87,7 +101,9 @@ def _run_lp_on_sample(
             if extra_row_fields:
                 row.update(extra_row_fields)
             rows.append(row)
-    return pd.DataFrame(rows)
+    if not rows:
+        return pd.DataFrame(columns=output_columns)
+    return pd.DataFrame(rows, columns=output_columns)
 
 
 def run_local_projections(

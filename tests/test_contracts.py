@@ -34,6 +34,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
+        "output/models/sample_construction_summary.json",
         "output/manifests/raw_downloads.json",
         "output/manifests/reused_artifacts.json",
         "output/manifests/pipeline_run.json",
@@ -56,6 +57,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "site/data/direct_identification_summary.json",
         "site/data/result_readiness_summary.json",
         "site/data/pass_through_summary.json",
+        "site/data/sample_construction_summary.json",
     }
     assert expected.issubset(paths)
 
@@ -124,6 +126,7 @@ def test_output_schema_mentions_full_bundle() -> None:
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
+        "output/models/sample_construction_summary.json",
         "proxy_coverage_context",
         "treatment_role",
         "control_role",
@@ -141,6 +144,7 @@ def test_output_schema_mentions_full_bundle() -> None:
         "site/data/direct_identification_summary.json",
         "site/data/result_readiness_summary.json",
         "site/data/pass_through_summary.json",
+        "site/data/sample_construction_summary.json",
         "headline sample",
     ]:
         assert needle in text

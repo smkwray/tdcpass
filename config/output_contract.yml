@@ -6,19 +6,11 @@ artifacts:
       - tdc_bank_only_qoq
       - total_deposits_bank_qoq
       - other_component_qoq
-      - cb_nonts_qoq
-      - foreign_nonts_qoq
       - bill_share
-      - bank_absorption_share
-      - tga_qoq
-      - reserves_qoq
       - fedfunds
       - unemployment
       - inflation
       - lag_tdc_bank_only_qoq
-      - lag_total_deposits_bank_qoq
-      - lag_tga_qoq
-      - lag_reserves_qoq
       - lag_bill_share
       - lag_fedfunds
       - lag_unemployment
@@ -265,6 +257,16 @@ artifacts:
       - published_regime_contexts
       - readiness_reasons
       - readiness_warnings
+  - path: output/models/sample_construction_summary.json
+    kind: json
+    required_keys:
+      - full_panel
+      - headline_sample
+      - usable_shock_sample
+      - shock_definition
+      - headline_sample_truncation
+      - extended_column_coverage
+      - takeaways
   - path: output/manifests/raw_downloads.json
     kind: json
     required_keys:
@@ -500,6 +502,16 @@ artifacts:
       - published_regime_contexts
       - readiness_reasons
       - readiness_warnings
+  - path: site/data/sample_construction_summary.json
+    kind: json
+    required_keys:
+      - full_panel
+      - headline_sample
+      - usable_shock_sample
+      - shock_definition
+      - headline_sample_truncation
+      - extended_column_coverage
+      - takeaways
 canonical_aliases:
   tdc_qoq: tdc_bank_only_qoq
   total_deposits_qoq: total_deposits_bank_qoq

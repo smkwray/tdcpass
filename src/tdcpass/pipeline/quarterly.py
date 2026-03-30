@@ -172,8 +172,41 @@ def _apply_shock_spec(df: Any, spec: Mapping[str, Any]) -> Any:
     )
 
 
-def _materialize_real_outputs(root: Path, contract: Mapping[str, Any], *, reuse_mode: str | None = None) -> dict[str, str]:
-    build_result = build_public_quarterly_panel(root, reuse_mode=reuse_mode)
+def _write_sample_construction_summary(
+    path: Path,
+    *,
+    shocked: Any,
+    shock_spec: Mapping[str, Any],
+) -> Path:
+    payload = _load_json(path)
+    shock_column = str(shock_spec.get("standardized_column", "tdc_residual_z"))
+    usable = shocked.dropna(subset=[shock_column]).copy() if shock_column in shocked.columns else shocked.iloc[0:0].copy()
+    payload["usable_shock_sample"] = {
+        "rows": int(len(usable)),
+        "start_quarter": None if usable.empty else str(usable["quarter"].iloc[0]),
+        "end_quarter": None if usable.empty else str(usable["quarter"].iloc[-1]),
+    }
+    payload["shock_definition"] = {
+        "shock_column": shock_column,
+        "target": str(shock_spec.get("target", "")),
+        "model_name": str(shock_spec.get("model_name", "")),
+        "predictors": [str(item) for item in shock_spec.get("predictors", [])],
+        "min_train_obs": int(shock_spec.get("min_train_obs", 0)),
+    }
+    payload["takeaways"] = list(payload.get("takeaways", [])) + [
+        "Usable shock counts are reported separately from headline panel rows because the expanding-window burn-in is part of the treatment definition."
+    ]
+    return write_json_payload(path, payload)
+
+
+def _materialize_real_outputs(
+    root: Path,
+    contract: Mapping[str, Any],
+    *,
+    reuse_mode: str | None = None,
+    raw_fixture_root: Path | None = None,
+) -> dict[str, str]:
+    build_result = build_public_quarterly_panel(root, reuse_mode=reuse_mode, fixture_root=raw_fixture_root)
     panel = compute_other_component(load_panel(build_result.panel_path))
 
     accounting_summary = build_accounting_summary(panel)
@@ -193,6 +226,11 @@ def _materialize_real_outputs(root: Path, contract: Mapping[str, Any], *, reuse_
 
     shocks_path = root / "output" / "shocks" / "unexpected_tdc.csv"
     export_frame(shocked[_artifact_columns(contract, "output/shocks/unexpected_tdc.csv")], shocks_path)
+    sample_construction_summary_path = _write_sample_construction_summary(
+        build_result.sample_construction_summary_path,
+        shocked=shocked,
+        shock_spec=baseline_shock_spec,
+    )
 
     lp_specs = load_yaml(_config_path("lp_specs.yml"))
     regime_specs = load_yaml(_config_path("regime_specs.yml"))
@@ -322,6 +360,7 @@ def _materialize_real_outputs(root: Path, contract: Mapping[str, Any], *, reuse_
         outputs=[
             build_result.panel_path,
             build_result.proxy_unit_audit_path,
+            sample_construction_summary_path,
             accounting_summary_path,
             quarters_exceeds_path,
             shocks_path,
@@ -343,12 +382,17 @@ def _materialize_real_outputs(root: Path, contract: Mapping[str, Any], *, reuse_
         ],
         raw_download_runs=raw_download_runs,
         reused_artifacts=reused_payload.get("reused_artifacts", []),
-        extra={"contract_path": str(_config_path("output_contract.yml")), "mode": "real"},
+        extra={
+            "contract_path": str(_config_path("output_contract.yml")),
+            "mode": "real",
+            "raw_fixture_root": None if raw_fixture_root is None else str(raw_fixture_root),
+        },
     )
 
     return {
         "panel_path": str(build_result.panel_path),
         "proxy_unit_audit_path": str(build_result.proxy_unit_audit_path),
+        "sample_construction_summary_path": str(sample_construction_summary_path),
         "accounting_summary_path": str(accounting_summary_path),
         "quarters_tdc_exceeds_total_path": str(quarters_exceeds_path),
         "shocks_path": str(shocks_path),
@@ -437,6 +481,7 @@ def run_quarterly_pipeline(
     raw_download_runs: list[Mapping[str, Any]] | None = None,
     reused_artifacts: list[Mapping[str, Any]] | None = None,
     reuse_mode: str | None = None,
+    raw_fixture_root: Path | None = None,
 ) -> dict[str, str]:
     root = base_dir or repo_root()
     ensure_repo_dirs(root)
@@ -455,4 +500,4 @@ def run_quarterly_pipeline(
             reused_artifacts=reused_artifacts,
         )
 
-    return _materialize_real_outputs(root, contract, reuse_mode=reuse_mode)
+    return _materialize_real_outputs(root, contract, reuse_mode=reuse_mode, raw_fixture_root=raw_fixture_root)

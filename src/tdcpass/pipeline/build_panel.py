@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -59,6 +60,7 @@ class QuarterlyPanelBuildResult:
     raw_download_manifest_path: Path
     reused_artifacts_path: Path
     proxy_unit_audit_path: Path
+    sample_construction_summary_path: Path
     rows: int
 
 
@@ -103,6 +105,27 @@ def _append_raw_manifest(
     )
 
 
+def _copy_fixture_file(
+    fixture_path: Path,
+    destination: Path,
+    manifest_path: Path,
+    *,
+    source_key: str,
+) -> Path:
+    if not fixture_path.exists():
+        raise FileNotFoundError(f"Missing raw fixture file: {fixture_path}")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(fixture_path, destination)
+    _append_raw_manifest(
+        manifest_path,
+        source_key=source_key,
+        source_url=fixture_path.resolve().as_uri(),
+        params={"mode": "raw_fixture"},
+        file_path=destination,
+    )
+    return destination
+
+
 def _download_current_z1_zip(raw_dir: Path, manifest_path: Path, *, timeout: int = DEFAULT_TIMEOUT) -> Path:
     landing_url = "https://www.federalreserve.gov/releases/z1/"
     html_path = raw_dir / "z1" / "landing.html"
@@ -135,6 +158,25 @@ def _download_current_z1_zip(raw_dir: Path, manifest_path: Path, *, timeout: int
     return zip_path
 
 
+def _normalize_z1_levels_frame(frame: pd.DataFrame, series_codes: Mapping[str, str]) -> pd.DataFrame:
+    frame = frame.rename(columns=lambda value: str(value).removesuffix(".Q"))
+    selected = ["date", *series_codes.values()]
+    out = frame[selected].rename(columns={code: key for key, code in series_codes.items()})
+    return _finalize_z1_levels_frame(out, series_codes.keys())
+
+
+def _finalize_z1_levels_frame(frame: pd.DataFrame, series_keys: Iterable[str]) -> pd.DataFrame:
+    out = frame.copy()
+    if "date" in out.columns:
+        out["quarter"] = out["date"].astype(str).str.replace(":", "", regex=False)
+        out = out.drop(columns=["date"])
+    elif "quarter" not in out.columns:
+        raise KeyError("Z.1 levels frame must contain either 'date' or 'quarter'.")
+    for column in series_keys:
+        out[column] = pd.to_numeric(out[column], errors="coerce") / 1000.0
+    return out
+
+
 def _read_z1_levels(zip_path: Path, series_codes: Mapping[str, str]) -> pd.DataFrame:
     frames: list[pd.DataFrame] = []
     with zipfile.ZipFile(zip_path) as archive:
@@ -142,9 +184,7 @@ def _read_z1_levels(zip_path: Path, series_codes: Mapping[str, str]) -> pd.DataF
         if missing_members:
             with archive.open("csv/all_sectors_levels_q.csv") as handle:
                 frame = pd.read_csv(handle)
-            frame = frame.rename(columns=lambda value: str(value).removesuffix(".Q"))
-            selected = ["date", *series_codes.values()]
-            out = frame[selected].rename(columns={code: key for key, code in series_codes.items()})
+            out = _normalize_z1_levels_frame(frame, series_codes)
         else:
             for member_name, keys in Z1_TABLE_MEMBERS.items():
                 with archive.open(member_name) as handle:
@@ -166,11 +206,11 @@ def _read_z1_levels(zip_path: Path, series_codes: Mapping[str, str]) -> pd.DataF
                 )
                 out = out.merge(supplement, on="date", how="left")
 
-    out["quarter"] = out["date"].astype(str).str.replace(":", "", regex=False)
-    out = out.drop(columns=["date"])
-    for column in series_codes:
-        out[column] = pd.to_numeric(out[column], errors="coerce") / 1000.0
-    return out
+    return _finalize_z1_levels_frame(out, series_codes.keys())
+
+
+def _read_z1_levels_from_csv(path: Path, series_codes: Mapping[str, str]) -> pd.DataFrame:
+    return _normalize_z1_levels_frame(pd.read_csv(path), series_codes)
 
 
 def _download_fred_csv(series_id: str, raw_dir: Path, manifest_path: Path, *, timeout: int = DEFAULT_TIMEOUT) -> Path:
@@ -362,6 +402,90 @@ def _compute_slr_tight_indicator(frame: pd.DataFrame) -> pd.Series:
     ).astype(float)
 
 
+def _write_sample_construction_summary(
+    path: Path,
+    *,
+    full_panel: pd.DataFrame,
+    headline_panel: pd.DataFrame,
+    headline_columns: list[str],
+    extended_columns: list[str],
+) -> Path:
+    full_panel = full_panel.sort_values("quarter").reset_index(drop=True)
+    headline_panel = headline_panel.sort_values("quarter").reset_index(drop=True)
+    truncation_rows = []
+    dropped = (
+        full_panel.loc[~full_panel["quarter"].isin(headline_panel["quarter"])]
+        if len(full_panel) != len(headline_panel)
+        else full_panel.iloc[0:0]
+    )
+    for column in headline_columns:
+        if column == "quarter":
+            continue
+        if column not in full_panel.columns:
+            continue
+        observed = full_panel[["quarter", column]].dropna()
+        truncation_rows.append(
+            {
+                "column": column,
+                "full_panel_non_missing_obs": int(full_panel[column].notna().sum()),
+                "first_available_quarter": None if observed.empty else str(observed["quarter"].iloc[0]),
+                "last_available_quarter": None if observed.empty else str(observed["quarter"].iloc[-1]),
+                "missing_rows_in_full_panel": int(full_panel[column].isna().sum()),
+                "dropped_rows_with_column_missing": int(dropped[column].isna().sum()) if column in dropped.columns else 0,
+            }
+        )
+
+    extended_coverage = []
+    for column in extended_columns:
+        if column not in headline_panel.columns:
+            continue
+        observed = headline_panel[["quarter", column]].dropna()
+        extended_coverage.append(
+            {
+                "column": column,
+                "headline_sample_non_missing_obs": int(headline_panel[column].notna().sum()),
+                "headline_sample_missing_obs": int(headline_panel[column].isna().sum()),
+                "coverage_share_within_headline_sample": (
+                    float(headline_panel[column].notna().mean()) if len(headline_panel) else None
+                ),
+                "first_available_quarter": None if observed.empty else str(observed["quarter"].iloc[0]),
+                "last_available_quarter": None if observed.empty else str(observed["quarter"].iloc[-1]),
+            }
+        )
+
+    payload = {
+        "full_panel": {
+            "rows": int(len(full_panel)),
+            "start_quarter": None if full_panel.empty else str(full_panel["quarter"].iloc[0]),
+            "end_quarter": None if full_panel.empty else str(full_panel["quarter"].iloc[-1]),
+        },
+        "headline_sample": {
+            "rows": int(len(headline_panel)),
+            "start_quarter": None if headline_panel.empty else str(headline_panel["quarter"].iloc[0]),
+            "end_quarter": None if headline_panel.empty else str(headline_panel["quarter"].iloc[-1]),
+            "required_columns": headline_columns,
+        },
+        "usable_shock_sample": {
+            "rows": 0,
+            "start_quarter": None,
+            "end_quarter": None,
+        },
+        "shock_definition": {},
+        "headline_sample_truncation": {
+            "dropped_rows_from_full_panel": int(len(full_panel) - len(headline_panel)),
+            "columns": truncation_rows,
+        },
+        "extended_column_coverage": extended_coverage,
+        "takeaways": [
+            "The headline panel is trimmed only on the frozen treatment, outcome, and baseline shock-control columns.",
+            "Extended proxy and regime variables remain in the exported panel but no longer silently define the headline sample.",
+        ],
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    return path
+
+
 def load_panel(path: Path) -> pd.DataFrame:
     return pd.read_csv(path)
 
@@ -371,6 +495,7 @@ def build_public_quarterly_panel(
     *,
     timeout: int = DEFAULT_TIMEOUT,
     reuse_mode: str | None = None,
+    fixture_root: Path | None = None,
 ) -> QuarterlyPanelBuildResult:
     root = base_dir or repo_root()
     dirs = ensure_repo_dirs(root)
@@ -382,6 +507,7 @@ def build_public_quarterly_panel(
     raw_download_manifest_path = output_manifest_dir / "raw_downloads.json"
     reused_artifacts_path = output_manifest_dir / "reused_artifacts.json"
     proxy_unit_audit_path = root / "output" / "models" / "proxy_unit_audit.json"
+    sample_construction_summary_path = root / "output" / "models" / "sample_construction_summary.json"
 
     reuse_payload = build_cache_reuse_provenance(reuse_mode=reuse_mode)
     reused_artifacts_path.write_text(
@@ -389,9 +515,24 @@ def build_public_quarterly_panel(
         encoding="utf-8",
     )
 
-    z1_zip_path = _download_current_z1_zip(raw_dir, raw_download_manifest_path, timeout=timeout)
-    z1_levels = _read_z1_levels(z1_zip_path, Z1_SERIES)
-    auctions_path = _download_fiscaldata_auctions_csv(raw_dir, raw_download_manifest_path, timeout=timeout)
+    if fixture_root is not None:
+        z1_csv_path = _copy_fixture_file(
+            fixture_root / "z1" / "all_sectors_levels_q.csv",
+            raw_dir / "z1" / "all_sectors_levels_q.csv",
+            raw_download_manifest_path,
+            source_key="fixture_frb_z1_csv",
+        )
+        z1_levels = _read_z1_levels_from_csv(z1_csv_path, Z1_SERIES)
+        auctions_path = _copy_fixture_file(
+            fixture_root / "fiscaldata" / "auctions_query.csv",
+            raw_dir / "fiscaldata" / "auctions_query.csv",
+            raw_download_manifest_path,
+            source_key="fixture_fiscaldata_auctions_query",
+        )
+    else:
+        z1_zip_path = _download_current_z1_zip(raw_dir, raw_download_manifest_path, timeout=timeout)
+        z1_levels = _read_z1_levels(z1_zip_path, Z1_SERIES)
+        auctions_path = _download_fiscaldata_auctions_csv(raw_dir, raw_download_manifest_path, timeout=timeout)
     bill_share = _load_bill_share_series(auctions_path)
 
     broad_tdc_level = (
@@ -420,7 +561,15 @@ def build_public_quarterly_panel(
     fred_levels_raw: dict[str, pd.Series] = {}
     fred_levels: dict[str, pd.Series] = {}
     for key, series_id in FRED_SERIES.items():
-        csv_path = _download_fred_csv(series_id, raw_dir, raw_download_manifest_path, timeout=timeout)
+        if fixture_root is not None:
+            csv_path = _copy_fixture_file(
+                fixture_root / "fred" / f"{series_id}.csv",
+                raw_dir / "fred" / f"{series_id}.csv",
+                raw_download_manifest_path,
+                source_key="fixture_fred_graph",
+            )
+        else:
+            csv_path = _download_fred_csv(series_id, raw_dir, raw_download_manifest_path, timeout=timeout)
         series = _load_fred_series(csv_path)
         if key in {"fedfunds", "unemployment", "cpi"}:
             fred_levels[key] = _quarter_average_level(series)
@@ -454,10 +603,14 @@ def build_public_quarterly_panel(
     ]:
         panel[f"lag_{column}"] = panel[column].shift(1)
 
-    panel = _enforce_max_common_sample(panel, _headline_sample_columns())
     panel["reserve_drain_pressure"] = -panel["lag_reserves_qoq"]
+    headline_columns = _headline_sample_columns()
+    full_panel = panel.copy()
+    panel = _enforce_max_common_sample(full_panel, headline_columns)
     panel["quarter_index"] = range(len(panel))
     panel["slr_tight"] = _compute_slr_tight_indicator(panel)
+    required_columns = _required_panel_columns()
+    extended_columns = [column for column in required_columns if column not in headline_columns and column != "quarter_index"]
     panel_path = derived_dir / "quarterly_panel.csv"
     panel_path.parent.mkdir(parents=True, exist_ok=True)
     panel.to_csv(panel_path, index=False, float_format="%.17g")
@@ -467,11 +620,19 @@ def build_public_quarterly_panel(
         fred_levels_scaled=fred_levels,
         panel=panel,
     )
+    _write_sample_construction_summary(
+        sample_construction_summary_path,
+        full_panel=full_panel,
+        headline_panel=panel,
+        headline_columns=headline_columns,
+        extended_columns=extended_columns,
+    )
 
     return QuarterlyPanelBuildResult(
         panel_path=panel_path,
         raw_download_manifest_path=raw_download_manifest_path,
         reused_artifacts_path=reused_artifacts_path,
         proxy_unit_audit_path=proxy_unit_audit_path,
+        sample_construction_summary_path=sample_construction_summary_path,
         rows=int(len(panel)),
     )
