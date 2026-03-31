@@ -258,11 +258,12 @@ Required keys:
 
 - `status`
 - `headline_question`
+- `estimation_path`
 - `periods`
 - `key_horizons`
 - `takeaways`
 
-This summary condenses `period_sensitivity.csv` to the key horizons and period windows used in interpretation.
+This summary condenses `period_sensitivity.csv` to the key horizons and period windows used in interpretation. It should make clear that period sensitivity is a secondary surface rather than the primary exact identity baseline, and its horizon labels should stay CI-aware instead of inferring `crowd_out_signal` from point estimates alone.
 
 ### `output/models/total_minus_other_contrast.csv`
 
@@ -382,6 +383,19 @@ Required keys:
 - `git_commit`
 
 This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml` and also record realized sample metadata from the current run so closeout can fail when docs, config, and exported artifacts drift apart.
+
+### `output/models/provenance_validation_summary.json`
+
+Required keys:
+
+- `status`
+- `failures`
+- `git_commit_check`
+- `config_hashes_check`
+- `upstream_input_check`
+- `spec_metadata_check`
+
+This file is the publish-path provenance verdict for the headline treatment fingerprint. It records whether the stored fingerprint matches the current repo commit, current config hashes, and the currently reachable upstream canonical-TDC source file when that source can be rechecked. The public mirror should only be refreshed when this summary passes.
 
 ### `output/models/direct_identification_summary.json`
 
@@ -570,6 +584,10 @@ Mirror of `output/models/shock_diagnostics_summary.json`.
 ### `site/data/headline_treatment_fingerprint.json`
 
 Mirror of `output/models/headline_treatment_fingerprint.json`.
+
+### `site/data/provenance_validation_summary.json`
+
+Mirror of `output/models/provenance_validation_summary.json`.
 
 ### `site/data/direct_identification_summary.json`
 

@@ -93,7 +93,7 @@
   },
   "interpretation_scope": "deposit_response_with_partial_mechanism_cross_checks",
   "headline_question": "When unexpected bank-only TDC rises, how do total deposits and the non-TDC deposit component respond?",
-  "headline_answer": "Current run supports an impact-stage crowd-out signal in the exact identity baseline, but persistence, mechanism attribution, and ratio-based headline interpretation remain fragile.",
+  "headline_answer": "Current run shows an impact-stage sign pattern consistent with crowd-out in the exact identity baseline, while persistence, mechanism attribution, and ratio-based headline interpretation remain unsettled.",
   "mechanism_caveat": "Structural proxies remain cross-checks on the residual, not standalone proof of mechanism.",
   "sample_policy": {
     "headline_sample_variant": "all_usable_shocks",

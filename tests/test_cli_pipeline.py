@@ -103,6 +103,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
         "output/models/proxy_coverage_summary.json",
         "output/models/proxy_unit_audit.json",
         "output/models/headline_treatment_fingerprint.json",
+        "output/models/provenance_validation_summary.json",
         "output/models/shock_diagnostics_summary.json",
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
@@ -176,6 +177,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                 {
                     "status": "materialized",
                     "headline_question": "stub",
+                    "estimation_path": {"role": "secondary_period_sensitivity_surface"},
                     "periods": [],
                     "key_horizons": {},
                     "takeaways": ["stub"],
@@ -241,6 +243,18 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                         "source_repo_locator": None,
                         "source_repo_commit": None,
                     },
+                },
+            )
+        elif rel.endswith("provenance_validation_summary.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "status": "passed",
+                    "failures": [],
+                    "git_commit_check": {"status": "passed"},
+                    "config_hashes_check": {"status": "passed"},
+                    "upstream_input_check": {"status": "skipped_missing_locator_or_sha"},
+                    "spec_metadata_check": {"status": "passed"},
                 },
             )
         elif rel.endswith("pass_through_summary.json"):
@@ -521,6 +535,7 @@ def test_pipeline_run_supports_offline_raw_fixture(tmp_path: Path) -> None:
     assert (dest_root / "output" / "models" / "lp_irf_identity_baseline.csv").exists()
     assert (dest_root / "output" / "models" / "identity_measurement_ladder.csv").exists()
     assert (dest_root / "output" / "models" / "headline_treatment_fingerprint.json").exists()
+    assert (dest_root / "output" / "models" / "provenance_validation_summary.json").exists()
     assert (dest_root / "output" / "models" / "published_state_proxy_comparator_summary.json").exists()
     assert (dest_root / "output" / "models" / "published_state_proxy_vs_baseline_summary.json").exists()
     assert (dest_root / "output" / "models" / "backend_decision_bundle_summary.json").exists()

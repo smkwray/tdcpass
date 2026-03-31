@@ -37,7 +37,10 @@ from tdcpass.analysis.smoothed_local_projections import (
 )
 from tdcpass.analysis.state_proxy_factor_diagnostics import build_state_proxy_factor_diagnostics
 from tdcpass.analysis.structural_proxy_evidence import build_structural_proxy_evidence
-from tdcpass.analysis.treatment_fingerprint import build_headline_treatment_fingerprint
+from tdcpass.analysis.treatment_fingerprint import (
+    build_headline_treatment_fingerprint,
+    build_headline_treatment_fingerprint_validation_summary,
+)
 from tdcpass.core.paths import ensure_repo_dirs, repo_root
 from tdcpass.core.yaml_utils import load_yaml
 from tdcpass.pipeline.build_panel import build_public_quarterly_panel, load_panel
@@ -157,6 +160,7 @@ def _default_overview_payload(
                 "proxy_coverage_summary",
                 "proxy_unit_audit",
                 "headline_treatment_fingerprint",
+                "provenance_validation_summary",
             ],
             "inferred_counterfactuals": [
                 "pass_through_h0_h8",
@@ -183,6 +187,7 @@ def _default_overview_payload(
             "site/data/proxy_coverage_summary.json",
             "site/data/proxy_unit_audit.json",
             "site/data/headline_treatment_fingerprint.json",
+            "site/data/provenance_validation_summary.json",
             "site/data/shock_diagnostics_summary.json",
             "site/data/result_readiness_summary.json",
             "site/data/direct_identification_summary.json",
@@ -426,15 +431,26 @@ def _materialize_real_outputs(
     identity_measurement_ladder_path = root / "output" / "models" / "identity_measurement_ladder.csv"
     export_frame(identity_measurement_ladder, identity_measurement_ladder_path)
     treatment_fingerprint_path = root / "output" / "models" / "headline_treatment_fingerprint.json"
+    fingerprint_payload = build_headline_treatment_fingerprint(
+        shock_spec=dict(baseline_shock_spec),
+        shocked=shocked,
+        repo_root=repo_root(),
+        canonical_tdc_source_path=build_result.canonical_tdc_source_path,
+        canonical_tdc_source_kind=build_result.canonical_tdc_source_kind,
+    )
     write_json_payload(
         treatment_fingerprint_path,
-        build_headline_treatment_fingerprint(
-            shock_spec=dict(baseline_shock_spec),
-            shocked=shocked,
-            repo_root=repo_root(),
-            canonical_tdc_source_path=build_result.canonical_tdc_source_path,
-            canonical_tdc_source_kind=build_result.canonical_tdc_source_kind,
-        ),
+        fingerprint_payload,
+    )
+    provenance_validation_summary_path = root / "output" / "models" / "provenance_validation_summary.json"
+    provenance_validation_payload = build_headline_treatment_fingerprint_validation_summary(
+        fingerprint_payload,
+        shock_spec=dict(baseline_shock_spec),
+        repo_root=repo_root(),
+    )
+    write_json_payload(
+        provenance_validation_summary_path,
+        provenance_validation_payload,
     )
     smooth_lp_spec = lp_specs["specs"].get("smooth_lp", {})
     smoothed_lp_irf = build_smoothed_lp_irf(
@@ -701,6 +717,10 @@ def _materialize_real_outputs(
         backend_closeout_report_path,
         backend_closeout_summary,
     )
+    if provenance_validation_payload["status"] != "passed":
+        raise RuntimeError(
+            "Refusing to mirror public artifacts because headline treatment provenance validation failed."
+        )
 
     mirror_contract_artifacts(source_root=root, dest_root=root, contract=contract)
     overview_path = root / overview_artifact_path(contract)
@@ -756,6 +776,7 @@ def _materialize_real_outputs(
             backend_closeout_summary_path,
             proxy_coverage_summary_path,
             treatment_fingerprint_path,
+            provenance_validation_summary_path,
             shock_diagnostics_path,
             direct_identification_path,
             result_readiness_path,
@@ -814,6 +835,7 @@ def _materialize_real_outputs(
         "backend_closeout_summary_path": str(backend_closeout_summary_path),
         "proxy_coverage_summary_path": str(proxy_coverage_summary_path),
         "headline_treatment_fingerprint_path": str(treatment_fingerprint_path),
+        "provenance_validation_summary_path": str(provenance_validation_summary_path),
         "shock_diagnostics_path": str(shock_diagnostics_path),
         "direct_identification_path": str(direct_identification_path),
         "result_readiness_path": str(result_readiness_path),

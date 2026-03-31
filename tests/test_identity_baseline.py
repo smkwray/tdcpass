@@ -7,6 +7,7 @@ import pandas as pd
 from tdcpass.analysis.identity_baseline import build_identity_baseline_irf, build_identity_variant_ladder
 from tdcpass.analysis.treatment_fingerprint import (
     build_headline_treatment_fingerprint,
+    build_headline_treatment_fingerprint_validation_summary,
     validate_headline_treatment_fingerprint,
 )
 
@@ -175,3 +176,38 @@ def test_treatment_fingerprint_detects_git_commit_mismatch() -> None:
 
     failures = validate_headline_treatment_fingerprint(fingerprint, shock_spec=spec, repo_root=repo_root)
     assert any("git_commit mismatch" in failure for failure in failures)
+
+
+def test_treatment_fingerprint_validation_summary_reports_failed_commit_check() -> None:
+    shocked = _panel()
+    repo_root = Path(__file__).resolve().parents[1]
+    spec = {
+        "freeze_status": "frozen",
+        "model_name": "unexpected_tdc_default",
+        "target": "tdc_bank_only_qoq",
+        "method": "rolling_window_ridge",
+        "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+        "ridge_alpha": 125.0,
+        "min_train_obs": 24,
+        "max_train_obs": 40,
+        "standardized_column": "tdc_residual_z",
+        "residual_column": "tdc_residual",
+        "fitted_column": "tdc_fitted",
+        "train_start_obs_column": "train_start_obs",
+    }
+    fingerprint = build_headline_treatment_fingerprint(
+        shock_spec=spec,
+        shocked=shocked,
+        repo_root=repo_root,
+    )
+    fingerprint["git_commit"] = "definitely-not-current-head"
+
+    summary = build_headline_treatment_fingerprint_validation_summary(
+        fingerprint,
+        shock_spec=spec,
+        repo_root=repo_root,
+    )
+
+    assert summary["status"] == "failed"
+    assert summary["git_commit_check"]["status"] == "failed"
+    assert any("git_commit mismatch" in failure for failure in summary["failures"])

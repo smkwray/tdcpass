@@ -87,6 +87,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/structural_proxy_evidence_summary.json",
         "output/models/proxy_coverage_summary.json",
         "output/models/headline_treatment_fingerprint.json",
+        "output/models/provenance_validation_summary.json",
         "output/models/shock_diagnostics_summary.json",
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
@@ -233,6 +234,18 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     },
                 },
             )
+        elif rel.endswith("provenance_validation_summary.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "status": "passed",
+                    "failures": [],
+                    "git_commit_check": {"status": "passed"},
+                    "config_hashes_check": {"status": "passed"},
+                    "upstream_input_check": {"status": "skipped_missing_locator_or_sha"},
+                    "spec_metadata_check": {"status": "passed"},
+                },
+            )
         elif rel.endswith("structural_proxy_evidence_summary.json"):
             _write_json(
                 source_root / rel,
@@ -303,6 +316,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                 {
                     "status": "materialized",
                     "headline_question": "stub",
+                    "estimation_path": {"role": "secondary_period_sensitivity_surface"},
                     "periods": [],
                     "key_horizons": {},
                     "takeaways": ["stub"],

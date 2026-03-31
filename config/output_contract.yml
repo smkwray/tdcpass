@@ -197,6 +197,7 @@ artifacts:
     required_keys:
       - status
       - headline_question
+      - estimation_path
       - periods
       - key_horizons
       - takeaways
@@ -289,6 +290,15 @@ artifacts:
       - git_commit
       - config_hashes
       - upstream_input
+  - path: output/models/provenance_validation_summary.json
+    kind: json
+    required_keys:
+      - status
+      - failures
+      - git_commit_check
+      - config_hashes_check
+      - upstream_input_check
+      - spec_metadata_check
   - path: output/models/direct_identification_summary.json
     kind: json
     required_keys:
@@ -518,6 +528,7 @@ artifacts:
     required_keys:
       - status
       - headline_question
+      - estimation_path
       - periods
       - key_horizons
       - takeaways
@@ -610,6 +621,15 @@ artifacts:
       - git_commit
       - config_hashes
       - upstream_input
+  - path: site/data/provenance_validation_summary.json
+    kind: json
+    required_keys:
+      - status
+      - failures
+      - git_commit_check
+      - config_hashes_check
+      - upstream_input_check
+      - spec_metadata_check
   - path: site/data/direct_identification_summary.json
     kind: json
     required_keys:

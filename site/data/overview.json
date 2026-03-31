@@ -62,7 +62,8 @@
       "structural_proxy_evidence",
       "proxy_coverage_summary",
       "proxy_unit_audit",
-      "headline_treatment_fingerprint"
+      "headline_treatment_fingerprint",
+      "provenance_validation_summary"
     ],
     "inferred_counterfactuals": [
       "pass_through_h0_h8",
@@ -89,6 +90,7 @@
     "site/data/proxy_coverage_summary.json",
     "site/data/proxy_unit_audit.json",
     "site/data/headline_treatment_fingerprint.json",
+    "site/data/provenance_validation_summary.json",
     "site/data/shock_diagnostics_summary.json",
     "site/data/result_readiness_summary.json",
     "site/data/direct_identification_summary.json",

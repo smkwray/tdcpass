@@ -21,15 +21,15 @@
     "start_quarter": "2009Q1",
     "end_quarter": "2025Q4"
   },
-  "git_commit": "13c5211ef4cb737321f446be580ffdb366f92ce2",
+  "git_commit": "0b2481a34edfeb181546c40f8b29575cda0036bc",
   "config_hashes": {
     "files": {
       "config/shock_specs.yml": "f2bc13ca92fb37ad91f1cd78960bbaa1bf62a6d15e7a4aeacea746652f7943ea",
       "config/lp_specs.yml": "d15f9c422541048f16ab79883f42e0f36aa54a76d88195d9181bc591cc9c1547",
       "config/regime_specs.yml": "74527837dfb4238ba824125722e82f435495a0fecf8ca1c227ad5bd145299179",
-      "config/output_contract.yml": "95469b9cb4f537ed448164811296c1352c19e9758b2673f534920cc9a45fcc86"
+      "config/output_contract.yml": "18dfc702cd3e45877a2460d4258706db15bf3033018bb385cc10c42bba685f9c"
     },
-    "combined_sha256": "d7bbcc428bad98421162953606c0d79ecd0969d20be8c4c400022e12cf5753a0"
+    "combined_sha256": "3851e8d42a48c11659fb90a52caf9b3b86918d7fd8db7f2857a6d935a292a0f3"
   },
   "upstream_input": {
     "source_kind": "tdcest_processed_csv",

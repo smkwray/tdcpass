@@ -272,7 +272,8 @@ def test_pass_through_summary_uses_cooler_provisional_headline_for_exact_baselin
         readiness={"status": "provisional", "warnings": [], "reasons": []},
     )
 
-    assert "impact-stage crowd-out signal in the exact identity baseline" in payload["headline_answer"]
+    assert "sign pattern consistent with crowd-out in the exact identity baseline" in payload["headline_answer"]
+    assert "remain unsettled" in payload["headline_answer"]
 
 
 def test_pass_through_summary_surfaces_failed_treatment_quality_gate() -> None:

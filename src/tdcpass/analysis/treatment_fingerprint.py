@@ -139,11 +139,10 @@ def build_headline_treatment_fingerprint(
     }
 
 
-def validate_headline_treatment_fingerprint(
+def _spec_validation_failures(
     fingerprint: Mapping[str, Any],
     *,
     shock_spec: Mapping[str, Any],
-    repo_root: Path | None = None,
 ) -> list[str]:
     failures: list[str] = []
     expected_pairs = {
@@ -188,34 +187,118 @@ def validate_headline_treatment_fingerprint(
             failures.append("Fingerprint upstream_input is missing source_kind.")
         if "sha256" not in upstream_input:
             failures.append("Fingerprint upstream_input is missing sha256.")
+    return failures
+
+
+def build_headline_treatment_fingerprint_validation_summary(
+    fingerprint: Mapping[str, Any],
+    *,
+    shock_spec: Mapping[str, Any],
+    repo_root: Path,
+) -> dict[str, Any]:
+    failures = _spec_validation_failures(fingerprint, shock_spec=shock_spec)
+    config_hashes = fingerprint.get("config_hashes")
+    upstream_input = fingerprint.get("upstream_input")
+    stored_commit = fingerprint.get("git_commit")
+    current_commit = _git_commit(repo_root)
+    commit_status = "passed"
+    if not isinstance(stored_commit, str) or not stored_commit:
+        failures.append("Fingerprint is missing git_commit metadata.")
+        commit_status = "missing"
+    elif current_commit is None:
+        failures.append("Could not resolve the current repo git commit for fingerprint validation.")
+        commit_status = "unresolved"
+    elif stored_commit != current_commit:
+        failures.append(
+            f"Fingerprint git_commit mismatch: expected current repo commit {current_commit!r}, observed {stored_commit!r}."
+        )
+        commit_status = "failed"
+
+    current_config_hashes = _config_hash_payload(repo_root)
+    config_status = "passed"
+    if not isinstance(config_hashes, Mapping):
+        config_status = "missing"
+    elif config_hashes != current_config_hashes:
+        failures.append("Fingerprint config_hashes do not match the current repo config state.")
+        config_status = "failed"
+
+    upstream_status = "missing"
+    upstream_rechecked = False
+    upstream_candidate = None
+    if isinstance(upstream_input, Mapping):
+        locator = upstream_input.get("source_locator")
+        stored_sha256 = upstream_input.get("sha256")
+        if isinstance(locator, str) and locator and isinstance(stored_sha256, str) and stored_sha256:
+            candidate: Path
+            if ":" in locator:
+                repo_name, relpath = locator.split(":", 1)
+                candidate = (repo_root.parent / repo_name / relpath).resolve()
+            else:
+                candidate = (repo_root / locator).resolve()
+            upstream_candidate = str(candidate)
+            if candidate.exists() and candidate.is_file():
+                upstream_rechecked = True
+                observed_sha256 = sha256_file(candidate)
+                if observed_sha256 != stored_sha256:
+                    failures.append(
+                        "Fingerprint upstream_input sha256 does not match the currently reachable source file."
+                    )
+                    upstream_status = "failed"
+                else:
+                    upstream_status = "passed"
+            else:
+                upstream_status = "skipped_unreachable"
+        else:
+            upstream_status = "skipped_missing_locator_or_sha"
+
+    return {
+        "status": "passed" if not failures else "failed",
+        "failures": failures,
+        "repo_root": str(repo_root),
+        "git_commit_check": {
+            "status": commit_status,
+            "stored_commit": stored_commit,
+            "current_commit": current_commit,
+        },
+        "config_hashes_check": {
+            "status": config_status,
+            "stored_combined_sha256": None if not isinstance(config_hashes, Mapping) else config_hashes.get("combined_sha256"),
+            "current_combined_sha256": current_config_hashes.get("combined_sha256"),
+        },
+        "upstream_input_check": {
+            "status": upstream_status,
+            "rechecked_current_source_sha256": upstream_rechecked,
+            "candidate_path": upstream_candidate,
+            "stored_locator": None if not isinstance(upstream_input, Mapping) else upstream_input.get("source_locator"),
+            "stored_sha256": None if not isinstance(upstream_input, Mapping) else upstream_input.get("sha256"),
+            "stored_source_repo_locator": None if not isinstance(upstream_input, Mapping) else upstream_input.get("source_repo_locator"),
+            "stored_source_repo_commit": None if not isinstance(upstream_input, Mapping) else upstream_input.get("source_repo_commit"),
+        },
+        "spec_metadata_check": {
+            "status": "passed" if not _spec_validation_failures(fingerprint, shock_spec=shock_spec) else "failed",
+        },
+    }
+
+
+def validate_headline_treatment_fingerprint(
+    fingerprint: Mapping[str, Any],
+    *,
+    shock_spec: Mapping[str, Any],
+    repo_root: Path | None = None,
+) -> list[str]:
+    failures = _spec_validation_failures(fingerprint, shock_spec=shock_spec)
     stored_commit = fingerprint.get("git_commit")
     if not isinstance(stored_commit, str) or not stored_commit:
         failures.append("Fingerprint is missing git_commit metadata.")
     if repo_root is not None:
-        current_commit = _git_commit(repo_root)
-        if current_commit is None:
-            failures.append("Could not resolve the current repo git commit for fingerprint validation.")
-        elif stored_commit != current_commit:
-            failures.append(
-                f"Fingerprint git_commit mismatch: expected current repo commit {current_commit!r}, observed {stored_commit!r}."
-            )
-        current_config_hashes = _config_hash_payload(repo_root)
-        if config_hashes != current_config_hashes:
-            failures.append("Fingerprint config_hashes do not match the current repo config state.")
-        if isinstance(upstream_input, Mapping):
-            locator = upstream_input.get("source_locator")
-            stored_sha256 = upstream_input.get("sha256")
-            if isinstance(locator, str) and locator and isinstance(stored_sha256, str) and stored_sha256:
-                candidate: Path
-                if ":" in locator:
-                    repo_name, relpath = locator.split(":", 1)
-                    candidate = (repo_root.parent / repo_name / relpath).resolve()
-                else:
-                    candidate = (repo_root / locator).resolve()
-                if candidate.exists() and candidate.is_file():
-                    observed_sha256 = sha256_file(candidate)
-                    if observed_sha256 != stored_sha256:
-                        failures.append(
-                            "Fingerprint upstream_input sha256 does not match the currently reachable source file."
-                        )
+        validation = build_headline_treatment_fingerprint_validation_summary(
+            fingerprint,
+            shock_spec=shock_spec,
+            repo_root=repo_root,
+        )
+        failures.extend(
+            failure
+            for failure in validation.get("failures", [])
+            if failure not in failures
+        )
     return failures
