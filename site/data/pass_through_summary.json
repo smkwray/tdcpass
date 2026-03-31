@@ -1,5 +1,17 @@
 {
   "status": "provisional",
+  "estimation_path": {
+    "primary_decomposition_mode": "exact_identity_baseline",
+    "primary_artifact": "lp_irf_identity_baseline.csv",
+    "approximate_robustness_artifact": "total_minus_other_contrast.csv",
+    "approximate_dynamic_robustness": {
+      "status": "divergent_secondary_check",
+      "artifact": "total_minus_other_contrast.csv",
+      "max_abs_gap_h0_h4": 34.841407895902734,
+      "key_horizon_consistent": false,
+      "note": "Primary decomposition uses the exact identity-preserving baseline; the approximate dynamic path is retained only as a secondary robustness check."
+    }
+  },
   "treatment_freeze_status": "frozen",
   "treatment_candidates": [],
   "treatment_quality_status": "pass",
@@ -128,65 +140,67 @@
   "baseline_horizons": {
     "h0": {
       "total_deposits": {
-        "beta": 46.46053662919742,
-        "se": 21.936358412025733,
-        "lower95": 3.4652741416269848,
-        "upper95": 89.45579911676785,
+        "beta": 55.75033524806063,
+        "se": 25.193756364184207,
+        "lower95": 11.914564763748912,
+        "upper95": 112.95810148991914,
         "n": 68,
         "ci_excludes_zero": true
       },
       "other_component": {
-        "beta": -81.17833439216729,
-        "se": 20.082089282921796,
-        "lower95": -120.539229386694,
-        "upper95": -41.81743939764057,
+        "beta": -72.74365367294723,
+        "se": 24.24909289745364,
+        "lower95": -110.4034376557296,
+        "upper95": -16.164168243115927,
         "n": 68,
         "ci_excludes_zero": true
       },
-      "beta_gap_total_minus_other": 127.63887102136471,
+      "beta_gap_total_minus_other": 128.49398892100785,
       "same_sign": false,
       "assessment": "crowd_out_signal",
       "direct_tdc_response": {
         "beta": 128.49398892100785,
-        "se": 14.082533270452723,
-        "lower95": 100.89222371092052,
-        "upper95": 156.0957541310952,
+        "se": 13.991961570115432,
+        "lower95": 100.88367137736657,
+        "upper95": 152.92481157086092,
         "n": 68,
         "ci_excludes_zero": true
       },
-      "direct_vs_identity_tdc_gap": -0.8551178996431474,
-      "contrast_consistent": false
+      "approximate_dynamic_tdc_gap": -0.8551178996431474,
+      "approximate_dynamic_contrast_consistent": false,
+      "primary_decomposition_mode": "exact_identity_baseline"
     },
     "h4": {
       "total_deposits": {
-        "beta": 142.30410309715606,
-        "se": 92.45580638597868,
-        "lower95": -38.909277419362155,
-        "upper95": 323.51748361367424,
+        "beta": 167.33069747889854,
+        "se": 100.30100771730665,
+        "lower95": -63.93923127273721,
+        "upper95": 358.74512761844096,
         "n": 64,
         "ci_excludes_zero": false
       },
       "other_component": {
-        "beta": -100.99420217322478,
-        "se": 48.95277771700602,
-        "lower95": -196.94164649855657,
-        "upper95": -5.046757847892977,
+        "beta": -110.80901568738503,
+        "se": 56.70082171226873,
+        "lower95": -206.322898566643,
+        "upper95": -1.787584654962086,
         "n": 64,
         "ci_excludes_zero": true
       },
-      "beta_gap_total_minus_other": 243.29830527038084,
+      "beta_gap_total_minus_other": 278.13971316628357,
       "same_sign": false,
       "assessment": "other_down_total_unclear",
       "direct_tdc_response": {
         "beta": 278.13971316628357,
-        "se": 69.29214131662822,
-        "lower95": 142.32711618569226,
-        "upper95": 413.9523101468749,
+        "se": 74.03622268034015,
+        "lower95": 97.62580949118603,
+        "upper95": 400.2710018774603,
         "n": 64,
         "ci_excludes_zero": true
       },
-      "direct_vs_identity_tdc_gap": -34.841407895902734,
-      "contrast_consistent": false
+      "approximate_dynamic_tdc_gap": -34.841407895902734,
+      "approximate_dynamic_contrast_consistent": false,
+      "primary_decomposition_mode": "exact_identity_baseline"
     }
   },
   "core_treatment_variants": [
@@ -235,6 +249,490 @@
           "beta_gap_total_minus_other": 243.29830527038084,
           "same_sign": false,
           "assessment": "other_down_total_unclear"
+        }
+      }
+    }
+  ],
+  "measurement_treatment_variants": [
+    {
+      "variant": "broad_depository",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 30.335457618998852,
+            "se": 13.174299579863323,
+            "lower95": 4.5138304424667375,
+            "upper95": 56.15708479553096,
+            "n": 67,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -18.050591322323076,
+            "se": 14.738916395226818,
+            "lower95": -46.93886745696764,
+            "upper95": 10.837684812321488,
+            "n": 67,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 48.38604894132193,
+          "same_sign": false,
+          "assessment": "total_up_other_unclear"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 104.8682469840488,
+            "se": 50.21283166301084,
+            "lower95": 6.4510969245475565,
+            "upper95": 203.28539704355003,
+            "n": 63,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": 4.8095419774025245,
+            "se": 24.516634722446216,
+            "lower95": -43.24306207859206,
+            "upper95": 52.86214603339711,
+            "n": 63,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 100.05870500664628,
+          "same_sign": true,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    },
+    {
+      "variant": "domestic_bank_only",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 61.48634913090622,
+            "se": 22.177764842361764,
+            "lower95": 18.017930039877164,
+            "upper95": 104.95476822193527,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -46.204894042942705,
+            "se": 28.785715588178096,
+            "lower95": -102.62489659577177,
+            "upper95": 10.215108509886363,
+            "n": 68,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 107.69124317384893,
+          "same_sign": false,
+          "assessment": "total_up_other_unclear"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 211.66160561970884,
+            "se": 82.70272072823109,
+            "lower95": 49.56427299237592,
+            "upper95": 373.7589382470418,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -16.069416716462953,
+            "se": 43.6921602485319,
+            "lower95": -101.70605080358547,
+            "upper95": 69.56721737065956,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 227.7310223361718,
+          "same_sign": false,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    },
+    {
+      "variant": "no_remit_bank_only",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 45.68501063737274,
+            "se": 21.797865821024835,
+            "lower95": 2.961193628164068,
+            "upper95": 88.40882764658141,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -81.0750937423875,
+            "se": 19.95622745078055,
+            "lower95": -120.18929954591738,
+            "upper95": -41.96088793885762,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 126.76010437976024,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 141.91623743076187,
+            "se": 93.20184448933693,
+            "lower95": -40.75937776833851,
+            "upper95": 324.5918526298623,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "other_component": {
+            "beta": -104.08870843831028,
+            "se": 49.2297969794691,
+            "lower95": -200.5791105180697,
+            "upper95": -7.598306358550843,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 246.00494586907215,
+          "same_sign": false,
+          "assessment": "other_down_total_unclear"
+        }
+      }
+    },
+    {
+      "variant": "credit_union_sensitive",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 46.10872732845895,
+            "se": 21.933629419620818,
+            "lower95": 3.118813666002147,
+            "upper95": 89.09864099091575,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -81.59226485119758,
+            "se": 19.948366703185183,
+            "lower95": -120.69106358944055,
+            "upper95": -42.49346611295463,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 127.70099217965654,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 141.2175855959158,
+            "se": 92.56044123346038,
+            "lower95": -40.200879221666526,
+            "upper95": 322.63605041349814,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "other_component": {
+            "beta": -102.26421803829594,
+            "se": 49.04599607840802,
+            "lower95": -198.39437035197565,
+            "upper95": -6.134065724616221,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 243.48180363421176,
+          "same_sign": false,
+          "assessment": "other_down_total_unclear"
+        }
+      }
+    }
+  ],
+  "shock_design_treatment_variants": [
+    {
+      "variant": "bank_only_long_burnin",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 56.97589472186087,
+            "se": 19.34892172484071,
+            "lower95": 19.052008141173076,
+            "upper95": 94.89978130254866,
+            "n": 60,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -52.88356636608168,
+            "se": 21.259971065157945,
+            "lower95": -94.55310965379125,
+            "upper95": -11.214023078372108,
+            "n": 60,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 109.85946108794255,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 220.50131580842282,
+            "se": 78.78325833261415,
+            "lower95": 66.08612947649908,
+            "upper95": 374.91650214034655,
+            "n": 56,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -17.297407018317685,
+            "se": 41.91681575516833,
+            "lower95": -99.4543658984476,
+            "upper95": 64.85955186181224,
+            "n": 56,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 237.79872282674052,
+          "same_sign": false,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    },
+    {
+      "variant": "bank_only_no_bill_share",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 49.822254493774324,
+            "se": 16.375297915302014,
+            "lower95": 17.72667057978238,
+            "upper95": 81.91783840776627,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -47.620686808830676,
+            "se": 17.342756646147183,
+            "lower95": -81.61248983527915,
+            "upper95": -13.628883782382196,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 97.44294130260499,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 194.06383603854698,
+            "se": 71.85065587823895,
+            "lower95": 53.23655051719862,
+            "upper95": 334.89112155989534,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": 4.794134022601476,
+            "se": 43.22475760871353,
+            "lower95": -79.92639089047705,
+            "upper95": 89.51465893567999,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 189.2697020159455,
+          "same_sign": true,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    },
+    {
+      "variant": "bank_only_billshare_macro_rolling40",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 52.05385985159914,
+            "se": 17.89907730316241,
+            "lower95": 16.97166833740082,
+            "upper95": 87.13605136579747,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -40.89748395347406,
+            "se": 18.442266326028854,
+            "lower95": -77.04432595249061,
+            "upper95": -4.750641954457507,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 92.95134380507321,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 198.58523650226516,
+            "se": 73.72886526345006,
+            "lower95": 54.076660585903056,
+            "upper95": 343.0938124186273,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": 18.90865865542223,
+            "se": 43.101612280582074,
+            "lower95": -65.57050141451863,
+            "upper95": 103.38781872536309,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 179.67657784684292,
+          "same_sign": true,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    },
+    {
+      "variant": "legacy_rolling40_ols",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 52.562269043481656,
+            "se": 18.776990373947708,
+            "lower95": 15.75936791054415,
+            "upper95": 89.36517017641916,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -46.56054316809916,
+            "se": 18.44210592848505,
+            "lower95": -82.70707078792985,
+            "upper95": -10.414015548268466,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 99.12281221158082,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 196.93852116368188,
+            "se": 76.9266610564252,
+            "lower95": 46.16226549308848,
+            "upper95": 347.7147768342753,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": 9.802539805021866,
+            "se": 44.65613372949137,
+            "lower95": -77.72348230478123,
+            "upper95": 97.32856191482496,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 187.13598135866002,
+          "same_sign": true,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    },
+    {
+      "variant": "legacy_billshare_expanding",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 50.62090063870641,
+            "se": 16.384774950004317,
+            "lower95": 18.506741736697947,
+            "upper95": 82.73505954071487,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -44.2424073567287,
+            "se": 17.946138614667305,
+            "lower95": -79.4168390414766,
+            "upper95": -9.067975671980783,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 94.86330799543511,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 193.80100908662897,
+            "se": 71.47324348749481,
+            "lower95": 53.713451851139126,
+            "upper95": 333.8885663221188,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": 11.043885434880515,
+            "se": 42.65594135588379,
+            "lower95": -72.56175962265172,
+            "upper95": 94.64953049241274,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 182.75712365174846,
+          "same_sign": true,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    },
+    {
+      "variant": "legacy_totaldep_long_burnin",
+      "role": "exploratory",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 30.31461896309789,
+            "se": 13.2305112162445,
+            "lower95": 4.382816979258671,
+            "upper95": 56.24642094693711,
+            "n": 67,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -17.89479072877233,
+            "se": 14.692984051272102,
+            "lower95": -46.69303946926565,
+            "upper95": 10.903458011720993,
+            "n": 67,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 48.20940969187022,
+          "same_sign": false,
+          "assessment": "total_up_other_unclear"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 104.65164647664396,
+            "se": 50.34098215925714,
+            "lower95": 5.983321444499978,
+            "upper95": 203.31997150878794,
+            "n": 63,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": 4.7905087264586115,
+            "se": 24.34180132808734,
+            "lower95": -42.91942187659257,
+            "upper95": 52.500439329509796,
+            "n": 63,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 99.86113775018535,
+          "same_sign": true,
+          "assessment": "total_up_other_unclear"
         }
       }
     }
@@ -547,7 +1045,7 @@
       "decisive_proxy_count": 1,
       "decisive_concordant_proxy_count": 0,
       "decisive_discordant_proxy_count": 1,
-      "proxy_bundle_beta_sum": 52.63109980366392,
+      "proxy_bundle_beta_sum": 52.631099803663915,
       "other_minus_proxy_bundle_beta": -133.80943419583122,
       "interpretation": "proxy_evidence_discordant",
       "proxy_rows": [
@@ -694,8 +1192,8 @@
           "n": 68,
           "ci_excludes_zero": true
         },
-        "proxy_bundle_beta_sum": 52.63109980366392,
-        "proxy_bundle_share_of_other_beta": -0.6483392422097068,
+        "proxy_bundle_beta_sum": 52.631099803663915,
+        "proxy_bundle_share_of_other_beta": -0.6483392422097067,
         "unexplained_beta": -133.80943419583122,
         "unexplained_share_of_other_beta": 1.648339242209707,
         "same_sign_proxy_count": 1,
@@ -919,10 +1417,10 @@
                 "n": 34,
                 "ci_excludes_zero": true
               },
-              "proxy_bundle_beta_sum": 58.41510909781301,
-              "proxy_bundle_share_of_other_beta": -0.8230961408478434,
-              "unexplained_beta": -129.38507991755418,
-              "unexplained_share_of_other_beta": 1.8230961408478434,
+              "proxy_bundle_beta_sum": 58.415109097813,
+              "proxy_bundle_share_of_other_beta": -0.8230961408478433,
+              "unexplained_beta": -129.38507991755415,
+              "unexplained_share_of_other_beta": 1.823096140847843,
               "same_sign_proxy_count": 2,
               "opposite_sign_proxy_count": 3,
               "decisive_proxy_count": 2,
@@ -993,8 +1491,8 @@
                 "n": 32,
                 "ci_excludes_zero": false
               },
-              "proxy_bundle_beta_sum": 227.499141749743,
-              "proxy_bundle_share_of_other_beta": -2.3363368348569296,
+              "proxy_bundle_beta_sum": 227.49914174974296,
+              "proxy_bundle_share_of_other_beta": -2.336336834856929,
               "unexplained_beta": -324.8734322867812,
               "unexplained_share_of_other_beta": 3.336336834856929,
               "same_sign_proxy_count": 0,
@@ -1182,7 +1680,6 @@
   ],
   "readiness_reasons": [],
   "readiness_warnings": [
-    "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables.",
     "Structural proxy cross-checks are mixed across key horizons.",
     "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern."
   ]

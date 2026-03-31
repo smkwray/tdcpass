@@ -125,27 +125,47 @@ specs:
       baseline:
         shock_column: tdc_residual_z
         treatment_role: core
+        treatment_family: headline
       bank_only_long_burnin:
         shock_column: tdc_long_burnin_residual_z
         treatment_role: exploratory
+        treatment_family: shock_design
       bank_only_no_bill_share:
         shock_column: tdc_no_bill_share_residual_z
         treatment_role: exploratory
+        treatment_family: shock_design
       bank_only_billshare_macro_rolling40:
         shock_column: tdc_bank_only_billshare_macro_rolling40_residual_z
         treatment_role: exploratory
+        treatment_family: shock_design
       legacy_rolling40_ols:
         shock_column: tdc_bank_only_macro_rolling40_residual_z
         treatment_role: exploratory
+        treatment_family: shock_design
       legacy_billshare_expanding:
         shock_column: tdc_legacy_billshare_expanding_residual_z
         treatment_role: exploratory
+        treatment_family: shock_design
       legacy_totaldep_long_burnin:
         shock_column: tdc_legacy_totaldep_residual_z
         treatment_role: exploratory
+        treatment_family: shock_design
       broad_depository:
         shock_column: tdc_broad_depository_residual_z
         treatment_role: exploratory
+        treatment_family: measurement
+      domestic_bank_only:
+        shock_column: tdc_domestic_bank_only_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
+      no_remit_bank_only:
+        shock_column: tdc_no_remit_bank_only_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
+      credit_union_sensitive:
+        shock_column: tdc_credit_union_sensitive_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
   control_sensitivity:
     horizons:
     - 0

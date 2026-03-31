@@ -28,6 +28,9 @@ artifacts:
       - quarter_index
       - tga_qoq
       - reserves_qoq
+      - tdc_domestic_bank_only_qoq
+      - tdc_no_remit_bank_only_qoq
+      - tdc_credit_union_sensitive_qoq
       - fedfunds
       - unemployment
       - inflation
@@ -80,6 +83,20 @@ artifacts:
       - upper95
       - n
       - spec_name
+  - path: output/models/lp_irf_identity_baseline.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
   - path: output/models/lp_irf_regimes.csv
     kind: csv
     required_columns:
@@ -104,6 +121,7 @@ artifacts:
     required_columns:
       - treatment_variant
       - treatment_role
+      - treatment_family
       - outcome
       - horizon
       - beta
@@ -238,11 +256,24 @@ artifacts:
       - treatment_variant_comparisons
       - largest_disagreement_quarters
       - takeaways
+  - path: output/models/headline_treatment_fingerprint.json
+    kind: json
+    required_keys:
+      - treatment_freeze_status
+      - model_name
+      - target
+      - method
+      - predictors
+      - min_train_obs
+      - max_train_obs
+      - usable_sample
+      - git_commit
   - path: output/models/direct_identification_summary.json
     kind: json
     required_keys:
       - status
       - headline_question
+      - estimation_path
       - shock_definition
       - horizon_evidence
       - first_stage_checks
@@ -255,6 +286,7 @@ artifacts:
     kind: json
     required_keys:
       - status
+      - estimation_path
       - headline_assessment
       - reasons
       - warnings
@@ -267,9 +299,12 @@ artifacts:
       - status
       - headline_question
       - headline_answer
+      - estimation_path
       - sample_policy
       - baseline_horizons
       - core_treatment_variants
+      - measurement_treatment_variants
+      - shock_design_treatment_variants
       - core_control_variants
       - shock_sample_variants
       - structural_proxy_context
@@ -348,6 +383,20 @@ artifacts:
       - upper95
       - n
       - spec_name
+  - path: site/data/lp_irf_identity_baseline.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
   - path: site/data/lp_irf_regimes.csv
     kind: csv
     required_columns:
@@ -372,6 +421,7 @@ artifacts:
     required_columns:
       - treatment_variant
       - treatment_role
+      - treatment_family
       - outcome
       - horizon
       - beta
@@ -506,11 +556,24 @@ artifacts:
       - treatment_variant_comparisons
       - largest_disagreement_quarters
       - takeaways
+  - path: site/data/headline_treatment_fingerprint.json
+    kind: json
+    required_keys:
+      - treatment_freeze_status
+      - model_name
+      - target
+      - method
+      - predictors
+      - min_train_obs
+      - max_train_obs
+      - usable_sample
+      - git_commit
   - path: site/data/direct_identification_summary.json
     kind: json
     required_keys:
       - status
       - headline_question
+      - estimation_path
       - shock_definition
       - horizon_evidence
       - first_stage_checks
@@ -523,6 +586,7 @@ artifacts:
     kind: json
     required_keys:
       - status
+      - estimation_path
       - headline_assessment
       - reasons
       - warnings
@@ -535,9 +599,12 @@ artifacts:
       - status
       - headline_question
       - headline_answer
+      - estimation_path
       - sample_policy
       - baseline_horizons
       - core_treatment_variants
+      - measurement_treatment_variants
+      - shock_design_treatment_variants
       - core_control_variants
       - shock_sample_variants
       - structural_proxy_context

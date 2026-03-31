@@ -1,0 +1,25 @@
+{
+  "treatment_freeze_status": "frozen",
+  "model_name": "unexpected_tdc_default",
+  "target": "tdc_bank_only_qoq",
+  "method": "rolling_window_ridge",
+  "predictors": [
+    "lag_tdc_bank_only_qoq",
+    "lag_fedfunds",
+    "lag_unemployment",
+    "lag_inflation"
+  ],
+  "ridge_alpha": 125.0,
+  "min_train_obs": 24,
+  "max_train_obs": 40,
+  "standardized_column": "tdc_residual_z",
+  "residual_column": "tdc_residual",
+  "fitted_column": "tdc_fitted",
+  "train_start_obs_column": "train_start_obs",
+  "usable_sample": {
+    "rows": 68,
+    "start_quarter": "2009Q1",
+    "end_quarter": "2025Q4"
+  },
+  "git_commit": "d6bfc77e5b12184721328ca29ca6231f3ae746a1"
+}

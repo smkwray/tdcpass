@@ -35,6 +35,9 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "tdc_bank_only_qoq",
         "total_deposits_bank_qoq",
         "other_component_qoq",
+        "tdc_domestic_bank_only_qoq",
+        "tdc_no_remit_bank_only_qoq",
+        "tdc_credit_union_sensitive_qoq",
         "bank_credit_private_qoq",
         "cb_nonts_qoq",
         "foreign_nonts_qoq",
@@ -67,6 +70,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/accounting/quarters_tdc_exceeds_total.csv",
         "output/shocks/unexpected_tdc.csv",
         "output/models/lp_irf.csv",
+        "output/models/lp_irf_identity_baseline.csv",
         "output/models/lp_irf_regimes.csv",
         "output/models/tdc_sensitivity_ladder.csv",
         "output/models/control_set_sensitivity.csv",
@@ -81,6 +85,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/regime_diagnostics_summary.json",
         "output/models/structural_proxy_evidence_summary.json",
         "output/models/proxy_coverage_summary.json",
+        "output/models/headline_treatment_fingerprint.json",
         "output/models/shock_diagnostics_summary.json",
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
@@ -114,10 +119,16 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
             )
         elif rel.endswith("lp_irf.csv"):
             _write_csv(source_root / rel, ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
+        elif rel.endswith("lp_irf_identity_baseline.csv"):
+            _write_csv(
+                source_root / rel,
+                ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name", "decomposition_mode", "outcome_construction", "inference_method"],
+                [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_baseline", "exact_identity_baseline", "estimated", "shared_bootstrap"]],
+            )
         elif rel.endswith("lp_irf_regimes.csv"):
             _write_csv(source_root / rel, ["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["reserve_drain_high", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
         elif rel.endswith("tdc_sensitivity_ladder.csv"):
-            _write_csv(source_root / rel, ["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["tdc_bank_only_qoq", "core", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
+            _write_csv(source_root / rel, ["treatment_variant", "treatment_role", "treatment_family", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["tdc_bank_only_qoq", "core", "headline", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
         elif rel.endswith("control_set_sensitivity.csv"):
             _write_csv(source_root / rel, ["control_variant", "control_role", "control_columns", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["headline_lagged_macro", "headline", "lag_fedfunds|lag_unemployment|lag_inflation", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "control_sensitivity"]])
         elif rel.endswith("shock_sample_sensitivity.csv"):
@@ -175,6 +186,21 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "takeaways": ["stub"],
                 },
             )
+        elif rel.endswith("headline_treatment_fingerprint.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "treatment_freeze_status": "frozen",
+                    "model_name": "unexpected_tdc_default",
+                    "target": "tdc_bank_only_qoq",
+                    "method": "rolling_window_ridge",
+                    "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+                    "min_train_obs": 24,
+                    "max_train_obs": 40,
+                    "usable_sample": {"start_quarter": "2009Q1", "end_quarter": "2025Q4", "observations": 68},
+                    "git_commit": "stub",
+                },
+            )
         elif rel.endswith("structural_proxy_evidence_summary.json"):
             _write_json(
                 source_root / rel,
@@ -207,9 +233,12 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "status": "not_ready",
                     "headline_question": "stub",
                     "headline_answer": "stub",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
                     "sample_policy": {"headline_sample_variant": "all_usable_shocks"},
                     "baseline_horizons": {},
                     "core_treatment_variants": [],
+                    "measurement_treatment_variants": [],
+                    "shock_design_treatment_variants": [],
                     "core_control_variants": [],
                     "shock_sample_variants": [],
                     "structural_proxy_context": {},
@@ -225,6 +254,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                 {
                     "status": "not_ready",
                     "headline_question": "stub",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
                     "shock_definition": {"shock_column": "tdc_residual_z"},
                     "horizon_evidence": {},
                     "first_stage_checks": {"tdc_ci_excludes_zero_at_h0_or_h4": False},
@@ -251,6 +281,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                 source_root / rel,
                 {
                     "status": "not_ready",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
                     "headline_assessment": "stub",
                     "reasons": ["stub"],
                     "warnings": [],

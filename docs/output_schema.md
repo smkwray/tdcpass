@@ -22,6 +22,9 @@ Minimum columns:
 - `tdc_bank_only_qoq`
 - `total_deposits_bank_qoq`
 - `other_component_qoq`
+- `tdc_domestic_bank_only_qoq`
+- `tdc_no_remit_bank_only_qoq`
+- `tdc_credit_union_sensitive_qoq`
 - `bank_credit_private_qoq`
 - `cb_nonts_qoq`
 - `foreign_nonts_qoq`
@@ -107,6 +110,26 @@ Operational metadata now travels with the LP exports as additional columns:
 - `shock_scale`
 - `response_type`
 
+This file remains the broad LP output and the approximate dynamic decomposition path because the baseline spec can still append outcome-specific lagged dependent variables.
+
+### `output/models/lp_irf_identity_baseline.csv`
+
+Minimum columns:
+
+- `outcome`
+- `horizon`
+- `beta`
+- `se`
+- `lower95`
+- `upper95`
+- `n`
+- `spec_name`
+- `decomposition_mode`
+- `outcome_construction`
+- `inference_method`
+
+This is the primary exact decomposition artifact for the public research sprint. It uses a common sample, common horizon transform, and common regressor matrix for `tdc_bank_only_qoq` and `total_deposits_bank_qoq`, then derives `other_component_qoq = total - tdc` mechanically at each horizon. The exported `other_component_qoq` uncertainty comes from the shared bootstrap path used to estimate the two underlying equations.
+
 ### `output/models/lp_irf_regimes.csv`
 
 Minimum columns:
@@ -140,6 +163,7 @@ Minimum columns:
 
 - `treatment_variant`
 - `treatment_role`
+- `treatment_family`
 - `outcome`
 - `horizon`
 - `beta`
@@ -237,6 +261,7 @@ Minimum columns:
 - `sample_mismatch_flag`
 
 This file makes the identity check explicit at the LP layer. `beta_implied` is `beta(total_deposits_bank_qoq) - beta(other_component_qoq)` and `beta_direct` is the direct LP response of `tdc_bank_only_qoq` under the same spec slice. The file is meant to catch cases where the direct treatment response is too weak or where sample mismatches break the accounting comparison. Tiny `abs_gap` values can reflect floating-point noise and should not be treated as substantive economic contradictions.
+When the exact identity-preserving baseline is available, the file can contain both `scope=baseline` for the older approximate dynamic LP path and `scope=exact_identity_baseline` for the primary exact decomposition path.
 
 ### `output/models/structural_proxy_evidence.csv`
 
@@ -316,7 +341,24 @@ Required keys:
 
 This file explains what an LP coefficient means on the current shock scale and whether the baseline-versus-sensitivity disagreement reflects different treatment objects rather than a simple scaling mismatch.
 It should also make clear when a variant is exploratory rather than a near-baseline robustness rung.
+`treatment_variant_comparisons` should separate measurement checks from shock-design checks using `treatment_family`.
 It now also reports baseline shock-quality diagnostics such as flagged windows, maximum fitted-to-target scale ratio, maximum training condition number, and the active baseline shock specification metadata.
+
+### `output/models/headline_treatment_fingerprint.json`
+
+Required keys:
+
+- `treatment_freeze_status`
+- `model_name`
+- `target`
+- `method`
+- `predictors`
+- `min_train_obs`
+- `max_train_obs`
+- `usable_sample`
+- `git_commit`
+
+This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml` and also record realized sample metadata from the current run so closeout can fail when docs, config, and exported artifacts drift apart.
 
 ### `output/models/direct_identification_summary.json`
 
@@ -324,6 +366,7 @@ Required keys:
 
 - `status`
 - `headline_question`
+- `estimation_path`
 - `shock_definition`
 - `horizon_evidence`
 - `first_stage_checks`
@@ -333,13 +376,14 @@ Required keys:
 - `warnings`
 - `answer_ready_when`
 
-This file is the direct identification gate for the release process. It asks whether the baseline unexpected-TDC shock moves `tdc_bank_only_qoq` itself enough to make pass-through versus crowd-out interpretable, and whether the flagged-window trimming check materially changes the headline answer. The `shock_definition` block should record the active baseline model name, predictor list, and burn-in length so headline shock redesigns remain explicit. Small numeric gaps in the total-minus-other identity check are diagnostic only; the substantive release blocker is lack of clean total-versus-other response separation.
+This file is the direct identification gate for the release process. It asks whether the baseline unexpected-TDC shock moves `tdc_bank_only_qoq` itself enough to make pass-through versus crowd-out interpretable, and whether the flagged-window trimming check materially changes the headline answer. The `shock_definition` block should record the active baseline model name, predictor list, and burn-in length so headline shock redesigns remain explicit. `estimation_path` should say whether the summary is using the exact identity-preserving baseline or the approximate dynamic decomposition path. Small numeric gaps in the total-minus-other identity check are diagnostic only; the substantive release blocker is lack of clean total-versus-other response separation.
 
 ### `output/models/result_readiness_summary.json`
 
 Required keys:
 
 - `status`
+- `estimation_path`
 - `headline_assessment`
 - `reasons`
 - `warnings`
@@ -347,7 +391,7 @@ Required keys:
 - `key_estimates`
 - `answer_ready_when`
 
-This file states whether the current backend run is ready to support a deposit-response interpretation and how much mechanism weight, if any, the release bundle can carry beyond that.
+This file states whether the current backend run is ready to support a deposit-response interpretation and how much mechanism weight, if any, the release bundle can carry beyond that. `estimation_path` should state whether key estimates are being read from `lp_irf_identity_baseline.csv` or the approximate broad LP path.
 
 ### `output/models/pass_through_summary.json`
 
@@ -356,9 +400,12 @@ Required keys:
 - `status`
 - `headline_question`
 - `headline_answer`
+- `estimation_path`
 - `sample_policy`
 - `baseline_horizons`
 - `core_treatment_variants`
+- `measurement_treatment_variants`
+- `shock_design_treatment_variants`
 - `core_control_variants`
 - `shock_sample_variants`
 - `structural_proxy_context`
@@ -367,7 +414,7 @@ Required keys:
 - `readiness_reasons`
 - `readiness_warnings`
 
-This file is the release-facing answer layer. It pairs total-deposit and non-TDC responses at headline horizons, carries the direct TDC response and total-minus-other contrast check, includes both structural-proxy direction checks and the broader proxy-coverage context, and states how flagged-window trimming should be interpreted relative to the frozen headline sample.
+This file is the release-facing answer layer. It pairs total-deposit and non-TDC responses at headline horizons, carries the direct TDC response and total-minus-other contrast check, includes both structural-proxy direction checks and the broader proxy-coverage context, and states how flagged-window trimming should be interpreted relative to the frozen headline sample. It should explicitly separate measurement-variant treatment checks from shock-design treatment checks and identify whether the baseline read is coming from the exact identity-preserving decomposition path.
 
 ### `output/models/sample_construction_summary.json`
 
@@ -437,6 +484,10 @@ Mirror of `output/shocks/unexpected_tdc.csv`.
 
 Mirror of `output/models/lp_irf.csv`.
 
+### `site/data/lp_irf_identity_baseline.csv`
+
+Mirror of `output/models/lp_irf_identity_baseline.csv`.
+
 ### `site/data/lp_irf_regimes.csv`
 
 Mirror of `output/models/lp_irf_regimes.csv`.
@@ -488,6 +539,10 @@ Mirror of `output/models/proxy_unit_audit.json`.
 ### `site/data/shock_diagnostics_summary.json`
 
 Mirror of `output/models/shock_diagnostics_summary.json`.
+
+### `site/data/headline_treatment_fingerprint.json`
+
+Mirror of `output/models/headline_treatment_fingerprint.json`.
 
 ### `site/data/direct_identification_summary.json`
 

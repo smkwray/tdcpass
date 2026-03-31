@@ -9,9 +9,11 @@ from typing import Sequence
 import pandas as pd
 
 from tdcpass.analysis.accounting import build_accounting_summary, compute_other_component, summary_to_frame
+from tdcpass.analysis.treatment_fingerprint import validate_headline_treatment_fingerprint
 from tdcpass.analysis.local_projections import run_local_projections
 from tdcpass.analysis.shocks import expanding_window_residual
 from tdcpass.core.paths import ensure_repo_dirs, repo_root
+from tdcpass.core.yaml_utils import load_yaml
 from tdcpass.data.fetchers.fiscaldata import fetch_fiscaldata_endpoint
 from tdcpass.data.fetchers.fred import fetch_fred_observations
 from tdcpass.data.sibling_cache import discover_and_write_manifest
@@ -142,24 +144,97 @@ def _pipeline_closeout(args: argparse.Namespace) -> int:
     report_path = root / "output" / "reports" / "backend_closeout.md"
     packet_path = root / "output" / "models" / "backend_evidence_packet_summary.json"
     bundle_path = root / "output" / "models" / "backend_decision_bundle_summary.json"
+    identity_path = root / "output" / "models" / "lp_irf_identity_baseline.csv"
+    fingerprint_path = root / "output" / "models" / "headline_treatment_fingerprint.json"
+    readiness_path = root / "output" / "models" / "result_readiness_summary.json"
+    direct_identification_path = root / "output" / "models" / "direct_identification_summary.json"
 
-    missing = [str(path) for path in [summary_path, report_path, packet_path, bundle_path] if not path.exists()]
+    missing = [
+        str(path)
+        for path in [
+            summary_path,
+            report_path,
+            packet_path,
+            bundle_path,
+            identity_path,
+            fingerprint_path,
+            readiness_path,
+            direct_identification_path,
+        ]
+        if not path.exists()
+    ]
     if missing:
         print(json.dumps({"status": "missing_artifacts", "root": str(root), "missing": missing}, indent=2))
         return 1
 
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    readiness = json.loads(readiness_path.read_text(encoding="utf-8"))
+    direct_identification = json.loads(direct_identification_path.read_text(encoding="utf-8"))
+    fingerprint = json.loads(fingerprint_path.read_text(encoding="utf-8"))
+    shock_specs = load_yaml(repo_root() / "config" / "shock_specs.yml")["shocks"]
+    fingerprint_failures = validate_headline_treatment_fingerprint(
+        fingerprint,
+        shock_spec=shock_specs["unexpected_tdc_default"],
+    )
+    closeout_failures: list[str] = []
+    identity_frame = pd.read_csv(identity_path)
+    if identity_frame.empty:
+        closeout_failures.append("Exact identity baseline artifact is empty.")
+    elif "decomposition_mode" not in identity_frame.columns or not identity_frame["decomposition_mode"].eq(
+        "exact_identity_baseline"
+    ).all():
+        closeout_failures.append("Exact identity baseline artifact is not labeled exact_identity_baseline.")
+    closeout_failures.extend(fingerprint_failures)
+    if (
+        direct_identification.get("estimation_path", {}).get("primary_decomposition_mode")
+        != "exact_identity_baseline"
+    ):
+        closeout_failures.append("Direct identification summary is not using the exact identity baseline as primary.")
+    if readiness.get("estimation_path", {}).get("primary_decomposition_mode") != "exact_identity_baseline":
+        closeout_failures.append("Result readiness summary is not using the exact identity baseline as primary.")
+    stale_phrase_checks = {
+        repo_root() / "README.md": [
+            "current provisional proxy implementation",
+            "provisional government-deposits-at-banks proxy",
+        ],
+        repo_root() / "docs" / "claims_and_limits.md": [
+            "current provisional proxy implementation",
+            "treatment migration is complete",
+        ],
+        repo_root() / "docs" / "glossary.md": [
+            "current provisional treatment",
+            "government-deposits-at-banks stock series",
+        ],
+        repo_root() / "docs" / "project_brief.md": [
+            "current checked-in `tdcpass` treatment implementation has drifted onto a provisional",
+        ],
+        repo_root() / "docs" / "task_backlog.md": [
+            "Rename the current provisional treatment",
+            "Rebuild unexpected-treatment residualization on canonical TDC",
+        ],
+    }
+    for path, phrases in stale_phrase_checks.items():
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for phrase in phrases:
+            if phrase in text:
+                closeout_failures.append(f"Stale proxy-era wording remains in {path.relative_to(repo_root())}: {phrase!r}")
+
     payload = {
-        "status": str(summary.get("status", "unknown")),
+        "status": "closeout_failed" if closeout_failures else str(summary.get("status", "unknown")),
         "recommended_action": str(summary.get("recommended_action", "unknown")),
         "headline_question": str(summary.get("headline_question", "")),
         "closeout_summary_path": str(summary_path),
         "closeout_report_path": str(report_path),
         "decision_bundle_path": str(bundle_path),
         "evidence_packet_path": str(packet_path),
+        "identity_baseline_path": str(identity_path),
+        "headline_treatment_fingerprint_path": str(fingerprint_path),
+        "closeout_failures": closeout_failures,
     }
     print(json.dumps(payload, indent=2))
-    return 0
+    return 1 if closeout_failures else 0
 
 
 def build_parser() -> argparse.ArgumentParser:

@@ -199,6 +199,30 @@
       "last_available_quarter": "2025Q4"
     },
     {
+      "column": "tdc_domestic_bank_only_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_no_remit_bank_only_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_credit_union_sensitive_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
       "column": "lag_total_deposits_bank_qoq",
       "headline_sample_non_missing_obs": 92,
       "headline_sample_missing_obs": 0,

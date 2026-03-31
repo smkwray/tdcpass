@@ -20,6 +20,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "output/accounting/quarters_tdc_exceeds_total.csv",
         "output/shocks/unexpected_tdc.csv",
         "output/models/lp_irf.csv",
+        "output/models/lp_irf_identity_baseline.csv",
         "output/models/lp_irf_regimes.csv",
         "output/models/regime_diagnostics_summary.json",
         "output/models/tdc_sensitivity_ladder.csv",
@@ -32,6 +33,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "output/models/structural_proxy_evidence_summary.json",
         "output/models/proxy_coverage_summary.json",
         "output/models/proxy_unit_audit.json",
+        "output/models/headline_treatment_fingerprint.json",
         "output/models/shock_diagnostics_summary.json",
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
@@ -45,6 +47,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "site/data/quarters_tdc_exceeds_total.csv",
         "site/data/unexpected_tdc.csv",
         "site/data/lp_irf.csv",
+        "site/data/lp_irf_identity_baseline.csv",
         "site/data/lp_irf_regimes.csv",
         "site/data/regime_diagnostics_summary.json",
         "site/data/tdc_sensitivity_ladder.csv",
@@ -57,6 +60,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "site/data/structural_proxy_evidence_summary.json",
         "site/data/proxy_coverage_summary.json",
         "site/data/proxy_unit_audit.json",
+        "site/data/headline_treatment_fingerprint.json",
         "site/data/shock_diagnostics_summary.json",
         "site/data/direct_identification_summary.json",
         "site/data/result_readiness_summary.json",
@@ -73,6 +77,9 @@ def test_contract_freezes_canonical_aliases_and_shock_column() -> None:
     assert payload["shock_column"] == "tdc_residual_z"
     panel_artifact = next(item for item in payload["artifacts"] if item["path"] == "data/derived/quarterly_panel.csv")
     assert "bank_credit_private_qoq" not in panel_artifact["headline_sample_columns"]
+    assert "tdc_domestic_bank_only_qoq" in panel_artifact["required_columns"]
+    assert "tdc_no_remit_bank_only_qoq" in panel_artifact["required_columns"]
+    assert "tdc_credit_union_sensitive_qoq" in panel_artifact["required_columns"]
 
 
 def test_shock_and_lp_specs_use_canonical_names() -> None:
@@ -149,13 +156,22 @@ def test_shock_and_lp_specs_use_canonical_names() -> None:
     assert lp_specs["specs"]["period_sensitivity"]["period_variants"]["pre_covid"]["period_role"] == "core"
     assert lp_specs["specs"]["period_sensitivity"]["period_variants"]["covid_post"]["start_quarter"] == "2020Q1"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["baseline"]["treatment_role"] == "core"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["baseline"]["treatment_family"] == "headline"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_long_burnin"]["treatment_role"] == "exploratory"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_long_burnin"]["treatment_family"] == "shock_design"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_no_bill_share"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_billshare_macro_rolling40"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["legacy_rolling40_ols"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["legacy_billshare_expanding"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["legacy_totaldep_long_burnin"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["broad_depository"]["treatment_role"] == "exploratory"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["broad_depository"]["treatment_family"] == "measurement"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["domestic_bank_only"]["treatment_family"] == "measurement"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["no_remit_bank_only"]["treatment_family"] == "measurement"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["credit_union_sensitive"]["treatment_family"] == "measurement"
+    assert shock_specs["shocks"]["unexpected_tdc_domestic_bank_only"]["target"] == "tdc_domestic_bank_only_qoq"
+    assert shock_specs["shocks"]["unexpected_tdc_no_remit_bank_only"]["target"] == "tdc_no_remit_bank_only_qoq"
+    assert shock_specs["shocks"]["unexpected_tdc_credit_union_sensitive"]["target"] == "tdc_credit_union_sensitive_qoq"
 
 
 def test_output_schema_mentions_full_bundle() -> None:

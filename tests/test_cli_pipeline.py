@@ -8,6 +8,8 @@ from tdcpass.cli import build_parser, main
 
 def _write_csv(path: Path, header: list[str], row: list[object]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    if len(row) == 1 and isinstance(row[0], (list, tuple)):
+        row = list(row[0])
     path.write_text(
         ",".join(header) + "\n" + ",".join(str(item) for item in row) + "\n",
         encoding="utf-8",
@@ -61,6 +63,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
         "output/accounting/quarters_tdc_exceeds_total.csv",
         "output/shocks/unexpected_tdc.csv",
         "output/models/lp_irf.csv",
+        "output/models/lp_irf_identity_baseline.csv",
         "output/models/lp_irf_regimes.csv",
         "output/models/regime_diagnostics_summary.json",
         "output/models/tdc_sensitivity_ladder.csv",
@@ -73,6 +76,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
         "output/models/structural_proxy_evidence_summary.json",
         "output/models/proxy_coverage_summary.json",
         "output/models/proxy_unit_audit.json",
+        "output/models/headline_treatment_fingerprint.json",
         "output/models/shock_diagnostics_summary.json",
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
@@ -105,10 +109,12 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
             )
         elif rel.endswith("lp_irf.csv"):
             _write_csv(source_root / rel, ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
+        elif rel.endswith("lp_irf_identity_baseline.csv"):
+            _write_csv(source_root / rel, ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name", "decomposition_mode", "outcome_construction", "inference_method"], [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_baseline", "exact_identity_baseline", "estimated_common_design", "bootstrap"]])
         elif rel.endswith("lp_irf_regimes.csv"):
             _write_csv(source_root / rel, ["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["reserve_drain_high", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
         elif rel.endswith("tdc_sensitivity_ladder.csv"):
-            _write_csv(source_root / rel, ["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["tdc_bank_only_qoq", "core", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
+            _write_csv(source_root / rel, ["treatment_variant", "treatment_role", "treatment_family", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["tdc_bank_only_qoq", "core", "headline", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
         elif rel.endswith("control_set_sensitivity.csv"):
             _write_csv(source_root / rel, ["control_variant", "control_role", "control_columns", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["headline_lagged_macro", "headline", "lag_fedfunds|lag_unemployment|lag_inflation", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "control_sensitivity"]])
         elif rel.endswith("shock_sample_sensitivity.csv"):
@@ -165,6 +171,21 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                     "takeaways": ["stub"],
                 },
             )
+        elif rel.endswith("headline_treatment_fingerprint.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "treatment_freeze_status": "frozen",
+                    "model_name": "unexpected_tdc_default",
+                    "target": "tdc_bank_only_qoq",
+                    "method": "rolling_window_ridge",
+                    "predictors": ["lag_tdc_bank_only_qoq"],
+                    "min_train_obs": 24,
+                    "max_train_obs": 40,
+                    "usable_sample": {"rows": 1},
+                    "git_commit": "stub",
+                },
+            )
         elif rel.endswith("pass_through_summary.json"):
             _write_json(
                 source_root / rel,
@@ -172,9 +193,12 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                     "status": "not_ready",
                     "headline_question": "stub",
                     "headline_answer": "stub",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
                     "sample_policy": {"headline_sample_variant": "all_usable_shocks"},
                     "baseline_horizons": {},
                     "core_treatment_variants": [],
+                    "measurement_treatment_variants": [],
+                    "shock_design_treatment_variants": [],
                     "core_control_variants": [],
                     "shock_sample_variants": [],
                     "structural_proxy_context": {},
@@ -203,6 +227,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                 {
                     "status": "not_ready",
                     "headline_question": "stub",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
                     "shock_definition": {"shock_column": "tdc_residual_z"},
                     "horizon_evidence": {},
                     "first_stage_checks": {"tdc_ci_excludes_zero_at_h0_or_h4": False},
@@ -218,6 +243,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                 source_root / rel,
                 {
                     "status": "not_ready",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
                     "headline_assessment": "stub",
                     "reasons": ["stub"],
                     "warnings": [],
@@ -281,6 +307,71 @@ def test_pipeline_closeout_reads_existing_artifacts(tmp_path: Path, capsys) -> N
     (root / "output" / "reports" / "backend_closeout.md").write_text("# closeout\n", encoding="utf-8")
     _write_json(root / "output" / "models" / "backend_evidence_packet_summary.json", {"status": "not_ready"})
     _write_json(root / "output" / "models" / "backend_decision_bundle_summary.json", {"status": "not_ready"})
+    _write_csv(
+        root / "output" / "models" / "lp_irf_identity_baseline.csv",
+        [
+            "outcome",
+            "horizon",
+            "beta",
+            "se",
+            "lower95",
+            "upper95",
+            "n",
+            "spec_name",
+            "decomposition_mode",
+            "outcome_construction",
+            "inference_method",
+        ],
+        [["tdc_bank_only_qoq", 0, 1.0, 0.1, 0.8, 1.2, 10, "identity_baseline", "exact_identity_baseline", "estimated", "bootstrap"]],
+    )
+    _write_json(
+        root / "output" / "models" / "headline_treatment_fingerprint.json",
+        {
+            "treatment_freeze_status": "frozen",
+            "model_name": "unexpected_tdc_default",
+            "target": "tdc_bank_only_qoq",
+            "method": "rolling_window_ridge",
+            "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+            "ridge_alpha": 125.0,
+            "min_train_obs": 24,
+            "max_train_obs": 40,
+            "standardized_column": "tdc_residual_z",
+            "residual_column": "tdc_residual",
+            "fitted_column": "tdc_fitted",
+            "train_start_obs_column": "train_start_obs",
+            "usable_sample": {"rows": 10, "start_quarter": "2010Q1", "end_quarter": "2012Q2"},
+            "git_commit": "abc123",
+        },
+    )
+    _write_json(
+        root / "output" / "models" / "direct_identification_summary.json",
+        {
+            "status": "provisional",
+            "headline_question": "stub",
+            "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
+            "shock_definition": {"shock_column": "tdc_residual_z"},
+            "horizon_evidence": {},
+            "first_stage_checks": {},
+            "sample_fragility": {},
+            "answer_ready": False,
+            "reasons": [],
+            "warnings": [],
+            "answer_ready_when": [],
+        },
+    )
+    _write_json(
+        root / "output" / "models" / "result_readiness_summary.json",
+        {
+            "status": "provisional",
+            "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
+            "headline_assessment": "stub",
+            "reasons": [],
+            "warnings": [],
+            "diagnostics": {},
+            "key_estimates": {},
+            "answer_ready_when": [],
+        },
+    )
 
     exit_code = main(["pipeline", "closeout", "--root", str(root)])
 
@@ -288,6 +379,94 @@ def test_pipeline_closeout_reads_existing_artifacts(tmp_path: Path, capsys) -> N
     payload = json.loads(capsys.readouterr().out)
     assert payload["recommended_action"] == "stop_and_package"
     assert payload["closeout_summary_path"].endswith("backend_closeout_summary.json")
+    assert payload["closeout_failures"] == []
+
+
+def test_pipeline_closeout_fails_on_fingerprint_mismatch(tmp_path: Path, capsys) -> None:
+    root = tmp_path / "closeout-root"
+    _write_json(
+        root / "output" / "models" / "backend_closeout_summary.json",
+        {
+            "status": "not_ready",
+            "recommended_action": "stop_and_package",
+            "headline_question": "stub",
+        },
+    )
+    (root / "output" / "reports").mkdir(parents=True, exist_ok=True)
+    (root / "output" / "reports" / "backend_closeout.md").write_text("# closeout\n", encoding="utf-8")
+    _write_json(root / "output" / "models" / "backend_evidence_packet_summary.json", {"status": "not_ready"})
+    _write_json(root / "output" / "models" / "backend_decision_bundle_summary.json", {"status": "not_ready"})
+    _write_csv(
+        root / "output" / "models" / "lp_irf_identity_baseline.csv",
+        [
+            "outcome",
+            "horizon",
+            "beta",
+            "se",
+            "lower95",
+            "upper95",
+            "n",
+            "spec_name",
+            "decomposition_mode",
+            "outcome_construction",
+            "inference_method",
+        ],
+        [["tdc_bank_only_qoq", 0, 1.0, 0.1, 0.8, 1.2, 10, "identity_baseline", "exact_identity_baseline", "estimated_common_design", "bootstrap"]],
+    )
+    _write_json(
+        root / "output" / "models" / "headline_treatment_fingerprint.json",
+        {
+            "treatment_freeze_status": "frozen",
+            "model_name": "wrong_model_name",
+            "target": "tdc_bank_only_qoq",
+            "method": "rolling_window_ridge",
+            "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+            "ridge_alpha": 125.0,
+            "min_train_obs": 24,
+            "max_train_obs": 40,
+            "standardized_column": "tdc_residual_z",
+            "residual_column": "tdc_residual",
+            "fitted_column": "tdc_fitted",
+            "train_start_obs_column": "train_start_obs",
+            "usable_sample": {"rows": 10},
+            "git_commit": "abc123",
+        },
+    )
+    _write_json(
+        root / "output" / "models" / "direct_identification_summary.json",
+        {
+            "status": "provisional",
+            "headline_question": "stub",
+            "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
+            "shock_definition": {"shock_column": "tdc_residual_z"},
+            "horizon_evidence": {},
+            "first_stage_checks": {},
+            "sample_fragility": {},
+            "answer_ready": False,
+            "reasons": [],
+            "warnings": [],
+            "answer_ready_when": [],
+        },
+    )
+    _write_json(
+        root / "output" / "models" / "result_readiness_summary.json",
+        {
+            "status": "provisional",
+            "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
+            "headline_assessment": "stub",
+            "reasons": [],
+            "warnings": [],
+            "diagnostics": {},
+            "key_estimates": {},
+            "answer_ready_when": [],
+        },
+    )
+
+    exit_code = main(["pipeline", "closeout", "--root", str(root)])
+
+    assert exit_code == 1
+    payload = json.loads(capsys.readouterr().out)
+    assert any("Fingerprint mismatch" in item for item in payload["closeout_failures"])
 
 
 def test_demo_command_still_exists() -> None:
@@ -305,6 +484,8 @@ def test_pipeline_run_supports_offline_raw_fixture(tmp_path: Path) -> None:
     assert exit_code == 0
     assert (dest_root / "data" / "derived" / "quarterly_panel.csv").exists()
     assert (dest_root / "output" / "models" / "sample_construction_summary.json").exists()
+    assert (dest_root / "output" / "models" / "lp_irf_identity_baseline.csv").exists()
+    assert (dest_root / "output" / "models" / "headline_treatment_fingerprint.json").exists()
     assert (dest_root / "output" / "models" / "published_state_proxy_comparator_summary.json").exists()
     assert (dest_root / "output" / "models" / "published_state_proxy_vs_baseline_summary.json").exists()
     assert (dest_root / "output" / "models" / "backend_decision_bundle_summary.json").exists()

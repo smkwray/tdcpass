@@ -220,6 +220,7 @@ def _regime_rows(lp_irf_regimes: pd.DataFrame, horizons: tuple[int, ...]) -> lis
 def build_pass_through_summary(
     *,
     lp_irf: pd.DataFrame,
+    identity_lp_irf: pd.DataFrame | None = None,
     sensitivity: pd.DataFrame,
     control_sensitivity: pd.DataFrame,
     sample_sensitivity: pd.DataFrame,
@@ -232,18 +233,61 @@ def build_pass_through_summary(
     proxy_coverage_summary: dict[str, Any] | None = None,
     horizons: tuple[int, ...] = (0, 4),
 ) -> dict[str, Any]:
+    primary_lp_irf = identity_lp_irf if identity_lp_irf is not None and not identity_lp_irf.empty else lp_irf
+    primary_decomposition_mode = (
+        "exact_identity_baseline"
+        if identity_lp_irf is not None and not identity_lp_irf.empty
+        else "approximate_dynamic_decomposition"
+    )
+    baseline_contrast = (
+        contrast[(contrast["scope"] == "baseline") & (contrast["variant"] == "baseline")].copy()
+        if not contrast.empty
+        else pd.DataFrame()
+    )
+    approximate_dynamic_robustness = {
+        "status": "not_available",
+        "artifact": None,
+        "max_abs_gap_h0_h4": None,
+        "key_horizon_consistent": None,
+        "note": "No approximate dynamic decomposition robustness check is available.",
+    }
+    if not baseline_contrast.empty:
+        key_contrast = baseline_contrast[baseline_contrast["horizon"].isin(horizons)].copy()
+        max_abs_gap = None
+        if not key_contrast.empty and "abs_gap" in key_contrast.columns and key_contrast["abs_gap"].notna().any():
+            max_abs_gap = float(key_contrast["abs_gap"].dropna().max())
+        approximate_dynamic_robustness = {
+            "status": (
+                "divergent_secondary_check"
+                if primary_decomposition_mode == "exact_identity_baseline" and key_contrast["contrast_consistent"].eq(False).any()
+                else "consistent_secondary_check"
+                if primary_decomposition_mode == "exact_identity_baseline"
+                else "primary_check"
+            ),
+            "artifact": "total_minus_other_contrast.csv",
+            "max_abs_gap_h0_h4": max_abs_gap,
+            "key_horizon_consistent": None if key_contrast.empty else bool(key_contrast["contrast_consistent"].fillna(False).all()),
+            "note": (
+                "Primary decomposition uses the exact identity-preserving baseline; the approximate dynamic path is retained only as a secondary robustness check."
+                if primary_decomposition_mode == "exact_identity_baseline"
+                else "The total-minus-other contrast remains part of the active decomposition check for this specification."
+            ),
+        }
     baseline = {}
     for horizon in horizons:
-        total_row = _lp_row(lp_irf, outcome="total_deposits_bank_qoq", horizon=horizon)
-        other_row = _lp_row(lp_irf, outcome="other_component_qoq", horizon=horizon)
-        tdc_row = _lp_row(lp_irf, outcome="tdc_bank_only_qoq", horizon=horizon)
+        total_row = _lp_row(primary_lp_irf, outcome="total_deposits_bank_qoq", horizon=horizon)
+        other_row = _lp_row(primary_lp_irf, outcome="other_component_qoq", horizon=horizon)
+        tdc_row = _lp_row(primary_lp_irf, outcome="tdc_bank_only_qoq", horizon=horizon)
         baseline[f"h{horizon}"] = _horizon_assessment(total_row, other_row)
         baseline[f"h{horizon}"]["direct_tdc_response"] = _snapshot(tdc_row)
         contrast_row = _contrast_row(contrast, scope="baseline", variant="baseline", horizon=horizon)
-        baseline[f"h{horizon}"]["direct_vs_identity_tdc_gap"] = (
+        baseline[f"h{horizon}"]["approximate_dynamic_tdc_gap"] = (
             float(contrast_row["gap_implied_minus_direct"]) if contrast_row is not None and contrast_row["gap_implied_minus_direct"] is not None else None
         )
-        baseline[f"h{horizon}"]["contrast_consistent"] = bool(contrast_row["contrast_consistent"]) if contrast_row is not None else False
+        baseline[f"h{horizon}"]["approximate_dynamic_contrast_consistent"] = (
+            bool(contrast_row["contrast_consistent"]) if contrast_row is not None else False
+        )
+        baseline[f"h{horizon}"]["primary_decomposition_mode"] = primary_decomposition_mode
 
     readiness_status = str(readiness.get("status", "not_ready"))
     treatment_freeze_status = str(readiness.get("treatment_freeze_status", "frozen"))
@@ -309,6 +353,14 @@ def build_pass_through_summary(
 
     return {
         "status": readiness_status,
+        "estimation_path": {
+            "primary_decomposition_mode": primary_decomposition_mode,
+            "primary_artifact": "lp_irf_identity_baseline.csv"
+            if primary_decomposition_mode == "exact_identity_baseline"
+            else "lp_irf.csv",
+            "approximate_robustness_artifact": "total_minus_other_contrast.csv",
+            "approximate_dynamic_robustness": approximate_dynamic_robustness,
+        },
         "treatment_freeze_status": treatment_freeze_status,
         "treatment_candidates": treatment_candidates,
         "treatment_quality_status": treatment_quality_status,
@@ -335,6 +387,24 @@ def build_pass_through_summary(
             variant_column="treatment_variant",
             role_column="treatment_role",
             allowed_roles={"core"},
+            horizons=horizons,
+        ),
+        "measurement_treatment_variants": _variant_rows(
+            sensitivity[sensitivity.get("treatment_family", "").eq("measurement")]
+            if "treatment_family" in sensitivity.columns
+            else pd.DataFrame(),
+            variant_column="treatment_variant",
+            role_column="treatment_role",
+            allowed_roles={"exploratory"},
+            horizons=horizons,
+        ),
+        "shock_design_treatment_variants": _variant_rows(
+            sensitivity[sensitivity.get("treatment_family", "").eq("shock_design")]
+            if "treatment_family" in sensitivity.columns
+            else pd.DataFrame(),
+            variant_column="treatment_variant",
+            role_column="treatment_role",
+            allowed_roles={"exploratory"},
             horizons=horizons,
         ),
         "core_control_variants": _variant_rows(

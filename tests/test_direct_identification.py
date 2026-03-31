@@ -33,6 +33,39 @@ def test_total_minus_other_contrast_tracks_direct_tdc_response() -> None:
     assert row["contrast_consistent"] is True
 
 
+def test_total_minus_other_contrast_can_append_exact_identity_scope() -> None:
+    approx_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.4, "se": 0.4, "lower95": 0.62, "upper95": 2.18, "n": 40},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.5, "lower95": 0.02, "upper95": 1.98, "n": 40},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.4, "se": 0.5, "lower95": -1.38, "upper95": 0.58, "n": 40},
+        ]
+    )
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 38},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 38},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.6, "se": 0.2, "lower95": -1.0, "upper95": -0.2, "n": 38},
+        ]
+    )
+
+    contrast = build_total_minus_other_contrast(
+        lp_irf=approx_lp,
+        identity_lp_irf=identity_lp,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+        identity_check_mode="approximate_with_outcome_specific_lags",
+    )
+
+    assert set(contrast["scope"]) == {"baseline", "exact_identity_baseline"}
+    exact_row = contrast[contrast["scope"] == "exact_identity_baseline"].iloc[0].to_dict()
+    assert exact_row["identity_check_mode"] == "exact_identity_baseline"
+    assert exact_row["beta_direct"] == 1.5
+    assert exact_row["beta_implied"] == 1.5
+    assert exact_row["contrast_consistent"] is True
+
+
 def test_direct_identification_summary_marks_weak_first_stage_as_not_ready() -> None:
     lp_irf = pd.DataFrame(
         [
@@ -167,6 +200,45 @@ def test_direct_identification_labels_lp_contrast_as_approximate_when_configured
         sample_sensitivity=pd.DataFrame(),
     )
 
+    assert payload["estimation_path"]["primary_decomposition_mode"] == "approximate_dynamic_decomposition"
+    assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "primary_check"
     assert payload["contrast_check"]["identity_check_mode"] == "approximate_with_outcome_specific_lags"
     assert "outcome-specific lagged dependent variables" in payload["contrast_check"]["explanation"]
     assert any("approximate LP cross-check" in item for item in payload["warnings"])
+
+
+def test_direct_identification_prefers_exact_identity_baseline_when_available() -> None:
+    approx_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 12.0, "se": 1.0, "lower95": 10.04, "upper95": 13.96, "n": 40},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 3.0, "se": 1.0, "lower95": 1.04, "upper95": 4.96, "n": 40},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -2.0, "se": 1.0, "lower95": -3.96, "upper95": -0.04, "n": 40},
+        ]
+    )
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 38},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.7, "se": 0.2, "lower95": -1.1, "upper95": -0.3, "n": 38},
+        ]
+    )
+    contrast = build_total_minus_other_contrast(
+        lp_irf=approx_lp,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+        identity_check_mode="approximate_with_outcome_specific_lags",
+    )
+    contrast.loc[:, "contrast_consistent"] = False
+
+    payload = build_direct_identification_summary(
+        lp_irf=approx_lp,
+        identity_lp_irf=identity_lp,
+        contrast=contrast,
+        sample_sensitivity=pd.DataFrame(),
+    )
+
+    assert payload["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
+    assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "divergent_secondary_check"
+    assert payload["horizon_evidence"]["h0"]["tdc"]["beta"] == 1.5
+    assert not any("exact identity-preserving baseline is primary" in item for item in payload["warnings"])

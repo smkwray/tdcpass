@@ -75,6 +75,9 @@ def _fake_canonical_tdc_frame() -> pd.DataFrame:
             "quarter": ["2000Q1", "2000Q2", "2000Q3", "2000Q4", "2001Q1"],
             "tdc_bank_only_qoq": [None, 2.0, 4.0, 2.0, 3.0],
             "tdc_broad_depository_qoq": [None, 3.0, 5.0, 3.0, 4.0],
+            "tdc_domestic_bank_only_qoq": [None, 1.5, 3.5, 1.5, 2.5],
+            "tdc_no_remit_bank_only_qoq": [None, 1.8, 3.8, 1.8, 2.8],
+            "tdc_credit_union_sensitive_qoq": [None, 2.2, 4.2, 2.2, 3.2],
         }
     )
 
@@ -139,6 +142,9 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert result.sample_construction_summary_path.exists()
     assert set(build_panel._required_panel_columns()).issubset(frame.columns)
     assert frame["quarter"].iloc[0] == "2000Q3"
+    assert "tdc_domestic_bank_only_qoq" in frame.columns
+    assert "tdc_no_remit_bank_only_qoq" in frame.columns
+    assert "tdc_credit_union_sensitive_qoq" in frame.columns
     assert frame.loc[frame["quarter"] == "2000Q3", "bank_credit_private_qoq"].isna().all()
     assert (frame["other_component_qoq"] == frame["total_deposits_bank_qoq"] - frame["tdc_bank_only_qoq"]).all()
     assert frame["bill_share"].between(0.0, 1.0).all()
@@ -221,16 +227,25 @@ def test_reused_tdc_series_accepts_legacy_alias(tmp_path: Path) -> None:
     payload = {"reused_artifacts": [{"materialized_path": str(reused_path)}]}
     frame = build_panel._load_reused_tdc_series(payload)
     assert frame is not None
-    assert list(frame.columns) == ["quarter", "tdc_bank_only_qoq"]
+    assert frame["quarter"].tolist() == ["2000Q1"]
+    assert frame["tdc_bank_only_qoq"].tolist() == [1.0]
+    assert "tdc_broad_depository_qoq" in frame.columns
+    assert "tdc_domestic_bank_only_qoq" in frame.columns
+    assert "tdc_no_remit_bank_only_qoq" in frame.columns
+    assert "tdc_credit_union_sensitive_qoq" in frame.columns
+    assert frame["tdc_broad_depository_qoq"].isna().all()
+    assert frame["tdc_domestic_bank_only_qoq"].isna().all()
+    assert frame["tdc_no_remit_bank_only_qoq"].isna().all()
+    assert frame["tdc_credit_union_sensitive_qoq"].isna().all()
 
 
 def test_load_canonical_tdc_series_csv_accepts_tdcest_export(tmp_path: Path) -> None:
     path = tmp_path / "tdc_estimates.csv"
     path.write_text(
         (
-            "date,tdc_base_bank_only_ru_flow,tdc_base_broad_depository_np_cu_ru_flow\n"
-            "2000-03-31,1000.0,2000.0\n"
-            "2000-06-30,3000.0,4000.0\n"
+            "date,tdc_base_bank_only_ru_flow,tdc_base_broad_depository_np_cu_ru_flow,tdc_domestic_bank_only_ru_flow,tdc_no_remit_bank_only,tdc_credit_union_aggregate_sensitivity\n"
+            "2000-03-31,1000.0,2000.0,1100.0,1200.0,1300.0\n"
+            "2000-06-30,3000.0,4000.0,3100.0,3200.0,3300.0\n"
         ),
         encoding="utf-8",
     )
@@ -239,6 +254,27 @@ def test_load_canonical_tdc_series_csv_accepts_tdcest_export(tmp_path: Path) -> 
     assert frame["quarter"].tolist() == ["2000Q1", "2000Q2"]
     assert frame["tdc_bank_only_qoq"].tolist() == [1.0, 3.0]
     assert frame["tdc_broad_depository_qoq"].tolist() == [2.0, 4.0]
+    assert frame["tdc_domestic_bank_only_qoq"].tolist() == [1.1, 3.1]
+    assert frame["tdc_no_remit_bank_only_qoq"].tolist() == [1.2, 3.2]
+    assert frame["tdc_credit_union_sensitive_qoq"].tolist() == [1.3, 3.3]
+
+
+def test_load_canonical_tdc_series_csv_backfills_optional_variants_when_absent(tmp_path: Path) -> None:
+    path = tmp_path / "tdc_estimates.csv"
+    path.write_text(
+        (
+            "date,tdc_base_bank_only_ru_flow\n"
+            "2000-03-31,1000.0\n"
+            "2000-06-30,3000.0\n"
+        ),
+        encoding="utf-8",
+    )
+    frame = build_panel._load_canonical_tdc_series_csv(path)
+    assert frame is not None
+    assert frame["tdc_bank_only_qoq"].tolist() == [1.0, 3.0]
+    assert frame["tdc_domestic_bank_only_qoq"].isna().all()
+    assert frame["tdc_no_remit_bank_only_qoq"].isna().all()
+    assert frame["tdc_credit_union_sensitive_qoq"].isna().all()
 
 
 def test_build_public_quarterly_panel_from_offline_raw_fixture(tmp_path: Path, monkeypatch) -> None:

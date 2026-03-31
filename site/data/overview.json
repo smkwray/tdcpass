@@ -10,16 +10,18 @@
     "rows": 92,
     "start_quarter": "2003Q1",
     "end_quarter": "2025Q4",
-    "source_root": "/Users/shanewray/malus/proj/tdcpass"
+    "source_root": "/tmp/tdcpass-research-push"
   },
   "main_findings": [
     "Quarterly public-data bundle materialized from direct official-source rebuild with optional sibling-cache reuse.",
     "This release is a methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock.",
     "The repaired baseline shock passes its treatment-quality gate on 68 usable quarters from 2009Q1 to 2025Q4, but the current release status remains `provisional`.",
+    "The exact identity-preserving baseline is now the primary decomposition path; the older outcome-specific LP contrast remains a secondary robustness check only.",
     "44.6% of quarters show `other_component_qoq < 0` in the headline sample."
   ],
   "caveats": [
     "Current release wording is gated by readiness diagnostics: the live bundle should be read as a deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
+    "When the exact identity baseline and the older approximate dynamic LP path disagree, interpretation should default to the exact baseline and treat the older path as a robustness diagnostic rather than the headline read.",
     "Pass-through and crowd-out ratios remain suppressed when the raw-unit TDC response is too small for interpretation relative to usable-sample target volatility.",
     "bill_share is a quarterly issue-date share of Treasury bill auction offering amounts from FiscalData; it remains an exploratory sensitivity input, not a live regime export or standalone mechanism proof.",
     "Structural proxies are partial cross-checks on the residual, not exhaustive counterpart accounting or standalone mechanism proof."
@@ -48,6 +50,7 @@
       "tdc_residual",
       "tdc_residual_z",
       "lp_irf",
+      "lp_irf_identity_baseline",
       "lp_irf_regimes",
       "tdc_sensitivity_ladder",
       "control_set_sensitivity",
@@ -56,7 +59,8 @@
       "total_minus_other_contrast",
       "structural_proxy_evidence",
       "proxy_coverage_summary",
-      "proxy_unit_audit"
+      "proxy_unit_audit",
+      "headline_treatment_fingerprint"
     ],
     "inferred_counterfactuals": [
       "pass_through_h0_h8",
@@ -70,6 +74,7 @@
     "site/data/accounting_summary.csv",
     "site/data/unexpected_tdc.csv",
     "site/data/lp_irf.csv",
+    "site/data/lp_irf_identity_baseline.csv",
     "site/data/regime_diagnostics_summary.json",
     "site/data/control_set_sensitivity.csv",
     "site/data/shock_sample_sensitivity.csv",
@@ -80,6 +85,7 @@
     "site/data/structural_proxy_evidence_summary.json",
     "site/data/proxy_coverage_summary.json",
     "site/data/proxy_unit_audit.json",
+    "site/data/headline_treatment_fingerprint.json",
     "site/data/shock_diagnostics_summary.json",
     "site/data/result_readiness_summary.json",
     "site/data/direct_identification_summary.json",

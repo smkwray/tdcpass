@@ -1,5 +1,17 @@
 {
   "status": "provisional",
+  "estimation_path": {
+    "primary_decomposition_mode": "exact_identity_baseline",
+    "primary_artifact": "lp_irf_identity_baseline.csv",
+    "approximate_robustness_artifact": "total_minus_other_contrast.csv",
+    "approximate_dynamic_robustness": {
+      "status": "divergent_secondary_check",
+      "artifact": "total_minus_other_contrast.csv",
+      "max_abs_gap_h0_h4": 34.841407895902734,
+      "key_horizon_consistent": false,
+      "note": "Primary decomposition uses the exact identity-preserving baseline; the approximate dynamic path is retained only as a secondary robustness check."
+    }
+  },
   "treatment_freeze_status": "frozen",
   "treatment_candidates": [],
   "treatment_quality_status": "pass",
@@ -81,11 +93,11 @@
   "headline_assessment": "Current outputs are usable for deposit-response interpretation, but mechanism attribution remains sensitive or incomplete.",
   "reasons": [],
   "warnings": [
-    "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables.",
     "Structural proxy cross-checks are mixed across key horizons.",
     "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern."
   ],
   "diagnostics": {
+    "primary_decomposition_mode": "exact_identity_baseline",
     "shock_usable_obs": 68,
     "shock_start_quarter": "2009Q1",
     "shock_end_quarter": "2025Q4",
@@ -95,19 +107,19 @@
     "regime_row_count": 144,
     "informative_regime_count": 1,
     "stable_regime_count": 1,
-    "sensitivity_variant_count": 8,
+    "sensitivity_variant_count": 11,
     "control_set_variant_count": 3,
     "control_set_core_variant_count": 2,
     "control_set_exploratory_variant_count": 1,
     "sensitivity_core_variant_count": 1,
-    "sensitivity_exploratory_variant_count": 7,
+    "sensitivity_exploratory_variant_count": 10,
     "exploratory_variant_sign_disagreement": false,
     "control_set_sign_disagreement": false,
     "exploratory_control_set_sign_disagreement": false,
     "sample_sensitivity_variant_count": 3,
     "sample_variant_sign_disagreement": false,
     "sample_variant_magnitude_instability": false,
-    "direct_identification_status": "provisional",
+    "direct_identification_status": "ready_for_interpretation",
     "contrast_max_abs_gap_h0_h4": 34.841407895902734,
     "contrast_rows_missing": false,
     "structural_proxy_status": "mixed",
@@ -129,49 +141,49 @@
   "key_estimates": {
     "tdc_h0": {
       "beta": 128.49398892100785,
-      "se": 14.082533270452723,
-      "lower95": 100.89222371092052,
-      "upper95": 156.0957541310952,
+      "se": 13.991961570115432,
+      "lower95": 100.88367137736657,
+      "upper95": 152.92481157086092,
       "n": 68,
       "ci_excludes_zero": true
     },
     "tdc_h4": {
       "beta": 278.13971316628357,
-      "se": 69.29214131662822,
-      "lower95": 142.32711618569226,
-      "upper95": 413.9523101468749,
+      "se": 74.03622268034015,
+      "lower95": 97.62580949118603,
+      "upper95": 400.2710018774603,
       "n": 64,
       "ci_excludes_zero": true
     },
     "total_deposits_h0": {
-      "beta": 46.46053662919742,
-      "se": 21.936358412025733,
-      "lower95": 3.4652741416269848,
-      "upper95": 89.45579911676785,
+      "beta": 55.75033524806063,
+      "se": 25.193756364184207,
+      "lower95": 11.914564763748912,
+      "upper95": 112.95810148991914,
       "n": 68,
       "ci_excludes_zero": true
     },
     "total_deposits_h4": {
-      "beta": 142.30410309715606,
-      "se": 92.45580638597868,
-      "lower95": -38.909277419362155,
-      "upper95": 323.51748361367424,
+      "beta": 167.33069747889854,
+      "se": 100.30100771730665,
+      "lower95": -63.93923127273721,
+      "upper95": 358.74512761844096,
       "n": 64,
       "ci_excludes_zero": false
     },
     "other_component_h0": {
-      "beta": -81.17833439216729,
-      "se": 20.082089282921796,
-      "lower95": -120.539229386694,
-      "upper95": -41.81743939764057,
+      "beta": -72.74365367294723,
+      "se": 24.24909289745364,
+      "lower95": -110.4034376557296,
+      "upper95": -16.164168243115927,
       "n": 68,
       "ci_excludes_zero": true
     },
     "other_component_h4": {
-      "beta": -100.99420217322478,
-      "se": 48.95277771700602,
-      "lower95": -196.94164649855657,
-      "upper95": -5.046757847892977,
+      "beta": -110.80901568738503,
+      "se": 56.70082171226873,
+      "lower95": -206.322898566643,
+      "upper95": -1.787584654962086,
       "n": 64,
       "ci_excludes_zero": true
     }

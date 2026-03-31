@@ -49,6 +49,7 @@ def build_result_readiness_summary(
     accounting_summary: AccountingSummary,
     shocks: pd.DataFrame,
     lp_irf: pd.DataFrame,
+    identity_lp_irf: pd.DataFrame | None = None,
     lp_irf_regimes: pd.DataFrame,
     sensitivity: pd.DataFrame,
     control_sensitivity: pd.DataFrame | None = None,
@@ -91,6 +92,13 @@ def build_result_readiness_summary(
     ):
         sample_sensitivity = pd.DataFrame(columns=sorted(sample_sensitivity_columns))
 
+    primary_lp_irf = identity_lp_irf if identity_lp_irf is not None and not identity_lp_irf.empty else lp_irf
+    primary_decomposition_mode = (
+        "exact_identity_baseline"
+        if identity_lp_irf is not None and not identity_lp_irf.empty
+        else "approximate_dynamic_decomposition"
+    )
+
     usable_shocks = shocks.dropna(subset=[shock_column]).copy()
     shock_obs = int(len(usable_shocks))
     shock_start = str(usable_shocks["quarter"].iloc[0]) if shock_obs else None
@@ -98,12 +106,12 @@ def build_result_readiness_summary(
     flagged_shock_obs = int(usable_shocks["shock_flag"].fillna("").astype(str).ne("").sum()) if "shock_flag" in usable_shocks.columns else 0
     flagged_shock_share = float(flagged_shock_obs / shock_obs) if shock_obs else None
 
-    total_h0 = _lp_row(lp_irf, outcome="total_deposits_bank_qoq", horizon=0)
-    total_h4 = _lp_row(lp_irf, outcome="total_deposits_bank_qoq", horizon=4)
-    other_h0 = _lp_row(lp_irf, outcome="other_component_qoq", horizon=0)
-    other_h4 = _lp_row(lp_irf, outcome="other_component_qoq", horizon=4)
-    tdc_h0 = _lp_row(lp_irf, outcome="tdc_bank_only_qoq", horizon=0)
-    tdc_h4 = _lp_row(lp_irf, outcome="tdc_bank_only_qoq", horizon=4)
+    total_h0 = _lp_row(primary_lp_irf, outcome="total_deposits_bank_qoq", horizon=0)
+    total_h4 = _lp_row(primary_lp_irf, outcome="total_deposits_bank_qoq", horizon=4)
+    other_h0 = _lp_row(primary_lp_irf, outcome="other_component_qoq", horizon=0)
+    other_h4 = _lp_row(primary_lp_irf, outcome="other_component_qoq", horizon=4)
+    tdc_h0 = _lp_row(primary_lp_irf, outcome="tdc_bank_only_qoq", horizon=0)
+    tdc_h4 = _lp_row(primary_lp_irf, outcome="tdc_bank_only_qoq", horizon=4)
 
     reasons: list[str] = []
     warnings: list[str] = []
@@ -212,18 +220,44 @@ def build_result_readiness_summary(
 
     contrast_max_abs_gap_h0_h4 = None
     contrast_rows_missing = None
+    approximate_dynamic_robustness = {
+        "status": "not_available",
+        "artifact": None,
+        "max_abs_gap_h0_h4": None,
+        "key_horizon_consistent": None,
+        "note": "No approximate dynamic decomposition robustness check is available.",
+    }
     if contrast is not None and not contrast.empty:
         baseline_contrast = contrast[(contrast["scope"] == "baseline") & (contrast["horizon"].isin([0, 4]))].copy()
         if not baseline_contrast.empty and baseline_contrast["abs_gap"].notna().any():
             contrast_max_abs_gap_h0_h4 = float(baseline_contrast["abs_gap"].dropna().max())
         contrast_rows_missing = bool(baseline_contrast["beta_direct"].isna().any()) if "beta_direct" in baseline_contrast.columns else None
+        approximate_dynamic_robustness = {
+            "status": (
+                "divergent_secondary_check"
+                if primary_decomposition_mode == "exact_identity_baseline" and baseline_contrast["contrast_consistent"].eq(False).any()
+                else "consistent_secondary_check"
+                if primary_decomposition_mode == "exact_identity_baseline"
+                else "primary_check"
+            ),
+            "artifact": "total_minus_other_contrast.csv",
+            "max_abs_gap_h0_h4": contrast_max_abs_gap_h0_h4,
+            "key_horizon_consistent": None
+            if baseline_contrast.empty
+            else bool(baseline_contrast["contrast_consistent"].fillna(False).all()),
+            "note": (
+                "Primary decomposition uses the exact identity-preserving baseline; the approximate dynamic path is retained only as a secondary robustness check."
+                if primary_decomposition_mode == "exact_identity_baseline"
+                else "The total-minus-other contrast remains part of the active decomposition check for this specification."
+            ),
+        }
         if baseline_contrast["contrast_consistent"].eq(False).any():
             contrast_mode = str(baseline_contrast.iloc[0].get("identity_check_mode", "exact_accounting_identity"))
-            if contrast_mode == "approximate_with_outcome_specific_lags":
+            if primary_decomposition_mode != "exact_identity_baseline" and contrast_mode == "approximate_with_outcome_specific_lags":
                 warnings.append(
                     "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables."
                 )
-            else:
+            elif primary_decomposition_mode != "exact_identity_baseline":
                 warnings.append("Direct TDC response and total-minus-other contrast differ by more than the numeric tolerance at key horizons.")
 
     structural_proxy_status = None
@@ -337,6 +371,14 @@ def build_result_readiness_summary(
 
     return {
         "status": status,
+        "estimation_path": {
+            "primary_decomposition_mode": primary_decomposition_mode,
+            "primary_artifact": "lp_irf_identity_baseline.csv"
+            if primary_decomposition_mode == "exact_identity_baseline"
+            else "lp_irf.csv",
+            "approximate_robustness_artifact": "total_minus_other_contrast.csv" if contrast is not None else None,
+            "approximate_dynamic_robustness": approximate_dynamic_robustness,
+        },
         "treatment_freeze_status": treatment_freeze_status,
         "treatment_candidates": treatment_candidates,
         "treatment_quality_status": treatment_quality_status,
@@ -346,6 +388,7 @@ def build_result_readiness_summary(
         "reasons": reasons,
         "warnings": warnings,
         "diagnostics": {
+            "primary_decomposition_mode": primary_decomposition_mode,
             "shock_usable_obs": shock_obs,
             "shock_start_quarter": shock_start,
             "shock_end_quarter": shock_end,

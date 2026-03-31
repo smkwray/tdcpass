@@ -18,6 +18,7 @@ from tdcpass.analysis.direct_identification import (
     build_total_minus_other_contrast,
 )
 from tdcpass.analysis.factor_control_diagnostics import build_factor_control_diagnostics_summary
+from tdcpass.analysis.identity_baseline import build_identity_baseline_irf
 from tdcpass.analysis.local_projections import run_local_projections, run_lp_from_specs
 from tdcpass.analysis.pass_through_summary import build_pass_through_summary
 from tdcpass.analysis.period_sensitivity import build_period_sensitivity_summary
@@ -36,6 +37,7 @@ from tdcpass.analysis.smoothed_local_projections import (
 )
 from tdcpass.analysis.state_proxy_factor_diagnostics import build_state_proxy_factor_diagnostics
 from tdcpass.analysis.structural_proxy_evidence import build_structural_proxy_evidence
+from tdcpass.analysis.treatment_fingerprint import build_headline_treatment_fingerprint
 from tdcpass.core.paths import ensure_repo_dirs, repo_root
 from tdcpass.core.yaml_utils import load_yaml
 from tdcpass.pipeline.build_panel import build_public_quarterly_panel, load_panel
@@ -108,10 +110,12 @@ def _default_overview_payload(
                 f"The repaired baseline shock passes its treatment-quality gate on {usable_shock_rows} usable quarters "
                 f"from {usable_shock_start} to {usable_shock_end}, but the current release status remains `{readiness_status}`."
             ),
+            "The exact identity-preserving baseline is now the primary decomposition path; the older outcome-specific LP contrast remains a secondary robustness check only.",
             f"{share_other_negative:.1%} of quarters show `other_component_qoq < 0` in the headline sample.",
         ],
         "caveats": [
             "Current release wording is gated by readiness diagnostics: the live bundle should be read as a deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
+            "When the exact identity baseline and the older approximate dynamic LP path disagree, interpretation should default to the exact baseline and treat the older path as a robustness diagnostic rather than the headline read.",
             "Pass-through and crowd-out ratios remain suppressed when the raw-unit TDC response is too small for interpretation relative to usable-sample target volatility.",
             "bill_share is a quarterly issue-date share of Treasury bill auction offering amounts from FiscalData; it remains an exploratory sensitivity input, not a live regime export or standalone mechanism proof.",
             "Structural proxies are partial cross-checks on the residual, not exhaustive counterpart accounting or standalone mechanism proof.",
@@ -140,6 +144,7 @@ def _default_overview_payload(
                 "tdc_residual",
                 "tdc_residual_z",
                 "lp_irf",
+                "lp_irf_identity_baseline",
                 "lp_irf_regimes",
                 "tdc_sensitivity_ladder",
                 "control_set_sensitivity",
@@ -149,6 +154,7 @@ def _default_overview_payload(
                 "structural_proxy_evidence",
                 "proxy_coverage_summary",
                 "proxy_unit_audit",
+                "headline_treatment_fingerprint",
             ],
             "inferred_counterfactuals": [
                 "pass_through_h0_h8",
@@ -162,6 +168,7 @@ def _default_overview_payload(
             "site/data/accounting_summary.csv",
             "site/data/unexpected_tdc.csv",
             "site/data/lp_irf.csv",
+            "site/data/lp_irf_identity_baseline.csv",
             "site/data/regime_diagnostics_summary.json",
             "site/data/control_set_sensitivity.csv",
             "site/data/shock_sample_sensitivity.csv",
@@ -172,6 +179,7 @@ def _default_overview_payload(
             "site/data/structural_proxy_evidence_summary.json",
             "site/data/proxy_coverage_summary.json",
             "site/data/proxy_unit_audit.json",
+            "site/data/headline_treatment_fingerprint.json",
             "site/data/shock_diagnostics_summary.json",
             "site/data/result_readiness_summary.json",
             "site/data/direct_identification_summary.json",
@@ -336,12 +344,22 @@ def _materialize_real_outputs(
         lp_specs=lp_specs,
         regime_specs=regime_specs,
     )
+    identity_baseline = build_identity_baseline_irf(
+        shocked,
+        shock_col=str(baseline_lp_spec.get("shock_column", "tdc_residual_z")),
+        tdc_outcome_col=str(baseline_shock_spec.get("target", "tdc_bank_only_qoq")),
+        total_outcome_col="total_deposits_bank_qoq",
+        controls=[str(col) for col in baseline_lp_spec.get("controls", [])],
+        horizons=[int(h) for h in baseline_lp_spec.get("horizons", [])],
+        cumulative=bool(baseline_lp_spec.get("cumulative", True)),
+        spec_name="identity_baseline",
+    )
     raw_tdc_lp = run_local_projections(
         shocked,
         shock_col=str(baseline_shock_spec.get("residual_column", "tdc_residual")),
         outcome_cols=[str(baseline_shock_spec.get("target", "tdc_bank_only_qoq"))],
         controls=[str(col) for col in baseline_lp_spec.get("controls", [])],
-        include_lagged_outcome=bool(baseline_lp_spec.get("include_lagged_outcome", False)),
+        include_lagged_outcome=False,
         horizons=[0, 4, 8],
         nw_lags=int(baseline_lp_spec.get("nw_lags", 4)),
         cumulative=bool(baseline_lp_spec.get("cumulative", True)),
@@ -349,6 +367,17 @@ def _materialize_real_outputs(
     )
     lp_irf_path = root / "output" / "models" / "lp_irf.csv"
     export_frame(lp_outputs["lp_irf"], lp_irf_path)
+    lp_irf_identity_baseline_path = root / "output" / "models" / "lp_irf_identity_baseline.csv"
+    export_frame(identity_baseline, lp_irf_identity_baseline_path)
+    treatment_fingerprint_path = root / "output" / "models" / "headline_treatment_fingerprint.json"
+    write_json_payload(
+        treatment_fingerprint_path,
+        build_headline_treatment_fingerprint(
+            shock_spec=dict(baseline_shock_spec),
+            shocked=shocked,
+            repo_root=repo_root(),
+        ),
+    )
     smooth_lp_spec = lp_specs["specs"].get("smooth_lp", {})
     smoothed_lp_irf = build_smoothed_lp_irf(
         lp_outputs["lp_irf"],
@@ -407,6 +436,7 @@ def _materialize_real_outputs(
     )
     contrast = build_total_minus_other_contrast(
         lp_irf=lp_outputs["lp_irf"],
+        identity_lp_irf=identity_baseline,
         sensitivity=lp_outputs["tdc_sensitivity_ladder"],
         control_sensitivity=lp_outputs["control_set_sensitivity"],
         sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
@@ -482,6 +512,7 @@ def _materialize_real_outputs(
     direct_identification_path = root / "output" / "models" / "direct_identification_summary.json"
     direct_identification = build_direct_identification_summary(
         lp_irf=lp_outputs["lp_irf"],
+        identity_lp_irf=identity_baseline,
         contrast=contrast,
         sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
         shock_metadata=dict(baseline_shock_spec),
@@ -499,6 +530,7 @@ def _materialize_real_outputs(
         accounting_summary=accounting_summary,
         shocks=shocked,
         lp_irf=lp_outputs["lp_irf"],
+        identity_lp_irf=identity_baseline,
         lp_irf_regimes=lp_outputs["lp_irf_regimes"],
         sensitivity=lp_outputs["tdc_sensitivity_ladder"],
         control_sensitivity=lp_outputs["control_set_sensitivity"],
@@ -520,6 +552,7 @@ def _materialize_real_outputs(
         pass_through_summary_path,
         build_pass_through_summary(
             lp_irf=lp_outputs["lp_irf"],
+            identity_lp_irf=identity_baseline,
             sensitivity=lp_outputs["tdc_sensitivity_ladder"],
             control_sensitivity=lp_outputs["control_set_sensitivity"],
             sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
@@ -636,6 +669,7 @@ def _materialize_real_outputs(
             quarters_exceeds_path,
             shocks_path,
             lp_irf_path,
+            lp_irf_identity_baseline_path,
             smoothed_lp_irf_path,
             smoothed_lp_diagnostics_path,
             lp_irf_regimes_path,
@@ -661,6 +695,7 @@ def _materialize_real_outputs(
             backend_evidence_packet_path,
             backend_closeout_summary_path,
             proxy_coverage_summary_path,
+            treatment_fingerprint_path,
             shock_diagnostics_path,
             direct_identification_path,
             result_readiness_path,
@@ -691,6 +726,7 @@ def _materialize_real_outputs(
         "quarters_tdc_exceeds_total_path": str(quarters_exceeds_path),
         "shocks_path": str(shocks_path),
         "lp_irf_path": str(lp_irf_path),
+        "lp_irf_identity_baseline_path": str(lp_irf_identity_baseline_path),
         "smoothed_lp_irf_path": str(smoothed_lp_irf_path),
         "smoothed_lp_diagnostics_path": str(smoothed_lp_diagnostics_path),
         "lp_irf_regimes_path": str(lp_irf_regimes_path),
@@ -716,6 +752,7 @@ def _materialize_real_outputs(
         "backend_evidence_packet_path": str(backend_evidence_packet_path),
         "backend_closeout_summary_path": str(backend_closeout_summary_path),
         "proxy_coverage_summary_path": str(proxy_coverage_summary_path),
+        "headline_treatment_fingerprint_path": str(treatment_fingerprint_path),
         "shock_diagnostics_path": str(shock_diagnostics_path),
         "direct_identification_path": str(direct_identification_path),
         "result_readiness_path": str(result_readiness_path),

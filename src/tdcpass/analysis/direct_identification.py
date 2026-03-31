@@ -194,6 +194,7 @@ def _contrast_rows(
 def build_total_minus_other_contrast(
     *,
     lp_irf: pd.DataFrame,
+    identity_lp_irf: pd.DataFrame | None = None,
     sensitivity: pd.DataFrame,
     control_sensitivity: pd.DataFrame,
     sample_sensitivity: pd.DataFrame,
@@ -209,6 +210,16 @@ def build_total_minus_other_contrast(
             identity_check_mode=identity_check_mode,
         )
     )
+    if identity_lp_irf is not None and not identity_lp_irf.empty:
+        rows.extend(
+            _contrast_rows(
+                identity_lp_irf,
+                scope="exact_identity_baseline",
+                variant_column=None,
+                role_column=None,
+                identity_check_mode="exact_identity_baseline",
+            )
+        )
     rows.extend(
         _contrast_rows(
             sensitivity,
@@ -242,6 +253,7 @@ def build_total_minus_other_contrast(
 def build_direct_identification_summary(
     *,
     lp_irf: pd.DataFrame,
+    identity_lp_irf: pd.DataFrame | None = None,
     contrast: pd.DataFrame,
     sample_sensitivity: pd.DataFrame,
     shock_metadata: dict[str, Any] | None = None,
@@ -253,6 +265,12 @@ def build_direct_identification_summary(
 ) -> dict[str, Any]:
     horizon_evidence: dict[str, Any] = {}
     baseline_contrast = contrast[contrast["scope"] == "baseline"].copy() if not contrast.empty else pd.DataFrame()
+    primary_lp_irf = identity_lp_irf if identity_lp_irf is not None and not identity_lp_irf.empty else lp_irf
+    primary_decomposition_mode = (
+        "exact_identity_baseline"
+        if identity_lp_irf is not None and not identity_lp_irf.empty
+        else "approximate_dynamic_decomposition"
+    )
     key_horizons = {0, 4}
     treatment_freeze_status = _treatment_freeze_status(shock_metadata)
     treatment_candidates = _treatment_candidates(shock_specs)
@@ -272,6 +290,14 @@ def build_direct_identification_summary(
     contrast_missing = False
     contrast_inconsistent = False
     contrast_identity_mode = "exact_accounting_identity"
+    approximate_dynamic_robustness = {
+        "status": "not_available",
+        "identity_check_mode": contrast_identity_mode,
+        "artifact": None,
+        "max_abs_gap_key_horizons": None,
+        "key_horizon_consistent": None,
+        "note": "No approximate dynamic decomposition robustness check is available.",
+    }
     ratio_reporting_gate = {
         "rule": [
             "tdc_ci_excludes_zero == true",
@@ -282,9 +308,9 @@ def build_direct_identification_summary(
     }
 
     for horizon in horizons:
-        tdc_row = _lp_row(lp_irf, outcome="tdc_bank_only_qoq", horizon=horizon)
-        total_row = _lp_row(lp_irf, outcome="total_deposits_bank_qoq", horizon=horizon)
-        other_row = _lp_row(lp_irf, outcome="other_component_qoq", horizon=horizon)
+        tdc_row = _lp_row(primary_lp_irf, outcome="tdc_bank_only_qoq", horizon=horizon)
+        total_row = _lp_row(primary_lp_irf, outcome="total_deposits_bank_qoq", horizon=horizon)
+        other_row = _lp_row(primary_lp_irf, outcome="other_component_qoq", horizon=horizon)
         tdc = _snapshot(tdc_row)
         total = _snapshot(total_row)
         other = _snapshot(other_row)
@@ -342,6 +368,31 @@ def build_direct_identification_summary(
             "contrast_consistent": bool(contrast_row.get("contrast_consistent", False)) if contrast_row is not None else False,
         }
 
+    if not baseline_contrast.empty:
+        key_contrast = baseline_contrast[baseline_contrast["horizon"].isin(key_horizons)].copy()
+        max_abs_gap = None
+        if not key_contrast.empty and key_contrast["abs_gap"].notna().any():
+            max_abs_gap = float(key_contrast["abs_gap"].dropna().max())
+        key_consistent = None if key_contrast.empty else bool(key_contrast["contrast_consistent"].fillna(False).all())
+        approximate_dynamic_robustness = {
+            "status": (
+                "divergent_secondary_check"
+                if primary_decomposition_mode == "exact_identity_baseline" and key_consistent is False
+                else "consistent_secondary_check"
+                if primary_decomposition_mode == "exact_identity_baseline" and key_consistent is True
+                else "primary_check"
+            ),
+            "identity_check_mode": contrast_identity_mode,
+            "artifact": "total_minus_other_contrast.csv",
+            "max_abs_gap_key_horizons": max_abs_gap,
+            "key_horizon_consistent": key_consistent,
+            "note": (
+                "Primary decomposition uses the exact identity-preserving baseline; the approximate dynamic path is retained only as a secondary robustness check."
+                if primary_decomposition_mode == "exact_identity_baseline"
+                else "The total-minus-other contrast is the active decomposition check for this specification."
+            ),
+        }
+
     warnings: list[str] = []
     reasons: list[str] = []
     if treatment_freeze_status != "frozen":
@@ -353,11 +404,11 @@ def build_direct_identification_summary(
     if contrast_missing:
         warnings.append("Some baseline total-minus-other contrast rows are missing.")
     if contrast_inconsistent:
-        if contrast_identity_mode == "approximate_with_outcome_specific_lags":
+        if primary_decomposition_mode != "exact_identity_baseline" and contrast_identity_mode == "approximate_with_outcome_specific_lags":
             warnings.append(
                 "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables."
             )
-        else:
+        elif primary_decomposition_mode != "exact_identity_baseline":
             warnings.append("Direct TDC response and total-minus-other contrast differ by more than the numeric tolerance at key horizons.")
 
     sample_fragility = {
@@ -398,6 +449,15 @@ def build_direct_identification_summary(
     return {
         "status": status,
         "headline_question": "Does the baseline unexpected-TDC shock move TDC enough to identify pass-through versus crowd-out?",
+        "estimation_path": {
+            "primary_decomposition_mode": primary_decomposition_mode,
+            "primary_artifact": "lp_irf_identity_baseline.csv"
+            if primary_decomposition_mode == "exact_identity_baseline"
+            else "lp_irf.csv",
+            "approximate_robustness_mode": contrast_identity_mode,
+            "approximate_robustness_artifact": "total_minus_other_contrast.csv" if not baseline_contrast.empty else None,
+            "approximate_dynamic_robustness": approximate_dynamic_robustness,
+        },
         "treatment_freeze_status": treatment_freeze_status,
         "treatment_candidates": treatment_candidates,
         "shock_definition": {
@@ -410,11 +470,16 @@ def build_direct_identification_summary(
             "min_train_obs": None if shock_metadata is None else int(shock_metadata.get("min_train_obs", 0)),
         },
         "contrast_check": {
+            "primary_decomposition_mode": primary_decomposition_mode,
             "identity_check_mode": contrast_identity_mode,
             "explanation": (
-                "Total-minus-other is an approximate LP cross-check here because the regressions include outcome-specific lagged dependent variables."
-                if contrast_identity_mode == "approximate_with_outcome_specific_lags"
-                else "Total-minus-other is treated as an exact accounting identity check."
+                "Primary decomposition uses the exact identity-preserving baseline; total-minus-other contrast remains an approximate dynamic robustness check."
+                if primary_decomposition_mode == "exact_identity_baseline"
+                else (
+                    "Total-minus-other is an approximate LP cross-check here because the regressions include outcome-specific lagged dependent variables."
+                    if contrast_identity_mode == "approximate_with_outcome_specific_lags"
+                    else "Total-minus-other is treated as an exact accounting identity check."
+                )
             ),
         },
         "ratio_reporting_gate": ratio_reporting_gate,

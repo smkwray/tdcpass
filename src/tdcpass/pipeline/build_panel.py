@@ -48,6 +48,9 @@ Z1_TABLE_MEMBERS = {
 }
 TDCEST_BANK_ONLY_METHOD = "tdc_base_bank_only_ru_flow"
 TDCEST_BROAD_DEPOSITORY_METHOD = "tdc_base_broad_depository_np_cu_ru_flow"
+TDCEST_DOMESTIC_BANK_ONLY_METHOD = "tdc_domestic_bank_only_ru_flow"
+TDCEST_NO_REMIT_BANK_ONLY_METHOD = "tdc_no_remit_bank_only"
+TDCEST_CREDIT_UNION_SENSITIVE_METHOD = "tdc_credit_union_aggregate_sensitivity"
 TDCEST_NOMINAL_TO_BILLIONS = 1000.0
 
 
@@ -326,17 +329,59 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
             out["tdc_broad_depository_qoq"] = pd.to_numeric(
                 frame[TDCEST_BROAD_DEPOSITORY_METHOD], errors="coerce"
             ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_DOMESTIC_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_domestic_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_DOMESTIC_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_NO_REMIT_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_no_remit_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_NO_REMIT_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_CREDIT_UNION_SENSITIVE_METHOD in frame.columns:
+            out["tdc_credit_union_sensitive_qoq"] = pd.to_numeric(
+                frame[TDCEST_CREDIT_UNION_SENSITIVE_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
         out["tdc_bank_only_qoq"] = (
             pd.to_numeric(out["tdc_bank_only_qoq"], errors="coerce") / TDCEST_NOMINAL_TO_BILLIONS
         )
+        for column in (
+            "tdc_broad_depository_qoq",
+            "tdc_domestic_bank_only_qoq",
+            "tdc_no_remit_bank_only_qoq",
+            "tdc_credit_union_sensitive_qoq",
+        ):
+            if column not in out.columns:
+                out[column] = pd.NA
         return out
     if "tdc_bank_only_qoq" in frame.columns:
         out = frame[["quarter", "tdc_bank_only_qoq"]].copy()
         if "tdc_broad_depository_qoq" in frame.columns:
             out["tdc_broad_depository_qoq"] = pd.to_numeric(frame["tdc_broad_depository_qoq"], errors="coerce")
+        if "tdc_domestic_bank_only_qoq" in frame.columns:
+            out["tdc_domestic_bank_only_qoq"] = pd.to_numeric(frame["tdc_domestic_bank_only_qoq"], errors="coerce")
+        if "tdc_no_remit_bank_only_qoq" in frame.columns:
+            out["tdc_no_remit_bank_only_qoq"] = pd.to_numeric(frame["tdc_no_remit_bank_only_qoq"], errors="coerce")
+        if "tdc_credit_union_sensitive_qoq" in frame.columns:
+            out["tdc_credit_union_sensitive_qoq"] = pd.to_numeric(frame["tdc_credit_union_sensitive_qoq"], errors="coerce")
+        for column in (
+            "tdc_broad_depository_qoq",
+            "tdc_domestic_bank_only_qoq",
+            "tdc_no_remit_bank_only_qoq",
+            "tdc_credit_union_sensitive_qoq",
+        ):
+            if column not in out.columns:
+                out[column] = pd.NA
         return out
     if "tdc_qoq" in frame.columns:
-        return frame[["quarter", "tdc_qoq"]].rename(columns={"tdc_qoq": "tdc_bank_only_qoq"})
+        out = frame[["quarter", "tdc_qoq"]].rename(columns={"tdc_qoq": "tdc_bank_only_qoq"})
+        for column in (
+            "tdc_broad_depository_qoq",
+            "tdc_domestic_bank_only_qoq",
+            "tdc_no_remit_bank_only_qoq",
+            "tdc_credit_union_sensitive_qoq",
+        ):
+            out[column] = pd.NA
+        return out
     return None
 
 
@@ -657,6 +702,9 @@ def build_public_quarterly_panel(
     for column in [
         "tdc_bank_only_qoq",
         "tdc_broad_depository_qoq",
+        "tdc_domestic_bank_only_qoq",
+        "tdc_no_remit_bank_only_qoq",
+        "tdc_credit_union_sensitive_qoq",
         "total_deposits_bank_qoq",
         "other_component_qoq",
         "bank_credit_private_qoq",

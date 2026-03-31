@@ -294,6 +294,75 @@ def test_result_readiness_uses_approximate_lp_contrast_warning_when_tagged() -> 
     )
 
     assert any("approximate LP cross-check" in item for item in payload["warnings"])
+    assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "primary_check"
+
+
+def test_result_readiness_prefers_exact_identity_baseline_when_available() -> None:
+    accounting = AccountingSummary(
+        mean_tdc=0.1,
+        mean_total_deposits=1.0,
+        mean_other_component=0.9,
+        share_other_negative=0.2,
+        correlation_tdc_total=0.0,
+        correlation_tdc_other=0.0,
+    )
+    shocks = pd.DataFrame({"quarter": ["2016Q1"], "tdc_residual_z": [0.1], "shock_flag": [""]})
+    approx_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 10.0, "se": 1.0, "lower95": 8.04, "upper95": 11.96, "n": 30, "spec_name": "baseline"},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 3.0, "se": 1.0, "lower95": 1.04, "upper95": 4.96, "n": 30, "spec_name": "baseline"},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -2.0, "se": 1.0, "lower95": -3.96, "upper95": -0.04, "n": 30, "spec_name": "baseline"},
+        ]
+    )
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 28, "spec_name": "identity_baseline"},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 28, "spec_name": "identity_baseline"},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.6, "se": 0.2, "lower95": -1.0, "upper95": -0.2, "n": 28, "spec_name": "identity_baseline"},
+        ]
+    )
+    contrast = pd.DataFrame(
+        [
+            {
+                "scope": "baseline",
+                "variant": "baseline",
+                "role": "headline",
+                "horizon": 0,
+                "beta_total": 3.0,
+                "beta_other": -2.0,
+                "beta_implied": 5.0,
+                "beta_direct": 10.0,
+                "direct_lower95": 8.04,
+                "direct_upper95": 11.96,
+                "direct_ci_excludes_zero": True,
+                "gap_implied_minus_direct": -5.0,
+                "abs_gap": 5.0,
+                "n_total": 30,
+                "n_other": 30,
+                "n_direct": 30,
+                "sample_mismatch_flag": False,
+                "identity_check_mode": "approximate_with_outcome_specific_lags",
+                "contrast_consistent": False,
+                "implied_sign": "positive",
+                "direct_sign": "positive",
+            }
+        ]
+    )
+
+    payload = build_result_readiness_summary(
+        accounting_summary=accounting,
+        shocks=shocks,
+        lp_irf=approx_lp,
+        identity_lp_irf=identity_lp,
+        lp_irf_regimes=pd.DataFrame(),
+        sensitivity=pd.DataFrame(),
+        contrast=contrast,
+    )
+
+    assert payload["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
+    assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "divergent_secondary_check"
+    assert payload["key_estimates"]["tdc_h0"]["beta"] == 1.5
+    assert not any("exact identity-preserving baseline is primary" in item for item in payload["warnings"])
 
 
 def test_result_readiness_summarizes_flagged_windows_when_sample_trim_is_stable() -> None:

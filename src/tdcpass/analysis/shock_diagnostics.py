@@ -363,6 +363,7 @@ def _comparison_payload(
     shocks: pd.DataFrame,
     treatment_variant: str,
     treatment_role: str,
+    treatment_family: str,
     variant_shock_column: str,
     variant_target_column: str | None,
     baseline_shock_column: str,
@@ -387,6 +388,7 @@ def _comparison_payload(
     return {
         "treatment_variant": treatment_variant,
         "treatment_role": treatment_role,
+        "treatment_family": treatment_family,
         "shock_column": variant_shock_column,
         "target_column": variant_target_column,
         "overlap_observations": overlap,
@@ -523,6 +525,7 @@ def build_shock_diagnostics_summary(
             shocks=shocks,
             treatment_variant=treatment_variant,
             treatment_role=str(row.get("treatment_role", "")),
+            treatment_family=str(row.get("treatment_family", "shock_design")),
             variant_shock_column=variant_shock_column,
             variant_target_column=str(metadata.get("target", "")) or None,
             baseline_shock_column=baseline_shock_column,
@@ -574,6 +577,10 @@ def build_shock_diagnostics_summary(
         ):
             takeaways.append(
                 f"Exploratory variant {comparison['treatment_variant']} is materially different from the headline shock object and should stay out of core robustness claims."
+            )
+        if comparison["treatment_family"] == "measurement":
+            takeaways.append(
+                f"Variant {comparison['treatment_variant']} is a treatment-measurement check and should be read separately from shock-design robustness."
             )
     max_scale_ratio = None
     max_condition_number = None

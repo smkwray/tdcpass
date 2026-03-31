@@ -18,9 +18,9 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
     )
     sensitivity = pd.DataFrame(
         [
-            {"treatment_variant": "baseline", "treatment_role": "core", "outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.4, "se": 0.4, "lower95": 0.62, "upper95": 2.18, "n": 40},
-            {"treatment_variant": "baseline", "treatment_role": "core", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.5, "lower95": 0.02, "upper95": 1.98, "n": 40},
-            {"treatment_variant": "baseline", "treatment_role": "core", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.4, "se": 0.5, "lower95": -1.38, "upper95": 0.58, "n": 40},
+            {"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.4, "se": 0.4, "lower95": 0.62, "upper95": 2.18, "n": 40},
+            {"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.5, "lower95": 0.02, "upper95": 1.98, "n": 40},
+            {"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.4, "se": 0.5, "lower95": -1.38, "upper95": 0.58, "n": 40},
         ]
     )
     control_sensitivity = pd.DataFrame(
@@ -96,10 +96,14 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
     )
 
     assert payload["status"] == "provisional"
+    assert payload["estimation_path"]["primary_decomposition_mode"] == "approximate_dynamic_decomposition"
+    assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "primary_check"
     assert payload["baseline_horizons"]["h0"]["assessment"] in {"crowd_out_signal", "total_up_other_unclear", "not_separated"}
     assert payload["baseline_horizons"]["h0"]["direct_tdc_response"]["beta"] == 1.4
-    assert payload["baseline_horizons"]["h0"]["contrast_consistent"] is True
+    assert payload["baseline_horizons"]["h0"]["approximate_dynamic_contrast_consistent"] is True
     assert payload["core_treatment_variants"]
+    assert payload["measurement_treatment_variants"] == []
+    assert payload["shock_design_treatment_variants"] == []
     assert payload["core_control_variants"]
     assert payload["shock_sample_variants"][0]["sample_variant"] == "all_usable_shocks"
     assert payload["flagged_window_robustness"]["status"] == "not_available"
@@ -115,7 +119,7 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
 def test_pass_through_summary_surfaces_under_review_treatment_status() -> None:
     payload = build_pass_through_summary(
         lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
-        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "treatment_family", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         sample_sensitivity=pd.DataFrame(columns=["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
@@ -135,10 +139,34 @@ def test_pass_through_summary_surfaces_under_review_treatment_status() -> None:
     assert "under review" in payload["headline_answer"]
 
 
+def test_pass_through_summary_prefers_exact_identity_baseline_when_available() -> None:
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 38},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 38},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.6, "se": 0.2, "lower95": -1.0, "upper95": -0.2, "n": 38},
+        ]
+    )
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        identity_lp_irf=identity_lp,
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "treatment_family", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sample_sensitivity=pd.DataFrame(columns=["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={"status": "provisional", "warnings": [], "reasons": []},
+    )
+
+    assert payload["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
+    assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "not_available"
+    assert payload["baseline_horizons"]["h0"]["direct_tdc_response"]["beta"] == 1.5
+
+
 def test_pass_through_summary_surfaces_failed_treatment_quality_gate() -> None:
     payload = build_pass_through_summary(
         lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
-        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "treatment_family", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         sample_sensitivity=pd.DataFrame(columns=["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
@@ -185,7 +213,7 @@ def test_pass_through_summary_promotes_flagged_window_robustness_note() -> None:
 
     payload = build_pass_through_summary(
         lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
-        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "treatment_family", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
         sample_sensitivity=sample_sensitivity,
         contrast=contrast,

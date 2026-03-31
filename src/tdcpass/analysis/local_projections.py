@@ -747,7 +747,10 @@ def run_lp_from_specs(
                 raise ValueError(
                     f"lp_specs sensitivity shock variant '{variant_name}' has unsupported treatment_role: {treatment_role}"
                 )
+            treatment_family = str(variant_spec.get("treatment_family", "shock_design"))
             shock_col = str(variant_spec["shock_column"])
+            if shock_col not in df.columns:
+                continue
             sensitivity_lp = run_local_projections(
                 df,
                 shock_col=shock_col,
@@ -763,6 +766,7 @@ def run_lp_from_specs(
                 continue
             sensitivity_lp.insert(0, "treatment_variant", str(variant_name))
             sensitivity_lp.insert(1, "treatment_role", treatment_role)
+            sensitivity_lp.insert(2, "treatment_family", treatment_family)
             sensitivity_frames.append(sensitivity_lp)
     else:
         for treatment in sensitivity.get("treatments", []):
@@ -782,6 +786,7 @@ def run_lp_from_specs(
                 continue
             sensitivity_lp.insert(0, "treatment_variant", treatment_col)
             sensitivity_lp.insert(1, "treatment_role", "legacy_control_sensitivity")
+            sensitivity_lp.insert(2, "treatment_family", "legacy_control")
             sensitivity_frames.append(sensitivity_lp)
     if sensitivity_frames:
         sensitivity_df = pd.concat(sensitivity_frames, ignore_index=True)
@@ -790,6 +795,7 @@ def run_lp_from_specs(
             columns=[
                 "treatment_variant",
                 "treatment_role",
+                "treatment_family",
                 "outcome",
                 "horizon",
                 "beta",
