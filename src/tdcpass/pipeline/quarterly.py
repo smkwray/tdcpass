@@ -103,7 +103,7 @@ def _default_overview_payload(
         },
         "main_findings": [
             "Quarterly public-data bundle materialized from direct official-source rebuild with optional sibling-cache reuse.",
-            "This public prototype is a methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock.",
+            "This release is a methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock.",
             (
                 f"The repaired baseline shock passes its treatment-quality gate on {usable_shock_rows} usable quarters "
                 f"from {usable_shock_start} to {usable_shock_end}, but the current release status remains `{readiness_status}`."

@@ -327,7 +327,7 @@ def build_result_readiness_summary(
     if status == "ready_for_interpretation":
         headline = "Current backend outputs are strong enough to support a first deposit-response interpretation with partial mechanism cross-checks."
     elif status == "provisional":
-        headline = "Current backend outputs are usable for internal deposit-response interpretation, but mechanism attribution remains sensitive or incomplete."
+        headline = "Current outputs are usable for deposit-response interpretation, but mechanism attribution remains sensitive or incomplete."
     elif treatment_freeze_status != "frozen":
         headline = "Current backend outputs remain a reproducibility preview only because the baseline unexpected-TDC shock is still under review and not yet a credibly frozen treatment object."
     elif treatment_quality_status == "fail":

@@ -6,16 +6,14 @@
 
 ## Status
 
-This repository is being prepared for an initial private release under `smkwray/tdcpass`.
-
 Current posture:
 
 - reproducible public-data pipeline
-- canonical quarterly TDC imported from sibling `tdcest` outputs
+- canonical quarterly TDC imported from `tdcest` outputs
 - reusable diagnostics for identification and mechanism caveats
 - committed `site/data/*` preview mirror; regenerated `output/*` stays local
 
-The current bundle is a diagnostics-heavy methods preview built on canonical `tdcest` TDC. The reusable core is the panel builder, outcome construction, LP stack, diagnostics, and site/export wiring around that treatment object.
+The current bundle is a diagnostics-heavy methods and reproducibility release built on canonical `tdcest` TDC. The reusable core is the panel builder, outcome construction, LP stack, diagnostics, and site/export wiring around that treatment object.
 
 ## What the repo does
 
@@ -27,11 +25,11 @@ The package rebuilds a quarterly public-data bundle that includes:
 - a rolling unexpected-treatment shock plus exploratory sensitivity variants
 - local-projection response tables
 - structural-proxy cross-checks and readiness diagnostics
-- manifests for raw downloads and optional sibling-cache reuse
+- manifests for raw downloads and optional local cache reuse
 
 ## What it does not do
 
-- It does not rely on sibling repos to run.
+- It does not require prebuilt local caches to run.
 - It does not treat the residual alone as mechanism proof.
 - It does not currently claim a clean pass-through-versus-crowd-out answer.
 - It does not currently report headline pass-through or crowd-out ratios when the raw-unit treatment response is too small for interpretation.
@@ -89,9 +87,8 @@ Generated data and build outputs are meant to be rebuilt locally. The repo does 
 - derived quarterly datasets
 - demo datasets
 - `output/*` analysis working files
-- internal planning or orchestration material
 
-The repo does commit the contract-backed `site/data/*` preview mirror that powers the public methods preview.
+The repo does commit the contract-backed `site/data/*` preview mirror that powers the public release.
 
 ## Repository layout
 

@@ -3,7 +3,7 @@
 Canonical exported names follow the registry contract.
 Short aliases such as `tdc_qoq` and `total_deposits_qoq` are optional compatibility aliases only and are not the frozen external artifact contract.
 The live quarterly bundle is produced by `tdcpass pipeline run` and writes the bank-only contract to `data/derived/quarterly_panel.csv`, `output/*`, and mirrored `site/data/*` artifacts.
-For the public prototype, `site/data/*` is the committed preview mirror and `output/*` remains regenerated local analysis output.
+For the public release, `site/data/*` is the committed preview mirror and `output/*` remains regenerated local analysis output.
 
 ## Required files
 

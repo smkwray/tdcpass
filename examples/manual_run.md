@@ -13,7 +13,7 @@ Outputs:
 - `output/demo/lp_irf.csv`
 - `site/data/overview.json`
 
-## Discover sibling caches
+## Discover reusable local caches
 
 ```bash
 tdcpass discover-cache

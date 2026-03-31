@@ -185,7 +185,7 @@ def build_parser() -> argparse.ArgumentParser:
     pipeline_closeout.add_argument("--root", default=None, help="Existing run root containing backend closeout artifacts")
     pipeline_closeout.set_defaults(func=_pipeline_closeout)
 
-    discover = subparsers.add_parser("discover-cache", help="Search sibling repos for reusable local artifacts")
+    discover = subparsers.add_parser("discover-cache", help="Search local caches for reusable artifacts")
     discover.set_defaults(func=_discover_cache)
 
     fred = subparsers.add_parser("fetch-fred", help="Fetch a FRED series via the official API")

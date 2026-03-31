@@ -14,7 +14,7 @@
   },
   "main_findings": [
     "Quarterly public-data bundle materialized from direct official-source rebuild with optional sibling-cache reuse.",
-    "This public prototype is a methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock.",
+    "This release is a methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock.",
     "The repaired baseline shock passes its treatment-quality gate on 68 usable quarters from 2009Q1 to 2025Q4, but the current release status remains `provisional`.",
     "44.6% of quarters show `other_component_qoq < 0` in the headline sample."
   ],

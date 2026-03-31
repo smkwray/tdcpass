@@ -78,7 +78,7 @@
       }
     }
   },
-  "headline_assessment": "Current backend outputs are usable for internal deposit-response interpretation, but mechanism attribution remains sensitive or incomplete.",
+  "headline_assessment": "Current outputs are usable for deposit-response interpretation, but mechanism attribution remains sensitive or incomplete.",
   "reasons": [],
   "warnings": [
     "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables.",

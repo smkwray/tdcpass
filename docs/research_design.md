@@ -1,11 +1,11 @@
 # Research design
 
 Current implementation posture:
-This repository analyzes quarterly pass-through using canonical TDC imported from `tdcest`. The public bundle is a methods-preview release built around that treatment object.
+This repository analyzes quarterly pass-through using canonical TDC imported from `tdcest`. The public bundle is a methods and reproducibility release built around that treatment object.
 
 ## 0. Source of truth
 
-For the meaning of **TDC**, use the sibling repos as the source of truth:
+For the meaning of **TDC**, use these external source repositories as the reference:
 
 - `tdcest` defines the canonical measured quarterly TDC series
 - `tdcsim` defines the mechanism/accounting interpretation of TDC
@@ -107,7 +107,7 @@ Use HAC/Newey-West standard errors.
 - easier to audit,
 - easier to explain,
 - robust to moderate misspecification,
-- consistent with the sibling-repo style already used in related projects.
+- consistent with the estimator style already used in related projects.
 
 ## 4. Regimes
 
