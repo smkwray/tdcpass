@@ -1,0 +1,91 @@
+{
+  "status": "ok",
+  "source_series": [
+    {
+      "series_key": "bank_credit_level",
+      "series_id": "TOTBKCR",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "1973Q1",
+      "raw_end_date": "2026Q1",
+      "latest_raw_level": 19345.367,
+      "latest_scaled_level": 19345.367
+    },
+    {
+      "series_key": "treasury_agency_level",
+      "series_id": "TNMACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2009Q3",
+      "raw_end_date": "2026Q1",
+      "latest_raw_level": 2029.3965,
+      "latest_scaled_level": 2029.3965
+    },
+    {
+      "series_key": "tga_level",
+      "series_id": "WTREGEN",
+      "scale_divisor": 1000.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2002Q4",
+      "raw_end_date": "2026Q1",
+      "latest_raw_level": 874077.0,
+      "latest_scaled_level": 874.077
+    },
+    {
+      "series_key": "reserves_level",
+      "series_id": "WRESBAL",
+      "scale_divisor": 1000.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2002Q4",
+      "raw_end_date": "2026Q1",
+      "latest_raw_level": 2993955.0,
+      "latest_scaled_level": 2993.955
+    }
+  ],
+  "derived_proxies": [
+    {
+      "proxy": "bank_credit_private_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2009Q4",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 65,
+      "median_abs_qoq": 135.592200000001
+    },
+    {
+      "proxy": "cb_nonts_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2003Q1",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 92,
+      "median_abs_qoq": 75.03549999999998
+    },
+    {
+      "proxy": "foreign_nonts_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2003Q1",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 92,
+      "median_abs_qoq": 43.528000000000006
+    },
+    {
+      "proxy": "domestic_nonfinancial_mmf_reallocation_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2003Q1",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 92,
+      "median_abs_qoq": 71.321
+    },
+    {
+      "proxy": "domestic_nonfinancial_repo_reallocation_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2003Q1",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 92,
+      "median_abs_qoq": 5.997999999999999
+    }
+  ],
+  "takeaways": [
+    "FRED level series are now scaled with an explicit per-series divisor rather than a blanket /1000 rule.",
+    "TOTBKCR and TNMACBW027SBOG are treated as already being in billions_usd, while WTREGEN and WRESBAL are converted from millions_usd to billions_usd."
+  ]
+}

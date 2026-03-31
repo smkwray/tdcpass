@@ -101,6 +101,7 @@ def build_regime_diagnostics_summary(
             {
                 "regime": str(regime_name),
                 "column": column,
+                "publication_role": str(regime_def.get("publication_role", "published")),
                 "threshold_rule": str(threshold_rule),
                 "threshold_value": threshold_value,
                 "high_rows": int(high_mask.sum()),

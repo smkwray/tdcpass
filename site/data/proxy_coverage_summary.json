@@ -1,0 +1,516 @@
+{
+  "status": "mixed",
+  "headline_question": "How much of the non-TDC response is covered by the current structural proxy bundle?",
+  "covered_channel_families": [
+    {
+      "proxy_outcome": "bank_credit_private_qoq",
+      "channel_family": "private_bank_credit",
+      "description": "Bank-side private credit expansion net of Treasury and agency securities."
+    },
+    {
+      "proxy_outcome": "cb_nonts_qoq",
+      "channel_family": "fed_liquidity_plumbing",
+      "description": "Central-bank and liquidity-plumbing counterpart movements proxied by reserves plus the TGA."
+    },
+    {
+      "proxy_outcome": "foreign_nonts_qoq",
+      "channel_family": "foreign_deposit_absorption",
+      "description": "Foreign-sector total-deposit movements captured from Z.1."
+    },
+    {
+      "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+      "channel_family": "domestic_mmf_portfolio_shift",
+      "description": "Sign-normalized declines in domestic nonfinancial money market fund holdings, interpreted as cash reallocations toward deposits."
+    },
+    {
+      "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+      "channel_family": "domestic_repo_portfolio_shift",
+      "description": "Sign-normalized declines in domestic nonfinancial repo assets, interpreted as cash reallocations toward deposits."
+    }
+  ],
+  "major_uncovered_channel_families": [
+    "within_bank_deposit_substitution_across_holders_or_products",
+    "omitted_bank_asset_side_channels_outside_private_credit",
+    "domestic_public_sector_and_wholesale_deposit_channels",
+    "additional_cash_management_channels_outside_mmf_and_repo"
+  ],
+  "history_limits": [
+    {
+      "proxy_outcome": "bank_credit_private_qoq",
+      "start_quarter": "2009Q4",
+      "non_missing_obs": 65
+    },
+    {
+      "proxy_outcome": "cb_nonts_qoq",
+      "start_quarter": "2003Q1",
+      "non_missing_obs": 92
+    },
+    {
+      "proxy_outcome": "foreign_nonts_qoq",
+      "start_quarter": "2003Q1",
+      "non_missing_obs": 92
+    },
+    {
+      "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+      "start_quarter": "2003Q1",
+      "non_missing_obs": 92
+    },
+    {
+      "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+      "start_quarter": "2003Q1",
+      "non_missing_obs": 92
+    }
+  ],
+  "key_horizons": {
+    "h0": {
+      "other_component": {
+        "beta": -81.17833439216729,
+        "se": 20.082089282921796,
+        "lower95": -120.539229386694,
+        "upper95": -41.81743939764057,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "proxy_bundle_beta_sum": 52.63109980366392,
+      "proxy_bundle_share_of_other_beta": -0.6483392422097068,
+      "unexplained_beta": -133.80943419583122,
+      "unexplained_share_of_other_beta": 1.648339242209707,
+      "same_sign_proxy_count": 1,
+      "opposite_sign_proxy_count": 4,
+      "decisive_proxy_count": 1,
+      "decisive_same_sign_proxy_count": 0,
+      "decisive_opposite_sign_proxy_count": 1,
+      "coverage_label": "proxy_bundle_opposite_direction",
+      "proxy_rows": [
+        {
+          "proxy_outcome": "bank_credit_private_qoq",
+          "beta": 14.021813174704516,
+          "se": 13.400899759392601,
+          "lower95": -12.243950353704982,
+          "upper95": 40.28757670311401,
+          "n": 64,
+          "ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign"
+        },
+        {
+          "proxy_outcome": "cb_nonts_qoq",
+          "beta": 26.523641651135975,
+          "se": 14.452809474715338,
+          "lower95": -1.8038649193060863,
+          "upper95": 54.851148221578036,
+          "n": 68,
+          "ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign"
+        },
+        {
+          "proxy_outcome": "foreign_nonts_qoq",
+          "beta": 27.0343911579461,
+          "se": 13.111973747146076,
+          "lower95": 1.334922613539792,
+          "upper95": 52.733859702352404,
+          "n": 68,
+          "ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign"
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+          "beta": -14.977538562329684,
+          "se": 11.828190798252104,
+          "lower95": -38.160792526903805,
+          "upper95": 8.20571540224444,
+          "n": 68,
+          "ci_excludes_zero": false,
+          "sign_alignment": "same_sign"
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+          "beta": 0.028792382207010303,
+          "se": 0.7154641657141337,
+          "lower95": -1.3735173825926918,
+          "upper95": 1.4311021470067122,
+          "n": 68,
+          "ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign"
+        }
+      ]
+    },
+    "h4": {
+      "other_component": {
+        "beta": -100.99420217322478,
+        "se": 48.95277771700602,
+        "lower95": -196.94164649855657,
+        "upper95": -5.046757847892977,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "proxy_bundle_beta_sum": 195.14824786932834,
+      "proxy_bundle_share_of_other_beta": -1.932271790558937,
+      "unexplained_beta": -296.14245004255315,
+      "unexplained_share_of_other_beta": 2.9322717905589375,
+      "same_sign_proxy_count": 2,
+      "opposite_sign_proxy_count": 3,
+      "decisive_proxy_count": 2,
+      "decisive_same_sign_proxy_count": 0,
+      "decisive_opposite_sign_proxy_count": 2,
+      "coverage_label": "proxy_bundle_opposite_direction",
+      "proxy_rows": [
+        {
+          "proxy_outcome": "bank_credit_private_qoq",
+          "beta": 54.572977783498914,
+          "se": 19.24512973374704,
+          "lower95": 16.852523505354718,
+          "upper95": 92.2934320616431,
+          "n": 60,
+          "ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign"
+        },
+        {
+          "proxy_outcome": "cb_nonts_qoq",
+          "beta": 109.21565891280892,
+          "se": 89.44754513553232,
+          "lower95": -66.10152955283442,
+          "upper95": 284.5328473784523,
+          "n": 64,
+          "ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign"
+        },
+        {
+          "proxy_outcome": "foreign_nonts_qoq",
+          "beta": 38.11141757510377,
+          "se": 9.926775458602929,
+          "lower95": 18.65493767624203,
+          "upper95": 57.567897473965516,
+          "n": 64,
+          "ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign"
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+          "beta": -6.051493186644944,
+          "se": 14.562904506654425,
+          "lower95": -34.59478601968762,
+          "upper95": 22.491799646397727,
+          "n": 64,
+          "ci_excludes_zero": false,
+          "sign_alignment": "same_sign"
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+          "beta": -0.7003132154383085,
+          "se": 1.2009103178726588,
+          "lower95": -3.0540974384687196,
+          "upper95": 1.6534710075921026,
+          "n": 64,
+          "ci_excludes_zero": false,
+          "sign_alignment": "same_sign"
+        }
+      ]
+    }
+  },
+  "published_regime_contexts": [
+    {
+      "regime": "reserve_drain",
+      "stable_for_interpretation": true,
+      "publication_role": "published",
+      "stability_warnings": [],
+      "horizons": {
+        "h0": {
+          "high": {
+            "other_component": {
+              "beta": -104.24831996095469,
+              "se": 14.975677960294943,
+              "lower95": -133.60064876313277,
+              "upper95": -74.8959911587766,
+              "n": 34,
+              "ci_excludes_zero": true
+            },
+            "proxy_bundle_beta_sum": 51.917623488384876,
+            "proxy_bundle_share_of_other_beta": -0.4980188026802751,
+            "unexplained_beta": -156.16594344933958,
+            "unexplained_share_of_other_beta": 1.4980188026802752,
+            "same_sign_proxy_count": 1,
+            "opposite_sign_proxy_count": 4,
+            "decisive_proxy_count": 1,
+            "decisive_same_sign_proxy_count": 0,
+            "decisive_opposite_sign_proxy_count": 1,
+            "coverage_label": "proxy_bundle_opposite_direction",
+            "proxy_rows": [
+              {
+                "proxy_outcome": "bank_credit_private_qoq",
+                "beta": -4.374227797095266,
+                "se": 5.443104859654593,
+                "lower95": -15.042713322018267,
+                "upper95": 6.294257727827736,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "same_sign"
+              },
+              {
+                "proxy_outcome": "cb_nonts_qoq",
+                "beta": 19.22504172001408,
+                "se": 21.346338704172847,
+                "lower95": -22.613782140164698,
+                "upper95": 61.063865580192854,
+                "n": 34,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "foreign_nonts_qoq",
+                "beta": 22.26377145942496,
+                "se": 7.698969189400526,
+                "lower95": 7.173791848199928,
+                "upper95": 37.35375107064999,
+                "n": 34,
+                "ci_excludes_zero": true,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                "beta": 13.338307888576631,
+                "se": 7.938316979938429,
+                "lower95": -2.2207933921026903,
+                "upper95": 28.89740916925595,
+                "n": 34,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                "beta": 1.4647302174644743,
+                "se": 1.2641532197698673,
+                "lower95": -1.0130100932844655,
+                "upper95": 3.942470528213414,
+                "n": 34,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              }
+            ]
+          },
+          "low": {
+            "other_component": {
+              "beta": -70.96997081974116,
+              "se": 22.79037753239897,
+              "lower95": -115.63911078324315,
+              "upper95": -26.30083085623918,
+              "n": 34,
+              "ci_excludes_zero": true
+            },
+            "proxy_bundle_beta_sum": 58.41510909781301,
+            "proxy_bundle_share_of_other_beta": -0.8230961408478434,
+            "unexplained_beta": -129.38507991755418,
+            "unexplained_share_of_other_beta": 1.8230961408478434,
+            "same_sign_proxy_count": 2,
+            "opposite_sign_proxy_count": 3,
+            "decisive_proxy_count": 2,
+            "decisive_same_sign_proxy_count": 1,
+            "decisive_opposite_sign_proxy_count": 1,
+            "coverage_label": "proxy_bundle_opposite_direction",
+            "proxy_rows": [
+              {
+                "proxy_outcome": "bank_credit_private_qoq",
+                "beta": 23.209698679364397,
+                "se": 18.412936578574755,
+                "lower95": -12.879657014642124,
+                "upper95": 59.29905437337092,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "cb_nonts_qoq",
+                "beta": 30.415575500217187,
+                "se": 19.685700876303375,
+                "lower95": -8.168398217337426,
+                "upper95": 68.9995492177718,
+                "n": 34,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "foreign_nonts_qoq",
+                "beta": 31.326943583570774,
+                "se": 14.131353180247313,
+                "lower95": 3.6294913502860418,
+                "upper95": 59.0243958168555,
+                "n": 34,
+                "ci_excludes_zero": true,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                "beta": -26.16732136673283,
+                "se": 13.095502726091093,
+                "lower95": -51.83450670987137,
+                "upper95": -0.5001360235942869,
+                "n": 34,
+                "ci_excludes_zero": true,
+                "sign_alignment": "same_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                "beta": -0.36978729860652837,
+                "se": 0.9591435403639703,
+                "lower95": -2.2497086377199103,
+                "upper95": 1.5101340405068533,
+                "n": 34,
+                "ci_excludes_zero": false,
+                "sign_alignment": "same_sign"
+              }
+            ]
+          }
+        },
+        "h4": {
+          "high": {
+            "other_component": {
+              "beta": -97.37429053703825,
+              "se": 62.2899459938,
+              "lower95": -219.46258468488625,
+              "upper95": 24.714003610809755,
+              "n": 32,
+              "ci_excludes_zero": false
+            },
+            "proxy_bundle_beta_sum": 227.499141749743,
+            "proxy_bundle_share_of_other_beta": -2.3363368348569296,
+            "unexplained_beta": -324.8734322867812,
+            "unexplained_share_of_other_beta": 3.336336834856929,
+            "same_sign_proxy_count": 0,
+            "opposite_sign_proxy_count": 5,
+            "decisive_proxy_count": 1,
+            "decisive_same_sign_proxy_count": 0,
+            "decisive_opposite_sign_proxy_count": 1,
+            "coverage_label": "other_component_not_decisive",
+            "proxy_rows": [
+              {
+                "proxy_outcome": "bank_credit_private_qoq",
+                "beta": 18.787832320295337,
+                "se": 27.753450669916,
+                "lower95": -35.60893099274002,
+                "upper95": 73.1845956333307,
+                "n": 30,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "cb_nonts_qoq",
+                "beta": 113.60782072565473,
+                "se": 90.11215822232482,
+                "lower95": -63.01200939010192,
+                "upper95": 290.2276508414114,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "foreign_nonts_qoq",
+                "beta": 84.7459402040849,
+                "se": 17.627138982094195,
+                "lower95": 50.19674779918028,
+                "upper95": 119.29513260898952,
+                "n": 32,
+                "ci_excludes_zero": true,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                "beta": 5.423804624188554,
+                "se": 31.996139880612922,
+                "lower95": -57.288629541812774,
+                "upper95": 68.13623879018988,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                "beta": 4.9337438755194345,
+                "se": 5.258152367089546,
+                "lower95": -5.372234763976076,
+                "upper95": 15.239722515014945,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              }
+            ]
+          },
+          "low": {
+            "other_component": {
+              "beta": -78.18078401591833,
+              "se": 40.558533421285254,
+              "lower95": -157.67550952163742,
+              "upper95": 1.3139414898007686,
+              "n": 32,
+              "ci_excludes_zero": false
+            },
+            "proxy_bundle_beta_sum": 181.50699351029257,
+            "proxy_bundle_share_of_other_beta": -2.32163178963946,
+            "unexplained_beta": -259.6877775262109,
+            "unexplained_share_of_other_beta": 3.3216317896394596,
+            "same_sign_proxy_count": 2,
+            "opposite_sign_proxy_count": 3,
+            "decisive_proxy_count": 2,
+            "decisive_same_sign_proxy_count": 0,
+            "decisive_opposite_sign_proxy_count": 2,
+            "coverage_label": "other_component_not_decisive",
+            "proxy_rows": [
+              {
+                "proxy_outcome": "bank_credit_private_qoq",
+                "beta": 61.75946560166633,
+                "se": 11.09289433731429,
+                "lower95": 40.01739270053032,
+                "upper95": 83.50153850280233,
+                "n": 30,
+                "ci_excludes_zero": true,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "cb_nonts_qoq",
+                "beta": 104.89938723988892,
+                "se": 82.41925580698609,
+                "lower95": -56.64235414180381,
+                "upper95": 266.44112862158164,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "foreign_nonts_qoq",
+                "beta": 23.091759197475188,
+                "se": 10.26976569979263,
+                "lower95": 2.963018425881632,
+                "upper95": 43.22049996906874,
+                "n": 32,
+                "ci_excludes_zero": true,
+                "sign_alignment": "opposite_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                "beta": -6.044203710109816,
+                "se": 16.860802937109405,
+                "lower95": -39.09137746684425,
+                "upper95": 27.002970046624615,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "same_sign"
+              },
+              {
+                "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                "beta": -2.1994148186280404,
+                "se": 1.6792254183664301,
+                "lower95": -5.490696638626243,
+                "upper95": 1.0918670013701623,
+                "n": 32,
+                "ci_excludes_zero": false,
+                "sign_alignment": "same_sign"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "release_caveat": "The current public proxy bundle spans a limited set of channel families and still does not exhaust the bank-only non-TDC residual.",
+  "takeaways": [
+    "Proxy coverage compares the non-TDC residual with the summed structural proxy response, so it can show whether the residual is mostly covered or still leaves a large unexplained remainder."
+  ]
+}

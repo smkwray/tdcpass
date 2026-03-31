@@ -11,21 +11,20 @@ This repository is being prepared for an initial private release under `smkwray/
 Current posture:
 
 - reproducible public-data pipeline
-- quarterly, bank-only headline design
-- explicit diagnostics for identification and mechanism caveats
-- headline panel currently spans `2003Q2` to `2025Q4`, with usable shock observations from `2009Q2` to `2025Q4`
-- no published site yet
+- canonical quarterly TDC imported from sibling `tdcest` outputs
+- reusable diagnostics for identification and mechanism caveats
+- committed `site/data/*` preview mirror; regenerated `output/*` stays local
 
-The current empirical bundle should be read as a **methods and reproducibility preview**, not as a settled pass-through or crowd-out result.
+The current bundle is a diagnostics-heavy methods preview built on canonical `tdcest` TDC. The reusable core is the panel builder, outcome construction, LP stack, diagnostics, and site/export wiring around that treatment object.
 
 ## What the repo does
 
 The package rebuilds a quarterly public-data bundle that includes:
 
-- a bank-only TDC treatment series
+- canonical bank-only TDC imported from `tdcest`
 - matched total-deposit outcomes
 - the non-TDC residual `other_component_qoq = total_deposits_bank_qoq - tdc_bank_only_qoq`
-- expanding-window unexpected-TDC shocks
+- a rolling unexpected-treatment shock plus exploratory sensitivity variants
 - local-projection response tables
 - structural-proxy cross-checks and readiness diagnostics
 - manifests for raw downloads and optional sibling-cache reuse
@@ -34,8 +33,8 @@ The package rebuilds a quarterly public-data bundle that includes:
 
 - It does not rely on sibling repos to run.
 - It does not treat the residual alone as mechanism proof.
-- It does not publish a site yet.
 - It does not currently claim a clean pass-through-versus-crowd-out answer.
+- It does not currently report headline pass-through or crowd-out ratios when the raw-unit treatment response is too small for interpretation.
 
 ## Environment
 
@@ -89,9 +88,10 @@ Generated data and build outputs are meant to be rebuilt locally. The repo does 
 - raw downloads
 - derived quarterly datasets
 - demo datasets
-- output bundles
-- site artifacts
+- `output/*` analysis working files
 - internal planning or orchestration material
+
+The repo does commit the contract-backed `site/data/*` preview mirror that powers the public methods preview.
 
 ## Repository layout
 

@@ -1,5 +1,17 @@
 # Research design
 
+Current implementation posture:
+This repository analyzes quarterly pass-through using canonical TDC imported from `tdcest`. The public bundle is a methods-preview release built around that treatment object.
+
+## 0. Source of truth
+
+For the meaning of **TDC**, use the sibling repos as the source of truth:
+
+- `tdcest` defines the canonical measured quarterly TDC series
+- `tdcsim` defines the mechanism/accounting interpretation of TDC
+
+This repo analyzes pass-through **of that TDC object**. It does not redefine TDC locally around a simpler stock-change proxy.
+
 ## 1. Main estimands
 
 ### 1.1 Pass-through
@@ -36,27 +48,30 @@ These are not just extra charts; they are a guardrail against overinterpreting t
 
 ## 2. Treatment construction
 
-### Frozen baseline shock
+### Headline treatment
 
-Use the **unexpected part** of quarterly TDC changes:
+The headline treatment is the canonical bank-only quarterly TDC series from `tdcest` or a locally reproduced equivalent.
+
+### Shock construction
+
+Use the **unexpected part** of canonical quarterly TDC changes:
 
 1. Predict `tdc_bank_only_qoq` using only lagged information.
-2. Use an **expanding window**.
+2. Use a **rolling 40-quarter window** with a ridge penalty on non-intercept terms (`ridge_alpha: 125.0`).
 3. Store:
    - `tdc_fitted`,
    - `tdc_residual`,
    - `tdc_residual_z`,
    - model metadata.
 
-The current baseline shock in code is the expanding-window residual from:
+The baseline shock is a rolling residual from:
 
 - `lag_tdc_bank_only_qoq`
-- `lag_bill_share`
 - `lag_fedfunds`
 - `lag_unemployment`
 - `lag_inflation`
 
-That means `bill_share` is not only a regime overlay in the current repo state. It is also part of the baseline shock definition through `lag_bill_share`.
+That shock architecture is the current frozen headline design.
 
 ### Alternate shock objects
 
@@ -67,7 +82,7 @@ The repo also carries exploratory or sensitivity shock variants for:
 - broad-depository TDC,
 - legacy total-deposit style predictor sets.
 
-These are robustness or scope checks, not replacements for the frozen headline shock.
+These are treatment-object and scope checks around the frozen rolling-macro baseline. The repo also tracks a shock-quality gate on usable-sample fit ratios, flagged-window share, and shock-to-target alignment. These variants are explicit stress tests around the frozen baseline, not co-equal headline designs.
 
 ## 3. Estimator
 
@@ -96,13 +111,15 @@ Use HAC/Newey-West standard errors.
 
 ## 4. Regimes
 
-Recommended first regime splits:
+Current live regime overlay:
 
-- high vs low bank absorption,
-- bill-heavy vs coupon-heavy issuance mix,
-- tighter vs looser balance-sheet/SLR proxy regimes.
+- `reserve_drain_pressure`
 
-Keep regime definitions transparent and configurable, but do not let regime availability silently define the headline sample.
+Exploratory regime or timing inputs:
+
+- `bill_share` remains an exploratory sensitivity input rather than a live regime export
+
+Regime definitions should remain transparent and configurable, but they should not silently define the headline sample.
 
 ## 5. Sample policy
 
@@ -110,14 +127,15 @@ The exported quarterly panel should preserve a **headline sample** and allow sho
 
 Headline sample:
 
-- treatment: `tdc_bank_only_qoq`
+- treatment: canonical bank-only TDC from `tdcest` or an exact local reproduction
 - headline outcomes: `total_deposits_bank_qoq`, `other_component_qoq`
-- baseline shock controls: `bill_share`, `fedfunds`, `unemployment`, `inflation`, plus their required lags
+- baseline shock controls: `lag_tdc_bank_only_qoq`, `fedfunds`, `unemployment`, and `inflation`, plus outcome-specific lag controls in the LP layer; `bill_share` remains exported but does not define the headline panel
 
 Extended coverage:
 
 - structural proxies such as `bank_credit_private_qoq`, `cb_nonts_qoq`, and `foreign_nonts_qoq`
-- regime overlays such as `bank_absorption_share`, `reserve_drain_pressure`, and `slr_tight`
+- live regime overlay: `reserve_drain_pressure`
+- exploratory sensitivity input: `bill_share`
 
 These extended columns can have shorter usable history, but they should not silently truncate the baseline deposit-response sample.
 
@@ -151,3 +169,5 @@ To reach a publishable version, the results should satisfy:
 - stable sign in the main sample,
 - structural cross-check support,
 - sensitivity stability across TDC versions.
+
+The main remaining work is substantive identification and mechanism evaluation on the canonical-TDC bundle.

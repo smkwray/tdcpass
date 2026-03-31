@@ -68,3 +68,38 @@ def test_proxy_coverage_summary_quantifies_baseline_and_published_regime_gaps() 
     assert payload["published_regime_contexts"][0]["horizons"]["h0"]["high"]["coverage_label"] == "proxy_bundle_mostly_covers_other"
     assert payload["history_limits"][0]["proxy_outcome"] == "bank_credit_private_qoq"
     assert "does not exhaust" in payload["release_caveat"]
+
+
+def test_proxy_coverage_excludes_bill_heavy_when_regime_is_diagnostic_only() -> None:
+    lp_irf = pd.DataFrame(
+        [
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": 10.0, "se": 1.0, "lower95": 8.0, "upper95": 12.0, "n": 40},
+        ]
+    )
+    lp_irf_regimes = pd.DataFrame(
+        [
+            {"regime": "bill_heavy_high", "outcome": "other_component_qoq", "horizon": 0, "beta": 8.0, "se": 1.0, "lower95": 6.0, "upper95": 10.0, "n": 20},
+            {"regime": "bill_heavy_low", "outcome": "other_component_qoq", "horizon": 0, "beta": 4.0, "se": 1.0, "lower95": 2.0, "upper95": 6.0, "n": 20},
+            {"regime": "reserve_drain_high", "outcome": "other_component_qoq", "horizon": 0, "beta": 9.0, "se": 1.0, "lower95": 7.0, "upper95": 11.0, "n": 20},
+            {"regime": "reserve_drain_low", "outcome": "other_component_qoq", "horizon": 0, "beta": 5.0, "se": 1.0, "lower95": 3.0, "upper95": 7.0, "n": 20},
+        ]
+    )
+
+    payload = build_proxy_coverage_summary(
+        lp_irf=lp_irf,
+        lp_irf_regimes=lp_irf_regimes,
+        regime_diagnostics={
+            "regimes": [
+                {"regime": "bill_heavy", "publication_role": "diagnostic_only", "stable_for_interpretation": True, "stability_warnings": []},
+                {"regime": "reserve_drain", "publication_role": "published", "stable_for_interpretation": True, "stability_warnings": []},
+            ]
+        },
+        regime_specs={
+            "regimes": {
+                "bill_heavy": {"publication_role": "diagnostic_only"},
+                "reserve_drain": {"publication_role": "published"},
+            }
+        },
+    )
+
+    assert [row["regime"] for row in payload["published_regime_contexts"]] == ["reserve_drain"]

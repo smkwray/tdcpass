@@ -1,0 +1,1189 @@
+{
+  "status": "provisional",
+  "treatment_freeze_status": "frozen",
+  "treatment_candidates": [],
+  "treatment_quality_status": "pass",
+  "treatment_quality_gate": {
+    "status": "pass",
+    "checks": {
+      "min_usable_observations": {
+        "observed": 68,
+        "threshold": 60,
+        "passed": true
+      },
+      "min_shock_target_correlation": {
+        "observed": 0.7657956791364907,
+        "threshold": 0.5,
+        "passed": true
+      },
+      "max_flagged_share": {
+        "observed": 0.058823529411764705,
+        "threshold": 0.2,
+        "passed": true
+      },
+      "max_realized_scale_ratio_p95": {
+        "observed": 4.817056239502941,
+        "threshold": 25.0,
+        "passed": true
+      },
+      "max_realized_scale_ratio_p99": {
+        "observed": 27.895931796070258,
+        "threshold": 100.0,
+        "passed": true
+      },
+      "max_initial_train_to_usable_volatility_ratio": {
+        "observed": 0.29671349936729485,
+        "threshold": 2.0,
+        "passed": true
+      }
+    },
+    "failed_checks": []
+  },
+  "ratio_reporting_gate": {
+    "rule": [
+      "tdc_ci_excludes_zero == true",
+      "abs(raw_unit_tdc_beta) >= usable_target_sd"
+    ],
+    "usable_target_sd": 263.42967242082716,
+    "horizons": {
+      "h0": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 0.9305308145201421,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "h4": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.2108641620062723,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "h8": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.7824498362130194,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      }
+    }
+  },
+  "interpretation_scope": "deposit_response_with_partial_mechanism_cross_checks",
+  "headline_question": "When unexpected bank-only TDC rises, how do total deposits and the non-TDC deposit component respond?",
+  "headline_answer": "Current run supports a provisional deposit-response interpretation with partial mechanism cross-checks, but the pass-through-versus-crowd-out read remains fragile.",
+  "mechanism_caveat": "Structural proxies remain cross-checks on the residual, not standalone proof of mechanism.",
+  "sample_policy": {
+    "headline_sample_variant": "all_usable_shocks",
+    "flagged_window_variant": "drop_flagged_shocks",
+    "severe_tail_variant": "drop_severe_scale_tail",
+    "headline_rule": "Keep the frozen headline sample and publish flagged-window trimming as a robustness check, not as a replacement estimand."
+  },
+  "flagged_window_robustness": {
+    "status": "changed",
+    "headline_sign_pattern_stable": false,
+    "note": "Flagged-window trims materially change the headline h0/h4 sign pattern.",
+    "details": {
+      "h0": {
+        "headline_assessment": "crowd_out_signal",
+        "comparisons": [
+          {
+            "sample_variant": "drop_flagged_shocks",
+            "assessment": "crowd_out_signal",
+            "matches_headline_assessment": true
+          },
+          {
+            "sample_variant": "drop_severe_scale_tail",
+            "assessment": "crowd_out_signal",
+            "matches_headline_assessment": true
+          }
+        ]
+      },
+      "h4": {
+        "headline_assessment": "other_down_total_unclear",
+        "comparisons": [
+          {
+            "sample_variant": "drop_flagged_shocks",
+            "assessment": "other_down_total_unclear",
+            "matches_headline_assessment": true
+          },
+          {
+            "sample_variant": "drop_severe_scale_tail",
+            "assessment": "not_separated",
+            "matches_headline_assessment": false
+          }
+        ]
+      }
+    }
+  },
+  "baseline_horizons": {
+    "h0": {
+      "total_deposits": {
+        "beta": 46.46053662919742,
+        "se": 21.936358412025733,
+        "lower95": 3.4652741416269848,
+        "upper95": 89.45579911676785,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "other_component": {
+        "beta": -81.17833439216729,
+        "se": 20.082089282921796,
+        "lower95": -120.539229386694,
+        "upper95": -41.81743939764057,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "beta_gap_total_minus_other": 127.63887102136471,
+      "same_sign": false,
+      "assessment": "crowd_out_signal",
+      "direct_tdc_response": {
+        "beta": 128.49398892100785,
+        "se": 14.082533270452723,
+        "lower95": 100.89222371092052,
+        "upper95": 156.0957541310952,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "direct_vs_identity_tdc_gap": -0.8551178996431474,
+      "contrast_consistent": false
+    },
+    "h4": {
+      "total_deposits": {
+        "beta": 142.30410309715606,
+        "se": 92.45580638597868,
+        "lower95": -38.909277419362155,
+        "upper95": 323.51748361367424,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "other_component": {
+        "beta": -100.99420217322478,
+        "se": 48.95277771700602,
+        "lower95": -196.94164649855657,
+        "upper95": -5.046757847892977,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "beta_gap_total_minus_other": 243.29830527038084,
+      "same_sign": false,
+      "assessment": "other_down_total_unclear",
+      "direct_tdc_response": {
+        "beta": 278.13971316628357,
+        "se": 69.29214131662822,
+        "lower95": 142.32711618569226,
+        "upper95": 413.9523101468749,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "direct_vs_identity_tdc_gap": -34.841407895902734,
+      "contrast_consistent": false
+    }
+  },
+  "core_treatment_variants": [
+    {
+      "variant": "baseline",
+      "role": "core",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 46.46053662919742,
+            "se": 21.936358412025733,
+            "lower95": 3.4652741416269848,
+            "upper95": 89.45579911676785,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -81.17833439216729,
+            "se": 20.082089282921796,
+            "lower95": -120.539229386694,
+            "upper95": -41.81743939764057,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 127.63887102136471,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 142.30410309715606,
+            "se": 92.45580638597868,
+            "lower95": -38.909277419362155,
+            "upper95": 323.51748361367424,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "other_component": {
+            "beta": -100.99420217322478,
+            "se": 48.95277771700602,
+            "lower95": -196.94164649855657,
+            "upper95": -5.046757847892977,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 243.29830527038084,
+          "same_sign": false,
+          "assessment": "other_down_total_unclear"
+        }
+      }
+    }
+  ],
+  "core_control_variants": [
+    {
+      "variant": "headline_lagged_macro",
+      "role": "headline",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 46.46053662919742,
+            "se": 21.936358412025733,
+            "lower95": 3.4652741416269848,
+            "upper95": 89.45579911676785,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -81.17833439216729,
+            "se": 20.082089282921796,
+            "lower95": -120.539229386694,
+            "upper95": -41.81743939764057,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 127.63887102136471,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 142.30410309715606,
+            "se": 92.45580638597868,
+            "lower95": -38.909277419362155,
+            "upper95": 323.51748361367424,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "other_component": {
+            "beta": -100.99420217322478,
+            "se": 48.95277771700602,
+            "lower95": -196.94164649855657,
+            "upper95": -5.046757847892977,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 243.29830527038084,
+          "same_sign": false,
+          "assessment": "other_down_total_unclear"
+        }
+      }
+    },
+    {
+      "variant": "lagged_macro_plus_bill",
+      "role": "core",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 56.138924225194295,
+            "se": 21.313366433131318,
+            "lower95": 14.36472601625691,
+            "upper95": 97.91312243413168,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -73.4318424687572,
+            "se": 21.006334897710875,
+            "lower95": -114.6042588682705,
+            "upper95": -32.25942606924388,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 129.5707666939515,
+          "same_sign": false,
+          "assessment": "crowd_out_signal"
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 183.00492645364875,
+            "se": 88.56161506024861,
+            "lower95": 9.424160935561474,
+            "upper95": 356.585691971736,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -60.87197451008169,
+            "se": 40.33687432441431,
+            "lower95": -139.93224818593373,
+            "upper95": 18.188299165770353,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 243.87690096373044,
+          "same_sign": false,
+          "assessment": "total_up_other_unclear"
+        }
+      }
+    }
+  ],
+  "shock_sample_variants": [
+    {
+      "sample_variant": "all_usable_shocks",
+      "sample_role": "headline",
+      "sample_filter": "all_usable_shocks",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 46.46053662919742,
+            "se": 21.936358412025733,
+            "lower95": 3.4652741416269848,
+            "upper95": 89.45579911676785,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -81.17833439216729,
+            "se": 20.082089282921796,
+            "lower95": -120.539229386694,
+            "upper95": -41.81743939764057,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 127.63887102136471,
+          "same_sign": false,
+          "assessment": "crowd_out_signal",
+          "direct_tdc_response": {
+            "beta": 128.49398892100785,
+            "se": 14.082533270452723,
+            "lower95": 100.89222371092052,
+            "upper95": 156.0957541310952,
+            "n": 68,
+            "ci_excludes_zero": true
+          }
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 142.30410309715606,
+            "se": 92.45580638597868,
+            "lower95": -38.909277419362155,
+            "upper95": 323.51748361367424,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "other_component": {
+            "beta": -100.99420217322478,
+            "se": 48.95277771700602,
+            "lower95": -196.94164649855657,
+            "upper95": -5.046757847892977,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 243.29830527038084,
+          "same_sign": false,
+          "assessment": "other_down_total_unclear",
+          "direct_tdc_response": {
+            "beta": 278.13971316628357,
+            "se": 69.29214131662822,
+            "lower95": 142.32711618569226,
+            "upper95": 413.9523101468749,
+            "n": 64,
+            "ci_excludes_zero": true
+          }
+        }
+      }
+    },
+    {
+      "sample_variant": "drop_flagged_shocks",
+      "sample_role": "exploratory",
+      "sample_filter": "shock_flag==''",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 53.8815090722739,
+            "se": 23.354461121662258,
+            "lower95": 8.106765273815874,
+            "upper95": 99.65625287073192,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -76.51302789812314,
+            "se": 23.071102602143167,
+            "lower95": -121.73238899832376,
+            "upper95": -31.293666797922533,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 130.39453697039704,
+          "same_sign": false,
+          "assessment": "crowd_out_signal",
+          "direct_tdc_response": {
+            "beta": 131.32420129365354,
+            "se": 13.86623262895334,
+            "lower95": 104.146385340905,
+            "upper95": 158.5020172464021,
+            "n": 64,
+            "ci_excludes_zero": true
+          }
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 160.57765881953347,
+            "se": 98.8499762308301,
+            "lower95": -33.16829459289352,
+            "upper95": 354.32361223196045,
+            "n": 60,
+            "ci_excludes_zero": false
+          },
+          "other_component": {
+            "beta": -102.63818449906837,
+            "se": 50.92083630857084,
+            "lower95": -202.44302366386722,
+            "upper95": -2.8333453342695236,
+            "n": 60,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 263.21584331860186,
+          "same_sign": false,
+          "assessment": "other_down_total_unclear",
+          "direct_tdc_response": {
+            "beta": 297.6299971709793,
+            "se": 61.751340550012735,
+            "lower95": 176.59736969295437,
+            "upper95": 418.6626246490043,
+            "n": 60,
+            "ci_excludes_zero": true
+          }
+        }
+      }
+    },
+    {
+      "sample_variant": "drop_severe_scale_tail",
+      "sample_role": "exploratory",
+      "sample_filter": "fitted_to_target_scale_ratio<=25.0",
+      "horizons": {
+        "h0": {
+          "total_deposits": {
+            "beta": 49.37404807584032,
+            "se": 22.558825549596023,
+            "lower95": 5.158749998632118,
+            "upper95": 93.58934615304852,
+            "n": 67,
+            "ci_excludes_zero": true
+          },
+          "other_component": {
+            "beta": -79.04528256862038,
+            "se": 21.0588681354342,
+            "lower95": -120.3206641140714,
+            "upper95": -37.769901023169346,
+            "n": 67,
+            "ci_excludes_zero": true
+          },
+          "beta_gap_total_minus_other": 128.4193306444607,
+          "same_sign": false,
+          "assessment": "crowd_out_signal",
+          "direct_tdc_response": {
+            "beta": 129.33519506845155,
+            "se": 14.300151620918879,
+            "lower95": 101.30689789145055,
+            "upper95": 157.36349224545256,
+            "n": 67,
+            "ci_excludes_zero": true
+          }
+        },
+        "h4": {
+          "total_deposits": {
+            "beta": 148.52652131152806,
+            "se": 97.45958827309953,
+            "lower95": -42.49427170374702,
+            "upper95": 339.54731432680313,
+            "n": 63,
+            "ci_excludes_zero": false
+          },
+          "other_component": {
+            "beta": -90.3933310631226,
+            "se": 51.315618844604316,
+            "lower95": -190.97194399854706,
+            "upper95": 10.185281872301857,
+            "n": 63,
+            "ci_excludes_zero": false
+          },
+          "beta_gap_total_minus_other": 238.91985237465065,
+          "same_sign": false,
+          "assessment": "not_separated",
+          "direct_tdc_response": {
+            "beta": 280.25453507039373,
+            "se": 70.26028414853144,
+            "lower95": 142.5443781392721,
+            "upper95": 417.96469200151535,
+            "n": 63,
+            "ci_excludes_zero": true
+          }
+        }
+      }
+    }
+  ],
+  "structural_proxy_context": {
+    "h0": {
+      "other_component": {
+        "beta": -81.17833439216729,
+        "se": 20.082089282921796,
+        "lower95": -120.539229386694,
+        "upper95": -41.81743939764057,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "decisive_proxy_count": 1,
+      "decisive_concordant_proxy_count": 0,
+      "decisive_discordant_proxy_count": 1,
+      "proxy_bundle_beta_sum": 52.63109980366392,
+      "other_minus_proxy_bundle_beta": -133.80943419583122,
+      "interpretation": "proxy_evidence_discordant",
+      "proxy_rows": [
+        {
+          "proxy_outcome": "bank_credit_private_qoq",
+          "proxy_beta": 14.021813174704516,
+          "proxy_se": 13.400899759392601,
+          "proxy_lower95": -12.243950353704982,
+          "proxy_upper95": 40.28757670311401,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -0.17272851530761943
+        },
+        {
+          "proxy_outcome": "cb_nonts_qoq",
+          "proxy_beta": 26.523641651135975,
+          "proxy_se": 14.452809474715338,
+          "proxy_lower95": -1.8038649193060863,
+          "proxy_upper95": 54.851148221578036,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -0.32673301133529026
+        },
+        {
+          "proxy_outcome": "foreign_nonts_qoq",
+          "proxy_beta": 27.0343911579461,
+          "proxy_se": 13.111973747146076,
+          "proxy_lower95": 1.334922613539792,
+          "proxy_upper95": 52.733859702352404,
+          "proxy_ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "proxy_discordant_with_other_direction",
+          "proxy_share_of_other_beta": -0.33302470862908695
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+          "proxy_beta": -14.977538562329684,
+          "proxy_se": 11.828190798252104,
+          "proxy_lower95": -38.160792526903805,
+          "proxy_upper95": 8.20571540224444,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "same_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": 0.1845016736851752
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+          "proxy_beta": 0.028792382207010303,
+          "proxy_se": 0.7154641657141337,
+          "proxy_lower95": -1.3735173825926918,
+          "proxy_upper95": 1.4311021470067122,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -0.00035468062288536456
+        }
+      ]
+    },
+    "h4": {
+      "other_component": {
+        "beta": -100.99420217322478,
+        "se": 48.95277771700602,
+        "lower95": -196.94164649855657,
+        "upper95": -5.046757847892977,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "decisive_proxy_count": 2,
+      "decisive_concordant_proxy_count": 0,
+      "decisive_discordant_proxy_count": 2,
+      "proxy_bundle_beta_sum": 195.14824786932834,
+      "other_minus_proxy_bundle_beta": -296.14245004255315,
+      "interpretation": "proxy_evidence_discordant",
+      "proxy_rows": [
+        {
+          "proxy_outcome": "bank_credit_private_qoq",
+          "proxy_beta": 54.572977783498914,
+          "proxy_se": 19.24512973374704,
+          "proxy_lower95": 16.852523505354718,
+          "proxy_upper95": 92.2934320616431,
+          "proxy_ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "proxy_discordant_with_other_direction",
+          "proxy_share_of_other_beta": -0.5403575315134982
+        },
+        {
+          "proxy_outcome": "cb_nonts_qoq",
+          "proxy_beta": 109.21565891280892,
+          "proxy_se": 89.44754513553232,
+          "proxy_lower95": -66.10152955283442,
+          "proxy_upper95": 284.5328473784523,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -1.081405234782515
+        },
+        {
+          "proxy_outcome": "foreign_nonts_qoq",
+          "proxy_beta": 38.11141757510377,
+          "proxy_se": 9.926775458602929,
+          "proxy_lower95": 18.65493767624203,
+          "proxy_upper95": 57.567897473965516,
+          "proxy_ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "proxy_discordant_with_other_direction",
+          "proxy_share_of_other_beta": -0.3773624302683757
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+          "proxy_beta": -6.051493186644944,
+          "proxy_se": 14.562904506654425,
+          "proxy_lower95": -34.59478601968762,
+          "proxy_upper95": 22.491799646397727,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "same_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": 0.05991921374125468
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+          "proxy_beta": -0.7003132154383085,
+          "proxy_se": 1.2009103178726588,
+          "proxy_lower95": -3.0540974384687196,
+          "proxy_upper95": 1.6534710075921026,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "same_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": 0.006934192264196855
+        }
+      ]
+    }
+  },
+  "proxy_coverage_context": {
+    "status": "mixed",
+    "key_horizons": {
+      "h0": {
+        "other_component": {
+          "beta": -81.17833439216729,
+          "se": 20.082089282921796,
+          "lower95": -120.539229386694,
+          "upper95": -41.81743939764057,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "proxy_bundle_beta_sum": 52.63109980366392,
+        "proxy_bundle_share_of_other_beta": -0.6483392422097068,
+        "unexplained_beta": -133.80943419583122,
+        "unexplained_share_of_other_beta": 1.648339242209707,
+        "same_sign_proxy_count": 1,
+        "opposite_sign_proxy_count": 4,
+        "decisive_proxy_count": 1,
+        "decisive_same_sign_proxy_count": 0,
+        "decisive_opposite_sign_proxy_count": 1,
+        "coverage_label": "proxy_bundle_opposite_direction",
+        "proxy_rows": [
+          {
+            "proxy_outcome": "bank_credit_private_qoq",
+            "beta": 14.021813174704516,
+            "se": 13.400899759392601,
+            "lower95": -12.243950353704982,
+            "upper95": 40.28757670311401,
+            "n": 64,
+            "ci_excludes_zero": false,
+            "sign_alignment": "opposite_sign"
+          },
+          {
+            "proxy_outcome": "cb_nonts_qoq",
+            "beta": 26.523641651135975,
+            "se": 14.452809474715338,
+            "lower95": -1.8038649193060863,
+            "upper95": 54.851148221578036,
+            "n": 68,
+            "ci_excludes_zero": false,
+            "sign_alignment": "opposite_sign"
+          },
+          {
+            "proxy_outcome": "foreign_nonts_qoq",
+            "beta": 27.0343911579461,
+            "se": 13.111973747146076,
+            "lower95": 1.334922613539792,
+            "upper95": 52.733859702352404,
+            "n": 68,
+            "ci_excludes_zero": true,
+            "sign_alignment": "opposite_sign"
+          },
+          {
+            "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+            "beta": -14.977538562329684,
+            "se": 11.828190798252104,
+            "lower95": -38.160792526903805,
+            "upper95": 8.20571540224444,
+            "n": 68,
+            "ci_excludes_zero": false,
+            "sign_alignment": "same_sign"
+          },
+          {
+            "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+            "beta": 0.028792382207010303,
+            "se": 0.7154641657141337,
+            "lower95": -1.3735173825926918,
+            "upper95": 1.4311021470067122,
+            "n": 68,
+            "ci_excludes_zero": false,
+            "sign_alignment": "opposite_sign"
+          }
+        ]
+      },
+      "h4": {
+        "other_component": {
+          "beta": -100.99420217322478,
+          "se": 48.95277771700602,
+          "lower95": -196.94164649855657,
+          "upper95": -5.046757847892977,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "proxy_bundle_beta_sum": 195.14824786932834,
+        "proxy_bundle_share_of_other_beta": -1.932271790558937,
+        "unexplained_beta": -296.14245004255315,
+        "unexplained_share_of_other_beta": 2.9322717905589375,
+        "same_sign_proxy_count": 2,
+        "opposite_sign_proxy_count": 3,
+        "decisive_proxy_count": 2,
+        "decisive_same_sign_proxy_count": 0,
+        "decisive_opposite_sign_proxy_count": 2,
+        "coverage_label": "proxy_bundle_opposite_direction",
+        "proxy_rows": [
+          {
+            "proxy_outcome": "bank_credit_private_qoq",
+            "beta": 54.572977783498914,
+            "se": 19.24512973374704,
+            "lower95": 16.852523505354718,
+            "upper95": 92.2934320616431,
+            "n": 60,
+            "ci_excludes_zero": true,
+            "sign_alignment": "opposite_sign"
+          },
+          {
+            "proxy_outcome": "cb_nonts_qoq",
+            "beta": 109.21565891280892,
+            "se": 89.44754513553232,
+            "lower95": -66.10152955283442,
+            "upper95": 284.5328473784523,
+            "n": 64,
+            "ci_excludes_zero": false,
+            "sign_alignment": "opposite_sign"
+          },
+          {
+            "proxy_outcome": "foreign_nonts_qoq",
+            "beta": 38.11141757510377,
+            "se": 9.926775458602929,
+            "lower95": 18.65493767624203,
+            "upper95": 57.567897473965516,
+            "n": 64,
+            "ci_excludes_zero": true,
+            "sign_alignment": "opposite_sign"
+          },
+          {
+            "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+            "beta": -6.051493186644944,
+            "se": 14.562904506654425,
+            "lower95": -34.59478601968762,
+            "upper95": 22.491799646397727,
+            "n": 64,
+            "ci_excludes_zero": false,
+            "sign_alignment": "same_sign"
+          },
+          {
+            "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+            "beta": -0.7003132154383085,
+            "se": 1.2009103178726588,
+            "lower95": -3.0540974384687196,
+            "upper95": 1.6534710075921026,
+            "n": 64,
+            "ci_excludes_zero": false,
+            "sign_alignment": "same_sign"
+          }
+        ]
+      }
+    },
+    "published_regime_contexts": [
+      {
+        "regime": "reserve_drain",
+        "stable_for_interpretation": true,
+        "publication_role": "published",
+        "stability_warnings": [],
+        "horizons": {
+          "h0": {
+            "high": {
+              "other_component": {
+                "beta": -104.24831996095469,
+                "se": 14.975677960294943,
+                "lower95": -133.60064876313277,
+                "upper95": -74.8959911587766,
+                "n": 34,
+                "ci_excludes_zero": true
+              },
+              "proxy_bundle_beta_sum": 51.917623488384876,
+              "proxy_bundle_share_of_other_beta": -0.4980188026802751,
+              "unexplained_beta": -156.16594344933958,
+              "unexplained_share_of_other_beta": 1.4980188026802752,
+              "same_sign_proxy_count": 1,
+              "opposite_sign_proxy_count": 4,
+              "decisive_proxy_count": 1,
+              "decisive_same_sign_proxy_count": 0,
+              "decisive_opposite_sign_proxy_count": 1,
+              "coverage_label": "proxy_bundle_opposite_direction",
+              "proxy_rows": [
+                {
+                  "proxy_outcome": "bank_credit_private_qoq",
+                  "beta": -4.374227797095266,
+                  "se": 5.443104859654593,
+                  "lower95": -15.042713322018267,
+                  "upper95": 6.294257727827736,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "same_sign"
+                },
+                {
+                  "proxy_outcome": "cb_nonts_qoq",
+                  "beta": 19.22504172001408,
+                  "se": 21.346338704172847,
+                  "lower95": -22.613782140164698,
+                  "upper95": 61.063865580192854,
+                  "n": 34,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "foreign_nonts_qoq",
+                  "beta": 22.26377145942496,
+                  "se": 7.698969189400526,
+                  "lower95": 7.173791848199928,
+                  "upper95": 37.35375107064999,
+                  "n": 34,
+                  "ci_excludes_zero": true,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                  "beta": 13.338307888576631,
+                  "se": 7.938316979938429,
+                  "lower95": -2.2207933921026903,
+                  "upper95": 28.89740916925595,
+                  "n": 34,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                  "beta": 1.4647302174644743,
+                  "se": 1.2641532197698673,
+                  "lower95": -1.0130100932844655,
+                  "upper95": 3.942470528213414,
+                  "n": 34,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                }
+              ]
+            },
+            "low": {
+              "other_component": {
+                "beta": -70.96997081974116,
+                "se": 22.79037753239897,
+                "lower95": -115.63911078324315,
+                "upper95": -26.30083085623918,
+                "n": 34,
+                "ci_excludes_zero": true
+              },
+              "proxy_bundle_beta_sum": 58.41510909781301,
+              "proxy_bundle_share_of_other_beta": -0.8230961408478434,
+              "unexplained_beta": -129.38507991755418,
+              "unexplained_share_of_other_beta": 1.8230961408478434,
+              "same_sign_proxy_count": 2,
+              "opposite_sign_proxy_count": 3,
+              "decisive_proxy_count": 2,
+              "decisive_same_sign_proxy_count": 1,
+              "decisive_opposite_sign_proxy_count": 1,
+              "coverage_label": "proxy_bundle_opposite_direction",
+              "proxy_rows": [
+                {
+                  "proxy_outcome": "bank_credit_private_qoq",
+                  "beta": 23.209698679364397,
+                  "se": 18.412936578574755,
+                  "lower95": -12.879657014642124,
+                  "upper95": 59.29905437337092,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "cb_nonts_qoq",
+                  "beta": 30.415575500217187,
+                  "se": 19.685700876303375,
+                  "lower95": -8.168398217337426,
+                  "upper95": 68.9995492177718,
+                  "n": 34,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "foreign_nonts_qoq",
+                  "beta": 31.326943583570774,
+                  "se": 14.131353180247313,
+                  "lower95": 3.6294913502860418,
+                  "upper95": 59.0243958168555,
+                  "n": 34,
+                  "ci_excludes_zero": true,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                  "beta": -26.16732136673283,
+                  "se": 13.095502726091093,
+                  "lower95": -51.83450670987137,
+                  "upper95": -0.5001360235942869,
+                  "n": 34,
+                  "ci_excludes_zero": true,
+                  "sign_alignment": "same_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                  "beta": -0.36978729860652837,
+                  "se": 0.9591435403639703,
+                  "lower95": -2.2497086377199103,
+                  "upper95": 1.5101340405068533,
+                  "n": 34,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "same_sign"
+                }
+              ]
+            }
+          },
+          "h4": {
+            "high": {
+              "other_component": {
+                "beta": -97.37429053703825,
+                "se": 62.2899459938,
+                "lower95": -219.46258468488625,
+                "upper95": 24.714003610809755,
+                "n": 32,
+                "ci_excludes_zero": false
+              },
+              "proxy_bundle_beta_sum": 227.499141749743,
+              "proxy_bundle_share_of_other_beta": -2.3363368348569296,
+              "unexplained_beta": -324.8734322867812,
+              "unexplained_share_of_other_beta": 3.336336834856929,
+              "same_sign_proxy_count": 0,
+              "opposite_sign_proxy_count": 5,
+              "decisive_proxy_count": 1,
+              "decisive_same_sign_proxy_count": 0,
+              "decisive_opposite_sign_proxy_count": 1,
+              "coverage_label": "other_component_not_decisive",
+              "proxy_rows": [
+                {
+                  "proxy_outcome": "bank_credit_private_qoq",
+                  "beta": 18.787832320295337,
+                  "se": 27.753450669916,
+                  "lower95": -35.60893099274002,
+                  "upper95": 73.1845956333307,
+                  "n": 30,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "cb_nonts_qoq",
+                  "beta": 113.60782072565473,
+                  "se": 90.11215822232482,
+                  "lower95": -63.01200939010192,
+                  "upper95": 290.2276508414114,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "foreign_nonts_qoq",
+                  "beta": 84.7459402040849,
+                  "se": 17.627138982094195,
+                  "lower95": 50.19674779918028,
+                  "upper95": 119.29513260898952,
+                  "n": 32,
+                  "ci_excludes_zero": true,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                  "beta": 5.423804624188554,
+                  "se": 31.996139880612922,
+                  "lower95": -57.288629541812774,
+                  "upper95": 68.13623879018988,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                  "beta": 4.9337438755194345,
+                  "se": 5.258152367089546,
+                  "lower95": -5.372234763976076,
+                  "upper95": 15.239722515014945,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                }
+              ]
+            },
+            "low": {
+              "other_component": {
+                "beta": -78.18078401591833,
+                "se": 40.558533421285254,
+                "lower95": -157.67550952163742,
+                "upper95": 1.3139414898007686,
+                "n": 32,
+                "ci_excludes_zero": false
+              },
+              "proxy_bundle_beta_sum": 181.50699351029257,
+              "proxy_bundle_share_of_other_beta": -2.32163178963946,
+              "unexplained_beta": -259.6877775262109,
+              "unexplained_share_of_other_beta": 3.3216317896394596,
+              "same_sign_proxy_count": 2,
+              "opposite_sign_proxy_count": 3,
+              "decisive_proxy_count": 2,
+              "decisive_same_sign_proxy_count": 0,
+              "decisive_opposite_sign_proxy_count": 2,
+              "coverage_label": "other_component_not_decisive",
+              "proxy_rows": [
+                {
+                  "proxy_outcome": "bank_credit_private_qoq",
+                  "beta": 61.75946560166633,
+                  "se": 11.09289433731429,
+                  "lower95": 40.01739270053032,
+                  "upper95": 83.50153850280233,
+                  "n": 30,
+                  "ci_excludes_zero": true,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "cb_nonts_qoq",
+                  "beta": 104.89938723988892,
+                  "se": 82.41925580698609,
+                  "lower95": -56.64235414180381,
+                  "upper95": 266.44112862158164,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "foreign_nonts_qoq",
+                  "beta": 23.091759197475188,
+                  "se": 10.26976569979263,
+                  "lower95": 2.963018425881632,
+                  "upper95": 43.22049996906874,
+                  "n": 32,
+                  "ci_excludes_zero": true,
+                  "sign_alignment": "opposite_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+                  "beta": -6.044203710109816,
+                  "se": 16.860802937109405,
+                  "lower95": -39.09137746684425,
+                  "upper95": 27.002970046624615,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "same_sign"
+                },
+                {
+                  "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+                  "beta": -2.1994148186280404,
+                  "se": 1.6792254183664301,
+                  "lower95": -5.490696638626243,
+                  "upper95": 1.0918670013701623,
+                  "n": 32,
+                  "ci_excludes_zero": false,
+                  "sign_alignment": "same_sign"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "release_caveat": "The current public proxy bundle spans a limited set of channel families and still does not exhaust the bank-only non-TDC residual."
+  },
+  "published_regime_contexts": [
+    {
+      "regime": "reserve_drain",
+      "horizons": {
+        "h0": {
+          "high": {
+            "beta": 37.00725800955061,
+            "se": 25.779352662726968,
+            "lower95": -13.520273209394247,
+            "upper95": 87.53478922849547,
+            "n": 34,
+            "ci_excludes_zero": false
+          },
+          "low": {
+            "beta": 51.931257848882325,
+            "se": 26.70058985426981,
+            "lower95": -0.4018982654865013,
+            "upper95": 104.26441396325114,
+            "n": 34,
+            "ci_excludes_zero": false
+          }
+        },
+        "h4": {
+          "high": {
+            "beta": 172.45154683853286,
+            "se": 82.0980052625317,
+            "lower95": 11.539456523970728,
+            "upper95": 333.363637153095,
+            "n": 32,
+            "ci_excludes_zero": true
+          },
+          "low": {
+            "beta": 138.74405791330113,
+            "se": 100.77547755936932,
+            "lower95": -58.77587810306272,
+            "upper95": 336.263993929665,
+            "n": 32,
+            "ci_excludes_zero": false
+          }
+        }
+      },
+      "stable_for_interpretation": true,
+      "stability_warnings": [],
+      "publication_role": "published"
+    }
+  ],
+  "readiness_reasons": [],
+  "readiness_warnings": [
+    "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables.",
+    "Structural proxy cross-checks are mixed across key horizons.",
+    "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern."
+  ]
+}

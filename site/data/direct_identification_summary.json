@@ -1,0 +1,242 @@
+{
+  "status": "provisional",
+  "headline_question": "Does the baseline unexpected-TDC shock move TDC enough to identify pass-through versus crowd-out?",
+  "treatment_freeze_status": "frozen",
+  "treatment_candidates": [],
+  "shock_definition": {
+    "shock_column": "tdc_residual_z",
+    "treatment_outcome": "tdc_bank_only_qoq",
+    "response_type": "cumulative_sum_h0_to_h",
+    "key_horizons": [
+      0,
+      4,
+      8
+    ],
+    "model_name": "unexpected_tdc_default",
+    "predictors": [
+      "lag_tdc_bank_only_qoq",
+      "lag_fedfunds",
+      "lag_unemployment",
+      "lag_inflation"
+    ],
+    "min_train_obs": 24
+  },
+  "contrast_check": {
+    "identity_check_mode": "approximate_with_outcome_specific_lags",
+    "explanation": "Total-minus-other is an approximate LP cross-check here because the regressions include outcome-specific lagged dependent variables."
+  },
+  "ratio_reporting_gate": {
+    "rule": [
+      "tdc_ci_excludes_zero == true",
+      "abs(raw_unit_tdc_beta) >= usable_target_sd"
+    ],
+    "usable_target_sd": 263.42967242082716,
+    "horizons": {
+      "h0": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 0.9305308145201421,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "h4": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.2108641620062723,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "h8": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.7824498362130194,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      }
+    }
+  },
+  "horizon_evidence": {
+    "h0": {
+      "tdc": {
+        "beta": 128.49398892100785,
+        "se": 14.082533270452723,
+        "lower95": 100.89222371092052,
+        "upper95": 156.0957541310952,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "raw_unit_tdc": {
+        "beta": 0.9305308145201421,
+        "se": 0.017236852863253205,
+        "lower95": 0.8967465829081658,
+        "upper95": 0.9643150461321184,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 46.46053662919742,
+        "se": 21.936358412025733,
+        "lower95": 3.4652741416269848,
+        "upper95": 89.45579911676785,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "other": {
+        "beta": -81.17833439216729,
+        "se": 20.082089282921796,
+        "lower95": -120.539229386694,
+        "upper95": -41.81743939764057,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "pass_through_ratio_total_over_tdc": null,
+      "crowd_out_ratio_neg_other_over_tdc": null,
+      "ratio_reporting_gate": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 0.9305308145201421,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "beta_gap_total_minus_other": 127.63887102136471,
+      "direct_vs_identity_tdc_gap": 0.8551178996431474,
+      "identity_check_mode": "approximate_with_outcome_specific_lags",
+      "contrast_consistent": false
+    },
+    "h4": {
+      "tdc": {
+        "beta": 278.13971316628357,
+        "se": 69.29214131662822,
+        "lower95": 142.32711618569226,
+        "upper95": 413.9523101468749,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "raw_unit_tdc": {
+        "beta": 2.2108641620062723,
+        "se": 0.3431532533364172,
+        "lower95": 1.5382837854668945,
+        "upper95": 2.88344453854565,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 142.30410309715606,
+        "se": 92.45580638597868,
+        "lower95": -38.909277419362155,
+        "upper95": 323.51748361367424,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "other": {
+        "beta": -100.99420217322478,
+        "se": 48.95277771700602,
+        "lower95": -196.94164649855657,
+        "upper95": -5.046757847892977,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "pass_through_ratio_total_over_tdc": null,
+      "crowd_out_ratio_neg_other_over_tdc": null,
+      "ratio_reporting_gate": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.2108641620062723,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "beta_gap_total_minus_other": 243.29830527038084,
+      "direct_vs_identity_tdc_gap": 34.841407895902734,
+      "identity_check_mode": "approximate_with_outcome_specific_lags",
+      "contrast_consistent": false
+    },
+    "h8": {
+      "tdc": {
+        "beta": 347.6946386730543,
+        "se": 113.67922702128271,
+        "lower95": 124.88335371134022,
+        "upper95": 570.5059236347685,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "raw_unit_tdc": {
+        "beta": 2.7824498362130194,
+        "se": 0.787235764329649,
+        "lower95": 1.2394677381269075,
+        "upper95": 4.325431934299131,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 83.51619577931737,
+        "se": 119.4365054718626,
+        "lower95": -150.57935494553334,
+        "upper95": 317.6117465041681,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "other": {
+        "beta": -230.2431106659432,
+        "se": 57.8314678492858,
+        "lower95": -343.59278765054336,
+        "upper95": -116.89343368134303,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "pass_through_ratio_total_over_tdc": null,
+      "crowd_out_ratio_neg_other_over_tdc": null,
+      "ratio_reporting_gate": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.7824498362130194,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "beta_gap_total_minus_other": 313.75930644526056,
+      "direct_vs_identity_tdc_gap": 33.935332227793765,
+      "identity_check_mode": "approximate_with_outcome_specific_lags",
+      "contrast_consistent": false
+    }
+  },
+  "first_stage_checks": {
+    "tdc_positive_at_h0_or_h4": true,
+    "tdc_ci_excludes_zero_at_h0_or_h4": true,
+    "tdc_nontrivial_denominator_at_h0_or_h4": true,
+    "decomposition_separates_at_h0_or_h4": true
+  },
+  "sample_fragility": {
+    "impact_sign_flip": false,
+    "h4_sign_flip": false,
+    "impact_magnitude_shift_gt_100pct": false,
+    "h4_magnitude_shift_gt_100pct": false
+  },
+  "answer_ready": false,
+  "reasons": [],
+  "warnings": [
+    "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables."
+  ],
+  "answer_ready_when": [
+    "the baseline unexpected-TDC shock is a credibly frozen treatment object",
+    "the baseline shock moves TDC itself clearly enough at h0 or h4",
+    "total deposits and the non-TDC component separate enough to support a pass-through versus crowd-out statement",
+    "excluding flagged shock windows does not overturn the headline interpretation"
+  ]
+}

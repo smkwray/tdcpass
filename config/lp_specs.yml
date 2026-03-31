@@ -23,9 +23,11 @@ specs:
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
     controls:
+    - lag_tdc_bank_only_qoq
     - lag_fedfunds
     - lag_unemployment
     - lag_inflation
+    include_lagged_outcome: true
   regimes:
     horizons:
     - 0
@@ -50,13 +52,47 @@ specs:
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
     controls:
+    - lag_tdc_bank_only_qoq
     - lag_fedfunds
     - lag_unemployment
     - lag_inflation
+    include_lagged_outcome: true
     regime_columns:
-    - bank_absorption_share
-    - bill_share
     - reserve_drain_pressure
+  state_dependence:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    shock_column: tdc_residual_z
+    outcomes:
+    - tdc_bank_only_qoq
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    - bank_credit_private_qoq
+    - cb_nonts_qoq
+    - foreign_nonts_qoq
+    - domestic_nonfinancial_mmf_reallocation_qoq
+    - domestic_nonfinancial_repo_reallocation_qoq
+    controls:
+    - lag_tdc_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    include_lagged_outcome: true
+    state_variants:
+      reserve_drain:
+        state_role: exploratory
+        low_quantile: 0.25
+        high_quantile: 0.75
   sensitivity:
     horizons:
     - 0
@@ -80,18 +116,29 @@ specs:
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
     controls:
+    - lag_tdc_bank_only_qoq
     - lag_fedfunds
     - lag_unemployment
     - lag_inflation
+    include_lagged_outcome: true
     shock_variants:
       baseline:
         shock_column: tdc_residual_z
         treatment_role: core
       bank_only_long_burnin:
         shock_column: tdc_long_burnin_residual_z
-        treatment_role: core
+        treatment_role: exploratory
       bank_only_no_bill_share:
         shock_column: tdc_no_bill_share_residual_z
+        treatment_role: exploratory
+      bank_only_billshare_macro_rolling40:
+        shock_column: tdc_bank_only_billshare_macro_rolling40_residual_z
+        treatment_role: exploratory
+      legacy_rolling40_ols:
+        shock_column: tdc_bank_only_macro_rolling40_residual_z
+        treatment_role: exploratory
+      legacy_billshare_expanding:
+        shock_column: tdc_legacy_billshare_expanding_residual_z
         treatment_role: exploratory
       legacy_totaldep_long_burnin:
         shock_column: tdc_legacy_totaldep_residual_z
@@ -125,23 +172,78 @@ specs:
       headline_lagged_macro:
         control_role: headline
         controls:
+        - lag_tdc_bank_only_qoq
         - lag_fedfunds
         - lag_unemployment
         - lag_inflation
+        include_lagged_outcome: true
       lagged_macro_plus_bill:
         control_role: core
         controls:
+        - lag_tdc_bank_only_qoq
         - lag_fedfunds
         - lag_unemployment
         - lag_inflation
         - lag_bill_share
+        include_lagged_outcome: true
       lagged_macro_plus_trend:
         control_role: exploratory
         controls:
+        - lag_tdc_bank_only_qoq
         - lag_fedfunds
         - lag_unemployment
         - lag_inflation
         - quarter_index
+        include_lagged_outcome: true
+  factor_control_sensitivity:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    shock_column: tdc_residual_z
+    outcomes:
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    - bank_credit_private_qoq
+    - cb_nonts_qoq
+    - foreign_nonts_qoq
+    - domestic_nonfinancial_mmf_reallocation_qoq
+    - domestic_nonfinancial_repo_reallocation_qoq
+    controls:
+    - lag_tdc_bank_only_qoq
+    include_lagged_outcome: true
+    factor_variants:
+      recursive_macro_factors2:
+        factor_role: core
+        source_columns:
+        - lag_fedfunds
+        - lag_unemployment
+        - lag_inflation
+        factor_count: 2
+        min_train_obs: 24
+      recursive_macro_plumbing_factors3:
+        factor_role: exploratory
+        source_columns:
+        - lag_tga_qoq
+        - lag_reserves_qoq
+        - lag_bill_share
+        - lag_fedfunds
+        - lag_unemployment
+        - lag_inflation
+        factor_count: 3
+        min_train_obs: 40
+  smooth_lp:
+    method: gaussian_kernel
+    bandwidth: 1.0
+    min_horizons: 4
   sample_sensitivity:
     horizons:
     - 0
@@ -166,9 +268,11 @@ specs:
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
     controls:
+    - lag_tdc_bank_only_qoq
     - lag_fedfunds
     - lag_unemployment
     - lag_inflation
+    include_lagged_outcome: true
     sample_variants:
       all_usable_shocks:
         sample_role: headline
@@ -178,3 +282,50 @@ specs:
         sample_role: exploratory
         exclude_flagged_shocks: true
         flag_column: shock_flag
+      drop_severe_scale_tail:
+        sample_role: exploratory
+        exclude_flagged_shocks: false
+        flag_column: shock_flag
+        max_value_column: fitted_to_target_scale_ratio
+        max_value: 25.0
+  period_sensitivity:
+    horizons:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    cumulative: true
+    nw_lags: 4
+    shock_column: tdc_residual_z
+    outcomes:
+    - tdc_bank_only_qoq
+    - total_deposits_bank_qoq
+    - other_component_qoq
+    controls:
+    - lag_tdc_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    include_lagged_outcome: true
+    period_variants:
+      all_usable:
+        period_role: headline
+        start_quarter: 2009Q1
+        end_quarter: 2025Q4
+      post_gfc_early:
+        period_role: core
+        start_quarter: 2009Q1
+        end_quarter: 2014Q4
+      pre_covid:
+        period_role: core
+        start_quarter: 2015Q1
+        end_quarter: 2019Q4
+      covid_post:
+        period_role: core
+        start_quarter: 2020Q1
+        end_quarter: 2025Q4

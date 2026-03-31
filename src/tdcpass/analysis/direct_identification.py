@@ -4,6 +4,8 @@ from typing import Any
 
 import pandas as pd
 
+CONTRAST_ABS_GAP_TOLERANCE = 0.05
+
 
 def _lp_row(df: pd.DataFrame, *, outcome: str, horizon: int) -> dict[str, Any] | None:
     sample = df[(df["outcome"] == outcome) & (df["horizon"] == horizon)]
@@ -39,12 +41,81 @@ def _sign(value: float | None) -> str:
     return "zero"
 
 
+def _treatment_freeze_status(shock_metadata: dict[str, Any] | None) -> str:
+    if shock_metadata is None:
+        return "frozen"
+    return str(shock_metadata.get("freeze_status", "frozen"))
+
+
+def _treatment_candidates(shock_specs: dict[str, Any] | None) -> list[dict[str, Any]]:
+    if shock_specs is None:
+        return []
+    candidates: list[dict[str, Any]] = []
+    for name, spec in shock_specs.items():
+        if not isinstance(spec, dict):
+            continue
+        if str(spec.get("candidate_role", "")) != "repair_candidate":
+            continue
+        candidates.append(
+            {
+                "name": str(name),
+                "model_name": str(spec.get("model_name", "")),
+                "shock_column": str(spec.get("standardized_column", "")),
+                "raw_shock_column": str(spec.get("residual_column", "")),
+                "target": str(spec.get("target", "")),
+                "method": str(spec.get("method", "expanding_window_ols")),
+                "min_train_obs": int(spec.get("min_train_obs", 0)),
+                "max_train_obs": None if spec.get("max_train_obs") is None else int(spec.get("max_train_obs")),
+                "predictors": [str(item) for item in spec.get("predictors", [])],
+            }
+        )
+    return candidates
+
+
+def _ratio_reporting_gate(
+    *,
+    raw_tdc: dict[str, Any] | None,
+    usable_target_sd: float | None,
+) -> dict[str, Any]:
+    ci_excludes_zero = bool(raw_tdc["ci_excludes_zero"]) if raw_tdc is not None else False
+    abs_raw_tdc_beta = None if raw_tdc is None else abs(float(raw_tdc["beta"]))
+    beta_large_enough = (
+        raw_tdc is not None
+        and usable_target_sd is not None
+        and pd.notna(usable_target_sd)
+        and abs_raw_tdc_beta is not None
+        and abs_raw_tdc_beta >= float(usable_target_sd)
+    )
+    allowed = ci_excludes_zero and beta_large_enough
+    if allowed:
+        explanation = "Ratios are reported because the raw-unit TDC response is statistically decisive and at least one usable-sample target standard deviation."
+    elif raw_tdc is None:
+        explanation = "Ratios are suppressed because the raw-unit TDC response is unavailable."
+    elif not ci_excludes_zero:
+        explanation = "Ratios are suppressed because the raw-unit TDC response does not exclude zero."
+    elif usable_target_sd is None or pd.isna(usable_target_sd):
+        explanation = "Ratios are suppressed because the usable-sample target volatility could not be computed."
+    else:
+        explanation = "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+    return {
+        "allowed": allowed,
+        "usable_target_sd": usable_target_sd,
+        "abs_raw_tdc_beta": abs_raw_tdc_beta,
+        "conditions": {
+            "tdc_ci_excludes_zero": ci_excludes_zero,
+            "abs_raw_tdc_beta_ge_usable_target_sd": beta_large_enough,
+        },
+        "explanation": explanation,
+    }
+
+
 def _contrast_rows(
     frame: pd.DataFrame,
     *,
     scope: str,
     variant_column: str | None,
     role_column: str | None,
+    identity_check_mode: str,
 ) -> list[dict[str, Any]]:
     if frame.empty:
         return []
@@ -105,8 +176,13 @@ def _contrast_rows(
                     "n_other": n_other,
                     "n_direct": n_direct,
                     "sample_mismatch_flag": sample_mismatch,
+                    "identity_check_mode": identity_check_mode,
                     "contrast_consistent": (
-                        beta_implied is not None and beta_direct is not None and (not sample_mismatch) and abs_gap is not None and abs_gap <= 1e-8
+                        beta_implied is not None
+                        and beta_direct is not None
+                        and (not sample_mismatch)
+                        and abs_gap is not None
+                        and abs_gap <= CONTRAST_ABS_GAP_TOLERANCE
                     ),
                     "implied_sign": _sign(beta_implied),
                     "direct_sign": _sign(beta_direct),
@@ -121,15 +197,25 @@ def build_total_minus_other_contrast(
     sensitivity: pd.DataFrame,
     control_sensitivity: pd.DataFrame,
     sample_sensitivity: pd.DataFrame,
+    identity_check_mode: str = "exact_accounting_identity",
 ) -> pd.DataFrame:
     rows: list[dict[str, Any]] = []
-    rows.extend(_contrast_rows(lp_irf, scope="baseline", variant_column=None, role_column=None))
+    rows.extend(
+        _contrast_rows(
+            lp_irf,
+            scope="baseline",
+            variant_column=None,
+            role_column=None,
+            identity_check_mode=identity_check_mode,
+        )
+    )
     rows.extend(
         _contrast_rows(
             sensitivity,
             scope="treatment_variant",
             variant_column="treatment_variant",
             role_column="treatment_role",
+            identity_check_mode=identity_check_mode,
         )
     )
     rows.extend(
@@ -138,6 +224,7 @@ def build_total_minus_other_contrast(
             scope="control_variant",
             variant_column="control_variant",
             role_column="control_role",
+            identity_check_mode=identity_check_mode,
         )
     )
     rows.extend(
@@ -146,6 +233,7 @@ def build_total_minus_other_contrast(
             scope="sample_variant",
             variant_column="sample_variant",
             role_column="sample_role",
+            identity_check_mode=identity_check_mode,
         )
     )
     return pd.DataFrame(rows)
@@ -157,11 +245,25 @@ def build_direct_identification_summary(
     contrast: pd.DataFrame,
     sample_sensitivity: pd.DataFrame,
     shock_metadata: dict[str, Any] | None = None,
+    shock_specs: dict[str, Any] | None = None,
+    shocks: pd.DataFrame | None = None,
+    raw_tdc_lp: pd.DataFrame | None = None,
+    shock_column: str = "tdc_residual_z",
     horizons: tuple[int, ...] = (0, 4, 8),
 ) -> dict[str, Any]:
     horizon_evidence: dict[str, Any] = {}
     baseline_contrast = contrast[contrast["scope"] == "baseline"].copy() if not contrast.empty else pd.DataFrame()
     key_horizons = {0, 4}
+    treatment_freeze_status = _treatment_freeze_status(shock_metadata)
+    treatment_candidates = _treatment_candidates(shock_specs)
+    treatment_target = "tdc_bank_only_qoq" if shock_metadata is None else str(shock_metadata.get("target", "tdc_bank_only_qoq"))
+    usable_target_sd = None
+    if shocks is not None and shock_column in shocks.columns and treatment_target in shocks.columns:
+        usable = shocks.dropna(subset=[shock_column, treatment_target]).copy()
+        if not usable.empty:
+            usable_target_sd = float(usable[treatment_target].std(ddof=1))
+            if not pd.notna(usable_target_sd) or usable_target_sd <= 0.0:
+                usable_target_sd = None
 
     first_stage_positive = False
     first_stage_decisive = False
@@ -169,6 +271,15 @@ def build_direct_identification_summary(
     decomposition_separates = False
     contrast_missing = False
     contrast_inconsistent = False
+    contrast_identity_mode = "exact_accounting_identity"
+    ratio_reporting_gate = {
+        "rule": [
+            "tdc_ci_excludes_zero == true",
+            "abs(raw_unit_tdc_beta) >= usable_target_sd",
+        ],
+        "usable_target_sd": usable_target_sd,
+        "horizons": {},
+    }
 
     for horizon in horizons:
         tdc_row = _lp_row(lp_irf, outcome="tdc_bank_only_qoq", horizon=horizon)
@@ -177,6 +288,7 @@ def build_direct_identification_summary(
         tdc = _snapshot(tdc_row)
         total = _snapshot(total_row)
         other = _snapshot(other_row)
+        raw_tdc = _snapshot(_lp_row(raw_tdc_lp, outcome="tdc_bank_only_qoq", horizon=horizon)) if raw_tdc_lp is not None else None
         contrast_row = None
         if not baseline_contrast.empty:
             sample = baseline_contrast[baseline_contrast["horizon"] == horizon]
@@ -191,7 +303,9 @@ def build_direct_identification_summary(
             beta_gap = float(total["beta"]) - float(other["beta"])
         if tdc is not None and beta_gap is not None:
             direct_gap = float(tdc["beta"]) - beta_gap
-        if tdc is not None and abs(float(tdc["beta"])) > 1e-12:
+        gate = _ratio_reporting_gate(raw_tdc=raw_tdc, usable_target_sd=usable_target_sd)
+        ratio_reporting_gate["horizons"][f"h{horizon}"] = gate
+        if gate["allowed"] and tdc is not None and abs(float(tdc["beta"])) > 1e-12:
             pass_through_ratio = (float(total["beta"]) / float(tdc["beta"])) if total is not None else None
             crowd_out_ratio = (-float(other["beta"]) / float(tdc["beta"])) if other is not None else None
 
@@ -207,22 +321,31 @@ def build_direct_identification_summary(
         if horizon in key_horizons:
             if contrast_row is None:
                 contrast_missing = True
-            elif not bool(contrast_row.get("contrast_consistent", False)):
-                contrast_inconsistent = True
+            else:
+                contrast_identity_mode = str(contrast_row.get("identity_check_mode", contrast_identity_mode))
+                if not bool(contrast_row.get("contrast_consistent", False)):
+                    contrast_inconsistent = True
 
         horizon_evidence[f"h{horizon}"] = {
             "tdc": tdc,
+            "raw_unit_tdc": raw_tdc,
             "total": total,
             "other": other,
             "pass_through_ratio_total_over_tdc": pass_through_ratio,
             "crowd_out_ratio_neg_other_over_tdc": crowd_out_ratio,
+            "ratio_reporting_gate": gate,
             "beta_gap_total_minus_other": beta_gap,
             "direct_vs_identity_tdc_gap": direct_gap,
+            "identity_check_mode": str(contrast_row.get("identity_check_mode", contrast_identity_mode))
+            if contrast_row is not None
+            else contrast_identity_mode,
             "contrast_consistent": bool(contrast_row.get("contrast_consistent", False)) if contrast_row is not None else False,
         }
 
     warnings: list[str] = []
     reasons: list[str] = []
+    if treatment_freeze_status != "frozen":
+        reasons.append("The baseline unexpected-TDC shock is not yet a credibly frozen treatment object.")
     if not first_stage_positive or not first_stage_decisive:
         reasons.append("The baseline shock does not move TDC itself clearly enough at key horizons.")
     if not decomposition_separates:
@@ -230,7 +353,12 @@ def build_direct_identification_summary(
     if contrast_missing:
         warnings.append("Some baseline total-minus-other contrast rows are missing.")
     if contrast_inconsistent:
-        warnings.append("Direct TDC response and total-minus-other contrast do not line up cleanly at key horizons.")
+        if contrast_identity_mode == "approximate_with_outcome_specific_lags":
+            warnings.append(
+                "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables."
+            )
+        else:
+            warnings.append("Direct TDC response and total-minus-other contrast differ by more than the numeric tolerance at key horizons.")
 
     sample_fragility = {
         "impact_sign_flip": False,
@@ -270,15 +398,26 @@ def build_direct_identification_summary(
     return {
         "status": status,
         "headline_question": "Does the baseline unexpected-TDC shock move TDC enough to identify pass-through versus crowd-out?",
+        "treatment_freeze_status": treatment_freeze_status,
+        "treatment_candidates": treatment_candidates,
         "shock_definition": {
-            "shock_column": "tdc_residual_z",
-            "treatment_outcome": "tdc_bank_only_qoq",
+            "shock_column": shock_column,
+            "treatment_outcome": treatment_target,
             "response_type": "cumulative_sum_h0_to_h",
             "key_horizons": list(horizons),
             "model_name": None if shock_metadata is None else str(shock_metadata.get("model_name", "")),
             "predictors": [] if shock_metadata is None else [str(item) for item in shock_metadata.get("predictors", [])],
             "min_train_obs": None if shock_metadata is None else int(shock_metadata.get("min_train_obs", 0)),
         },
+        "contrast_check": {
+            "identity_check_mode": contrast_identity_mode,
+            "explanation": (
+                "Total-minus-other is an approximate LP cross-check here because the regressions include outcome-specific lagged dependent variables."
+                if contrast_identity_mode == "approximate_with_outcome_specific_lags"
+                else "Total-minus-other is treated as an exact accounting identity check."
+            ),
+        },
+        "ratio_reporting_gate": ratio_reporting_gate,
         "horizon_evidence": horizon_evidence,
         "first_stage_checks": {
             "tdc_positive_at_h0_or_h4": first_stage_positive,
@@ -291,6 +430,7 @@ def build_direct_identification_summary(
         "reasons": reasons,
         "warnings": warnings,
         "answer_ready_when": [
+            "the baseline unexpected-TDC shock is a credibly frozen treatment object",
             "the baseline shock moves TDC itself clearly enough at h0 or h4",
             "total deposits and the non-TDC component separate enough to support a pass-through versus crowd-out statement",
             "excluding flagged shock windows does not overturn the headline interpretation",

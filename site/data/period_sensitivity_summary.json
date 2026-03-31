@@ -1,0 +1,389 @@
+{
+  "status": "materialized",
+  "headline_question": "Do total deposits and non-TDC responses differ across major usable-sample periods?",
+  "periods": [
+    {
+      "period_variant": "all_usable",
+      "period_role": "headline",
+      "start_quarter": "2009Q1",
+      "end_quarter": "2025Q4",
+      "key_horizons": {
+        "h0": {
+          "assessment": "crowd_out_signal",
+          "tdc": {
+            "beta": 128.49398892100785,
+            "lower95": 100.89222371092052,
+            "upper95": 156.0957541310952,
+            "n": 68
+          },
+          "total_deposits": {
+            "beta": 46.46053662919742,
+            "lower95": 3.4652741416269848,
+            "upper95": 89.45579911676785,
+            "n": 68
+          },
+          "other_component": {
+            "beta": -81.17833439216729,
+            "lower95": -120.539229386694,
+            "upper95": -41.81743939764057,
+            "n": 68
+          }
+        },
+        "h4": {
+          "assessment": "crowd_out_signal",
+          "tdc": {
+            "beta": 278.13971316628357,
+            "lower95": 142.32711618569226,
+            "upper95": 413.9523101468749,
+            "n": 64
+          },
+          "total_deposits": {
+            "beta": 142.30410309715606,
+            "lower95": -38.909277419362155,
+            "upper95": 323.51748361367424,
+            "n": 64
+          },
+          "other_component": {
+            "beta": -100.99420217322478,
+            "lower95": -196.94164649855657,
+            "upper95": -5.046757847892977,
+            "n": 64
+          }
+        }
+      }
+    },
+    {
+      "period_variant": "post_gfc_early",
+      "period_role": "core",
+      "start_quarter": "2009Q1",
+      "end_quarter": "2014Q4",
+      "key_horizons": {
+        "h0": {
+          "assessment": "crowd_out_signal",
+          "tdc": {
+            "beta": 93.71356166848689,
+            "lower95": 86.20327218718943,
+            "upper95": 101.22385114978435,
+            "n": 24
+          },
+          "total_deposits": {
+            "beta": 0.5166758625012164,
+            "lower95": -28.425695049748576,
+            "upper95": 29.45904677475101,
+            "n": 24
+          },
+          "other_component": {
+            "beta": -93.13639070729926,
+            "lower95": -123.81537532646863,
+            "upper95": -62.457406088129886,
+            "n": 24
+          }
+        },
+        "h4": {
+          "assessment": "crowd_out_signal",
+          "tdc": {
+            "beta": 60.83481293188569,
+            "lower95": 4.543410182021368,
+            "upper95": 117.12621568175001,
+            "n": 24
+          },
+          "total_deposits": {
+            "beta": 9.030435405720496,
+            "lower95": -52.06742963803043,
+            "upper95": 70.12830044947142,
+            "n": 24
+          },
+          "other_component": {
+            "beta": -49.61494363526292,
+            "lower95": -119.41062232919738,
+            "upper95": 20.180735058671544,
+            "n": 24
+          }
+        }
+      }
+    },
+    {
+      "period_variant": "pre_covid",
+      "period_role": "core",
+      "start_quarter": "2015Q1",
+      "end_quarter": "2019Q4",
+      "key_horizons": {
+        "h0": {
+          "assessment": "crowd_out_signal",
+          "tdc": {
+            "beta": 127.65023813875462,
+            "lower95": 125.67885890302504,
+            "upper95": 129.62161737448417,
+            "n": 20
+          },
+          "total_deposits": {
+            "beta": 33.47538739475129,
+            "lower95": -0.01373798884225863,
+            "upper95": 66.96451277834484,
+            "n": 20
+          },
+          "other_component": {
+            "beta": -94.53165167714619,
+            "lower95": -127.44547661028986,
+            "upper95": -61.61782674400252,
+            "n": 20
+          }
+        },
+        "h4": {
+          "assessment": "same_sign_positive_or_unclear",
+          "tdc": {
+            "beta": 249.6968766993817,
+            "lower95": 58.596060035380134,
+            "upper95": 440.79769336338325,
+            "n": 20
+          },
+          "total_deposits": {
+            "beta": 256.6667170795331,
+            "lower95": -64.84395275544279,
+            "upper95": 578.177386914509,
+            "n": 20
+          },
+          "other_component": {
+            "beta": 37.37559998527992,
+            "lower95": -127.02246168452037,
+            "upper95": 201.77366165508022,
+            "n": 20
+          }
+        }
+      }
+    },
+    {
+      "period_variant": "covid_post",
+      "period_role": "core",
+      "start_quarter": "2020Q1",
+      "end_quarter": "2025Q4",
+      "key_horizons": {
+        "h0": {
+          "assessment": "crowd_out_signal",
+          "tdc": {
+            "beta": 171.68598858540835,
+            "lower95": 154.43566164172327,
+            "upper95": 188.93631552909343,
+            "n": 24
+          },
+          "total_deposits": {
+            "beta": 91.47310529334284,
+            "lower95": 34.48314885379727,
+            "upper95": 148.4630617328884,
+            "n": 24
+          },
+          "other_component": {
+            "beta": -81.18899966339555,
+            "lower95": -138.14921043003855,
+            "upper95": -24.228788896752555,
+            "n": 24
+          }
+        },
+        "h4": {
+          "assessment": "crowd_out_signal",
+          "tdc": {
+            "beta": 317.9605126338285,
+            "lower95": 229.06469484565713,
+            "upper95": 406.85633042199987,
+            "n": 20
+          },
+          "total_deposits": {
+            "beta": 294.5945234675841,
+            "lower95": 117.02074493925525,
+            "upper95": 472.168301995913,
+            "n": 20
+          },
+          "other_component": {
+            "beta": -60.945045530146174,
+            "lower95": -140.35202821828676,
+            "upper95": 18.4619371579944,
+            "n": 20
+          }
+        }
+      }
+    }
+  ],
+  "key_horizons": {
+    "all_usable": {
+      "h0": {
+        "assessment": "crowd_out_signal",
+        "tdc": {
+          "beta": 128.49398892100785,
+          "lower95": 100.89222371092052,
+          "upper95": 156.0957541310952,
+          "n": 68
+        },
+        "total_deposits": {
+          "beta": 46.46053662919742,
+          "lower95": 3.4652741416269848,
+          "upper95": 89.45579911676785,
+          "n": 68
+        },
+        "other_component": {
+          "beta": -81.17833439216729,
+          "lower95": -120.539229386694,
+          "upper95": -41.81743939764057,
+          "n": 68
+        }
+      },
+      "h4": {
+        "assessment": "crowd_out_signal",
+        "tdc": {
+          "beta": 278.13971316628357,
+          "lower95": 142.32711618569226,
+          "upper95": 413.9523101468749,
+          "n": 64
+        },
+        "total_deposits": {
+          "beta": 142.30410309715606,
+          "lower95": -38.909277419362155,
+          "upper95": 323.51748361367424,
+          "n": 64
+        },
+        "other_component": {
+          "beta": -100.99420217322478,
+          "lower95": -196.94164649855657,
+          "upper95": -5.046757847892977,
+          "n": 64
+        }
+      }
+    },
+    "post_gfc_early": {
+      "h0": {
+        "assessment": "crowd_out_signal",
+        "tdc": {
+          "beta": 93.71356166848689,
+          "lower95": 86.20327218718943,
+          "upper95": 101.22385114978435,
+          "n": 24
+        },
+        "total_deposits": {
+          "beta": 0.5166758625012164,
+          "lower95": -28.425695049748576,
+          "upper95": 29.45904677475101,
+          "n": 24
+        },
+        "other_component": {
+          "beta": -93.13639070729926,
+          "lower95": -123.81537532646863,
+          "upper95": -62.457406088129886,
+          "n": 24
+        }
+      },
+      "h4": {
+        "assessment": "crowd_out_signal",
+        "tdc": {
+          "beta": 60.83481293188569,
+          "lower95": 4.543410182021368,
+          "upper95": 117.12621568175001,
+          "n": 24
+        },
+        "total_deposits": {
+          "beta": 9.030435405720496,
+          "lower95": -52.06742963803043,
+          "upper95": 70.12830044947142,
+          "n": 24
+        },
+        "other_component": {
+          "beta": -49.61494363526292,
+          "lower95": -119.41062232919738,
+          "upper95": 20.180735058671544,
+          "n": 24
+        }
+      }
+    },
+    "pre_covid": {
+      "h0": {
+        "assessment": "crowd_out_signal",
+        "tdc": {
+          "beta": 127.65023813875462,
+          "lower95": 125.67885890302504,
+          "upper95": 129.62161737448417,
+          "n": 20
+        },
+        "total_deposits": {
+          "beta": 33.47538739475129,
+          "lower95": -0.01373798884225863,
+          "upper95": 66.96451277834484,
+          "n": 20
+        },
+        "other_component": {
+          "beta": -94.53165167714619,
+          "lower95": -127.44547661028986,
+          "upper95": -61.61782674400252,
+          "n": 20
+        }
+      },
+      "h4": {
+        "assessment": "same_sign_positive_or_unclear",
+        "tdc": {
+          "beta": 249.6968766993817,
+          "lower95": 58.596060035380134,
+          "upper95": 440.79769336338325,
+          "n": 20
+        },
+        "total_deposits": {
+          "beta": 256.6667170795331,
+          "lower95": -64.84395275544279,
+          "upper95": 578.177386914509,
+          "n": 20
+        },
+        "other_component": {
+          "beta": 37.37559998527992,
+          "lower95": -127.02246168452037,
+          "upper95": 201.77366165508022,
+          "n": 20
+        }
+      }
+    },
+    "covid_post": {
+      "h0": {
+        "assessment": "crowd_out_signal",
+        "tdc": {
+          "beta": 171.68598858540835,
+          "lower95": 154.43566164172327,
+          "upper95": 188.93631552909343,
+          "n": 24
+        },
+        "total_deposits": {
+          "beta": 91.47310529334284,
+          "lower95": 34.48314885379727,
+          "upper95": 148.4630617328884,
+          "n": 24
+        },
+        "other_component": {
+          "beta": -81.18899966339555,
+          "lower95": -138.14921043003855,
+          "upper95": -24.228788896752555,
+          "n": 24
+        }
+      },
+      "h4": {
+        "assessment": "crowd_out_signal",
+        "tdc": {
+          "beta": 317.9605126338285,
+          "lower95": 229.06469484565713,
+          "upper95": 406.85633042199987,
+          "n": 20
+        },
+        "total_deposits": {
+          "beta": 294.5945234675841,
+          "lower95": 117.02074493925525,
+          "upper95": 472.168301995913,
+          "n": 20
+        },
+        "other_component": {
+          "beta": -60.945045530146174,
+          "lower95": -140.35202821828676,
+          "upper95": 18.4619371579944,
+          "n": 20
+        }
+      }
+    }
+  },
+  "takeaways": [
+    "The strongest short-run total-deposit response appears in the COVID/post-COVID window, while the non-TDC component remains negative on impact.",
+    "In the post-GFC early recovery window, the negative non-TDC impact response is clearer than the total-deposit response.",
+    "The usable unexpected-TDC shock sample begins in 2009Q1, so the live quarterly design cannot estimate a true 2008 GFC subperiod under the frozen shock."
+  ]
+}

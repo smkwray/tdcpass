@@ -3,6 +3,7 @@
 Canonical exported names follow the registry contract.
 Short aliases such as `tdc_qoq` and `total_deposits_qoq` are optional compatibility aliases only and are not the frozen external artifact contract.
 The live quarterly bundle is produced by `tdcpass pipeline run` and writes the bank-only contract to `data/derived/quarterly_panel.csv`, `output/*`, and mirrored `site/data/*` artifacts.
+For the public prototype, `site/data/*` is the committed preview mirror and `output/*` remains regenerated local analysis output.
 
 ## Required files
 
@@ -27,10 +28,8 @@ Minimum columns:
 - `domestic_nonfinancial_mmf_reallocation_qoq`
 - `domestic_nonfinancial_repo_reallocation_qoq`
 - `bill_share`
-- `bank_absorption_share`
 - `reserve_drain_pressure`
 - `quarter_index`
-- `slr_tight`
 - `tga_qoq`
 - `reserves_qoq`
 - `fedfunds`
@@ -46,8 +45,8 @@ Minimum columns:
 - `lag_unemployment`
 - `lag_inflation`
 
-`bill_share` is built from quarterly Treasury auction offering amounts in FiscalData using issue dates. Keep the caveat attached that it is a regime overlay and not standalone mechanism proof.
-`reserve_drain_pressure` is a transparent transformation equal to `-lag_reserves_qoq`; it is the current headline liquidity-pressure regime split because it preserves longer public history than `slr_tight`.
+`bill_share` is built from quarterly Treasury auction offering amounts in FiscalData using issue dates. It remains available for exploratory shock and control sensitivities, but it is no longer part of the active live regime layer.
+`reserve_drain_pressure` is a transparent transformation equal to `-lag_reserves_qoq`; it is the current headline liquidity-pressure regime split.
 `quarter_index` is a monotonic quarter-order index used only for exploratory trend-stress LP diagnostics; it is not part of the headline sample gate.
 `bank_credit_private_qoq` remains part of the exported panel as a structural proxy, but it can have a shorter public history than the headline sample and should not define the max-common quarterly sample used for the headline panel or shock path.
 
@@ -87,7 +86,7 @@ Minimum columns:
 - `fitted_to_target_scale_ratio`
 - `shock_flag`
 
-The shock export now carries numerical-quality diagnostics for each usable expanding-window fit. `shock_flag` marks windows where the fitted path is badly scaled relative to the target or where the training design is numerically weak.
+The shock export now carries numerical-quality diagnostics for each usable out-of-sample fit. `shock_flag` marks windows where the fitted path is badly scaled relative to the target or where the training design is numerically weak.
 
 ### `output/models/lp_irf.csv`
 
@@ -132,7 +131,7 @@ Required keys:
 - `takeaways`
 
 This file summarizes whether the configured regime splits are balanced enough to interpret and records the key high-versus-low regime rows at headline horizons.
-In the current live configuration, the release-facing regime layer publishes only `bill_share` and `reserve_drain_pressure`; `bank_absorption_share` and `slr_tight` remain in the panel schema and diagnostics but are not part of the headline regime export.
+In the current live configuration, the release-facing regime layer uses only `reserve_drain_pressure`.
 It also reports whether each regime has enough within-state shock support to avoid highly extrapolative split estimates.
 
 ### `output/models/tdc_sensitivity_ladder.csv`
@@ -187,6 +186,37 @@ Minimum columns:
 
 This file compares the frozen headline shock sample against explicit robustness filters. In the current release path, `sample_role=headline` is the full usable shock sample and `sample_role=exploratory` is the flagged-window trimming check. The headline estimand stays on the full usable sample; flagged-window exclusion is published as a fragility check, not as a silent replacement.
 
+### `output/models/period_sensitivity.csv`
+
+Minimum columns:
+
+- `period_variant`
+- `period_role`
+- `start_quarter`
+- `end_quarter`
+- `outcome`
+- `horizon`
+- `beta`
+- `se`
+- `lower95`
+- `upper95`
+- `n`
+- `spec_name`
+
+This file reruns the frozen headline LP stack on explicit usable-sample subperiods. In the current release path, `all_usable` is the headline usable shock window, while `post_gfc_early`, `pre_covid`, and `covid_post` are core historical splits used to show how the total-versus-other read changes over time. Because the frozen usable shock sample begins in `2009Q1`, this file cannot identify a true 2008 GFC subperiod under the current quarterly design.
+
+### `output/models/period_sensitivity_summary.json`
+
+Required keys:
+
+- `status`
+- `headline_question`
+- `periods`
+- `key_horizons`
+- `takeaways`
+
+This summary condenses `period_sensitivity.csv` to the key horizons and period windows used in interpretation.
+
 ### `output/models/total_minus_other_contrast.csv`
 
 Minimum columns:
@@ -206,7 +236,7 @@ Minimum columns:
 - `n_direct`
 - `sample_mismatch_flag`
 
-This file makes the identity check explicit at the LP layer. `beta_implied` is `beta(total_deposits_bank_qoq) - beta(other_component_qoq)` and `beta_direct` is the direct LP response of `tdc_bank_only_qoq` under the same spec slice. The file is meant to catch cases where the direct treatment response is too weak or where sample mismatches break the accounting comparison.
+This file makes the identity check explicit at the LP layer. `beta_implied` is `beta(total_deposits_bank_qoq) - beta(other_component_qoq)` and `beta_direct` is the direct LP response of `tdc_bank_only_qoq` under the same spec slice. The file is meant to catch cases where the direct treatment response is too weak or where sample mismatches break the accounting comparison. Tiny `abs_gap` values can reflect floating-point noise and should not be treated as substantive economic contradictions.
 
 ### `output/models/structural_proxy_evidence.csv`
 
@@ -303,7 +333,7 @@ Required keys:
 - `warnings`
 - `answer_ready_when`
 
-This file is the direct identification gate for the release process. It asks whether the baseline unexpected-TDC shock moves `tdc_bank_only_qoq` itself enough to make pass-through versus crowd-out interpretable, and whether the flagged-window trimming check materially changes the headline answer. The `shock_definition` block should record the active baseline model name, predictor list, and burn-in length so headline shock redesigns remain explicit.
+This file is the direct identification gate for the release process. It asks whether the baseline unexpected-TDC shock moves `tdc_bank_only_qoq` itself enough to make pass-through versus crowd-out interpretable, and whether the flagged-window trimming check materially changes the headline answer. The `shock_definition` block should record the active baseline model name, predictor list, and burn-in length so headline shock redesigns remain explicit. Small numeric gaps in the total-minus-other identity check are diagnostic only; the substantive release blocker is lack of clean total-versus-other response separation.
 
 ### `output/models/result_readiness_summary.json`
 
@@ -351,7 +381,7 @@ Required keys:
 - `extended_column_coverage`
 - `takeaways`
 
-This file makes the sample rule machine-readable. It records the full merged quarterly span before trimming, the narrower headline sample that defines the baseline treatment and deposit-response path, the usable shock count after expanding-window burn-in, and the shorter-history proxy or regime columns that remain partially observed inside the headline sample.
+This file makes the sample rule machine-readable. It records the full merged quarterly span before trimming, the narrower headline sample that defines the baseline treatment and deposit-response path, the usable shock count after treatment-model burn-in, and the shorter-history proxy or regime columns that remain partially observed inside the headline sample.
 It may also include `interpretation_scope` and `mechanism_caveat` fields so the release layer can distinguish deposit-response evidence from broader mechanism attribution.
 
 ### `output/manifests/raw_downloads.json`
@@ -386,8 +416,9 @@ Required keys:
 
 Recommended content:
 
-- `headline_metrics` should summarize headline accounting quantities and regime context.
+- `headline_metrics` should summarize headline accounting quantities and release context.
 - `sample` should state the quarterly sample span and row count.
+- `main_findings` and `caveats` should state that the public preview is a methods-and-reproducibility release around the frozen rolling 40-quarter ridge shock, report the usable shock span, and surface the current `not_ready` release posture honestly.
 - `evidence_tiers` should classify direct data, transparent transformations, model-based estimates, and inferred counterfactuals.
 
 ### `site/data/accounting_summary.csv`
@@ -425,6 +456,14 @@ Mirror of `output/models/control_set_sensitivity.csv`.
 ### `site/data/shock_sample_sensitivity.csv`
 
 Mirror of `output/models/shock_sample_sensitivity.csv`.
+
+### `site/data/period_sensitivity.csv`
+
+Mirror of `output/models/period_sensitivity.csv`.
+
+### `site/data/period_sensitivity_summary.json`
+
+Mirror of `output/models/period_sensitivity_summary.json`.
 
 ### `site/data/total_minus_other_contrast.csv`
 

@@ -1,0 +1,250 @@
+{
+  "full_panel": {
+    "rows": 319,
+    "start_quarter": "1945Q4",
+    "end_quarter": "2026Q1"
+  },
+  "headline_sample": {
+    "rows": 92,
+    "start_quarter": "2003Q1",
+    "end_quarter": "2025Q4",
+    "required_columns": [
+      "quarter",
+      "tdc_bank_only_qoq",
+      "total_deposits_bank_qoq",
+      "other_component_qoq",
+      "fedfunds",
+      "unemployment",
+      "inflation",
+      "lag_tdc_bank_only_qoq",
+      "lag_fedfunds",
+      "lag_unemployment",
+      "lag_inflation"
+    ]
+  },
+  "usable_shock_sample": {
+    "shock_column": "tdc_residual_z",
+    "rows": 68,
+    "start_quarter": "2009Q1",
+    "end_quarter": "2025Q4"
+  },
+  "shock_definition": {
+    "shock_column": "tdc_residual_z",
+    "target": "tdc_bank_only_qoq",
+    "model_name": "unexpected_tdc_default",
+    "predictors": [
+      "lag_tdc_bank_only_qoq",
+      "lag_fedfunds",
+      "lag_unemployment",
+      "lag_inflation"
+    ],
+    "min_train_obs": 24
+  },
+  "headline_sample_truncation": {
+    "dropped_rows_from_full_panel": 227,
+    "columns": [
+      {
+        "column": "tdc_bank_only_qoq",
+        "full_panel_non_missing_obs": 93,
+        "first_available_quarter": "2002Q4",
+        "last_available_quarter": "2025Q4",
+        "missing_rows_in_full_panel": 226,
+        "dropped_rows_with_column_missing": 226
+      },
+      {
+        "column": "total_deposits_bank_qoq",
+        "full_panel_non_missing_obs": 302,
+        "first_available_quarter": "1946Q4",
+        "last_available_quarter": "2025Q4",
+        "missing_rows_in_full_panel": 17,
+        "dropped_rows_with_column_missing": 17
+      },
+      {
+        "column": "other_component_qoq",
+        "full_panel_non_missing_obs": 93,
+        "first_available_quarter": "2002Q4",
+        "last_available_quarter": "2025Q4",
+        "missing_rows_in_full_panel": 226,
+        "dropped_rows_with_column_missing": 226
+      },
+      {
+        "column": "fedfunds",
+        "full_panel_non_missing_obs": 287,
+        "first_available_quarter": "1954Q3",
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 32,
+        "dropped_rows_with_column_missing": 32
+      },
+      {
+        "column": "unemployment",
+        "full_panel_non_missing_obs": 313,
+        "first_available_quarter": "1948Q1",
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 6,
+        "dropped_rows_with_column_missing": 6
+      },
+      {
+        "column": "inflation",
+        "full_panel_non_missing_obs": 316,
+        "first_available_quarter": "1947Q2",
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 3,
+        "dropped_rows_with_column_missing": 3
+      },
+      {
+        "column": "lag_tdc_bank_only_qoq",
+        "full_panel_non_missing_obs": 93,
+        "first_available_quarter": "2003Q1",
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 226,
+        "dropped_rows_with_column_missing": 226
+      },
+      {
+        "column": "lag_fedfunds",
+        "full_panel_non_missing_obs": 286,
+        "first_available_quarter": "1954Q4",
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 33,
+        "dropped_rows_with_column_missing": 33
+      },
+      {
+        "column": "lag_unemployment",
+        "full_panel_non_missing_obs": 312,
+        "first_available_quarter": "1948Q2",
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 7,
+        "dropped_rows_with_column_missing": 7
+      },
+      {
+        "column": "lag_inflation",
+        "full_panel_non_missing_obs": 315,
+        "first_available_quarter": "1947Q3",
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 4,
+        "dropped_rows_with_column_missing": 4
+      }
+    ]
+  },
+  "extended_column_coverage": [
+    {
+      "column": "bank_credit_private_qoq",
+      "headline_sample_non_missing_obs": 65,
+      "headline_sample_missing_obs": 27,
+      "coverage_share_within_headline_sample": 0.7065217391304348,
+      "first_available_quarter": "2009Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "cb_nonts_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "foreign_nonts_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "domestic_nonfinancial_mmf_reallocation_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "domestic_nonfinancial_repo_reallocation_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "bill_share",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "reserve_drain_pressure",
+      "headline_sample_non_missing_obs": 91,
+      "headline_sample_missing_obs": 1,
+      "coverage_share_within_headline_sample": 0.9891304347826086,
+      "first_available_quarter": "2003Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tga_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "reserves_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_total_deposits_bank_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_bank_credit_private_qoq",
+      "headline_sample_non_missing_obs": 64,
+      "headline_sample_missing_obs": 28,
+      "coverage_share_within_headline_sample": 0.6956521739130435,
+      "first_available_quarter": "2010Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_tga_qoq",
+      "headline_sample_non_missing_obs": 91,
+      "headline_sample_missing_obs": 1,
+      "coverage_share_within_headline_sample": 0.9891304347826086,
+      "first_available_quarter": "2003Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_reserves_qoq",
+      "headline_sample_non_missing_obs": 91,
+      "headline_sample_missing_obs": 1,
+      "coverage_share_within_headline_sample": 0.9891304347826086,
+      "first_available_quarter": "2003Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_bill_share",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    }
+  ],
+  "takeaways": [
+    "The headline panel is trimmed only on the frozen treatment, outcome, and baseline shock-control columns.",
+    "Extended proxy and regime variables remain in the exported panel but no longer silently define the headline sample.",
+    "Usable shock counts are reported separately from headline panel rows because treatment-model burn-in is part of the frozen shock definition."
+  ],
+  "treatment_freeze_status": "frozen",
+  "treatment_candidates": [],
+  "candidate_usable_shock_samples": []
+}

@@ -29,6 +29,7 @@ def test_total_minus_other_contrast_tracks_direct_tdc_response() -> None:
     assert row["beta_implied"] == 1.4
     assert row["beta_direct"] == 1.4
     assert row["gap_implied_minus_direct"] == 0.0
+    assert row["identity_check_mode"] == "exact_accounting_identity"
     assert row["contrast_consistent"] is True
 
 
@@ -66,3 +67,106 @@ def test_direct_identification_summary_marks_weak_first_stage_as_not_ready() -> 
     assert payload["first_stage_checks"]["tdc_ci_excludes_zero_at_h0_or_h4"] is False
     assert payload["sample_fragility"]["impact_magnitude_shift_gt_100pct"] is True
     assert any("move TDC itself" in item for item in payload["reasons"])
+
+
+def test_direct_identification_suppresses_ratios_when_raw_tdc_beta_is_too_small() -> None:
+    lp_irf = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 0.5, "se": 0.1, "lower95": 0.3, "upper95": 0.7, "n": 40},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 2.0, "se": 0.5, "lower95": 1.02, "upper95": 2.98, "n": 40},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": 1.5, "se": 0.5, "lower95": 0.52, "upper95": 2.48, "n": 40},
+        ]
+    )
+    raw_tdc_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 0.2, "se": 0.05, "lower95": 0.1, "upper95": 0.3, "n": 40},
+        ]
+    )
+    contrast = build_total_minus_other_contrast(
+        lp_irf=lp_irf,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+    )
+    shocks = pd.DataFrame(
+        {
+            "quarter": ["2015Q1", "2015Q2", "2015Q3", "2015Q4"],
+            "tdc_residual_z": [0.1, -0.1, 0.2, -0.2],
+            "tdc_bank_only_qoq": [1.0, -1.0, 1.0, -1.0],
+        }
+    )
+
+    payload = build_direct_identification_summary(
+        lp_irf=lp_irf,
+        contrast=contrast,
+        sample_sensitivity=pd.DataFrame(),
+        shock_metadata={"target": "tdc_bank_only_qoq"},
+        shocks=shocks,
+        raw_tdc_lp=raw_tdc_lp,
+    )
+
+    assert payload["ratio_reporting_gate"]["horizons"]["h0"]["allowed"] is False
+    assert payload["ratio_reporting_gate"]["horizons"]["h0"]["conditions"]["tdc_ci_excludes_zero"] is True
+    assert payload["ratio_reporting_gate"]["horizons"]["h0"]["conditions"]["abs_raw_tdc_beta_ge_usable_target_sd"] is False
+    assert payload["horizon_evidence"]["h0"]["pass_through_ratio_total_over_tdc"] is None
+    assert payload["horizon_evidence"]["h0"]["crowd_out_ratio_neg_other_over_tdc"] is None
+
+
+def test_direct_identification_treats_tiny_contrast_gaps_as_numeric_noise() -> None:
+    lp_irf = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.4, "se": 0.3, "lower95": 0.81, "upper95": 1.99, "n": 40},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.5, "lower95": 0.02, "upper95": 1.98, "n": 40},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.39, "se": 0.5, "lower95": -1.37, "upper95": 0.59, "n": 40},
+            {"outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 1.2, "se": 0.3, "lower95": 0.61, "upper95": 1.79, "n": 36},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 0.9, "se": 0.6, "lower95": -0.28, "upper95": 2.08, "n": 36},
+            {"outcome": "other_component_qoq", "horizon": 4, "beta": -0.28, "se": 0.6, "lower95": -1.46, "upper95": 0.90, "n": 36},
+        ]
+    )
+    contrast = build_total_minus_other_contrast(
+        lp_irf=lp_irf,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+    )
+
+    assert contrast["contrast_consistent"].all()
+
+    payload = build_direct_identification_summary(
+        lp_irf=lp_irf,
+        contrast=contrast,
+        sample_sensitivity=pd.DataFrame(),
+    )
+
+    assert not any("numeric tolerance" in item for item in payload["warnings"])
+
+
+def test_direct_identification_labels_lp_contrast_as_approximate_when_configured() -> None:
+    lp_irf = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 10.0, "se": 1.0, "lower95": 8.04, "upper95": 11.96, "n": 40},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 3.0, "se": 1.0, "lower95": 1.04, "upper95": 4.96, "n": 40},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -2.0, "se": 1.0, "lower95": -3.96, "upper95": -0.04, "n": 40},
+            {"outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 15.0, "se": 2.0, "lower95": 11.08, "upper95": 18.92, "n": 36},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 4.0, "se": 2.0, "lower95": 0.08, "upper95": 7.92, "n": 36},
+            {"outcome": "other_component_qoq", "horizon": 4, "beta": -3.0, "se": 2.0, "lower95": -6.92, "upper95": 0.92, "n": 36},
+        ]
+    )
+    contrast = build_total_minus_other_contrast(
+        lp_irf=lp_irf,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+        identity_check_mode="approximate_with_outcome_specific_lags",
+    )
+    contrast.loc[:, "contrast_consistent"] = False
+
+    payload = build_direct_identification_summary(
+        lp_irf=lp_irf,
+        contrast=contrast,
+        sample_sensitivity=pd.DataFrame(),
+    )
+
+    assert payload["contrast_check"]["identity_check_mode"] == "approximate_with_outcome_specific_lags"
+    assert "outcome-specific lagged dependent variables" in payload["contrast_check"]["explanation"]
+    assert any("approximate LP cross-check" in item for item in payload["warnings"])

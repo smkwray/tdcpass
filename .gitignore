@@ -15,8 +15,11 @@ docs/*
 !docs/research_design.md
 prompts/
 
-# No public site yet.
-site/
+# Commit the public preview mirror, but ignore any other ad hoc site output.
+site/*
+!site/data/
+!site/data/**
+!site/index.html
 
 *.plan.md
 plan.md

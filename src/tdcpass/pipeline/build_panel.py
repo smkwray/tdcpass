@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import zipfile
@@ -37,21 +38,17 @@ FRED_LEVEL_DIVISORS = {
     "treasury_agency_level": 1.0,
 }
 Z1_SERIES = {
-    "tdc_bank_only_level": "FL763123005",
     "total_deposits_bank_level": "FL764100005",
-    "federal_government_checkable_level": "FL313020005",
-    "federal_government_time_savings_level": "FL313030003",
-    "federal_government_other_level": "FL313030505",
     "foreign_total_deposits_level": "FL264000005",
     "domestic_nonfinancial_mmf_level": "FL383034005",
     "domestic_nonfinancial_repo_level": "FL382051005",
 }
 Z1_TABLE_MEMBERS = {
     "csv/l201.csv": ("total_deposits_bank_level", "foreign_total_deposits_level"),
-    "csv/l203.csv": ("tdc_bank_only_level", "federal_government_checkable_level"),
-    "csv/l204.csv": ("federal_government_time_savings_level",),
-    "csv/l205.csv": ("federal_government_other_level",),
 }
+TDCEST_BANK_ONLY_METHOD = "tdc_base_bank_only_ru_flow"
+TDCEST_BROAD_DEPOSITORY_METHOD = "tdc_base_broad_depository_np_cu_ru_flow"
+TDCEST_NOMINAL_TO_BILLIONS = 1000.0
 
 
 @dataclass(frozen=True)
@@ -305,6 +302,44 @@ def _align_quarter_series(series: pd.Series, quarters: pd.Series) -> pd.Series:
     return series.reindex(quarters).reset_index(drop=True)
 
 
+def _quarterly_series_frame(name: str, series: pd.Series) -> pd.DataFrame:
+    frame = series.rename(name).rename_axis("quarter").reset_index()
+    return frame.sort_values("quarter").reset_index(drop=True)
+
+
+def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
+    if not path.exists() or path.suffix.lower() != ".csv":
+        return None
+    frame = pd.read_csv(path)
+    if "quarter" not in frame.columns:
+        if "date" not in frame.columns:
+            return None
+        dates = pd.to_datetime(frame["date"], errors="coerce")
+        if dates.isna().all():
+            return None
+        frame = frame.assign(quarter=dates.dt.to_period("Q").astype(str))
+    if TDCEST_BANK_ONLY_METHOD in frame.columns:
+        out = frame[["quarter", TDCEST_BANK_ONLY_METHOD]].rename(
+            columns={TDCEST_BANK_ONLY_METHOD: "tdc_bank_only_qoq"}
+        )
+        if TDCEST_BROAD_DEPOSITORY_METHOD in frame.columns:
+            out["tdc_broad_depository_qoq"] = pd.to_numeric(
+                frame[TDCEST_BROAD_DEPOSITORY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        out["tdc_bank_only_qoq"] = (
+            pd.to_numeric(out["tdc_bank_only_qoq"], errors="coerce") / TDCEST_NOMINAL_TO_BILLIONS
+        )
+        return out
+    if "tdc_bank_only_qoq" in frame.columns:
+        out = frame[["quarter", "tdc_bank_only_qoq"]].copy()
+        if "tdc_broad_depository_qoq" in frame.columns:
+            out["tdc_broad_depository_qoq"] = pd.to_numeric(frame["tdc_broad_depository_qoq"], errors="coerce")
+        return out
+    if "tdc_qoq" in frame.columns:
+        return frame[["quarter", "tdc_qoq"]].rename(columns={"tdc_qoq": "tdc_bank_only_qoq"})
+    return None
+
+
 def _load_reused_tdc_series(reuse_payload: Mapping[str, object]) -> pd.DataFrame | None:
     artifacts = reuse_payload.get("reused_artifacts", [])
     if not isinstance(artifacts, list):
@@ -316,16 +351,55 @@ def _load_reused_tdc_series(reuse_payload: Mapping[str, object]) -> pd.DataFrame
         if not path_value:
             continue
         path = Path(str(path_value))
-        if not path.exists() or path.suffix.lower() != ".csv":
-            continue
-        frame = pd.read_csv(path)
-        if "quarter" not in frame.columns:
-            continue
-        if "tdc_bank_only_qoq" in frame.columns:
-            return frame[["quarter", "tdc_bank_only_qoq"]].copy()
-        if "tdc_qoq" in frame.columns:
-            return frame[["quarter", "tdc_qoq"]].rename(columns={"tdc_qoq": "tdc_bank_only_qoq"})
+        frame = _load_canonical_tdc_series_csv(path)
+        if frame is not None:
+            return frame
     return None
+
+
+def _candidate_tdcest_csv_paths(*, root: Path, fixture_root: Path | None) -> list[Path]:
+    candidates: list[Path] = []
+    workspace_root = repo_root()
+    if fixture_root is not None:
+        candidates.append(fixture_root / "tdcest" / "tdc_estimates.csv")
+    env_root = os.getenv("TDCEST_ROOT")
+    if env_root:
+        candidates.append(Path(os.path.expanduser(os.path.expandvars(env_root))) / "data" / "processed" / "tdc_estimates.csv")
+    candidates.append(workspace_root.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
+    candidates.append(workspace_root.parent.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
+    candidates.append(root.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
+    candidates.append(root.parent.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
+    seen: set[str] = set()
+    out: list[Path] = []
+    for candidate in candidates:
+        key = str(candidate)
+        if key not in seen:
+            seen.add(key)
+            out.append(candidate)
+    return out
+
+
+def _load_canonical_tdc_series(
+    *,
+    root: Path,
+    reuse_payload: Mapping[str, object],
+    fixture_root: Path | None,
+) -> pd.DataFrame:
+    reused = _load_reused_tdc_series(reuse_payload)
+    if reused is not None and "tdc_broad_depository_qoq" in reused.columns:
+        return reused
+    for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
+        frame = _load_canonical_tdc_series_csv(path)
+        if frame is not None and "tdc_broad_depository_qoq" in frame.columns:
+            return frame
+    for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
+        frame = _load_canonical_tdc_series_csv(path)
+        if frame is not None:
+            return frame
+    raise FileNotFoundError(
+        "Could not locate canonical TDC estimates. Expected a tdcest processed file such as "
+        "../tdcest/data/processed/tdc_estimates.csv or $TDCEST_ROOT/data/processed/tdc_estimates.csv."
+    )
 
 
 def _write_proxy_unit_audit(
@@ -393,13 +467,6 @@ def _enforce_max_common_sample(frame: pd.DataFrame, required_columns: Iterable[s
     if sample.empty:
         raise ValueError("No rows survive the max-common-sample requirement for the quarterly panel.")
     return sample.reset_index(drop=True)
-
-
-def _compute_slr_tight_indicator(frame: pd.DataFrame) -> pd.Series:
-    return (
-        (frame["bank_absorption_share"] > frame["bank_absorption_share"].median(skipna=True))
-        & (frame["reserves_qoq"] < 0)
-    ).astype(float)
 
 
 def _write_sample_construction_summary(
@@ -535,28 +602,18 @@ def build_public_quarterly_panel(
         auctions_path = _download_fiscaldata_auctions_csv(raw_dir, raw_download_manifest_path, timeout=timeout)
     bill_share = _load_bill_share_series(auctions_path)
 
-    broad_tdc_level = (
-        z1_levels["federal_government_checkable_level"]
-        + z1_levels["federal_government_time_savings_level"]
-        + z1_levels["federal_government_other_level"]
-    )
+    canonical_tdc = _load_canonical_tdc_series(root=root, reuse_payload=reuse_payload, fixture_root=fixture_root)
     panel = pd.DataFrame(
         {
             "quarter": z1_levels["quarter"],
-            "tdc_bank_only_qoq": _qoq_change(z1_levels["tdc_bank_only_level"]),
-            "tdc_broad_depository_qoq": _qoq_change(broad_tdc_level),
             "total_deposits_bank_qoq": _qoq_change(z1_levels["total_deposits_bank_level"]),
             "foreign_nonts_qoq": _qoq_change(z1_levels["foreign_total_deposits_level"]),
             "domestic_nonfinancial_mmf_reallocation_qoq": -_qoq_change(z1_levels["domestic_nonfinancial_mmf_level"]),
             "domestic_nonfinancial_repo_reallocation_qoq": -_qoq_change(z1_levels["domestic_nonfinancial_repo_level"]),
-            "bank_absorption_share": (z1_levels["tdc_bank_only_level"] / broad_tdc_level.replace({0.0: pd.NA})).clip(0.0, 1.0),
         }
     )
     panel = panel.merge(bill_share, on="quarter", how="left")
-
-    reused_tdc = _load_reused_tdc_series(reuse_payload)
-    if reused_tdc is not None:
-        panel = panel.drop(columns=["tdc_bank_only_qoq"]).merge(reused_tdc, on="quarter", how="left")
+    panel = panel.merge(canonical_tdc, on="quarter", how="left")
 
     fred_levels_raw: dict[str, pd.Series] = {}
     fred_levels: dict[str, pd.Series] = {}
@@ -577,23 +634,36 @@ def build_public_quarterly_panel(
             fred_levels_raw[key] = _quarter_end_level(series)
             fred_levels[key] = fred_levels_raw[key] / float(FRED_LEVEL_DIVISORS[key])
 
-    fred_frame = pd.DataFrame({"quarter": list(fred_levels["tga_level"].index)})
-    fred_frame["tga_qoq"] = _align_quarter_series(_qoq_change(fred_levels["tga_level"]), fred_frame["quarter"])
-    fred_frame["reserves_qoq"] = _align_quarter_series(_qoq_change(fred_levels["reserves_level"]), fred_frame["quarter"])
     bank_private_level = fred_levels["bank_credit_level"] - fred_levels["treasury_agency_level"]
-    fred_frame["bank_credit_private_qoq"] = _align_quarter_series(_qoq_change(bank_private_level), fred_frame["quarter"])
-    fred_frame["fedfunds"] = _align_quarter_series(fred_levels["fedfunds"], fred_frame["quarter"])
-    fred_frame["unemployment"] = _align_quarter_series(fred_levels["unemployment"], fred_frame["quarter"])
-    cpi_quarter = fred_levels["cpi"].reindex(fred_frame["quarter"])
-    fred_frame["inflation"] = _align_quarter_series(cpi_quarter.pct_change() * 100.0, fred_frame["quarter"])
+    fred_series = {
+        "tga_qoq": _qoq_change(fred_levels["tga_level"]),
+        "reserves_qoq": _qoq_change(fred_levels["reserves_level"]),
+        "bank_credit_private_qoq": _qoq_change(bank_private_level),
+        "fedfunds": fred_levels["fedfunds"],
+        "unemployment": fred_levels["unemployment"],
+        "inflation": fred_levels["cpi"].pct_change() * 100.0,
+    }
+    fred_frame: pd.DataFrame | None = None
+    for name, series in fred_series.items():
+        series_frame = _quarterly_series_frame(name, series)
+        fred_frame = series_frame if fred_frame is None else fred_frame.merge(series_frame, on="quarter", how="outer")
+    if fred_frame is None:
+        fred_frame = pd.DataFrame(columns=["quarter"])
+    fred_frame = fred_frame.sort_values("quarter").reset_index(drop=True)
     fred_frame["cb_nonts_qoq"] = fred_frame["reserves_qoq"] + fred_frame["tga_qoq"]
 
     panel = panel.merge(fred_frame, on="quarter", how="outer").sort_values("quarter").reset_index(drop=True)
     panel["other_component_qoq"] = panel["total_deposits_bank_qoq"] - panel["tdc_bank_only_qoq"]
     for column in [
         "tdc_bank_only_qoq",
+        "tdc_broad_depository_qoq",
         "total_deposits_bank_qoq",
+        "other_component_qoq",
         "bank_credit_private_qoq",
+        "cb_nonts_qoq",
+        "foreign_nonts_qoq",
+        "domestic_nonfinancial_mmf_reallocation_qoq",
+        "domestic_nonfinancial_repo_reallocation_qoq",
         "tga_qoq",
         "reserves_qoq",
         "bill_share",
@@ -608,7 +678,6 @@ def build_public_quarterly_panel(
     full_panel = panel.copy()
     panel = _enforce_max_common_sample(full_panel, headline_columns)
     panel["quarter_index"] = range(len(panel))
-    panel["slr_tight"] = _compute_slr_tight_indicator(panel)
     required_columns = _required_panel_columns()
     extended_columns = [column for column in required_columns if column not in headline_columns and column != "quarter_index"]
     panel_path = derived_dir / "quarterly_panel.csv"

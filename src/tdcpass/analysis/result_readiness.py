@@ -58,6 +58,7 @@ def build_result_readiness_summary(
     contrast: pd.DataFrame | None = None,
     structural_proxy_evidence: dict[str, Any] | None = None,
     proxy_coverage_summary: dict[str, Any] | None = None,
+    shock_diagnostics: dict[str, Any] | None = None,
     headline_shock_metadata: dict[str, Any] | None = None,
     shock_column: str = "tdc_residual_z",
 ) -> dict[str, Any]:
@@ -111,9 +112,6 @@ def build_result_readiness_summary(
         reasons.append("No usable unexpected-TDC shock observations are available after the training burn-in.")
     elif shock_obs < 36:
         warnings.append("The usable unexpected-TDC shock sample is short for quarterly LPs.")
-    if flagged_shock_obs > 0:
-        warnings.append("Some unexpected-TDC shock windows are flagged as numerically unstable or badly scaled.")
-
     total_decisive = _ci_excludes_zero(total_h0) or _ci_excludes_zero(total_h4)
     other_decisive = _ci_excludes_zero(other_h0) or _ci_excludes_zero(other_h4)
     if not total_decisive:
@@ -220,7 +218,13 @@ def build_result_readiness_summary(
             contrast_max_abs_gap_h0_h4 = float(baseline_contrast["abs_gap"].dropna().max())
         contrast_rows_missing = bool(baseline_contrast["beta_direct"].isna().any()) if "beta_direct" in baseline_contrast.columns else None
         if baseline_contrast["contrast_consistent"].eq(False).any():
-            warnings.append("Direct TDC response and total-minus-other contrast do not line up cleanly at key horizons.")
+            contrast_mode = str(baseline_contrast.iloc[0].get("identity_check_mode", "exact_accounting_identity"))
+            if contrast_mode == "approximate_with_outcome_specific_lags":
+                warnings.append(
+                    "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables."
+                )
+            else:
+                warnings.append("Direct TDC response and total-minus-other contrast differ by more than the numeric tolerance at key horizons.")
 
     structural_proxy_status = None
     structural_proxy_supportive_key_horizons = 0
@@ -269,14 +273,50 @@ def build_result_readiness_summary(
             warnings.append("The structural proxy bundle lines up in sign at some key horizons but remains statistically weak.")
 
     direct_identification_status = None
+    treatment_freeze_status = "frozen" if headline_shock_metadata is None else str(headline_shock_metadata.get("freeze_status", "frozen"))
+    treatment_candidates = []
+    ratio_reporting_gate = None
+    treatment_quality_status = None
+    treatment_quality_gate = None
+    if shock_diagnostics is not None:
+        treatment_quality_status = str(shock_diagnostics.get("treatment_quality_status", "not_evaluated"))
+        treatment_quality_gate = shock_diagnostics.get("treatment_quality_gate")
+        if treatment_quality_status == "fail":
+            reasons.append("The frozen baseline unexpected-TDC shock still fails its publishable shock-quality gate.")
+        severe_tail_rows = int(
+            ((shock_diagnostics.get("severe_realized_scale_tail_audit") or {}).get("tail_rows", 0))
+        )
+        mild_flagged_rows = max(flagged_shock_obs - severe_tail_rows, 0)
+        if flagged_shock_obs > 0 and not sample_variant_sign_disagreement and not sample_variant_magnitude_instability:
+            if severe_tail_rows > 0 and mild_flagged_rows > 0:
+                warnings.append(
+                    f"{flagged_shock_obs} unexpected-TDC shock windows are scale-ratio flagged ({severe_tail_rows} severe tail and {mild_flagged_rows} milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern."
+                )
+            elif severe_tail_rows > 0:
+                warnings.append(
+                    f"{flagged_shock_obs} unexpected-TDC shock windows are scale-ratio flagged, including {severe_tail_rows} severe tail quarter(s), but the published sample-sensitivity trims do not overturn the headline sign pattern."
+                )
+            else:
+                warnings.append(
+                    f"{flagged_shock_obs} unexpected-TDC shock windows are scale-ratio flagged, but the published sample-sensitivity trims do not overturn the headline sign pattern."
+                )
+    elif flagged_shock_obs > 0 and not sample_variant_sign_disagreement and not sample_variant_magnitude_instability:
+        warnings.append("Some unexpected-TDC shock windows are scale-ratio flagged, but the published sample-sensitivity trims do not overturn the headline sign pattern.")
     if direct_identification is not None:
         direct_identification_status = str(direct_identification.get("status", "not_ready"))
+        treatment_freeze_status = str(direct_identification.get("treatment_freeze_status", treatment_freeze_status))
+        treatment_candidates = list(direct_identification.get("treatment_candidates", []))
+        ratio_reporting_gate = direct_identification.get("ratio_reporting_gate")
         for reason in direct_identification.get("reasons", []):
             if reason not in reasons:
                 reasons.append(str(reason))
         for warning in direct_identification.get("warnings", []):
             if warning not in warnings:
                 warnings.append(str(warning))
+    if treatment_freeze_status != "frozen":
+        under_review_reason = "The baseline unexpected-TDC shock is not yet a credibly frozen treatment object."
+        if under_review_reason not in reasons:
+            reasons.append(under_review_reason)
 
     status = "ready_for_interpretation"
     if reasons:
@@ -288,11 +328,20 @@ def build_result_readiness_summary(
         headline = "Current backend outputs are strong enough to support a first deposit-response interpretation with partial mechanism cross-checks."
     elif status == "provisional":
         headline = "Current backend outputs are usable for internal deposit-response interpretation, but mechanism attribution remains sensitive or incomplete."
+    elif treatment_freeze_status != "frozen":
+        headline = "Current backend outputs remain a reproducibility preview only because the baseline unexpected-TDC shock is still under review and not yet a credibly frozen treatment object."
+    elif treatment_quality_status == "fail":
+        headline = "Current backend outputs remain below release standard because the frozen baseline unexpected-TDC shock still fails its publishable shock-quality gate."
     else:
         headline = "Current backend outputs are not yet strong enough to distinguish deposit-response patterns or support broad mechanism attribution with confidence."
 
     return {
         "status": status,
+        "treatment_freeze_status": treatment_freeze_status,
+        "treatment_candidates": treatment_candidates,
+        "treatment_quality_status": treatment_quality_status,
+        "treatment_quality_gate": treatment_quality_gate,
+        "ratio_reporting_gate": ratio_reporting_gate,
         "headline_assessment": headline,
         "reasons": reasons,
         "warnings": warnings,
@@ -350,6 +399,12 @@ def build_result_readiness_summary(
             "proxy_coverage_partial_support_key_horizons": proxy_coverage_partial_support_key_horizons,
             "proxy_coverage_same_sign_not_decisive_key_horizons": proxy_coverage_same_sign_not_decisive_key_horizons,
             "proxy_coverage_published_regime_count": proxy_coverage_published_regime_count,
+            "treatment_freeze_status": treatment_freeze_status,
+            "treatment_candidate_count": int(len(treatment_candidates)),
+            "treatment_quality_status": treatment_quality_status,
+            "treatment_quality_gate_failed_checks": []
+            if not isinstance(treatment_quality_gate, dict)
+            else list(treatment_quality_gate.get("failed_checks", [])),
             "headline_shock_model_name": None
             if headline_shock_metadata is None
             else str(headline_shock_metadata.get("model_name", "")),

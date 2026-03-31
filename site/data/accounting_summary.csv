@@ -1,0 +1,7 @@
+metric,value,notes
+mean_tdc,153.2595,Average quarterly TDC change.
+mean_total_deposits,148.74632608695654,Average quarterly total-deposit change.
+mean_other_component,-4.513173913043467,Average quarterly non-TDC component.
+share_other_negative,0.44565217391304346,Share of quarters with negative non-TDC component.
+corr_tdc_total,0.4329207233788897,Correlation between TDC and total deposits.
+corr_tdc_other,-0.5535088403680112,Correlation between TDC and non-TDC component.

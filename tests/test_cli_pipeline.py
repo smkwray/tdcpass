@@ -66,6 +66,8 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
         "output/models/tdc_sensitivity_ladder.csv",
         "output/models/control_set_sensitivity.csv",
         "output/models/shock_sample_sensitivity.csv",
+        "output/models/period_sensitivity.csv",
+        "output/models/period_sensitivity_summary.json",
         "output/models/total_minus_other_contrast.csv",
         "output/models/structural_proxy_evidence.csv",
         "output/models/structural_proxy_evidence_summary.json",
@@ -96,9 +98,10 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                     "train_target_sd",
                     "train_resid_sd",
                     "fitted_to_target_scale_ratio",
+                    "fitted_to_train_target_sd_ratio",
                     "shock_flag",
                 ],
-                [["2000Q1", 1.0, 0.8, 0.2, 0.2, "stub", 1, 10.0, 0.5, 0.2, 0.8, ""]],
+                [["2000Q1", 1.0, 0.8, 0.2, 0.2, "stub", 1, 10.0, 0.5, 0.2, 0.8, 1.6, ""]],
             )
         elif rel.endswith("lp_irf.csv"):
             _write_csv(source_root / rel, ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
@@ -110,6 +113,19 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
             _write_csv(source_root / rel, ["control_variant", "control_role", "control_columns", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["headline_lagged_macro", "headline", "lag_fedfunds|lag_unemployment|lag_inflation", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "control_sensitivity"]])
         elif rel.endswith("shock_sample_sensitivity.csv"):
             _write_csv(source_root / rel, ["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["all_usable_shocks", "headline", "all_usable_shocks", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "sample_sensitivity"]])
+        elif rel.endswith("period_sensitivity.csv"):
+            _write_csv(source_root / rel, ["period_variant", "period_role", "start_quarter", "end_quarter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["all_usable", "headline", "2009Q1", "2025Q4", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "period_sensitivity"]])
+        elif rel.endswith("period_sensitivity_summary.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "status": "materialized",
+                    "headline_question": "stub",
+                    "periods": [],
+                    "key_horizons": {},
+                    "takeaways": ["stub"],
+                },
+            )
         elif rel.endswith("total_minus_other_contrast.csv"):
             _write_csv(source_root / rel, ["scope", "variant", "role", "horizon", "beta_total", "beta_other", "beta_implied", "beta_direct", "gap_implied_minus_direct", "abs_gap", "n_total", "n_other", "n_direct", "sample_mismatch_flag"], [["baseline", "baseline", "headline", 0, 0.1, 0.0, 0.1, 0.1, 0.0, 0.0, 1, 1, 1, False]])
         elif rel.endswith("structural_proxy_evidence.csv"):
@@ -244,6 +260,36 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
     assert json.loads((dest_root / "output" / "manifests" / "pipeline_run.json").read_text(encoding="utf-8"))["command"] == "pipeline run"
 
 
+def test_pipeline_closeout_command_is_wired() -> None:
+    parser = build_parser()
+    parsed = parser.parse_args(["pipeline", "closeout", "--root", "/tmp/demo"])
+    assert parsed.command == "pipeline"
+    assert parsed.pipeline_command == "closeout"
+
+
+def test_pipeline_closeout_reads_existing_artifacts(tmp_path: Path, capsys) -> None:
+    root = tmp_path / "closeout-root"
+    _write_json(
+        root / "output" / "models" / "backend_closeout_summary.json",
+        {
+            "status": "not_ready",
+            "recommended_action": "stop_and_package",
+            "headline_question": "stub",
+        },
+    )
+    (root / "output" / "reports").mkdir(parents=True, exist_ok=True)
+    (root / "output" / "reports" / "backend_closeout.md").write_text("# closeout\n", encoding="utf-8")
+    _write_json(root / "output" / "models" / "backend_evidence_packet_summary.json", {"status": "not_ready"})
+    _write_json(root / "output" / "models" / "backend_decision_bundle_summary.json", {"status": "not_ready"})
+
+    exit_code = main(["pipeline", "closeout", "--root", str(root)])
+
+    assert exit_code == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["recommended_action"] == "stop_and_package"
+    assert payload["closeout_summary_path"].endswith("backend_closeout_summary.json")
+
+
 def test_demo_command_still_exists() -> None:
     parser = build_parser()
     parsed = parser.parse_args(["demo"])
@@ -259,4 +305,26 @@ def test_pipeline_run_supports_offline_raw_fixture(tmp_path: Path) -> None:
     assert exit_code == 0
     assert (dest_root / "data" / "derived" / "quarterly_panel.csv").exists()
     assert (dest_root / "output" / "models" / "sample_construction_summary.json").exists()
+    assert (dest_root / "output" / "models" / "published_state_proxy_comparator_summary.json").exists()
+    assert (dest_root / "output" / "models" / "published_state_proxy_vs_baseline_summary.json").exists()
+    assert (dest_root / "output" / "models" / "backend_decision_bundle_summary.json").exists()
+    assert (dest_root / "output" / "models" / "backend_evidence_packet_summary.json").exists()
+    assert (dest_root / "output" / "models" / "backend_closeout_summary.json").exists()
+    assert (dest_root / "output" / "reports" / "published_state_proxy_comparator.md").exists()
+    assert (dest_root / "output" / "reports" / "published_state_proxy_vs_baseline.md").exists()
+    assert (dest_root / "output" / "reports" / "backend_decision_bundle.md").exists()
+    assert (dest_root / "output" / "reports" / "backend_evidence_packet.md").exists()
+    assert (dest_root / "output" / "reports" / "backend_closeout.md").exists()
     assert (dest_root / "output" / "manifests" / "pipeline_run.json").exists()
+
+    sample_summary = json.loads((dest_root / "output" / "models" / "sample_construction_summary.json").read_text(encoding="utf-8"))
+    shock_diagnostics = json.loads((dest_root / "output" / "models" / "shock_diagnostics_summary.json").read_text(encoding="utf-8"))
+    direct_identification = json.loads((dest_root / "output" / "models" / "direct_identification_summary.json").read_text(encoding="utf-8"))
+    readiness = json.loads((dest_root / "output" / "models" / "result_readiness_summary.json").read_text(encoding="utf-8"))
+    pass_through = json.loads((dest_root / "output" / "models" / "pass_through_summary.json").read_text(encoding="utf-8"))
+
+    assert sample_summary["treatment_freeze_status"] == "frozen"
+    assert shock_diagnostics["treatment_freeze_status"] == "frozen"
+    assert direct_identification["treatment_freeze_status"] == "frozen"
+    assert readiness["treatment_freeze_status"] == "frozen"
+    assert pass_through["treatment_freeze_status"] == "frozen"

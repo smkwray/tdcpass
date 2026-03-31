@@ -1,0 +1,88 @@
+{
+  "headline_metrics": {
+    "share_other_negative": 0.44565217391304346,
+    "mean_tdc": 153.2595,
+    "mean_total_deposits": 148.74632608695654,
+    "median_bill_share": 0.7830406363814848
+  },
+  "sample": {
+    "frequency": "quarterly",
+    "rows": 92,
+    "start_quarter": "2003Q1",
+    "end_quarter": "2025Q4",
+    "source_root": "/Users/shanewray/malus/proj/tdcpass"
+  },
+  "main_findings": [
+    "Quarterly public-data bundle materialized from direct official-source rebuild with optional sibling-cache reuse.",
+    "This public prototype is a methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock.",
+    "The repaired baseline shock passes its treatment-quality gate on 68 usable quarters from 2009Q1 to 2025Q4, but the current release status remains `provisional`.",
+    "44.6% of quarters show `other_component_qoq < 0` in the headline sample."
+  ],
+  "caveats": [
+    "Current release wording is gated by readiness diagnostics: the live bundle should be read as a deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
+    "Pass-through and crowd-out ratios remain suppressed when the raw-unit TDC response is too small for interpretation relative to usable-sample target volatility.",
+    "bill_share is a quarterly issue-date share of Treasury bill auction offering amounts from FiscalData; it remains an exploratory sensitivity input, not a live regime export or standalone mechanism proof.",
+    "Structural proxies are partial cross-checks on the residual, not exhaustive counterpart accounting or standalone mechanism proof."
+  ],
+  "evidence_tiers": {
+    "direct_data": [
+      "tdc_bank_only_qoq",
+      "total_deposits_bank_qoq",
+      "bill_share",
+      "fedfunds",
+      "unemployment",
+      "inflation"
+    ],
+    "transparent_transformations": [
+      "other_component_qoq",
+      "bank_credit_private_qoq",
+      "cb_nonts_qoq",
+      "foreign_nonts_qoq",
+      "domestic_nonfinancial_mmf_reallocation_qoq",
+      "domestic_nonfinancial_repo_reallocation_qoq",
+      "reserve_drain_pressure",
+      "quarter_index"
+    ],
+    "model_based_estimates": [
+      "tdc_fitted",
+      "tdc_residual",
+      "tdc_residual_z",
+      "lp_irf",
+      "lp_irf_regimes",
+      "tdc_sensitivity_ladder",
+      "control_set_sensitivity",
+      "shock_sample_sensitivity",
+      "period_sensitivity",
+      "total_minus_other_contrast",
+      "structural_proxy_evidence",
+      "proxy_coverage_summary",
+      "proxy_unit_audit"
+    ],
+    "inferred_counterfactuals": [
+      "pass_through_h0_h8",
+      "crowd_out_h0_h8",
+      "regime_split_pass_through",
+      "direct_identification_summary",
+      "pass_through_summary"
+    ]
+  },
+  "artifacts": [
+    "site/data/accounting_summary.csv",
+    "site/data/unexpected_tdc.csv",
+    "site/data/lp_irf.csv",
+    "site/data/regime_diagnostics_summary.json",
+    "site/data/control_set_sensitivity.csv",
+    "site/data/shock_sample_sensitivity.csv",
+    "site/data/period_sensitivity.csv",
+    "site/data/period_sensitivity_summary.json",
+    "site/data/total_minus_other_contrast.csv",
+    "site/data/structural_proxy_evidence.csv",
+    "site/data/structural_proxy_evidence_summary.json",
+    "site/data/proxy_coverage_summary.json",
+    "site/data/proxy_unit_audit.json",
+    "site/data/shock_diagnostics_summary.json",
+    "site/data/result_readiness_summary.json",
+    "site/data/direct_identification_summary.json",
+    "site/data/pass_through_summary.json"
+  ]
+}

@@ -140,6 +140,60 @@ def _sample_variant_rows(sample_sensitivity: pd.DataFrame, *, horizons: tuple[in
     return rows
 
 
+def _flagged_window_robustness(
+    sample_variants: list[dict[str, Any]],
+    *,
+    horizons: tuple[int, ...],
+) -> dict[str, Any]:
+    headline = next((row for row in sample_variants if row.get("sample_variant") == "all_usable_shocks"), None)
+    drop_flagged = next((row for row in sample_variants if row.get("sample_variant") == "drop_flagged_shocks"), None)
+    drop_severe = next((row for row in sample_variants if row.get("sample_variant") == "drop_severe_scale_tail"), None)
+    compared = [row for row in [drop_flagged, drop_severe] if row is not None]
+    if headline is None or not compared:
+        return {
+            "status": "not_available",
+            "headline_sign_pattern_stable": None,
+            "note": "No flagged-window robustness comparison is available.",
+        }
+
+    stable = True
+    details: dict[str, Any] = {}
+    for horizon in horizons:
+        key = f"h{horizon}"
+        baseline_assessment = str(headline["horizons"].get(key, {}).get("assessment", "missing"))
+        details[key] = {
+            "headline_assessment": baseline_assessment,
+            "comparisons": [],
+        }
+        for row in compared:
+            variant_assessment = str(row["horizons"].get(key, {}).get("assessment", "missing"))
+            same_assessment = variant_assessment == baseline_assessment
+            stable = stable and same_assessment
+            details[key]["comparisons"].append(
+                {
+                    "sample_variant": str(row.get("sample_variant", "")),
+                    "assessment": variant_assessment,
+                    "matches_headline_assessment": same_assessment,
+                }
+            )
+
+    if stable:
+        status = "stable"
+        note = (
+            "Dropping flagged windows or only the severe realized-scale tail does not overturn the headline h0/h4 sign pattern."
+        )
+    else:
+        status = "changed"
+        note = "Flagged-window trims materially change the headline h0/h4 sign pattern."
+
+    return {
+        "status": status,
+        "headline_sign_pattern_stable": stable,
+        "note": note,
+        "details": details,
+    }
+
+
 def _regime_rows(lp_irf_regimes: pd.DataFrame, horizons: tuple[int, ...]) -> list[dict[str, Any]]:
     if lp_irf_regimes.empty:
         return []
@@ -192,13 +246,28 @@ def build_pass_through_summary(
         baseline[f"h{horizon}"]["contrast_consistent"] = bool(contrast_row["contrast_consistent"]) if contrast_row is not None else False
 
     readiness_status = str(readiness.get("status", "not_ready"))
+    treatment_freeze_status = str(readiness.get("treatment_freeze_status", "frozen"))
+    treatment_quality_status = str(readiness.get("treatment_quality_status", "not_evaluated"))
+    treatment_candidates = list(readiness.get("treatment_candidates", []))
+    treatment_quality_gate = readiness.get("treatment_quality_gate")
+    ratio_reporting_gate = readiness.get("ratio_reporting_gate")
     mechanism_scope = _mechanism_scope(
         readiness_status=readiness_status,
         structural_proxy_evidence=structural_proxy_evidence,
         proxy_coverage_summary=proxy_coverage_summary,
     )
 
-    if readiness_status == "not_ready":
+    if treatment_freeze_status != "frozen":
+        headline = (
+            "Current run remains a reproducibility and deposit-response preview only because the baseline unexpected-TDC shock "
+            "is still under review and not yet a credibly frozen treatment object."
+        )
+    elif treatment_quality_status == "fail":
+        headline = (
+            "Current run remains a deposit-response preview because the frozen baseline unexpected-TDC shock still fails "
+            "its publishable shock-quality gate."
+        )
+    elif readiness_status == "not_ready":
         headline = (
             "Current run is informative as a deposit-response readout, but it does not yet support a clean "
             "pass-through-versus-crowd-out conclusion or broad mechanism attribution."
@@ -235,9 +304,16 @@ def build_pass_through_summary(
         for row in published_regimes
         if row.get("publication_role") != "diagnostic_only" and row.get("stable_for_interpretation", False)
     ]
+    sample_variant_rows = _sample_variant_rows(sample_sensitivity, horizons=horizons)
+    flagged_window_robustness = _flagged_window_robustness(sample_variant_rows, horizons=horizons)
 
     return {
         "status": readiness_status,
+        "treatment_freeze_status": treatment_freeze_status,
+        "treatment_candidates": treatment_candidates,
+        "treatment_quality_status": treatment_quality_status,
+        "treatment_quality_gate": treatment_quality_gate,
+        "ratio_reporting_gate": ratio_reporting_gate,
         "interpretation_scope": mechanism_scope,
         "headline_question": (
             "When unexpected bank-only TDC rises, how do total deposits and the non-TDC deposit component respond?"
@@ -249,8 +325,10 @@ def build_pass_through_summary(
         "sample_policy": {
             "headline_sample_variant": "all_usable_shocks",
             "flagged_window_variant": "drop_flagged_shocks",
+            "severe_tail_variant": "drop_severe_scale_tail",
             "headline_rule": "Keep the frozen headline sample and publish flagged-window trimming as a robustness check, not as a replacement estimand.",
         },
+        "flagged_window_robustness": flagged_window_robustness,
         "baseline_horizons": baseline,
         "core_treatment_variants": _variant_rows(
             sensitivity,
@@ -266,7 +344,7 @@ def build_pass_through_summary(
             allowed_roles={"headline", "core"},
             horizons=horizons,
         ),
-        "shock_sample_variants": _sample_variant_rows(sample_sensitivity, horizons=horizons),
+        "shock_sample_variants": sample_variant_rows,
         "structural_proxy_context": {}
         if structural_proxy_evidence is None
         else dict(structural_proxy_evidence.get("key_horizons", {})),

@@ -1,0 +1,490 @@
+{
+  "treatment_freeze_status": "frozen",
+  "treatment_quality_status": "pass",
+  "treatment_quality_gate": {
+    "status": "pass",
+    "checks": {
+      "min_usable_observations": {
+        "observed": 68,
+        "threshold": 60,
+        "passed": true
+      },
+      "min_shock_target_correlation": {
+        "observed": 0.7657956791364907,
+        "threshold": 0.5,
+        "passed": true
+      },
+      "max_flagged_share": {
+        "observed": 0.058823529411764705,
+        "threshold": 0.2,
+        "passed": true
+      },
+      "max_realized_scale_ratio_p95": {
+        "observed": 4.817056239502941,
+        "threshold": 25.0,
+        "passed": true
+      },
+      "max_realized_scale_ratio_p99": {
+        "observed": 27.895931796070258,
+        "threshold": 100.0,
+        "passed": true
+      },
+      "max_initial_train_to_usable_volatility_ratio": {
+        "observed": 0.29671349936729485,
+        "threshold": 2.0,
+        "passed": true
+      }
+    },
+    "failed_checks": []
+  },
+  "baseline_usable_sample": {
+    "rows": 68,
+    "start_quarter": "2009Q1",
+    "end_quarter": "2025Q4"
+  },
+  "baseline_shock_name": "unexpected_tdc_default",
+  "shock_target_correlation_usable": 0.7657956791364907,
+  "raw_unit_tdc_lp_response": {
+    "h0": {
+      "beta": 0.9305308145201421,
+      "se": 0.017236852863253205,
+      "lower95": 0.8967465829081658,
+      "upper95": 0.9643150461321184,
+      "n": 68,
+      "treatment_role": "",
+      "shock_column": "tdc_residual",
+      "shock_scale": "raw_unit",
+      "response_type": "cumulative_sum_h0_to_h"
+    },
+    "h4": {
+      "beta": 2.2108641620062723,
+      "se": 0.3431532533364172,
+      "lower95": 1.5382837854668945,
+      "upper95": 2.88344453854565,
+      "n": 64,
+      "treatment_role": "",
+      "shock_column": "tdc_residual",
+      "shock_scale": "raw_unit",
+      "response_type": "cumulative_sum_h0_to_h"
+    }
+  },
+  "realized_scale_fit_ratio_quantiles": {
+    "p50": 0.9466380733484647,
+    "p90": 3.363598256430674,
+    "p95": 4.817056239502941,
+    "p99": 27.895931796070258
+  },
+  "train_to_usable_target_volatility_ratio": 0.29671349936729485,
+  "severe_realized_scale_tail_audit": {
+    "threshold": 25.0,
+    "tail_rows": 1,
+    "tail_share": 0.014705882352941176,
+    "quarters": [
+      {
+        "quarter": "2011Q4",
+        "realized_target_qoq": -5.283,
+        "fitted_value": 239.80414819983548,
+        "raw_shock_residual": -245.08714819983547,
+        "standardized_shock": -2.1758749014797316,
+        "realized_scale_fit_ratio": 45.39166159376026,
+        "train_target_sd": 156.97145375138604,
+        "train_condition_number": 3.9878471101038104,
+        "shock_flag": "scale_ratio"
+      }
+    ]
+  },
+  "treatment_candidates": [],
+  "estimand_interpretation": {
+    "baseline_shock_column": "tdc_residual_z",
+    "baseline_target_column": "tdc_bank_only_qoq",
+    "alternate_shock_column": "tdc_broad_depository_residual_z",
+    "alternate_target_column": "tdc_broad_depository_qoq",
+    "response_type": "cumulative_sum_of_quarterly_changes_from_h0_to_h",
+    "outcome_units": "same units as total_deposits_bank_qoq in quarterly_panel.csv",
+    "shock_scale": "per_one_rolling_out_of_sample_standard_deviation",
+    "baseline_model_name": "unexpected_tdc_default",
+    "baseline_predictors": [
+      "lag_tdc_bank_only_qoq",
+      "lag_fedfunds",
+      "lag_unemployment",
+      "lag_inflation"
+    ],
+    "baseline_min_train_obs": 24
+  },
+  "sample_comparison": {
+    "overlap_observations": 67,
+    "sample_start_quarter": "2009Q2",
+    "sample_end_quarter": "2025Q4",
+    "shock_correlation": 0.5984662939540888,
+    "target_correlation": 0.9999228633967043,
+    "shock_sign_disagreement_quarters": 13,
+    "shock_sign_disagreement_share": 0.19402985074626866,
+    "baseline_shock_mean": 0.17233477597284166,
+    "baseline_shock_std": 1.518047433990282,
+    "alternate_shock_mean": 0.3928710652559868,
+    "alternate_shock_std": 2.944304084198877,
+    "baseline_target_mean": 184.53925373134328,
+    "baseline_target_std": 264.66887909236783,
+    "alternate_target_mean": 185.26516417910446,
+    "alternate_target_std": 265.4510177893122,
+    "baseline_shock_outcome_correlation": 0.33016941667654764,
+    "alternate_shock_outcome_correlation": 0.2364179149786211
+  },
+  "impact_response_comparison": {
+    "baseline_total_deposits_h0": {
+      "beta": 46.46053662919742,
+      "se": 21.936358412025733,
+      "lower95": 3.4652741416269848,
+      "upper95": 89.45579911676785,
+      "n": 68,
+      "treatment_role": "core",
+      "shock_column": "tdc_residual_z",
+      "shock_scale": "rolling_oos_standard_deviation",
+      "response_type": "cumulative_sum_h0_to_h"
+    },
+    "broad_depository_total_deposits_h0": {
+      "beta": 30.335457618998852,
+      "se": 13.174299579863323,
+      "lower95": 4.5138304424667375,
+      "upper95": 56.15708479553096,
+      "n": 67,
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_broad_depository_residual_z",
+      "shock_scale": "rolling_oos_standard_deviation",
+      "response_type": "cumulative_sum_h0_to_h"
+    }
+  },
+  "treatment_variant_comparisons": [
+    {
+      "treatment_variant": "bank_only_long_burnin",
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_long_burnin_residual_z",
+      "target_column": "tdc_bank_only_qoq",
+      "overlap_observations": 60,
+      "sample_start_quarter": "2011Q1",
+      "sample_end_quarter": "2025Q4",
+      "shock_correlation": 0.9741398500081686,
+      "target_correlation": 1.0,
+      "shock_sign_disagreement_quarters": 11,
+      "shock_sign_disagreement_share": 0.18333333333333332,
+      "baseline_shock_outcome_correlation": 0.37497286135383107,
+      "variant_shock_outcome_correlation": 0.4078411836844005,
+      "impact_total_deposits_h0": {
+        "beta": 56.97589472186087,
+        "se": 19.34892172484071,
+        "lower95": 19.052008141173076,
+        "upper95": 94.89978130254866,
+        "n": 60,
+        "treatment_role": "exploratory",
+        "shock_column": "tdc_long_burnin_residual_z",
+        "shock_scale": "rolling_oos_standard_deviation",
+        "response_type": "cumulative_sum_h0_to_h"
+      },
+      "model_name": "unexpected_tdc_long_burnin",
+      "predictors": [
+        "lag_tdc_bank_only_qoq",
+        "lag_bill_share",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "min_train_obs": 32
+    },
+    {
+      "treatment_variant": "bank_only_no_bill_share",
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_no_bill_share_residual_z",
+      "target_column": "tdc_bank_only_qoq",
+      "overlap_observations": 68,
+      "sample_start_quarter": "2009Q1",
+      "sample_end_quarter": "2025Q4",
+      "shock_correlation": 0.8478178712606961,
+      "target_correlation": 1.0,
+      "shock_sign_disagreement_quarters": 9,
+      "shock_sign_disagreement_share": 0.1323529411764706,
+      "baseline_shock_outcome_correlation": 0.3007626130705636,
+      "variant_shock_outcome_correlation": 0.4531842589554537,
+      "impact_total_deposits_h0": {
+        "beta": 49.822254493774324,
+        "se": 16.375297915302014,
+        "lower95": 17.72667057978238,
+        "upper95": 81.91783840776627,
+        "n": 68,
+        "treatment_role": "exploratory",
+        "shock_column": "tdc_no_bill_share_residual_z",
+        "shock_scale": "rolling_oos_standard_deviation",
+        "response_type": "cumulative_sum_h0_to_h"
+      },
+      "model_name": "unexpected_tdc_no_bill_share",
+      "predictors": [
+        "lag_tdc_bank_only_qoq",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "min_train_obs": 24
+    },
+    {
+      "treatment_variant": "bank_only_billshare_macro_rolling40",
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_bank_only_billshare_macro_rolling40_residual_z",
+      "target_column": "tdc_bank_only_qoq",
+      "overlap_observations": 68,
+      "sample_start_quarter": "2009Q1",
+      "sample_end_quarter": "2025Q4",
+      "shock_correlation": 0.8257397534372137,
+      "target_correlation": 1.0,
+      "shock_sign_disagreement_quarters": 16,
+      "shock_sign_disagreement_share": 0.23529411764705882,
+      "baseline_shock_outcome_correlation": 0.3007626130705636,
+      "variant_shock_outcome_correlation": 0.4122238524177598,
+      "impact_total_deposits_h0": {
+        "beta": 52.05385985159914,
+        "se": 17.89907730316241,
+        "lower95": 16.97166833740082,
+        "upper95": 87.13605136579747,
+        "n": 68,
+        "treatment_role": "exploratory",
+        "shock_column": "tdc_bank_only_billshare_macro_rolling40_residual_z",
+        "shock_scale": "rolling_oos_standard_deviation",
+        "response_type": "cumulative_sum_h0_to_h"
+      },
+      "model_name": "unexpected_tdc_bank_only_billshare_macro_rolling40",
+      "predictors": [
+        "lag_tdc_bank_only_qoq",
+        "lag_bill_share",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "min_train_obs": 24
+    },
+    {
+      "treatment_variant": "legacy_rolling40_ols",
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_bank_only_macro_rolling40_residual_z",
+      "target_column": "tdc_bank_only_qoq",
+      "overlap_observations": 68,
+      "sample_start_quarter": "2009Q1",
+      "sample_end_quarter": "2025Q4",
+      "shock_correlation": 0.8396765678386853,
+      "target_correlation": 1.0,
+      "shock_sign_disagreement_quarters": 12,
+      "shock_sign_disagreement_share": 0.17647058823529413,
+      "baseline_shock_outcome_correlation": 0.3007626130705636,
+      "variant_shock_outcome_correlation": 0.4454582045649166,
+      "impact_total_deposits_h0": {
+        "beta": 52.562269043481656,
+        "se": 18.776990373947708,
+        "lower95": 15.75936791054415,
+        "upper95": 89.36517017641916,
+        "n": 68,
+        "treatment_role": "exploratory",
+        "shock_column": "tdc_bank_only_macro_rolling40_residual_z",
+        "shock_scale": "rolling_oos_standard_deviation",
+        "response_type": "cumulative_sum_h0_to_h"
+      },
+      "model_name": "unexpected_tdc_bank_only_macro_rolling40",
+      "predictors": [
+        "lag_tdc_bank_only_qoq",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "min_train_obs": 24
+    },
+    {
+      "treatment_variant": "legacy_billshare_expanding",
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_legacy_billshare_expanding_residual_z",
+      "target_column": "tdc_bank_only_qoq",
+      "overlap_observations": 68,
+      "sample_start_quarter": "2009Q1",
+      "sample_end_quarter": "2025Q4",
+      "shock_correlation": 0.8558140031217467,
+      "target_correlation": 1.0,
+      "shock_sign_disagreement_quarters": 13,
+      "shock_sign_disagreement_share": 0.19117647058823528,
+      "baseline_shock_outcome_correlation": 0.3007626130705636,
+      "variant_shock_outcome_correlation": 0.43640961793559396,
+      "impact_total_deposits_h0": {
+        "beta": 50.62090063870641,
+        "se": 16.384774950004317,
+        "lower95": 18.506741736697947,
+        "upper95": 82.73505954071487,
+        "n": 68,
+        "treatment_role": "exploratory",
+        "shock_column": "tdc_legacy_billshare_expanding_residual_z",
+        "shock_scale": "rolling_oos_standard_deviation",
+        "response_type": "cumulative_sum_h0_to_h"
+      },
+      "model_name": "unexpected_tdc_legacy_billshare_expanding",
+      "predictors": [
+        "lag_tdc_bank_only_qoq",
+        "lag_bill_share",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "min_train_obs": 24
+    },
+    {
+      "treatment_variant": "legacy_totaldep_long_burnin",
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_legacy_totaldep_residual_z",
+      "target_column": "tdc_bank_only_qoq",
+      "overlap_observations": 67,
+      "sample_start_quarter": "2009Q2",
+      "sample_end_quarter": "2025Q4",
+      "shock_correlation": 0.5979101335275293,
+      "target_correlation": 0.9999999999999998,
+      "shock_sign_disagreement_quarters": 13,
+      "shock_sign_disagreement_share": 0.19402985074626866,
+      "baseline_shock_outcome_correlation": 0.33016941667654764,
+      "variant_shock_outcome_correlation": 0.23594667261982394,
+      "impact_total_deposits_h0": {
+        "beta": 30.31461896309789,
+        "se": 13.2305112162445,
+        "lower95": 4.382816979258671,
+        "upper95": 56.24642094693711,
+        "n": 67,
+        "treatment_role": "exploratory",
+        "shock_column": "tdc_legacy_totaldep_residual_z",
+        "shock_scale": "rolling_oos_standard_deviation",
+        "response_type": "cumulative_sum_h0_to_h"
+      },
+      "model_name": "unexpected_tdc_legacy_totaldep",
+      "predictors": [
+        "lag_total_deposits_bank_qoq",
+        "lag_tga_qoq",
+        "lag_reserves_qoq",
+        "lag_bill_share",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "min_train_obs": 24
+    },
+    {
+      "treatment_variant": "broad_depository",
+      "treatment_role": "exploratory",
+      "shock_column": "tdc_broad_depository_residual_z",
+      "target_column": "tdc_broad_depository_qoq",
+      "overlap_observations": 67,
+      "sample_start_quarter": "2009Q2",
+      "sample_end_quarter": "2025Q4",
+      "shock_correlation": 0.5984662939540888,
+      "target_correlation": 0.9999228633967043,
+      "shock_sign_disagreement_quarters": 13,
+      "shock_sign_disagreement_share": 0.19402985074626866,
+      "baseline_shock_outcome_correlation": 0.33016941667654764,
+      "variant_shock_outcome_correlation": 0.2364179149786211,
+      "impact_total_deposits_h0": {
+        "beta": 30.335457618998852,
+        "se": 13.174299579863323,
+        "lower95": 4.5138304424667375,
+        "upper95": 56.15708479553096,
+        "n": 67,
+        "treatment_role": "exploratory",
+        "shock_column": "tdc_broad_depository_residual_z",
+        "shock_scale": "rolling_oos_standard_deviation",
+        "response_type": "cumulative_sum_h0_to_h"
+      },
+      "model_name": "unexpected_tdc_broad_depository",
+      "predictors": [
+        "lag_total_deposits_bank_qoq",
+        "lag_tga_qoq",
+        "lag_reserves_qoq",
+        "lag_bill_share",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "min_train_obs": 24
+    }
+  ],
+  "shock_quality": {
+    "flagged_observations": 4,
+    "flagged_share": 0.058823529411764705,
+    "max_fitted_to_target_scale_ratio": 45.39166159376026,
+    "realized_scale_ratio_quantiles": {
+      "p50": 0.9466380733484647,
+      "p90": 3.363598256430674,
+      "p95": 4.817056239502941,
+      "p99": 27.895931796070258
+    },
+    "max_train_condition_number": 7.301481999130325
+  },
+  "largest_disagreement_quarters": [
+    {
+      "quarter": "2009Q3",
+      "baseline_shock": 1.6417529057029447,
+      "alternate_shock": 12.971916474100814,
+      "baseline_target_qoq": 313.482,
+      "alternate_target_qoq": 313.912,
+      "total_deposits_bank_qoq": -43.733
+    },
+    {
+      "quarter": "2020Q3",
+      "baseline_shock": 0.581904236918328,
+      "alternate_shock": -8.407789106811219,
+      "baseline_target_qoq": 378.459,
+      "alternate_target_qoq": 379.761,
+      "total_deposits_bank_qoq": 143.220000000001
+    },
+    {
+      "quarter": "2009Q2",
+      "baseline_shock": 0.321361895525654,
+      "alternate_shock": -8.208008226522693,
+      "baseline_target_qoq": 238.732,
+      "alternate_target_qoq": 238.803,
+      "total_deposits_bank_qoq": -192.748
+    },
+    {
+      "quarter": "2010Q1",
+      "baseline_shock": 0.346027723074058,
+      "alternate_shock": -4.118595169485665,
+      "baseline_target_qoq": 222.035,
+      "alternate_target_qoq": 223.603,
+      "total_deposits_bank_qoq": -136.092000000001
+    },
+    {
+      "quarter": "2011Q2",
+      "baseline_shock": -1.1845578958562442,
+      "alternate_shock": 2.375400778487025,
+      "baseline_target_qoq": 350.428,
+      "alternate_target_qoq": 350.8,
+      "total_deposits_bank_qoq": 115.940000000001
+    },
+    {
+      "quarter": "2017Q2",
+      "baseline_shock": -1.8641270631363642,
+      "alternate_shock": 0.6199678866603412,
+      "baseline_target_qoq": -60.422,
+      "alternate_target_qoq": -60.805,
+      "total_deposits_bank_qoq": -0.261
+    },
+    {
+      "quarter": "2011Q4",
+      "baseline_shock": -2.1758749014797316,
+      "alternate_shock": -4.28070156894768,
+      "baseline_target_qoq": -5.283,
+      "alternate_target_qoq": -10.347,
+      "total_deposits_bank_qoq": 151.837
+    },
+    {
+      "quarter": "2009Q4",
+      "baseline_shock": -0.2810596542553419,
+      "alternate_shock": -2.280250096573558,
+      "baseline_target_qoq": 217.706,
+      "alternate_target_qoq": 218.126,
+      "total_deposits_bank_qoq": 82.57
+    }
+  ],
+  "takeaways": [
+    "LP betas are in outcome units per one rolling out-of-sample shock standard deviation when the shock column is standardized.",
+    "The broad-depository variant is classified as exploratory and should not be treated as a near-baseline robustness rung.",
+    "The baseline shock has 4 scale-ratio flagged windows: 1 severe realized-scale tail quarter(s) and 3 milder threshold breaches.",
+    "A small set of severe realized-scale tail quarters is now surfaced explicitly for audit and sample-sensitivity checks."
+  ]
+}

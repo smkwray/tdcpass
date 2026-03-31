@@ -136,6 +136,32 @@ def _pipeline_run(args: argparse.Namespace) -> int:
     return 0
 
 
+def _pipeline_closeout(args: argparse.Namespace) -> int:
+    root = Path(args.root) if args.root else repo_root()
+    summary_path = root / "output" / "models" / "backend_closeout_summary.json"
+    report_path = root / "output" / "reports" / "backend_closeout.md"
+    packet_path = root / "output" / "models" / "backend_evidence_packet_summary.json"
+    bundle_path = root / "output" / "models" / "backend_decision_bundle_summary.json"
+
+    missing = [str(path) for path in [summary_path, report_path, packet_path, bundle_path] if not path.exists()]
+    if missing:
+        print(json.dumps({"status": "missing_artifacts", "root": str(root), "missing": missing}, indent=2))
+        return 1
+
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    payload = {
+        "status": str(summary.get("status", "unknown")),
+        "recommended_action": str(summary.get("recommended_action", "unknown")),
+        "headline_question": str(summary.get("headline_question", "")),
+        "closeout_summary_path": str(summary_path),
+        "closeout_report_path": str(report_path),
+        "decision_bundle_path": str(bundle_path),
+        "evidence_packet_path": str(packet_path),
+    }
+    print(json.dumps(payload, indent=2))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="tdcpass", description="TDC pass-through repo scaffold CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -155,6 +181,9 @@ def build_parser() -> argparse.ArgumentParser:
     pipeline_run.add_argument("--reuse-mode", default=None, help="Sibling cache reuse mode: discover, rebuild, copy, or symlink")
     pipeline_run.add_argument("--raw-fixture-root", default=None, help="Offline frozen raw-data fixture root for a reproducible rebuild")
     pipeline_run.set_defaults(func=_pipeline_run)
+    pipeline_closeout = pipeline_subparsers.add_parser("closeout", help="Print the final backend closeout artifact paths from an existing run root")
+    pipeline_closeout.add_argument("--root", default=None, help="Existing run root containing backend closeout artifacts")
+    pipeline_closeout.set_defaults(func=_pipeline_closeout)
 
     discover = subparsers.add_parser("discover-cache", help="Search sibling repos for reusable local artifacts")
     discover.set_defaults(func=_discover_cache)
@@ -179,7 +208,7 @@ def build_parser() -> argparse.ArgumentParser:
     decompose.add_argument("--out-col", default="other_component_qoq")
     decompose.set_defaults(func=_decompose)
 
-    shock = subparsers.add_parser("shock", help="Build expanding-window residual shocks")
+    shock = subparsers.add_parser("shock", help="Build out-of-sample residual shocks")
     shock.add_argument("--input", required=True)
     shock.add_argument("--out", required=True)
     shock.add_argument("--target", required=True)

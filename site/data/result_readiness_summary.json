@@ -1,0 +1,186 @@
+{
+  "status": "provisional",
+  "treatment_freeze_status": "frozen",
+  "treatment_candidates": [],
+  "treatment_quality_status": "pass",
+  "treatment_quality_gate": {
+    "status": "pass",
+    "checks": {
+      "min_usable_observations": {
+        "observed": 68,
+        "threshold": 60,
+        "passed": true
+      },
+      "min_shock_target_correlation": {
+        "observed": 0.7657956791364907,
+        "threshold": 0.5,
+        "passed": true
+      },
+      "max_flagged_share": {
+        "observed": 0.058823529411764705,
+        "threshold": 0.2,
+        "passed": true
+      },
+      "max_realized_scale_ratio_p95": {
+        "observed": 4.817056239502941,
+        "threshold": 25.0,
+        "passed": true
+      },
+      "max_realized_scale_ratio_p99": {
+        "observed": 27.895931796070258,
+        "threshold": 100.0,
+        "passed": true
+      },
+      "max_initial_train_to_usable_volatility_ratio": {
+        "observed": 0.29671349936729485,
+        "threshold": 2.0,
+        "passed": true
+      }
+    },
+    "failed_checks": []
+  },
+  "ratio_reporting_gate": {
+    "rule": [
+      "tdc_ci_excludes_zero == true",
+      "abs(raw_unit_tdc_beta) >= usable_target_sd"
+    ],
+    "usable_target_sd": 263.42967242082716,
+    "horizons": {
+      "h0": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 0.9305308145201421,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "h4": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.2108641620062723,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      },
+      "h8": {
+        "allowed": false,
+        "usable_target_sd": 263.42967242082716,
+        "abs_raw_tdc_beta": 2.7824498362130194,
+        "conditions": {
+          "tdc_ci_excludes_zero": true,
+          "abs_raw_tdc_beta_ge_usable_target_sd": false
+        },
+        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+      }
+    }
+  },
+  "headline_assessment": "Current backend outputs are usable for internal deposit-response interpretation, but mechanism attribution remains sensitive or incomplete.",
+  "reasons": [],
+  "warnings": [
+    "Direct TDC response and total-minus-other contrast diverge at key horizons, but this is an approximate LP cross-check because the regressions use outcome-specific lagged dependent variables.",
+    "Structural proxy cross-checks are mixed across key horizons.",
+    "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern."
+  ],
+  "diagnostics": {
+    "shock_usable_obs": 68,
+    "shock_start_quarter": "2009Q1",
+    "shock_end_quarter": "2025Q4",
+    "flagged_shock_obs": 4,
+    "flagged_shock_share": 0.058823529411764705,
+    "share_other_negative": 0.44565217391304346,
+    "regime_row_count": 144,
+    "informative_regime_count": 1,
+    "stable_regime_count": 1,
+    "sensitivity_variant_count": 8,
+    "control_set_variant_count": 3,
+    "control_set_core_variant_count": 2,
+    "control_set_exploratory_variant_count": 1,
+    "sensitivity_core_variant_count": 1,
+    "sensitivity_exploratory_variant_count": 7,
+    "exploratory_variant_sign_disagreement": false,
+    "control_set_sign_disagreement": false,
+    "exploratory_control_set_sign_disagreement": false,
+    "sample_sensitivity_variant_count": 3,
+    "sample_variant_sign_disagreement": false,
+    "sample_variant_magnitude_instability": false,
+    "direct_identification_status": "provisional",
+    "contrast_max_abs_gap_h0_h4": 34.841407895902734,
+    "contrast_rows_missing": false,
+    "structural_proxy_status": "mixed",
+    "structural_proxy_supportive_key_horizons": 0,
+    "structural_proxy_discordant_key_horizons": 2,
+    "structural_proxy_weak_key_horizons": 0,
+    "proxy_coverage_status": "mixed",
+    "proxy_coverage_large_gap_key_horizons": 0,
+    "proxy_coverage_partial_support_key_horizons": 0,
+    "proxy_coverage_same_sign_not_decisive_key_horizons": 0,
+    "proxy_coverage_published_regime_count": 1,
+    "treatment_freeze_status": "frozen",
+    "treatment_candidate_count": 0,
+    "treatment_quality_status": "pass",
+    "treatment_quality_gate_failed_checks": [],
+    "headline_shock_model_name": "unexpected_tdc_default",
+    "headline_shock_min_train_obs": 24
+  },
+  "key_estimates": {
+    "tdc_h0": {
+      "beta": 128.49398892100785,
+      "se": 14.082533270452723,
+      "lower95": 100.89222371092052,
+      "upper95": 156.0957541310952,
+      "n": 68,
+      "ci_excludes_zero": true
+    },
+    "tdc_h4": {
+      "beta": 278.13971316628357,
+      "se": 69.29214131662822,
+      "lower95": 142.32711618569226,
+      "upper95": 413.9523101468749,
+      "n": 64,
+      "ci_excludes_zero": true
+    },
+    "total_deposits_h0": {
+      "beta": 46.46053662919742,
+      "se": 21.936358412025733,
+      "lower95": 3.4652741416269848,
+      "upper95": 89.45579911676785,
+      "n": 68,
+      "ci_excludes_zero": true
+    },
+    "total_deposits_h4": {
+      "beta": 142.30410309715606,
+      "se": 92.45580638597868,
+      "lower95": -38.909277419362155,
+      "upper95": 323.51748361367424,
+      "n": 64,
+      "ci_excludes_zero": false
+    },
+    "other_component_h0": {
+      "beta": -81.17833439216729,
+      "se": 20.082089282921796,
+      "lower95": -120.539229386694,
+      "upper95": -41.81743939764057,
+      "n": 68,
+      "ci_excludes_zero": true
+    },
+    "other_component_h4": {
+      "beta": -100.99420217322478,
+      "se": 48.95277771700602,
+      "lower95": -196.94164649855657,
+      "upper95": -5.046757847892977,
+      "n": 64,
+      "ci_excludes_zero": true
+    }
+  },
+  "answer_ready_when": [
+    "the baseline total-deposit response is directionally interpretable at key horizons",
+    "the baseline non-TDC response is directionally interpretable at key horizons",
+    "the total-deposit and non-TDC responses separate enough to support a pass-through versus crowd-out statement",
+    "structural proxies corroborate the direction of the non-TDC residual at key horizons",
+    "headline and core control-set variants do not overturn the impact sign of the total-deposit response"
+  ]
+}

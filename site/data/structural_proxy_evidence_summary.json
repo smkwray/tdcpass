@@ -1,0 +1,156 @@
+{
+  "status": "mixed",
+  "headline_question": "Do structural proxies corroborate the direction of the non-TDC residual after an unexpected TDC shock?",
+  "key_horizons": {
+    "h0": {
+      "other_component": {
+        "beta": -81.17833439216729,
+        "se": 20.082089282921796,
+        "lower95": -120.539229386694,
+        "upper95": -41.81743939764057,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "decisive_proxy_count": 1,
+      "decisive_concordant_proxy_count": 0,
+      "decisive_discordant_proxy_count": 1,
+      "proxy_bundle_beta_sum": 52.63109980366392,
+      "other_minus_proxy_bundle_beta": -133.80943419583122,
+      "interpretation": "proxy_evidence_discordant",
+      "proxy_rows": [
+        {
+          "proxy_outcome": "bank_credit_private_qoq",
+          "proxy_beta": 14.021813174704516,
+          "proxy_se": 13.400899759392601,
+          "proxy_lower95": -12.243950353704982,
+          "proxy_upper95": 40.28757670311401,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -0.17272851530761943
+        },
+        {
+          "proxy_outcome": "cb_nonts_qoq",
+          "proxy_beta": 26.523641651135975,
+          "proxy_se": 14.452809474715338,
+          "proxy_lower95": -1.8038649193060863,
+          "proxy_upper95": 54.851148221578036,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -0.32673301133529026
+        },
+        {
+          "proxy_outcome": "foreign_nonts_qoq",
+          "proxy_beta": 27.0343911579461,
+          "proxy_se": 13.111973747146076,
+          "proxy_lower95": 1.334922613539792,
+          "proxy_upper95": 52.733859702352404,
+          "proxy_ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "proxy_discordant_with_other_direction",
+          "proxy_share_of_other_beta": -0.33302470862908695
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+          "proxy_beta": -14.977538562329684,
+          "proxy_se": 11.828190798252104,
+          "proxy_lower95": -38.160792526903805,
+          "proxy_upper95": 8.20571540224444,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "same_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": 0.1845016736851752
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+          "proxy_beta": 0.028792382207010303,
+          "proxy_se": 0.7154641657141337,
+          "proxy_lower95": -1.3735173825926918,
+          "proxy_upper95": 1.4311021470067122,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -0.00035468062288536456
+        }
+      ]
+    },
+    "h4": {
+      "other_component": {
+        "beta": -100.99420217322478,
+        "se": 48.95277771700602,
+        "lower95": -196.94164649855657,
+        "upper95": -5.046757847892977,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "decisive_proxy_count": 2,
+      "decisive_concordant_proxy_count": 0,
+      "decisive_discordant_proxy_count": 2,
+      "proxy_bundle_beta_sum": 195.14824786932834,
+      "other_minus_proxy_bundle_beta": -296.14245004255315,
+      "interpretation": "proxy_evidence_discordant",
+      "proxy_rows": [
+        {
+          "proxy_outcome": "bank_credit_private_qoq",
+          "proxy_beta": 54.572977783498914,
+          "proxy_se": 19.24512973374704,
+          "proxy_lower95": 16.852523505354718,
+          "proxy_upper95": 92.2934320616431,
+          "proxy_ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "proxy_discordant_with_other_direction",
+          "proxy_share_of_other_beta": -0.5403575315134982
+        },
+        {
+          "proxy_outcome": "cb_nonts_qoq",
+          "proxy_beta": 109.21565891280892,
+          "proxy_se": 89.44754513553232,
+          "proxy_lower95": -66.10152955283442,
+          "proxy_upper95": 284.5328473784523,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": -1.081405234782515
+        },
+        {
+          "proxy_outcome": "foreign_nonts_qoq",
+          "proxy_beta": 38.11141757510377,
+          "proxy_se": 9.926775458602929,
+          "proxy_lower95": 18.65493767624203,
+          "proxy_upper95": 57.567897473965516,
+          "proxy_ci_excludes_zero": true,
+          "sign_alignment": "opposite_sign",
+          "evidence_label": "proxy_discordant_with_other_direction",
+          "proxy_share_of_other_beta": -0.3773624302683757
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_mmf_reallocation_qoq",
+          "proxy_beta": -6.051493186644944,
+          "proxy_se": 14.562904506654425,
+          "proxy_lower95": -34.59478601968762,
+          "proxy_upper95": 22.491799646397727,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "same_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": 0.05991921374125468
+        },
+        {
+          "proxy_outcome": "domestic_nonfinancial_repo_reallocation_qoq",
+          "proxy_beta": -0.7003132154383085,
+          "proxy_se": 1.2009103178726588,
+          "proxy_lower95": -3.0540974384687196,
+          "proxy_upper95": 1.6534710075921026,
+          "proxy_ci_excludes_zero": false,
+          "sign_alignment": "same_sign",
+          "evidence_label": "other_without_proxy_confirmation",
+          "proxy_share_of_other_beta": 0.006934192264196855
+        }
+      ]
+    }
+  },
+  "takeaways": [
+    "Structural proxies are mechanism cross-checks for the non-TDC residual, not exact counterpart accounting.",
+    "At h0, h4, at least one decisive structural proxy moves against the non-TDC residual."
+  ]
+}

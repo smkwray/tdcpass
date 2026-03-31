@@ -25,6 +25,8 @@ def test_output_contract_has_required_artifacts() -> None:
         "output/models/tdc_sensitivity_ladder.csv",
         "output/models/control_set_sensitivity.csv",
         "output/models/shock_sample_sensitivity.csv",
+        "output/models/period_sensitivity.csv",
+        "output/models/period_sensitivity_summary.json",
         "output/models/total_minus_other_contrast.csv",
         "output/models/structural_proxy_evidence.csv",
         "output/models/structural_proxy_evidence_summary.json",
@@ -48,6 +50,8 @@ def test_output_contract_has_required_artifacts() -> None:
         "site/data/tdc_sensitivity_ladder.csv",
         "site/data/control_set_sensitivity.csv",
         "site/data/shock_sample_sensitivity.csv",
+        "site/data/period_sensitivity.csv",
+        "site/data/period_sensitivity_summary.json",
         "site/data/total_minus_other_contrast.csv",
         "site/data/structural_proxy_evidence.csv",
         "site/data/structural_proxy_evidence_summary.json",
@@ -77,9 +81,18 @@ def test_shock_and_lp_specs_use_canonical_names() -> None:
 
     default_shock = shock_specs["shocks"]["unexpected_tdc_default"]
     assert default_shock["target"] == "tdc_bank_only_qoq"
+    assert default_shock["method"] == "rolling_window_ridge"
+    assert default_shock["freeze_status"] == "frozen"
+    assert default_shock["ridge_alpha"] == 125.0
+    assert default_shock["max_train_obs"] == 40
+    assert default_shock["quality_gate"]["min_usable_observations"] == 60
+    assert default_shock["quality_gate"]["min_shock_target_correlation"] == 0.5
+    assert default_shock["quality_gate"]["max_realized_scale_ratio_p95"] == 25.0
+    assert default_shock["quality_gate"]["max_realized_scale_ratio_p99"] == 100.0
     assert default_shock["standardized_column"] == "tdc_residual_z"
     assert default_shock["fitted_column"] == "tdc_fitted"
     assert "lag_tdc_bank_only_qoq" in default_shock["predictors"]
+    assert "lag_bill_share" not in default_shock["predictors"]
     assert "lag_total_deposits_bank_qoq" not in default_shock["predictors"]
     assert "lag_bank_credit_private_qoq" not in default_shock["predictors"]
 
@@ -87,22 +100,60 @@ def test_shock_and_lp_specs_use_canonical_names() -> None:
     assert baseline["shock_column"] == "tdc_residual_z"
     assert "tdc_bank_only_qoq" in baseline["outcomes"]
     assert "total_deposits_bank_qoq" in baseline["outcomes"]
-    assert baseline["controls"] == ["lag_fedfunds", "lag_unemployment", "lag_inflation"]
-    assert lp_specs["specs"]["regimes"]["controls"] == ["lag_fedfunds", "lag_unemployment", "lag_inflation"]
+    assert baseline["controls"] == ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"]
+    assert baseline["include_lagged_outcome"] is True
+    assert lp_specs["specs"]["regimes"]["controls"] == ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"]
+    assert lp_specs["specs"]["regimes"]["include_lagged_outcome"] is True
     assert lp_specs["specs"]["regimes"]["regime_columns"] == [
-        "bank_absorption_share",
-        "bill_share",
         "reserve_drain_pressure",
     ]
-    assert lp_specs["specs"]["sensitivity"]["controls"] == ["lag_fedfunds", "lag_unemployment", "lag_inflation"]
+    assert lp_specs["specs"]["sensitivity"]["controls"] == ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"]
+    assert lp_specs["specs"]["sensitivity"]["include_lagged_outcome"] is True
     assert lp_specs["specs"]["control_sensitivity"]["control_variants"]["headline_lagged_macro"]["control_role"] == "headline"
     assert lp_specs["specs"]["control_sensitivity"]["control_variants"]["lagged_macro_plus_bill"]["control_role"] == "core"
     assert lp_specs["specs"]["control_sensitivity"]["control_variants"]["lagged_macro_plus_trend"]["control_role"] == "exploratory"
+    macro_factor_spec = lp_specs["specs"]["factor_control_sensitivity"]["factor_variants"]["recursive_macro_factors2"]
+    assert macro_factor_spec["factor_role"] == "core"
+    assert macro_factor_spec["factor_count"] == 2
+    assert macro_factor_spec["min_train_obs"] == 24
+    assert macro_factor_spec["source_columns"] == [
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation",
+    ]
+    plumbing_factor_spec = lp_specs["specs"]["factor_control_sensitivity"]["factor_variants"][
+        "recursive_macro_plumbing_factors3"
+    ]
+    assert plumbing_factor_spec["factor_role"] == "exploratory"
+    assert plumbing_factor_spec["factor_count"] == 3
+    assert plumbing_factor_spec["min_train_obs"] == 40
+    assert plumbing_factor_spec["source_columns"] == [
+        "lag_tga_qoq",
+        "lag_reserves_qoq",
+        "lag_bill_share",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation",
+    ]
+    smooth_lp = lp_specs["specs"]["smooth_lp"]
+    assert smooth_lp["method"] == "gaussian_kernel"
+    assert smooth_lp["bandwidth"] == 1.0
+    assert smooth_lp["min_horizons"] == 4
     assert lp_specs["specs"]["sample_sensitivity"]["sample_variants"]["all_usable_shocks"]["sample_role"] == "headline"
     assert lp_specs["specs"]["sample_sensitivity"]["sample_variants"]["drop_flagged_shocks"]["sample_role"] == "exploratory"
+    assert lp_specs["specs"]["sample_sensitivity"]["sample_variants"]["drop_severe_scale_tail"]["sample_role"] == "exploratory"
+    assert lp_specs["specs"]["sample_sensitivity"]["sample_variants"]["drop_severe_scale_tail"]["max_value_column"] == "fitted_to_target_scale_ratio"
+    assert lp_specs["specs"]["period_sensitivity"]["period_variants"]["all_usable"]["period_role"] == "headline"
+    assert lp_specs["specs"]["period_sensitivity"]["period_variants"]["post_gfc_early"]["start_quarter"] == "2009Q1"
+    assert lp_specs["specs"]["period_sensitivity"]["period_variants"]["post_gfc_early"]["end_quarter"] == "2014Q4"
+    assert lp_specs["specs"]["period_sensitivity"]["period_variants"]["pre_covid"]["period_role"] == "core"
+    assert lp_specs["specs"]["period_sensitivity"]["period_variants"]["covid_post"]["start_quarter"] == "2020Q1"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["baseline"]["treatment_role"] == "core"
-    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_long_burnin"]["treatment_role"] == "core"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_long_burnin"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_no_bill_share"]["treatment_role"] == "exploratory"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["bank_only_billshare_macro_rolling40"]["treatment_role"] == "exploratory"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["legacy_rolling40_ols"]["treatment_role"] == "exploratory"
+    assert lp_specs["specs"]["sensitivity"]["shock_variants"]["legacy_billshare_expanding"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["legacy_totaldep_long_burnin"]["treatment_role"] == "exploratory"
     assert lp_specs["specs"]["sensitivity"]["shock_variants"]["broad_depository"]["treatment_role"] == "exploratory"
 
@@ -117,6 +168,8 @@ def test_output_schema_mentions_full_bundle() -> None:
         "output/models/tdc_sensitivity_ladder.csv",
         "output/models/control_set_sensitivity.csv",
         "output/models/shock_sample_sensitivity.csv",
+        "output/models/period_sensitivity.csv",
+        "output/models/period_sensitivity_summary.json",
         "output/models/total_minus_other_contrast.csv",
         "output/models/structural_proxy_evidence.csv",
         "output/models/structural_proxy_evidence_summary.json",
@@ -134,6 +187,8 @@ def test_output_schema_mentions_full_bundle() -> None:
         "site/data/tdc_sensitivity_ladder.csv",
         "site/data/control_set_sensitivity.csv",
         "site/data/shock_sample_sensitivity.csv",
+        "site/data/period_sensitivity.csv",
+        "site/data/period_sensitivity_summary.json",
         "site/data/total_minus_other_contrast.csv",
         "site/data/structural_proxy_evidence.csv",
         "site/data/structural_proxy_evidence_summary.json",

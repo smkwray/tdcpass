@@ -11,6 +11,12 @@ def _ols_fit(x: np.ndarray, y: np.ndarray) -> np.ndarray:
     return beta
 
 
+def _ridge_fit(x: np.ndarray, y: np.ndarray, ridge_alpha: float) -> np.ndarray:
+    penalty = np.eye(x.shape[1], dtype=float) * float(ridge_alpha)
+    penalty[0, 0] = 0.0
+    return np.linalg.solve(x.T @ x + penalty, x.T @ y)
+
+
 def _ols_residual_std(
     x_train: np.ndarray,
     y_train: np.ndarray,
@@ -34,7 +40,23 @@ def _sample_std(values: np.ndarray) -> float:
 def _condition_number(x: np.ndarray) -> float:
     if x.size == 0:
         return np.nan
-    cond = float(np.linalg.cond(x))
+    x_cond = np.array(x, dtype=float, copy=True)
+    if x_cond.ndim != 2:
+        return np.nan
+    if x_cond.shape[1] >= 2:
+        # Make the stability diagnostic invariant to column scale. The raw
+        # quarterly panel mixes large flow units with small macro rates, so a
+        # plain condition number on the unscaled design matrix overstates
+        # instability even when the predictors are well behaved.
+        for idx in range(1, x_cond.shape[1]):
+            column = x_cond[:, idx]
+            mean = float(np.mean(column))
+            sd = float(np.std(column, ddof=1)) if len(column) > 1 else np.nan
+            if np.isfinite(sd) and sd > 0.0:
+                x_cond[:, idx] = (column - mean) / sd
+            else:
+                x_cond[:, idx] = column - mean
+    cond = float(np.linalg.cond(x_cond))
     return cond if np.isfinite(cond) else np.nan
 
 
@@ -44,6 +66,7 @@ def expanding_window_residual(
     target: str,
     predictors: List[str],
     min_train_obs: int = 24,
+    max_train_obs: int | None = None,
     standardize: bool = True,
     model_name: str = "unexpected_tdc_default",
     fitted_column: str = "tdc_fitted",
@@ -55,9 +78,11 @@ def expanding_window_residual(
     target_sd_column: str = "train_target_sd",
     residual_sd_column: str = "train_resid_sd",
     scale_ratio_column: str = "fitted_to_target_scale_ratio",
+    train_target_scale_ratio_column: str = "fitted_to_train_target_sd_ratio",
     flag_column: str = "shock_flag",
     max_condition_number: float | None = None,
     max_scale_ratio: float | None = None,
+    ridge_alpha: float | None = None,
 ) -> pd.DataFrame:
     if target not in df.columns:
         raise KeyError(f"Missing target column: {target}")
@@ -75,10 +100,13 @@ def expanding_window_residual(
     target_sds = np.full(len(out), np.nan, dtype=float)
     residual_sds = np.full(len(out), np.nan, dtype=float)
     scale_ratios = np.full(len(out), np.nan, dtype=float)
+    train_target_scale_ratios = np.full(len(out), np.nan, dtype=float)
     flags = np.full(len(out), "", dtype=object)
 
     for i in range(min_train_obs, len(out)):
         train = out.iloc[:i][[target] + predictors].dropna()
+        if max_train_obs is not None:
+            train = train.tail(max_train_obs)
         if len(train) < max(min_train_obs, len(predictors) + 3):
             continue
 
@@ -91,7 +119,10 @@ def expanding_window_residual(
             continue
 
         x_now = np.r_[1.0, row.to_numpy(dtype=float)]
-        beta = _ols_fit(x_train, y_train)
+        if ridge_alpha is not None and float(ridge_alpha) > 0.0:
+            beta = _ridge_fit(x_train, y_train, float(ridge_alpha))
+        else:
+            beta = _ols_fit(x_train, y_train)
         target_sd = _sample_std(y_train)
         train_sd = _ols_residual_std(x_train, y_train, beta)
         condition_no = _condition_number(x_train)
@@ -100,8 +131,9 @@ def expanding_window_residual(
         target_sds[i] = target_sd
         residual_sds[i] = train_sd
         condition_numbers[i] = condition_no
-        scale_denominator = max(abs(float(out.iloc[i][target])), target_sd if np.isfinite(target_sd) else 0.0, 1e-12)
+        scale_denominator = max(abs(float(out.iloc[i][target])), 1e-6)
         scale_ratios[i] = abs(fitted[i]) / scale_denominator
+        train_target_scale_ratios[i] = abs(fitted[i]) / target_sd if np.isfinite(target_sd) else np.nan
         if standardize:
             resid_z[i] = resid[i] / train_sd if np.isfinite(train_sd) else np.nan
         else:
@@ -125,6 +157,7 @@ def expanding_window_residual(
     out[target_sd_column] = target_sds
     out[residual_sd_column] = residual_sds
     out[scale_ratio_column] = scale_ratios
+    out[train_target_scale_ratio_column] = train_target_scale_ratios
     out[flag_column] = flags
 
     # Compatibility aliases for legacy/demo paths.

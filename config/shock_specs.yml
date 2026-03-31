@@ -1,12 +1,21 @@
 shocks:
   unexpected_tdc_default:
     target: tdc_bank_only_qoq
-    method: expanding_window_ols
+    method: rolling_window_ridge
     model_name: unexpected_tdc_default
+    freeze_status: frozen
+    ridge_alpha: 125.0
+    quality_gate:
+      min_usable_observations: 60
+      min_shock_target_correlation: 0.5
+      max_flagged_share: 0.2
+      max_realized_scale_ratio_p95: 25.0
+      max_realized_scale_ratio_p99: 100.0
+      max_initial_train_to_usable_volatility_ratio: 2.0
     min_train_obs: 24
+    max_train_obs: 40
     predictors:
     - lag_tdc_bank_only_qoq
-    - lag_bill_share
     - lag_fedfunds
     - lag_unemployment
     - lag_inflation
@@ -17,6 +26,32 @@ shocks:
     standardized_column: tdc_residual_z
     fitted_column: tdc_fitted
     train_start_obs_column: train_start_obs
+    train_target_scale_ratio_column: fitted_to_train_target_sd_ratio
+  unexpected_tdc_legacy_billshare_expanding:
+    target: tdc_bank_only_qoq
+    method: expanding_window_ols
+    model_name: unexpected_tdc_legacy_billshare_expanding
+    min_train_obs: 24
+    predictors:
+    - lag_tdc_bank_only_qoq
+    - lag_bill_share
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    residual_column: tdc_legacy_billshare_expanding_residual
+    standardized_column: tdc_legacy_billshare_expanding_residual_z
+    fitted_column: tdc_legacy_billshare_expanding_fitted
+    train_start_obs_column: tdc_legacy_billshare_expanding_train_start_obs
+    model_name_column: tdc_legacy_billshare_expanding_model_name
+    condition_number_column: tdc_legacy_billshare_expanding_train_condition_number
+    target_sd_column: tdc_legacy_billshare_expanding_train_target_sd
+    residual_sd_column: tdc_legacy_billshare_expanding_train_resid_sd
+    scale_ratio_column: tdc_legacy_billshare_expanding_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_legacy_billshare_expanding_fitted_to_train_target_sd_ratio
+    flag_column: tdc_legacy_billshare_expanding_shock_flag
   unexpected_tdc_broad_depository:
     target: tdc_broad_depository_qoq
     method: expanding_window_ols
@@ -42,6 +77,7 @@ shocks:
     target_sd_column: tdc_broad_depository_train_target_sd
     residual_sd_column: tdc_broad_depository_train_resid_sd
     scale_ratio_column: tdc_broad_depository_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_broad_depository_fitted_to_train_target_sd_ratio
     flag_column: tdc_broad_depository_shock_flag
   unexpected_tdc_no_bill_share:
     target: tdc_bank_only_qoq
@@ -65,6 +101,7 @@ shocks:
     target_sd_column: tdc_no_bill_share_train_target_sd
     residual_sd_column: tdc_no_bill_share_train_resid_sd
     scale_ratio_column: tdc_no_bill_share_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_no_bill_share_fitted_to_train_target_sd_ratio
     flag_column: tdc_no_bill_share_shock_flag
   unexpected_tdc_long_burnin:
     target: tdc_bank_only_qoq
@@ -89,6 +126,7 @@ shocks:
     target_sd_column: tdc_long_burnin_train_target_sd
     residual_sd_column: tdc_long_burnin_train_resid_sd
     scale_ratio_column: tdc_long_burnin_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_long_burnin_fitted_to_train_target_sd_ratio
     flag_column: tdc_long_burnin_shock_flag
   unexpected_tdc_legacy_totaldep:
     target: tdc_bank_only_qoq
@@ -115,4 +153,56 @@ shocks:
     target_sd_column: tdc_legacy_totaldep_train_target_sd
     residual_sd_column: tdc_legacy_totaldep_train_resid_sd
     scale_ratio_column: tdc_legacy_totaldep_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_legacy_totaldep_fitted_to_train_target_sd_ratio
     flag_column: tdc_legacy_totaldep_shock_flag
+  unexpected_tdc_bank_only_macro_rolling40:
+    target: tdc_bank_only_qoq
+    method: rolling_window_ols
+    model_name: unexpected_tdc_bank_only_macro_rolling40
+    min_train_obs: 24
+    max_train_obs: 40
+    predictors:
+    - lag_tdc_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_bank_only_macro_rolling40_model_name
+    residual_column: tdc_bank_only_macro_rolling40_residual
+    standardized_column: tdc_bank_only_macro_rolling40_residual_z
+    fitted_column: tdc_bank_only_macro_rolling40_fitted
+    train_start_obs_column: tdc_bank_only_macro_rolling40_train_start_obs
+    condition_number_column: tdc_bank_only_macro_rolling40_train_condition_number
+    target_sd_column: tdc_bank_only_macro_rolling40_train_target_sd
+    residual_sd_column: tdc_bank_only_macro_rolling40_train_resid_sd
+    scale_ratio_column: tdc_bank_only_macro_rolling40_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_bank_only_macro_rolling40_fitted_to_train_target_sd_ratio
+    flag_column: tdc_bank_only_macro_rolling40_shock_flag
+  unexpected_tdc_bank_only_billshare_macro_rolling40:
+    target: tdc_bank_only_qoq
+    method: rolling_window_ols
+    model_name: unexpected_tdc_bank_only_billshare_macro_rolling40
+    min_train_obs: 24
+    max_train_obs: 40
+    predictors:
+    - lag_tdc_bank_only_qoq
+    - lag_bill_share
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_bank_only_billshare_macro_rolling40_model_name
+    residual_column: tdc_bank_only_billshare_macro_rolling40_residual
+    standardized_column: tdc_bank_only_billshare_macro_rolling40_residual_z
+    fitted_column: tdc_bank_only_billshare_macro_rolling40_fitted
+    train_start_obs_column: tdc_bank_only_billshare_macro_rolling40_train_start_obs
+    condition_number_column: tdc_bank_only_billshare_macro_rolling40_train_condition_number
+    target_sd_column: tdc_bank_only_billshare_macro_rolling40_train_target_sd
+    residual_sd_column: tdc_bank_only_billshare_macro_rolling40_train_resid_sd
+    scale_ratio_column: tdc_bank_only_billshare_macro_rolling40_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_bank_only_billshare_macro_rolling40_fitted_to_train_target_sd_ratio
+    flag_column: tdc_bank_only_billshare_macro_rolling40_shock_flag

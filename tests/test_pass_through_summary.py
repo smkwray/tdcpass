@@ -102,6 +102,7 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
     assert payload["core_treatment_variants"]
     assert payload["core_control_variants"]
     assert payload["shock_sample_variants"][0]["sample_variant"] == "all_usable_shocks"
+    assert payload["flagged_window_robustness"]["status"] == "not_available"
     assert payload["structural_proxy_context"]["h0"]["interpretation"] == "proxy_evidence_weak"
     assert payload["proxy_coverage_context"]["status"] == "mixed"
     assert payload["proxy_coverage_context"]["release_caveat"] == "stub caveat"
@@ -109,3 +110,89 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
     assert payload["published_regime_contexts"][0]["stable_for_interpretation"] is True
     assert payload["readiness_reasons"] == ["stub"]
     assert payload["readiness_warnings"] == ["warn"]
+
+
+def test_pass_through_summary_surfaces_under_review_treatment_status() -> None:
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sample_sensitivity=pd.DataFrame(columns=["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={
+            "status": "not_ready",
+            "treatment_freeze_status": "under_review",
+            "treatment_candidates": [{"name": "unexpected_tdc_bank_only_macro_rolling40"}],
+            "ratio_reporting_gate": {"rule": ["stub"]},
+            "reasons": ["The baseline unexpected-TDC shock is not yet a credibly frozen treatment object."],
+            "warnings": [],
+        },
+    )
+
+    assert payload["treatment_freeze_status"] == "under_review"
+    assert payload["treatment_candidates"][0]["name"] == "unexpected_tdc_bank_only_macro_rolling40"
+    assert "under review" in payload["headline_answer"]
+
+
+def test_pass_through_summary_surfaces_failed_treatment_quality_gate() -> None:
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sample_sensitivity=pd.DataFrame(columns=["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={
+            "status": "not_ready",
+            "treatment_freeze_status": "frozen",
+            "treatment_quality_status": "fail",
+            "treatment_quality_gate": {"failed_checks": ["max_realized_scale_ratio_p95"]},
+            "reasons": ["The frozen baseline unexpected-TDC shock still fails its publishable shock-quality gate."],
+            "warnings": [],
+        },
+    )
+
+    assert payload["treatment_quality_status"] == "fail"
+    assert payload["treatment_quality_gate"]["failed_checks"] == ["max_realized_scale_ratio_p95"]
+    assert "quality gate" in payload["headline_answer"]
+
+
+def test_pass_through_summary_promotes_flagged_window_robustness_note() -> None:
+    sample_sensitivity = pd.DataFrame(
+        [
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.4, "se": 0.4, "lower95": 0.62, "upper95": 2.18, "n": 40},
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.5, "lower95": 0.02, "upper95": 1.98, "n": 40},
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.4, "se": 0.5, "lower95": -1.38, "upper95": 0.58, "n": 40},
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 2.8, "se": 0.7, "lower95": 1.43, "upper95": 4.17, "n": 36},
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 2.0, "se": 0.8, "lower95": 0.43, "upper95": 3.57, "n": 36},
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "other_component_qoq", "horizon": 4, "beta": -0.8, "se": 0.8, "lower95": -2.37, "upper95": 0.77, "n": 36},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.4, "lower95": 0.72, "upper95": 2.28, "n": 38},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.1, "se": 0.5, "lower95": 0.12, "upper95": 2.08, "n": 38},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.5, "se": 0.5, "lower95": -1.48, "upper95": 0.48, "n": 38},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 2.9, "se": 0.7, "lower95": 1.53, "upper95": 4.27, "n": 34},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 1.8, "se": 0.8, "lower95": 0.23, "upper95": 3.37, "n": 34},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "other_component_qoq", "horizon": 4, "beta": -0.6, "se": 0.8, "lower95": -2.17, "upper95": 0.97, "n": 34},
+            {"sample_variant": "drop_severe_scale_tail", "sample_role": "exploratory", "sample_filter": "fitted_to_target_scale_ratio<=25.0", "outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.45, "se": 0.4, "lower95": 0.67, "upper95": 2.23, "n": 39},
+            {"sample_variant": "drop_severe_scale_tail", "sample_role": "exploratory", "sample_filter": "fitted_to_target_scale_ratio<=25.0", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.05, "se": 0.5, "lower95": 0.07, "upper95": 2.03, "n": 39},
+            {"sample_variant": "drop_severe_scale_tail", "sample_role": "exploratory", "sample_filter": "fitted_to_target_scale_ratio<=25.0", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.45, "se": 0.5, "lower95": -1.43, "upper95": 0.53, "n": 39},
+            {"sample_variant": "drop_severe_scale_tail", "sample_role": "exploratory", "sample_filter": "fitted_to_target_scale_ratio<=25.0", "outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 2.85, "se": 0.7, "lower95": 1.48, "upper95": 4.22, "n": 35},
+            {"sample_variant": "drop_severe_scale_tail", "sample_role": "exploratory", "sample_filter": "fitted_to_target_scale_ratio<=25.0", "outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 1.9, "se": 0.8, "lower95": 0.33, "upper95": 3.47, "n": 35},
+            {"sample_variant": "drop_severe_scale_tail", "sample_role": "exploratory", "sample_filter": "fitted_to_target_scale_ratio<=25.0", "outcome": "other_component_qoq", "horizon": 4, "beta": -0.7, "se": 0.8, "lower95": -2.27, "upper95": 0.87, "n": 35},
+        ]
+    )
+    contrast = pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"])
+
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sample_sensitivity=sample_sensitivity,
+        contrast=contrast,
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={"status": "provisional", "warnings": [], "reasons": []},
+    )
+
+    assert payload["flagged_window_robustness"]["status"] == "stable"
+    assert payload["flagged_window_robustness"]["headline_sign_pattern_stable"] is True
+    assert "does not overturn the headline h0/h4 sign pattern" in payload["flagged_window_robustness"]["note"]

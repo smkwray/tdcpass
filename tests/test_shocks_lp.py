@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from pathlib import Path
 
@@ -5,6 +6,7 @@ from tdcpass.analysis.local_projections import (
     run_local_projections,
     run_lp_from_specs,
     run_regime_split_local_projections,
+    run_state_dependent_local_projections,
 )
 from tdcpass.analysis.shocks import expanding_window_residual
 from tdcpass.core.yaml_utils import load_yaml
@@ -14,7 +16,7 @@ def _build_panel(n: int = 64) -> pd.DataFrame:
     rows = list(range(n))
     lag_reserves_qoq = [0.15 * i for i in rows]
     tdc_values = [0.3 * i + (i % 5) for i in rows]
-    return pd.DataFrame(
+    frame = pd.DataFrame(
         {
             "quarter": [f"20{i // 4:02d}Q{(i % 4) + 1}" for i in rows],
             "tdc_bank_only_qoq": tdc_values,
@@ -44,6 +46,17 @@ def _build_panel(n: int = 64) -> pd.DataFrame:
             "tdc_broad_depository_qoq": [0.4 * i + (i % 2) for i in rows],
         }
     )
+    for column in [
+        "tdc_broad_depository_qoq",
+        "other_component_qoq",
+        "bank_credit_private_qoq",
+        "cb_nonts_qoq",
+        "foreign_nonts_qoq",
+        "domestic_nonfinancial_mmf_reallocation_qoq",
+        "domestic_nonfinancial_repo_reallocation_qoq",
+    ]:
+        frame[f"lag_{column}"] = [None, *frame[column].tolist()[:-1]]
+    return frame
 
 
 def _shock_predictors() -> list[str]:
@@ -79,6 +92,7 @@ def test_shock_builder_and_lp_canonical_contract():
         "train_target_sd",
         "train_resid_sd",
         "fitted_to_target_scale_ratio",
+        "fitted_to_train_target_sd_ratio",
         "shock_flag",
     }
     assert required_shock_cols.issubset(shocked.columns)
@@ -128,6 +142,59 @@ def test_shock_standardization_is_strict_oos_no_future_leakage():
     assert left == right
 
 
+def test_shock_scale_flag_uses_realized_target_scale_not_train_sd() -> None:
+    values = [100.0 if i % 2 == 0 else -100.0 for i in range(25)] + [0.1, 0.2, -0.1]
+    df = pd.DataFrame(
+        {
+            "quarter": [f"20{i // 4:02d}Q{(i % 4) + 1}" for i in range(len(values))],
+            "tdc_bank_only_qoq": values,
+            "lag_tdc_bank_only_qoq": [None, *values[:-1]],
+        }
+    )
+
+    shocked = expanding_window_residual(
+        df,
+        target="tdc_bank_only_qoq",
+        predictors=["lag_tdc_bank_only_qoq"],
+        min_train_obs=24,
+        max_scale_ratio=5,
+    )
+
+    flagged_row = shocked.loc[shocked["quarter"] == "2006Q2"].iloc[0]
+    assert flagged_row["shock_flag"] == "scale_ratio"
+    assert flagged_row["fitted_to_target_scale_ratio"] > 500
+    assert flagged_row["fitted_to_train_target_sd_ratio"] < 5
+
+
+def test_condition_number_flag_is_scale_invariant() -> None:
+    rows = 32
+    seq = np.arange(rows, dtype=float)
+    level = [200_000.0 + 8_000.0 * i + (i % 5) * 750.0 for i in range(rows)]
+    df = pd.DataFrame(
+        {
+            "quarter": [f"20{i // 4:02d}Q{(i % 4) + 1}" for i in range(rows)],
+            "tdc_bank_only_qoq": level,
+            "lag_tdc_bank_only_qoq": [None, *level[:-1]],
+            "lag_fedfunds": (2.0 + 0.05 * seq + 0.15 * np.sin(seq / 3.0)).tolist(),
+            "lag_unemployment": (6.0 - 0.03 * seq + 0.2 * np.cos(seq / 4.0)).tolist(),
+            "lag_inflation": (1.5 + 0.01 * seq + 0.1 * np.sin(seq / 5.0)).tolist(),
+        }
+    )
+
+    shocked = expanding_window_residual(
+        df,
+        target="tdc_bank_only_qoq",
+        predictors=["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+        min_train_obs=24,
+        max_condition_number=1_000_000,
+    )
+
+    usable = shocked.dropna(subset=["tdc_residual"])
+    assert not usable.empty
+    assert usable["train_condition_number"].max() < 100.0
+    assert usable["shock_flag"].fillna("").eq("").all()
+
+
 def test_lp_spec_scaffolding_baseline_and_regimes_contract_columns():
     panel = _build_panel()
     shocked = expanding_window_residual(
@@ -170,6 +237,44 @@ def test_lp_spec_scaffolding_baseline_and_regimes_contract_columns():
         residual_column="tdc_long_burnin_residual",
         standardized_column="tdc_long_burnin_residual_z",
         train_start_obs_column="tdc_long_burnin_train_start_obs",
+    )
+    shocked = expanding_window_residual(
+        shocked,
+        target="tdc_bank_only_qoq",
+        predictors=["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+        min_train_obs=24,
+        max_train_obs=40,
+        model_name="unexpected_tdc_bank_only_macro_rolling40",
+        model_name_column="tdc_bank_only_macro_rolling40_model_name",
+        fitted_column="tdc_bank_only_macro_rolling40_fitted",
+        residual_column="tdc_bank_only_macro_rolling40_residual",
+        standardized_column="tdc_bank_only_macro_rolling40_residual_z",
+        train_start_obs_column="tdc_bank_only_macro_rolling40_train_start_obs",
+    )
+    shocked = expanding_window_residual(
+        shocked,
+        target="tdc_bank_only_qoq",
+        predictors=["lag_tdc_bank_only_qoq", "lag_bill_share", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+        min_train_obs=24,
+        model_name="unexpected_tdc_legacy_billshare_expanding",
+        model_name_column="tdc_legacy_billshare_expanding_model_name",
+        fitted_column="tdc_legacy_billshare_expanding_fitted",
+        residual_column="tdc_legacy_billshare_expanding_residual",
+        standardized_column="tdc_legacy_billshare_expanding_residual_z",
+        train_start_obs_column="tdc_legacy_billshare_expanding_train_start_obs",
+    )
+    shocked = expanding_window_residual(
+        shocked,
+        target="tdc_bank_only_qoq",
+        predictors=["lag_tdc_bank_only_qoq", "lag_bill_share", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+        min_train_obs=24,
+        max_train_obs=40,
+        model_name="unexpected_tdc_bank_only_billshare_macro_rolling40",
+        model_name_column="tdc_bank_only_billshare_macro_rolling40_model_name",
+        fitted_column="tdc_bank_only_billshare_macro_rolling40_fitted",
+        residual_column="tdc_bank_only_billshare_macro_rolling40_residual",
+        standardized_column="tdc_bank_only_billshare_macro_rolling40_residual_z",
+        train_start_obs_column="tdc_bank_only_billshare_macro_rolling40_train_start_obs",
     )
     shocked = expanding_window_residual(
         shocked,
@@ -220,6 +325,37 @@ def test_lp_spec_scaffolding_baseline_and_regimes_contract_columns():
     }.issubset(regimes.columns)
     assert set(regimes["spec_name"]) == {"regimes"}
 
+    state_dependence = outputs["lp_irf_state_dependence"]
+    assert {
+        "state_variant",
+        "state_role",
+        "state_column",
+        "state_label",
+        "state_quantile",
+        "state_value",
+        "state_mean",
+        "state_centered_value",
+        "outcome",
+        "horizon",
+        "beta",
+        "se",
+        "lower95",
+        "upper95",
+        "interaction_beta",
+        "interaction_se",
+        "interaction_lower95",
+        "interaction_upper95",
+        "n",
+        "spec_name",
+        "shock_column",
+        "shock_scale",
+        "response_type",
+    }.issubset(state_dependence.columns)
+    assert set(state_dependence["spec_name"]) == {"state_dependence"}
+    assert set(state_dependence["state_variant"]) == {"reserve_drain"}
+    assert set(state_dependence["state_role"]) == {"exploratory"}
+    assert set(state_dependence["state_label"]) == {"low", "high"}
+
     sensitivity = outputs["tdc_sensitivity_ladder"]
     assert {
         "treatment_variant",
@@ -241,6 +377,9 @@ def test_lp_spec_scaffolding_baseline_and_regimes_contract_columns():
         "baseline",
         "bank_only_long_burnin",
         "bank_only_no_bill_share",
+        "bank_only_billshare_macro_rolling40",
+        "legacy_rolling40_ols",
+        "legacy_billshare_expanding",
         "legacy_totaldep_long_burnin",
         "broad_depository",
     }
@@ -271,6 +410,35 @@ def test_lp_spec_scaffolding_baseline_and_regimes_contract_columns():
     }
     assert set(control_sensitivity["control_role"]) == {"headline", "core", "exploratory"}
 
+    factor_control_sensitivity = outputs["factor_control_sensitivity"]
+    assert {
+        "factor_variant",
+        "factor_role",
+        "factor_columns",
+        "source_columns",
+        "factor_count",
+        "min_train_obs",
+        "outcome",
+        "horizon",
+        "beta",
+        "se",
+        "lower95",
+        "upper95",
+        "n",
+        "spec_name",
+        "shock_column",
+        "shock_scale",
+        "response_type",
+    }.issubset(factor_control_sensitivity.columns)
+    assert set(factor_control_sensitivity["spec_name"]) == {"factor_control_sensitivity"}
+    assert set(factor_control_sensitivity["factor_variant"]) == {
+        "recursive_macro_factors2",
+        "recursive_macro_plumbing_factors3",
+    }
+    assert set(factor_control_sensitivity["factor_role"]) == {"core", "exploratory"}
+    assert set(factor_control_sensitivity["factor_count"]) == {2, 3}
+    assert set(factor_control_sensitivity["min_train_obs"]) == {24, 40}
+
     sample_sensitivity = outputs["shock_sample_sensitivity"]
     assert {
         "sample_variant",
@@ -289,8 +457,38 @@ def test_lp_spec_scaffolding_baseline_and_regimes_contract_columns():
         "response_type",
     }.issubset(sample_sensitivity.columns)
     assert set(sample_sensitivity["spec_name"]) == {"sample_sensitivity"}
-    assert set(sample_sensitivity["sample_variant"]) == {"all_usable_shocks", "drop_flagged_shocks"}
+    assert set(sample_sensitivity["sample_variant"]) == {
+        "all_usable_shocks",
+        "drop_flagged_shocks",
+        "drop_severe_scale_tail",
+    }
     assert set(sample_sensitivity["sample_role"]) == {"headline", "exploratory"}
+    severe_tail_filters = sample_sensitivity.loc[
+        sample_sensitivity["sample_variant"] == "drop_severe_scale_tail", "sample_filter"
+    ].drop_duplicates()
+    assert severe_tail_filters.tolist() == ["fitted_to_target_scale_ratio<=25.0"]
+
+    period_sensitivity = outputs["period_sensitivity"]
+    assert {
+        "period_variant",
+        "period_role",
+        "start_quarter",
+        "end_quarter",
+        "outcome",
+        "horizon",
+        "beta",
+        "se",
+        "lower95",
+        "upper95",
+        "n",
+        "spec_name",
+        "shock_column",
+        "shock_scale",
+        "response_type",
+    }.issubset(period_sensitivity.columns)
+    assert set(period_sensitivity["spec_name"]) == {"period_sensitivity"}
+    assert {"all_usable", "post_gfc_early"}.issubset(set(period_sensitivity["period_variant"]))
+    assert set(period_sensitivity["period_role"]).issubset({"headline", "core"})
 
 
 def test_alternate_shock_does_not_overwrite_baseline_model_name_metadata() -> None:
@@ -352,6 +550,170 @@ def test_regime_split_uses_calendar_forward_horizons() -> None:
 
     high_row = out[(out["regime"] == "alternating_high") & (out["outcome"] == "total_deposits_bank_qoq")].iloc[0]
     assert int(high_row["n"]) == 15
+
+
+def test_state_dependent_lp_reports_low_and_high_implied_responses() -> None:
+    n = 96
+    rows = list(range(n))
+    shock = pd.Series([np.sin(i / 5.0) + 0.25 * np.cos(i / 9.0) for i in rows], dtype=float)
+    state = pd.Series(np.linspace(-1.0, 1.0, n), dtype=float)
+    state_centered = state - float(state.mean())
+    outcome = 1.0 + 2.0 * shock + 3.0 * shock * state_centered
+    frame = pd.DataFrame(
+        {
+            "quarter": [f"20{i // 4:02d}Q{(i % 4) + 1}" for i in rows],
+            "tdc_residual_z": shock,
+            "bank_absorption_share": state,
+            "total_deposits_bank_qoq": outcome,
+        }
+    )
+
+    out = run_state_dependent_local_projections(
+        frame,
+        shock_col="tdc_residual_z",
+        outcome_cols=["total_deposits_bank_qoq"],
+        controls=[],
+        horizons=[0],
+        nw_lags=1,
+        cumulative=False,
+        state_definitions={
+            "bank_absorption": {
+                "column": "bank_absorption_share",
+                "state_role": "core",
+                "low_quantile": 0.25,
+                "high_quantile": 0.75,
+            }
+        },
+    )
+
+    assert not out.empty
+    low_row = out[(out["state_variant"] == "bank_absorption") & (out["state_label"] == "low")].iloc[0]
+    high_row = out[(out["state_variant"] == "bank_absorption") & (out["state_label"] == "high")].iloc[0]
+    assert float(high_row["beta"]) > float(low_row["beta"])
+    assert float(high_row["interaction_beta"]) > 0.0
+    assert float(low_row["state_value"]) < float(high_row["state_value"])
+
+
+def test_factor_augmented_controls_materialize_after_recursive_burn_in() -> None:
+    panel = _build_panel(n=96)
+    shocked = expanding_window_residual(
+        panel,
+        target="tdc_bank_only_qoq",
+        predictors=_shock_predictors(),
+        min_train_obs=24,
+    )
+    lp_specs = {
+        "specs": {
+            "baseline": {
+                "shock_column": "tdc_residual_z",
+                "outcomes": ["total_deposits_bank_qoq"],
+                "controls": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+                "include_lagged_outcome": True,
+                "horizons": [0],
+            },
+            "regimes": {
+                "shock_column": "tdc_residual_z",
+                "outcomes": ["total_deposits_bank_qoq"],
+                "controls": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+                "include_lagged_outcome": True,
+                "horizons": [0],
+                "regime_columns": ["reserve_drain_pressure"],
+            },
+            "state_dependence": {
+                "shock_column": "tdc_residual_z",
+                "outcomes": ["total_deposits_bank_qoq"],
+                "controls": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+                "include_lagged_outcome": True,
+                "horizons": [0],
+                "state_variants": {
+                    "reserve_drain": {"state_role": "exploratory"}
+                },
+            },
+            "sensitivity": {
+                "outcomes": ["total_deposits_bank_qoq"],
+                "controls": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+                "include_lagged_outcome": True,
+                "horizons": [0],
+                "shock_variants": {
+                    "baseline": {
+                        "shock_column": "tdc_residual_z",
+                        "treatment_role": "core",
+                    }
+                },
+            },
+            "control_sensitivity": {
+                "shock_column": "tdc_residual_z",
+                "outcomes": ["total_deposits_bank_qoq"],
+                "include_lagged_outcome": True,
+                "horizons": [0],
+                "control_variants": {
+                    "headline_lagged_macro": {
+                        "control_role": "headline",
+                        "controls": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+                        "include_lagged_outcome": True,
+                    }
+                },
+            },
+            "factor_control_sensitivity": {
+                "shock_column": "tdc_residual_z",
+                "outcomes": ["total_deposits_bank_qoq"],
+                "controls": ["lag_tdc_bank_only_qoq"],
+                "include_lagged_outcome": True,
+                "horizons": [0],
+                "factor_variants": {
+                    "recursive_macro_factors2": {
+                        "factor_role": "core",
+                        "source_columns": [
+                            "lag_fedfunds",
+                            "lag_unemployment",
+                            "lag_inflation",
+                        ],
+                        "factor_count": 2,
+                        "min_train_obs": 24,
+                    },
+                    "recursive_macro_plumbing_factors3": {
+                        "factor_role": "exploratory",
+                        "source_columns": [
+                            "lag_tga_qoq",
+                            "lag_reserves_qoq",
+                            "lag_bill_share",
+                            "lag_fedfunds",
+                            "lag_unemployment",
+                            "lag_inflation",
+                        ],
+                        "factor_count": 3,
+                        "min_train_obs": 40,
+                    }
+                },
+            },
+            "sample_sensitivity": {
+                "shock_column": "tdc_residual_z",
+                "outcomes": ["total_deposits_bank_qoq"],
+                "controls": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+                "include_lagged_outcome": True,
+                "horizons": [0],
+                "sample_variants": {
+                    "all_usable_shocks": {
+                        "sample_role": "headline",
+                        "exclude_flagged_shocks": False,
+                    }
+                },
+            },
+        }
+    }
+    regime_specs = {"regimes": {"reserve_drain": {"column": "reserve_drain_pressure", "threshold": "median"}}}
+
+    outputs = run_lp_from_specs(shocked, lp_specs=lp_specs, regime_specs=regime_specs)
+    factors = outputs["factor_control_sensitivity"]
+
+    assert not factors.empty
+    macro_row = factors[factors["factor_variant"] == "recursive_macro_factors2"].iloc[0]
+    plumbing_row = factors[factors["factor_variant"] == "recursive_macro_plumbing_factors3"].iloc[0]
+    assert "recursive_macro_factors2_factor1" in str(macro_row["factor_columns"])
+    assert "lag_fedfunds" in str(macro_row["source_columns"])
+    assert "recursive_macro_plumbing_factors3_factor1" in str(plumbing_row["factor_columns"])
+    assert "lag_tga_qoq" in str(plumbing_row["source_columns"])
+    assert int(macro_row["n"]) >= int(plumbing_row["n"])
 
 
 def test_sensitivity_variants_require_explicit_treatment_role() -> None:

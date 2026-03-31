@@ -1,0 +1,57 @@
+{
+  "informative_regime_count": 1,
+  "stable_regime_count": 1,
+  "regimes": [
+    {
+      "regime": "reserve_drain",
+      "column": "reserve_drain_pressure",
+      "publication_role": "published",
+      "threshold_rule": "median",
+      "threshold_value": 10.218,
+      "high_rows": 34,
+      "low_rows": 34,
+      "high_share": 0.5,
+      "low_share": 0.5,
+      "informative": true,
+      "stable_for_interpretation": true,
+      "stability_warnings": [],
+      "full_sample_shock_std": 1.5614747232100081,
+      "high_shock_std": 1.1830628174941256,
+      "low_shock_std": 1.8838354081364177,
+      "high_shock_support_ratio": 0.7576573606404843,
+      "low_shock_support_ratio": 1.2064463036991822,
+      "total_deposits_h0_high": {
+        "beta": 37.00725800955061,
+        "se": 25.779352662726968,
+        "lower95": -13.520273209394247,
+        "upper95": 87.53478922849547,
+        "n": 34
+      },
+      "total_deposits_h0_low": {
+        "beta": 51.931257848882325,
+        "se": 26.70058985426981,
+        "lower95": -0.4018982654865013,
+        "upper95": 104.26441396325114,
+        "n": 34
+      },
+      "total_deposits_h4_high": {
+        "beta": 172.45154683853286,
+        "se": 82.0980052625317,
+        "lower95": 11.539456523970728,
+        "upper95": 333.363637153095,
+        "n": 32
+      },
+      "total_deposits_h4_low": {
+        "beta": 138.74405791330113,
+        "se": 100.77547755936932,
+        "lower95": -58.77587810306272,
+        "upper95": 336.263993929665,
+        "n": 32
+      }
+    }
+  ],
+  "takeaways": [
+    "1 regime splits have enough balanced rows for first-pass interpretation.",
+    "1 regime splits also have enough within-state shock support for cautious interpretation."
+  ]
+}

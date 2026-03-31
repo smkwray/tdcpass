@@ -6,12 +6,10 @@ artifacts:
       - tdc_bank_only_qoq
       - total_deposits_bank_qoq
       - other_component_qoq
-      - bill_share
       - fedfunds
       - unemployment
       - inflation
       - lag_tdc_bank_only_qoq
-      - lag_bill_share
       - lag_fedfunds
       - lag_unemployment
       - lag_inflation
@@ -26,10 +24,8 @@ artifacts:
       - domestic_nonfinancial_mmf_reallocation_qoq
       - domestic_nonfinancial_repo_reallocation_qoq
       - bill_share
-      - bank_absorption_share
       - reserve_drain_pressure
       - quarter_index
-      - slr_tight
       - tga_qoq
       - reserves_qoq
       - fedfunds
@@ -71,6 +67,7 @@ artifacts:
       - train_target_sd
       - train_resid_sd
       - fitted_to_target_scale_ratio
+      - fitted_to_train_target_sd_ratio
       - shock_flag
   - path: output/models/lp_irf.csv
     kind: csv
@@ -143,6 +140,29 @@ artifacts:
       - upper95
       - n
       - spec_name
+  - path: output/models/period_sensitivity.csv
+    kind: csv
+    required_columns:
+      - period_variant
+      - period_role
+      - start_quarter
+      - end_quarter
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/period_sensitivity_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - periods
+      - key_horizons
+      - takeaways
   - path: output/models/total_minus_other_contrast.csv
     kind: csv
     required_columns:
@@ -388,6 +408,29 @@ artifacts:
       - upper95
       - n
       - spec_name
+  - path: site/data/period_sensitivity.csv
+    kind: csv
+    required_columns:
+      - period_variant
+      - period_role
+      - start_quarter
+      - end_quarter
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/period_sensitivity_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - periods
+      - key_horizons
+      - takeaways
   - path: site/data/total_minus_other_contrast.csv
     kind: csv
     required_columns:

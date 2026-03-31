@@ -6,6 +6,8 @@ from pathlib import Path
 import pandas as pd
 
 from tdcpass.core.yaml_utils import load_yaml
+from tdcpass.analysis.accounting import AccountingSummary
+from tdcpass.pipeline.quarterly import _default_overview_payload
 from tdcpass.pipeline.quarterly import run_quarterly_pipeline
 from tdcpass.reports.site_export import contract_paths, load_output_contract
 
@@ -69,6 +71,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/tdc_sensitivity_ladder.csv",
         "output/models/control_set_sensitivity.csv",
         "output/models/shock_sample_sensitivity.csv",
+        "output/models/period_sensitivity.csv",
         "output/models/total_minus_other_contrast.csv",
         "output/models/structural_proxy_evidence.csv",
         "output/models/proxy_unit_audit.json",
@@ -82,6 +85,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
+        "output/models/period_sensitivity_summary.json",
     }
     for rel in csv_artifacts:
         if rel.endswith("accounting_summary.csv"):
@@ -103,9 +107,10 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "train_target_sd",
                     "train_resid_sd",
                     "fitted_to_target_scale_ratio",
+                    "fitted_to_train_target_sd_ratio",
                     "shock_flag",
                 ],
-                [["2000Q1", 1.0, 0.8, 0.2, 0.2, "stub", 1, 10.0, 0.5, 0.2, 0.8, ""]],
+                [["2000Q1", 1.0, 0.8, 0.2, 0.2, "stub", 1, 10.0, 0.5, 0.2, 0.8, 1.6, ""]],
             )
         elif rel.endswith("lp_irf.csv"):
             _write_csv(source_root / rel, ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
@@ -117,6 +122,8 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
             _write_csv(source_root / rel, ["control_variant", "control_role", "control_columns", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["headline_lagged_macro", "headline", "lag_fedfunds|lag_unemployment|lag_inflation", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "control_sensitivity"]])
         elif rel.endswith("shock_sample_sensitivity.csv"):
             _write_csv(source_root / rel, ["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["all_usable_shocks", "headline", "all_usable_shocks", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "sample_sensitivity"]])
+        elif rel.endswith("period_sensitivity.csv"):
+            _write_csv(source_root / rel, ["period_variant", "period_role", "start_quarter", "end_quarter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["all_usable", "headline", "2009Q1", "2025Q4", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "period_sensitivity"]])
         elif rel.endswith("total_minus_other_contrast.csv"):
             _write_csv(source_root / rel, ["scope", "variant", "role", "horizon", "beta_total", "beta_other", "beta_implied", "beta_direct", "gap_implied_minus_direct", "abs_gap", "n_total", "n_other", "n_direct", "sample_mismatch_flag"], [["baseline", "baseline", "headline", 0, 0.1, 0.0, 0.1, 0.1, 0.0, 0.0, 1, 1, 1, False]])
         elif rel.endswith("structural_proxy_evidence.csv"):
@@ -228,6 +235,17 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "answer_ready_when": ["stub"],
                 },
             )
+        elif rel.endswith("period_sensitivity_summary.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "status": "materialized",
+                    "headline_question": "stub",
+                    "periods": [],
+                    "key_horizons": {},
+                    "takeaways": ["stub"],
+                },
+            )
         else:
             _write_json(
                 source_root / rel,
@@ -276,3 +294,39 @@ def test_contract_loader_reads_frozen_layout() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     payload = load_yaml(repo_root / "config" / "output_contract.yml")
     assert "site/data/overview.json" in {item["path"] for item in payload["artifacts"]}
+
+
+def test_default_overview_payload_stays_methods_preview() -> None:
+    panel = pd.DataFrame(
+        {
+            "quarter": ["1954Q4", "1955Q1", "1955Q2"],
+            "bill_share": [0.7, 0.8, 0.9],
+        }
+    )
+    shocked = pd.DataFrame(
+        {
+            "quarter": ["1954Q4", "1960Q4", "2025Q4"],
+            "tdc_residual_z": [None, 0.1, -0.1],
+        }
+    )
+    accounting = AccountingSummary(
+        mean_tdc=0.1,
+        mean_total_deposits=1.0,
+        mean_other_component=0.9,
+        share_other_negative=0.2,
+        correlation_tdc_total=0.0,
+        correlation_tdc_other=0.0,
+    )
+
+    payload = _default_overview_payload(
+        panel=panel,
+        shocked=shocked,
+        accounting_summary=accounting,
+        readiness={"status": "not_ready"},
+        root=Path("/tmp/tdcpass"),
+    )
+
+    assert "methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock" in payload["main_findings"][1]
+    assert "1960Q4" in payload["main_findings"][2]
+    assert "`not_ready`" in payload["main_findings"][2]
+    assert "deposit-response readout" in payload["caveats"][0]

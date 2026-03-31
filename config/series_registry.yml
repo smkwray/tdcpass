@@ -107,15 +107,6 @@ series:
   preferred_source: fiscaldata_auctions_query
   quality_tier: tier_2_constructed
   notes: Quarterly bill share from Treasury auction offering amounts by issue date; regime overlay, not standalone mechanism proof.
-- key: bank_absorption_share
-  display_name: Bank absorption share
-  role: regime
-  frequency: quarterly
-  units: share
-  status: planned_v1
-  preferred_source: sibling_tsyparty_or_proxy
-  quality_tier: tier_3_inferred
-  notes: Regime overlay.
 - key: reserve_drain_pressure
   display_name: Reserve-drain pressure
   role: regime
@@ -134,15 +125,6 @@ series:
   preferred_source: constructed_from_panel_order
   quality_tier: tier_1_direct
   notes: Monotonic quarter-order index used only for exploratory trend-stress LP diagnostics.
-- key: slr_tight
-  display_name: Bank balance-sheet space / SLR tightness proxy
-  role: regime
-  frequency: quarterly
-  units: indicator
-  status: planned_v1
-  preferred_source: sibling_slrwatch_or_internal_proxy
-  quality_tier: tier_3_inferred
-  notes: Regime overlay.
 - key: tdc_fitted
   display_name: Fitted bank-only TDC path
   role: derived_shock_component
