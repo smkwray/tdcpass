@@ -114,6 +114,39 @@ def _git_blob_bytes(repo_root: Path, *, commit: str, relpath: Path) -> bytes | N
     return result.stdout
 
 
+def _git_working_tree_payload(repo_root: Path) -> dict[str, Any]:
+    try:
+        result = subprocess.run(
+            ["git", "status", "--porcelain=v1", "--untracked-files=normal"],
+            cwd=str(repo_root),
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return {
+            "status": "unresolved",
+            "tracked_change_count": None,
+            "untracked_change_count": None,
+        }
+
+    tracked_change_count = 0
+    untracked_change_count = 0
+    for line in result.stdout.splitlines():
+        if not line:
+            continue
+        if line.startswith("?? "):
+            untracked_change_count += 1
+        else:
+            tracked_change_count += 1
+    status = "clean" if tracked_change_count == 0 and untracked_change_count == 0 else "dirty"
+    return {
+        "status": status,
+        "tracked_change_count": tracked_change_count,
+        "untracked_change_count": untracked_change_count,
+    }
+
+
 def _stored_analysis_source_commit(fingerprint: Mapping[str, Any]) -> str | None:
     value = fingerprint.get("analysis_source_commit")
     if isinstance(value, str) and value:
@@ -177,6 +210,7 @@ def build_headline_treatment_fingerprint(
             "end_quarter": None if usable.empty else str(usable["quarter"].iloc[-1]),
         },
         "analysis_source_commit": _git_commit(repo_root),
+        "analysis_tree": _git_working_tree_payload(repo_root),
         "config_hashes": _config_hash_payload(repo_root),
         "upstream_input": _upstream_input_payload(
             source_path=canonical_tdc_source_path,
@@ -237,6 +271,13 @@ def _spec_validation_failures(
     stored_commit = _stored_analysis_source_commit(fingerprint)
     if stored_commit is None:
         failures.append("Fingerprint is missing analysis_source_commit metadata.")
+    analysis_tree = fingerprint.get("analysis_tree")
+    if not isinstance(analysis_tree, Mapping):
+        failures.append("Fingerprint is missing analysis_tree metadata.")
+    else:
+        tree_status = analysis_tree.get("status")
+        if not isinstance(tree_status, str) or not tree_status:
+            failures.append("Fingerprint analysis_tree is missing status.")
     return failures
 
 
@@ -250,12 +291,28 @@ def build_headline_treatment_fingerprint_validation_summary(
     config_hashes = fingerprint.get("config_hashes")
     upstream_input = fingerprint.get("upstream_input")
     stored_commit = _stored_analysis_source_commit(fingerprint)
+    analysis_tree = fingerprint.get("analysis_tree")
     commit_status = "passed"
     if stored_commit is None:
         commit_status = "missing"
     elif not _git_commit_exists(repo_root, stored_commit):
         failures.append(f"Fingerprint analysis_source_commit {stored_commit!r} is not available in this repo.")
         commit_status = "unresolved"
+
+    analysis_tree_status = "passed"
+    stored_tree_status = None
+    if not isinstance(analysis_tree, Mapping):
+        analysis_tree_status = "missing"
+    else:
+        stored_tree_status = analysis_tree.get("status")
+        if stored_tree_status == "clean":
+            analysis_tree_status = "passed"
+        elif stored_tree_status == "dirty":
+            failures.append("Fingerprint analysis_tree indicates the build was generated from a dirty working tree.")
+            analysis_tree_status = "failed"
+        else:
+            failures.append("Fingerprint analysis_tree status is unresolved.")
+            analysis_tree_status = "unresolved"
 
     current_config_hashes = _config_hash_payload(repo_root)
     config_status = "passed"
@@ -282,8 +339,8 @@ def build_headline_treatment_fingerprint_validation_summary(
                 and ":" in locator
             ):
                 _, relpath = locator.split(":", 1)
+                upstream_candidate = f"{stored_source_repo_locator}:{relpath}@{stored_source_repo_commit}"
                 candidate_repo = (repo_root.parent / stored_source_repo_locator).resolve()
-                upstream_candidate = f"{candidate_repo}:{relpath}@{stored_source_repo_commit}"
                 blob = (
                     _git_blob_bytes(candidate_repo, commit=stored_source_repo_commit, relpath=Path(relpath))
                     if _git_commit_exists(candidate_repo, stored_source_repo_commit)
@@ -306,9 +363,10 @@ def build_headline_treatment_fingerprint_validation_summary(
                 if ":" in locator:
                     repo_name, relpath = locator.split(":", 1)
                     candidate = (repo_root.parent / repo_name / relpath).resolve()
+                    upstream_candidate = locator
                 else:
                     candidate = (repo_root / locator).resolve()
-                upstream_candidate = str(candidate)
+                    upstream_candidate = locator
                 if candidate.exists() and candidate.is_file():
                     upstream_rechecked = True
                     observed_sha256 = sha256_file(candidate)
@@ -327,10 +385,15 @@ def build_headline_treatment_fingerprint_validation_summary(
     return {
         "status": "passed" if not failures else "failed",
         "failures": failures,
-        "repo_root": str(repo_root),
         "analysis_source_commit_check": {
             "status": commit_status,
             "stored_analysis_source_commit": stored_commit,
+        },
+        "analysis_tree_check": {
+            "status": analysis_tree_status,
+            "stored_status": stored_tree_status,
+            "tracked_change_count": None if not isinstance(analysis_tree, Mapping) else analysis_tree.get("tracked_change_count"),
+            "untracked_change_count": None if not isinstance(analysis_tree, Mapping) else analysis_tree.get("untracked_change_count"),
         },
         "config_hashes_check": {
             "status": config_status,
@@ -340,7 +403,7 @@ def build_headline_treatment_fingerprint_validation_summary(
         "upstream_input_check": {
             "status": upstream_status,
             "rechecked_source_sha256": upstream_rechecked,
-            "candidate_path": upstream_candidate,
+            "candidate_locator": upstream_candidate,
             "stored_locator": None if not isinstance(upstream_input, Mapping) else upstream_input.get("source_locator"),
             "stored_sha256": None if not isinstance(upstream_input, Mapping) else upstream_input.get("sha256"),
             "stored_source_repo_locator": None if not isinstance(upstream_input, Mapping) else upstream_input.get("source_repo_locator"),
@@ -375,6 +438,7 @@ def validate_headline_treatment_fingerprint(
 ) -> list[str]:
     failures = _spec_validation_failures(fingerprint, shock_spec=shock_spec)
     stored_commit = _stored_analysis_source_commit(fingerprint)
+    analysis_tree = fingerprint.get("analysis_tree")
     if repo_root is not None:
         current_commit = _git_commit(repo_root)
         if stored_commit is None:
@@ -385,6 +449,13 @@ def validate_headline_treatment_fingerprint(
             failures.append(
                 f"Fingerprint analysis_source_commit mismatch: expected current repo commit {current_commit!r}, observed {stored_commit!r}."
             )
+        if not isinstance(analysis_tree, Mapping):
+            failures.append("Fingerprint is missing analysis_tree metadata.")
+        elif analysis_tree.get("status") != "clean":
+            failures.append("Fingerprint analysis_tree indicates the build was not generated from a clean working tree.")
+        current_tree = _git_working_tree_payload(repo_root)
+        if current_tree.get("status") != "clean":
+            failures.append("Current repo working tree is not clean for live fingerprint validation.")
         current_config_hashes = _config_hash_payload(repo_root)
         config_hashes = fingerprint.get("config_hashes")
         if config_hashes != current_config_hashes:

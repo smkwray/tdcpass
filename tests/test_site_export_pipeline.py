@@ -224,6 +224,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "max_train_obs": 40,
                     "usable_sample": {"start_quarter": "2009Q1", "end_quarter": "2025Q4", "observations": 68},
                     "analysis_source_commit": "stub",
+                    "analysis_tree": {"status": "clean", "tracked_change_count": 0, "untracked_change_count": 0},
                     "config_hashes": {"files": {"config/shock_specs.yml": "stub"}, "combined_sha256": "stub"},
                     "upstream_input": {
                         "source_kind": "tdcest_processed_csv",
@@ -241,6 +242,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "status": "passed",
                     "failures": [],
                     "analysis_source_commit_check": {"status": "passed"},
+                    "analysis_tree_check": {"status": "passed"},
                     "config_hashes_check": {"status": "passed"},
                     "upstream_input_check": {"status": "skipped_missing_locator_or_sha"},
                     "spec_metadata_check": {"status": "passed"},

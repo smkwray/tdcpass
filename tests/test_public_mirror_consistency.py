@@ -49,6 +49,7 @@ def test_committed_site_data_mirror_is_self_consistent() -> None:
     assert provenance["status"] == "passed"
     assert provenance["failures"] == []
     assert provenance["analysis_source_commit_check"]["status"] == "passed"
+    assert provenance["analysis_tree_check"]["status"] == "passed"
     assert provenance["config_hashes_check"]["status"] == "passed"
 
     assert direct_identification["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
@@ -57,7 +58,6 @@ def test_committed_site_data_mirror_is_self_consistent() -> None:
     assert readiness["status"] == "provisional"
     assert pass_through["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
     assert pass_through["estimation_path"]["measurement_variant_artifact"] == "identity_measurement_ladder.csv"
-    assert "consistent with crowd-out" in pass_through["headline_answer"]
 
     for summary in [direct_identification, readiness, pass_through]:
         horizons = summary["ratio_reporting_gate"]["horizons"]

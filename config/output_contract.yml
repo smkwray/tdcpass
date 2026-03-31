@@ -288,6 +288,7 @@ artifacts:
       - max_train_obs
       - usable_sample
       - analysis_source_commit
+      - analysis_tree
       - config_hashes
       - upstream_input
   - path: output/models/provenance_validation_summary.json
@@ -296,6 +297,7 @@ artifacts:
       - status
       - failures
       - analysis_source_commit_check
+      - analysis_tree_check
       - config_hashes_check
       - upstream_input_check
       - spec_metadata_check
@@ -619,6 +621,7 @@ artifacts:
       - max_train_obs
       - usable_sample
       - analysis_source_commit
+      - analysis_tree
       - config_hashes
       - upstream_input
   - path: site/data/provenance_validation_summary.json
@@ -627,6 +630,7 @@ artifacts:
       - status
       - failures
       - analysis_source_commit_check
+      - analysis_tree_check
       - config_hashes_check
       - upstream_input_check
       - spec_metadata_check

@@ -381,8 +381,9 @@ Required keys:
 - `max_train_obs`
 - `usable_sample`
 - `analysis_source_commit`
+- `analysis_tree`
 
-This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml` and record the `analysis_source_commit` whose code/config state produced the artifact. That makes the committed public mirror validate against a satisfiable recorded state instead of the containing repo's later `HEAD`.
+This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml`, record the `analysis_source_commit` used as the source anchor for the build, and record whether that source tree was clean or dirty at build time. That makes the committed public mirror validate against a satisfiable recorded state instead of the containing repo's later `HEAD`, while still surfacing whether the build came from uncommitted source changes.
 
 ### `output/models/provenance_validation_summary.json`
 
@@ -391,11 +392,12 @@ Required keys:
 - `status`
 - `failures`
 - `analysis_source_commit_check`
+- `analysis_tree_check`
 - `config_hashes_check`
 - `upstream_input_check`
 - `spec_metadata_check`
 
-This file is the recorded-state provenance verdict for the headline treatment fingerprint. It records whether the stored `analysis_source_commit` is present in repo history, whether the stored config hashes still match the current repo config files, and whether the upstream canonical-TDC source can be revalidated against its recorded source commit when the sibling repo is reachable. The publish path can still apply a stricter live current-HEAD gate before mirroring, but the committed public mirror should avoid an unsatisfiable “stored commit must equal containing repo HEAD” rule.
+This file is the recorded-state provenance verdict for the headline treatment fingerprint. It records whether the stored `analysis_source_commit` is present in repo history, whether the stored build tree was clean, whether the stored config hashes still match the current repo config files, and whether the upstream canonical-TDC source can be revalidated against its recorded source commit when the sibling repo is reachable. The publish path can still apply a stricter live current-HEAD gate before mirroring, but the committed public mirror should avoid an unsatisfiable “stored commit must equal containing repo HEAD” rule.
 
 ### `output/models/direct_identification_summary.json`
 

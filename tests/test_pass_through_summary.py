@@ -272,7 +272,8 @@ def test_pass_through_summary_uses_cooler_provisional_headline_for_exact_baselin
         readiness={"status": "provisional", "warnings": [], "reasons": []},
     )
 
-    assert "sign pattern consistent with crowd-out in the exact identity baseline" in payload["headline_answer"]
+    assert "impact-stage sign pattern" in payload["headline_answer"]
+    assert "suggestive of crowd-out" in payload["headline_answer"]
     assert "remain unsettled" in payload["headline_answer"]
 
 

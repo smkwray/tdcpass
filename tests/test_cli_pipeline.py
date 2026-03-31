@@ -26,7 +26,7 @@ def _write_json(path: Path, payload: dict[str, object]) -> None:
 
 def _valid_fingerprint_payload() -> dict[str, object]:
     repo_root = Path(__file__).resolve().parents[1]
-    return build_headline_treatment_fingerprint(
+    payload = build_headline_treatment_fingerprint(
         shock_spec={
             "freeze_status": "frozen",
             "model_name": "unexpected_tdc_default",
@@ -44,6 +44,8 @@ def _valid_fingerprint_payload() -> dict[str, object]:
         shocked=pd.DataFrame({"quarter": ["2010Q1"], "tdc_residual_z": [0.1]}),
         repo_root=repo_root,
     )
+    payload["analysis_tree"] = {"status": "clean", "tracked_change_count": 0, "untracked_change_count": 0}
+    return payload
 
 
 def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
@@ -235,6 +237,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                     "max_train_obs": 40,
                     "usable_sample": {"rows": 1},
                     "analysis_source_commit": "stub",
+                    "analysis_tree": {"status": "clean", "tracked_change_count": 0, "untracked_change_count": 0},
                     "config_hashes": {"files": {"config/shock_specs.yml": "stub"}, "combined_sha256": "stub"},
                     "upstream_input": {
                         "source_kind": "tdcest_processed_csv",
@@ -252,6 +255,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                     "status": "passed",
                     "failures": [],
                     "analysis_source_commit_check": {"status": "passed"},
+                    "analysis_tree_check": {"status": "passed"},
                     "config_hashes_check": {"status": "passed"},
                     "upstream_input_check": {"status": "skipped_missing_locator_or_sha"},
                     "spec_metadata_check": {"status": "passed"},
@@ -364,7 +368,8 @@ def test_pipeline_closeout_command_is_wired() -> None:
     assert parsed.pipeline_command == "closeout"
 
 
-def test_pipeline_closeout_reads_existing_artifacts(tmp_path: Path, capsys) -> None:
+def test_pipeline_closeout_reads_existing_artifacts(tmp_path: Path, capsys, monkeypatch) -> None:
+    monkeypatch.setattr("tdcpass.cli.validate_headline_treatment_fingerprint", lambda *args, **kwargs: [])
     root = tmp_path / "closeout-root"
     _write_json(
         root / "output" / "models" / "backend_closeout_summary.json",
@@ -523,7 +528,11 @@ def test_demo_command_still_exists() -> None:
     assert parsed.command == "demo"
 
 
-def test_pipeline_run_supports_offline_raw_fixture(tmp_path: Path) -> None:
+def test_pipeline_run_supports_offline_raw_fixture(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(
+        "tdcpass.analysis.treatment_fingerprint._git_working_tree_payload",
+        lambda _repo_root: {"status": "clean", "tracked_change_count": 0, "untracked_change_count": 0},
+    )
     fixture_root = Path(__file__).resolve().parent / "fixtures" / "offline_raw_fixture"
     dest_root = tmp_path / "offline-dest"
 

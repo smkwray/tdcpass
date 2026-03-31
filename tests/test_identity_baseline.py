@@ -9,6 +9,7 @@ from tdcpass.analysis.treatment_fingerprint import (
     build_headline_treatment_fingerprint,
     build_headline_treatment_fingerprint_validation_summary,
     validate_headline_treatment_fingerprint,
+    validate_headline_treatment_fingerprint_recorded_state,
 )
 
 
@@ -122,9 +123,13 @@ def test_identity_variant_ladder_materializes_measurement_rows() -> None:
     assert frame["spec_name"].drop_duplicates().tolist() == ["identity_measurement_ladder"]
 
 
-def test_treatment_fingerprint_matches_default_spec() -> None:
+def test_treatment_fingerprint_matches_default_spec(monkeypatch) -> None:
     shocked = _panel()
     repo_root = Path(__file__).resolve().parents[1]
+    monkeypatch.setattr(
+        "tdcpass.analysis.treatment_fingerprint._git_working_tree_payload",
+        lambda _repo_root: {"status": "clean", "tracked_change_count": 0, "untracked_change_count": 0},
+    )
     spec = {
         "freeze_status": "frozen",
         "model_name": "unexpected_tdc_default",
@@ -145,9 +150,11 @@ def test_treatment_fingerprint_matches_default_spec() -> None:
         repo_root=repo_root,
     )
 
+    assert validate_headline_treatment_fingerprint_recorded_state(fingerprint, shock_spec=spec, repo_root=repo_root) == []
     assert validate_headline_treatment_fingerprint(fingerprint, shock_spec=spec, repo_root=repo_root) == []
     assert "config_hashes" in fingerprint
     assert "upstream_input" in fingerprint
+    assert fingerprint["analysis_tree"]["status"] in {"clean", "dirty", "unresolved"}
 
 
 def test_treatment_fingerprint_detects_git_commit_mismatch() -> None:
@@ -211,3 +218,38 @@ def test_treatment_fingerprint_validation_summary_reports_failed_commit_check() 
     assert summary["status"] == "failed"
     assert summary["analysis_source_commit_check"]["status"] in {"failed", "unresolved"}
     assert any("analysis_source_commit" in failure for failure in summary["failures"])
+
+
+def test_treatment_fingerprint_validation_summary_fails_dirty_tree_metadata() -> None:
+    shocked = _panel()
+    repo_root = Path(__file__).resolve().parents[1]
+    spec = {
+        "freeze_status": "frozen",
+        "model_name": "unexpected_tdc_default",
+        "target": "tdc_bank_only_qoq",
+        "method": "rolling_window_ridge",
+        "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+        "ridge_alpha": 125.0,
+        "min_train_obs": 24,
+        "max_train_obs": 40,
+        "standardized_column": "tdc_residual_z",
+        "residual_column": "tdc_residual",
+        "fitted_column": "tdc_fitted",
+        "train_start_obs_column": "train_start_obs",
+    }
+    fingerprint = build_headline_treatment_fingerprint(
+        shock_spec=spec,
+        shocked=shocked,
+        repo_root=repo_root,
+    )
+    fingerprint["analysis_tree"] = {"status": "dirty", "tracked_change_count": 1, "untracked_change_count": 0}
+
+    summary = build_headline_treatment_fingerprint_validation_summary(
+        fingerprint,
+        shock_spec=spec,
+        repo_root=repo_root,
+    )
+
+    assert summary["status"] == "failed"
+    assert summary["analysis_tree_check"]["status"] == "failed"
+    assert any("dirty working tree" in failure for failure in summary["failures"])

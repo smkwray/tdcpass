@@ -1,20 +1,25 @@
 {
   "status": "passed",
   "failures": [],
-  "repo_root": "/Users/shanewray/malus/proj/tdcpass",
   "analysis_source_commit_check": {
     "status": "passed",
     "stored_analysis_source_commit": "da7c35bef02d1a3559870bcd18bd9f1f0b8a94de"
   },
+  "analysis_tree_check": {
+    "status": "passed",
+    "stored_status": "clean",
+    "tracked_change_count": 0,
+    "untracked_change_count": 0
+  },
   "config_hashes_check": {
     "status": "passed",
-    "stored_combined_sha256": "4fa9e0a1b98931c7d1f2f51dfe8c00f1f414792b8f3cf0687c19b75a74394629",
-    "current_combined_sha256": "4fa9e0a1b98931c7d1f2f51dfe8c00f1f414792b8f3cf0687c19b75a74394629"
+    "stored_combined_sha256": "e86bc64fc062f6788b21d33bbb1bcb00e0e5dd1a28a8f12a0b02425dd4ea4d75",
+    "current_combined_sha256": "e86bc64fc062f6788b21d33bbb1bcb00e0e5dd1a28a8f12a0b02425dd4ea4d75"
   },
   "upstream_input_check": {
     "status": "skipped_unreachable",
     "rechecked_source_sha256": false,
-    "candidate_path": "/Users/shanewray/malus/proj/tdcest:data/processed/tdc_estimates.csv@bfd2dde0b2629c89bbfefea3ebf0693241c7bbba",
+    "candidate_locator": "tdcest:data/processed/tdc_estimates.csv@bfd2dde0b2629c89bbfefea3ebf0693241c7bbba",
     "stored_locator": "tdcest:data/processed/tdc_estimates.csv",
     "stored_sha256": "144cfbc0031fba343ca46025dea23a7531c0b08c968863a5123887ebf0f15abc",
     "stored_source_repo_locator": "tdcest",
