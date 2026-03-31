@@ -82,6 +82,14 @@ def _fake_canonical_tdc_frame() -> pd.DataFrame:
     )
 
 
+def _fake_canonical_tdc_result() -> build_panel.CanonicalTdcSeriesResult:
+    return build_panel.CanonicalTdcSeriesResult(
+        frame=_fake_canonical_tdc_frame(),
+        source_path=None,
+        source_kind="test_fixture",
+    )
+
+
 def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, monkeypatch) -> None:
     z1_zip = tmp_path / "fixtures" / "z1.zip"
     _write_z1_zip(z1_zip)
@@ -130,7 +138,7 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     monkeypatch.setattr(build_panel, "_download_fred_csv", fake_download_fred_csv)
     monkeypatch.setattr(build_panel, "_download_fiscaldata_auctions_csv", fake_download_fiscaldata_auctions_csv)
     monkeypatch.setattr(build_panel, "build_cache_reuse_provenance", lambda reuse_mode=None: {"reuse_mode": "discover", "reused_artifacts": [], "fresh_downloads": []})
-    monkeypatch.setattr(build_panel, "_load_canonical_tdc_series", lambda **kwargs: _fake_canonical_tdc_frame())
+    monkeypatch.setattr(build_panel, "_load_canonical_tdc_series", lambda **kwargs: _fake_canonical_tdc_result())
 
     result = build_panel.build_public_quarterly_panel(base_dir=tmp_path)
     frame = pd.read_csv(result.panel_path)
@@ -210,7 +218,7 @@ def test_build_public_quarterly_panel_preserves_macro_history_when_tga_starts_la
     monkeypatch.setattr(build_panel, "_download_fred_csv", fake_download_fred_csv)
     monkeypatch.setattr(build_panel, "_download_fiscaldata_auctions_csv", fake_download_fiscaldata_auctions_csv)
     monkeypatch.setattr(build_panel, "build_cache_reuse_provenance", lambda reuse_mode=None: {"reuse_mode": "discover", "reused_artifacts": [], "fresh_downloads": []})
-    monkeypatch.setattr(build_panel, "_load_canonical_tdc_series", lambda **kwargs: _fake_canonical_tdc_frame())
+    monkeypatch.setattr(build_panel, "_load_canonical_tdc_series", lambda **kwargs: _fake_canonical_tdc_result())
 
     result = build_panel.build_public_quarterly_panel(base_dir=tmp_path)
     sample_summary = json.loads(result.sample_construction_summary_path.read_text(encoding="utf-8"))
@@ -225,8 +233,11 @@ def test_reused_tdc_series_accepts_legacy_alias(tmp_path: Path) -> None:
     reused_path = tmp_path / "reused.csv"
     reused_path.write_text("quarter,tdc_qoq\n2000Q1,1.0\n", encoding="utf-8")
     payload = {"reused_artifacts": [{"materialized_path": str(reused_path)}]}
-    frame = build_panel._load_reused_tdc_series(payload)
-    assert frame is not None
+    result = build_panel._load_reused_tdc_series(payload)
+    assert result is not None
+    frame = result.frame
+    assert result.source_kind == "reused_artifact"
+    assert result.source_path == reused_path
     assert frame["quarter"].tolist() == ["2000Q1"]
     assert frame["tdc_bank_only_qoq"].tolist() == [1.0]
     assert "tdc_broad_depository_qoq" in frame.columns

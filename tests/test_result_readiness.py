@@ -57,6 +57,56 @@ def test_result_readiness_marks_ambiguous_run_as_not_ready() -> None:
     assert not any("Exploratory sensitivity variants" in item for item in payload["warnings"])
 
 
+def test_result_readiness_uses_cooler_provisional_headline_language() -> None:
+    accounting = AccountingSummary(
+        mean_tdc=0.1,
+        mean_total_deposits=1.0,
+        mean_other_component=0.9,
+        share_other_negative=0.2,
+        correlation_tdc_total=0.0,
+        correlation_tdc_other=0.0,
+    )
+    shocks = pd.DataFrame({"quarter": ["2016Q1"], "tdc_residual_z": [0.1], "shock_flag": [""]})
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.0, "se": 0.2, "lower95": 0.61, "upper95": 1.39, "n": 30, "spec_name": "identity"},
+            {"outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 1.8, "se": 0.3, "lower95": 1.21, "upper95": 2.39, "n": 26, "spec_name": "identity"},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.7, "se": 0.3, "lower95": 0.11, "upper95": 1.29, "n": 30, "spec_name": "identity"},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 0.6, "se": 0.5, "lower95": -0.38, "upper95": 1.58, "n": 26, "spec_name": "identity"},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.3, "se": 0.2, "lower95": -0.69, "upper95": 0.09, "n": 30, "spec_name": "identity"},
+            {"outcome": "other_component_qoq", "horizon": 4, "beta": -1.2, "se": 0.4, "lower95": -1.98, "upper95": -0.42, "n": 26, "spec_name": "identity"},
+        ]
+    )
+    contrast = pd.DataFrame(
+        [
+            {"scope": "baseline", "variant": "baseline", "role": "headline", "horizon": 0, "contrast_consistent": False, "abs_gap": 5.0, "beta_direct": 1.0, "identity_check_mode": "approximate_with_outcome_specific_lags"},
+            {"scope": "baseline", "variant": "baseline", "role": "headline", "horizon": 4, "contrast_consistent": False, "abs_gap": 10.0, "beta_direct": 1.8, "identity_check_mode": "approximate_with_outcome_specific_lags"},
+        ]
+    )
+    direct_identification = {
+        "status": "provisional",
+        "warnings": ["The exact identity baseline is primary, but the secondary approximate dynamic path still diverges materially at key horizons."],
+        "reasons": [],
+        "treatment_freeze_status": "frozen",
+        "treatment_candidates": [],
+        "ratio_reporting_gate": {"rule": ["stub"]},
+    }
+
+    payload = build_result_readiness_summary(
+        accounting_summary=accounting,
+        shocks=shocks,
+        lp_irf=pd.DataFrame(columns=identity_lp.columns),
+        identity_lp_irf=identity_lp,
+        lp_irf_regimes=pd.DataFrame(),
+        sensitivity=pd.DataFrame(),
+        direct_identification=direct_identification,
+        contrast=contrast,
+    )
+
+    assert payload["status"] == "provisional"
+    assert payload["headline_assessment"].startswith("Current outputs support an exploratory deposit-response read")
+
+
 def test_result_readiness_adds_structural_proxy_reason_when_cross_checks_are_weak() -> None:
     accounting = AccountingSummary(
         mean_tdc=0.1,

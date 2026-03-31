@@ -83,6 +83,7 @@ The repo also carries exploratory or sensitivity shock variants for:
 - legacy total-deposit style predictor sets.
 
 These are treatment-object and scope checks around the frozen rolling-macro baseline. The repo also tracks a shock-quality gate on usable-sample fit ratios, flagged-window share, and shock-to-target alignment. These variants are explicit stress tests around the frozen baseline, not co-equal headline designs.
+The `bill_share`-linked variants remain in that exploratory bucket because they preserve the impact-stage sign pattern but change medium-horizon persistence enough to be read as stress tests rather than replacements for the frozen baseline.
 
 ## 3. Estimator
 
@@ -152,6 +153,8 @@ At minimum also compare outcomes:
 - total bank deposits,
 - non-TDC component,
 - deposit-inclusive money robustness.
+
+The current public bundle keeps `period_sensitivity.csv` and `period_sensitivity_summary.json` on the preview surface because the medium-horizon pattern differs materially across the post-GFC early, pre-COVID, and COVID/post-COVID windows.
 
 ## 7. Things not to do first
 

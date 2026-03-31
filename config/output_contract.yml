@@ -97,6 +97,25 @@ artifacts:
       - decomposition_mode
       - outcome_construction
       - inference_method
+  - path: output/models/identity_measurement_ladder.csv
+    kind: csv
+    required_columns:
+      - treatment_variant
+      - treatment_role
+      - treatment_family
+      - target
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
   - path: output/models/lp_irf_regimes.csv
     kind: csv
     required_columns:
@@ -268,6 +287,8 @@ artifacts:
       - max_train_obs
       - usable_sample
       - git_commit
+      - config_hashes
+      - upstream_input
   - path: output/models/direct_identification_summary.json
     kind: json
     required_keys:
@@ -394,6 +415,25 @@ artifacts:
       - upper95
       - n
       - spec_name
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
+  - path: site/data/identity_measurement_ladder.csv
+    kind: csv
+    required_columns:
+      - treatment_variant
+      - treatment_role
+      - treatment_family
+      - target
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
       - decomposition_mode
       - outcome_construction
       - inference_method
@@ -568,6 +608,8 @@ artifacts:
       - max_train_obs
       - usable_sample
       - git_commit
+      - config_hashes
+      - upstream_input
   - path: site/data/direct_identification_summary.json
     kind: json
     required_keys:

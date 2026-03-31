@@ -221,6 +221,7 @@ def build_pass_through_summary(
     *,
     lp_irf: pd.DataFrame,
     identity_lp_irf: pd.DataFrame | None = None,
+    identity_measurement_ladder: pd.DataFrame | None = None,
     sensitivity: pd.DataFrame,
     control_sensitivity: pd.DataFrame,
     sample_sensitivity: pd.DataFrame,
@@ -318,8 +319,8 @@ def build_pass_through_summary(
         )
     elif readiness_status == "provisional":
         headline = (
-            "Current run supports a provisional deposit-response interpretation with partial mechanism "
-            "cross-checks, but the pass-through-versus-crowd-out read remains fragile."
+            "Current run supports an impact-stage crowd-out signal in the exact identity baseline, but persistence, "
+            "mechanism attribution, and ratio-based headline interpretation remain fragile."
         )
     else:
         headline = (
@@ -350,6 +351,13 @@ def build_pass_through_summary(
     ]
     sample_variant_rows = _sample_variant_rows(sample_sensitivity, horizons=horizons)
     flagged_window_robustness = _flagged_window_robustness(sample_variant_rows, horizons=horizons)
+    measurement_variant_source = (
+        identity_measurement_ladder
+        if identity_measurement_ladder is not None and not identity_measurement_ladder.empty
+        else sensitivity[sensitivity.get("treatment_family", "").eq("measurement")]
+        if "treatment_family" in sensitivity.columns
+        else pd.DataFrame()
+    )
 
     return {
         "status": readiness_status,
@@ -359,6 +367,9 @@ def build_pass_through_summary(
             if primary_decomposition_mode == "exact_identity_baseline"
             else "lp_irf.csv",
             "approximate_robustness_artifact": "total_minus_other_contrast.csv",
+            "measurement_variant_artifact": "identity_measurement_ladder.csv"
+            if identity_measurement_ladder is not None and not identity_measurement_ladder.empty
+            else "tdc_sensitivity_ladder.csv",
             "approximate_dynamic_robustness": approximate_dynamic_robustness,
         },
         "treatment_freeze_status": treatment_freeze_status,
@@ -390,9 +401,7 @@ def build_pass_through_summary(
             horizons=horizons,
         ),
         "measurement_treatment_variants": _variant_rows(
-            sensitivity[sensitivity.get("treatment_family", "").eq("measurement")]
-            if "treatment_family" in sensitivity.columns
-            else pd.DataFrame(),
+            measurement_variant_source,
             variant_column="treatment_variant",
             role_column="treatment_role",
             allowed_roles={"exploratory"},

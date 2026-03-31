@@ -71,6 +71,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/shocks/unexpected_tdc.csv",
         "output/models/lp_irf.csv",
         "output/models/lp_irf_identity_baseline.csv",
+        "output/models/identity_measurement_ladder.csv",
         "output/models/lp_irf_regimes.csv",
         "output/models/tdc_sensitivity_ladder.csv",
         "output/models/control_set_sensitivity.csv",
@@ -124,6 +125,29 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                 source_root / rel,
                 ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name", "decomposition_mode", "outcome_construction", "inference_method"],
                 [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_baseline", "exact_identity_baseline", "estimated", "shared_bootstrap"]],
+            )
+        elif rel.endswith("identity_measurement_ladder.csv"):
+            _write_csv(
+                source_root / rel,
+                [
+                    "treatment_variant",
+                    "treatment_role",
+                    "treatment_family",
+                    "target",
+                    "outcome",
+                    "horizon",
+                    "beta",
+                    "se",
+                    "lower95",
+                    "upper95",
+                    "n",
+                    "spec_name",
+                    "shock_column",
+                    "decomposition_mode",
+                    "outcome_construction",
+                    "inference_method",
+                ],
+                [["domestic_bank_only", "exploratory", "measurement", "tdc_domestic_bank_only_qoq", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_measurement_ladder", "tdc_domestic_bank_only_residual_z", "exact_identity_baseline", "estimated_common_design", "bootstrap"]],
             )
         elif rel.endswith("lp_irf_regimes.csv"):
             _write_csv(source_root / rel, ["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["reserve_drain_high", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
@@ -199,6 +223,14 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "max_train_obs": 40,
                     "usable_sample": {"start_quarter": "2009Q1", "end_quarter": "2025Q4", "observations": 68},
                     "git_commit": "stub",
+                    "config_hashes": {"files": {"config/shock_specs.yml": "stub"}, "combined_sha256": "stub"},
+                    "upstream_input": {
+                        "source_kind": "tdcest_processed_csv",
+                        "source_locator": None,
+                        "sha256": None,
+                        "source_repo_locator": None,
+                        "source_repo_commit": None,
+                    },
                 },
             )
         elif rel.endswith("structural_proxy_evidence_summary.json"):
@@ -360,4 +392,6 @@ def test_default_overview_payload_stays_methods_preview() -> None:
     assert "methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock" in payload["main_findings"][1]
     assert "1960Q4" in payload["main_findings"][2]
     assert "`not_ready`" in payload["main_findings"][2]
-    assert "deposit-response readout" in payload["caveats"][0]
+    assert "exploratory deposit-response readout" in payload["caveats"][0]
+    assert "dimensionally coherent first-stage gate" in payload["caveats"][2]
+    assert "source_root" not in payload["sample"]

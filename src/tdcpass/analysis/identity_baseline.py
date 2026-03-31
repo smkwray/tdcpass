@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import math
 from collections.abc import Sequence
+from typing import Any
 
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
 from tdcpass.analysis.local_projections import cumulative_forward_sum
+from tdcpass.analysis.shocks import expanding_window_residual
 
 
 def _forward_transform(series: pd.Series, horizon: int, *, cumulative: bool) -> pd.Series:
@@ -35,6 +37,36 @@ def _fit_beta(sample: pd.DataFrame, *, shock_col: str, response_col: str, contro
     return float(fit.params[shock_col])
 
 
+def _reestimate_bootstrap_shock(sample: pd.DataFrame, *, shock_spec: dict[str, Any]) -> pd.DataFrame:
+    return expanding_window_residual(
+        sample,
+        target=str(shock_spec["target"]),
+        predictors=[str(item) for item in shock_spec["predictors"]],
+        min_train_obs=int(shock_spec["min_train_obs"]),
+        max_train_obs=None if shock_spec.get("max_train_obs") is None else int(shock_spec["max_train_obs"]),
+        standardize=bool(shock_spec.get("standardize_residual", True)),
+        model_name=str(shock_spec.get("model_name", "unexpected_tdc_default")),
+        fitted_column=str(shock_spec.get("fitted_column", "tdc_fitted")),
+        residual_column=str(shock_spec.get("residual_column", "tdc_residual")),
+        standardized_column=str(shock_spec.get("standardized_column", "tdc_residual_z")),
+        train_start_obs_column=str(shock_spec.get("train_start_obs_column", "train_start_obs")),
+        model_name_column=str(shock_spec.get("model_name_column", "model_name")),
+        condition_number_column=str(shock_spec.get("condition_number_column", "train_condition_number")),
+        target_sd_column=str(shock_spec.get("target_sd_column", "train_target_sd")),
+        residual_sd_column=str(shock_spec.get("residual_sd_column", "train_resid_sd")),
+        scale_ratio_column=str(shock_spec.get("scale_ratio_column", "fitted_to_target_scale_ratio")),
+        train_target_scale_ratio_column=str(
+            shock_spec.get("train_target_scale_ratio_column", "fitted_to_train_target_sd_ratio")
+        ),
+        flag_column=str(shock_spec.get("flag_column", "shock_flag")),
+        max_condition_number=float(shock_spec["max_condition_number"])
+        if shock_spec.get("max_condition_number") is not None
+        else None,
+        max_scale_ratio=float(shock_spec["max_scale_ratio"]) if shock_spec.get("max_scale_ratio") is not None else None,
+        ridge_alpha=float(shock_spec["ridge_alpha"]) if shock_spec.get("ridge_alpha") is not None else None,
+    )
+
+
 def build_identity_baseline_irf(
     df: pd.DataFrame,
     *,
@@ -48,8 +80,18 @@ def build_identity_baseline_irf(
     bootstrap_reps: int = 250,
     bootstrap_block_length: int = 4,
     bootstrap_seed: int = 0,
+    nested_shock_spec: dict[str, Any] | None = None,
 ) -> pd.DataFrame:
-    required = [shock_col, tdc_outcome_col, total_outcome_col, *controls]
+    required = [tdc_outcome_col, total_outcome_col, *controls]
+    if nested_shock_spec is None:
+        required.insert(0, shock_col)
+    else:
+        required.extend(
+            [
+                str(nested_shock_spec["target"]),
+                *[str(item) for item in nested_shock_spec["predictors"]],
+            ]
+        )
     missing = [col for col in required if col not in df.columns]
     if missing:
         raise KeyError(f"Missing required columns for identity baseline: {missing}")
@@ -62,15 +104,23 @@ def build_identity_baseline_irf(
     for horizon in horizons:
         dep_tdc = _forward_transform(df[tdc_outcome_col], int(horizon), cumulative=cumulative)
         dep_total = _forward_transform(df[total_outcome_col], int(horizon), cumulative=cumulative)
-        sample = pd.DataFrame(
-            {
-                "dep_tdc": dep_tdc,
-                "dep_total": dep_total,
-                shock_col: df[shock_col],
-            }
-        )
-        for control in controls:
-            sample[control] = df[control]
+        sample = pd.DataFrame({"dep_tdc": dep_tdc, "dep_total": dep_total})
+        sample_columns: list[str] = list(controls)
+        if shock_col in df.columns:
+            sample_columns.append(shock_col)
+        if nested_shock_spec is not None:
+            sample_columns.extend(
+                [
+                    str(nested_shock_spec["target"]),
+                    *[str(item) for item in nested_shock_spec["predictors"]],
+                ]
+            )
+        seen: set[str] = set()
+        for column in sample_columns:
+            if column in seen:
+                continue
+            seen.add(column)
+            sample[column] = df[column]
         sample = sample.dropna()
         if len(sample) < len(controls) + 12:
             continue
@@ -86,9 +136,16 @@ def build_identity_baseline_irf(
             sampled = sample.iloc[_bootstrap_indices(len(sample), block_length=bootstrap_block_length, rng=rng)].reset_index(
                 drop=True
             )
+            sampled_shock_col = shock_col
+            if nested_shock_spec is not None:
+                sampled = _reestimate_bootstrap_shock(sampled, shock_spec=nested_shock_spec)
+                sampled_shock_col = str(nested_shock_spec.get("standardized_column", shock_col))
+                sampled = sampled.dropna(subset=["dep_tdc", "dep_total", sampled_shock_col, *controls]).reset_index(drop=True)
+                if len(sampled) < len(controls) + 12:
+                    continue
             try:
-                draw_tdc = _fit_beta(sampled, shock_col=shock_col, response_col="dep_tdc", controls=controls)
-                draw_total = _fit_beta(sampled, shock_col=shock_col, response_col="dep_total", controls=controls)
+                draw_tdc = _fit_beta(sampled, shock_col=sampled_shock_col, response_col="dep_tdc", controls=controls)
+                draw_total = _fit_beta(sampled, shock_col=sampled_shock_col, response_col="dep_total", controls=controls)
             except (np.linalg.LinAlgError, ValueError):
                 continue
             bootstrap_tdc.append(draw_tdc)
@@ -116,7 +173,11 @@ def build_identity_baseline_irf(
             "shock_scale": shock_scale,
             "response_type": response_type,
             "decomposition_mode": "exact_identity_baseline",
-            "inference_method": f"circular_block_bootstrap_{bootstrap_block_length}q_{bootstrap_reps}reps",
+            "inference_method": (
+                f"nested_circular_block_bootstrap_{bootstrap_block_length}q_{bootstrap_reps}reps"
+                if nested_shock_spec is not None
+                else f"circular_block_bootstrap_{bootstrap_block_length}q_{bootstrap_reps}reps"
+            ),
         }
         rows.extend(
             [
@@ -169,3 +230,66 @@ def build_identity_baseline_irf(
     if not rows:
         return pd.DataFrame(columns=columns)
     return pd.DataFrame(rows, columns=columns)
+
+
+def build_identity_variant_ladder(
+    df: pd.DataFrame,
+    *,
+    variants: Sequence[dict[str, Any]],
+    total_outcome_col: str = "total_deposits_bank_qoq",
+    horizons: Sequence[int] = tuple(range(0, 9)),
+    cumulative: bool = True,
+    spec_name: str = "identity_variant_ladder",
+    bootstrap_reps: int = 250,
+    bootstrap_block_length: int = 4,
+    bootstrap_seed: int = 0,
+) -> pd.DataFrame:
+    frames: list[pd.DataFrame] = []
+    columns = [
+        "treatment_variant",
+        "treatment_role",
+        "treatment_family",
+        "target",
+        "outcome",
+        "horizon",
+        "beta",
+        "se",
+        "lower95",
+        "upper95",
+        "n",
+        "spec_name",
+        "shock_column",
+        "decomposition_mode",
+        "outcome_construction",
+        "inference_method",
+    ]
+    for offset, variant in enumerate(variants):
+        shock_col = str(variant["shock_column"])
+        tdc_outcome_col = str(variant["target"])
+        controls = [str(item) for item in variant.get("controls", [])]
+        required = [shock_col, tdc_outcome_col, total_outcome_col, *controls]
+        if any(column not in df.columns for column in required):
+            continue
+        frame = build_identity_baseline_irf(
+            df,
+            shock_col=shock_col,
+            tdc_outcome_col=tdc_outcome_col,
+            total_outcome_col=total_outcome_col,
+            controls=controls,
+            horizons=horizons,
+            cumulative=cumulative,
+            spec_name=spec_name,
+            bootstrap_reps=bootstrap_reps,
+            bootstrap_block_length=bootstrap_block_length,
+            bootstrap_seed=bootstrap_seed + offset,
+        )
+        if frame.empty:
+            continue
+        frame.insert(0, "target", tdc_outcome_col)
+        frame.insert(0, "treatment_family", str(variant.get("treatment_family", "")))
+        frame.insert(0, "treatment_role", str(variant.get("treatment_role", "")))
+        frame.insert(0, "treatment_variant", str(variant["treatment_variant"]))
+        frames.append(frame)
+    if not frames:
+        return pd.DataFrame(columns=columns)
+    return pd.concat(frames, ignore_index=True)[columns]

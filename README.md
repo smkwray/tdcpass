@@ -25,6 +25,7 @@ The package rebuilds a quarterly public-data bundle that includes:
 - matched total-deposit outcomes
 - the non-TDC residual `other_component_qoq = total_deposits_bank_qoq - tdc_bank_only_qoq`
 - a rolling unexpected-treatment shock plus exploratory sensitivity variants
+- public period-sensitivity tables because medium-horizon persistence differs across major usable-sample windows
 - local-projection response tables
 - structural-proxy cross-checks and readiness diagnostics
 - manifests for raw downloads and optional local cache reuse
@@ -34,7 +35,8 @@ The package rebuilds a quarterly public-data bundle that includes:
 - It does not require prebuilt local caches to run.
 - It does not treat the residual alone as mechanism proof.
 - It does not currently claim a clean pass-through-versus-crowd-out answer.
-- It does not currently report headline pass-through or crowd-out ratios when the raw-unit treatment response is too small for interpretation.
+- It does not currently report headline pass-through or crowd-out ratios while the repo still lacks a dimensionally coherent first-stage gate for raw-unit treatment responses.
+- It does not treat `bill_share`-linked shock variants as co-equal headline designs; they remain exploratory stress tests only.
 
 ## Environment
 

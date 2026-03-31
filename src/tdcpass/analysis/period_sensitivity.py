@@ -97,6 +97,9 @@ def build_period_sensitivity_summary(period_sensitivity: pd.DataFrame) -> dict[s
                 "In the post-GFC early recovery window, the negative non-TDC impact response is clearer than the total-deposit response."
             )
     takeaways.append(
+        "This summary remains on the public preview surface because medium-horizon persistence differs meaningfully across the post-GFC early, pre-COVID, and COVID/post-COVID windows."
+    )
+    takeaways.append(
         "The usable unexpected-TDC shock sample begins in 2009Q1, so the live quarterly design cannot estimate a true 2008 GFC subperiod under the frozen shock."
     )
 

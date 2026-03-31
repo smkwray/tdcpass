@@ -79,31 +79,26 @@ def _ratio_reporting_gate(
 ) -> dict[str, Any]:
     ci_excludes_zero = bool(raw_tdc["ci_excludes_zero"]) if raw_tdc is not None else False
     abs_raw_tdc_beta = None if raw_tdc is None else abs(float(raw_tdc["beta"]))
-    beta_large_enough = (
-        raw_tdc is not None
-        and usable_target_sd is not None
-        and pd.notna(usable_target_sd)
-        and abs_raw_tdc_beta is not None
-        and abs_raw_tdc_beta >= float(usable_target_sd)
-    )
-    allowed = ci_excludes_zero and beta_large_enough
-    if allowed:
-        explanation = "Ratios are reported because the raw-unit TDC response is statistically decisive and at least one usable-sample target standard deviation."
-    elif raw_tdc is None:
+    denominator_gate_resolved = False
+    if raw_tdc is None:
         explanation = "Ratios are suppressed because the raw-unit TDC response is unavailable."
     elif not ci_excludes_zero:
-        explanation = "Ratios are suppressed because the raw-unit TDC response does not exclude zero."
-    elif usable_target_sd is None or pd.isna(usable_target_sd):
-        explanation = "Ratios are suppressed because the usable-sample target volatility could not be computed."
+        explanation = (
+            "Ratios are suppressed because the raw-unit TDC response does not exclude zero, and this release still "
+            "withholds headline ratios pending a dimensionally coherent first-stage gate."
+        )
     else:
-        explanation = "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        explanation = (
+            "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent "
+            "first-stage gate for raw-unit treatment responses."
+        )
     return {
-        "allowed": allowed,
-        "usable_target_sd": usable_target_sd,
+        "allowed": False,
+        "diagnostic_reference_usable_target_sd": usable_target_sd,
         "abs_raw_tdc_beta": abs_raw_tdc_beta,
         "conditions": {
             "tdc_ci_excludes_zero": ci_excludes_zero,
-            "abs_raw_tdc_beta_ge_usable_target_sd": beta_large_enough,
+            "dimensionally_coherent_denominator_gate_resolved": denominator_gate_resolved,
         },
         "explanation": explanation,
     }
@@ -289,6 +284,7 @@ def build_direct_identification_summary(
     decomposition_separates = False
     contrast_missing = False
     contrast_inconsistent = False
+    warnings: list[str] = []
     contrast_identity_mode = "exact_accounting_identity"
     approximate_dynamic_robustness = {
         "status": "not_available",
@@ -301,9 +297,9 @@ def build_direct_identification_summary(
     ratio_reporting_gate = {
         "rule": [
             "tdc_ci_excludes_zero == true",
-            "abs(raw_unit_tdc_beta) >= usable_target_sd",
+            "dimensionally_coherent_denominator_gate_resolved == true",
         ],
-        "usable_target_sd": usable_target_sd,
+        "diagnostic_reference_usable_target_sd": usable_target_sd,
         "horizons": {},
     }
 
@@ -392,8 +388,11 @@ def build_direct_identification_summary(
                 else "The total-minus-other contrast is the active decomposition check for this specification."
             ),
         }
+        if primary_decomposition_mode == "exact_identity_baseline" and key_consistent is False:
+            warnings.append(
+                "The exact identity baseline is primary, but the secondary approximate dynamic path still diverges materially at key horizons."
+            )
 
-    warnings: list[str] = []
     reasons: list[str] = []
     if treatment_freeze_status != "frozen":
         reasons.append("The baseline unexpected-TDC shock is not yet a credibly frozen treatment object.")
@@ -448,7 +447,7 @@ def build_direct_identification_summary(
 
     return {
         "status": status,
-        "headline_question": "Does the baseline unexpected-TDC shock move TDC enough to identify pass-through versus crowd-out?",
+        "headline_question": "Does the frozen baseline unexpected-TDC shock generate an interpretable exact-baseline deposit response and sign separation?",
         "estimation_path": {
             "primary_decomposition_mode": primary_decomposition_mode,
             "primary_artifact": "lp_irf_identity_baseline.csv"
@@ -499,5 +498,6 @@ def build_direct_identification_summary(
             "the baseline shock moves TDC itself clearly enough at h0 or h4",
             "total deposits and the non-TDC component separate enough to support a pass-through versus crowd-out statement",
             "excluding flagged shock windows does not overturn the headline interpretation",
+            "secondary dynamic robustness checks do not raise material divergence warnings",
         ],
     }

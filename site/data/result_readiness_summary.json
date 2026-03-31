@@ -54,47 +54,48 @@
   "ratio_reporting_gate": {
     "rule": [
       "tdc_ci_excludes_zero == true",
-      "abs(raw_unit_tdc_beta) >= usable_target_sd"
+      "dimensionally_coherent_denominator_gate_resolved == true"
     ],
-    "usable_target_sd": 263.42967242082716,
+    "diagnostic_reference_usable_target_sd": 263.42967242082716,
     "horizons": {
       "h0": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 0.9305308145201421,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "h4": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.2108641620062723,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "h8": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.7824498362130194,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       }
     }
   },
-  "headline_assessment": "Current outputs are usable for deposit-response interpretation, but mechanism attribution remains sensitive or incomplete.",
+  "headline_assessment": "Current outputs support an exploratory deposit-response read, but persistence and mechanism attribution remain sensitive or incomplete.",
   "reasons": [],
   "warnings": [
     "Structural proxy cross-checks are mixed across key horizons.",
-    "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern."
+    "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern.",
+    "The exact identity baseline is primary, but the secondary approximate dynamic path still diverges materially at key horizons."
   ],
   "diagnostics": {
     "primary_decomposition_mode": "exact_identity_baseline",
@@ -119,7 +120,7 @@
     "sample_sensitivity_variant_count": 3,
     "sample_variant_sign_disagreement": false,
     "sample_variant_magnitude_instability": false,
-    "direct_identification_status": "ready_for_interpretation",
+    "direct_identification_status": "provisional",
     "contrast_max_abs_gap_h0_h4": 34.841407895902734,
     "contrast_rows_missing": false,
     "structural_proxy_status": "mixed",
@@ -141,51 +142,51 @@
   "key_estimates": {
     "tdc_h0": {
       "beta": 128.49398892100785,
-      "se": 13.991961570115432,
-      "lower95": 100.88367137736657,
-      "upper95": 152.92481157086092,
+      "se": 35.018290469572285,
+      "lower95": 119.41873548043742,
+      "upper95": 248.5482159371078,
       "n": 68,
       "ci_excludes_zero": true
     },
     "tdc_h4": {
       "beta": 278.13971316628357,
-      "se": 74.03622268034015,
-      "lower95": 97.62580949118603,
-      "upper95": 400.2710018774603,
+      "se": 141.57570011679425,
+      "lower95": 78.32278678356286,
+      "upper95": 597.5909020053358,
       "n": 64,
       "ci_excludes_zero": true
     },
     "total_deposits_h0": {
       "beta": 55.75033524806063,
-      "se": 25.193756364184207,
-      "lower95": 11.914564763748912,
-      "upper95": 112.95810148991914,
+      "se": 40.86113535471181,
+      "lower95": 8.738139880568623,
+      "upper95": 168.6573860829989,
       "n": 68,
       "ci_excludes_zero": true
     },
     "total_deposits_h4": {
       "beta": 167.33069747889854,
-      "se": 100.30100771730665,
-      "lower95": -63.93923127273721,
-      "upper95": 358.74512761844096,
+      "se": 154.8910510638327,
+      "lower95": -27.18884889021173,
+      "upper95": 550.7057101571328,
       "n": 64,
       "ci_excludes_zero": false
     },
     "other_component_h0": {
       "beta": -72.74365367294723,
-      "se": 24.24909289745364,
-      "lower95": -110.4034376557296,
-      "upper95": -16.164168243115927,
+      "se": 42.946700439267694,
+      "lower95": -170.48932979728906,
+      "upper95": -1.8809331488254672,
       "n": 68,
       "ci_excludes_zero": true
     },
     "other_component_h4": {
       "beta": -110.80901568738503,
-      "se": 56.70082171226873,
-      "lower95": -206.322898566643,
-      "upper95": -1.787584654962086,
+      "se": 84.23711570896954,
+      "lower95": -242.41233479835054,
+      "upper95": 62.23408515351409,
       "n": 64,
-      "ci_excludes_zero": true
+      "ci_excludes_zero": false
     }
   },
   "answer_ready_when": [

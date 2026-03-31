@@ -1,6 +1,6 @@
 {
-  "status": "ready_for_interpretation",
-  "headline_question": "Does the baseline unexpected-TDC shock move TDC enough to identify pass-through versus crowd-out?",
+  "status": "provisional",
+  "headline_question": "Does the frozen baseline unexpected-TDC shock generate an interpretable exact-baseline deposit response and sign separation?",
   "estimation_path": {
     "primary_decomposition_mode": "exact_identity_baseline",
     "primary_artifact": "lp_irf_identity_baseline.csv",
@@ -43,39 +43,39 @@
   "ratio_reporting_gate": {
     "rule": [
       "tdc_ci_excludes_zero == true",
-      "abs(raw_unit_tdc_beta) >= usable_target_sd"
+      "dimensionally_coherent_denominator_gate_resolved == true"
     ],
-    "usable_target_sd": 263.42967242082716,
+    "diagnostic_reference_usable_target_sd": 263.42967242082716,
     "horizons": {
       "h0": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 0.9305308145201421,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "h4": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.2108641620062723,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "h8": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.7824498362130194,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       }
     }
   },
@@ -83,9 +83,9 @@
     "h0": {
       "tdc": {
         "beta": 128.49398892100785,
-        "se": 13.991961570115432,
-        "lower95": 100.88367137736657,
-        "upper95": 152.92481157086092,
+        "se": 35.018290469572285,
+        "lower95": 119.41873548043742,
+        "upper95": 248.5482159371078,
         "n": 68,
         "ci_excludes_zero": true
       },
@@ -99,17 +99,17 @@
       },
       "total": {
         "beta": 55.75033524806063,
-        "se": 25.193756364184207,
-        "lower95": 11.914564763748912,
-        "upper95": 112.95810148991914,
+        "se": 40.86113535471181,
+        "lower95": 8.738139880568623,
+        "upper95": 168.6573860829989,
         "n": 68,
         "ci_excludes_zero": true
       },
       "other": {
         "beta": -72.74365367294723,
-        "se": 24.24909289745364,
-        "lower95": -110.4034376557296,
-        "upper95": -16.164168243115927,
+        "se": 42.946700439267694,
+        "lower95": -170.48932979728906,
+        "upper95": -1.8809331488254672,
         "n": 68,
         "ci_excludes_zero": true
       },
@@ -117,13 +117,13 @@
       "crowd_out_ratio_neg_other_over_tdc": null,
       "ratio_reporting_gate": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 0.9305308145201421,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "beta_gap_total_minus_other": 128.49398892100785,
       "direct_vs_identity_tdc_gap": 0.0,
@@ -133,9 +133,9 @@
     "h4": {
       "tdc": {
         "beta": 278.13971316628357,
-        "se": 74.03622268034015,
-        "lower95": 97.62580949118603,
-        "upper95": 400.2710018774603,
+        "se": 141.57570011679425,
+        "lower95": 78.32278678356286,
+        "upper95": 597.5909020053358,
         "n": 64,
         "ci_excludes_zero": true
       },
@@ -149,31 +149,31 @@
       },
       "total": {
         "beta": 167.33069747889854,
-        "se": 100.30100771730665,
-        "lower95": -63.93923127273721,
-        "upper95": 358.74512761844096,
+        "se": 154.8910510638327,
+        "lower95": -27.18884889021173,
+        "upper95": 550.7057101571328,
         "n": 64,
         "ci_excludes_zero": false
       },
       "other": {
         "beta": -110.80901568738503,
-        "se": 56.70082171226873,
-        "lower95": -206.322898566643,
-        "upper95": -1.787584654962086,
+        "se": 84.23711570896954,
+        "lower95": -242.41233479835054,
+        "upper95": 62.23408515351409,
         "n": 64,
-        "ci_excludes_zero": true
+        "ci_excludes_zero": false
       },
       "pass_through_ratio_total_over_tdc": null,
       "crowd_out_ratio_neg_other_over_tdc": null,
       "ratio_reporting_gate": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.2108641620062723,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "beta_gap_total_minus_other": 278.13971316628357,
       "direct_vs_identity_tdc_gap": 0.0,
@@ -183,9 +183,9 @@
     "h8": {
       "tdc": {
         "beta": 347.6946386730543,
-        "se": 123.77196173767524,
-        "lower95": 60.88204719349223,
-        "upper95": 552.1645703678078,
+        "se": 270.7611316749685,
+        "lower95": 21.075804641888197,
+        "upper95": 971.3675619015519,
         "n": 60,
         "ci_excludes_zero": true
       },
@@ -199,17 +199,17 @@
       },
       "total": {
         "beta": 114.22386198654391,
-        "se": 126.54837984909642,
-        "lower95": -138.13993073116154,
-        "upper95": 335.8534011051046,
+        "se": 248.53089249335375,
+        "lower95": -230.74012129989265,
+        "upper95": 685.5523861147914,
         "n": 60,
         "ci_excludes_zero": false
       },
       "other": {
         "beta": -233.47077668651042,
-        "se": 69.09033550475722,
-        "lower95": -357.4997422369733,
-        "upper95": -71.80771747701556,
+        "se": 130.44794059486154,
+        "lower95": -529.4765352545235,
+        "upper95": -30.381588860860656,
         "n": 60,
         "ci_excludes_zero": true
       },
@@ -217,13 +217,13 @@
       "crowd_out_ratio_neg_other_over_tdc": null,
       "ratio_reporting_gate": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.7824498362130194,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "beta_gap_total_minus_other": 347.6946386730543,
       "direct_vs_identity_tdc_gap": 0.0,
@@ -243,13 +243,16 @@
     "impact_magnitude_shift_gt_100pct": false,
     "h4_magnitude_shift_gt_100pct": false
   },
-  "answer_ready": true,
+  "answer_ready": false,
   "reasons": [],
-  "warnings": [],
+  "warnings": [
+    "The exact identity baseline is primary, but the secondary approximate dynamic path still diverges materially at key horizons."
+  ],
   "answer_ready_when": [
     "the baseline unexpected-TDC shock is a credibly frozen treatment object",
     "the baseline shock moves TDC itself clearly enough at h0 or h4",
     "total deposits and the non-TDC component separate enough to support a pass-through versus crowd-out statement",
-    "excluding flagged shock windows does not overturn the headline interpretation"
+    "excluding flagged shock windows does not overturn the headline interpretation",
+    "secondary dynamic robustness checks do not raise material divergence warnings"
   ]
 }

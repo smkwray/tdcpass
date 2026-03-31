@@ -4,6 +4,7 @@
     "primary_decomposition_mode": "exact_identity_baseline",
     "primary_artifact": "lp_irf_identity_baseline.csv",
     "approximate_robustness_artifact": "total_minus_other_contrast.csv",
+    "measurement_variant_artifact": "identity_measurement_ladder.csv",
     "approximate_dynamic_robustness": {
       "status": "divergent_secondary_check",
       "artifact": "total_minus_other_contrast.csv",
@@ -54,45 +55,45 @@
   "ratio_reporting_gate": {
     "rule": [
       "tdc_ci_excludes_zero == true",
-      "abs(raw_unit_tdc_beta) >= usable_target_sd"
+      "dimensionally_coherent_denominator_gate_resolved == true"
     ],
-    "usable_target_sd": 263.42967242082716,
+    "diagnostic_reference_usable_target_sd": 263.42967242082716,
     "horizons": {
       "h0": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 0.9305308145201421,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "h4": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.2108641620062723,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       },
       "h8": {
         "allowed": false,
-        "usable_target_sd": 263.42967242082716,
+        "diagnostic_reference_usable_target_sd": 263.42967242082716,
         "abs_raw_tdc_beta": 2.7824498362130194,
         "conditions": {
           "tdc_ci_excludes_zero": true,
-          "abs_raw_tdc_beta_ge_usable_target_sd": false
+          "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Ratios are suppressed because the raw-unit TDC response is smaller than one usable-sample target standard deviation."
+        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
       }
     }
   },
   "interpretation_scope": "deposit_response_with_partial_mechanism_cross_checks",
   "headline_question": "When unexpected bank-only TDC rises, how do total deposits and the non-TDC deposit component respond?",
-  "headline_answer": "Current run supports a provisional deposit-response interpretation with partial mechanism cross-checks, but the pass-through-versus-crowd-out read remains fragile.",
+  "headline_answer": "Current run supports an impact-stage crowd-out signal in the exact identity baseline, but persistence, mechanism attribution, and ratio-based headline interpretation remain fragile.",
   "mechanism_caveat": "Structural proxies remain cross-checks on the residual, not standalone proof of mechanism.",
   "sample_policy": {
     "headline_sample_variant": "all_usable_shocks",
@@ -141,17 +142,17 @@
     "h0": {
       "total_deposits": {
         "beta": 55.75033524806063,
-        "se": 25.193756364184207,
-        "lower95": 11.914564763748912,
-        "upper95": 112.95810148991914,
+        "se": 40.86113535471181,
+        "lower95": 8.738139880568623,
+        "upper95": 168.6573860829989,
         "n": 68,
         "ci_excludes_zero": true
       },
       "other_component": {
         "beta": -72.74365367294723,
-        "se": 24.24909289745364,
-        "lower95": -110.4034376557296,
-        "upper95": -16.164168243115927,
+        "se": 42.946700439267694,
+        "lower95": -170.48932979728906,
+        "upper95": -1.8809331488254672,
         "n": 68,
         "ci_excludes_zero": true
       },
@@ -160,9 +161,9 @@
       "assessment": "crowd_out_signal",
       "direct_tdc_response": {
         "beta": 128.49398892100785,
-        "se": 13.991961570115432,
-        "lower95": 100.88367137736657,
-        "upper95": 152.92481157086092,
+        "se": 35.018290469572285,
+        "lower95": 119.41873548043742,
+        "upper95": 248.5482159371078,
         "n": 68,
         "ci_excludes_zero": true
       },
@@ -173,28 +174,28 @@
     "h4": {
       "total_deposits": {
         "beta": 167.33069747889854,
-        "se": 100.30100771730665,
-        "lower95": -63.93923127273721,
-        "upper95": 358.74512761844096,
+        "se": 154.8910510638327,
+        "lower95": -27.18884889021173,
+        "upper95": 550.7057101571328,
         "n": 64,
         "ci_excludes_zero": false
       },
       "other_component": {
         "beta": -110.80901568738503,
-        "se": 56.70082171226873,
-        "lower95": -206.322898566643,
-        "upper95": -1.787584654962086,
+        "se": 84.23711570896954,
+        "lower95": -242.41233479835054,
+        "upper95": 62.23408515351409,
         "n": 64,
-        "ci_excludes_zero": true
+        "ci_excludes_zero": false
       },
       "beta_gap_total_minus_other": 278.13971316628357,
       "same_sign": false,
-      "assessment": "other_down_total_unclear",
+      "assessment": "not_separated",
       "direct_tdc_response": {
         "beta": 278.13971316628357,
-        "se": 74.03622268034015,
-        "lower95": 97.62580949118603,
-        "upper95": 400.2710018774603,
+        "se": 141.57570011679425,
+        "lower95": 78.32278678356286,
+        "upper95": 597.5909020053358,
         "n": 64,
         "ci_excludes_zero": true
       },
@@ -260,43 +261,43 @@
       "horizons": {
         "h0": {
           "total_deposits": {
-            "beta": 30.335457618998852,
-            "se": 13.174299579863323,
-            "lower95": 4.5138304424667375,
-            "upper95": 56.15708479553096,
+            "beta": 29.71910918144276,
+            "se": 16.388031845145303,
+            "lower95": 8.224280017743315,
+            "upper95": 73.50053355485146,
             "n": 67,
             "ci_excludes_zero": true
           },
           "other_component": {
-            "beta": -18.050591322323076,
-            "se": 14.738916395226818,
-            "lower95": -46.93886745696764,
-            "upper95": 10.837684812321488,
+            "beta": -15.771524229513517,
+            "se": 18.06351391223054,
+            "lower95": -67.22853720513694,
+            "upper95": 4.8270672818075235,
             "n": 67,
             "ci_excludes_zero": false
           },
-          "beta_gap_total_minus_other": 48.38604894132193,
+          "beta_gap_total_minus_other": 45.49063341095628,
           "same_sign": false,
           "assessment": "total_up_other_unclear"
         },
         "h4": {
           "total_deposits": {
-            "beta": 104.8682469840488,
-            "se": 50.21283166301084,
-            "lower95": 6.4510969245475565,
-            "upper95": 203.28539704355003,
+            "beta": 106.81316907537072,
+            "se": 62.95821841460774,
+            "lower95": 23.458051358217595,
+            "upper95": 244.5124098712794,
             "n": 63,
             "ci_excludes_zero": true
           },
           "other_component": {
-            "beta": 4.8095419774025245,
-            "se": 24.516634722446216,
-            "lower95": -43.24306207859206,
-            "upper95": 52.86214603339711,
+            "beta": 12.101584080480777,
+            "se": 26.697938120070813,
+            "lower95": -57.87576629485845,
+            "upper95": 48.95941906408541,
             "n": 63,
             "ci_excludes_zero": false
           },
-          "beta_gap_total_minus_other": 100.05870500664628,
+          "beta_gap_total_minus_other": 94.71158499488995,
           "same_sign": true,
           "assessment": "total_up_other_unclear"
         }
@@ -308,43 +309,43 @@
       "horizons": {
         "h0": {
           "total_deposits": {
-            "beta": 61.48634913090622,
-            "se": 22.177764842361764,
-            "lower95": 18.017930039877164,
-            "upper95": 104.95476822193527,
+            "beta": 68.66197083010917,
+            "se": 24.665285213521464,
+            "lower95": 19.492286247453873,
+            "upper95": 104.01320295166128,
             "n": 68,
             "ci_excludes_zero": true
           },
           "other_component": {
-            "beta": -46.204894042942705,
-            "se": 28.785715588178096,
-            "lower95": -102.62489659577177,
-            "upper95": 10.215108509886363,
+            "beta": -52.77309218268971,
+            "se": 21.262245264110973,
+            "lower95": -100.03136674096383,
+            "upper95": -18.56954752370483,
             "n": 68,
-            "ci_excludes_zero": false
+            "ci_excludes_zero": true
           },
-          "beta_gap_total_minus_other": 107.69124317384893,
+          "beta_gap_total_minus_other": 121.43506301279888,
           "same_sign": false,
-          "assessment": "total_up_other_unclear"
+          "assessment": "crowd_out_signal"
         },
         "h4": {
           "total_deposits": {
-            "beta": 211.66160561970884,
-            "se": 82.70272072823109,
-            "lower95": 49.56427299237592,
-            "upper95": 373.7589382470418,
+            "beta": 230.3985232137405,
+            "se": 82.40486096889946,
+            "lower95": 33.83773373311173,
+            "upper95": 332.54206647309985,
             "n": 64,
             "ci_excludes_zero": true
           },
           "other_component": {
-            "beta": -16.069416716462953,
-            "se": 43.6921602485319,
-            "lower95": -101.70605080358547,
-            "upper95": 69.56721737065956,
+            "beta": -27.29682368908945,
+            "se": 39.58320242777369,
+            "lower95": -112.81094425376132,
+            "upper95": 30.715607966783555,
             "n": 64,
             "ci_excludes_zero": false
           },
-          "beta_gap_total_minus_other": 227.7310223361718,
+          "beta_gap_total_minus_other": 257.69534690282995,
           "same_sign": false,
           "assessment": "total_up_other_unclear"
         }
@@ -356,45 +357,45 @@
       "horizons": {
         "h0": {
           "total_deposits": {
-            "beta": 45.68501063737274,
-            "se": 21.797865821024835,
-            "lower95": 2.961193628164068,
-            "upper95": 88.40882764658141,
+            "beta": 54.88202161955895,
+            "se": 24.739173131107837,
+            "lower95": 15.718284990396324,
+            "upper95": 107.66892740071397,
             "n": 68,
             "ci_excludes_zero": true
           },
           "other_component": {
-            "beta": -81.0750937423875,
-            "se": 19.95622745078055,
-            "lower95": -120.18929954591738,
-            "upper95": -41.96088793885762,
+            "beta": -73.20249844812693,
+            "se": 23.471927885830357,
+            "lower95": -107.56118028415578,
+            "upper95": -20.10305030765891,
             "n": 68,
             "ci_excludes_zero": true
           },
-          "beta_gap_total_minus_other": 126.76010437976024,
+          "beta_gap_total_minus_other": 128.08452006768587,
           "same_sign": false,
           "assessment": "crowd_out_signal"
         },
         "h4": {
           "total_deposits": {
-            "beta": 141.91623743076187,
-            "se": 93.20184448933693,
-            "lower95": -40.75937776833851,
-            "upper95": 324.5918526298623,
+            "beta": 166.63999787985875,
+            "se": 108.29498104203358,
+            "lower95": -50.37216234610477,
+            "upper95": 382.51642128585956,
             "n": 64,
             "ci_excludes_zero": false
           },
           "other_component": {
-            "beta": -104.08870843831028,
-            "se": 49.2297969794691,
-            "lower95": -200.5791105180697,
-            "upper95": -7.598306358550843,
+            "beta": -112.89636278479486,
+            "se": 58.87924592652778,
+            "lower95": -209.75712749620803,
+            "upper95": 17.89692837186334,
             "n": 64,
-            "ci_excludes_zero": true
+            "ci_excludes_zero": false
           },
-          "beta_gap_total_minus_other": 246.00494586907215,
+          "beta_gap_total_minus_other": 279.5363606646536,
           "same_sign": false,
-          "assessment": "other_down_total_unclear"
+          "assessment": "not_separated"
         }
       }
     },
@@ -404,45 +405,45 @@
       "horizons": {
         "h0": {
           "total_deposits": {
-            "beta": 46.10872732845895,
-            "se": 21.933629419620818,
-            "lower95": 3.118813666002147,
-            "upper95": 89.09864099091575,
+            "beta": 55.53500436904736,
+            "se": 25.692314597012057,
+            "lower95": 5.800144470373233,
+            "upper95": 107.31822179941135,
             "n": 68,
             "ci_excludes_zero": true
           },
           "other_component": {
-            "beta": -81.59226485119758,
-            "se": 19.948366703185183,
-            "lower95": -120.69106358944055,
-            "upper95": -42.49346611295463,
+            "beta": -72.92024873590626,
+            "se": 22.966807392401883,
+            "lower95": -110.14613510598339,
+            "upper95": -24.109322630293697,
             "n": 68,
             "ci_excludes_zero": true
           },
-          "beta_gap_total_minus_other": 127.70099217965654,
+          "beta_gap_total_minus_other": 128.4552531049536,
           "same_sign": false,
           "assessment": "crowd_out_signal"
         },
         "h4": {
           "total_deposits": {
-            "beta": 141.2175855959158,
-            "se": 92.56044123346038,
-            "lower95": -40.200879221666526,
-            "upper95": 322.63605041349814,
+            "beta": 166.62271119547825,
+            "se": 102.43978800976124,
+            "lower95": -10.801507650155013,
+            "upper95": 375.3838293889314,
             "n": 64,
             "ci_excludes_zero": false
           },
           "other_component": {
-            "beta": -102.26421803829594,
-            "se": 49.04599607840802,
-            "lower95": -198.39437035197565,
-            "upper95": -6.134065724616221,
+            "beta": -114.08472650283676,
+            "se": 56.12447427849439,
+            "lower95": -209.44201915952064,
+            "upper95": 2.8138890116562916,
             "n": 64,
-            "ci_excludes_zero": true
+            "ci_excludes_zero": false
           },
-          "beta_gap_total_minus_other": 243.48180363421176,
+          "beta_gap_total_minus_other": 280.707437698315,
           "same_sign": false,
-          "assessment": "other_down_total_unclear"
+          "assessment": "not_separated"
         }
       }
     }
@@ -1681,6 +1682,7 @@
   "readiness_reasons": [],
   "readiness_warnings": [
     "Structural proxy cross-checks are mixed across key horizons.",
-    "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern."
+    "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern.",
+    "The exact identity baseline is primary, but the secondary approximate dynamic path still diverges materially at key horizons."
   ]
 }

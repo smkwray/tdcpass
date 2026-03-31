@@ -140,9 +140,51 @@ def test_direct_identification_suppresses_ratios_when_raw_tdc_beta_is_too_small(
 
     assert payload["ratio_reporting_gate"]["horizons"]["h0"]["allowed"] is False
     assert payload["ratio_reporting_gate"]["horizons"]["h0"]["conditions"]["tdc_ci_excludes_zero"] is True
-    assert payload["ratio_reporting_gate"]["horizons"]["h0"]["conditions"]["abs_raw_tdc_beta_ge_usable_target_sd"] is False
+    assert payload["ratio_reporting_gate"]["horizons"]["h0"]["conditions"]["dimensionally_coherent_denominator_gate_resolved"] is False
     assert payload["horizon_evidence"]["h0"]["pass_through_ratio_total_over_tdc"] is None
     assert payload["horizon_evidence"]["h0"]["crowd_out_ratio_neg_other_over_tdc"] is None
+
+
+def test_direct_identification_downgrades_to_provisional_when_secondary_check_diverges() -> None:
+    approx_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 12.0, "se": 1.0, "lower95": 10.04, "upper95": 13.96, "n": 40},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 3.0, "se": 1.0, "lower95": 1.04, "upper95": 4.96, "n": 40},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -2.0, "se": 1.0, "lower95": -3.96, "upper95": -0.04, "n": 40},
+            {"outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 20.0, "se": 2.0, "lower95": 16.08, "upper95": 23.92, "n": 36},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 5.0, "se": 2.0, "lower95": 1.08, "upper95": 8.92, "n": 36},
+            {"outcome": "other_component_qoq", "horizon": 4, "beta": -4.0, "se": 2.0, "lower95": -7.92, "upper95": -0.08, "n": 36},
+        ]
+    )
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 38},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.7, "se": 0.2, "lower95": -1.1, "upper95": -0.3, "n": 38},
+            {"outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 2.0, "se": 0.2, "lower95": 1.6, "upper95": 2.4, "n": 34},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 34},
+            {"outcome": "other_component_qoq", "horizon": 4, "beta": -1.1, "se": 0.2, "lower95": -1.5, "upper95": -0.7, "n": 34},
+        ]
+    )
+    contrast = build_total_minus_other_contrast(
+        lp_irf=approx_lp,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+        identity_check_mode="approximate_with_outcome_specific_lags",
+    )
+    contrast.loc[:, "contrast_consistent"] = False
+
+    payload = build_direct_identification_summary(
+        lp_irf=approx_lp,
+        identity_lp_irf=identity_lp,
+        contrast=contrast,
+        sample_sensitivity=pd.DataFrame(),
+    )
+
+    assert payload["status"] == "provisional"
+    assert payload["answer_ready"] is False
+    assert any("secondary approximate dynamic path still diverges materially" in item for item in payload["warnings"])
 
 
 def test_direct_identification_treats_tiny_contrast_gaps_as_numeric_noise() -> None:

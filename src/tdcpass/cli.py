@@ -175,6 +175,7 @@ def _pipeline_closeout(args: argparse.Namespace) -> int:
     fingerprint_failures = validate_headline_treatment_fingerprint(
         fingerprint,
         shock_spec=shock_specs["unexpected_tdc_default"],
+        repo_root=repo_root(),
     )
     closeout_failures: list[str] = []
     identity_frame = pd.read_csv(identity_path)

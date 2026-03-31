@@ -163,6 +163,118 @@ def test_pass_through_summary_prefers_exact_identity_baseline_when_available() -
     assert payload["baseline_horizons"]["h0"]["direct_tdc_response"]["beta"] == 1.5
 
 
+def test_pass_through_summary_prefers_exact_measurement_ladder_when_available() -> None:
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        identity_measurement_ladder=pd.DataFrame(
+            [
+                {
+                    "treatment_variant": "domestic_bank_only",
+                    "treatment_role": "exploratory",
+                    "treatment_family": "measurement",
+                    "target": "tdc_domestic_bank_only_qoq",
+                    "outcome": "tdc_domestic_bank_only_qoq",
+                    "horizon": 0,
+                    "beta": 1.2,
+                    "se": 0.2,
+                    "lower95": 0.8,
+                    "upper95": 1.6,
+                    "n": 30,
+                    "spec_name": "identity_measurement_ladder",
+                    "shock_column": "tdc_domestic_bank_only_residual_z",
+                    "decomposition_mode": "exact_identity_baseline",
+                    "outcome_construction": "estimated_common_design",
+                    "inference_method": "bootstrap",
+                },
+                {
+                    "treatment_variant": "domestic_bank_only",
+                    "treatment_role": "exploratory",
+                    "treatment_family": "measurement",
+                    "target": "tdc_domestic_bank_only_qoq",
+                    "outcome": "total_deposits_bank_qoq",
+                    "horizon": 0,
+                    "beta": 0.6,
+                    "se": 0.2,
+                    "lower95": 0.2,
+                    "upper95": 1.0,
+                    "n": 30,
+                    "spec_name": "identity_measurement_ladder",
+                    "shock_column": "tdc_domestic_bank_only_residual_z",
+                    "decomposition_mode": "exact_identity_baseline",
+                    "outcome_construction": "estimated_common_design",
+                    "inference_method": "bootstrap",
+                },
+                {
+                    "treatment_variant": "domestic_bank_only",
+                    "treatment_role": "exploratory",
+                    "treatment_family": "measurement",
+                    "target": "tdc_domestic_bank_only_qoq",
+                    "outcome": "other_component_qoq",
+                    "horizon": 0,
+                    "beta": -0.6,
+                    "se": 0.2,
+                    "lower95": -1.0,
+                    "upper95": -0.2,
+                    "n": 30,
+                    "spec_name": "identity_measurement_ladder",
+                    "shock_column": "tdc_domestic_bank_only_residual_z",
+                    "decomposition_mode": "exact_identity_baseline",
+                    "outcome_construction": "derived_total_minus_tdc",
+                    "inference_method": "bootstrap",
+                },
+            ]
+        ),
+        sensitivity=pd.DataFrame(
+            [
+                {
+                    "treatment_variant": "domestic_bank_only",
+                    "treatment_role": "exploratory",
+                    "treatment_family": "measurement",
+                    "outcome": "total_deposits_bank_qoq",
+                    "horizon": 0,
+                    "beta": -9.0,
+                    "se": 1.0,
+                    "lower95": -11.0,
+                    "upper95": -7.0,
+                    "n": 30,
+                    "spec_name": "baseline",
+                }
+            ]
+        ),
+        control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sample_sensitivity=pd.DataFrame(columns=["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={"status": "provisional", "warnings": [], "reasons": []},
+    )
+
+    assert payload["estimation_path"]["measurement_variant_artifact"] == "identity_measurement_ladder.csv"
+    assert payload["measurement_treatment_variants"][0]["variant"] == "domestic_bank_only"
+    assert payload["measurement_treatment_variants"][0]["horizons"]["h0"]["assessment"] == "crowd_out_signal"
+
+
+def test_pass_through_summary_uses_cooler_provisional_headline_for_exact_baseline() -> None:
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 38},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 38},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.6, "se": 0.2, "lower95": -1.0, "upper95": -0.2, "n": 38},
+        ]
+    )
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        identity_lp_irf=identity_lp,
+        sensitivity=pd.DataFrame(columns=["treatment_variant", "treatment_role", "treatment_family", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        control_sensitivity=pd.DataFrame(columns=["control_variant", "control_role", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        sample_sensitivity=pd.DataFrame(columns=["sample_variant", "sample_role", "sample_filter", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={"status": "provisional", "warnings": [], "reasons": []},
+    )
+
+    assert "impact-stage crowd-out signal in the exact identity baseline" in payload["headline_answer"]
+
+
 def test_pass_through_summary_surfaces_failed_treatment_quality_gate() -> None:
     payload = build_pass_through_summary(
         lp_irf=pd.DataFrame(columns=["outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),

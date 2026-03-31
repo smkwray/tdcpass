@@ -3,6 +3,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pandas as pd
+
+from tdcpass.analysis.treatment_fingerprint import build_headline_treatment_fingerprint
 from tdcpass.cli import build_parser, main
 
 
@@ -19,6 +22,28 @@ def _write_csv(path: Path, header: list[str], row: list[object]) -> None:
 def _write_json(path: Path, payload: dict[str, object]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def _valid_fingerprint_payload() -> dict[str, object]:
+    repo_root = Path(__file__).resolve().parents[1]
+    return build_headline_treatment_fingerprint(
+        shock_spec={
+            "freeze_status": "frozen",
+            "model_name": "unexpected_tdc_default",
+            "target": "tdc_bank_only_qoq",
+            "method": "rolling_window_ridge",
+            "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
+            "ridge_alpha": 125.0,
+            "min_train_obs": 24,
+            "max_train_obs": 40,
+            "standardized_column": "tdc_residual_z",
+            "residual_column": "tdc_residual",
+            "fitted_column": "tdc_fitted",
+            "train_start_obs_column": "train_start_obs",
+        },
+        shocked=pd.DataFrame({"quarter": ["2010Q1"], "tdc_residual_z": [0.1]}),
+        repo_root=repo_root,
+    )
 
 
 def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
@@ -64,6 +89,7 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
         "output/shocks/unexpected_tdc.csv",
         "output/models/lp_irf.csv",
         "output/models/lp_irf_identity_baseline.csv",
+        "output/models/identity_measurement_ladder.csv",
         "output/models/lp_irf_regimes.csv",
         "output/models/regime_diagnostics_summary.json",
         "output/models/tdc_sensitivity_ladder.csv",
@@ -111,6 +137,29 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
             _write_csv(source_root / rel, ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
         elif rel.endswith("lp_irf_identity_baseline.csv"):
             _write_csv(source_root / rel, ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name", "decomposition_mode", "outcome_construction", "inference_method"], [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_baseline", "exact_identity_baseline", "estimated_common_design", "bootstrap"]])
+        elif rel.endswith("identity_measurement_ladder.csv"):
+            _write_csv(
+                source_root / rel,
+                [
+                    "treatment_variant",
+                    "treatment_role",
+                    "treatment_family",
+                    "target",
+                    "outcome",
+                    "horizon",
+                    "beta",
+                    "se",
+                    "lower95",
+                    "upper95",
+                    "n",
+                    "spec_name",
+                    "shock_column",
+                    "decomposition_mode",
+                    "outcome_construction",
+                    "inference_method",
+                ],
+                [["domestic_bank_only", "exploratory", "measurement", "tdc_domestic_bank_only_qoq", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_measurement_ladder", "tdc_domestic_bank_only_residual_z", "exact_identity_baseline", "estimated_common_design", "bootstrap"]],
+            )
         elif rel.endswith("lp_irf_regimes.csv"):
             _write_csv(source_root / rel, ["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["reserve_drain_high", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
         elif rel.endswith("tdc_sensitivity_ladder.csv"):
@@ -184,6 +233,14 @@ def test_pipeline_run_command_is_wired(tmp_path: Path) -> None:
                     "max_train_obs": 40,
                     "usable_sample": {"rows": 1},
                     "git_commit": "stub",
+                    "config_hashes": {"files": {"config/shock_specs.yml": "stub"}, "combined_sha256": "stub"},
+                    "upstream_input": {
+                        "source_kind": "tdcest_processed_csv",
+                        "source_locator": None,
+                        "sha256": None,
+                        "source_repo_locator": None,
+                        "source_repo_commit": None,
+                    },
                 },
             )
         elif rel.endswith("pass_through_summary.json"):
@@ -327,20 +384,8 @@ def test_pipeline_closeout_reads_existing_artifacts(tmp_path: Path, capsys) -> N
     _write_json(
         root / "output" / "models" / "headline_treatment_fingerprint.json",
         {
-            "treatment_freeze_status": "frozen",
-            "model_name": "unexpected_tdc_default",
-            "target": "tdc_bank_only_qoq",
-            "method": "rolling_window_ridge",
-            "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
-            "ridge_alpha": 125.0,
-            "min_train_obs": 24,
-            "max_train_obs": 40,
-            "standardized_column": "tdc_residual_z",
-            "residual_column": "tdc_residual",
-            "fitted_column": "tdc_fitted",
-            "train_start_obs_column": "train_start_obs",
+            **_valid_fingerprint_payload(),
             "usable_sample": {"rows": 10, "start_quarter": "2010Q1", "end_quarter": "2012Q2"},
-            "git_commit": "abc123",
         },
     )
     _write_json(
@@ -416,20 +461,9 @@ def test_pipeline_closeout_fails_on_fingerprint_mismatch(tmp_path: Path, capsys)
     _write_json(
         root / "output" / "models" / "headline_treatment_fingerprint.json",
         {
-            "treatment_freeze_status": "frozen",
+            **_valid_fingerprint_payload(),
             "model_name": "wrong_model_name",
-            "target": "tdc_bank_only_qoq",
-            "method": "rolling_window_ridge",
-            "predictors": ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"],
-            "ridge_alpha": 125.0,
-            "min_train_obs": 24,
-            "max_train_obs": 40,
-            "standardized_column": "tdc_residual_z",
-            "residual_column": "tdc_residual",
-            "fitted_column": "tdc_fitted",
-            "train_start_obs_column": "train_start_obs",
             "usable_sample": {"rows": 10},
-            "git_commit": "abc123",
         },
     )
     _write_json(
@@ -485,6 +519,7 @@ def test_pipeline_run_supports_offline_raw_fixture(tmp_path: Path) -> None:
     assert (dest_root / "data" / "derived" / "quarterly_panel.csv").exists()
     assert (dest_root / "output" / "models" / "sample_construction_summary.json").exists()
     assert (dest_root / "output" / "models" / "lp_irf_identity_baseline.csv").exists()
+    assert (dest_root / "output" / "models" / "identity_measurement_ladder.csv").exists()
     assert (dest_root / "output" / "models" / "headline_treatment_fingerprint.json").exists()
     assert (dest_root / "output" / "models" / "published_state_proxy_comparator_summary.json").exists()
     assert (dest_root / "output" / "models" / "published_state_proxy_vs_baseline_summary.json").exists()

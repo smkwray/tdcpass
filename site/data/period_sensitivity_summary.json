@@ -384,6 +384,7 @@
   "takeaways": [
     "The strongest short-run total-deposit response appears in the COVID/post-COVID window, while the non-TDC component remains negative on impact.",
     "In the post-GFC early recovery window, the negative non-TDC impact response is clearer than the total-deposit response.",
+    "This summary remains on the public preview surface because medium-horizon persistence differs meaningfully across the post-GFC early, pre-COVID, and COVID/post-COVID windows.",
     "The usable unexpected-TDC shock sample begins in 2009Q1, so the live quarterly design cannot estimate a true 2008 GFC subperiod under the frozen shock."
   ]
 }

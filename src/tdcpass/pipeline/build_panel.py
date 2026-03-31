@@ -61,7 +61,16 @@ class QuarterlyPanelBuildResult:
     reused_artifacts_path: Path
     proxy_unit_audit_path: Path
     sample_construction_summary_path: Path
+    canonical_tdc_source_path: Path | None
+    canonical_tdc_source_kind: str
     rows: int
+
+
+@dataclass(frozen=True)
+class CanonicalTdcSeriesResult:
+    frame: pd.DataFrame
+    source_path: Path | None
+    source_kind: str
 
 
 def _output_contract() -> Mapping[str, object]:
@@ -385,7 +394,7 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
     return None
 
 
-def _load_reused_tdc_series(reuse_payload: Mapping[str, object]) -> pd.DataFrame | None:
+def _load_reused_tdc_series(reuse_payload: Mapping[str, object]) -> CanonicalTdcSeriesResult | None:
     artifacts = reuse_payload.get("reused_artifacts", [])
     if not isinstance(artifacts, list):
         return None
@@ -398,7 +407,7 @@ def _load_reused_tdc_series(reuse_payload: Mapping[str, object]) -> pd.DataFrame
         path = Path(str(path_value))
         frame = _load_canonical_tdc_series_csv(path)
         if frame is not None:
-            return frame
+            return CanonicalTdcSeriesResult(frame=frame, source_path=path, source_kind="reused_artifact")
     return None
 
 
@@ -429,18 +438,18 @@ def _load_canonical_tdc_series(
     root: Path,
     reuse_payload: Mapping[str, object],
     fixture_root: Path | None,
-) -> pd.DataFrame:
+) -> CanonicalTdcSeriesResult:
     reused = _load_reused_tdc_series(reuse_payload)
-    if reused is not None and "tdc_broad_depository_qoq" in reused.columns:
+    if reused is not None and "tdc_broad_depository_qoq" in reused.frame.columns:
         return reused
     for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
         frame = _load_canonical_tdc_series_csv(path)
         if frame is not None and "tdc_broad_depository_qoq" in frame.columns:
-            return frame
+            return CanonicalTdcSeriesResult(frame=frame, source_path=path, source_kind="tdcest_processed_csv")
     for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
         frame = _load_canonical_tdc_series_csv(path)
         if frame is not None:
-            return frame
+            return CanonicalTdcSeriesResult(frame=frame, source_path=path, source_kind="tdcest_processed_csv")
     raise FileNotFoundError(
         "Could not locate canonical TDC estimates. Expected a tdcest processed file such as "
         "../tdcest/data/processed/tdc_estimates.csv or $TDCEST_ROOT/data/processed/tdc_estimates.csv."
@@ -658,7 +667,7 @@ def build_public_quarterly_panel(
         }
     )
     panel = panel.merge(bill_share, on="quarter", how="left")
-    panel = panel.merge(canonical_tdc, on="quarter", how="left")
+    panel = panel.merge(canonical_tdc.frame, on="quarter", how="left")
 
     fred_levels_raw: dict[str, pd.Series] = {}
     fred_levels: dict[str, pd.Series] = {}
@@ -751,5 +760,7 @@ def build_public_quarterly_panel(
         reused_artifacts_path=reused_artifacts_path,
         proxy_unit_audit_path=proxy_unit_audit_path,
         sample_construction_summary_path=sample_construction_summary_path,
+        canonical_tdc_source_path=canonical_tdc.source_path,
+        canonical_tdc_source_kind=canonical_tdc.source_kind,
         rows=int(len(panel)),
     )

@@ -79,7 +79,7 @@ def test_quarterly_pipeline_bundle_contract_from_skeleton_source(tmp_path: Path)
         reused_artifacts=reused_artifacts,
         overview_payload={
             "headline_metrics": {"share_other_negative": 0.0},
-            "sample": {"frequency": "quarterly", "rows": 1, "source_root": str(source_root)},
+            "sample": {"frequency": "quarterly", "rows": 1},
             "main_findings": ["skeleton integration test"],
             "caveats": ["stubbed offline source bundle"],
             "evidence_tiers": {"direct_data": ["quarter"]},
@@ -141,6 +141,5 @@ def test_quarterly_pipeline_bundle_contract_from_skeleton_source(tmp_path: Path)
 
     overview = json.loads((dest_root / "site" / "data" / "overview.json").read_text(encoding="utf-8"))
     assert overview["headline_metrics"]["share_other_negative"] == 0.0
-    assert overview["sample"]["source_root"] == str(source_root)
     assert overview["main_findings"] == ["skeleton integration test"]
     assert overview["evidence_tiers"]["direct_data"] == ["quarter"]

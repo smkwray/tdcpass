@@ -130,6 +130,29 @@ Minimum columns:
 
 This is the primary exact decomposition artifact for the public research sprint. It uses a common sample, common horizon transform, and common regressor matrix for `tdc_bank_only_qoq` and `total_deposits_bank_qoq`, then derives `other_component_qoq = total - tdc` mechanically at each horizon. The exported `other_component_qoq` uncertainty comes from the shared bootstrap path used to estimate the two underlying equations.
 
+### `output/models/identity_measurement_ladder.csv`
+
+Minimum columns:
+
+- `treatment_variant`
+- `treatment_role`
+- `treatment_family`
+- `target`
+- `outcome`
+- `horizon`
+- `beta`
+- `se`
+- `lower95`
+- `upper95`
+- `n`
+- `spec_name`
+- `shock_column`
+- `decomposition_mode`
+- `outcome_construction`
+- `inference_method`
+
+This file applies the same exact identity-preserving baseline logic to the imported `tdcest` measurement variants. It is the preferred release-facing source for measurement sensitivity because it keeps the `other_component_qoq = total - tdc` accounting exact, rather than relying only on the approximate LP sensitivity ladder.
+
 ### `output/models/lp_irf_regimes.csv`
 
 Minimum columns:
@@ -414,7 +437,7 @@ Required keys:
 - `readiness_reasons`
 - `readiness_warnings`
 
-This file is the release-facing answer layer. It pairs total-deposit and non-TDC responses at headline horizons, carries the direct TDC response and total-minus-other contrast check, includes both structural-proxy direction checks and the broader proxy-coverage context, and states how flagged-window trimming should be interpreted relative to the frozen headline sample. It should explicitly separate measurement-variant treatment checks from shock-design treatment checks and identify whether the baseline read is coming from the exact identity-preserving decomposition path.
+This file is the release-facing answer layer. It pairs total-deposit and non-TDC responses at headline horizons, carries the direct TDC response and total-minus-other contrast check, includes both structural-proxy direction checks and the broader proxy-coverage context, and states how flagged-window trimming should be interpreted relative to the frozen headline sample. It should explicitly separate measurement-variant treatment checks from shock-design treatment checks, identify whether the baseline read is coming from the exact identity-preserving decomposition path, and prefer `identity_measurement_ladder.csv` over the approximate LP sensitivity table for public measurement-variant comparisons when that exact artifact is available.
 
 ### `output/models/sample_construction_summary.json`
 
@@ -487,6 +510,10 @@ Mirror of `output/models/lp_irf.csv`.
 ### `site/data/lp_irf_identity_baseline.csv`
 
 Mirror of `output/models/lp_irf_identity_baseline.csv`.
+
+### `site/data/identity_measurement_ladder.csv`
+
+Mirror of `output/models/identity_measurement_ladder.csv`.
 
 ### `site/data/lp_irf_regimes.csv`
 

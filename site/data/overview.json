@@ -9,21 +9,22 @@
     "frequency": "quarterly",
     "rows": 92,
     "start_quarter": "2003Q1",
-    "end_quarter": "2025Q4",
-    "source_root": "/tmp/tdcpass-research-push"
+    "end_quarter": "2025Q4"
   },
   "main_findings": [
     "Quarterly public-data bundle materialized from direct official-source rebuild with optional sibling-cache reuse.",
     "This release is a methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock.",
     "The repaired baseline shock passes its treatment-quality gate on 68 usable quarters from 2009Q1 to 2025Q4, but the current release status remains `provisional`.",
     "The exact identity-preserving baseline is now the primary decomposition path; the older outcome-specific LP contrast remains a secondary robustness check only.",
+    "Period sensitivity remains on the public surface because medium-horizon persistence differs across the post-GFC early, pre-COVID, and COVID/post-COVID windows.",
     "44.6% of quarters show `other_component_qoq < 0` in the headline sample."
   ],
   "caveats": [
-    "Current release wording is gated by readiness diagnostics: the live bundle should be read as a deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
+    "Current release wording is gated by readiness diagnostics: the live bundle should be read as an exploratory deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
     "When the exact identity baseline and the older approximate dynamic LP path disagree, interpretation should default to the exact baseline and treat the older path as a robustness diagnostic rather than the headline read.",
-    "Pass-through and crowd-out ratios remain suppressed when the raw-unit TDC response is too small for interpretation relative to usable-sample target volatility.",
+    "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses.",
     "bill_share is a quarterly issue-date share of Treasury bill auction offering amounts from FiscalData; it remains an exploratory sensitivity input, not a live regime export or standalone mechanism proof.",
+    "bill_share-linked shock variants are retained only as exploratory stress tests because they preserve the impact-stage sign pattern but change medium-horizon persistence enough that they should not be promoted into the headline treatment family.",
     "Structural proxies are partial cross-checks on the residual, not exhaustive counterpart accounting or standalone mechanism proof."
   ],
   "evidence_tiers": {
@@ -51,6 +52,7 @@
       "tdc_residual_z",
       "lp_irf",
       "lp_irf_identity_baseline",
+      "identity_measurement_ladder",
       "lp_irf_regimes",
       "tdc_sensitivity_ladder",
       "control_set_sensitivity",
@@ -75,6 +77,7 @@
     "site/data/unexpected_tdc.csv",
     "site/data/lp_irf.csv",
     "site/data/lp_irf_identity_baseline.csv",
+    "site/data/identity_measurement_ladder.csv",
     "site/data/regime_diagnostics_summary.json",
     "site/data/control_set_sensitivity.csv",
     "site/data/shock_sample_sensitivity.csv",

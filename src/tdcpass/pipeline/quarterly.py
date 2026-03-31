@@ -18,7 +18,7 @@ from tdcpass.analysis.direct_identification import (
     build_total_minus_other_contrast,
 )
 from tdcpass.analysis.factor_control_diagnostics import build_factor_control_diagnostics_summary
-from tdcpass.analysis.identity_baseline import build_identity_baseline_irf
+from tdcpass.analysis.identity_baseline import build_identity_baseline_irf, build_identity_variant_ladder
 from tdcpass.analysis.local_projections import run_local_projections, run_lp_from_specs
 from tdcpass.analysis.pass_through_summary import build_pass_through_summary
 from tdcpass.analysis.period_sensitivity import build_period_sensitivity_summary
@@ -101,7 +101,6 @@ def _default_overview_payload(
             "rows": int(len(panel)),
             "start_quarter": str(panel["quarter"].iloc[0]),
             "end_quarter": str(panel["quarter"].iloc[-1]),
-            "source_root": str(root),
         },
         "main_findings": [
             "Quarterly public-data bundle materialized from direct official-source rebuild with optional sibling-cache reuse.",
@@ -111,13 +110,15 @@ def _default_overview_payload(
                 f"from {usable_shock_start} to {usable_shock_end}, but the current release status remains `{readiness_status}`."
             ),
             "The exact identity-preserving baseline is now the primary decomposition path; the older outcome-specific LP contrast remains a secondary robustness check only.",
+            "Period sensitivity remains on the public surface because medium-horizon persistence differs across the post-GFC early, pre-COVID, and COVID/post-COVID windows.",
             f"{share_other_negative:.1%} of quarters show `other_component_qoq < 0` in the headline sample.",
         ],
         "caveats": [
-            "Current release wording is gated by readiness diagnostics: the live bundle should be read as a deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
+            "Current release wording is gated by readiness diagnostics: the live bundle should be read as an exploratory deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
             "When the exact identity baseline and the older approximate dynamic LP path disagree, interpretation should default to the exact baseline and treat the older path as a robustness diagnostic rather than the headline read.",
-            "Pass-through and crowd-out ratios remain suppressed when the raw-unit TDC response is too small for interpretation relative to usable-sample target volatility.",
+            "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses.",
             "bill_share is a quarterly issue-date share of Treasury bill auction offering amounts from FiscalData; it remains an exploratory sensitivity input, not a live regime export or standalone mechanism proof.",
+            "bill_share-linked shock variants are retained only as exploratory stress tests because they preserve the impact-stage sign pattern but change medium-horizon persistence enough that they should not be promoted into the headline treatment family.",
             "Structural proxies are partial cross-checks on the residual, not exhaustive counterpart accounting or standalone mechanism proof.",
         ],
         "evidence_tiers": {
@@ -145,6 +146,7 @@ def _default_overview_payload(
                 "tdc_residual_z",
                 "lp_irf",
                 "lp_irf_identity_baseline",
+                "identity_measurement_ladder",
                 "lp_irf_regimes",
                 "tdc_sensitivity_ladder",
                 "control_set_sensitivity",
@@ -169,6 +171,7 @@ def _default_overview_payload(
             "site/data/unexpected_tdc.csv",
             "site/data/lp_irf.csv",
             "site/data/lp_irf_identity_baseline.csv",
+            "site/data/identity_measurement_ladder.csv",
             "site/data/regime_diagnostics_summary.json",
             "site/data/control_set_sensitivity.csv",
             "site/data/shock_sample_sensitivity.csv",
@@ -302,6 +305,51 @@ def _write_sample_construction_summary(
     return write_json_payload(path, payload)
 
 
+def _build_identity_measurement_ladder(
+    shocked: Any,
+    *,
+    lp_specs: Mapping[str, Any],
+    shock_specs: Mapping[str, Any],
+) -> Any:
+    sensitivity_spec = lp_specs["specs"]["sensitivity"]
+    shock_variants = sensitivity_spec.get("shock_variants", {})
+    shock_specs_by_column = {
+        str(spec.get("standardized_column", "")): dict(spec)
+        for spec in shock_specs.values()
+        if isinstance(spec, Mapping) and spec.get("standardized_column")
+    }
+    variants: list[dict[str, Any]] = []
+    for variant_name, variant_spec in shock_variants.items():
+        if not isinstance(variant_spec, Mapping):
+            continue
+        if str(variant_spec.get("treatment_family", "")) != "measurement":
+            continue
+        shock_column = str(variant_spec.get("shock_column", ""))
+        resolved_spec = shock_specs_by_column.get(shock_column)
+        if resolved_spec is None:
+            continue
+        variants.append(
+            {
+                "treatment_variant": str(variant_name),
+                "treatment_role": str(variant_spec.get("treatment_role", "")),
+                "treatment_family": str(variant_spec.get("treatment_family", "")),
+                "shock_column": shock_column,
+                "target": str(resolved_spec.get("target", "")),
+                "controls": [str(item) for item in resolved_spec.get("predictors", [])],
+            }
+        )
+
+    baseline_lp_spec = lp_specs["specs"]["baseline"]
+    return build_identity_variant_ladder(
+        shocked,
+        variants=variants,
+        total_outcome_col="total_deposits_bank_qoq",
+        horizons=[int(h) for h in baseline_lp_spec.get("horizons", [])],
+        cumulative=bool(baseline_lp_spec.get("cumulative", True)),
+        spec_name="identity_measurement_ladder",
+    )
+
+
 def _materialize_real_outputs(
     root: Path,
     contract: Mapping[str, Any],
@@ -353,6 +401,7 @@ def _materialize_real_outputs(
         horizons=[int(h) for h in baseline_lp_spec.get("horizons", [])],
         cumulative=bool(baseline_lp_spec.get("cumulative", True)),
         spec_name="identity_baseline",
+        nested_shock_spec=dict(baseline_shock_spec),
     )
     raw_tdc_lp = run_local_projections(
         shocked,
@@ -369,6 +418,13 @@ def _materialize_real_outputs(
     export_frame(lp_outputs["lp_irf"], lp_irf_path)
     lp_irf_identity_baseline_path = root / "output" / "models" / "lp_irf_identity_baseline.csv"
     export_frame(identity_baseline, lp_irf_identity_baseline_path)
+    identity_measurement_ladder = _build_identity_measurement_ladder(
+        shocked,
+        lp_specs=lp_specs,
+        shock_specs=all_shock_specs,
+    )
+    identity_measurement_ladder_path = root / "output" / "models" / "identity_measurement_ladder.csv"
+    export_frame(identity_measurement_ladder, identity_measurement_ladder_path)
     treatment_fingerprint_path = root / "output" / "models" / "headline_treatment_fingerprint.json"
     write_json_payload(
         treatment_fingerprint_path,
@@ -376,6 +432,8 @@ def _materialize_real_outputs(
             shock_spec=dict(baseline_shock_spec),
             shocked=shocked,
             repo_root=repo_root(),
+            canonical_tdc_source_path=build_result.canonical_tdc_source_path,
+            canonical_tdc_source_kind=build_result.canonical_tdc_source_kind,
         ),
     )
     smooth_lp_spec = lp_specs["specs"].get("smooth_lp", {})
@@ -553,6 +611,7 @@ def _materialize_real_outputs(
         build_pass_through_summary(
             lp_irf=lp_outputs["lp_irf"],
             identity_lp_irf=identity_baseline,
+            identity_measurement_ladder=identity_measurement_ladder,
             sensitivity=lp_outputs["tdc_sensitivity_ladder"],
             control_sensitivity=lp_outputs["control_set_sensitivity"],
             sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
@@ -670,6 +729,7 @@ def _materialize_real_outputs(
             shocks_path,
             lp_irf_path,
             lp_irf_identity_baseline_path,
+            identity_measurement_ladder_path,
             smoothed_lp_irf_path,
             smoothed_lp_diagnostics_path,
             lp_irf_regimes_path,
@@ -727,6 +787,7 @@ def _materialize_real_outputs(
         "shocks_path": str(shocks_path),
         "lp_irf_path": str(lp_irf_path),
         "lp_irf_identity_baseline_path": str(lp_irf_identity_baseline_path),
+        "identity_measurement_ladder_path": str(identity_measurement_ladder_path),
         "smoothed_lp_irf_path": str(smoothed_lp_irf_path),
         "smoothed_lp_diagnostics_path": str(smoothed_lp_diagnostics_path),
         "lp_irf_regimes_path": str(lp_irf_regimes_path),
@@ -788,7 +849,7 @@ def _materialize_from_source_bundle(
         overview_payload
         or {
             "headline_metrics": {},
-            "sample": {"frequency": "quarterly", "rows": None, "source_root": str(source_root), "layout": "contract_skeleton"},
+            "sample": {"frequency": "quarterly", "rows": None, "layout": "contract_skeleton"},
             "main_findings": ["Quarterly export skeleton materialized from the frozen contract."],
             "caveats": ["This command only freezes the export layout; substantive analysis is wired later."],
             "evidence_tiers": {"contract_skeleton": ["site/data/overview.json"]},
