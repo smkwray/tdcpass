@@ -4,7 +4,7 @@
 
 `tdcpass` studies one question:
 
-**When the Treasury-attributed component of deposits rises unexpectedly, do matched total bank deposits rise too, or does that increase mostly replace other deposit-creating channels?**
+**When the Treasury-attributed component of deposits (TDC) rises unexpectedly, do matched total bank deposits rise too, or does that increase mostly replace other deposit-creating channels?**
 
 ## Status
 
@@ -16,6 +16,8 @@ Current posture:
 - committed `site/data/*` preview mirror; regenerated `output/*` stays local
 
 The current bundle is a diagnostics-heavy methods and reproducibility release built on canonical `tdcest` TDC. The reusable core is the panel builder, outcome construction, LP stack, diagnostics, and site/export wiring around that treatment object.
+
+Here, **TDC** means the canonically defined Treasury-attributed component of deposits from `tdcest` / `tdcsim`. It is the project’s specific treatment object, not a repo-local relabeling of literal Treasury deposit balances.
 
 ## What the repo does
 

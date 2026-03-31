@@ -380,9 +380,9 @@ Required keys:
 - `min_train_obs`
 - `max_train_obs`
 - `usable_sample`
-- `git_commit`
+- `analysis_source_commit`
 
-This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml` and also record realized sample metadata from the current run so closeout can fail when docs, config, and exported artifacts drift apart.
+This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml` and record the `analysis_source_commit` whose code/config state produced the artifact. That makes the committed public mirror validate against a satisfiable recorded state instead of the containing repo's later `HEAD`.
 
 ### `output/models/provenance_validation_summary.json`
 
@@ -390,12 +390,12 @@ Required keys:
 
 - `status`
 - `failures`
-- `git_commit_check`
+- `analysis_source_commit_check`
 - `config_hashes_check`
 - `upstream_input_check`
 - `spec_metadata_check`
 
-This file is the publish-path provenance verdict for the headline treatment fingerprint. It records whether the stored fingerprint matches the current repo commit, current config hashes, and the currently reachable upstream canonical-TDC source file when that source can be rechecked. The public mirror should only be refreshed when this summary passes.
+This file is the recorded-state provenance verdict for the headline treatment fingerprint. It records whether the stored `analysis_source_commit` is present in repo history, whether the stored config hashes still match the current repo config files, and whether the upstream canonical-TDC source can be revalidated against its recorded source commit when the sibling repo is reachable. The publish path can still apply a stricter live current-HEAD gate before mirroring, but the committed public mirror should avoid an unsatisfiable “stored commit must equal containing repo HEAD” rule.
 
 ### `output/models/direct_identification_summary.json`
 

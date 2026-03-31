@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from tdcpass.analysis.treatment_fingerprint import validate_headline_treatment_fingerprint
+from tdcpass.analysis.treatment_fingerprint import validate_headline_treatment_fingerprint_recorded_state
 from tdcpass.core.yaml_utils import load_yaml
 
 
@@ -41,14 +41,14 @@ def test_committed_site_data_mirror_is_self_consistent() -> None:
     readiness = _load_json(root / "site" / "data" / "result_readiness_summary.json")
     pass_through = _load_json(root / "site" / "data" / "pass_through_summary.json")
 
-    assert validate_headline_treatment_fingerprint(
+    assert validate_headline_treatment_fingerprint_recorded_state(
         fingerprint,
         shock_spec=shock_specs["unexpected_tdc_default"],
         repo_root=root,
     ) == []
     assert provenance["status"] == "passed"
     assert provenance["failures"] == []
-    assert provenance["git_commit_check"]["status"] == "passed"
+    assert provenance["analysis_source_commit_check"]["status"] == "passed"
     assert provenance["config_hashes_check"]["status"] == "passed"
 
     assert direct_identification["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"

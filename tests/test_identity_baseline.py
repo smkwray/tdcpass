@@ -172,10 +172,10 @@ def test_treatment_fingerprint_detects_git_commit_mismatch() -> None:
         shocked=shocked,
         repo_root=repo_root,
     )
-    fingerprint["git_commit"] = "definitely-not-current-head"
+    fingerprint["analysis_source_commit"] = "definitely-not-current-head"
 
     failures = validate_headline_treatment_fingerprint(fingerprint, shock_spec=spec, repo_root=repo_root)
-    assert any("git_commit mismatch" in failure for failure in failures)
+    assert any("analysis_source_commit mismatch" in failure for failure in failures)
 
 
 def test_treatment_fingerprint_validation_summary_reports_failed_commit_check() -> None:
@@ -200,7 +200,7 @@ def test_treatment_fingerprint_validation_summary_reports_failed_commit_check() 
         shocked=shocked,
         repo_root=repo_root,
     )
-    fingerprint["git_commit"] = "definitely-not-current-head"
+    fingerprint["analysis_source_commit"] = "definitely-not-current-head"
 
     summary = build_headline_treatment_fingerprint_validation_summary(
         fingerprint,
@@ -209,5 +209,5 @@ def test_treatment_fingerprint_validation_summary_reports_failed_commit_check() 
     )
 
     assert summary["status"] == "failed"
-    assert summary["git_commit_check"]["status"] == "failed"
-    assert any("git_commit mismatch" in failure for failure in summary["failures"])
+    assert summary["analysis_source_commit_check"]["status"] in {"failed", "unresolved"}
+    assert any("analysis_source_commit" in failure for failure in summary["failures"])

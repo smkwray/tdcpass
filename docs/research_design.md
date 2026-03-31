@@ -10,7 +10,7 @@ For the meaning of **TDC**, use these external source repositories as the refere
 - `tdcest` defines the canonical measured quarterly TDC series
 - `tdcsim` defines the mechanism/accounting interpretation of TDC
 
-This repo analyzes pass-through **of that TDC object**. It does not redefine TDC locally around a simpler stock-change proxy.
+This repo analyzes pass-through **of that TDC object**. It does not redefine TDC locally around a simpler stock-change proxy or treat it as a literal Treasury deposit stock.
 
 ## 1. Main estimands
 

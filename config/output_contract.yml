@@ -287,7 +287,7 @@ artifacts:
       - min_train_obs
       - max_train_obs
       - usable_sample
-      - git_commit
+      - analysis_source_commit
       - config_hashes
       - upstream_input
   - path: output/models/provenance_validation_summary.json
@@ -295,7 +295,7 @@ artifacts:
     required_keys:
       - status
       - failures
-      - git_commit_check
+      - analysis_source_commit_check
       - config_hashes_check
       - upstream_input_check
       - spec_metadata_check
@@ -618,7 +618,7 @@ artifacts:
       - min_train_obs
       - max_train_obs
       - usable_sample
-      - git_commit
+      - analysis_source_commit
       - config_hashes
       - upstream_input
   - path: site/data/provenance_validation_summary.json
@@ -626,7 +626,7 @@ artifacts:
     required_keys:
       - status
       - failures
-      - git_commit_check
+      - analysis_source_commit_check
       - config_hashes_check
       - upstream_input_check
       - spec_metadata_check
