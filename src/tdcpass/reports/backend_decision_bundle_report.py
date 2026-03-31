@@ -6,7 +6,7 @@ from typing import Any, Mapping
 
 def render_backend_decision_bundle_report(summary: Mapping[str, Any]) -> str:
     lines: list[str] = []
-    lines.append("# Backend Decision Bundle")
+    lines.append("# Backend Scope Bundle")
     lines.append("")
     lines.append(f"Status: `{summary.get('status', 'unknown')}`")
     lines.append(f"Recommended action: `{summary.get('recommended_action', 'unknown')}`")

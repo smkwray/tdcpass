@@ -55,7 +55,7 @@
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
+        "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
       "h4": {
         "allowed": false,
@@ -65,7 +65,7 @@
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
+        "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
       "h8": {
         "allowed": false,
@@ -75,7 +75,7 @@
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
+        "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       }
     }
   },
@@ -123,7 +123,7 @@
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
+        "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
       "beta_gap_total_minus_other": 128.49398892100785,
       "direct_vs_identity_tdc_gap": 0.0,
@@ -173,7 +173,7 @@
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
+        "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
       "beta_gap_total_minus_other": 278.13971316628357,
       "direct_vs_identity_tdc_gap": 0.0,
@@ -223,7 +223,7 @@
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
-        "explanation": "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses."
+        "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
       "beta_gap_total_minus_other": 347.6946386730543,
       "direct_vs_identity_tdc_gap": 0.0,

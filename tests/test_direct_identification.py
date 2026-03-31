@@ -141,6 +141,7 @@ def test_direct_identification_suppresses_ratios_when_raw_tdc_beta_is_too_small(
     assert payload["ratio_reporting_gate"]["horizons"]["h0"]["allowed"] is False
     assert payload["ratio_reporting_gate"]["horizons"]["h0"]["conditions"]["tdc_ci_excludes_zero"] is True
     assert payload["ratio_reporting_gate"]["horizons"]["h0"]["conditions"]["dimensionally_coherent_denominator_gate_resolved"] is False
+    assert "out of scope in the current release" in payload["ratio_reporting_gate"]["horizons"]["h0"]["explanation"]
     assert payload["horizon_evidence"]["h0"]["pass_through_ratio_total_over_tdc"] is None
     assert payload["horizon_evidence"]["h0"]["crowd_out_ratio_neg_other_over_tdc"] is None
 

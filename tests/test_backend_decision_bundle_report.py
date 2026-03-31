@@ -8,7 +8,7 @@ def test_render_backend_decision_bundle_report_includes_action_and_status_board(
         {
             "status": "not_ready",
             "recommended_action": "stop_and_package",
-            "headline_question": "What does the current backend evidence stack imply about whether to continue or stop quarterly-method work?",
+            "headline_question": "What does the current backend evidence stack support in the current release?",
             "status_board": {
                 "readiness": "not_ready",
                 "methods_stack": "mature",
@@ -24,12 +24,12 @@ def test_render_backend_decision_bundle_report_includes_action_and_status_board(
                     "other_component": {"beta": -32.8, "ci_excludes_zero": True},
                 }
             ],
-            "takeaways": ["Recommended action: stop adding backend estimators and package the current internal evidence stack."],
+            "takeaways": ["The current backend is complete enough to package with the repo's narrow release wording."],
         }
     )
 
-    assert "# Backend Decision Bundle" in text
+    assert "# Backend Scope Bundle" in text
     assert "Recommended action: `stop_and_package`" in text
     assert "- methods_stack: `mature`" in text
     assert "reserve_drain_low_h0" in text
-    assert "stop adding backend estimators" in text
+    assert "narrow release wording" in text

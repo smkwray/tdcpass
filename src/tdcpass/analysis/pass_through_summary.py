@@ -320,7 +320,7 @@ def build_pass_through_summary(
     elif readiness_status == "provisional":
         headline = (
             "Current run shows an impact-stage sign pattern suggestive of crowd-out in the exact identity baseline, "
-            "while persistence, mechanism attribution, and ratio-based headline interpretation remain unsettled."
+            "while persistence and mechanism attribution remain unsettled and ratio-based headline interpretation stays out of scope in the current release."
         )
     else:
         headline = (

@@ -8,20 +8,20 @@ def test_render_backend_evidence_packet_report_includes_reading_order() -> None:
         {
             "status": "not_ready",
             "recommended_action": "stop_and_package",
-            "headline_question": "Which backend artifacts should be used to make the quarterly-method stop/continue decision?",
+            "headline_question": "Which backend artifacts define the current release scope?",
             "packet_sections": [
                 {
                     "label": "Decision Bundle",
-                    "purpose": "Start here for the stop/continue call.",
+                    "purpose": "Start here for the release-scope summary.",
                     "json_path": "/tmp/demo/output/models/backend_decision_bundle_summary.json",
                     "report_path": "/tmp/demo/output/reports/backend_decision_bundle.md",
                 }
             ],
-            "takeaways": ["The packet is complete enough to support ending the current quarterly backend iteration cycle."],
+            "takeaways": ["The packet is complete enough to support the current release boundary."],
         }
     )
 
     assert "# Backend Evidence Packet" in text
     assert "Recommended action: `stop_and_package`" in text
-    assert "Decision Bundle: Start here for the stop/continue call." in text
+    assert "Decision Bundle: Start here for the release-scope summary." in text
     assert "/tmp/demo/output/models/backend_decision_bundle_summary.json" in text

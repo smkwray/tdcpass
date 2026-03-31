@@ -25,27 +25,29 @@ def build_backend_closeout_summary(
 
     unsupported_claims = [
         "The quarterly design is not ready for a clean pass-through versus crowd-out claim.",
-        "Direct pass-through or crowd-out ratios remain suppressed or not interpretable.",
+        "Headline pass-through or crowd-out ratios are out of scope in the current release.",
         "Full-sample mechanism evidence remains non-decisive even though some published state contexts are sharper.",
     ]
 
     next_lane_options = [
-        "Package the internal backend evidence stack and stop adding quarterly backend estimators.",
-        "If work continues, limit it to narrow follow-ups that could change the decision boundary rather than broad spec exploration.",
-        "Treat any future work on the headline causal claim as a design-change problem rather than another quarterly backend iteration.",
+        "Package the current backend outputs with the repo's narrow release wording.",
+        "If work continues, limit it to narrow follow-ups that could change the supported claim boundary rather than broad spec exploration.",
+        "Treat any future work on the headline causal claim as a design-change problem rather than another round of backend specification churn.",
     ]
 
     takeaways = [
         f"Recommended action: `{recommended_action}`.",
-        "This closeout summary is intended to be the final backend handoff note for the current quarterly iteration cycle.",
+        "This summary records the current backend claim boundary for the release.",
     ]
     if str(status_board.get("readiness", "not_ready")) != "ready_for_interpretation":
-        takeaways.append("The stop recommendation is driven by a mature methods stack plus persistent claim-level non-readiness.")
+        takeaways.append("The current release boundary is driven by a mature methods stack plus persistent claim-level non-readiness.")
+    if recommended_action == "targeted_followup_only":
+        takeaways.append("Broad backend specification expansion is not warranted; only targeted follow-up remains justified.")
 
     return {
         "status": str(decision_bundle.get("status", "unknown")),
         "recommended_action": recommended_action,
-        "headline_question": "What should be treated as settled, unsupported, and next-step options at backend closeout?",
+        "headline_question": "What is settled, what remains unsupported, and what follow-up scope is justified by the current backend?",
         "evidence_packet_report_path": str(evidence_packet.get("packet_sections", [{}])[0].get("report_path", "")) if evidence_packet.get("packet_sections") else "",
         "status_board": status_board,
         "settled_points": settled_points,

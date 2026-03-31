@@ -76,7 +76,7 @@ def build_backend_decision_bundle(
     )
 
     takeaways = [
-        "This bundle synthesizes the backend-only methodological stack into a single stopping-rule artifact.",
+        "This bundle synthesizes the backend methodological stack into a single release-scope summary.",
     ]
     if methods_stack_status == "mature":
         takeaways.append("The methods stack is mature: treatment quality passes, smoothing is stable, and the core factor-control path is adequate.")
@@ -87,15 +87,15 @@ def build_backend_decision_bundle(
     if published_vs_baseline_status == "context_sharpens_mechanism_only":
         takeaways.append("The published mechanism context sharpens interpretation relative to the full-sample baseline, but only on the mechanism side.")
     if recommended_action == "stop_and_package":
-        takeaways.append("Recommended action: stop adding backend estimators and package the current internal evidence stack.")
+        takeaways.append("The current backend is complete enough to package with the repo's narrow release wording.")
     elif recommended_action == "targeted_followup_only":
-        takeaways.append("Recommended action: only run narrow targeted follow-ups that could materially change the decision boundary.")
+        takeaways.append("Any additional work should stay narrowly focused on evidence that could materially change the supported claim boundary.")
     elif recommended_action == "continue_backend_work":
-        takeaways.append("Recommended action: continue backend work because the core methodology stack is not yet stable enough to support a stopping decision.")
+        takeaways.append("More backend work is still warranted because the core methodology stack is not yet stable enough for the current release boundary.")
 
     return {
         "status": readiness_status,
-        "headline_question": "What does the current backend evidence stack imply about whether to continue or stop quarterly-method work?",
+        "headline_question": "What does the current backend evidence stack support in the current release?",
         "status_board": {
             "readiness": readiness_status,
             "direct_identification": direct_status,

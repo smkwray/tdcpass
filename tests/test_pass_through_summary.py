@@ -274,7 +274,8 @@ def test_pass_through_summary_uses_cooler_provisional_headline_for_exact_baselin
 
     assert "impact-stage sign pattern" in payload["headline_answer"]
     assert "suggestive of crowd-out" in payload["headline_answer"]
-    assert "remain unsettled" in payload["headline_answer"]
+    assert "mechanism attribution remain unsettled" in payload["headline_answer"]
+    assert "out of scope in the current release" in payload["headline_answer"]
 
 
 def test_pass_through_summary_surfaces_failed_treatment_quality_gate() -> None:

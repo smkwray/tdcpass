@@ -81,16 +81,16 @@ def _ratio_reporting_gate(
     abs_raw_tdc_beta = None if raw_tdc is None else abs(float(raw_tdc["beta"]))
     denominator_gate_resolved = False
     if raw_tdc is None:
-        explanation = "Ratios are suppressed because the raw-unit TDC response is unavailable."
+        explanation = "Headline pass-through and crowd-out ratios are out of scope in the current release because the raw-unit TDC response is unavailable."
     elif not ci_excludes_zero:
         explanation = (
-            "Ratios are suppressed because the raw-unit TDC response does not exclude zero, and this release still "
-            "withholds headline ratios pending a dimensionally coherent first-stage gate."
+            "Headline pass-through and crowd-out ratios are out of scope in the current release because the raw-unit "
+            "TDC response does not exclude zero and the repo has not resolved a dimensionally coherent first-stage denominator gate."
         )
     else:
         explanation = (
-            "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent "
-            "first-stage gate for raw-unit treatment responses."
+            "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has "
+            "not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
         )
     return {
         "allowed": False,

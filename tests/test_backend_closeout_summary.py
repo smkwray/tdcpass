@@ -19,3 +19,18 @@ def test_backend_closeout_summary_carries_stop_action_and_boundaries() -> None:
     assert summary["recommended_action"] == "stop_and_package"
     assert any("reserve_drain_low_h0" in item for item in summary["settled_points"])
     assert any("not ready" in item.lower() for item in summary["unsupported_claims"])
+
+
+def test_backend_closeout_summary_marks_ratio_lane_out_of_scope_and_targeted_followup_only() -> None:
+    summary = build_backend_closeout_summary(
+        decision_bundle={
+            "status": "provisional",
+            "recommended_action": "targeted_followup_only",
+            "status_board": {"readiness": "provisional"},
+            "published_contexts": [],
+        },
+        evidence_packet={"packet_sections": []},
+    )
+
+    assert any("out of scope in the current release" in item for item in summary["unsupported_claims"])
+    assert any("only targeted follow-up remains justified" in item for item in summary["takeaways"])

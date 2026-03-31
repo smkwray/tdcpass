@@ -22,7 +22,7 @@
   "caveats": [
     "Current release wording is gated by readiness diagnostics: the live bundle should be read as an exploratory deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
     "When the exact identity baseline and the older approximate dynamic LP path disagree, interpretation should default to the exact baseline and treat the older path as a robustness diagnostic rather than the headline read.",
-    "Headline pass-through and crowd-out ratios are suppressed in this release pending a dimensionally coherent first-stage gate for raw-unit treatment responses.",
+    "Headline pass-through and crowd-out ratios are out of scope in the current release until the repo has a dimensionally coherent first-stage gate for raw-unit treatment responses.",
     "bill_share is a quarterly issue-date share of Treasury bill auction offering amounts from FiscalData; it remains an exploratory sensitivity input, not a live regime export or standalone mechanism proof.",
     "bill_share-linked shock variants are retained only as exploratory stress tests because they preserve the impact-stage sign pattern but change medium-horizon persistence enough that they should not be promoted into the headline treatment family.",
     "Structural proxies are partial cross-checks on the residual, not exhaustive counterpart accounting or standalone mechanism proof."

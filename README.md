@@ -37,7 +37,7 @@ The package rebuilds a quarterly public-data bundle that includes:
 - It does not require prebuilt local caches to run.
 - It does not treat the residual alone as mechanism proof.
 - It does not currently claim a clean pass-through-versus-crowd-out answer.
-- It does not currently report headline pass-through or crowd-out ratios while the repo still lacks a dimensionally coherent first-stage gate for raw-unit treatment responses.
+- It does not report headline pass-through or crowd-out ratios in the current release; that lane remains out of scope until the repo has a dimensionally coherent first-stage gate for raw-unit treatment responses.
 - It does not treat `bill_share`-linked shock variants as co-equal headline designs; they remain exploratory stress tests only.
 
 ## Environment

@@ -21,7 +21,7 @@ def build_backend_evidence_packet(
     packet_sections = [
         {
             "label": "Decision Bundle",
-            "purpose": "Start here for the stop/continue call.",
+            "purpose": "Start here for the release-scope summary.",
             "json_path": str(backend_decision_bundle_path),
             "report_path": str(backend_decision_bundle_report_path),
         },
@@ -46,15 +46,15 @@ def build_backend_evidence_packet(
     ]
 
     takeaways = [
-        "This packet packages the backend-only evidence stack into a fixed reading order for internal review.",
+        "This packet packages the backend evidence into a fixed reading order.",
         f"Current recommended action: `{recommended_action}`.",
     ]
     if recommended_action == "stop_and_package":
-        takeaways.append("The packet is complete enough to support ending the current quarterly backend iteration cycle.")
+        takeaways.append("The packet is complete enough to support the current release boundary.")
 
     return {
         "status": str(backend_decision_bundle.get("status", "unknown")),
-        "headline_question": "Which backend artifacts should be used to make the quarterly-method stop/continue decision?",
+        "headline_question": "Which backend artifacts define the current release scope?",
         "root": str(root),
         "recommended_action": recommended_action,
         "packet_sections": packet_sections,

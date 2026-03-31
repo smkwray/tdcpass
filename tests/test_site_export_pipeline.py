@@ -409,5 +409,6 @@ def test_default_overview_payload_stays_methods_preview() -> None:
     assert "1960Q4" in payload["main_findings"][2]
     assert "`not_ready`" in payload["main_findings"][2]
     assert "exploratory deposit-response readout" in payload["caveats"][0]
+    assert "out of scope in the current release" in payload["caveats"][2]
     assert "dimensionally coherent first-stage gate" in payload["caveats"][2]
     assert "source_root" not in payload["sample"]
