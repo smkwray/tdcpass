@@ -1,5 +1,7 @@
 # tdcpass
 
+> In progress: this is a public methods-and-reproducibility release, and the design, estimates, and wording may still tighten.
+
 `tdcpass` studies one question:
 
 **When the Treasury-attributed component of deposits rises unexpectedly, do matched total bank deposits rise too, or does that increase mostly replace other deposit-creating channels?**
