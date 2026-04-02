@@ -26,6 +26,96 @@ series:
   preferred_source: frb_h8_or_derived_match
   quality_tier: tier_1_direct
   notes: Headline outcome.
+- key: checkable_deposits_bank_qoq
+  display_name: Bank checkable deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 liability component of total bank deposits.
+- key: interbank_transactions_bank_qoq
+  display_name: Bank interbank transactions liabilities, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 liability component of total bank deposits.
+- key: time_savings_deposits_bank_qoq
+  display_name: Bank time and savings deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 liability component of total bank deposits.
+- key: checkable_federal_govt_bank_qoq
+  display_name: Bank checkable federal government deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 checkable subcomponent for federal government deposit liabilities.
+- key: checkable_state_local_bank_qoq
+  display_name: Bank checkable state and local deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 checkable subcomponent for state and local government deposit liabilities.
+- key: checkable_rest_of_world_bank_qoq
+  display_name: Bank checkable rest-of-world deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 checkable subcomponent for foreign deposit liabilities.
+- key: checkable_private_domestic_bank_qoq
+  display_name: Bank checkable private domestic deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 checkable subcomponent for private domestic deposit liabilities.
+- key: interbank_transactions_foreign_banks_liability_qoq
+  display_name: Bank interbank liabilities to foreign banks, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_l202
+  quality_tier: tier_1_direct
+  notes: Quarterly change in U.S.-chartered bank interbank liabilities to banks in foreign countries from Z.1 L.202; an external banking lane, not a domestic creator subtotal.
+- key: interbank_transactions_foreign_banks_asset_qoq
+  display_name: Bank interbank assets on foreign banks, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_l202
+  quality_tier: tier_1_direct
+  notes: Quarterly change in U.S.-chartered bank interbank claims on banks in foreign countries from Z.1 L.202; an external banking lane rather than a domestic escape-support proxy.
+- key: deposits_at_foreign_banks_asset_qoq
+  display_name: Bank deposits at foreign banks, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_l202
+  quality_tier: tier_1_direct
+  notes: Quarterly change in U.S.-chartered bank deposits at foreign banks from Z.1 L.202; use as external banking context rather than domestic creator evidence.
 - key: tga_qoq
   display_name: Treasury General Account quarterly change
   role: control
@@ -62,6 +152,204 @@ series:
   preferred_source: frb_z1_or_h8_proxy
   quality_tier: tier_2_constructed
   notes: Mechanism cross-check built from FRED bank credit minus Treasury and agency securities with explicit per-series unit audit. This proxy has a shorter public history than the headline sample and should not gate the headline quarterly panel.
+- key: commercial_industrial_loans_qoq
+  display_name: Commercial and industrial loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank C&I balances quarterlyized from weekly levels.
+- key: construction_land_development_loans_qoq
+  display_name: Construction and land development loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank construction and land development balances.
+- key: cre_multifamily_loans_qoq
+  display_name: Multifamily CRE loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank CRE balances secured by multifamily properties.
+- key: cre_nonfarm_nonresidential_loans_qoq
+  display_name: Nonfarm nonresidential CRE loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank CRE balances secured by nonfarm nonresidential properties.
+- key: consumer_loans_qoq
+  display_name: Consumer loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank consumer-loan balances.
+- key: credit_card_revolving_loans_qoq
+  display_name: Credit-card and revolving consumer loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank credit-card and other revolving consumer-loan balances.
+- key: auto_loans_qoq
+  display_name: Automobile loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank automobile-loan balances.
+- key: other_consumer_loans_qoq
+  display_name: Other consumer loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank other-consumer-loan balances.
+- key: heloc_loans_qoq
+  display_name: Revolving home equity loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank revolving home-equity loan balances.
+- key: closed_end_residential_loans_qoq
+  display_name: Closed-end residential loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: First-wave creator-lane channel from H.8/FRED all-commercial-bank closed-end residential-loan balances.
+- key: loans_to_commercial_banks_qoq
+  display_name: Loans to commercial banks, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: Noncore creator-lane channel from H.8/FRED all-commercial-bank loans to commercial banks. This is an intermediary or depository-credit family, not core domestic nonfinancial lending.
+- key: loans_to_nondepository_financial_institutions_qoq
+  display_name: Loans to nondepository financial institutions, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: Noncore creator-lane channel from H.8/FRED all-commercial-bank loans to nondepository financial institutions. This is an intermediary-credit family, not core domestic nonfinancial lending.
+- key: loans_for_purchasing_or_carrying_securities_qoq
+  display_name: Loans for purchasing or carrying securities, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Noncore creator-lane channel from quarterly Z.1 U.S.-chartered depository-institution asset levels for loans for purchasing or carrying securities. This is a securities-purpose credit family, not core domestic nonfinancial lending.
+- key: treasury_securities_bank_qoq
+  display_name: Bank Treasury securities, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: First asset-purchase creator lane from quarterly Z.1 L.111 U.S.-chartered depository-institution Treasury-security asset levels. Interpret with TGA and Fed context rather than as standalone direct deposit creation.
+- key: agency_gse_backed_securities_bank_qoq
+  display_name: Bank agency- and GSE-backed securities, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: First asset-purchase creator lane from quarterly Z.1 L.111 U.S.-chartered depository-institution agency- and GSE-backed security asset levels. Interpret with Treasury and Fed context rather than as standalone direct deposit creation.
+- key: municipal_securities_bank_qoq
+  display_name: Bank municipal securities, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: First asset-purchase creator lane from quarterly Z.1 L.111 U.S.-chartered depository-institution municipal-security asset levels.
+- key: corporate_foreign_bonds_bank_qoq
+  display_name: Bank corporate and foreign bonds, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: First asset-purchase creator lane from quarterly Z.1 L.111 U.S.-chartered depository-institution corporate- and foreign-bond asset levels.
+- key: commercial_industrial_loans_ex_chargeoffs_qoq
+  display_name: Commercial and industrial loans, quarterly change plus charge-off add-back
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred_plus_fred_chargeoff_rate
+  quality_tier: tier_2_constructed
+  notes: Approximate creator lane equal to q/q change in H.8/FRED C&I balances plus lagged balance times the official annualized business-loan charge-off rate divided by 400.
+- key: consumer_loans_ex_chargeoffs_qoq
+  display_name: Consumer loans, quarterly change plus charge-off add-back
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred_plus_fred_chargeoff_rate
+  quality_tier: tier_2_constructed
+  notes: Approximate creator lane equal to q/q change in H.8/FRED consumer-loan balances plus lagged balance times the official annualized consumer-loan charge-off rate divided by 400.
+- key: credit_card_revolving_loans_ex_chargeoffs_qoq
+  display_name: Credit-card and revolving consumer loans, quarterly change plus charge-off add-back
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred_plus_fred_chargeoff_rate
+  quality_tier: tier_2_constructed
+  notes: Approximate creator lane equal to q/q change in H.8/FRED credit-card and revolving balances plus lagged balance times the official annualized credit-card charge-off rate divided by 400.
+- key: other_consumer_loans_ex_chargeoffs_qoq
+  display_name: Other consumer loans, quarterly change plus charge-off add-back
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred_plus_fred_chargeoff_rate
+  quality_tier: tier_2_constructed
+  notes: Approximate creator lane equal to q/q change in H.8/FRED other-consumer balances plus lagged balance times the official annualized other-consumer-loan charge-off rate divided by 400.
+- key: closed_end_residential_loans_ex_chargeoffs_qoq
+  display_name: Closed-end residential loans, quarterly change plus charge-off add-back
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred_plus_fred_chargeoff_rate
+  quality_tier: tier_2_constructed
+  notes: Approximate creator lane equal to q/q change in H.8/FRED closed-end residential balances plus lagged balance times the official annualized single-family residential mortgage charge-off rate divided by 400.
 - key: cb_nonts_qoq
   display_name: Central-bank non-Treasury channel proxy, quarterly change
   role: structural_proxy
@@ -98,6 +386,96 @@ series:
   preferred_source: frb_z1_proxy
   quality_tier: tier_2_constructed
   notes: Sign-normalized decline in domestic nonfinancial repo assets; positive values indicate cash reallocations that could support deposit increases.
+- key: on_rrp_reallocation_qoq
+  display_name: ON RRP reallocation support proxy, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h41_or_fred
+  quality_tier: tier_1_direct
+  notes: Sign-normalized decline in Federal Reserve ON RRP balances; positive values indicate less cash absorbed by ON RRP and therefore more support for bank-deposit retention, while negative values indicate escape pressure into ON RRP.
+- key: household_treasury_securities_reallocation_qoq
+  display_name: Household Treasury-holdings reallocation support proxy, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_l210
+  quality_tier: tier_1_direct
+  notes: Sign-normalized decline in household-sector Treasury-security holdings from Z.1 L.210; positive values indicate less household cash absorbed into Treasuries, while negative values indicate direct Treasury-absorption escape pressure.
+- key: mmf_treasury_bills_reallocation_qoq
+  display_name: MMF Treasury-bill reallocation support proxy, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_l210
+  quality_tier: tier_1_direct
+  notes: Sign-normalized decline in money market fund Treasury-bill holdings from Z.1 L.210; positive values indicate less direct bill absorption, while negative values indicate escape pressure into Treasury bills via MMFs.
+- key: currency_reallocation_qoq
+  display_name: Public currency reallocation support proxy, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: fred_currency_component
+  quality_tier: tier_1_direct
+  notes: Sign-normalized decline in public currency holdings from the FRED currency component of M1; positive values indicate less cash leakage out of deposits, while negative values indicate escape pressure into currency.
+- key: fedfunds_repo_liabilities_bank_qoq
+  display_name: Bank fed funds and repo liabilities, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_l207
+  quality_tier: tier_1_direct
+  notes: Quarterly change in bank fed-funds and repo liabilities from Z.1; a funding-accommodation lane rather than a creator or escape channel.
+- key: commercial_bank_borrowings_qoq
+  display_name: Commercial-bank borrowings, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_h8_or_fred
+  quality_tier: tier_1_direct
+  notes: Quarterly change in H.8 commercial-bank borrowings; a broad borrowing-side accommodation channel.
+- key: fed_borrowings_depository_institutions_qoq
+  display_name: Depository-institution Fed borrowings, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: fred_borrow
+  quality_tier: tier_1_direct
+  notes: Quarterly change in total borrowings from the Federal Reserve by depository institutions; a system-level funding-accommodation proxy rather than a bank-only creator or escape channel.
+- key: debt_securities_bank_liability_qoq
+  display_name: Bank debt securities liabilities, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_l208
+  quality_tier: tier_1_direct
+  notes: Quarterly change in bank debt-securities liabilities from Z.1; a nondeposit funding-accommodation channel.
+- key: fhlb_advances_sallie_mae_loans_bank_qoq
+  display_name: Bank FHLB advances and Sallie Mae loans, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_f111
+  quality_tier: tier_1_direct
+  notes: Quarterly change in bank FHLB advances and Sallie Mae loans from Z.1 F.111; a secured funding-accommodation channel.
+- key: holding_company_parent_funding_bank_qoq
+  display_name: Bank holding-company parent funding, quarterly change
+  role: counterpart_channel
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_f111
+  quality_tier: tier_1_direct
+  notes: Quarterly change in net transactions due to holding-company parents from Z.1; a parent-funding accommodation channel.
 - key: bill_share
   display_name: Bill-heavy issuance share
   role: regime

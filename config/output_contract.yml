@@ -17,12 +17,54 @@ artifacts:
       - quarter
       - tdc_bank_only_qoq
       - total_deposits_bank_qoq
+      - checkable_deposits_bank_qoq
+      - interbank_transactions_bank_qoq
+      - time_savings_deposits_bank_qoq
+      - checkable_federal_govt_bank_qoq
+      - checkable_state_local_bank_qoq
+      - checkable_rest_of_world_bank_qoq
+      - checkable_private_domestic_bank_qoq
+      - interbank_transactions_foreign_banks_liability_qoq
+      - interbank_transactions_foreign_banks_asset_qoq
+      - deposits_at_foreign_banks_asset_qoq
       - other_component_qoq
       - bank_credit_private_qoq
+      - commercial_industrial_loans_qoq
+      - construction_land_development_loans_qoq
+      - cre_multifamily_loans_qoq
+      - cre_nonfarm_nonresidential_loans_qoq
+      - consumer_loans_qoq
+      - credit_card_revolving_loans_qoq
+      - auto_loans_qoq
+      - other_consumer_loans_qoq
+      - heloc_loans_qoq
+      - closed_end_residential_loans_qoq
+      - loans_to_commercial_banks_qoq
+      - loans_to_nondepository_financial_institutions_qoq
+      - loans_for_purchasing_or_carrying_securities_qoq
+      - treasury_securities_bank_qoq
+      - agency_gse_backed_securities_bank_qoq
+      - municipal_securities_bank_qoq
+      - corporate_foreign_bonds_bank_qoq
+      - fedfunds_repo_liabilities_bank_qoq
+      - commercial_bank_borrowings_qoq
+      - fed_borrowings_depository_institutions_qoq
+      - debt_securities_bank_liability_qoq
+      - fhlb_advances_sallie_mae_loans_bank_qoq
+      - holding_company_parent_funding_bank_qoq
+      - commercial_industrial_loans_ex_chargeoffs_qoq
+      - consumer_loans_ex_chargeoffs_qoq
+      - credit_card_revolving_loans_ex_chargeoffs_qoq
+      - other_consumer_loans_ex_chargeoffs_qoq
+      - closed_end_residential_loans_ex_chargeoffs_qoq
       - cb_nonts_qoq
       - foreign_nonts_qoq
       - domestic_nonfinancial_mmf_reallocation_qoq
       - domestic_nonfinancial_repo_reallocation_qoq
+      - on_rrp_reallocation_qoq
+      - household_treasury_securities_reallocation_qoq
+      - mmf_treasury_bills_reallocation_qoq
+      - currency_reallocation_qoq
       - bill_share
       - reserve_drain_pressure
       - quarter_index
@@ -36,13 +78,66 @@ artifacts:
       - inflation
       - lag_tdc_bank_only_qoq
       - lag_total_deposits_bank_qoq
+      - lag_checkable_deposits_bank_qoq
+      - lag_interbank_transactions_bank_qoq
+      - lag_time_savings_deposits_bank_qoq
+      - lag_checkable_federal_govt_bank_qoq
+      - lag_checkable_state_local_bank_qoq
+      - lag_checkable_rest_of_world_bank_qoq
+      - lag_checkable_private_domestic_bank_qoq
+      - lag_interbank_transactions_foreign_banks_liability_qoq
+      - lag_interbank_transactions_foreign_banks_asset_qoq
+      - lag_deposits_at_foreign_banks_asset_qoq
       - lag_bank_credit_private_qoq
+      - lag_commercial_industrial_loans_qoq
+      - lag_construction_land_development_loans_qoq
+      - lag_cre_multifamily_loans_qoq
+      - lag_cre_nonfarm_nonresidential_loans_qoq
+      - lag_consumer_loans_qoq
+      - lag_credit_card_revolving_loans_qoq
+      - lag_auto_loans_qoq
+      - lag_other_consumer_loans_qoq
+      - lag_heloc_loans_qoq
+      - lag_closed_end_residential_loans_qoq
+      - lag_loans_to_commercial_banks_qoq
+      - lag_loans_to_nondepository_financial_institutions_qoq
+      - lag_loans_for_purchasing_or_carrying_securities_qoq
+      - lag_treasury_securities_bank_qoq
+      - lag_agency_gse_backed_securities_bank_qoq
+      - lag_municipal_securities_bank_qoq
+      - lag_corporate_foreign_bonds_bank_qoq
+      - lag_fedfunds_repo_liabilities_bank_qoq
+      - lag_commercial_bank_borrowings_qoq
+      - lag_fed_borrowings_depository_institutions_qoq
+      - lag_debt_securities_bank_liability_qoq
+      - lag_fhlb_advances_sallie_mae_loans_bank_qoq
+      - lag_holding_company_parent_funding_bank_qoq
+      - lag_commercial_industrial_loans_ex_chargeoffs_qoq
+      - lag_consumer_loans_ex_chargeoffs_qoq
+      - lag_credit_card_revolving_loans_ex_chargeoffs_qoq
+      - lag_other_consumer_loans_ex_chargeoffs_qoq
+      - lag_closed_end_residential_loans_ex_chargeoffs_qoq
       - lag_tga_qoq
       - lag_reserves_qoq
+      - lag_on_rrp_reallocation_qoq
+      - lag_household_treasury_securities_reallocation_qoq
+      - lag_mmf_treasury_bills_reallocation_qoq
+      - lag_currency_reallocation_qoq
       - lag_bill_share
       - lag_fedfunds
       - lag_unemployment
       - lag_inflation
+  - path: data/derived/call_report_deposit_components.csv
+    kind: csv
+    required_columns:
+      - quarter
+      - account_type
+      - depositor_class
+      - amount_bil_usd
+      - institution_count
+      - source_quarter
+      - source_kind
+      - universe_basis
   - path: output/accounting/accounting_summary.csv
     kind: csv
     required_columns:
@@ -113,6 +208,65 @@ artifacts:
       - n
       - spec_name
       - shock_column
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
+  - path: output/models/identity_treatment_sensitivity.csv
+    kind: csv
+    required_columns:
+      - treatment_variant
+      - treatment_role
+      - treatment_family
+      - target
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
+  - path: output/models/identity_control_sensitivity.csv
+    kind: csv
+    required_columns:
+      - control_variant
+      - control_role
+      - control_columns
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
+      - shock_scale
+      - response_type
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
+  - path: output/models/identity_sample_sensitivity.csv
+    kind: csv
+    required_columns:
+      - sample_variant
+      - sample_role
+      - sample_filter
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
+      - shock_scale
+      - response_type
       - decomposition_mode
       - outcome_construction
       - inference_method
@@ -260,6 +414,13 @@ artifacts:
       - published_regime_contexts
       - release_caveat
       - takeaways
+  - path: output/models/call_report_deposit_components_summary.json
+    kind: json
+    required_keys:
+      - status
+      - row_count
+      - qa
+      - takeaways
   - path: output/models/proxy_unit_audit.json
     kind: json
     required_keys:
@@ -325,6 +486,7 @@ artifacts:
       - warnings
       - diagnostics
       - key_estimates
+      - counterpart_channel_context
       - answer_ready_when
   - path: output/models/pass_through_summary.json
     kind: json
@@ -342,9 +504,31 @@ artifacts:
       - shock_sample_variants
       - structural_proxy_context
       - proxy_coverage_context
+      - counterpart_channel_context
       - published_regime_contexts
       - readiness_reasons
       - readiness_warnings
+  - path: output/models/deposit_component_scorecard.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - component_outcomes_present
+      - creator_channel_outcomes_present
+      - horizons
+      - takeaways
+  - path: output/models/counterpart_channel_scorecard.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - legacy_private_credit_proxy_role
+      - creator_channel_outcomes_present
+      - funding_accommodation_outcomes_present
+      - horizons
+      - takeaways
   - path: output/models/sample_construction_summary.json
     kind: json
     required_keys:
@@ -446,6 +630,65 @@ artifacts:
       - n
       - spec_name
       - shock_column
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
+  - path: site/data/identity_treatment_sensitivity.csv
+    kind: csv
+    required_columns:
+      - treatment_variant
+      - treatment_role
+      - treatment_family
+      - target
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
+  - path: site/data/identity_control_sensitivity.csv
+    kind: csv
+    required_columns:
+      - control_variant
+      - control_role
+      - control_columns
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
+      - shock_scale
+      - response_type
+      - decomposition_mode
+      - outcome_construction
+      - inference_method
+  - path: site/data/identity_sample_sensitivity.csv
+    kind: csv
+    required_columns:
+      - sample_variant
+      - sample_role
+      - sample_filter
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+      - shock_column
+      - shock_scale
+      - response_type
       - decomposition_mode
       - outcome_construction
       - inference_method
@@ -593,6 +836,13 @@ artifacts:
       - published_regime_contexts
       - release_caveat
       - takeaways
+  - path: site/data/call_report_deposit_components_summary.json
+    kind: json
+    required_keys:
+      - status
+      - row_count
+      - qa
+      - takeaways
   - path: site/data/proxy_unit_audit.json
     kind: json
     required_keys:
@@ -658,6 +908,7 @@ artifacts:
       - warnings
       - diagnostics
       - key_estimates
+      - counterpart_channel_context
       - answer_ready_when
   - path: site/data/pass_through_summary.json
     kind: json
@@ -675,9 +926,31 @@ artifacts:
       - shock_sample_variants
       - structural_proxy_context
       - proxy_coverage_context
+      - counterpart_channel_context
       - published_regime_contexts
       - readiness_reasons
       - readiness_warnings
+  - path: site/data/deposit_component_scorecard.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - component_outcomes_present
+      - creator_channel_outcomes_present
+      - horizons
+      - takeaways
+  - path: site/data/counterpart_channel_scorecard.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - legacy_private_credit_proxy_role
+      - creator_channel_outcomes_present
+      - funding_accommodation_outcomes_present
+      - horizons
+      - takeaways
   - path: site/data/sample_construction_summary.json
     kind: json
     required_keys:

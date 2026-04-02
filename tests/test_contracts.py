@@ -16,12 +16,16 @@ def test_output_contract_has_required_artifacts() -> None:
     paths = {row["path"] for row in artifacts}
     expected = {
         "data/derived/quarterly_panel.csv",
+        "data/derived/call_report_deposit_components.csv",
         "output/accounting/accounting_summary.csv",
         "output/accounting/quarters_tdc_exceeds_total.csv",
         "output/shocks/unexpected_tdc.csv",
         "output/models/lp_irf.csv",
         "output/models/lp_irf_identity_baseline.csv",
         "output/models/identity_measurement_ladder.csv",
+        "output/models/identity_treatment_sensitivity.csv",
+        "output/models/identity_control_sensitivity.csv",
+        "output/models/identity_sample_sensitivity.csv",
         "output/models/lp_irf_regimes.csv",
         "output/models/regime_diagnostics_summary.json",
         "output/models/tdc_sensitivity_ladder.csv",
@@ -33,6 +37,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "output/models/structural_proxy_evidence.csv",
         "output/models/structural_proxy_evidence_summary.json",
         "output/models/proxy_coverage_summary.json",
+        "output/models/call_report_deposit_components_summary.json",
         "output/models/proxy_unit_audit.json",
         "output/models/headline_treatment_fingerprint.json",
         "output/models/provenance_validation_summary.json",
@@ -40,6 +45,8 @@ def test_output_contract_has_required_artifacts() -> None:
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
+        "output/models/deposit_component_scorecard.json",
+        "output/models/counterpart_channel_scorecard.json",
         "output/models/sample_construction_summary.json",
         "output/manifests/raw_downloads.json",
         "output/manifests/reused_artifacts.json",
@@ -51,6 +58,9 @@ def test_output_contract_has_required_artifacts() -> None:
         "site/data/lp_irf.csv",
         "site/data/lp_irf_identity_baseline.csv",
         "site/data/identity_measurement_ladder.csv",
+        "site/data/identity_treatment_sensitivity.csv",
+        "site/data/identity_control_sensitivity.csv",
+        "site/data/identity_sample_sensitivity.csv",
         "site/data/lp_irf_regimes.csv",
         "site/data/regime_diagnostics_summary.json",
         "site/data/tdc_sensitivity_ladder.csv",
@@ -62,6 +72,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "site/data/structural_proxy_evidence.csv",
         "site/data/structural_proxy_evidence_summary.json",
         "site/data/proxy_coverage_summary.json",
+        "site/data/call_report_deposit_components_summary.json",
         "site/data/proxy_unit_audit.json",
         "site/data/headline_treatment_fingerprint.json",
         "site/data/provenance_validation_summary.json",
@@ -69,6 +80,8 @@ def test_output_contract_has_required_artifacts() -> None:
         "site/data/direct_identification_summary.json",
         "site/data/result_readiness_summary.json",
         "site/data/pass_through_summary.json",
+        "site/data/deposit_component_scorecard.json",
+        "site/data/counterpart_channel_scorecard.json",
         "site/data/sample_construction_summary.json",
     }
     assert expected.issubset(paths)
@@ -84,6 +97,80 @@ def test_contract_freezes_canonical_aliases_and_shock_column() -> None:
     assert "tdc_domestic_bank_only_qoq" in panel_artifact["required_columns"]
     assert "tdc_no_remit_bank_only_qoq" in panel_artifact["required_columns"]
     assert "tdc_credit_union_sensitive_qoq" in panel_artifact["required_columns"]
+    assert "checkable_deposits_bank_qoq" in panel_artifact["required_columns"]
+    assert "interbank_transactions_bank_qoq" in panel_artifact["required_columns"]
+    assert "time_savings_deposits_bank_qoq" in panel_artifact["required_columns"]
+    assert "checkable_federal_govt_bank_qoq" in panel_artifact["required_columns"]
+    assert "checkable_state_local_bank_qoq" in panel_artifact["required_columns"]
+    assert "checkable_rest_of_world_bank_qoq" in panel_artifact["required_columns"]
+    assert "checkable_private_domestic_bank_qoq" in panel_artifact["required_columns"]
+    assert "interbank_transactions_foreign_banks_liability_qoq" in panel_artifact["required_columns"]
+    assert "interbank_transactions_foreign_banks_asset_qoq" in panel_artifact["required_columns"]
+    assert "deposits_at_foreign_banks_asset_qoq" in panel_artifact["required_columns"]
+    assert "lag_checkable_deposits_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_interbank_transactions_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_time_savings_deposits_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_checkable_federal_govt_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_checkable_state_local_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_checkable_rest_of_world_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_checkable_private_domestic_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_interbank_transactions_foreign_banks_liability_qoq" in panel_artifact["required_columns"]
+    assert "lag_interbank_transactions_foreign_banks_asset_qoq" in panel_artifact["required_columns"]
+    assert "lag_deposits_at_foreign_banks_asset_qoq" in panel_artifact["required_columns"]
+    assert "commercial_industrial_loans_qoq" in panel_artifact["required_columns"]
+    assert "construction_land_development_loans_qoq" in panel_artifact["required_columns"]
+    assert "cre_multifamily_loans_qoq" in panel_artifact["required_columns"]
+    assert "cre_nonfarm_nonresidential_loans_qoq" in panel_artifact["required_columns"]
+    assert "consumer_loans_qoq" in panel_artifact["required_columns"]
+    assert "credit_card_revolving_loans_qoq" in panel_artifact["required_columns"]
+    assert "auto_loans_qoq" in panel_artifact["required_columns"]
+    assert "other_consumer_loans_qoq" in panel_artifact["required_columns"]
+    assert "heloc_loans_qoq" in panel_artifact["required_columns"]
+    assert "closed_end_residential_loans_qoq" in panel_artifact["required_columns"]
+    assert "loans_to_commercial_banks_qoq" in panel_artifact["required_columns"]
+    assert "loans_to_nondepository_financial_institutions_qoq" in panel_artifact["required_columns"]
+    assert "loans_for_purchasing_or_carrying_securities_qoq" in panel_artifact["required_columns"]
+    assert "treasury_securities_bank_qoq" in panel_artifact["required_columns"]
+    assert "agency_gse_backed_securities_bank_qoq" in panel_artifact["required_columns"]
+    assert "municipal_securities_bank_qoq" in panel_artifact["required_columns"]
+    assert "corporate_foreign_bonds_bank_qoq" in panel_artifact["required_columns"]
+    assert "fedfunds_repo_liabilities_bank_qoq" in panel_artifact["required_columns"]
+    assert "commercial_bank_borrowings_qoq" in panel_artifact["required_columns"]
+    assert "fed_borrowings_depository_institutions_qoq" in panel_artifact["required_columns"]
+    assert "debt_securities_bank_liability_qoq" in panel_artifact["required_columns"]
+    assert "fhlb_advances_sallie_mae_loans_bank_qoq" in panel_artifact["required_columns"]
+    assert "holding_company_parent_funding_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_commercial_industrial_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_construction_land_development_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_cre_multifamily_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_cre_nonfarm_nonresidential_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_consumer_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_credit_card_revolving_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_auto_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_other_consumer_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_heloc_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_closed_end_residential_loans_qoq" in panel_artifact["required_columns"]
+    assert "lag_loans_to_commercial_banks_qoq" in panel_artifact["required_columns"]
+    assert "lag_loans_to_nondepository_financial_institutions_qoq" in panel_artifact["required_columns"]
+    assert "lag_loans_for_purchasing_or_carrying_securities_qoq" in panel_artifact["required_columns"]
+    assert "lag_treasury_securities_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_agency_gse_backed_securities_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_municipal_securities_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_corporate_foreign_bonds_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_fedfunds_repo_liabilities_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_commercial_bank_borrowings_qoq" in panel_artifact["required_columns"]
+    assert "lag_fed_borrowings_depository_institutions_qoq" in panel_artifact["required_columns"]
+    assert "lag_debt_securities_bank_liability_qoq" in panel_artifact["required_columns"]
+    assert "lag_fhlb_advances_sallie_mae_loans_bank_qoq" in panel_artifact["required_columns"]
+    assert "lag_holding_company_parent_funding_bank_qoq" in panel_artifact["required_columns"]
+    assert "on_rrp_reallocation_qoq" in panel_artifact["required_columns"]
+    assert "household_treasury_securities_reallocation_qoq" in panel_artifact["required_columns"]
+    assert "mmf_treasury_bills_reallocation_qoq" in panel_artifact["required_columns"]
+    assert "currency_reallocation_qoq" in panel_artifact["required_columns"]
+    assert "lag_on_rrp_reallocation_qoq" in panel_artifact["required_columns"]
+    assert "lag_household_treasury_securities_reallocation_qoq" in panel_artifact["required_columns"]
+    assert "lag_mmf_treasury_bills_reallocation_qoq" in panel_artifact["required_columns"]
+    assert "lag_currency_reallocation_qoq" in panel_artifact["required_columns"]
 
 
 def test_shock_and_lp_specs_use_canonical_names() -> None:
@@ -111,15 +198,120 @@ def test_shock_and_lp_specs_use_canonical_names() -> None:
     assert baseline["shock_column"] == "tdc_residual_z"
     assert "tdc_bank_only_qoq" in baseline["outcomes"]
     assert "total_deposits_bank_qoq" in baseline["outcomes"]
+    assert "checkable_deposits_bank_qoq" in baseline["outcomes"]
+    assert "interbank_transactions_bank_qoq" in baseline["outcomes"]
+    assert "time_savings_deposits_bank_qoq" in baseline["outcomes"]
+    assert "checkable_federal_govt_bank_qoq" in baseline["outcomes"]
+    assert "checkable_state_local_bank_qoq" in baseline["outcomes"]
+    assert "checkable_rest_of_world_bank_qoq" in baseline["outcomes"]
+    assert "checkable_private_domestic_bank_qoq" in baseline["outcomes"]
+    assert "interbank_transactions_foreign_banks_liability_qoq" in baseline["outcomes"]
+    assert "interbank_transactions_foreign_banks_asset_qoq" in baseline["outcomes"]
+    assert "deposits_at_foreign_banks_asset_qoq" in baseline["outcomes"]
+    assert "commercial_industrial_loans_qoq" in baseline["outcomes"]
+    assert "construction_land_development_loans_qoq" in baseline["outcomes"]
+    assert "cre_multifamily_loans_qoq" in baseline["outcomes"]
+    assert "cre_nonfarm_nonresidential_loans_qoq" in baseline["outcomes"]
+    assert "consumer_loans_qoq" in baseline["outcomes"]
+    assert "credit_card_revolving_loans_qoq" in baseline["outcomes"]
+    assert "auto_loans_qoq" in baseline["outcomes"]
+    assert "other_consumer_loans_qoq" in baseline["outcomes"]
+    assert "heloc_loans_qoq" in baseline["outcomes"]
+    assert "closed_end_residential_loans_qoq" in baseline["outcomes"]
+    assert "loans_to_commercial_banks_qoq" in baseline["outcomes"]
+    assert "loans_to_nondepository_financial_institutions_qoq" in baseline["outcomes"]
+    assert "loans_for_purchasing_or_carrying_securities_qoq" in baseline["outcomes"]
+    assert "treasury_securities_bank_qoq" in baseline["outcomes"]
+    assert "agency_gse_backed_securities_bank_qoq" in baseline["outcomes"]
+    assert "municipal_securities_bank_qoq" in baseline["outcomes"]
+    assert "corporate_foreign_bonds_bank_qoq" in baseline["outcomes"]
+    assert "fedfunds_repo_liabilities_bank_qoq" in baseline["outcomes"]
+    assert "commercial_bank_borrowings_qoq" in baseline["outcomes"]
+    assert "fed_borrowings_depository_institutions_qoq" in baseline["outcomes"]
+    assert "debt_securities_bank_liability_qoq" in baseline["outcomes"]
+    assert "fhlb_advances_sallie_mae_loans_bank_qoq" in baseline["outcomes"]
+    assert "holding_company_parent_funding_bank_qoq" in baseline["outcomes"]
+    assert "tga_qoq" in baseline["outcomes"]
+    assert "reserves_qoq" in baseline["outcomes"]
+    assert "on_rrp_reallocation_qoq" in baseline["outcomes"]
+    assert "household_treasury_securities_reallocation_qoq" in baseline["outcomes"]
+    assert "mmf_treasury_bills_reallocation_qoq" in baseline["outcomes"]
+    assert "currency_reallocation_qoq" in baseline["outcomes"]
     assert baseline["controls"] == ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"]
     assert baseline["include_lagged_outcome"] is True
     assert lp_specs["specs"]["regimes"]["controls"] == ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"]
     assert lp_specs["specs"]["regimes"]["include_lagged_outcome"] is True
+    assert "checkable_deposits_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "interbank_transactions_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "time_savings_deposits_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "checkable_federal_govt_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "checkable_state_local_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "checkable_rest_of_world_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "checkable_private_domestic_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "interbank_transactions_foreign_banks_liability_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "interbank_transactions_foreign_banks_asset_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "deposits_at_foreign_banks_asset_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "tga_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "reserves_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "on_rrp_reallocation_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "household_treasury_securities_reallocation_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "mmf_treasury_bills_reallocation_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "currency_reallocation_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "fedfunds_repo_liabilities_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "commercial_bank_borrowings_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "fed_borrowings_depository_institutions_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "debt_securities_bank_liability_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "fhlb_advances_sallie_mae_loans_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
+    assert "holding_company_parent_funding_bank_qoq" in lp_specs["specs"]["regimes"]["outcomes"]
     assert lp_specs["specs"]["regimes"]["regime_columns"] == [
         "reserve_drain_pressure",
     ]
     assert lp_specs["specs"]["sensitivity"]["controls"] == ["lag_tdc_bank_only_qoq", "lag_fedfunds", "lag_unemployment", "lag_inflation"]
     assert lp_specs["specs"]["sensitivity"]["include_lagged_outcome"] is True
+    assert "checkable_deposits_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "interbank_transactions_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "time_savings_deposits_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "checkable_federal_govt_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "checkable_state_local_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "checkable_rest_of_world_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "checkable_private_domestic_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "interbank_transactions_foreign_banks_liability_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "interbank_transactions_foreign_banks_asset_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "deposits_at_foreign_banks_asset_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "tga_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "reserves_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "on_rrp_reallocation_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "household_treasury_securities_reallocation_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "mmf_treasury_bills_reallocation_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "currency_reallocation_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "fedfunds_repo_liabilities_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "commercial_bank_borrowings_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "fed_borrowings_depository_institutions_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "debt_securities_bank_liability_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "fhlb_advances_sallie_mae_loans_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "holding_company_parent_funding_bank_qoq" in lp_specs["specs"]["sensitivity"]["outcomes"]
+    assert "checkable_deposits_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "interbank_transactions_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "time_savings_deposits_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "checkable_federal_govt_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "checkable_state_local_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "checkable_rest_of_world_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "checkable_private_domestic_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "interbank_transactions_foreign_banks_liability_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "interbank_transactions_foreign_banks_asset_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "deposits_at_foreign_banks_asset_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "tga_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "reserves_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "on_rrp_reallocation_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "household_treasury_securities_reallocation_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "mmf_treasury_bills_reallocation_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "currency_reallocation_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "fedfunds_repo_liabilities_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "commercial_bank_borrowings_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "fed_borrowings_depository_institutions_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "debt_securities_bank_liability_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "fhlb_advances_sallie_mae_loans_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
+    assert "holding_company_parent_funding_bank_qoq" in lp_specs["specs"]["state_dependence"]["outcomes"]
     assert lp_specs["specs"]["control_sensitivity"]["control_variants"]["headline_lagged_macro"]["control_role"] == "headline"
     assert lp_specs["specs"]["control_sensitivity"]["control_variants"]["lagged_macro_plus_bill"]["control_role"] == "core"
     assert lp_specs["specs"]["control_sensitivity"]["control_variants"]["lagged_macro_plus_trend"]["control_role"] == "exploratory"

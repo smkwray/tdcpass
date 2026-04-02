@@ -52,6 +52,7 @@ def test_result_readiness_marks_ambiguous_run_as_not_ready() -> None:
     assert payload["diagnostics"]["sensitivity_exploratory_variant_count"] == 1
     assert payload["diagnostics"]["exploratory_variant_sign_disagreement"] is False
     assert payload["key_estimates"]["total_deposits_h0"]["ci_excludes_zero"] is False
+    assert payload["counterpart_channel_context"] == {}
     assert any("total-deposit response" in item for item in payload["reasons"])
     assert not any("Core sensitivity variants" in item for item in payload["warnings"])
     assert not any("Exploratory sensitivity variants" in item for item in payload["warnings"])
@@ -105,6 +106,7 @@ def test_result_readiness_uses_cooler_provisional_headline_language() -> None:
 
     assert payload["status"] == "provisional"
     assert payload["headline_assessment"].startswith("Current outputs support an exploratory deposit-response read")
+    assert payload["counterpart_channel_context"] == {}
 
 
 def test_result_readiness_adds_structural_proxy_reason_when_cross_checks_are_weak() -> None:
@@ -207,6 +209,85 @@ def test_result_readiness_handles_empty_sensitivity_frame() -> None:
 
     assert payload["status"] == "not_ready"
     assert payload["diagnostics"]["sensitivity_variant_count"] == 0
+    assert payload["counterpart_channel_context"] == {}
+
+
+def test_result_readiness_surfaces_counterpart_channel_context_and_legacy_proxy_role() -> None:
+    accounting = AccountingSummary(
+        mean_tdc=0.1,
+        mean_total_deposits=1.0,
+        mean_other_component=0.9,
+        share_other_negative=0.2,
+        correlation_tdc_total=0.0,
+        correlation_tdc_other=0.0,
+    )
+    shocks = pd.DataFrame({"quarter": ["2016Q1"], "tdc_residual_z": [0.1], "shock_flag": [""]})
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.0, "se": 0.2, "lower95": 0.61, "upper95": 1.39, "n": 30, "spec_name": "identity"},
+            {"outcome": "tdc_bank_only_qoq", "horizon": 4, "beta": 1.8, "se": 0.3, "lower95": 1.21, "upper95": 2.39, "n": 26, "spec_name": "identity"},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.7, "se": 0.3, "lower95": 0.11, "upper95": 1.29, "n": 30, "spec_name": "identity"},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 4, "beta": 0.6, "se": 0.5, "lower95": -0.38, "upper95": 1.58, "n": 26, "spec_name": "identity"},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.3, "se": 0.1, "lower95": -0.496, "upper95": -0.104, "n": 30, "spec_name": "identity"},
+            {"outcome": "other_component_qoq", "horizon": 4, "beta": -1.2, "se": 0.4, "lower95": -1.98, "upper95": -0.42, "n": 26, "spec_name": "identity"},
+        ]
+    )
+
+    payload = build_result_readiness_summary(
+        accounting_summary=accounting,
+        shocks=shocks,
+        lp_irf=pd.DataFrame(columns=identity_lp.columns),
+        identity_lp_irf=identity_lp,
+        lp_irf_regimes=pd.DataFrame(),
+        sensitivity=pd.DataFrame(),
+        counterpart_channel_scorecard={
+            "status": "available",
+            "legacy_private_credit_proxy_role": "coarse_legacy_creator_proxy",
+            "creator_channel_outcomes_present": ["commercial_industrial_loans_qoq", "auto_loans_qoq"],
+            "key_horizons": {
+                "h0": {
+                    "other_component": {"beta": -0.3, "ci_excludes_zero": True},
+                    "decisive_positive_creator_channels": [],
+                    "decisive_negative_creator_channels": ["closed_end_residential_loans_qoq"],
+                    "decisive_positive_asset_purchase_channels": ["agency_gse_backed_securities_bank_qoq"],
+                    "decisive_positive_retention_support_channels": ["on_rrp_reallocation_qoq"],
+                    "decisive_negative_retention_support_channels": [],
+                    "escape_support_context": {"interpretation": "deposit_retention_support_signal"},
+                    "asset_purchase_plumbing_context": {"interpretation": "treasury_drain_context"},
+                },
+                "h4": {
+                    "other_component": {"beta": -1.2, "ci_excludes_zero": True},
+                    "decisive_positive_creator_channels": ["auto_loans_qoq"],
+                    "decisive_negative_creator_channels": [],
+                    "decisive_positive_retention_support_channels": [],
+                    "decisive_negative_retention_support_channels": ["domestic_nonfinancial_mmf_reallocation_qoq"],
+                    "escape_support_context": {"interpretation": "escape_pressure_signal"},
+                },
+            },
+        },
+    )
+
+    assert payload["counterpart_channel_context"]["artifact"] == "counterpart_channel_scorecard.json"
+    assert payload["counterpart_channel_context"]["legacy_private_credit_proxy_role"] == "coarse_legacy_creator_proxy"
+    assert payload["diagnostics"]["counterpart_h0_decisive_positive_creator_count"] == 0
+    assert payload["diagnostics"]["counterpart_h4_decisive_positive_creator_count"] == 1
+    assert payload["diagnostics"]["counterpart_h0_decisive_positive_retention_support_count"] == 1
+    assert payload["diagnostics"]["counterpart_h4_decisive_negative_retention_support_count"] == 1
+    assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_asset_purchase_channels"] == [
+        "agency_gse_backed_securities_bank_qoq"
+    ]
+    assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_retention_support_channels"] == [
+        "on_rrp_reallocation_qoq"
+    ]
+    assert (
+        payload["counterpart_channel_context"]["key_horizons"]["h4"]["escape_support_context"]["interpretation"]
+        == "escape_pressure_signal"
+    )
+    assert (
+        payload["counterpart_channel_context"]["key_horizons"]["h0"]["asset_purchase_plumbing_context"]["interpretation"]
+        == "treasury_drain_context"
+    )
+    assert any("counterpart_channel_scorecard.json" in item for item in payload["warnings"])
 
 
 def test_result_readiness_records_control_set_sign_disagreement() -> None:
@@ -413,6 +494,55 @@ def test_result_readiness_prefers_exact_identity_baseline_when_available() -> No
     assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "divergent_secondary_check"
     assert payload["key_estimates"]["tdc_h0"]["beta"] == 1.5
     assert not any("exact identity-preserving baseline is primary" in item for item in payload["warnings"])
+
+
+def test_result_readiness_prefers_exact_variant_artifacts_when_available() -> None:
+    accounting = AccountingSummary(
+        mean_tdc=0.1,
+        mean_total_deposits=1.0,
+        mean_other_component=0.9,
+        share_other_negative=0.2,
+        correlation_tdc_total=0.0,
+        correlation_tdc_other=0.0,
+    )
+    shocks = pd.DataFrame({"quarter": ["2016Q1"], "tdc_residual_z": [0.1], "shock_flag": [""]})
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 28, "spec_name": "identity_baseline"},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 28, "spec_name": "identity_baseline"},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.6, "se": 0.2, "lower95": -1.0, "upper95": -0.2, "n": 28, "spec_name": "identity_baseline"},
+        ]
+    )
+
+    payload = build_result_readiness_summary(
+        accounting_summary=accounting,
+        shocks=shocks,
+        lp_irf=pd.DataFrame(columns=identity_lp.columns),
+        identity_lp_irf=identity_lp,
+        lp_irf_regimes=pd.DataFrame(),
+        sensitivity=pd.DataFrame(
+            [{"treatment_variant": "baseline", "treatment_role": "core", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 99.0, "se": 1.0, "lower95": 97.0, "upper95": 101.0, "n": 30}]
+        ),
+        identity_sensitivity=pd.DataFrame(
+            [{"treatment_variant": "baseline", "treatment_role": "core", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 28}]
+        ),
+        control_sensitivity=pd.DataFrame(
+            [{"control_variant": "headline_lagged_macro", "control_role": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 99.0, "se": 1.0, "lower95": 97.0, "upper95": 101.0, "n": 30}]
+        ),
+        identity_control_sensitivity=pd.DataFrame(
+            [{"control_variant": "headline_lagged_macro", "control_role": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 28}]
+        ),
+        sample_sensitivity=pd.DataFrame(
+            [{"sample_variant": "all_usable_shocks", "sample_role": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 99.0, "se": 1.0, "lower95": 97.0, "upper95": 101.0, "n": 30}]
+        ),
+        identity_sample_sensitivity=pd.DataFrame(
+            [{"sample_variant": "all_usable_shocks", "sample_role": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.9, "se": 0.2, "lower95": 0.5, "upper95": 1.3, "n": 28}]
+        ),
+    )
+
+    assert payload["estimation_path"]["treatment_variant_artifact"] == "identity_treatment_sensitivity.csv"
+    assert payload["estimation_path"]["control_variant_artifact"] == "identity_control_sensitivity.csv"
+    assert payload["estimation_path"]["sample_variant_artifact"] == "identity_sample_sensitivity.csv"
 
 
 def test_result_readiness_summarizes_flagged_windows_when_sample_trim_is_stable() -> None:

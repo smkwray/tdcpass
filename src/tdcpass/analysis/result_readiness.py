@@ -52,13 +52,17 @@ def build_result_readiness_summary(
     identity_lp_irf: pd.DataFrame | None = None,
     lp_irf_regimes: pd.DataFrame,
     sensitivity: pd.DataFrame,
+    identity_sensitivity: pd.DataFrame | None = None,
     control_sensitivity: pd.DataFrame | None = None,
+    identity_control_sensitivity: pd.DataFrame | None = None,
     sample_sensitivity: pd.DataFrame | None = None,
+    identity_sample_sensitivity: pd.DataFrame | None = None,
     regime_diagnostics: dict[str, Any] | None = None,
     direct_identification: dict[str, Any] | None = None,
     contrast: pd.DataFrame | None = None,
     structural_proxy_evidence: dict[str, Any] | None = None,
     proxy_coverage_summary: dict[str, Any] | None = None,
+    counterpart_channel_scorecard: dict[str, Any] | None = None,
     shock_diagnostics: dict[str, Any] | None = None,
     headline_shock_metadata: dict[str, Any] | None = None,
     shock_column: str = "tdc_residual_z",
@@ -98,6 +102,17 @@ def build_result_readiness_summary(
         if identity_lp_irf is not None and not identity_lp_irf.empty
         else "approximate_dynamic_decomposition"
     )
+    primary_sensitivity = identity_sensitivity if identity_sensitivity is not None and not identity_sensitivity.empty else sensitivity
+    primary_control_sensitivity = (
+        identity_control_sensitivity
+        if identity_control_sensitivity is not None and not identity_control_sensitivity.empty
+        else control_sensitivity
+    )
+    primary_sample_sensitivity = (
+        identity_sample_sensitivity
+        if identity_sample_sensitivity is not None and not identity_sample_sensitivity.empty
+        else sample_sensitivity
+    )
 
     usable_shocks = shocks.dropna(subset=[shock_column]).copy()
     shock_obs = int(len(usable_shocks))
@@ -135,8 +150,8 @@ def build_result_readiness_summary(
     if total_h4 and other_h4 and _beta_sign(total_h4) == _beta_sign(other_h4):
         warnings.append("By horizon 4, total deposits and the non-TDC component still do not separate cleanly in point estimates.")
 
-    sensitivity_h0 = sensitivity[
-        (sensitivity["outcome"] == "total_deposits_bank_qoq") & (sensitivity["horizon"] == 0)
+    sensitivity_h0 = primary_sensitivity[
+        (primary_sensitivity["outcome"] == "total_deposits_bank_qoq") & (primary_sensitivity["horizon"] == 0)
     ]
     core_sensitivity_h0 = sensitivity_h0
     if "treatment_role" in sensitivity_h0.columns:
@@ -154,8 +169,9 @@ def build_result_readiness_summary(
         if "positive" in signs and "negative" in signs:
             exploratory_variant_sign_disagreement = True
 
-    control_sensitivity_h0 = control_sensitivity[
-        (control_sensitivity["outcome"] == "total_deposits_bank_qoq") & (control_sensitivity["horizon"] == 0)
+    control_sensitivity_h0 = primary_control_sensitivity[
+        (primary_control_sensitivity["outcome"] == "total_deposits_bank_qoq")
+        & (primary_control_sensitivity["horizon"] == 0)
     ]
     control_set_sign_disagreement = False
     exploratory_control_set_sign_disagreement = False
@@ -184,7 +200,9 @@ def build_result_readiness_summary(
 
     sample_variant_sign_disagreement = False
     sample_variant_magnitude_instability = False
-    total_sample_sensitivity = sample_sensitivity[sample_sensitivity["outcome"] == "total_deposits_bank_qoq"]
+    total_sample_sensitivity = primary_sample_sensitivity[
+        primary_sample_sensitivity["outcome"] == "total_deposits_bank_qoq"
+    ]
     if not total_sample_sensitivity.empty:
         for horizon in (0, 4):
             horizon_frame = total_sample_sensitivity[total_sample_sensitivity["horizon"] == horizon]
@@ -306,6 +324,92 @@ def build_result_readiness_summary(
         elif proxy_coverage_same_sign_not_decisive_key_horizons > 0:
             warnings.append("The structural proxy bundle lines up in sign at some key horizons but remains statistically weak.")
 
+    counterpart_channel_status = None
+    counterpart_creator_outcome_count = 0
+    counterpart_h0_decisive_positive_creator_count = 0
+    counterpart_h0_decisive_negative_creator_count = 0
+    counterpart_h4_decisive_positive_creator_count = 0
+    counterpart_h4_decisive_negative_creator_count = 0
+    counterpart_h0_decisive_positive_retention_support_count = 0
+    counterpart_h0_decisive_negative_retention_support_count = 0
+    counterpart_h4_decisive_positive_retention_support_count = 0
+    counterpart_h4_decisive_negative_retention_support_count = 0
+    counterpart_legacy_private_credit_proxy_role = None
+    counterpart_context: dict[str, Any] = {}
+    if counterpart_channel_scorecard is not None:
+        counterpart_channel_status = str(counterpart_channel_scorecard.get("status", "not_available"))
+        counterpart_creator_outcome_count = int(len(counterpart_channel_scorecard.get("creator_channel_outcomes_present", [])))
+        counterpart_legacy_private_credit_proxy_role = str(
+            counterpart_channel_scorecard.get("legacy_private_credit_proxy_role", "coarse_legacy_creator_proxy")
+        )
+        key_horizons = dict(counterpart_channel_scorecard.get("key_horizons", {}))
+        for horizon in (0, 4):
+            horizon_payload = dict(key_horizons.get(f"h{horizon}", {}))
+            positive_count = int(len(horizon_payload.get("decisive_positive_creator_channels", [])))
+            negative_count = int(len(horizon_payload.get("decisive_negative_creator_channels", [])))
+            positive_support_count = int(len(horizon_payload.get("decisive_positive_retention_support_channels", [])))
+            negative_support_count = int(len(horizon_payload.get("decisive_negative_retention_support_channels", [])))
+            if horizon == 0:
+                counterpart_h0_decisive_positive_creator_count = positive_count
+                counterpart_h0_decisive_negative_creator_count = negative_count
+                counterpart_h0_decisive_positive_retention_support_count = positive_support_count
+                counterpart_h0_decisive_negative_retention_support_count = negative_support_count
+            else:
+                counterpart_h4_decisive_positive_creator_count = positive_count
+                counterpart_h4_decisive_negative_creator_count = negative_count
+                counterpart_h4_decisive_positive_retention_support_count = positive_support_count
+                counterpart_h4_decisive_negative_retention_support_count = negative_support_count
+        counterpart_context = {
+            "status": counterpart_channel_status,
+            "artifact": "counterpart_channel_scorecard.json",
+            "legacy_private_credit_proxy_role": counterpart_legacy_private_credit_proxy_role,
+            "creator_channel_outcomes_present": list(counterpart_channel_scorecard.get("creator_channel_outcomes_present", [])),
+            "key_horizons": {
+                f"h{horizon}": {
+                    "decisive_positive_creator_channels": list(
+                        dict(key_horizons.get(f"h{horizon}", {})).get("decisive_positive_creator_channels", [])
+                    ),
+                    "decisive_negative_creator_channels": list(
+                        dict(key_horizons.get(f"h{horizon}", {})).get("decisive_negative_creator_channels", [])
+                    ),
+                    "decisive_positive_asset_purchase_channels": list(
+                        dict(key_horizons.get(f"h{horizon}", {})).get("decisive_positive_asset_purchase_channels", [])
+                    ),
+                    "decisive_positive_retention_support_channels": list(
+                        dict(key_horizons.get(f"h{horizon}", {})).get("decisive_positive_retention_support_channels", [])
+                    ),
+                    "decisive_negative_retention_support_channels": list(
+                        dict(key_horizons.get(f"h{horizon}", {})).get("decisive_negative_retention_support_channels", [])
+                    ),
+                    "escape_support_context": dict(
+                        dict(key_horizons.get(f"h{horizon}", {})).get("escape_support_context") or {}
+                    ),
+                    "asset_purchase_plumbing_context": dict(
+                        dict(key_horizons.get(f"h{horizon}", {})).get("asset_purchase_plumbing_context") or {}
+                    ),
+                }
+                for horizon in (0, 4)
+            },
+        }
+        unresolved_creator_horizons: list[str] = []
+        for horizon in (0, 4):
+            horizon_payload = dict(key_horizons.get(f"h{horizon}", {}))
+            other_component = horizon_payload.get("other_component")
+            positive_channels = list(horizon_payload.get("decisive_positive_creator_channels", []))
+            if (
+                isinstance(other_component, dict)
+                and bool(other_component.get("ci_excludes_zero"))
+                and float(other_component.get("beta", 0.0)) < 0.0
+                and not positive_channels
+            ):
+                unresolved_creator_horizons.append(f"h{horizon}")
+        if unresolved_creator_horizons:
+            warnings.append(
+                "First-wave creator-lending channels do not supply a decisive positive offset at "
+                + "/".join(unresolved_creator_horizons)
+                + "; use counterpart_channel_scorecard.json rather than bank_credit_private_qoq alone for channel interpretation."
+            )
+
     direct_identification_status = None
     treatment_freeze_status = "frozen" if headline_shock_metadata is None else str(headline_shock_metadata.get("freeze_status", "frozen"))
     treatment_candidates = []
@@ -376,6 +480,15 @@ def build_result_readiness_summary(
             "primary_artifact": "lp_irf_identity_baseline.csv"
             if primary_decomposition_mode == "exact_identity_baseline"
             else "lp_irf.csv",
+            "treatment_variant_artifact": "identity_treatment_sensitivity.csv"
+            if identity_sensitivity is not None and not identity_sensitivity.empty
+            else "tdc_sensitivity_ladder.csv",
+            "control_variant_artifact": "identity_control_sensitivity.csv"
+            if identity_control_sensitivity is not None and not identity_control_sensitivity.empty
+            else "control_set_sensitivity.csv",
+            "sample_variant_artifact": "identity_sample_sensitivity.csv"
+            if identity_sample_sensitivity is not None and not identity_sample_sensitivity.empty
+            else "shock_sample_sensitivity.csv",
             "approximate_robustness_artifact": "total_minus_other_contrast.csv" if contrast is not None else None,
             "approximate_dynamic_robustness": approximate_dynamic_robustness,
         },
@@ -398,35 +511,43 @@ def build_result_readiness_summary(
             "regime_row_count": regime_rows,
             "informative_regime_count": informative_regime_count,
             "stable_regime_count": stable_regime_count,
-            "sensitivity_variant_count": int(sensitivity["treatment_variant"].nunique()) if not sensitivity.empty else 0,
-            "control_set_variant_count": int(control_sensitivity["control_variant"].nunique())
-            if not control_sensitivity.empty
+            "sensitivity_variant_count": int(primary_sensitivity["treatment_variant"].nunique())
+            if not primary_sensitivity.empty
+            else 0,
+            "control_set_variant_count": int(primary_control_sensitivity["control_variant"].nunique())
+            if not primary_control_sensitivity.empty
             else 0,
             "control_set_core_variant_count": int(
-                control_sensitivity.loc[control_sensitivity["control_role"].isin(["headline", "core"]), "control_variant"].nunique()
+                primary_control_sensitivity.loc[
+                    primary_control_sensitivity["control_role"].isin(["headline", "core"]), "control_variant"
+                ].nunique()
             )
-            if not control_sensitivity.empty and "control_role" in control_sensitivity.columns
+            if not primary_control_sensitivity.empty and "control_role" in primary_control_sensitivity.columns
             else 0,
             "control_set_exploratory_variant_count": int(
-                control_sensitivity.loc[control_sensitivity["control_role"] == "exploratory", "control_variant"].nunique()
+                primary_control_sensitivity.loc[
+                    primary_control_sensitivity["control_role"] == "exploratory", "control_variant"
+                ].nunique()
             )
-            if not control_sensitivity.empty and "control_role" in control_sensitivity.columns
+            if not primary_control_sensitivity.empty and "control_role" in primary_control_sensitivity.columns
             else 0,
             "sensitivity_core_variant_count": int(
-                sensitivity.loc[sensitivity["treatment_role"] == "core", "treatment_variant"].nunique()
+                primary_sensitivity.loc[primary_sensitivity["treatment_role"] == "core", "treatment_variant"].nunique()
             )
-            if not sensitivity.empty and "treatment_role" in sensitivity.columns
+            if not primary_sensitivity.empty and "treatment_role" in primary_sensitivity.columns
             else 0,
             "sensitivity_exploratory_variant_count": int(
-                sensitivity.loc[sensitivity["treatment_role"] == "exploratory", "treatment_variant"].nunique()
+                primary_sensitivity.loc[
+                    primary_sensitivity["treatment_role"] == "exploratory", "treatment_variant"
+                ].nunique()
             )
-            if not sensitivity.empty and "treatment_role" in sensitivity.columns
+            if not primary_sensitivity.empty and "treatment_role" in primary_sensitivity.columns
             else 0,
             "exploratory_variant_sign_disagreement": exploratory_variant_sign_disagreement,
             "control_set_sign_disagreement": control_set_sign_disagreement,
             "exploratory_control_set_sign_disagreement": exploratory_control_set_sign_disagreement,
-            "sample_sensitivity_variant_count": int(sample_sensitivity["sample_variant"].nunique())
-            if not sample_sensitivity.empty
+            "sample_sensitivity_variant_count": int(primary_sample_sensitivity["sample_variant"].nunique())
+            if not primary_sample_sensitivity.empty
             else 0,
             "sample_variant_sign_disagreement": sample_variant_sign_disagreement,
             "sample_variant_magnitude_instability": sample_variant_magnitude_instability,
@@ -442,6 +563,17 @@ def build_result_readiness_summary(
             "proxy_coverage_partial_support_key_horizons": proxy_coverage_partial_support_key_horizons,
             "proxy_coverage_same_sign_not_decisive_key_horizons": proxy_coverage_same_sign_not_decisive_key_horizons,
             "proxy_coverage_published_regime_count": proxy_coverage_published_regime_count,
+            "counterpart_channel_status": counterpart_channel_status,
+            "counterpart_creator_outcome_count": counterpart_creator_outcome_count,
+            "counterpart_h0_decisive_positive_creator_count": counterpart_h0_decisive_positive_creator_count,
+            "counterpart_h0_decisive_negative_creator_count": counterpart_h0_decisive_negative_creator_count,
+            "counterpart_h4_decisive_positive_creator_count": counterpart_h4_decisive_positive_creator_count,
+            "counterpart_h4_decisive_negative_creator_count": counterpart_h4_decisive_negative_creator_count,
+            "counterpart_h0_decisive_positive_retention_support_count": counterpart_h0_decisive_positive_retention_support_count,
+            "counterpart_h0_decisive_negative_retention_support_count": counterpart_h0_decisive_negative_retention_support_count,
+            "counterpart_h4_decisive_positive_retention_support_count": counterpart_h4_decisive_positive_retention_support_count,
+            "counterpart_h4_decisive_negative_retention_support_count": counterpart_h4_decisive_negative_retention_support_count,
+            "counterpart_legacy_private_credit_proxy_role": counterpart_legacy_private_credit_proxy_role,
             "treatment_freeze_status": treatment_freeze_status,
             "treatment_candidate_count": int(len(treatment_candidates)),
             "treatment_quality_status": treatment_quality_status,
@@ -463,6 +595,7 @@ def build_result_readiness_summary(
             "other_component_h0": _row_snapshot(other_h0),
             "other_component_h4": _row_snapshot(other_h4),
         },
+        "counterpart_channel_context": counterpart_context,
         "answer_ready_when": [
             "the baseline total-deposit response is directionally interpretable at key horizons",
             "the baseline non-TDC response is directionally interpretable at key horizons",

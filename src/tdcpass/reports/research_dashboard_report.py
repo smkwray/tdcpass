@@ -81,7 +81,7 @@ def _state_proxy_context_lines(context: Mapping[str, Any] | None) -> list[str]:
 
 def render_research_dashboard_report(dashboard: Mapping[str, Any]) -> str:
     lines: list[str] = []
-    lines.append("# Internal Research Dashboard")
+    lines.append("# Research Dashboard")
     lines.append("")
     lines.append(f"Status: `{dashboard.get('status', 'unknown')}`")
     lines.append("")

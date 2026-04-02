@@ -6,6 +6,15 @@
 
 **When the Treasury-attributed component of deposits (TDC) rises unexpectedly, do matched total bank deposits rise too, or does that increase mostly replace other deposit-creating channels?**
 
+Current stopping point:
+
+- the exact baseline shows positive impact effects on matched total bank deposits and negative effects on the non-TDC residual
+- the deposit-type split does not cleanly explain that residual
+- broad creator-lending channels do not explain it on impact
+- the clearest domestic escape-pressure signal is ON RRP
+- the external lane shows persistent foreign nontransaction pressure and medium-horizon foreign-bank asset-side interbank movement
+- funding accommodations matter, but they are secondary context rather than the main explanation
+
 ## Status
 
 Current posture:
@@ -30,15 +39,27 @@ The package rebuilds a quarterly public-data bundle that includes:
 - public period-sensitivity tables because medium-horizon persistence differs across major usable-sample windows
 - local-projection response tables
 - structural-proxy cross-checks and readiness diagnostics
+- creator, escape, external, and funding counterpart-channel scorecards
 - manifests for raw downloads and optional local cache reuse
 
 ## What it does not do
 
 - It does not require prebuilt local caches to run.
 - It does not treat the residual alone as mechanism proof.
+- It does not claim a complete additive decomposition of the non-TDC residual.
 - It does not currently claim a clean pass-through-versus-crowd-out answer.
 - It does not report headline pass-through or crowd-out ratios in the current release; that lane remains out of scope until the repo has a dimensionally coherent first-stage gate for raw-unit treatment responses.
 - It does not treat `bill_share`-linked shock variants as co-equal headline designs; they remain exploratory stress tests only.
+
+## What the repo can currently say
+
+- Unexpected TDC increases are associated with higher matched total bank deposits on impact in the exact baseline.
+- The increase is less than one-for-one because the non-TDC component falls.
+- Deposit-type categories do not provide a clean explanation for that negative residual.
+- The first-wave broad lending creator surface does not provide a decisive positive impact-stage offset.
+- The domestic destroyer / escape surface points most clearly to ON RRP.
+- The expanded external-banking surface adds foreign nontransaction pressure and medium-horizon foreign-bank asset-side interbank movement.
+- The current robustness surface is intentionally narrow: exact-baseline treatment, control, and sample sensitivity plus period sensitivity.
 
 ## Environment
 

@@ -227,13 +227,20 @@ def _regime_contexts(
 def build_proxy_coverage_summary(
     *,
     lp_irf: pd.DataFrame,
+    identity_lp_irf: pd.DataFrame | None = None,
     lp_irf_regimes: pd.DataFrame,
     regime_diagnostics: dict[str, Any] | None = None,
     regime_specs: dict[str, Any] | None = None,
     proxy_unit_audit: dict[str, Any] | None = None,
     horizons: tuple[int, ...] = (0, 4),
 ) -> dict[str, Any]:
-    key_horizons = {f"h{horizon}": _build_context(lp_irf, horizon=horizon) for horizon in horizons}
+    primary_lp_irf = identity_lp_irf if identity_lp_irf is not None and not identity_lp_irf.empty else lp_irf
+    primary_decomposition_mode = (
+        "exact_identity_baseline"
+        if identity_lp_irf is not None and not identity_lp_irf.empty
+        else "approximate_dynamic_decomposition"
+    )
+    key_horizons = {f"h{horizon}": _build_context(primary_lp_irf, horizon=horizon) for horizon in horizons}
     status = _status_from_key_horizons(key_horizons)
     large_gap_horizons = [
         name for name, payload in key_horizons.items() if payload["coverage_label"] == "proxy_bundle_uncovered_remainder_large"
@@ -279,6 +286,13 @@ def build_proxy_coverage_summary(
 
     return {
         "status": status,
+        "estimation_path": {
+            "primary_decomposition_mode": primary_decomposition_mode,
+            "primary_artifact": "lp_irf_identity_baseline.csv"
+            if primary_decomposition_mode == "exact_identity_baseline"
+            else "lp_irf.csv",
+            "secondary_artifact": "lp_irf.csv" if primary_decomposition_mode == "exact_identity_baseline" else None,
+        },
         "headline_question": "How much of the non-TDC response is covered by the current structural proxy bundle?",
         "covered_channel_families": [
             {

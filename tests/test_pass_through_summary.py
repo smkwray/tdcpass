@@ -93,6 +93,45 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
             "published_regime_contexts": [{"regime": "reserve_drain"}],
             "release_caveat": "stub caveat",
         },
+        counterpart_channel_scorecard={
+            "status": "available",
+            "legacy_private_credit_proxy_role": "coarse_legacy_creator_proxy",
+            "creator_channel_outcomes_present": ["commercial_industrial_loans_qoq"],
+            "key_horizons": {
+                "h0": {
+                    "other_component": {"beta": -0.4, "ci_excludes_zero": False},
+                    "legacy_private_credit_proxy": {
+                        "role": "coarse_legacy_creator_proxy",
+                        "snapshot": {"beta": 0.2, "ci_excludes_zero": False},
+                    },
+                    "decisive_positive_creator_channels": [],
+                    "decisive_negative_creator_channels": [],
+                    "decisive_positive_asset_purchase_channels": ["agency_gse_backed_securities_bank_qoq"],
+                    "decisive_positive_retention_support_channels": ["on_rrp_reallocation_qoq"],
+                    "decisive_negative_retention_support_channels": [],
+                    "escape_support_context": {
+                        "interpretation": "deposit_retention_support_signal",
+                        "decisive_positive_channels": ["on_rrp_reallocation_qoq"],
+                    },
+                    "asset_purchase_plumbing_context": {
+                        "interpretation": "treasury_drain_context",
+                        "treasury_drain_signal": True,
+                    },
+                    "proxy_coverage_label": "proxy_bundle_same_sign_but_not_decisive",
+                },
+                "h4": {
+                    "other_component": {"beta": -0.8, "ci_excludes_zero": False},
+                    "legacy_private_credit_proxy": {
+                        "role": "coarse_legacy_creator_proxy",
+                        "snapshot": {"beta": 0.1, "ci_excludes_zero": False},
+                    },
+                    "decisive_positive_creator_channels": ["auto_loans_qoq"],
+                    "decisive_negative_creator_channels": [],
+                    "proxy_coverage_label": None,
+                },
+            },
+            "takeaways": ["stub counterpart"],
+        },
     )
 
     assert payload["status"] == "provisional"
@@ -110,6 +149,24 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
     assert payload["structural_proxy_context"]["h0"]["interpretation"] == "proxy_evidence_weak"
     assert payload["proxy_coverage_context"]["status"] == "mixed"
     assert payload["proxy_coverage_context"]["release_caveat"] == "stub caveat"
+    assert payload["counterpart_channel_context"]["artifact"] == "counterpart_channel_scorecard.json"
+    assert payload["counterpart_channel_context"]["legacy_private_credit_proxy_role"] == "coarse_legacy_creator_proxy"
+    assert payload["counterpart_channel_context"]["key_horizons"]["h4"]["decisive_positive_creator_channels"] == ["auto_loans_qoq"]
+    assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_asset_purchase_channels"] == [
+        "agency_gse_backed_securities_bank_qoq"
+    ]
+    assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_retention_support_channels"] == [
+        "on_rrp_reallocation_qoq"
+    ]
+    assert (
+        payload["counterpart_channel_context"]["key_horizons"]["h0"]["escape_support_context"]["interpretation"]
+        == "deposit_retention_support_signal"
+    )
+    assert (
+        payload["counterpart_channel_context"]["key_horizons"]["h0"]["asset_purchase_plumbing_context"]["interpretation"]
+        == "treasury_drain_context"
+    )
+    assert "coarse legacy creator proxy" in payload["mechanism_caveat"]
     assert [row["regime"] for row in payload["published_regime_contexts"]] == ["reserve_drain"]
     assert payload["published_regime_contexts"][0]["stable_for_interpretation"] is True
     assert payload["readiness_reasons"] == ["stub"]
@@ -253,6 +310,45 @@ def test_pass_through_summary_prefers_exact_measurement_ladder_when_available() 
     assert payload["measurement_treatment_variants"][0]["horizons"]["h0"]["assessment"] == "crowd_out_signal"
 
 
+def test_pass_through_summary_prefers_exact_variant_artifacts_when_available() -> None:
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 38},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.7, "se": 0.2, "lower95": -1.1, "upper95": -0.3, "n": 38},
+        ]
+    )
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(columns=identity_lp.columns),
+        identity_lp_irf=identity_lp,
+        sensitivity=pd.DataFrame(
+            [{"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 99.0, "se": 1.0, "lower95": 97.0, "upper95": 101.0, "n": 30}]
+        ),
+        identity_sensitivity=pd.DataFrame(
+            [{"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "target": "tdc_bank_only_qoq", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38, "spec_name": "identity_treatment_sensitivity", "shock_column": "tdc_residual_z", "decomposition_mode": "exact_identity_baseline", "outcome_construction": "estimated_common_design", "inference_method": "bootstrap"}]
+        ),
+        control_sensitivity=pd.DataFrame(
+            [{"control_variant": "headline_lagged_macro", "control_role": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 99.0, "se": 1.0, "lower95": 97.0, "upper95": 101.0, "n": 30}]
+        ),
+        identity_control_sensitivity=pd.DataFrame(
+            [{"control_variant": "headline_lagged_macro", "control_role": "headline", "control_columns": "lag_tdc_bank_only_qoq|lag_fedfunds", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38, "spec_name": "identity_control_sensitivity", "shock_column": "tdc_residual_z", "shock_scale": "rolling_oos_standard_deviation", "response_type": "cumulative_sum_h0_to_h", "decomposition_mode": "exact_identity_baseline", "outcome_construction": "estimated_common_design", "inference_method": "bootstrap"}]
+        ),
+        sample_sensitivity=pd.DataFrame(
+            [{"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 99.0, "se": 1.0, "lower95": 97.0, "upper95": 101.0, "n": 30}]
+        ),
+        identity_sample_sensitivity=pd.DataFrame(
+            [{"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38, "spec_name": "identity_sample_sensitivity", "shock_column": "tdc_residual_z", "shock_scale": "rolling_oos_standard_deviation", "response_type": "cumulative_sum_h0_to_h", "decomposition_mode": "exact_identity_baseline", "outcome_construction": "estimated_common_design", "inference_method": "bootstrap"}]
+        ),
+        contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={"status": "provisional", "warnings": [], "reasons": []},
+    )
+
+    assert payload["estimation_path"]["treatment_variant_artifact"] == "identity_treatment_sensitivity.csv"
+    assert payload["estimation_path"]["control_variant_artifact"] == "identity_control_sensitivity.csv"
+    assert payload["estimation_path"]["sample_variant_artifact"] == "identity_sample_sensitivity.csv"
+
+
 def test_pass_through_summary_uses_cooler_provisional_headline_for_exact_baseline() -> None:
     identity_lp = pd.DataFrame(
         [
@@ -299,6 +395,66 @@ def test_pass_through_summary_surfaces_failed_treatment_quality_gate() -> None:
     assert payload["treatment_quality_status"] == "fail"
     assert payload["treatment_quality_gate"]["failed_checks"] == ["max_realized_scale_ratio_p95"]
     assert "quality gate" in payload["headline_answer"]
+
+
+def test_pass_through_summary_prefers_identity_variant_artifacts_when_available() -> None:
+    payload = build_pass_through_summary(
+        lp_irf=pd.DataFrame(
+            [
+                {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.1, "se": 0.2, "lower95": 0.7, "upper95": 1.5, "n": 40},
+                {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.7, "se": 0.2, "lower95": 0.3, "upper95": 1.1, "n": 40},
+                {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.4, "se": 0.2, "lower95": -0.8, "upper95": 0.0, "n": 40},
+            ]
+        ),
+        sensitivity=pd.DataFrame(
+            [
+                {"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": -9.0, "se": 1.0, "lower95": -11.0, "upper95": -7.0, "n": 40},
+                {"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "other_component_qoq", "horizon": 0, "beta": 8.0, "se": 1.0, "lower95": 6.0, "upper95": 10.0, "n": 40},
+            ]
+        ),
+        identity_sensitivity=pd.DataFrame(
+            [
+                {"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.7, "se": 0.2, "lower95": 0.3, "upper95": 1.1, "n": 40},
+                {"treatment_variant": "baseline", "treatment_role": "core", "treatment_family": "headline", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.4, "se": 0.2, "lower95": -0.8, "upper95": 0.0, "n": 40},
+            ]
+        ),
+        control_sensitivity=pd.DataFrame(
+            [
+                {"control_variant": "headline_lagged_macro", "control_role": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": -6.0, "se": 1.0, "lower95": -8.0, "upper95": -4.0, "n": 40},
+                {"control_variant": "headline_lagged_macro", "control_role": "headline", "outcome": "other_component_qoq", "horizon": 0, "beta": 5.0, "se": 1.0, "lower95": 3.0, "upper95": 7.0, "n": 40},
+            ]
+        ),
+        identity_control_sensitivity=pd.DataFrame(
+            [
+                {"control_variant": "headline_lagged_macro", "control_role": "headline", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 40},
+                {"control_variant": "headline_lagged_macro", "control_role": "headline", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.3, "se": 0.2, "lower95": -0.7, "upper95": 0.1, "n": 40},
+            ]
+        ),
+        sample_sensitivity=pd.DataFrame(
+            [
+                {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.1, "se": 0.2, "lower95": 0.7, "upper95": 1.5, "n": 40},
+                {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": -4.0, "se": 1.0, "lower95": -6.0, "upper95": -2.0, "n": 40},
+                {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "other_component_qoq", "horizon": 0, "beta": 3.0, "se": 1.0, "lower95": 1.0, "upper95": 5.0, "n": 40},
+            ]
+        ),
+        identity_sample_sensitivity=pd.DataFrame(
+            [
+                {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.1, "se": 0.2, "lower95": 0.7, "upper95": 1.5, "n": 40},
+                {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.7, "se": 0.2, "lower95": 0.3, "upper95": 1.1, "n": 40},
+                {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "other_component_qoq", "horizon": 0, "beta": -0.4, "se": 0.2, "lower95": -0.8, "upper95": 0.0, "n": 40},
+            ]
+        ),
+        contrast=pd.DataFrame(columns=["scope", "variant", "role", "horizon", "gap_implied_minus_direct", "contrast_consistent"]),
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        readiness={"status": "provisional", "warnings": [], "reasons": []},
+    )
+
+    assert payload["estimation_path"]["treatment_variant_artifact"] == "identity_treatment_sensitivity.csv"
+    assert payload["estimation_path"]["control_variant_artifact"] == "identity_control_sensitivity.csv"
+    assert payload["estimation_path"]["sample_variant_artifact"] == "identity_sample_sensitivity.csv"
+    assert payload["core_treatment_variants"][0]["horizons"]["h0"]["total_deposits"]["beta"] == 0.7
+    assert payload["core_control_variants"][0]["horizons"]["h0"]["total_deposits"]["beta"] == 0.8
+    assert payload["shock_sample_variants"][0]["horizons"]["h0"]["total_deposits"]["beta"] == 0.7
 
 
 def test_pass_through_summary_promotes_flagged_window_robustness_note() -> None:

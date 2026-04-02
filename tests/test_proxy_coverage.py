@@ -103,3 +103,55 @@ def test_proxy_coverage_excludes_bill_heavy_when_regime_is_diagnostic_only() -> 
     )
 
     assert [row["regime"] for row in payload["published_regime_contexts"]] == ["reserve_drain"]
+
+
+def test_proxy_coverage_prefers_exact_identity_baseline_when_available() -> None:
+    approx_lp = pd.DataFrame(
+        [
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": 10.0, "se": 1.0, "lower95": 8.0, "upper95": 12.0, "n": 40},
+            {"outcome": "foreign_nonts_qoq", "horizon": 0, "beta": 3.0, "se": 1.0, "lower95": 1.0, "upper95": 5.0, "n": 40},
+        ]
+    )
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -4.0, "se": 1.0, "lower95": -6.0, "upper95": -2.0, "n": 38},
+            {"outcome": "foreign_nonts_qoq", "horizon": 0, "beta": 3.0, "se": 1.0, "lower95": 1.0, "upper95": 5.0, "n": 40},
+        ]
+    )
+
+    payload = build_proxy_coverage_summary(
+        lp_irf=approx_lp,
+        identity_lp_irf=identity_lp,
+        lp_irf_regimes=pd.DataFrame(),
+        horizons=(0,),
+    )
+
+    assert payload["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
+    assert payload["key_horizons"]["h0"]["other_component"]["beta"] == -4.0
+
+
+def test_proxy_coverage_uses_exact_identity_artifact_and_updates_coverage_label() -> None:
+    approx_lp = pd.DataFrame(
+        [
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": 10.0, "se": 1.0, "lower95": 8.0, "upper95": 12.0, "n": 40},
+            {"outcome": "bank_credit_private_qoq", "horizon": 0, "beta": 6.0, "se": 1.0, "lower95": 4.0, "upper95": 8.0, "n": 40},
+        ]
+    )
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -10.0, "se": 1.0, "lower95": -12.0, "upper95": -8.0, "n": 40},
+            {"outcome": "bank_credit_private_qoq", "horizon": 0, "beta": 6.0, "se": 1.0, "lower95": 4.0, "upper95": 8.0, "n": 40},
+        ]
+    )
+
+    payload = build_proxy_coverage_summary(
+        lp_irf=approx_lp,
+        identity_lp_irf=identity_lp,
+        lp_irf_regimes=pd.DataFrame(columns=["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n"]),
+        horizons=(0,),
+    )
+
+    assert payload["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
+    assert payload["estimation_path"]["primary_artifact"] == "lp_irf_identity_baseline.csv"
+    assert payload["key_horizons"]["h0"]["other_component"]["beta"] == -10.0
+    assert payload["key_horizons"]["h0"]["coverage_label"] == "proxy_bundle_opposite_direction"

@@ -76,7 +76,7 @@ def test_render_research_dashboard_report_includes_core_sections() -> None:
 
     text = render_research_dashboard_report(dashboard)
 
-    assert "# Internal Research Dashboard" in text
+    assert "# Research Dashboard" in text
     assert "## Status Board" in text
     assert "## H0" in text
     assert "### Baseline" in text

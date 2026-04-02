@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
+import pandas as pd
+
 from tdcpass.analysis.accounting import (
     build_accounting_summary,
     build_quarters_tdc_exceeds_total,
@@ -13,6 +15,7 @@ from tdcpass.analysis.accounting import (
 from tdcpass.analysis.backend_decision_bundle import build_backend_decision_bundle
 from tdcpass.analysis.backend_closeout_summary import build_backend_closeout_summary
 from tdcpass.analysis.backend_evidence_packet import build_backend_evidence_packet
+from tdcpass.analysis.counterpart_channel_scorecard import build_counterpart_channel_scorecard
 from tdcpass.analysis.direct_identification import (
     build_direct_identification_summary,
     build_total_minus_other_contrast,
@@ -44,6 +47,7 @@ from tdcpass.analysis.treatment_fingerprint import (
 from tdcpass.core.paths import ensure_repo_dirs, repo_root
 from tdcpass.core.yaml_utils import load_yaml
 from tdcpass.pipeline.build_panel import build_public_quarterly_panel, load_panel
+from tdcpass.pipeline.call_report_components import build_call_report_deposit_components
 from tdcpass.reports.site_export import (
     contract_paths,
     export_frame,
@@ -79,6 +83,7 @@ def _default_overview_payload(
     shocked: Any,
     accounting_summary: Any,
     readiness: Mapping[str, Any],
+    counterpart_channel_scorecard: Mapping[str, Any] | None = None,
     root: Path,
 ) -> dict[str, Any]:
     share_other_negative = float(accounting_summary.share_other_negative)
@@ -92,6 +97,32 @@ def _default_overview_payload(
             usable_shock_start = str(usable["quarter"].iloc[0])
             usable_shock_end = str(usable["quarter"].iloc[-1])
     readiness_status = str(readiness.get("status", "not_ready"))
+    counterpart_key_horizons = (
+        {} if counterpart_channel_scorecard is None else dict(counterpart_channel_scorecard.get("key_horizons", {}))
+    )
+    h0_counterpart = dict(counterpart_key_horizons.get("h0", {}))
+    h4_counterpart = dict(counterpart_key_horizons.get("h4", {}))
+    h8_counterpart = dict(counterpart_key_horizons.get("h8", {}))
+    counterpart_findings: list[str] = []
+    if counterpart_channel_scorecard is not None:
+        if (
+            not h0_counterpart.get("decisive_positive_core_creator_channels", [])
+            and "escape_support_context" in h0_counterpart
+        ):
+            counterpart_findings.append(
+                "Counterpart channels do not show a decisive positive core creator-lending offset on impact; the current broad creator surface does not explain the negative non-TDC residual at h0."
+            )
+        if (
+            "on_rrp_reallocation_qoq" in dict(h0_counterpart.get("deposit_retention_support_channels", {}))
+            or "on_rrp_reallocation_qoq" in dict(h4_counterpart.get("deposit_retention_support_channels", {}))
+            or "on_rrp_reallocation_qoq" in dict(h8_counterpart.get("deposit_retention_support_channels", {}))
+        ):
+            counterpart_findings.append(
+                "The strongest domestic escape signal currently comes from ON RRP, while the expanded external lane adds persistent foreign nontransaction pressure and medium-horizon foreign-bank asset-side interbank movement."
+            )
+        counterpart_findings.append(
+            "See counterpart_channel_scorecard.json for the creator, escape, external, and funding blocks rather than relying on bank_credit_private_qoq alone."
+        )
     return {
         "headline_metrics": {
             "share_other_negative": share_other_negative,
@@ -113,8 +144,10 @@ def _default_overview_payload(
                 f"from {usable_shock_start} to {usable_shock_end}, but the current release status remains `{readiness_status}`."
             ),
             "The exact identity-preserving baseline is now the primary decomposition path; the older outcome-specific LP contrast remains a secondary robustness check only.",
+            "The public surface now includes first-wave counterpart creator lanes alongside the exact baseline, while the deposit-type split remains a secondary side read.",
             "Period sensitivity remains on the public surface because medium-horizon persistence differs across the post-GFC early, pre-COVID, and COVID/post-COVID windows.",
             f"{share_other_negative:.1%} of quarters show `other_component_qoq < 0` in the headline sample.",
+            *counterpart_findings,
         ],
         "caveats": [
             "Current release wording is gated by readiness diagnostics: the live bundle should be read as an exploratory deposit-response readout, not a clean headline causal decomposition, until total and non-TDC responses separate more clearly.",
@@ -128,6 +161,13 @@ def _default_overview_payload(
             "direct_data": [
                 "tdc_bank_only_qoq",
                 "total_deposits_bank_qoq",
+                "checkable_deposits_bank_qoq",
+                "interbank_transactions_bank_qoq",
+                "time_savings_deposits_bank_qoq",
+                "checkable_federal_govt_bank_qoq",
+                "checkable_state_local_bank_qoq",
+                "checkable_rest_of_world_bank_qoq",
+                "checkable_private_domestic_bank_qoq",
                 "bill_share",
                 "fedfunds",
                 "unemployment",
@@ -159,6 +199,7 @@ def _default_overview_payload(
                 "structural_proxy_evidence",
                 "proxy_coverage_summary",
                 "proxy_unit_audit",
+                "call_report_deposit_components",
                 "headline_treatment_fingerprint",
                 "provenance_validation_summary",
             ],
@@ -176,6 +217,9 @@ def _default_overview_payload(
             "site/data/lp_irf.csv",
             "site/data/lp_irf_identity_baseline.csv",
             "site/data/identity_measurement_ladder.csv",
+            "site/data/identity_treatment_sensitivity.csv",
+            "site/data/identity_control_sensitivity.csv",
+            "site/data/identity_sample_sensitivity.csv",
             "site/data/regime_diagnostics_summary.json",
             "site/data/control_set_sensitivity.csv",
             "site/data/shock_sample_sensitivity.csv",
@@ -185,6 +229,7 @@ def _default_overview_payload(
             "site/data/structural_proxy_evidence.csv",
             "site/data/structural_proxy_evidence_summary.json",
             "site/data/proxy_coverage_summary.json",
+            "site/data/call_report_deposit_components_summary.json",
             "site/data/proxy_unit_audit.json",
             "site/data/headline_treatment_fingerprint.json",
             "site/data/provenance_validation_summary.json",
@@ -192,6 +237,8 @@ def _default_overview_payload(
             "site/data/result_readiness_summary.json",
             "site/data/direct_identification_summary.json",
             "site/data/pass_through_summary.json",
+            "site/data/deposit_component_scorecard.json",
+            "site/data/counterpart_channel_scorecard.json",
         ],
     }
 
@@ -355,6 +402,270 @@ def _build_identity_measurement_ladder(
     )
 
 
+def _build_identity_treatment_sensitivity(
+    shocked: Any,
+    *,
+    lp_specs: Mapping[str, Any],
+    shock_specs: Mapping[str, Any],
+) -> Any:
+    sensitivity_spec = lp_specs["specs"]["sensitivity"]
+    shock_variants = sensitivity_spec.get("shock_variants", {})
+    shock_specs_by_column = {
+        str(spec.get("standardized_column", "")): dict(spec)
+        for spec in shock_specs.values()
+        if isinstance(spec, Mapping) and spec.get("standardized_column")
+    }
+    variants: list[dict[str, Any]] = []
+    for variant_name, variant_spec in shock_variants.items():
+        if not isinstance(variant_spec, Mapping):
+            continue
+        shock_column = str(variant_spec.get("shock_column", ""))
+        resolved_spec = shock_specs_by_column.get(shock_column)
+        if resolved_spec is None:
+            continue
+        variants.append(
+            {
+                "treatment_variant": str(variant_name),
+                "treatment_role": str(variant_spec.get("treatment_role", "")),
+                "treatment_family": str(variant_spec.get("treatment_family", "")),
+                "shock_column": shock_column,
+                "target": str(resolved_spec.get("target", "")),
+                "controls": [str(item) for item in resolved_spec.get("predictors", [])],
+            }
+        )
+    return build_identity_variant_ladder(
+        shocked,
+        variants=variants,
+        total_outcome_col="total_deposits_bank_qoq",
+        horizons=[int(h) for h in sensitivity_spec.get("horizons", [])],
+        cumulative=bool(sensitivity_spec.get("cumulative", True)),
+        spec_name="identity_treatment_sensitivity",
+    )
+
+
+def _build_identity_control_sensitivity(
+    shocked: Any,
+    *,
+    lp_specs: Mapping[str, Any],
+    baseline_shock_spec: Mapping[str, Any],
+) -> Any:
+    control_spec = lp_specs["specs"]["control_sensitivity"]
+    frames = []
+    for variant_name, variant_spec in control_spec.get("control_variants", {}).items():
+        if not isinstance(variant_spec, Mapping):
+            continue
+        controls = [str(col) for col in variant_spec.get("controls", [])]
+        frame = build_identity_baseline_irf(
+            shocked,
+            shock_col=str(control_spec.get("shock_column", "tdc_residual_z")),
+            tdc_outcome_col=str(baseline_shock_spec.get("target", "tdc_bank_only_qoq")),
+            total_outcome_col="total_deposits_bank_qoq",
+            controls=controls,
+            horizons=[int(h) for h in control_spec.get("horizons", [])],
+            cumulative=bool(control_spec.get("cumulative", True)),
+            spec_name="identity_control_sensitivity",
+            nested_shock_spec=dict(baseline_shock_spec),
+        )
+        if frame.empty:
+            continue
+        frame.insert(0, "control_columns", "|".join(controls))
+        frame.insert(0, "control_role", str(variant_spec.get("control_role", "")))
+        frame.insert(0, "control_variant", str(variant_name))
+        frames.append(frame)
+    if not frames:
+        return pd.DataFrame(
+            columns=[
+                "control_variant",
+                "control_role",
+                "control_columns",
+                "outcome",
+                "horizon",
+                "beta",
+                "se",
+                "lower95",
+                "upper95",
+                "n",
+                "spec_name",
+                "shock_column",
+                "shock_scale",
+                "response_type",
+                "decomposition_mode",
+                "outcome_construction",
+                "inference_method",
+            ]
+        )
+    return pd.concat(frames, ignore_index=True)
+
+
+def _build_identity_sample_sensitivity(
+    shocked: Any,
+    *,
+    lp_specs: Mapping[str, Any],
+    baseline_shock_spec: Mapping[str, Any],
+) -> Any:
+    sample_spec = lp_specs["specs"]["sample_sensitivity"]
+    frames = []
+    for variant_name, variant_spec in sample_spec.get("sample_variants", {}).items():
+        if not isinstance(variant_spec, Mapping):
+            continue
+        flag_column = str(variant_spec.get("flag_column", "shock_flag"))
+        exclude_flagged = bool(variant_spec.get("exclude_flagged_shocks", False))
+        sample_mask = pd.Series(True, index=shocked.index, dtype=bool)
+        sample_filters: list[str] = []
+        if exclude_flagged:
+            if flag_column not in shocked.columns:
+                raise KeyError(f"Missing sample_sensitivity flag column: {flag_column}")
+            sample_mask = shocked[flag_column].fillna("").astype(str).eq("")
+            sample_filters.append(f"{flag_column}==''")
+        max_value_column = variant_spec.get("max_value_column")
+        if max_value_column is not None:
+            max_value_column = str(max_value_column)
+            if max_value_column not in shocked.columns:
+                raise KeyError(f"Missing sample_sensitivity max_value_column: {max_value_column}")
+            max_value = float(variant_spec["max_value"])
+            sample_mask = sample_mask & shocked[max_value_column].le(max_value)
+            sample_filters.append(f"{max_value_column}<={max_value}")
+        sample_filter = "all_usable_shocks" if not sample_filters else " & ".join(sample_filters)
+        frame = build_identity_baseline_irf(
+            shocked.loc[sample_mask].copy(),
+            shock_col=str(sample_spec.get("shock_column", "tdc_residual_z")),
+            tdc_outcome_col=str(baseline_shock_spec.get("target", "tdc_bank_only_qoq")),
+            total_outcome_col="total_deposits_bank_qoq",
+            controls=[str(col) for col in sample_spec.get("controls", [])],
+            horizons=[int(h) for h in sample_spec.get("horizons", [])],
+            cumulative=bool(sample_spec.get("cumulative", True)),
+            spec_name="identity_sample_sensitivity",
+            nested_shock_spec=dict(baseline_shock_spec),
+        )
+        if frame.empty:
+            continue
+        frame.insert(0, "sample_filter", sample_filter)
+        frame.insert(0, "sample_role", str(variant_spec.get("sample_role", "")))
+        frame.insert(0, "sample_variant", str(variant_name))
+        frames.append(frame)
+    if not frames:
+        return pd.DataFrame(
+            columns=[
+                "sample_variant",
+                "sample_role",
+                "sample_filter",
+                "outcome",
+                "horizon",
+                "beta",
+                "se",
+                "lower95",
+                "upper95",
+                "n",
+                "spec_name",
+                "shock_column",
+                "shock_scale",
+                "response_type",
+                "decomposition_mode",
+                "outcome_construction",
+                "inference_method",
+            ]
+        )
+    return pd.concat(frames, ignore_index=True)
+
+
+def _score_snapshot(frame: Any, *, outcome: str, horizon: int) -> dict[str, Any] | None:
+    sample = frame[(frame["outcome"] == outcome) & (frame["horizon"] == horizon)]
+    if sample.empty:
+        return None
+    row = sample.iloc[0]
+    lower95 = float(row["lower95"])
+    upper95 = float(row["upper95"])
+    return {
+        "beta": float(row["beta"]),
+        "se": float(row["se"]),
+        "lower95": lower95,
+        "upper95": upper95,
+        "n": int(row["n"]),
+        "ci_excludes_zero": lower95 > 0.0 or upper95 < 0.0,
+    }
+
+
+def _build_deposit_component_scorecard(
+    *,
+    identity_lp_irf: Any,
+    lp_irf: Any,
+    structural_proxy_summary: Mapping[str, Any],
+    proxy_coverage_summary: Mapping[str, Any],
+) -> dict[str, Any]:
+    component_outcomes = [
+        "checkable_deposits_bank_qoq",
+        "interbank_transactions_bank_qoq",
+        "time_savings_deposits_bank_qoq",
+        "checkable_federal_govt_bank_qoq",
+        "checkable_state_local_bank_qoq",
+        "checkable_rest_of_world_bank_qoq",
+        "checkable_private_domestic_bank_qoq",
+    ]
+    creator_outcomes = [
+        "commercial_industrial_loans_qoq",
+        "construction_land_development_loans_qoq",
+        "cre_multifamily_loans_qoq",
+        "cre_nonfarm_nonresidential_loans_qoq",
+        "consumer_loans_qoq",
+        "credit_card_revolving_loans_qoq",
+        "auto_loans_qoq",
+        "other_consumer_loans_qoq",
+        "heloc_loans_qoq",
+        "closed_end_residential_loans_qoq",
+    ]
+    horizons = (0, 4, 8)
+    payload_horizons: dict[str, Any] = {}
+    observed_components: set[str] = set()
+    observed_creators: set[str] = set()
+    for horizon in horizons:
+        key = f"h{horizon}"
+        component_payload = {
+            outcome: snapshot
+            for outcome in component_outcomes
+            if (snapshot := _score_snapshot(lp_irf, outcome=outcome, horizon=horizon)) is not None
+        }
+        creator_payload = {
+            outcome: snapshot
+            for outcome in creator_outcomes
+            if (snapshot := _score_snapshot(lp_irf, outcome=outcome, horizon=horizon)) is not None
+        }
+        observed_components.update(component_payload.keys())
+        observed_creators.update(creator_payload.keys())
+        payload_horizons[key] = {
+            "exact_identity_baseline": {
+                "tdc": _score_snapshot(identity_lp_irf, outcome="tdc_bank_only_qoq", horizon=horizon),
+                "total": _score_snapshot(identity_lp_irf, outcome="total_deposits_bank_qoq", horizon=horizon),
+                "other": _score_snapshot(identity_lp_irf, outcome="other_component_qoq", horizon=horizon),
+            },
+            "z1_deposit_component_lp_responses": component_payload,
+            "creator_lending_channel_lp_responses": creator_payload,
+            "proxy_bundle_coverage": {
+                "structural_proxy_context": dict((structural_proxy_summary.get("key_horizons") or {}).get(key, {})),
+                "coverage_context": dict((proxy_coverage_summary.get("key_horizons") or {}).get(key, {})),
+            },
+            "major_uncovered_channel_families": list(proxy_coverage_summary.get("major_uncovered_channel_families", [])),
+        }
+    return {
+        "status": "available",
+        "headline_question": "As a secondary side read, which observable deposit types move alongside the exact non-TDC deposit response?",
+        "estimation_path": {
+            "primary_decomposition_mode": "exact_identity_baseline",
+            "primary_artifact": "lp_irf_identity_baseline.csv",
+            "component_artifact": "lp_irf.csv",
+            "proxy_artifacts": [
+                "structural_proxy_evidence_summary.json",
+                "proxy_coverage_summary.json",
+            ],
+        },
+        "component_outcomes_present": sorted(observed_components),
+        "creator_channel_outcomes_present": sorted(observed_creators),
+        "horizons": payload_horizons,
+        "takeaways": [
+            "This scorecard is a secondary side read that pairs the exact-baseline TDC/total/other decomposition with observed deposit-type LP responses, first-wave creator-lending channels, and the current proxy uncovered remainder."
+        ],
+    }
+
+
 def _materialize_real_outputs(
     root: Path,
     contract: Mapping[str, Any],
@@ -364,6 +675,14 @@ def _materialize_real_outputs(
 ) -> dict[str, str]:
     build_result = build_public_quarterly_panel(root, reuse_mode=reuse_mode, fixture_root=raw_fixture_root)
     panel = compute_other_component(load_panel(build_result.panel_path))
+    call_report_components, call_report_summary = build_call_report_deposit_components(
+        root=root,
+        fixture_root=raw_fixture_root,
+    )
+    call_report_components_path = root / "data" / "derived" / "call_report_deposit_components.csv"
+    export_frame(call_report_components, call_report_components_path)
+    call_report_summary_path = root / "output" / "models" / "call_report_deposit_components_summary.json"
+    write_json_payload(call_report_summary_path, call_report_summary)
 
     accounting_summary = build_accounting_summary(panel)
     accounting_summary_path = root / "output" / "accounting" / "accounting_summary.csv"
@@ -428,8 +747,29 @@ def _materialize_real_outputs(
         lp_specs=lp_specs,
         shock_specs=all_shock_specs,
     )
+    identity_treatment_sensitivity = _build_identity_treatment_sensitivity(
+        shocked,
+        lp_specs=lp_specs,
+        shock_specs=all_shock_specs,
+    )
+    identity_control_sensitivity = _build_identity_control_sensitivity(
+        shocked,
+        lp_specs=lp_specs,
+        baseline_shock_spec=baseline_shock_spec,
+    )
+    identity_sample_sensitivity = _build_identity_sample_sensitivity(
+        shocked,
+        lp_specs=lp_specs,
+        baseline_shock_spec=baseline_shock_spec,
+    )
     identity_measurement_ladder_path = root / "output" / "models" / "identity_measurement_ladder.csv"
     export_frame(identity_measurement_ladder, identity_measurement_ladder_path)
+    identity_treatment_sensitivity_path = root / "output" / "models" / "identity_treatment_sensitivity.csv"
+    export_frame(identity_treatment_sensitivity, identity_treatment_sensitivity_path)
+    identity_control_sensitivity_path = root / "output" / "models" / "identity_control_sensitivity.csv"
+    export_frame(identity_control_sensitivity, identity_control_sensitivity_path)
+    identity_sample_sensitivity_path = root / "output" / "models" / "identity_sample_sensitivity.csv"
+    export_frame(identity_sample_sensitivity, identity_sample_sensitivity_path)
     treatment_fingerprint_path = root / "output" / "models" / "headline_treatment_fingerprint.json"
     fingerprint_payload = build_headline_treatment_fingerprint(
         shock_spec=dict(baseline_shock_spec),
@@ -511,9 +851,15 @@ def _materialize_real_outputs(
     contrast = build_total_minus_other_contrast(
         lp_irf=lp_outputs["lp_irf"],
         identity_lp_irf=identity_baseline,
-        sensitivity=lp_outputs["tdc_sensitivity_ladder"],
-        control_sensitivity=lp_outputs["control_set_sensitivity"],
-        sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
+        sensitivity=identity_treatment_sensitivity
+        if not identity_treatment_sensitivity.empty
+        else lp_outputs["tdc_sensitivity_ladder"],
+        control_sensitivity=identity_control_sensitivity
+        if not identity_control_sensitivity.empty
+        else lp_outputs["control_set_sensitivity"],
+        sample_sensitivity=identity_sample_sensitivity
+        if not identity_sample_sensitivity.empty
+        else lp_outputs["shock_sample_sensitivity"],
         identity_check_mode=(
             "approximate_with_outcome_specific_lags"
             if bool(baseline_lp_spec.get("include_lagged_outcome", False))
@@ -524,6 +870,7 @@ def _materialize_real_outputs(
     export_frame(contrast, contrast_path)
     structural_proxy_frame, structural_proxy_summary = build_structural_proxy_evidence(
         lp_irf=lp_outputs["lp_irf"],
+        identity_lp_irf=identity_baseline,
     )
     structural_proxy_path = root / "output" / "models" / "structural_proxy_evidence.csv"
     export_frame(structural_proxy_frame, structural_proxy_path)
@@ -564,12 +911,18 @@ def _materialize_real_outputs(
     proxy_coverage_summary_path = root / "output" / "models" / "proxy_coverage_summary.json"
     proxy_coverage_summary = build_proxy_coverage_summary(
         lp_irf=lp_outputs["lp_irf"],
+        identity_lp_irf=identity_baseline,
         lp_irf_regimes=lp_outputs["lp_irf_regimes"],
         regime_diagnostics=regime_diagnostics,
         regime_specs=regime_specs,
         proxy_unit_audit=_load_json(build_result.proxy_unit_audit_path),
     )
     write_json_payload(proxy_coverage_summary_path, proxy_coverage_summary)
+    counterpart_channel_scorecard = build_counterpart_channel_scorecard(
+        identity_lp_irf=identity_baseline,
+        lp_irf=lp_outputs["lp_irf"],
+        proxy_coverage_summary=proxy_coverage_summary,
+    )
     shock_diagnostics_path = root / "output" / "models" / "shock_diagnostics_summary.json"
     shock_diagnostics_payload = build_shock_diagnostics_summary(
         shocks=shocked,
@@ -589,6 +942,7 @@ def _materialize_real_outputs(
         identity_lp_irf=identity_baseline,
         contrast=contrast,
         sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
+        identity_sample_sensitivity=identity_sample_sensitivity,
         shock_metadata=dict(baseline_shock_spec),
         shock_specs=dict(all_shock_specs),
         shocks=shocked,
@@ -607,13 +961,17 @@ def _materialize_real_outputs(
         identity_lp_irf=identity_baseline,
         lp_irf_regimes=lp_outputs["lp_irf_regimes"],
         sensitivity=lp_outputs["tdc_sensitivity_ladder"],
+        identity_sensitivity=identity_treatment_sensitivity,
         control_sensitivity=lp_outputs["control_set_sensitivity"],
+        identity_control_sensitivity=identity_control_sensitivity,
         sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
+        identity_sample_sensitivity=identity_sample_sensitivity,
         regime_diagnostics=regime_diagnostics,
         direct_identification=direct_identification,
         contrast=contrast,
         structural_proxy_evidence=structural_proxy_summary,
         proxy_coverage_summary=proxy_coverage_summary,
+        counterpart_channel_scorecard=counterpart_channel_scorecard,
         shock_diagnostics=shock_diagnostics_payload,
         headline_shock_metadata=dict(baseline_shock_spec),
     )
@@ -629,8 +987,11 @@ def _materialize_real_outputs(
             identity_lp_irf=identity_baseline,
             identity_measurement_ladder=identity_measurement_ladder,
             sensitivity=lp_outputs["tdc_sensitivity_ladder"],
+            identity_sensitivity=identity_treatment_sensitivity,
             control_sensitivity=lp_outputs["control_set_sensitivity"],
+            identity_control_sensitivity=identity_control_sensitivity,
             sample_sensitivity=lp_outputs["shock_sample_sensitivity"],
+            identity_sample_sensitivity=identity_sample_sensitivity,
             contrast=contrast,
             lp_irf_regimes=lp_outputs["lp_irf_regimes"],
             readiness=readiness_payload,
@@ -638,6 +999,7 @@ def _materialize_real_outputs(
             regime_specs=regime_specs,
             structural_proxy_evidence=structural_proxy_summary,
             proxy_coverage_summary=proxy_coverage_summary,
+            counterpart_channel_scorecard=counterpart_channel_scorecard,
         ),
     )
     research_dashboard_path = root / "output" / "models" / "research_dashboard_summary.json"
@@ -717,6 +1079,16 @@ def _materialize_real_outputs(
         backend_closeout_report_path,
         backend_closeout_summary,
     )
+    deposit_component_scorecard = _build_deposit_component_scorecard(
+        identity_lp_irf=identity_baseline,
+        lp_irf=lp_outputs["lp_irf"],
+        structural_proxy_summary=structural_proxy_summary,
+        proxy_coverage_summary=proxy_coverage_summary,
+    )
+    deposit_component_scorecard_path = root / "output" / "models" / "deposit_component_scorecard.json"
+    write_json_payload(deposit_component_scorecard_path, deposit_component_scorecard)
+    counterpart_channel_scorecard_path = root / "output" / "models" / "counterpart_channel_scorecard.json"
+    write_json_payload(counterpart_channel_scorecard_path, counterpart_channel_scorecard)
     if provenance_validation_payload["status"] != "passed":
         raise RuntimeError(
             "Refusing to mirror public artifacts because headline treatment provenance validation failed."
@@ -731,10 +1103,10 @@ def _materialize_real_outputs(
             shocked=shocked,
             accounting_summary=accounting_summary,
             readiness=readiness_payload,
+            counterpart_channel_scorecard=counterpart_channel_scorecard,
             root=root,
         ),
     )
-
     raw_download_runs = _load_json(build_result.raw_download_manifest_path).get("runs", [])
     reused_payload = _load_json(build_result.reused_artifacts_path)
     manifest_paths = write_pipeline_manifests(
@@ -742,6 +1114,7 @@ def _materialize_real_outputs(
         command="pipeline run",
         outputs=[
             build_result.panel_path,
+            call_report_components_path,
             build_result.proxy_unit_audit_path,
             sample_construction_summary_path,
             accounting_summary_path,
@@ -750,6 +1123,9 @@ def _materialize_real_outputs(
             lp_irf_path,
             lp_irf_identity_baseline_path,
             identity_measurement_ladder_path,
+            identity_treatment_sensitivity_path,
+            identity_control_sensitivity_path,
+            identity_sample_sensitivity_path,
             smoothed_lp_irf_path,
             smoothed_lp_diagnostics_path,
             lp_irf_regimes_path,
@@ -775,6 +1151,7 @@ def _materialize_real_outputs(
             backend_evidence_packet_path,
             backend_closeout_summary_path,
             proxy_coverage_summary_path,
+            call_report_summary_path,
             treatment_fingerprint_path,
             provenance_validation_summary_path,
             shock_diagnostics_path,
@@ -788,6 +1165,8 @@ def _materialize_real_outputs(
             backend_decision_bundle_report_path,
             backend_evidence_packet_report_path,
             backend_closeout_report_path,
+            deposit_component_scorecard_path,
+            counterpart_channel_scorecard_path,
             overview_path,
         ],
         raw_download_runs=raw_download_runs,
@@ -801,6 +1180,7 @@ def _materialize_real_outputs(
 
     return {
         "panel_path": str(build_result.panel_path),
+        "call_report_components_path": str(call_report_components_path),
         "proxy_unit_audit_path": str(build_result.proxy_unit_audit_path),
         "sample_construction_summary_path": str(sample_construction_summary_path),
         "accounting_summary_path": str(accounting_summary_path),
@@ -809,6 +1189,9 @@ def _materialize_real_outputs(
         "lp_irf_path": str(lp_irf_path),
         "lp_irf_identity_baseline_path": str(lp_irf_identity_baseline_path),
         "identity_measurement_ladder_path": str(identity_measurement_ladder_path),
+        "identity_treatment_sensitivity_path": str(identity_treatment_sensitivity_path),
+        "identity_control_sensitivity_path": str(identity_control_sensitivity_path),
+        "identity_sample_sensitivity_path": str(identity_sample_sensitivity_path),
         "smoothed_lp_irf_path": str(smoothed_lp_irf_path),
         "smoothed_lp_diagnostics_path": str(smoothed_lp_diagnostics_path),
         "lp_irf_regimes_path": str(lp_irf_regimes_path),
@@ -834,6 +1217,7 @@ def _materialize_real_outputs(
         "backend_evidence_packet_path": str(backend_evidence_packet_path),
         "backend_closeout_summary_path": str(backend_closeout_summary_path),
         "proxy_coverage_summary_path": str(proxy_coverage_summary_path),
+        "call_report_summary_path": str(call_report_summary_path),
         "headline_treatment_fingerprint_path": str(treatment_fingerprint_path),
         "provenance_validation_summary_path": str(provenance_validation_summary_path),
         "shock_diagnostics_path": str(shock_diagnostics_path),
@@ -847,6 +1231,8 @@ def _materialize_real_outputs(
         "backend_decision_bundle_report_path": str(backend_decision_bundle_report_path),
         "backend_evidence_packet_report_path": str(backend_evidence_packet_report_path),
         "backend_closeout_report_path": str(backend_closeout_report_path),
+        "deposit_component_scorecard_path": str(deposit_component_scorecard_path),
+        "counterpart_channel_scorecard_path": str(counterpart_channel_scorecard_path),
         "overview_path": str(overview_path),
         "raw_downloads_path": str(manifest_paths["raw_downloads"]),
         "reused_artifacts_path": str(manifest_paths["reused_artifacts"]),

@@ -21,7 +21,7 @@
     "start_quarter": "2009Q1",
     "end_quarter": "2025Q4"
   },
-  "analysis_source_commit": "fc62a9f0408427b5a10955987291f5a56461e787",
+  "analysis_source_commit": "2555ae553dfdc7006674d24d53a644cb0c9b6598",
   "analysis_tree": {
     "status": "clean",
     "tracked_change_count": 0,
@@ -30,11 +30,11 @@
   "config_hashes": {
     "files": {
       "config/shock_specs.yml": "f2bc13ca92fb37ad91f1cd78960bbaa1bf62a6d15e7a4aeacea746652f7943ea",
-      "config/lp_specs.yml": "d15f9c422541048f16ab79883f42e0f36aa54a76d88195d9181bc591cc9c1547",
+      "config/lp_specs.yml": "6565e5f2feea1bdeeb8c565e2e7d9f15ffbf4e2599b965b942875b37a2fd5304",
       "config/regime_specs.yml": "74527837dfb4238ba824125722e82f435495a0fecf8ca1c227ad5bd145299179",
-      "config/output_contract.yml": "0e8701c22d21cfc438c7edc4d60412e6f34adc37bd400a8980ef5f38053835bd"
+      "config/output_contract.yml": "cee43a3245fa3fa674ab0000b87871a23fceaea017d0a682a99450b15c8d39f9"
     },
-    "combined_sha256": "e86bc64fc062f6788b21d33bbb1bcb00e0e5dd1a28a8f12a0b02425dd4ea4d75"
+    "combined_sha256": "717e9b3d02b491b0fea018c82520943d11ebcd6a5e7a059ea475c7a255555a0c"
   },
   "upstream_input": {
     "source_kind": "tdcest_processed_csv",

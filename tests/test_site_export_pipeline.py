@@ -34,15 +34,57 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "quarter",
         "tdc_bank_only_qoq",
         "total_deposits_bank_qoq",
+        "checkable_deposits_bank_qoq",
+        "interbank_transactions_bank_qoq",
+        "time_savings_deposits_bank_qoq",
+        "checkable_federal_govt_bank_qoq",
+        "checkable_state_local_bank_qoq",
+        "checkable_rest_of_world_bank_qoq",
+        "checkable_private_domestic_bank_qoq",
+        "interbank_transactions_foreign_banks_liability_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq",
+        "deposits_at_foreign_banks_asset_qoq",
         "other_component_qoq",
         "tdc_domestic_bank_only_qoq",
         "tdc_no_remit_bank_only_qoq",
         "tdc_credit_union_sensitive_qoq",
         "bank_credit_private_qoq",
+        "commercial_industrial_loans_qoq",
+        "construction_land_development_loans_qoq",
+        "cre_multifamily_loans_qoq",
+        "cre_nonfarm_nonresidential_loans_qoq",
+        "consumer_loans_qoq",
+        "credit_card_revolving_loans_qoq",
+        "auto_loans_qoq",
+        "other_consumer_loans_qoq",
+        "heloc_loans_qoq",
+        "closed_end_residential_loans_qoq",
+        "loans_to_commercial_banks_qoq",
+        "loans_to_nondepository_financial_institutions_qoq",
+        "loans_for_purchasing_or_carrying_securities_qoq",
+        "treasury_securities_bank_qoq",
+        "agency_gse_backed_securities_bank_qoq",
+        "municipal_securities_bank_qoq",
+        "corporate_foreign_bonds_bank_qoq",
+        "fedfunds_repo_liabilities_bank_qoq",
+        "commercial_bank_borrowings_qoq",
+        "fed_borrowings_depository_institutions_qoq",
+        "debt_securities_bank_liability_qoq",
+        "fhlb_advances_sallie_mae_loans_bank_qoq",
+        "holding_company_parent_funding_bank_qoq",
+        "commercial_industrial_loans_ex_chargeoffs_qoq",
+        "consumer_loans_ex_chargeoffs_qoq",
+        "credit_card_revolving_loans_ex_chargeoffs_qoq",
+        "other_consumer_loans_ex_chargeoffs_qoq",
+        "closed_end_residential_loans_ex_chargeoffs_qoq",
         "cb_nonts_qoq",
         "foreign_nonts_qoq",
         "domestic_nonfinancial_mmf_reallocation_qoq",
         "domestic_nonfinancial_repo_reallocation_qoq",
+        "on_rrp_reallocation_qoq",
+        "household_treasury_securities_reallocation_qoq",
+        "mmf_treasury_bills_reallocation_qoq",
+        "currency_reallocation_qoq",
         "bill_share",
         "bank_absorption_share",
         "reserve_drain_pressure",
@@ -55,15 +97,71 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "inflation",
         "lag_tdc_bank_only_qoq",
         "lag_total_deposits_bank_qoq",
+        "lag_checkable_deposits_bank_qoq",
+        "lag_interbank_transactions_bank_qoq",
+        "lag_time_savings_deposits_bank_qoq",
+        "lag_checkable_federal_govt_bank_qoq",
+        "lag_checkable_state_local_bank_qoq",
+        "lag_checkable_rest_of_world_bank_qoq",
+        "lag_checkable_private_domestic_bank_qoq",
+        "lag_interbank_transactions_foreign_banks_liability_qoq",
+        "lag_interbank_transactions_foreign_banks_asset_qoq",
+        "lag_deposits_at_foreign_banks_asset_qoq",
         "lag_bank_credit_private_qoq",
+        "lag_commercial_industrial_loans_qoq",
+        "lag_construction_land_development_loans_qoq",
+        "lag_cre_multifamily_loans_qoq",
+        "lag_cre_nonfarm_nonresidential_loans_qoq",
+        "lag_consumer_loans_qoq",
+        "lag_credit_card_revolving_loans_qoq",
+        "lag_auto_loans_qoq",
+        "lag_other_consumer_loans_qoq",
+        "lag_heloc_loans_qoq",
+        "lag_closed_end_residential_loans_qoq",
+        "lag_loans_to_commercial_banks_qoq",
+        "lag_loans_to_nondepository_financial_institutions_qoq",
+        "lag_loans_for_purchasing_or_carrying_securities_qoq",
+        "lag_treasury_securities_bank_qoq",
+        "lag_agency_gse_backed_securities_bank_qoq",
+        "lag_municipal_securities_bank_qoq",
+        "lag_corporate_foreign_bonds_bank_qoq",
+        "lag_fedfunds_repo_liabilities_bank_qoq",
+        "lag_commercial_bank_borrowings_qoq",
+        "lag_fed_borrowings_depository_institutions_qoq",
+        "lag_debt_securities_bank_liability_qoq",
+        "lag_fhlb_advances_sallie_mae_loans_bank_qoq",
+        "lag_holding_company_parent_funding_bank_qoq",
+        "lag_commercial_industrial_loans_ex_chargeoffs_qoq",
+        "lag_consumer_loans_ex_chargeoffs_qoq",
+        "lag_credit_card_revolving_loans_ex_chargeoffs_qoq",
+        "lag_other_consumer_loans_ex_chargeoffs_qoq",
+        "lag_closed_end_residential_loans_ex_chargeoffs_qoq",
         "lag_tga_qoq",
         "lag_reserves_qoq",
+        "lag_on_rrp_reallocation_qoq",
+        "lag_household_treasury_securities_reallocation_qoq",
+        "lag_mmf_treasury_bills_reallocation_qoq",
+        "lag_currency_reallocation_qoq",
         "lag_bill_share",
         "lag_fedfunds",
         "lag_unemployment",
         "lag_inflation",
     ]
     _write_csv(source_root / "data" / "derived" / "quarterly_panel.csv", panel_columns, [["2000Q1"] + [1] * (len(panel_columns) - 1)])
+    _write_csv(
+        source_root / "data" / "derived" / "call_report_deposit_components.csv",
+        [
+            "quarter",
+            "account_type",
+            "depositor_class",
+            "amount_bil_usd",
+            "institution_count",
+            "source_quarter",
+            "source_kind",
+            "universe_basis",
+        ],
+        [["2000Q1", "transaction", "individuals_partnerships_corporations", 1.0, 1, "2000Q1", "stub", "insured_institutions_aggregate"]],
+    )
 
     csv_artifacts = {
         "output/accounting/accounting_summary.csv",
@@ -72,6 +170,9 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/lp_irf.csv",
         "output/models/lp_irf_identity_baseline.csv",
         "output/models/identity_measurement_ladder.csv",
+        "output/models/identity_treatment_sensitivity.csv",
+        "output/models/identity_control_sensitivity.csv",
+        "output/models/identity_sample_sensitivity.csv",
         "output/models/lp_irf_regimes.csv",
         "output/models/tdc_sensitivity_ladder.csv",
         "output/models/control_set_sensitivity.csv",
@@ -86,12 +187,15 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/regime_diagnostics_summary.json",
         "output/models/structural_proxy_evidence_summary.json",
         "output/models/proxy_coverage_summary.json",
+        "output/models/call_report_deposit_components_summary.json",
         "output/models/headline_treatment_fingerprint.json",
         "output/models/provenance_validation_summary.json",
         "output/models/shock_diagnostics_summary.json",
         "output/models/direct_identification_summary.json",
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
+        "output/models/deposit_component_scorecard.json",
+        "output/models/counterpart_channel_scorecard.json",
         "output/models/period_sensitivity_summary.json",
     }
     for rel in csv_artifacts:
@@ -149,6 +253,77 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "inference_method",
                 ],
                 [["domestic_bank_only", "exploratory", "measurement", "tdc_domestic_bank_only_qoq", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_measurement_ladder", "tdc_domestic_bank_only_residual_z", "exact_identity_baseline", "estimated_common_design", "bootstrap"]],
+            )
+        elif rel.endswith("identity_treatment_sensitivity.csv"):
+            _write_csv(
+                source_root / rel,
+                [
+                    "treatment_variant",
+                    "treatment_role",
+                    "treatment_family",
+                    "target",
+                    "outcome",
+                    "horizon",
+                    "beta",
+                    "se",
+                    "lower95",
+                    "upper95",
+                    "n",
+                    "spec_name",
+                    "shock_column",
+                    "decomposition_mode",
+                    "outcome_construction",
+                    "inference_method",
+                ],
+                [["baseline", "core", "headline", "tdc_bank_only_qoq", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_treatment_sensitivity", "tdc_residual_z", "exact_identity_baseline", "estimated_common_design", "bootstrap"]],
+            )
+        elif rel.endswith("identity_control_sensitivity.csv"):
+            _write_csv(
+                source_root / rel,
+                [
+                    "control_variant",
+                    "control_role",
+                    "control_columns",
+                    "outcome",
+                    "horizon",
+                    "beta",
+                    "se",
+                    "lower95",
+                    "upper95",
+                    "n",
+                    "spec_name",
+                    "shock_column",
+                    "shock_scale",
+                    "response_type",
+                    "decomposition_mode",
+                    "outcome_construction",
+                    "inference_method",
+                ],
+                [["headline_lagged_macro", "headline", "lag_tdc_bank_only_qoq|lag_fedfunds|lag_unemployment|lag_inflation", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_control_sensitivity", "tdc_residual_z", "rolling_oos_standard_deviation", "cumulative_sum_h0_to_h", "exact_identity_baseline", "estimated_common_design", "bootstrap"]],
+            )
+        elif rel.endswith("identity_sample_sensitivity.csv"):
+            _write_csv(
+                source_root / rel,
+                [
+                    "sample_variant",
+                    "sample_role",
+                    "sample_filter",
+                    "outcome",
+                    "horizon",
+                    "beta",
+                    "se",
+                    "lower95",
+                    "upper95",
+                    "n",
+                    "spec_name",
+                    "shock_column",
+                    "shock_scale",
+                    "response_type",
+                    "decomposition_mode",
+                    "outcome_construction",
+                    "inference_method",
+                ],
+                [["all_usable_shocks", "headline", "all_usable_shocks", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_sample_sensitivity", "tdc_residual_z", "rolling_oos_standard_deviation", "cumulative_sum_h0_to_h", "exact_identity_baseline", "estimated_common_design", "bootstrap"]],
             )
         elif rel.endswith("lp_irf_regimes.csv"):
             _write_csv(source_root / rel, ["regime", "outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name"], [["reserve_drain_high", "total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "baseline"]])
@@ -273,6 +448,16 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "takeaways": ["stub"],
                 },
             )
+        elif rel.endswith("call_report_deposit_components_summary.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "status": "not_available",
+                    "row_count": 0,
+                    "qa": {"quarterly_aggregation_confirmed": None},
+                    "takeaways": ["stub"],
+                },
+            )
         elif rel.endswith("pass_through_summary.json"):
             _write_json(
                 source_root / rel,
@@ -290,9 +475,37 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "shock_sample_variants": [],
                     "structural_proxy_context": {},
                     "proxy_coverage_context": {},
+                    "counterpart_channel_context": {},
                     "published_regime_contexts": [],
                     "readiness_reasons": ["stub"],
                     "readiness_warnings": [],
+                },
+            )
+        elif rel.endswith("deposit_component_scorecard.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "status": "available",
+                    "headline_question": "stub",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
+                    "component_outcomes_present": ["checkable_deposits_bank_qoq"],
+                    "creator_channel_outcomes_present": ["commercial_industrial_loans_qoq"],
+                    "horizons": {"h0": {}},
+                    "takeaways": ["stub"],
+                },
+            )
+        elif rel.endswith("counterpart_channel_scorecard.json"):
+            _write_json(
+                source_root / rel,
+                {
+                    "status": "available",
+                    "headline_question": "stub",
+                    "estimation_path": {"primary_decomposition_mode": "exact_identity_baseline"},
+                    "legacy_private_credit_proxy_role": "coarse_legacy_creator_proxy",
+                    "creator_channel_outcomes_present": ["commercial_industrial_loans_qoq"],
+                    "funding_accommodation_outcomes_present": ["commercial_bank_borrowings_qoq"],
+                    "horizons": {"h0": {}},
+                    "takeaways": ["stub"],
                 },
             )
         elif rel.endswith("direct_identification_summary.json"):
@@ -335,6 +548,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                     "warnings": [],
                     "diagnostics": {"shock_usable_obs": 1},
                     "key_estimates": {},
+                    "counterpart_channel_context": {},
                     "answer_ready_when": ["stub"],
                 },
             )
@@ -402,12 +616,27 @@ def test_default_overview_payload_stays_methods_preview() -> None:
         shocked=shocked,
         accounting_summary=accounting,
         readiness={"status": "not_ready"},
+        counterpart_channel_scorecard={
+            "key_horizons": {
+                "h0": {
+                    "decisive_positive_core_creator_channels": [],
+                    "deposit_retention_support_channels": {
+                        "on_rrp_reallocation_qoq": {"beta": -1.0, "ci_excludes_zero": True}
+                    },
+                    "escape_support_context": {"interpretation": "escape_pressure_signal"},
+                },
+                "h4": {"deposit_retention_support_channels": {}},
+                "h8": {"deposit_retention_support_channels": {}},
+            }
+        },
         root=Path("/tmp/tdcpass"),
     )
 
     assert "methods-and-reproducibility preview centered on the frozen rolling 40-quarter ridge unexpected-TDC shock" in payload["main_findings"][1]
     assert "1960Q4" in payload["main_findings"][2]
     assert "`not_ready`" in payload["main_findings"][2]
+    assert any("Counterpart channels do not show a decisive positive core creator-lending offset on impact" in item for item in payload["main_findings"])
+    assert any("counterpart_channel_scorecard.json" in item for item in payload["main_findings"])
     assert "exploratory deposit-response readout" in payload["caveats"][0]
     assert "out of scope in the current release" in payload["caveats"][2]
     assert "dimensionally coherent first-stage gate" in payload["caveats"][2]

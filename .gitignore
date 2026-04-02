@@ -10,9 +10,7 @@ __pycache__/
 do/
 
 # Non-public working material.
-docs/*
-!docs/output_schema.md
-!docs/research_design.md
+docs/
 prompts/
 
 # Commit the public preview mirror, but ignore any other ad hoc site output.

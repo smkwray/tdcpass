@@ -251,6 +251,7 @@ def build_direct_identification_summary(
     identity_lp_irf: pd.DataFrame | None = None,
     contrast: pd.DataFrame,
     sample_sensitivity: pd.DataFrame,
+    identity_sample_sensitivity: pd.DataFrame | None = None,
     shock_metadata: dict[str, Any] | None = None,
     shock_specs: dict[str, Any] | None = None,
     shocks: pd.DataFrame | None = None,
@@ -265,6 +266,11 @@ def build_direct_identification_summary(
         "exact_identity_baseline"
         if identity_lp_irf is not None and not identity_lp_irf.empty
         else "approximate_dynamic_decomposition"
+    )
+    primary_sample_sensitivity = (
+        identity_sample_sensitivity
+        if identity_sample_sensitivity is not None and not identity_sample_sensitivity.empty
+        else sample_sensitivity
     )
     key_horizons = {0, 4}
     treatment_freeze_status = _treatment_freeze_status(shock_metadata)
@@ -416,8 +422,8 @@ def build_direct_identification_summary(
         "impact_magnitude_shift_gt_100pct": False,
         "h4_magnitude_shift_gt_100pct": False,
     }
-    if not sample_sensitivity.empty:
-        total_sample = sample_sensitivity[sample_sensitivity["outcome"] == "total_deposits_bank_qoq"]
+    if not primary_sample_sensitivity.empty:
+        total_sample = primary_sample_sensitivity[primary_sample_sensitivity["outcome"] == "total_deposits_bank_qoq"]
         headline_rows = total_sample[total_sample["sample_role"] == "headline"]
         exploratory_rows = total_sample[total_sample["sample_role"] == "exploratory"]
         if not headline_rows.empty and not exploratory_rows.empty:
@@ -453,6 +459,9 @@ def build_direct_identification_summary(
             "primary_artifact": "lp_irf_identity_baseline.csv"
             if primary_decomposition_mode == "exact_identity_baseline"
             else "lp_irf.csv",
+            "sample_variant_artifact": "identity_sample_sensitivity.csv"
+            if identity_sample_sensitivity is not None and not identity_sample_sensitivity.empty
+            else "shock_sample_sensitivity.csv",
             "approximate_robustness_mode": contrast_identity_mode,
             "approximate_robustness_artifact": "total_minus_other_contrast.csv" if not baseline_contrast.empty else None,
             "approximate_dynamic_robustness": approximate_dynamic_robustness,

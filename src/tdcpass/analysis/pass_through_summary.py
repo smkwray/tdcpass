@@ -217,14 +217,67 @@ def _regime_rows(lp_irf_regimes: pd.DataFrame, horizons: tuple[int, ...]) -> lis
     return regimes
 
 
+def _counterpart_channel_context(
+    counterpart_channel_scorecard: dict[str, Any] | None,
+    *,
+    horizons: tuple[int, ...],
+) -> dict[str, Any]:
+    if counterpart_channel_scorecard is None:
+        return {}
+    key_horizons = dict(counterpart_channel_scorecard.get("key_horizons", {}))
+    return {
+        "status": str(counterpart_channel_scorecard.get("status", "not_available")),
+        "artifact": "counterpart_channel_scorecard.json",
+        "legacy_private_credit_proxy_role": str(
+            counterpart_channel_scorecard.get("legacy_private_credit_proxy_role", "coarse_legacy_creator_proxy")
+        ),
+        "creator_channel_outcomes_present": list(counterpart_channel_scorecard.get("creator_channel_outcomes_present", [])),
+        "key_horizons": {
+            f"h{horizon}": {
+                "other_component": dict((key_horizons.get(f"h{horizon}") or {}).get("other_component") or {})
+                if (key_horizons.get(f"h{horizon}") or {}).get("other_component") is not None
+                else None,
+                "legacy_private_credit_proxy": dict((key_horizons.get(f"h{horizon}") or {}).get("legacy_private_credit_proxy") or {}),
+                "decisive_positive_creator_channels": list(
+                    (key_horizons.get(f"h{horizon}") or {}).get("decisive_positive_creator_channels", [])
+                ),
+                "decisive_negative_creator_channels": list(
+                    (key_horizons.get(f"h{horizon}") or {}).get("decisive_negative_creator_channels", [])
+                ),
+                "decisive_positive_asset_purchase_channels": list(
+                    (key_horizons.get(f"h{horizon}") or {}).get("decisive_positive_asset_purchase_channels", [])
+                ),
+                "decisive_positive_retention_support_channels": list(
+                    (key_horizons.get(f"h{horizon}") or {}).get("decisive_positive_retention_support_channels", [])
+                ),
+                "decisive_negative_retention_support_channels": list(
+                    (key_horizons.get(f"h{horizon}") or {}).get("decisive_negative_retention_support_channels", [])
+                ),
+                "escape_support_context": dict(
+                    (key_horizons.get(f"h{horizon}") or {}).get("escape_support_context") or {}
+                ),
+                "asset_purchase_plumbing_context": dict(
+                    (key_horizons.get(f"h{horizon}") or {}).get("asset_purchase_plumbing_context") or {}
+                ),
+                "proxy_coverage_label": (key_horizons.get(f"h{horizon}") or {}).get("proxy_coverage_label"),
+            }
+            for horizon in horizons
+        },
+        "takeaways": list(counterpart_channel_scorecard.get("takeaways", [])),
+    }
+
+
 def build_pass_through_summary(
     *,
     lp_irf: pd.DataFrame,
     identity_lp_irf: pd.DataFrame | None = None,
     identity_measurement_ladder: pd.DataFrame | None = None,
     sensitivity: pd.DataFrame,
+    identity_sensitivity: pd.DataFrame | None = None,
     control_sensitivity: pd.DataFrame,
+    identity_control_sensitivity: pd.DataFrame | None = None,
     sample_sensitivity: pd.DataFrame,
+    identity_sample_sensitivity: pd.DataFrame | None = None,
     contrast: pd.DataFrame,
     lp_irf_regimes: pd.DataFrame,
     readiness: dict[str, Any],
@@ -232,6 +285,7 @@ def build_pass_through_summary(
     regime_specs: dict[str, Any] | None = None,
     structural_proxy_evidence: dict[str, Any] | None = None,
     proxy_coverage_summary: dict[str, Any] | None = None,
+    counterpart_channel_scorecard: dict[str, Any] | None = None,
     horizons: tuple[int, ...] = (0, 4),
 ) -> dict[str, Any]:
     primary_lp_irf = identity_lp_irf if identity_lp_irf is not None and not identity_lp_irf.empty else lp_irf
@@ -239,6 +293,17 @@ def build_pass_through_summary(
         "exact_identity_baseline"
         if identity_lp_irf is not None and not identity_lp_irf.empty
         else "approximate_dynamic_decomposition"
+    )
+    primary_sensitivity = identity_sensitivity if identity_sensitivity is not None and not identity_sensitivity.empty else sensitivity
+    primary_control_sensitivity = (
+        identity_control_sensitivity
+        if identity_control_sensitivity is not None and not identity_control_sensitivity.empty
+        else control_sensitivity
+    )
+    primary_sample_sensitivity = (
+        identity_sample_sensitivity
+        if identity_sample_sensitivity is not None and not identity_sample_sensitivity.empty
+        else sample_sensitivity
     )
     baseline_contrast = (
         contrast[(contrast["scope"] == "baseline") & (contrast["variant"] == "baseline")].copy()
@@ -349,13 +414,13 @@ def build_pass_through_summary(
         for row in published_regimes
         if row.get("publication_role") != "diagnostic_only" and row.get("stable_for_interpretation", False)
     ]
-    sample_variant_rows = _sample_variant_rows(sample_sensitivity, horizons=horizons)
+    sample_variant_rows = _sample_variant_rows(primary_sample_sensitivity, horizons=horizons)
     flagged_window_robustness = _flagged_window_robustness(sample_variant_rows, horizons=horizons)
     measurement_variant_source = (
         identity_measurement_ladder
         if identity_measurement_ladder is not None and not identity_measurement_ladder.empty
-        else sensitivity[sensitivity.get("treatment_family", "").eq("measurement")]
-        if "treatment_family" in sensitivity.columns
+        else primary_sensitivity[primary_sensitivity.get("treatment_family", "").eq("measurement")]
+        if "treatment_family" in primary_sensitivity.columns
         else pd.DataFrame()
     )
 
@@ -370,6 +435,15 @@ def build_pass_through_summary(
             "measurement_variant_artifact": "identity_measurement_ladder.csv"
             if identity_measurement_ladder is not None and not identity_measurement_ladder.empty
             else "tdc_sensitivity_ladder.csv",
+            "treatment_variant_artifact": "identity_treatment_sensitivity.csv"
+            if identity_sensitivity is not None and not identity_sensitivity.empty
+            else "tdc_sensitivity_ladder.csv",
+            "control_variant_artifact": "identity_control_sensitivity.csv"
+            if identity_control_sensitivity is not None and not identity_control_sensitivity.empty
+            else "control_set_sensitivity.csv",
+            "sample_variant_artifact": "identity_sample_sensitivity.csv"
+            if identity_sample_sensitivity is not None and not identity_sample_sensitivity.empty
+            else "shock_sample_sensitivity.csv",
             "approximate_dynamic_robustness": approximate_dynamic_robustness,
         },
         "treatment_freeze_status": treatment_freeze_status,
@@ -383,7 +457,7 @@ def build_pass_through_summary(
         ),
         "headline_answer": headline,
         "mechanism_caveat": (
-            "Structural proxies remain cross-checks on the residual, not standalone proof of mechanism."
+            "Structural proxies remain cross-checks on the residual, not standalone proof of mechanism; creator-lane evidence is surfaced separately in counterpart_channel_scorecard.json, and bank_credit_private_qoq remains only a coarse legacy creator proxy."
         ),
         "sample_policy": {
             "headline_sample_variant": "all_usable_shocks",
@@ -394,7 +468,7 @@ def build_pass_through_summary(
         "flagged_window_robustness": flagged_window_robustness,
         "baseline_horizons": baseline,
         "core_treatment_variants": _variant_rows(
-            sensitivity,
+            primary_sensitivity,
             variant_column="treatment_variant",
             role_column="treatment_role",
             allowed_roles={"core"},
@@ -408,8 +482,8 @@ def build_pass_through_summary(
             horizons=horizons,
         ),
         "shock_design_treatment_variants": _variant_rows(
-            sensitivity[sensitivity.get("treatment_family", "").eq("shock_design")]
-            if "treatment_family" in sensitivity.columns
+            primary_sensitivity[primary_sensitivity.get("treatment_family", "").eq("shock_design")]
+            if "treatment_family" in primary_sensitivity.columns
             else pd.DataFrame(),
             variant_column="treatment_variant",
             role_column="treatment_role",
@@ -417,7 +491,7 @@ def build_pass_through_summary(
             horizons=horizons,
         ),
         "core_control_variants": _variant_rows(
-            control_sensitivity,
+            primary_control_sensitivity,
             variant_column="control_variant",
             role_column="control_role",
             allowed_roles={"headline", "core"},
@@ -435,6 +509,10 @@ def build_pass_through_summary(
             "published_regime_contexts": list(proxy_coverage_summary.get("published_regime_contexts", [])),
             "release_caveat": str(proxy_coverage_summary.get("release_caveat", "")),
         },
+        "counterpart_channel_context": _counterpart_channel_context(
+            counterpart_channel_scorecard,
+            horizons=horizons,
+        ),
         "published_regime_contexts": published_regimes,
         "readiness_reasons": list(readiness.get("reasons", [])),
         "readiness_warnings": list(readiness.get("warnings", [])),

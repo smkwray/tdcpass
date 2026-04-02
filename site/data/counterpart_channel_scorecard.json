@@ -1,0 +1,974 @@
+{
+  "status": "available",
+  "headline_question": "Which first-wave creator and escape counterpart channels line up with the exact non-TDC deposit response?",
+  "estimation_path": {
+    "primary_decomposition_mode": "exact_identity_baseline",
+    "primary_artifact": "lp_irf_identity_baseline.csv",
+    "creator_channel_artifact": "lp_irf.csv",
+    "legacy_private_credit_artifact": "lp_irf.csv",
+    "proxy_coverage_artifact": "proxy_coverage_summary.json"
+  },
+  "target_mapping": {
+    "priority_gap": "ci_us_qoq",
+    "next_build_priority": "funding_accommodation_lane_then_external_banking_or_narrower_us_addressee_mapping",
+    "core_creator_targets": [
+      {
+        "scientific_target": "ci_us_qoq",
+        "current_live_proxy": "commercial_industrial_loans_qoq",
+        "status": "scope_mismatch_current_public_path",
+        "scope": "all_commercial_bank_c_and_i",
+        "interpretation": "Treat as a broad all-bank creator proxy, not exact U.S.-addressee domestic nonfinancial C&I."
+      },
+      {
+        "scientific_target": "construction_land_dev_qoq",
+        "current_live_proxy": "construction_land_development_loans_qoq",
+        "status": "near_match_current_public_path",
+        "scope": "all_commercial_bank_construction_and_land_development",
+        "interpretation": "Usable first-pass public creator lane, but still on all-commercial-bank scope rather than a narrower domestic counterpart object."
+      },
+      {
+        "scientific_target": "cre_multifamily_qoq",
+        "current_live_proxy": "cre_multifamily_loans_qoq",
+        "status": "near_match_current_public_path",
+        "scope": "all_commercial_bank_multifamily",
+        "interpretation": "Close public category match, but still broader than a bank-only domestic counterpart-accounting object."
+      },
+      {
+        "scientific_target": "cre_nonfarm_nonres_qoq",
+        "current_live_proxy": "cre_nonfarm_nonresidential_loans_qoq",
+        "status": "near_match_current_public_path",
+        "scope": "all_commercial_bank_nonfarm_nonresidential_cre",
+        "interpretation": "Close public category match, but still on broad all-commercial-bank scope."
+      },
+      {
+        "scientific_target": "consumer_credit_qoq",
+        "current_live_proxy": "consumer_loans_qoq",
+        "status": "near_match_current_public_path",
+        "scope": "all_commercial_bank_consumer_loans",
+        "interpretation": "Broad public consumer creator lane, with narrower subcomponents available as secondary detail."
+      }
+    ],
+    "excluded_or_noncore_families": [
+      {
+        "excluded_family": "loans_to_depositories_qoq",
+        "current_live_proxy": "loans_to_commercial_banks_qoq",
+        "status": "materialized",
+        "interpretation": "Separated from the core domestic creator lane and should stay excluded from a domestic nonfinancial lending subtotal."
+      },
+      {
+        "excluded_family": "loans_to_ndfis_qoq",
+        "current_live_proxy": "loans_to_nondepository_financial_institutions_qoq",
+        "status": "materialized",
+        "interpretation": "Separated from the core domestic creator lane and should stay excluded from a domestic nonfinancial lending subtotal."
+      },
+      {
+        "excluded_family": "securities_purpose_loans_qoq",
+        "current_live_proxy": "loans_for_purchasing_or_carrying_securities_qoq",
+        "status": "materialized",
+        "interpretation": "Separated from the core domestic creator lane and should stay excluded from a domestic nonfinancial lending subtotal."
+      }
+    ],
+    "bank_asset_purchase_lane": {
+      "status": "materialized",
+      "outcomes": [
+        "treasury_securities_bank_qoq",
+        "agency_gse_backed_securities_bank_qoq",
+        "municipal_securities_bank_qoq",
+        "corporate_foreign_bonds_bank_qoq"
+      ],
+      "interpretation": "Potential creator evidence from quarterly bank asset accumulation; pair with TGA and Fed context rather than treating raw securities growth as direct deposit creation by itself."
+    },
+    "destroyer_escape_lane": {
+      "status": "materialized",
+      "outcomes": [
+        "domestic_nonfinancial_mmf_reallocation_qoq",
+        "domestic_nonfinancial_repo_reallocation_qoq",
+        "on_rrp_reallocation_qoq",
+        "household_treasury_securities_reallocation_qoq",
+        "mmf_treasury_bills_reallocation_qoq",
+        "currency_reallocation_qoq"
+      ],
+      "interpretation": "Sign-normalized reallocation support channels spanning MMFs, repo, ON RRP, direct Treasury / bill absorption, and public currency; positive means less deposit escape / more retention support, negative means escape pressure out of bank deposits."
+    },
+    "external_escape_lane": {
+      "status": "expanded",
+      "outcomes": [
+        "foreign_nonts_qoq",
+        "checkable_rest_of_world_bank_qoq",
+        "interbank_transactions_foreign_banks_liability_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq",
+        "deposits_at_foreign_banks_asset_qoq"
+      ],
+      "interpretation": "External banking context now spans broad foreign nontransaction liabilities plus bank-specific foreign interbank liabilities, foreign interbank assets, and deposits at foreign banks; keep these separate from the domestic escape-support subtotal."
+    },
+    "funding_accommodation_lane": {
+      "status": "materialized_with_cleanup_candidate",
+      "active_outcomes": [
+        "interbank_transactions_bank_qoq",
+        "fedfunds_repo_liabilities_bank_qoq",
+        "commercial_bank_borrowings_qoq",
+        "fed_borrowings_depository_institutions_qoq",
+        "debt_securities_bank_liability_qoq",
+        "fhlb_advances_sallie_mae_loans_bank_qoq"
+      ],
+      "cleanup_candidates": [
+        "holding_company_parent_funding_bank_qoq"
+      ],
+      "interpretation": "Separate bank funding-accommodation channels spanning interbank liabilities, repo/fed-funds-style liabilities, total borrowings, Fed borrowing, debt securities, and FHLB advances; parent/affiliate funding remains a cleanup candidate rather than an active interpreted lane."
+    }
+  },
+  "legacy_private_credit_proxy_role": "coarse_legacy_creator_proxy",
+  "creator_channel_outcomes_present": [],
+  "funding_accommodation_outcomes_present": [],
+  "funding_accommodation_cleanup_candidates": [
+    "holding_company_parent_funding_bank_qoq"
+  ],
+  "horizons": {
+    "h0": {
+      "tdc": {
+        "beta": 128.49398892100783,
+        "se": 35.018290469572285,
+        "lower95": 119.41873548043742,
+        "upper95": 248.5482159371078,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 55.75033524806063,
+        "se": 40.86113535471181,
+        "lower95": 8.738139880568623,
+        "upper95": 168.6573860829989,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "other_component": {
+        "beta": -72.74365367294723,
+        "se": 42.946700439267694,
+        "lower95": -170.48932979728906,
+        "upper95": -1.8809331488254672,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "legacy_private_credit_proxy": {
+        "role": "coarse_legacy_creator_proxy",
+        "snapshot": {
+          "beta": 14.021813174704516,
+          "se": 13.4008997593926,
+          "lower95": -12.243950353704982,
+          "upper95": 40.28757670311401,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_lending_channels": {},
+      "core_domestic_creator_lending_channels": {},
+      "noncore_creator_lending_channels": {},
+      "creator_asset_purchase_channels": {},
+      "funding_accommodation_channels": {},
+      "funding_accommodation_cleanup_candidates": {},
+      "deposit_retention_support_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -14.977538562329684,
+          "se": 11.828190798252104,
+          "lower95": -38.160792526903805,
+          "upper95": 8.20571540224444,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": 0.0287923822070103,
+          "se": 0.7154641657141337,
+          "lower95": -1.3735173825926918,
+          "upper95": 1.4311021470067122,
+          "n": 68,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_escape_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 27.0343911579461,
+          "se": 13.111973747146076,
+          "lower95": 1.334922613539792,
+          "upper95": 52.7338597023524,
+          "n": 68,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {},
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "funding_accommodation_unresolved"
+      },
+      "escape_support_context": {
+        "channels": {
+          "domestic_nonfinancial_mmf_reallocation_qoq": {
+            "beta": -14.977538562329684,
+            "se": 11.828190798252104,
+            "lower95": -38.160792526903805,
+            "upper95": 8.20571540224444,
+            "n": 68,
+            "ci_excludes_zero": false
+          },
+          "domestic_nonfinancial_repo_reallocation_qoq": {
+            "beta": 0.0287923822070103,
+            "se": 0.7154641657141337,
+            "lower95": -1.3735173825926918,
+            "upper95": 1.4311021470067122,
+            "n": 68,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "escape_support_unresolved"
+      },
+      "asset_purchase_plumbing_context": {
+        "channels": {
+          "cb_nonts_qoq": {
+            "beta": 26.523641651135975,
+            "se": 14.452809474715338,
+            "lower95": -1.8038649193060865,
+            "upper95": 54.85114822157803,
+            "n": 68,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "treasury_drain_signal": false,
+        "reserve_support_signal": false,
+        "interpretation": "no_decisive_asset_purchase_creator_signal"
+      },
+      "decisive_positive_creator_channels": [],
+      "decisive_negative_creator_channels": [],
+      "decisive_positive_core_creator_channels": [],
+      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_noncore_creator_channels": [],
+      "decisive_negative_noncore_creator_channels": [],
+      "decisive_positive_asset_purchase_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_retention_support_channels": [],
+      "decisive_negative_retention_support_channels": [],
+      "decisive_positive_external_escape_channels": [
+        "foreign_nonts_qoq"
+      ],
+      "decisive_negative_external_escape_channels": [],
+      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_funding_accommodation_channels": [],
+      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "uncovered_channel_families": [
+        "within_bank_deposit_substitution_across_holders_or_products",
+        "omitted_bank_asset_side_channels_outside_private_credit",
+        "domestic_public_sector_and_wholesale_deposit_channels",
+        "additional_cash_management_channels_outside_mmf_and_repo"
+      ]
+    },
+    "h4": {
+      "tdc": {
+        "beta": 278.13971316628357,
+        "se": 141.57570011679425,
+        "lower95": 78.32278678356286,
+        "upper95": 597.5909020053358,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 167.33069747889854,
+        "se": 154.8910510638327,
+        "lower95": -27.18884889021173,
+        "upper95": 550.7057101571328,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "other_component": {
+        "beta": -110.80901568738504,
+        "se": 84.23711570896954,
+        "lower95": -242.41233479835057,
+        "upper95": 62.23408515351409,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "legacy_private_credit_proxy": {
+        "role": "coarse_legacy_creator_proxy",
+        "snapshot": {
+          "beta": 54.572977783498914,
+          "se": 19.24512973374704,
+          "lower95": 16.852523505354718,
+          "upper95": 92.2934320616431,
+          "n": 60,
+          "ci_excludes_zero": true
+        }
+      },
+      "creator_lending_channels": {},
+      "core_domestic_creator_lending_channels": {},
+      "noncore_creator_lending_channels": {},
+      "creator_asset_purchase_channels": {},
+      "funding_accommodation_channels": {},
+      "funding_accommodation_cleanup_candidates": {},
+      "deposit_retention_support_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -6.051493186644944,
+          "se": 14.562904506654425,
+          "lower95": -34.59478601968762,
+          "upper95": 22.491799646397727,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -0.7003132154383085,
+          "se": 1.2009103178726588,
+          "lower95": -3.0540974384687196,
+          "upper95": 1.6534710075921026,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_escape_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 38.11141757510377,
+          "se": 9.926775458602927,
+          "lower95": 18.65493767624203,
+          "upper95": 57.56789747396552,
+          "n": 64,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {},
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "funding_accommodation_unresolved"
+      },
+      "escape_support_context": {
+        "channels": {
+          "domestic_nonfinancial_mmf_reallocation_qoq": {
+            "beta": -6.051493186644944,
+            "se": 14.562904506654425,
+            "lower95": -34.59478601968762,
+            "upper95": 22.491799646397727,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "domestic_nonfinancial_repo_reallocation_qoq": {
+            "beta": -0.7003132154383085,
+            "se": 1.2009103178726588,
+            "lower95": -3.0540974384687196,
+            "upper95": 1.6534710075921026,
+            "n": 64,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "escape_support_unresolved"
+      },
+      "asset_purchase_plumbing_context": {
+        "channels": {
+          "cb_nonts_qoq": {
+            "beta": 109.21565891280892,
+            "se": 89.44754513553232,
+            "lower95": -66.10152955283442,
+            "upper95": 284.5328473784523,
+            "n": 64,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "treasury_drain_signal": false,
+        "reserve_support_signal": false,
+        "interpretation": "no_decisive_asset_purchase_creator_signal"
+      },
+      "decisive_positive_creator_channels": [],
+      "decisive_negative_creator_channels": [],
+      "decisive_positive_core_creator_channels": [],
+      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_noncore_creator_channels": [],
+      "decisive_negative_noncore_creator_channels": [],
+      "decisive_positive_asset_purchase_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_retention_support_channels": [],
+      "decisive_negative_retention_support_channels": [],
+      "decisive_positive_external_escape_channels": [
+        "foreign_nonts_qoq"
+      ],
+      "decisive_negative_external_escape_channels": [],
+      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_funding_accommodation_channels": [],
+      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "uncovered_channel_families": [
+        "within_bank_deposit_substitution_across_holders_or_products",
+        "omitted_bank_asset_side_channels_outside_private_credit",
+        "domestic_public_sector_and_wholesale_deposit_channels",
+        "additional_cash_management_channels_outside_mmf_and_repo"
+      ]
+    },
+    "h8": {
+      "tdc": {
+        "beta": 347.6946386730543,
+        "se": 270.7611316749685,
+        "lower95": 21.075804641888197,
+        "upper95": 971.367561901552,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 114.22386198654392,
+        "se": 248.53089249335375,
+        "lower95": -230.74012129989265,
+        "upper95": 685.5523861147914,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "other_component": {
+        "beta": -233.4707766865104,
+        "se": 130.44794059486154,
+        "lower95": -529.4765352545235,
+        "upper95": -30.381588860860656,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "legacy_private_credit_proxy": {
+        "role": "coarse_legacy_creator_proxy",
+        "snapshot": {
+          "beta": 79.6870552422084,
+          "se": 30.0419239929606,
+          "lower95": 20.804884216005625,
+          "upper95": 138.56922626841117,
+          "n": 56,
+          "ci_excludes_zero": true
+        }
+      },
+      "creator_lending_channels": {},
+      "core_domestic_creator_lending_channels": {},
+      "noncore_creator_lending_channels": {},
+      "creator_asset_purchase_channels": {},
+      "funding_accommodation_channels": {},
+      "funding_accommodation_cleanup_candidates": {},
+      "deposit_retention_support_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -28.06167360138172,
+          "se": 21.060724923948644,
+          "lower95": -69.34069445232106,
+          "upper95": 13.21734724955762,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -2.099738160365989,
+          "se": 1.607468321927399,
+          "lower95": -5.250376071343691,
+          "upper95": 1.0508997506117137,
+          "n": 60,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_escape_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 31.305272756279713,
+          "se": 13.00063006617244,
+          "lower95": 5.82403782658173,
+          "upper95": 56.786507685977696,
+          "n": 60,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {},
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "funding_accommodation_unresolved"
+      },
+      "escape_support_context": {
+        "channels": {
+          "domestic_nonfinancial_mmf_reallocation_qoq": {
+            "beta": -28.06167360138172,
+            "se": 21.060724923948644,
+            "lower95": -69.34069445232106,
+            "upper95": 13.21734724955762,
+            "n": 60,
+            "ci_excludes_zero": false
+          },
+          "domestic_nonfinancial_repo_reallocation_qoq": {
+            "beta": -2.099738160365989,
+            "se": 1.607468321927399,
+            "lower95": -5.250376071343691,
+            "upper95": 1.0508997506117137,
+            "n": 60,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "escape_support_unresolved"
+      },
+      "asset_purchase_plumbing_context": {
+        "channels": {
+          "cb_nonts_qoq": {
+            "beta": 25.151068626318896,
+            "se": 94.31939068681434,
+            "lower95": -159.7149371198372,
+            "upper95": 210.017074372475,
+            "n": 60,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "treasury_drain_signal": false,
+        "reserve_support_signal": false,
+        "interpretation": "no_decisive_asset_purchase_creator_signal"
+      },
+      "decisive_positive_creator_channels": [],
+      "decisive_negative_creator_channels": [],
+      "decisive_positive_core_creator_channels": [],
+      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_noncore_creator_channels": [],
+      "decisive_negative_noncore_creator_channels": [],
+      "decisive_positive_asset_purchase_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_retention_support_channels": [],
+      "decisive_negative_retention_support_channels": [],
+      "decisive_positive_external_escape_channels": [
+        "foreign_nonts_qoq"
+      ],
+      "decisive_negative_external_escape_channels": [],
+      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_funding_accommodation_channels": [],
+      "proxy_coverage_label": null,
+      "uncovered_channel_families": [
+        "within_bank_deposit_substitution_across_holders_or_products",
+        "omitted_bank_asset_side_channels_outside_private_credit",
+        "domestic_public_sector_and_wholesale_deposit_channels",
+        "additional_cash_management_channels_outside_mmf_and_repo"
+      ]
+    }
+  },
+  "key_horizons": {
+    "h0": {
+      "tdc": {
+        "beta": 128.49398892100783,
+        "se": 35.018290469572285,
+        "lower95": 119.41873548043742,
+        "upper95": 248.5482159371078,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 55.75033524806063,
+        "se": 40.86113535471181,
+        "lower95": 8.738139880568623,
+        "upper95": 168.6573860829989,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "other_component": {
+        "beta": -72.74365367294723,
+        "se": 42.946700439267694,
+        "lower95": -170.48932979728906,
+        "upper95": -1.8809331488254672,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "legacy_private_credit_proxy": {
+        "role": "coarse_legacy_creator_proxy",
+        "snapshot": {
+          "beta": 14.021813174704516,
+          "se": 13.4008997593926,
+          "lower95": -12.243950353704982,
+          "upper95": 40.28757670311401,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_lending_channels": {},
+      "core_domestic_creator_lending_channels": {},
+      "noncore_creator_lending_channels": {},
+      "creator_asset_purchase_channels": {},
+      "funding_accommodation_channels": {},
+      "funding_accommodation_cleanup_candidates": {},
+      "deposit_retention_support_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -14.977538562329684,
+          "se": 11.828190798252104,
+          "lower95": -38.160792526903805,
+          "upper95": 8.20571540224444,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": 0.0287923822070103,
+          "se": 0.7154641657141337,
+          "lower95": -1.3735173825926918,
+          "upper95": 1.4311021470067122,
+          "n": 68,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_escape_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 27.0343911579461,
+          "se": 13.111973747146076,
+          "lower95": 1.334922613539792,
+          "upper95": 52.7338597023524,
+          "n": 68,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {},
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "funding_accommodation_unresolved"
+      },
+      "escape_support_context": {
+        "channels": {
+          "domestic_nonfinancial_mmf_reallocation_qoq": {
+            "beta": -14.977538562329684,
+            "se": 11.828190798252104,
+            "lower95": -38.160792526903805,
+            "upper95": 8.20571540224444,
+            "n": 68,
+            "ci_excludes_zero": false
+          },
+          "domestic_nonfinancial_repo_reallocation_qoq": {
+            "beta": 0.0287923822070103,
+            "se": 0.7154641657141337,
+            "lower95": -1.3735173825926918,
+            "upper95": 1.4311021470067122,
+            "n": 68,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "escape_support_unresolved"
+      },
+      "asset_purchase_plumbing_context": {
+        "channels": {
+          "cb_nonts_qoq": {
+            "beta": 26.523641651135975,
+            "se": 14.452809474715338,
+            "lower95": -1.8038649193060865,
+            "upper95": 54.85114822157803,
+            "n": 68,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "treasury_drain_signal": false,
+        "reserve_support_signal": false,
+        "interpretation": "no_decisive_asset_purchase_creator_signal"
+      },
+      "decisive_positive_creator_channels": [],
+      "decisive_negative_creator_channels": [],
+      "decisive_positive_core_creator_channels": [],
+      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_noncore_creator_channels": [],
+      "decisive_negative_noncore_creator_channels": [],
+      "decisive_positive_asset_purchase_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_retention_support_channels": [],
+      "decisive_negative_retention_support_channels": [],
+      "decisive_positive_external_escape_channels": [
+        "foreign_nonts_qoq"
+      ],
+      "decisive_negative_external_escape_channels": [],
+      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_funding_accommodation_channels": [],
+      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "uncovered_channel_families": [
+        "within_bank_deposit_substitution_across_holders_or_products",
+        "omitted_bank_asset_side_channels_outside_private_credit",
+        "domestic_public_sector_and_wholesale_deposit_channels",
+        "additional_cash_management_channels_outside_mmf_and_repo"
+      ]
+    },
+    "h4": {
+      "tdc": {
+        "beta": 278.13971316628357,
+        "se": 141.57570011679425,
+        "lower95": 78.32278678356286,
+        "upper95": 597.5909020053358,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 167.33069747889854,
+        "se": 154.8910510638327,
+        "lower95": -27.18884889021173,
+        "upper95": 550.7057101571328,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "other_component": {
+        "beta": -110.80901568738504,
+        "se": 84.23711570896954,
+        "lower95": -242.41233479835057,
+        "upper95": 62.23408515351409,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "legacy_private_credit_proxy": {
+        "role": "coarse_legacy_creator_proxy",
+        "snapshot": {
+          "beta": 54.572977783498914,
+          "se": 19.24512973374704,
+          "lower95": 16.852523505354718,
+          "upper95": 92.2934320616431,
+          "n": 60,
+          "ci_excludes_zero": true
+        }
+      },
+      "creator_lending_channels": {},
+      "core_domestic_creator_lending_channels": {},
+      "noncore_creator_lending_channels": {},
+      "creator_asset_purchase_channels": {},
+      "funding_accommodation_channels": {},
+      "funding_accommodation_cleanup_candidates": {},
+      "deposit_retention_support_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -6.051493186644944,
+          "se": 14.562904506654425,
+          "lower95": -34.59478601968762,
+          "upper95": 22.491799646397727,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -0.7003132154383085,
+          "se": 1.2009103178726588,
+          "lower95": -3.0540974384687196,
+          "upper95": 1.6534710075921026,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_escape_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 38.11141757510377,
+          "se": 9.926775458602927,
+          "lower95": 18.65493767624203,
+          "upper95": 57.56789747396552,
+          "n": 64,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {},
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "funding_accommodation_unresolved"
+      },
+      "escape_support_context": {
+        "channels": {
+          "domestic_nonfinancial_mmf_reallocation_qoq": {
+            "beta": -6.051493186644944,
+            "se": 14.562904506654425,
+            "lower95": -34.59478601968762,
+            "upper95": 22.491799646397727,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "domestic_nonfinancial_repo_reallocation_qoq": {
+            "beta": -0.7003132154383085,
+            "se": 1.2009103178726588,
+            "lower95": -3.0540974384687196,
+            "upper95": 1.6534710075921026,
+            "n": 64,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "escape_support_unresolved"
+      },
+      "asset_purchase_plumbing_context": {
+        "channels": {
+          "cb_nonts_qoq": {
+            "beta": 109.21565891280892,
+            "se": 89.44754513553232,
+            "lower95": -66.10152955283442,
+            "upper95": 284.5328473784523,
+            "n": 64,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "treasury_drain_signal": false,
+        "reserve_support_signal": false,
+        "interpretation": "no_decisive_asset_purchase_creator_signal"
+      },
+      "decisive_positive_creator_channels": [],
+      "decisive_negative_creator_channels": [],
+      "decisive_positive_core_creator_channels": [],
+      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_noncore_creator_channels": [],
+      "decisive_negative_noncore_creator_channels": [],
+      "decisive_positive_asset_purchase_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_retention_support_channels": [],
+      "decisive_negative_retention_support_channels": [],
+      "decisive_positive_external_escape_channels": [
+        "foreign_nonts_qoq"
+      ],
+      "decisive_negative_external_escape_channels": [],
+      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_funding_accommodation_channels": [],
+      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "uncovered_channel_families": [
+        "within_bank_deposit_substitution_across_holders_or_products",
+        "omitted_bank_asset_side_channels_outside_private_credit",
+        "domestic_public_sector_and_wholesale_deposit_channels",
+        "additional_cash_management_channels_outside_mmf_and_repo"
+      ]
+    },
+    "h8": {
+      "tdc": {
+        "beta": 347.6946386730543,
+        "se": 270.7611316749685,
+        "lower95": 21.075804641888197,
+        "upper95": 971.367561901552,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "total": {
+        "beta": 114.22386198654392,
+        "se": 248.53089249335375,
+        "lower95": -230.74012129989265,
+        "upper95": 685.5523861147914,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "other_component": {
+        "beta": -233.4707766865104,
+        "se": 130.44794059486154,
+        "lower95": -529.4765352545235,
+        "upper95": -30.381588860860656,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "legacy_private_credit_proxy": {
+        "role": "coarse_legacy_creator_proxy",
+        "snapshot": {
+          "beta": 79.6870552422084,
+          "se": 30.0419239929606,
+          "lower95": 20.804884216005625,
+          "upper95": 138.56922626841117,
+          "n": 56,
+          "ci_excludes_zero": true
+        }
+      },
+      "creator_lending_channels": {},
+      "core_domestic_creator_lending_channels": {},
+      "noncore_creator_lending_channels": {},
+      "creator_asset_purchase_channels": {},
+      "funding_accommodation_channels": {},
+      "funding_accommodation_cleanup_candidates": {},
+      "deposit_retention_support_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -28.06167360138172,
+          "se": 21.060724923948644,
+          "lower95": -69.34069445232106,
+          "upper95": 13.21734724955762,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -2.099738160365989,
+          "se": 1.607468321927399,
+          "lower95": -5.250376071343691,
+          "upper95": 1.0508997506117137,
+          "n": 60,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_escape_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 31.305272756279713,
+          "se": 13.00063006617244,
+          "lower95": 5.82403782658173,
+          "upper95": 56.786507685977696,
+          "n": 60,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {},
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "funding_accommodation_unresolved"
+      },
+      "escape_support_context": {
+        "channels": {
+          "domestic_nonfinancial_mmf_reallocation_qoq": {
+            "beta": -28.06167360138172,
+            "se": 21.060724923948644,
+            "lower95": -69.34069445232106,
+            "upper95": 13.21734724955762,
+            "n": 60,
+            "ci_excludes_zero": false
+          },
+          "domestic_nonfinancial_repo_reallocation_qoq": {
+            "beta": -2.099738160365989,
+            "se": 1.607468321927399,
+            "lower95": -5.250376071343691,
+            "upper95": 1.0508997506117137,
+            "n": 60,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "interpretation": "escape_support_unresolved"
+      },
+      "asset_purchase_plumbing_context": {
+        "channels": {
+          "cb_nonts_qoq": {
+            "beta": 25.151068626318896,
+            "se": 94.31939068681434,
+            "lower95": -159.7149371198372,
+            "upper95": 210.017074372475,
+            "n": 60,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [],
+        "treasury_drain_signal": false,
+        "reserve_support_signal": false,
+        "interpretation": "no_decisive_asset_purchase_creator_signal"
+      },
+      "decisive_positive_creator_channels": [],
+      "decisive_negative_creator_channels": [],
+      "decisive_positive_core_creator_channels": [],
+      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_noncore_creator_channels": [],
+      "decisive_negative_noncore_creator_channels": [],
+      "decisive_positive_asset_purchase_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_retention_support_channels": [],
+      "decisive_negative_retention_support_channels": [],
+      "decisive_positive_external_escape_channels": [
+        "foreign_nonts_qoq"
+      ],
+      "decisive_negative_external_escape_channels": [],
+      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_funding_accommodation_channels": [],
+      "proxy_coverage_label": null,
+      "uncovered_channel_families": [
+        "within_bank_deposit_substitution_across_holders_or_products",
+        "omitted_bank_asset_side_channels_outside_private_credit",
+        "domestic_public_sector_and_wholesale_deposit_channels",
+        "additional_cash_management_channels_outside_mmf_and_repo"
+      ]
+    }
+  },
+  "takeaways": [
+    "This scorecard reframes the non-TDC question around counterpart creator channels rather than deposit types.",
+    "No creator-channel LP outcomes are materialized yet."
+  ]
+}

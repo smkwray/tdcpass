@@ -156,14 +156,21 @@ def _summarize_rows(
 def build_structural_proxy_evidence(
     *,
     lp_irf: pd.DataFrame,
+    identity_lp_irf: pd.DataFrame | None = None,
     horizons: tuple[int, ...] = (0, 4, 8),
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
+    primary_lp_irf = identity_lp_irf if identity_lp_irf is not None and not identity_lp_irf.empty else lp_irf
+    primary_decomposition_mode = (
+        "exact_identity_baseline"
+        if identity_lp_irf is not None and not identity_lp_irf.empty
+        else "approximate_dynamic_decomposition"
+    )
     rows: list[dict[str, Any]] = []
     summary_horizons: dict[str, Any] = {}
     for horizon in horizons:
-        context_rows = _rows_for_context(df=lp_irf, scope="baseline", context="baseline", horizon=horizon)
+        context_rows = _rows_for_context(df=primary_lp_irf, scope="baseline", context="baseline", horizon=horizon)
         rows.extend(context_rows)
-        other_snapshot = _snapshot(_lp_row(lp_irf, outcome="other_component_qoq", horizon=horizon))
+        other_snapshot = _snapshot(_lp_row(primary_lp_irf, outcome="other_component_qoq", horizon=horizon))
         summary_horizons[f"h{horizon}"] = {
             **_summarize_rows(context_rows, other_snapshot=other_snapshot),
             "proxy_rows": [
@@ -223,6 +230,13 @@ def build_structural_proxy_evidence(
     frame = pd.DataFrame(rows)
     return frame, {
         "status": status,
+        "estimation_path": {
+            "primary_decomposition_mode": primary_decomposition_mode,
+            "primary_artifact": "lp_irf_identity_baseline.csv"
+            if primary_decomposition_mode == "exact_identity_baseline"
+            else "lp_irf.csv",
+            "secondary_artifact": "lp_irf.csv" if primary_decomposition_mode == "exact_identity_baseline" else None,
+        },
         "headline_question": "Do structural proxies corroborate the direction of the non-TDC residual after an unexpected TDC shock?",
         "key_horizons": key_horizons,
         "takeaways": takeaways,

@@ -37,3 +37,23 @@ def test_structural_proxy_evidence_summarizes_key_horizons() -> None:
     assert summary["key_horizons"]["h0"]["decisive_concordant_proxy_count"] == 1
     assert summary["key_horizons"]["h0"]["decisive_discordant_proxy_count"] == 1
     assert summary["key_horizons"]["h4"]["interpretation"] == "other_component_not_decisive"
+
+
+def test_structural_proxy_evidence_prefers_exact_identity_baseline_when_available() -> None:
+    approx_lp = pd.DataFrame(
+        [
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": 5.0, "se": 0.6, "lower95": 3.824, "upper95": 6.176, "n": 40},
+            {"outcome": "foreign_nonts_qoq", "horizon": 0, "beta": 0.5, "se": 0.2, "lower95": 0.108, "upper95": 0.892, "n": 40},
+        ]
+    )
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -2.0, "se": 0.6, "lower95": -3.176, "upper95": -0.824, "n": 38},
+            {"outcome": "foreign_nonts_qoq", "horizon": 0, "beta": 0.5, "se": 0.2, "lower95": 0.108, "upper95": 0.892, "n": 40},
+        ]
+    )
+
+    _, summary = build_structural_proxy_evidence(lp_irf=approx_lp, identity_lp_irf=identity_lp, horizons=(0,))
+
+    assert summary["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
+    assert summary["key_horizons"]["h0"]["other_component"]["beta"] == -2.0

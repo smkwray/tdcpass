@@ -284,4 +284,73 @@ def test_direct_identification_prefers_exact_identity_baseline_when_available() 
     assert payload["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
     assert payload["estimation_path"]["approximate_dynamic_robustness"]["status"] == "divergent_secondary_check"
     assert payload["horizon_evidence"]["h0"]["tdc"]["beta"] == 1.5
+
+
+def test_direct_identification_prefers_exact_sample_sensitivity_when_available() -> None:
+    identity_lp = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.5, "se": 0.2, "lower95": 1.1, "upper95": 1.9, "n": 38},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.7, "se": 0.2, "lower95": -1.1, "upper95": -0.3, "n": 38},
+        ]
+    )
+    contrast = build_total_minus_other_contrast(
+        lp_irf=pd.DataFrame(columns=identity_lp.columns),
+        identity_lp_irf=identity_lp,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+        identity_check_mode="approximate_with_outcome_specific_lags",
+    )
+    payload = build_direct_identification_summary(
+        lp_irf=pd.DataFrame(columns=identity_lp.columns),
+        identity_lp_irf=identity_lp,
+        contrast=contrast,
+        sample_sensitivity=pd.DataFrame(
+            [{"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 99.0, "se": 1.0, "lower95": 97.0, "upper95": 101.0, "n": 30}]
+        ),
+        identity_sample_sensitivity=pd.DataFrame(
+            [{"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 0.8, "se": 0.2, "lower95": 0.4, "upper95": 1.2, "n": 38}]
+        ),
+    )
+
+    assert payload["estimation_path"]["sample_variant_artifact"] == "identity_sample_sensitivity.csv"
     assert not any("exact identity-preserving baseline is primary" in item for item in payload["warnings"])
+
+
+def test_direct_identification_prefers_identity_sample_sensitivity_when_available() -> None:
+    lp_irf = pd.DataFrame(
+        [
+            {"outcome": "tdc_bank_only_qoq", "horizon": 0, "beta": 1.2, "se": 0.2, "lower95": 0.8, "upper95": 1.6, "n": 40},
+            {"outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.2, "lower95": 0.6, "upper95": 1.4, "n": 40},
+            {"outcome": "other_component_qoq", "horizon": 0, "beta": -0.2, "se": 0.2, "lower95": -0.6, "upper95": 0.2, "n": 40},
+        ]
+    )
+    contrast = build_total_minus_other_contrast(
+        lp_irf=lp_irf,
+        sensitivity=pd.DataFrame(),
+        control_sensitivity=pd.DataFrame(),
+        sample_sensitivity=pd.DataFrame(),
+    )
+    sample_sensitivity = pd.DataFrame(
+        [
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.2, "lower95": 0.6, "upper95": 1.4, "n": 40},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 3.2, "se": 0.3, "lower95": 2.6, "upper95": 3.8, "n": 38},
+        ]
+    )
+    identity_sample_sensitivity = pd.DataFrame(
+        [
+            {"sample_variant": "all_usable_shocks", "sample_role": "headline", "sample_filter": "all_usable_shocks", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.0, "se": 0.2, "lower95": 0.6, "upper95": 1.4, "n": 40},
+            {"sample_variant": "drop_flagged_shocks", "sample_role": "exploratory", "sample_filter": "shock_flag==''", "outcome": "total_deposits_bank_qoq", "horizon": 0, "beta": 1.2, "se": 0.2, "lower95": 0.8, "upper95": 1.6, "n": 38},
+        ]
+    )
+
+    payload = build_direct_identification_summary(
+        lp_irf=lp_irf,
+        contrast=contrast,
+        sample_sensitivity=sample_sensitivity,
+        identity_sample_sensitivity=identity_sample_sensitivity,
+    )
+
+    assert payload["estimation_path"]["sample_variant_artifact"] == "identity_sample_sensitivity.csv"
+    assert payload["sample_fragility"]["impact_magnitude_shift_gt_100pct"] is False

@@ -15,6 +15,7 @@ import requests
 from tdcpass.core.paths import ensure_repo_dirs, repo_root
 from tdcpass.core.yaml_utils import load_yaml
 from tdcpass.data.fetchers.fiscaldata import fetch_fiscaldata_endpoint
+from tdcpass.data.fetchers.fred import fetch_fred_observations
 from tdcpass.data.fetchers.http import DEFAULT_TIMEOUT, download_file
 from tdcpass.data.fetchers.raw_manifest import utc_now_iso, write_raw_download_manifest
 from tdcpass.data.sibling_cache import build_cache_reuse_provenance
@@ -27,6 +28,28 @@ FRED_SERIES = {
     "reserves_level": "WRESBAL",
     "bank_credit_level": "TOTBKCR",
     "treasury_agency_level": "TNMACBW027SBOG",
+    "on_rrp_level": "RRPONTSYD",
+    "currency_component_level": "CURRNS",
+    "commercial_bank_borrowings_level": "H8B3094NCBA",
+    "fed_borrowings_depository_institutions_level": "BORROW",
+    "commercial_industrial_loans_level": "TOTCINSA",
+    "construction_land_development_loans_level": "CLDACBW027SBOG",
+    "cre_multifamily_loans_level": "SMPACBW027SBOG",
+    "cre_nonfarm_nonresidential_loans_level": "SNFACBW027SBOG",
+    "consumer_loans_level": "CLSACBW027SBOG",
+    "credit_card_revolving_loans_level": "CCLACBW027SBOG",
+    "auto_loans_level": "CARACBW027SBOG",
+    "other_consumer_loans_level": "OCLACBW027SBOG",
+    "heloc_loans_level": "RHEACBW027SBOG",
+    "closed_end_residential_loans_level": "CRLACBW027SBOG",
+    "loans_to_commercial_banks_level": "LCBACBW027SBOG",
+    "loans_to_nondepository_financial_institutions_level": "LNFACBW027SBOG",
+    "loans_for_purchasing_or_carrying_securities_level": "BOGZ1FL763067003Q",
+    "commercial_industrial_chargeoff_rate": "CORBLACBS",
+    "consumer_chargeoff_rate": "CORCACBS",
+    "credit_card_revolving_chargeoff_rate": "CORCCACBS",
+    "other_consumer_chargeoff_rate": "COROCLACBS",
+    "closed_end_residential_chargeoff_rate": "CORSFRMACBS",
     "fedfunds": "FEDFUNDS",
     "unemployment": "UNRATE",
     "cpi": "CPIAUCSL",
@@ -36,15 +59,139 @@ FRED_LEVEL_DIVISORS = {
     "reserves_level": 1000.0,
     "bank_credit_level": 1.0,
     "treasury_agency_level": 1.0,
+    "on_rrp_level": 1000.0,
+    "currency_component_level": 1.0,
+    "commercial_bank_borrowings_level": 1000.0,
+    "fed_borrowings_depository_institutions_level": 1000.0,
+    "commercial_industrial_loans_level": 1.0,
+    "construction_land_development_loans_level": 1.0,
+    "cre_multifamily_loans_level": 1.0,
+    "cre_nonfarm_nonresidential_loans_level": 1.0,
+    "consumer_loans_level": 1.0,
+    "credit_card_revolving_loans_level": 1.0,
+    "auto_loans_level": 1.0,
+    "other_consumer_loans_level": 1.0,
+    "heloc_loans_level": 1.0,
+    "closed_end_residential_loans_level": 1.0,
+    "loans_to_commercial_banks_level": 1.0,
+    "loans_to_nondepository_financial_institutions_level": 1.0,
+    "loans_for_purchasing_or_carrying_securities_level": 1000.0,
+}
+CORE_CREATOR_LENDING_FRED_KEYS = {
+    "commercial_industrial_loans_qoq": "commercial_industrial_loans_level",
+    "construction_land_development_loans_qoq": "construction_land_development_loans_level",
+    "cre_multifamily_loans_qoq": "cre_multifamily_loans_level",
+    "cre_nonfarm_nonresidential_loans_qoq": "cre_nonfarm_nonresidential_loans_level",
+    "consumer_loans_qoq": "consumer_loans_level",
+    "credit_card_revolving_loans_qoq": "credit_card_revolving_loans_level",
+    "auto_loans_qoq": "auto_loans_level",
+    "other_consumer_loans_qoq": "other_consumer_loans_level",
+    "heloc_loans_qoq": "heloc_loans_level",
+    "closed_end_residential_loans_qoq": "closed_end_residential_loans_level",
+}
+NONCORE_CREATOR_LENDING_FRED_KEYS = {
+    "loans_to_commercial_banks_qoq": "loans_to_commercial_banks_level",
+    "loans_to_nondepository_financial_institutions_qoq": "loans_to_nondepository_financial_institutions_level",
+    "loans_for_purchasing_or_carrying_securities_qoq": "loans_for_purchasing_or_carrying_securities_level",
+}
+ASSET_PURCHASE_Z1_KEYS = {
+    "treasury_securities_bank_qoq": "treasury_securities_bank_level",
+    "agency_gse_backed_securities_bank_qoq": "agency_gse_backed_securities_bank_level",
+    "municipal_securities_bank_qoq": "municipal_securities_bank_level",
+    "corporate_foreign_bonds_bank_qoq": "corporate_foreign_bonds_bank_level",
+}
+CHARGEOFF_ADJUSTED_CREATOR_LENDING_KEYS = {
+    "commercial_industrial_loans_ex_chargeoffs_qoq": (
+        "commercial_industrial_loans_level",
+        "commercial_industrial_chargeoff_rate",
+    ),
+    "consumer_loans_ex_chargeoffs_qoq": (
+        "consumer_loans_level",
+        "consumer_chargeoff_rate",
+    ),
+    "credit_card_revolving_loans_ex_chargeoffs_qoq": (
+        "credit_card_revolving_loans_level",
+        "credit_card_revolving_chargeoff_rate",
+    ),
+    "other_consumer_loans_ex_chargeoffs_qoq": (
+        "other_consumer_loans_level",
+        "other_consumer_chargeoff_rate",
+    ),
+    "closed_end_residential_loans_ex_chargeoffs_qoq": (
+        "closed_end_residential_loans_level",
+        "closed_end_residential_chargeoff_rate",
+    ),
+}
+CREATOR_LENDING_FRED_KEYS = {
+    **CORE_CREATOR_LENDING_FRED_KEYS,
+    **NONCORE_CREATOR_LENDING_FRED_KEYS,
+}
+FRED_AVERAGE_KEYS = {
+    "fedfunds",
+    "unemployment",
+    "cpi",
+    "commercial_industrial_chargeoff_rate",
+    "consumer_chargeoff_rate",
+    "credit_card_revolving_chargeoff_rate",
+    "other_consumer_chargeoff_rate",
+    "closed_end_residential_chargeoff_rate",
 }
 Z1_SERIES = {
     "total_deposits_bank_level": "FL764100005",
+    "checkable_deposits_bank_level": "FL763127005",
+    "interbank_transactions_bank_level": "FL764110005",
+    "time_savings_deposits_bank_level": "FL763130005",
+    "checkable_federal_govt_bank_level": "FL763123005",
+    "checkable_state_local_bank_level": "FL763128000",
+    "checkable_rest_of_world_bank_level": "FL763122605",
+    "checkable_private_domestic_bank_level": "FL763129205",
+    "interbank_transactions_foreign_banks_liability_level": "FL764116005",
+    "interbank_transactions_foreign_banks_asset_level": "FL764016005",
+    "deposits_at_foreign_banks_asset_level": "FL764016205",
+    "treasury_securities_bank_level": "LM763061100",
+    "agency_gse_backed_securities_bank_level": "LM763061705",
+    "municipal_securities_bank_level": "LM763062005",
+    "corporate_foreign_bonds_bank_level": "LM763063005",
+    "fedfunds_repo_liabilities_bank_level": "FL762150005",
+    "debt_securities_bank_liability_level": "FL764122005",
+    "fhlb_advances_sallie_mae_loans_bank_level": "FL763169305",
+    "holding_company_parent_funding_bank_level": "FL763194735",
+    "household_treasury_securities_level": "LM153061105",
+    "mmf_treasury_bills_level": "FL633061110",
     "foreign_total_deposits_level": "FL264000005",
     "domestic_nonfinancial_mmf_level": "FL383034005",
     "domestic_nonfinancial_repo_level": "FL382051005",
 }
 Z1_TABLE_MEMBERS = {
     "csv/l201.csv": ("total_deposits_bank_level", "foreign_total_deposits_level"),
+    "csv/l202.csv": (
+        "interbank_transactions_bank_level",
+        "interbank_transactions_foreign_banks_liability_level",
+        "interbank_transactions_foreign_banks_asset_level",
+        "deposits_at_foreign_banks_asset_level",
+    ),
+    "csv/l203.csv": (
+        "checkable_deposits_bank_level",
+        "checkable_federal_govt_bank_level",
+        "checkable_state_local_bank_level",
+        "checkable_rest_of_world_bank_level",
+        "checkable_private_domestic_bank_level",
+    ),
+    "csv/l204.csv": ("time_savings_deposits_bank_level",),
+    "csv/l207.csv": ("fedfunds_repo_liabilities_bank_level",),
+    "csv/l111.csv": (
+        "treasury_securities_bank_level",
+        "agency_gse_backed_securities_bank_level",
+        "municipal_securities_bank_level",
+        "corporate_foreign_bonds_bank_level",
+        "debt_securities_bank_liability_level",
+        "fhlb_advances_sallie_mae_loans_bank_level",
+        "holding_company_parent_funding_bank_level",
+    ),
+    "csv/l210.csv": (
+        "household_treasury_securities_level",
+        "mmf_treasury_bills_level",
+    ),
 }
 TDCEST_BANK_ONLY_METHOD = "tdc_base_bank_only_ru_flow"
 TDCEST_BROAD_DEPOSITORY_METHOD = "tdc_base_broad_depository_np_cu_ru_flow"
@@ -169,8 +316,17 @@ def _download_current_z1_zip(raw_dir: Path, manifest_path: Path, *, timeout: int
 
 def _normalize_z1_levels_frame(frame: pd.DataFrame, series_codes: Mapping[str, str]) -> pd.DataFrame:
     frame = frame.rename(columns=lambda value: str(value).removesuffix(".Q"))
-    selected = ["date", *series_codes.values()]
-    out = frame[selected].rename(columns={code: key for key, code in series_codes.items()})
+    if "date" in frame.columns:
+        out = frame[["date"]].copy()
+    elif "quarter" in frame.columns:
+        out = frame[["quarter"]].copy()
+    else:
+        raise KeyError("Z.1 levels frame must contain either 'date' or 'quarter'.")
+    for key, code in series_codes.items():
+        if code in frame.columns:
+            out[key] = frame[code]
+        else:
+            out[key] = pd.NA
     return _finalize_z1_levels_frame(out, series_codes.keys())
 
 
@@ -193,15 +349,17 @@ def _read_z1_levels(zip_path: Path, series_codes: Mapping[str, str]) -> pd.DataF
         if missing_members:
             with archive.open("csv/all_sectors_levels_q.csv") as handle:
                 frame = pd.read_csv(handle)
-            out = _normalize_z1_levels_frame(frame, series_codes)
+            return _normalize_z1_levels_frame(frame, series_codes)
         else:
             for member_name, keys in Z1_TABLE_MEMBERS.items():
                 with archive.open(member_name) as handle:
                     frame = pd.read_csv(handle)
                 frame = frame.rename(columns=lambda value: str(value).removesuffix(".Q"))
-                selected = ["date", *[series_codes[key] for key in keys]]
-                frame = frame[selected].rename(columns={series_codes[key]: key for key in keys})
-                frames.append(frame)
+                shaped = frame[["date"]].copy()
+                for key in keys:
+                    source_column = series_codes[key]
+                    shaped[key] = frame[source_column] if source_column in frame.columns else pd.NA
+                frames.append(shaped)
             out = frames[0]
             for frame in frames[1:]:
                 out = out.merge(frame, on="date", how="outer")
@@ -210,9 +368,10 @@ def _read_z1_levels(zip_path: Path, series_codes: Mapping[str, str]) -> pd.DataF
                 with archive.open("csv/all_sectors_levels_q.csv") as handle:
                     all_sectors = pd.read_csv(handle)
                 all_sectors = all_sectors.rename(columns=lambda value: str(value).removesuffix(".Q"))
-                supplement = all_sectors[["date", *[series_codes[key] for key in missing_keys]]].rename(
-                    columns={series_codes[key]: key for key in missing_keys}
-                )
+                supplement = all_sectors[["date"]].copy()
+                for key in missing_keys:
+                    source_column = series_codes[key]
+                    supplement[key] = all_sectors[source_column] if source_column in all_sectors.columns else pd.NA
                 out = out.merge(supplement, on="date", how="left")
 
     return _finalize_z1_levels_frame(out, series_codes.keys())
@@ -224,6 +383,29 @@ def _read_z1_levels_from_csv(path: Path, series_codes: Mapping[str, str]) -> pd.
 
 def _download_fred_csv(series_id: str, raw_dir: Path, manifest_path: Path, *, timeout: int = DEFAULT_TIMEOUT) -> Path:
     destination = raw_dir / "fred" / f"{series_id}.csv"
+    api_key = os.getenv("FRED_API_KEY")
+    if api_key:
+        try:
+            api_frame = fetch_fred_observations(series_id, api_key=api_key)
+        except requests.RequestException:
+            api_frame = pd.DataFrame()
+        if not api_frame.empty:
+            api_export = pd.DataFrame(
+                {
+                    "DATE": api_frame["date"],
+                    series_id: pd.to_numeric(api_frame["value"], errors="coerce"),
+                }
+            )
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            api_export.to_csv(destination, index=False)
+            _append_raw_manifest(
+                manifest_path,
+                source_key="fred_api",
+                source_url="https://api.stlouisfed.org/fred/series/observations",
+                params={"series_id": series_id, "api_key_present": True, "file_type": "json"},
+                file_path=destination,
+            )
+            return destination
     url = f"{FRED_GRAPH_URL}?id={series_id}"
     download_file(url, destination, timeout=timeout)
     _append_raw_manifest(
@@ -308,6 +490,16 @@ def _quarter_average_level(series: pd.Series) -> pd.Series:
 
 def _qoq_change(levels: pd.Series) -> pd.Series:
     return levels.astype(float).diff().round(12)
+
+
+def _approximate_chargeoff_flow(levels: pd.Series, annualized_rate: pd.Series) -> pd.Series:
+    lagged_levels = levels.astype(float).shift(1)
+    aligned_rate = annualized_rate.astype(float).reindex(lagged_levels.index)
+    return (lagged_levels * aligned_rate / 400.0).round(12)
+
+
+def _chargeoff_adjusted_qoq(levels: pd.Series, annualized_rate: pd.Series) -> pd.Series:
+    return (_qoq_change(levels) + _approximate_chargeoff_flow(levels, annualized_rate)).round(12)
 
 
 def _align_quarter_series(series: pd.Series, quarters: pd.Series) -> pd.Series:
@@ -464,7 +656,13 @@ def _write_proxy_unit_audit(
     panel: pd.DataFrame,
 ) -> Path:
     source_series = []
-    for key in ("bank_credit_level", "treasury_agency_level", "tga_level", "reserves_level"):
+    for key in (
+        "bank_credit_level",
+        "treasury_agency_level",
+        "tga_level",
+        "reserves_level",
+        *CREATOR_LENDING_FRED_KEYS.values(),
+    ):
         raw = fred_levels_raw[key].dropna()
         scaled = fred_levels_scaled[key].dropna()
         source_series.append(
@@ -500,14 +698,50 @@ def _write_proxy_unit_audit(
             }
         )
 
+    creator_channels = []
+    for channel_name in (*CREATOR_LENDING_FRED_KEYS.keys(), *ASSET_PURCHASE_Z1_KEYS.keys()):
+        series = panel[["quarter", channel_name]].dropna()
+        creator_channels.append(
+            {
+                "channel": channel_name,
+                "units": "billions_usd",
+                "start_quarter": None if series.empty else str(series["quarter"].iloc[0]),
+                "end_quarter": None if series.empty else str(series["quarter"].iloc[-1]),
+                "non_missing_obs": int(len(series)),
+                "median_abs_qoq": None if series.empty else float(series[channel_name].abs().median()),
+            }
+        )
+
+    creator_channel_adjustments = []
+    for channel_name, (level_key, rate_key) in CHARGEOFF_ADJUSTED_CREATOR_LENDING_KEYS.items():
+        series = panel[["quarter", channel_name]].dropna()
+        creator_channel_adjustments.append(
+            {
+                "channel": channel_name,
+                "construction": "raw_qoq_plus_lagged_balance_times_annualized_chargeoff_rate_div_400",
+                "base_level_series_id": FRED_SERIES[level_key],
+                "chargeoff_rate_series_id": FRED_SERIES[rate_key],
+                "units": "billions_usd",
+                "start_quarter": None if series.empty else str(series["quarter"].iloc[0]),
+                "end_quarter": None if series.empty else str(series["quarter"].iloc[-1]),
+                "non_missing_obs": int(len(series)),
+                "median_abs_qoq": None if series.empty else float(series[channel_name].abs().median()),
+            }
+        )
+
     takeaways = [
         "FRED level series are now scaled with an explicit per-series divisor rather than a blanket /1000 rule.",
         "TOTBKCR and TNMACBW027SBOG are treated as already being in billions_usd, while WTREGEN and WRESBAL are converted from millions_usd to billions_usd.",
+        "The creator-lane lending series are H.8/FRED balance levels quarterlyized by taking the last observation in each quarter and then differencing q/q, except for the securities-purpose lane that comes from quarterly Z.1 levels.",
+        "The first asset-purchase creator lanes come from quarterly Z.1 L.111 holdings for Treasury, agency/GSE-backed, municipal, and corporate/foreign bond assets.",
+        "Charge-off-adjusted creator lanes add back an approximate quarterly destruction flow computed from lagged balances and official annualized charge-off rates.",
     ]
     payload = {
         "status": "ok",
         "source_series": source_series,
         "derived_proxies": derived_proxies,
+        "creator_channels": creator_channels,
+        "creator_channel_adjustments": creator_channel_adjustments,
         "takeaways": takeaways,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -661,6 +895,38 @@ def build_public_quarterly_panel(
         {
             "quarter": z1_levels["quarter"],
             "total_deposits_bank_qoq": _qoq_change(z1_levels["total_deposits_bank_level"]),
+            "checkable_deposits_bank_qoq": _qoq_change(z1_levels["checkable_deposits_bank_level"]),
+            "interbank_transactions_bank_qoq": _qoq_change(z1_levels["interbank_transactions_bank_level"]),
+            "time_savings_deposits_bank_qoq": _qoq_change(z1_levels["time_savings_deposits_bank_level"]),
+            "checkable_federal_govt_bank_qoq": _qoq_change(z1_levels["checkable_federal_govt_bank_level"]),
+            "checkable_state_local_bank_qoq": _qoq_change(z1_levels["checkable_state_local_bank_level"]),
+            "checkable_rest_of_world_bank_qoq": _qoq_change(z1_levels["checkable_rest_of_world_bank_level"]),
+            "checkable_private_domestic_bank_qoq": _qoq_change(z1_levels["checkable_private_domestic_bank_level"]),
+            "interbank_transactions_foreign_banks_liability_qoq": _qoq_change(
+                z1_levels["interbank_transactions_foreign_banks_liability_level"]
+            ),
+            "interbank_transactions_foreign_banks_asset_qoq": _qoq_change(
+                z1_levels["interbank_transactions_foreign_banks_asset_level"]
+            ),
+            "deposits_at_foreign_banks_asset_qoq": _qoq_change(
+                z1_levels["deposits_at_foreign_banks_asset_level"]
+            ),
+            "treasury_securities_bank_qoq": _qoq_change(z1_levels["treasury_securities_bank_level"]),
+            "agency_gse_backed_securities_bank_qoq": _qoq_change(z1_levels["agency_gse_backed_securities_bank_level"]),
+            "municipal_securities_bank_qoq": _qoq_change(z1_levels["municipal_securities_bank_level"]),
+            "corporate_foreign_bonds_bank_qoq": _qoq_change(z1_levels["corporate_foreign_bonds_bank_level"]),
+            "fedfunds_repo_liabilities_bank_qoq": _qoq_change(z1_levels["fedfunds_repo_liabilities_bank_level"]),
+            "debt_securities_bank_liability_qoq": _qoq_change(z1_levels["debt_securities_bank_liability_level"]),
+            "fhlb_advances_sallie_mae_loans_bank_qoq": _qoq_change(
+                z1_levels["fhlb_advances_sallie_mae_loans_bank_level"]
+            ),
+            "holding_company_parent_funding_bank_qoq": _qoq_change(
+                z1_levels["holding_company_parent_funding_bank_level"]
+            ),
+            "household_treasury_securities_reallocation_qoq": -_qoq_change(
+                z1_levels["household_treasury_securities_level"]
+            ),
+            "mmf_treasury_bills_reallocation_qoq": -_qoq_change(z1_levels["mmf_treasury_bills_level"]),
             "foreign_nonts_qoq": _qoq_change(z1_levels["foreign_total_deposits_level"]),
             "domestic_nonfinancial_mmf_reallocation_qoq": -_qoq_change(z1_levels["domestic_nonfinancial_mmf_level"]),
             "domestic_nonfinancial_repo_reallocation_qoq": -_qoq_change(z1_levels["domestic_nonfinancial_repo_level"]),
@@ -682,7 +948,7 @@ def build_public_quarterly_panel(
         else:
             csv_path = _download_fred_csv(series_id, raw_dir, raw_download_manifest_path, timeout=timeout)
         series = _load_fred_series(csv_path)
-        if key in {"fedfunds", "unemployment", "cpi"}:
+        if key in FRED_AVERAGE_KEYS:
             fred_levels[key] = _quarter_average_level(series)
         else:
             fred_levels_raw[key] = _quarter_end_level(series)
@@ -693,6 +959,20 @@ def build_public_quarterly_panel(
         "tga_qoq": _qoq_change(fred_levels["tga_level"]),
         "reserves_qoq": _qoq_change(fred_levels["reserves_level"]),
         "bank_credit_private_qoq": _qoq_change(bank_private_level),
+        "on_rrp_reallocation_qoq": -_qoq_change(fred_levels["on_rrp_level"]),
+        "currency_reallocation_qoq": -_qoq_change(fred_levels["currency_component_level"]),
+        "commercial_bank_borrowings_qoq": _qoq_change(fred_levels["commercial_bank_borrowings_level"]),
+        "fed_borrowings_depository_institutions_qoq": _qoq_change(
+            fred_levels["fed_borrowings_depository_institutions_level"]
+        ),
+        **{
+            outcome_name: _qoq_change(fred_levels[level_key])
+            for outcome_name, level_key in CREATOR_LENDING_FRED_KEYS.items()
+        },
+        **{
+            outcome_name: _chargeoff_adjusted_qoq(fred_levels[level_key], fred_levels[rate_key])
+            for outcome_name, (level_key, rate_key) in CHARGEOFF_ADJUSTED_CREATOR_LENDING_KEYS.items()
+        },
         "fedfunds": fred_levels["fedfunds"],
         "unemployment": fred_levels["unemployment"],
         "inflation": fred_levels["cpi"].pct_change() * 100.0,
@@ -715,12 +995,54 @@ def build_public_quarterly_panel(
         "tdc_no_remit_bank_only_qoq",
         "tdc_credit_union_sensitive_qoq",
         "total_deposits_bank_qoq",
+        "checkable_deposits_bank_qoq",
+        "interbank_transactions_bank_qoq",
+        "time_savings_deposits_bank_qoq",
+        "checkable_federal_govt_bank_qoq",
+        "checkable_state_local_bank_qoq",
+        "checkable_rest_of_world_bank_qoq",
+        "checkable_private_domestic_bank_qoq",
+        "interbank_transactions_foreign_banks_liability_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq",
+        "deposits_at_foreign_banks_asset_qoq",
+        "treasury_securities_bank_qoq",
+        "agency_gse_backed_securities_bank_qoq",
+        "municipal_securities_bank_qoq",
+        "corporate_foreign_bonds_bank_qoq",
+        "fedfunds_repo_liabilities_bank_qoq",
+        "debt_securities_bank_liability_qoq",
+        "fhlb_advances_sallie_mae_loans_bank_qoq",
+        "holding_company_parent_funding_bank_qoq",
+        "commercial_bank_borrowings_qoq",
+        "fed_borrowings_depository_institutions_qoq",
         "other_component_qoq",
         "bank_credit_private_qoq",
+        "commercial_industrial_loans_qoq",
+        "construction_land_development_loans_qoq",
+        "cre_multifamily_loans_qoq",
+        "cre_nonfarm_nonresidential_loans_qoq",
+        "consumer_loans_qoq",
+        "credit_card_revolving_loans_qoq",
+        "auto_loans_qoq",
+        "other_consumer_loans_qoq",
+        "heloc_loans_qoq",
+        "closed_end_residential_loans_qoq",
+        "loans_to_commercial_banks_qoq",
+        "loans_to_nondepository_financial_institutions_qoq",
+        "loans_for_purchasing_or_carrying_securities_qoq",
+        "commercial_industrial_loans_ex_chargeoffs_qoq",
+        "consumer_loans_ex_chargeoffs_qoq",
+        "credit_card_revolving_loans_ex_chargeoffs_qoq",
+        "other_consumer_loans_ex_chargeoffs_qoq",
+        "closed_end_residential_loans_ex_chargeoffs_qoq",
         "cb_nonts_qoq",
         "foreign_nonts_qoq",
         "domestic_nonfinancial_mmf_reallocation_qoq",
         "domestic_nonfinancial_repo_reallocation_qoq",
+        "on_rrp_reallocation_qoq",
+        "currency_reallocation_qoq",
+        "household_treasury_securities_reallocation_qoq",
+        "mmf_treasury_bills_reallocation_qoq",
         "tga_qoq",
         "reserves_qoq",
         "bill_share",

@@ -16,12 +16,56 @@ specs:
     outcomes:
     - tdc_bank_only_qoq
     - total_deposits_bank_qoq
+    - checkable_deposits_bank_qoq
+    - interbank_transactions_bank_qoq
+    - time_savings_deposits_bank_qoq
+    - checkable_federal_govt_bank_qoq
+    - checkable_state_local_bank_qoq
+    - checkable_rest_of_world_bank_qoq
+    - checkable_private_domestic_bank_qoq
+    - interbank_transactions_foreign_banks_liability_qoq
+    - interbank_transactions_foreign_banks_asset_qoq
+    - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
     - bank_credit_private_qoq
+    - commercial_industrial_loans_qoq
+    - construction_land_development_loans_qoq
+    - cre_multifamily_loans_qoq
+    - cre_nonfarm_nonresidential_loans_qoq
+    - consumer_loans_qoq
+    - credit_card_revolving_loans_qoq
+    - auto_loans_qoq
+    - other_consumer_loans_qoq
+    - heloc_loans_qoq
+    - closed_end_residential_loans_qoq
+    - loans_to_commercial_banks_qoq
+    - loans_to_nondepository_financial_institutions_qoq
+    - loans_for_purchasing_or_carrying_securities_qoq
+    - treasury_securities_bank_qoq
+    - agency_gse_backed_securities_bank_qoq
+    - municipal_securities_bank_qoq
+    - corporate_foreign_bonds_bank_qoq
+    - fedfunds_repo_liabilities_bank_qoq
+    - commercial_bank_borrowings_qoq
+    - fed_borrowings_depository_institutions_qoq
+    - debt_securities_bank_liability_qoq
+    - fhlb_advances_sallie_mae_loans_bank_qoq
+    - holding_company_parent_funding_bank_qoq
+    - commercial_industrial_loans_ex_chargeoffs_qoq
+    - consumer_loans_ex_chargeoffs_qoq
+    - credit_card_revolving_loans_ex_chargeoffs_qoq
+    - other_consumer_loans_ex_chargeoffs_qoq
+    - closed_end_residential_loans_ex_chargeoffs_qoq
     - cb_nonts_qoq
+    - tga_qoq
+    - reserves_qoq
     - foreign_nonts_qoq
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
+    - on_rrp_reallocation_qoq
+    - household_treasury_securities_reallocation_qoq
+    - mmf_treasury_bills_reallocation_qoq
+    - currency_reallocation_qoq
     controls:
     - lag_tdc_bank_only_qoq
     - lag_fedfunds
@@ -45,12 +89,56 @@ specs:
     outcomes:
     - tdc_bank_only_qoq
     - total_deposits_bank_qoq
+    - checkable_deposits_bank_qoq
+    - interbank_transactions_bank_qoq
+    - time_savings_deposits_bank_qoq
+    - checkable_federal_govt_bank_qoq
+    - checkable_state_local_bank_qoq
+    - checkable_rest_of_world_bank_qoq
+    - checkable_private_domestic_bank_qoq
+    - interbank_transactions_foreign_banks_liability_qoq
+    - interbank_transactions_foreign_banks_asset_qoq
+    - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
     - bank_credit_private_qoq
+    - commercial_industrial_loans_qoq
+    - construction_land_development_loans_qoq
+    - cre_multifamily_loans_qoq
+    - cre_nonfarm_nonresidential_loans_qoq
+    - consumer_loans_qoq
+    - credit_card_revolving_loans_qoq
+    - auto_loans_qoq
+    - other_consumer_loans_qoq
+    - heloc_loans_qoq
+    - closed_end_residential_loans_qoq
+    - loans_to_commercial_banks_qoq
+    - loans_to_nondepository_financial_institutions_qoq
+    - loans_for_purchasing_or_carrying_securities_qoq
+    - treasury_securities_bank_qoq
+    - agency_gse_backed_securities_bank_qoq
+    - municipal_securities_bank_qoq
+    - corporate_foreign_bonds_bank_qoq
+    - fedfunds_repo_liabilities_bank_qoq
+    - commercial_bank_borrowings_qoq
+    - fed_borrowings_depository_institutions_qoq
+    - debt_securities_bank_liability_qoq
+    - fhlb_advances_sallie_mae_loans_bank_qoq
+    - holding_company_parent_funding_bank_qoq
+    - commercial_industrial_loans_ex_chargeoffs_qoq
+    - consumer_loans_ex_chargeoffs_qoq
+    - credit_card_revolving_loans_ex_chargeoffs_qoq
+    - other_consumer_loans_ex_chargeoffs_qoq
+    - closed_end_residential_loans_ex_chargeoffs_qoq
     - cb_nonts_qoq
+    - tga_qoq
+    - reserves_qoq
     - foreign_nonts_qoq
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
+    - on_rrp_reallocation_qoq
+    - household_treasury_securities_reallocation_qoq
+    - mmf_treasury_bills_reallocation_qoq
+    - currency_reallocation_qoq
     controls:
     - lag_tdc_bank_only_qoq
     - lag_fedfunds
@@ -76,12 +164,56 @@ specs:
     outcomes:
     - tdc_bank_only_qoq
     - total_deposits_bank_qoq
+    - checkable_deposits_bank_qoq
+    - interbank_transactions_bank_qoq
+    - time_savings_deposits_bank_qoq
+    - checkable_federal_govt_bank_qoq
+    - checkable_state_local_bank_qoq
+    - checkable_rest_of_world_bank_qoq
+    - checkable_private_domestic_bank_qoq
+    - interbank_transactions_foreign_banks_liability_qoq
+    - interbank_transactions_foreign_banks_asset_qoq
+    - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
     - bank_credit_private_qoq
+    - commercial_industrial_loans_qoq
+    - construction_land_development_loans_qoq
+    - cre_multifamily_loans_qoq
+    - cre_nonfarm_nonresidential_loans_qoq
+    - consumer_loans_qoq
+    - credit_card_revolving_loans_qoq
+    - auto_loans_qoq
+    - other_consumer_loans_qoq
+    - heloc_loans_qoq
+    - closed_end_residential_loans_qoq
+    - loans_to_commercial_banks_qoq
+    - loans_to_nondepository_financial_institutions_qoq
+    - loans_for_purchasing_or_carrying_securities_qoq
+    - treasury_securities_bank_qoq
+    - agency_gse_backed_securities_bank_qoq
+    - municipal_securities_bank_qoq
+    - corporate_foreign_bonds_bank_qoq
+    - fedfunds_repo_liabilities_bank_qoq
+    - commercial_bank_borrowings_qoq
+    - fed_borrowings_depository_institutions_qoq
+    - debt_securities_bank_liability_qoq
+    - fhlb_advances_sallie_mae_loans_bank_qoq
+    - holding_company_parent_funding_bank_qoq
+    - commercial_industrial_loans_ex_chargeoffs_qoq
+    - consumer_loans_ex_chargeoffs_qoq
+    - credit_card_revolving_loans_ex_chargeoffs_qoq
+    - other_consumer_loans_ex_chargeoffs_qoq
+    - closed_end_residential_loans_ex_chargeoffs_qoq
     - cb_nonts_qoq
+    - tga_qoq
+    - reserves_qoq
     - foreign_nonts_qoq
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
+    - on_rrp_reallocation_qoq
+    - household_treasury_securities_reallocation_qoq
+    - mmf_treasury_bills_reallocation_qoq
+    - currency_reallocation_qoq
     controls:
     - lag_tdc_bank_only_qoq
     - lag_fedfunds
@@ -109,12 +241,56 @@ specs:
     outcomes:
     - tdc_bank_only_qoq
     - total_deposits_bank_qoq
+    - checkable_deposits_bank_qoq
+    - interbank_transactions_bank_qoq
+    - time_savings_deposits_bank_qoq
+    - checkable_federal_govt_bank_qoq
+    - checkable_state_local_bank_qoq
+    - checkable_rest_of_world_bank_qoq
+    - checkable_private_domestic_bank_qoq
+    - interbank_transactions_foreign_banks_liability_qoq
+    - interbank_transactions_foreign_banks_asset_qoq
+    - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
     - bank_credit_private_qoq
+    - commercial_industrial_loans_qoq
+    - construction_land_development_loans_qoq
+    - cre_multifamily_loans_qoq
+    - cre_nonfarm_nonresidential_loans_qoq
+    - consumer_loans_qoq
+    - credit_card_revolving_loans_qoq
+    - auto_loans_qoq
+    - other_consumer_loans_qoq
+    - heloc_loans_qoq
+    - closed_end_residential_loans_qoq
+    - loans_to_commercial_banks_qoq
+    - loans_to_nondepository_financial_institutions_qoq
+    - loans_for_purchasing_or_carrying_securities_qoq
+    - treasury_securities_bank_qoq
+    - agency_gse_backed_securities_bank_qoq
+    - municipal_securities_bank_qoq
+    - corporate_foreign_bonds_bank_qoq
+    - fedfunds_repo_liabilities_bank_qoq
+    - commercial_bank_borrowings_qoq
+    - fed_borrowings_depository_institutions_qoq
+    - debt_securities_bank_liability_qoq
+    - fhlb_advances_sallie_mae_loans_bank_qoq
+    - holding_company_parent_funding_bank_qoq
+    - commercial_industrial_loans_ex_chargeoffs_qoq
+    - consumer_loans_ex_chargeoffs_qoq
+    - credit_card_revolving_loans_ex_chargeoffs_qoq
+    - other_consumer_loans_ex_chargeoffs_qoq
+    - closed_end_residential_loans_ex_chargeoffs_qoq
     - cb_nonts_qoq
+    - tga_qoq
+    - reserves_qoq
     - foreign_nonts_qoq
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
+    - on_rrp_reallocation_qoq
+    - household_treasury_securities_reallocation_qoq
+    - mmf_treasury_bills_reallocation_qoq
+    - currency_reallocation_qoq
     controls:
     - lag_tdc_bank_only_qoq
     - lag_fedfunds
@@ -184,10 +360,44 @@ specs:
     - total_deposits_bank_qoq
     - other_component_qoq
     - bank_credit_private_qoq
+    - commercial_industrial_loans_qoq
+    - construction_land_development_loans_qoq
+    - cre_multifamily_loans_qoq
+    - cre_nonfarm_nonresidential_loans_qoq
+    - consumer_loans_qoq
+    - credit_card_revolving_loans_qoq
+    - auto_loans_qoq
+    - other_consumer_loans_qoq
+    - heloc_loans_qoq
+    - closed_end_residential_loans_qoq
+    - loans_to_commercial_banks_qoq
+    - loans_to_nondepository_financial_institutions_qoq
+    - loans_for_purchasing_or_carrying_securities_qoq
+    - treasury_securities_bank_qoq
+    - agency_gse_backed_securities_bank_qoq
+    - municipal_securities_bank_qoq
+    - corporate_foreign_bonds_bank_qoq
+    - fedfunds_repo_liabilities_bank_qoq
+    - commercial_bank_borrowings_qoq
+    - fed_borrowings_depository_institutions_qoq
+    - debt_securities_bank_liability_qoq
+    - fhlb_advances_sallie_mae_loans_bank_qoq
+    - holding_company_parent_funding_bank_qoq
+    - commercial_industrial_loans_ex_chargeoffs_qoq
+    - consumer_loans_ex_chargeoffs_qoq
+    - credit_card_revolving_loans_ex_chargeoffs_qoq
+    - other_consumer_loans_ex_chargeoffs_qoq
+    - closed_end_residential_loans_ex_chargeoffs_qoq
     - cb_nonts_qoq
+    - tga_qoq
+    - reserves_qoq
     - foreign_nonts_qoq
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
+    - on_rrp_reallocation_qoq
+    - household_treasury_securities_reallocation_qoq
+    - mmf_treasury_bills_reallocation_qoq
+    - currency_reallocation_qoq
     control_variants:
       headline_lagged_macro:
         control_role: headline
@@ -234,9 +444,15 @@ specs:
     - other_component_qoq
     - bank_credit_private_qoq
     - cb_nonts_qoq
+    - tga_qoq
+    - reserves_qoq
     - foreign_nonts_qoq
     - domestic_nonfinancial_mmf_reallocation_qoq
     - domestic_nonfinancial_repo_reallocation_qoq
+    - on_rrp_reallocation_qoq
+    - household_treasury_securities_reallocation_qoq
+    - mmf_treasury_bills_reallocation_qoq
+    - currency_reallocation_qoq
     controls:
     - lag_tdc_bank_only_qoq
     include_lagged_outcome: true
@@ -283,6 +499,34 @@ specs:
     - total_deposits_bank_qoq
     - other_component_qoq
     - bank_credit_private_qoq
+    - commercial_industrial_loans_qoq
+    - construction_land_development_loans_qoq
+    - cre_multifamily_loans_qoq
+    - cre_nonfarm_nonresidential_loans_qoq
+    - consumer_loans_qoq
+    - credit_card_revolving_loans_qoq
+    - auto_loans_qoq
+    - other_consumer_loans_qoq
+    - heloc_loans_qoq
+    - closed_end_residential_loans_qoq
+    - loans_to_commercial_banks_qoq
+    - loans_to_nondepository_financial_institutions_qoq
+    - loans_for_purchasing_or_carrying_securities_qoq
+    - treasury_securities_bank_qoq
+    - agency_gse_backed_securities_bank_qoq
+    - municipal_securities_bank_qoq
+    - corporate_foreign_bonds_bank_qoq
+    - fedfunds_repo_liabilities_bank_qoq
+    - commercial_bank_borrowings_qoq
+    - fed_borrowings_depository_institutions_qoq
+    - debt_securities_bank_liability_qoq
+    - fhlb_advances_sallie_mae_loans_bank_qoq
+    - holding_company_parent_funding_bank_qoq
+    - commercial_industrial_loans_ex_chargeoffs_qoq
+    - consumer_loans_ex_chargeoffs_qoq
+    - credit_card_revolving_loans_ex_chargeoffs_qoq
+    - other_consumer_loans_ex_chargeoffs_qoq
+    - closed_end_residential_loans_ex_chargeoffs_qoq
     - cb_nonts_qoq
     - foreign_nonts_qoq
     - domestic_nonfinancial_mmf_reallocation_qoq
