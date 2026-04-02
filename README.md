@@ -9,11 +9,10 @@
 Current stopping point:
 
 - the exact baseline shows positive impact effects on matched total bank deposits and negative effects on the non-TDC residual
-- the deposit-type split does not cleanly explain that residual
-- broad creator-lending channels do not explain it on impact
-- the clearest domestic escape-pressure signal is ON RRP
-- the external lane shows persistent foreign nontransaction pressure and medium-horizon foreign-bank asset-side interbank movement
-- funding accommodations matter, but they are secondary context rather than the main explanation
+- medium-horizon persistence and mechanism attribution remain unsettled
+- the current public counterpart preview does not show a decisive positive core creator-lending offset on impact
+- foreign nontransaction pressure is the clearest currently materialized external counterpart signal
+- the current robustness surface is intentionally narrow: exact-baseline treatment, control, and sample sensitivity plus period sensitivity
 
 ## Status
 
@@ -55,10 +54,9 @@ The package rebuilds a quarterly public-data bundle that includes:
 
 - Unexpected TDC increases are associated with higher matched total bank deposits on impact in the exact baseline.
 - The increase is less than one-for-one because the non-TDC component falls.
-- Deposit-type categories do not provide a clean explanation for that negative residual.
-- The first-wave broad lending creator surface does not provide a decisive positive impact-stage offset.
-- The domestic destroyer / escape surface points most clearly to ON RRP.
-- The expanded external-banking surface adds foreign nontransaction pressure and medium-horizon foreign-bank asset-side interbank movement.
+- The current public counterpart preview does not provide a decisive positive core creator-lending offset on impact.
+- Foreign nontransaction pressure is the clearest currently materialized external counterpart signal in the committed preview mirror.
+- Medium-horizon persistence and mechanism attribution remain unsettled in the current release.
 - The current robustness surface is intentionally narrow: exact-baseline treatment, control, and sample sensitivity plus period sensitivity.
 
 ## Environment

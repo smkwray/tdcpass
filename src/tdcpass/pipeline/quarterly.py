@@ -107,18 +107,19 @@ def _default_overview_payload(
     if counterpart_channel_scorecard is not None:
         if (
             not h0_counterpart.get("decisive_positive_core_creator_channels", [])
-            and "escape_support_context" in h0_counterpart
+            and not list(counterpart_channel_scorecard.get("creator_channel_outcomes_present", []))
         ):
             counterpart_findings.append(
                 "Counterpart channels do not show a decisive positive core creator-lending offset on impact; the current broad creator surface does not explain the negative non-TDC residual at h0."
             )
-        if (
-            "on_rrp_reallocation_qoq" in dict(h0_counterpart.get("deposit_retention_support_channels", {}))
-            or "on_rrp_reallocation_qoq" in dict(h4_counterpart.get("deposit_retention_support_channels", {}))
-            or "on_rrp_reallocation_qoq" in dict(h8_counterpart.get("deposit_retention_support_channels", {}))
+        external_horizons = [h0_counterpart, h4_counterpart, h8_counterpart]
+        if any(
+            "foreign_nonts_qoq"
+            in list(dict(horizon_payload.get("external_channel_block", {})).get("decisive_positive_external_channels", []) or [])
+            for horizon_payload in external_horizons
         ):
             counterpart_findings.append(
-                "The strongest domestic escape signal currently comes from ON RRP, while the expanded external lane adds persistent foreign nontransaction pressure and medium-horizon foreign-bank asset-side interbank movement."
+                "The currently materialized external counterpart preview most clearly shows foreign nontransaction pressure; creator, domestic escape, and funding lanes should still be read as partial diagnostics rather than settled mechanism evidence."
             )
         counterpart_findings.append(
             "See counterpart_channel_scorecard.json for the creator, escape, external, and funding blocks rather than relying on bank_credit_private_qoq alone."
@@ -144,7 +145,7 @@ def _default_overview_payload(
                 f"from {usable_shock_start} to {usable_shock_end}, but the current release status remains `{readiness_status}`."
             ),
             "The exact identity-preserving baseline is now the primary decomposition path; the older outcome-specific LP contrast remains a secondary robustness check only.",
-            "The public surface now includes first-wave counterpart creator lanes alongside the exact baseline, while the deposit-type split remains a secondary side read.",
+            "The public surface keeps the exact identity baseline as the headline path and treats counterpart or deposit side reads as secondary diagnostics rather than settled mechanism evidence.",
             "Period sensitivity remains on the public surface because medium-horizon persistence differs across the post-GFC early, pre-COVID, and COVID/post-COVID windows.",
             f"{share_other_negative:.1%} of quarters show `other_component_qoq < 0` in the headline sample.",
             *counterpart_findings,
@@ -217,9 +218,6 @@ def _default_overview_payload(
             "site/data/lp_irf.csv",
             "site/data/lp_irf_identity_baseline.csv",
             "site/data/identity_measurement_ladder.csv",
-            "site/data/identity_treatment_sensitivity.csv",
-            "site/data/identity_control_sensitivity.csv",
-            "site/data/identity_sample_sensitivity.csv",
             "site/data/regime_diagnostics_summary.json",
             "site/data/control_set_sensitivity.csv",
             "site/data/shock_sample_sensitivity.csv",
@@ -229,7 +227,6 @@ def _default_overview_payload(
             "site/data/structural_proxy_evidence.csv",
             "site/data/structural_proxy_evidence_summary.json",
             "site/data/proxy_coverage_summary.json",
-            "site/data/call_report_deposit_components_summary.json",
             "site/data/proxy_unit_audit.json",
             "site/data/headline_treatment_fingerprint.json",
             "site/data/provenance_validation_summary.json",
@@ -237,7 +234,6 @@ def _default_overview_payload(
             "site/data/result_readiness_summary.json",
             "site/data/direct_identification_summary.json",
             "site/data/pass_through_summary.json",
-            "site/data/deposit_component_scorecard.json",
             "site/data/counterpart_channel_scorecard.json",
         ],
     }

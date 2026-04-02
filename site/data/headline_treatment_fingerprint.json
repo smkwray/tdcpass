@@ -32,9 +32,9 @@
       "config/shock_specs.yml": "f2bc13ca92fb37ad91f1cd78960bbaa1bf62a6d15e7a4aeacea746652f7943ea",
       "config/lp_specs.yml": "6565e5f2feea1bdeeb8c565e2e7d9f15ffbf4e2599b965b942875b37a2fd5304",
       "config/regime_specs.yml": "74527837dfb4238ba824125722e82f435495a0fecf8ca1c227ad5bd145299179",
-      "config/output_contract.yml": "cee43a3245fa3fa674ab0000b87871a23fceaea017d0a682a99450b15c8d39f9"
+      "config/output_contract.yml": "3da40c9ac90a0646312ff53c92cf5d3bf06da65ac1cd8ed1e5c741f390b146c8"
     },
-    "combined_sha256": "717e9b3d02b491b0fea018c82520943d11ebcd6a5e7a059ea475c7a255555a0c"
+    "combined_sha256": "6399e05ba8e5cec1bb43bc840002c40046818ad03d814ef73ee5074cf75b1979"
   },
   "upstream_input": {
     "source_kind": "tdcest_processed_csv",

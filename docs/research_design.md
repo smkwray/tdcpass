@@ -163,14 +163,14 @@ The current public bundle keeps `period_sensitivity.csv` and `period_sensitivity
 - Do not start with black-box ML shocks.
 - Do not claim precise mechanism from the residual alone.
 
-## 8. Publication-grade evidence path
+## 8. Narrow public stopping point
 
-To reach a publishable version, the results should satisfy:
+For the current public stopping point, the results should satisfy:
 
 - accounting coherence,
 - no look-ahead leakage,
-- stable sign in the main sample,
-- structural cross-check support,
-- sensitivity stability across TDC versions.
+- a stable impact-stage exact-baseline sign pattern in the main sample,
+- transparent sensitivity over treatment, controls, sample, and period windows,
+- explicit caveats when persistence or mechanism attribution remain unsettled.
 
-The main remaining work is substantive identification and mechanism evaluation on the canonical-TDC bundle.
+Beyond that threshold, additional mechanism work is scope expansion rather than a prerequisite for this release.

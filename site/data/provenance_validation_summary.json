@@ -13,8 +13,8 @@
   },
   "config_hashes_check": {
     "status": "passed",
-    "stored_combined_sha256": "717e9b3d02b491b0fea018c82520943d11ebcd6a5e7a059ea475c7a255555a0c",
-    "current_combined_sha256": "717e9b3d02b491b0fea018c82520943d11ebcd6a5e7a059ea475c7a255555a0c"
+    "stored_combined_sha256": "6399e05ba8e5cec1bb43bc840002c40046818ad03d814ef73ee5074cf75b1979",
+    "current_combined_sha256": "6399e05ba8e5cec1bb43bc840002c40046818ad03d814ef73ee5074cf75b1979"
   },
   "upstream_input_check": {
     "status": "skipped_unreachable",
