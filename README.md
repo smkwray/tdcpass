@@ -21,19 +21,21 @@ Current stopping point:
 Current posture:
 
 - reproducible public-data pipeline
-- canonical quarterly TDC imported from `tdcest` outputs
+- canonical quarterly TDC imported from [`smkwray/tdcest`](https://github.com/smkwray/tdcest) outputs
 - reusable diagnostics for identification and mechanism caveats
 - committed `site/data/*` preview mirror; regenerated `output/*` stays local
 
-The current bundle is a diagnostics-heavy methods and reproducibility release built on canonical `tdcest` TDC. The reusable core is the panel builder, outcome construction, LP stack, diagnostics, and site/export wiring around that treatment object.
+The current bundle is a diagnostics-heavy methods and reproducibility release built on canonical [`tdcest`](https://github.com/smkwray/tdcest) TDC. The reusable core is the panel builder, outcome construction, LP stack, diagnostics, and site/export wiring around that treatment object.
 
-Here, **TDC** means the canonically defined Treasury-attributed component of deposits from `tdcest` / `tdcsim`. It is the project’s specific treatment object, not a repo-local relabeling of literal Treasury deposit balances.
+Here, **TDC** means the canonically defined Treasury-attributed component of deposits from [`smkwray/tdcest`](https://github.com/smkwray/tdcest) / `tdcsim`. It is the project’s specific treatment object, not a repo-local relabeling of literal Treasury deposit balances.
+
+In the upstream accounting, the preferred headline estimate is the bank-only transaction-flow series `tdc_base_bank_only_ru_flow`. In words, it measures reserve-user net acquisition of marketable Treasuries, minus Treasury operating-cash drain, plus positive Fed remittances only. In this repo, that imported quarterly series appears as `tdc_bank_only_qoq` and is the default headline treatment target.
 
 ## What the repo does
 
 The package rebuilds a quarterly public-data bundle that includes:
 
-- canonical bank-only TDC imported from `tdcest`
+- canonical bank-only TDC imported from [`smkwray/tdcest`](https://github.com/smkwray/tdcest), specifically the preferred bank-only transaction-flow estimate `tdc_base_bank_only_ru_flow`
 - matched total-deposit outcomes
 - the non-TDC residual `other_component_qoq = total_deposits_bank_qoq - tdc_bank_only_qoq`
 - a rolling unexpected-treatment shock plus exploratory sensitivity variants
