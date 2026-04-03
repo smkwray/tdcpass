@@ -234,6 +234,7 @@ def _default_overview_payload(
             "site/data/result_readiness_summary.json",
             "site/data/direct_identification_summary.json",
             "site/data/pass_through_summary.json",
+            "site/data/deposit_type_side_read.csv",
             "site/data/counterpart_channel_scorecard.json",
         ],
     }
@@ -662,6 +663,71 @@ def _build_deposit_component_scorecard(
     }
 
 
+def _build_deposit_type_side_read(lp_irf: pd.DataFrame) -> pd.DataFrame:
+    outcomes = [
+        "checkable_deposits_bank_qoq",
+        "interbank_transactions_bank_qoq",
+        "time_savings_deposits_bank_qoq",
+        "checkable_federal_govt_bank_qoq",
+        "checkable_state_local_bank_qoq",
+        "checkable_rest_of_world_bank_qoq",
+        "checkable_private_domestic_bank_qoq",
+    ]
+    horizon_labels = {0: "impact", 4: "medium_run", 8: "longer_run"}
+    display_labels = {
+        "checkable_deposits_bank_qoq": "Checkable deposits",
+        "interbank_transactions_bank_qoq": "Interbank transactions",
+        "time_savings_deposits_bank_qoq": "Time and savings deposits",
+        "checkable_federal_govt_bank_qoq": "Checkable: federal government",
+        "checkable_state_local_bank_qoq": "Checkable: state and local government",
+        "checkable_rest_of_world_bank_qoq": "Checkable: rest of world",
+        "checkable_private_domestic_bank_qoq": "Checkable: private domestic",
+    }
+    sample = lp_irf[
+        lp_irf["outcome"].isin(outcomes) & lp_irf["horizon"].isin([0, 4, 8])
+    ].copy()
+    if sample.empty:
+        return pd.DataFrame(
+            columns=[
+                "outcome",
+                "display_name",
+                "horizon",
+                "horizon_label",
+                "beta",
+                "se",
+                "lower95",
+                "upper95",
+                "n",
+                "ci_excludes_zero",
+                "sign_label",
+                "interpretation_note",
+            ]
+        )
+    sample["display_name"] = sample["outcome"].map(display_labels)
+    sample["horizon_label"] = sample["horizon"].map(horizon_labels)
+    sample["ci_excludes_zero"] = (sample["lower95"] > 0.0) | (sample["upper95"] < 0.0)
+    sample["sign_label"] = sample["beta"].apply(lambda value: "positive" if float(value) > 0.0 else "negative")
+    sample["interpretation_note"] = (
+        "Secondary observed deposit-type side read; not a clean decomposition of the non-TDC residual."
+    )
+    return sample[
+        [
+            "outcome",
+            "display_name",
+            "horizon",
+            "horizon_label",
+            "beta",
+            "se",
+            "lower95",
+            "upper95",
+            "n",
+            "ci_excludes_zero",
+            "sign_label",
+            "interpretation_note",
+        ]
+    ].reset_index(drop=True)
+
+
 def _materialize_real_outputs(
     root: Path,
     contract: Mapping[str, Any],
@@ -1083,6 +1149,9 @@ def _materialize_real_outputs(
     )
     deposit_component_scorecard_path = root / "output" / "models" / "deposit_component_scorecard.json"
     write_json_payload(deposit_component_scorecard_path, deposit_component_scorecard)
+    deposit_type_side_read = _build_deposit_type_side_read(lp_outputs["lp_irf"])
+    deposit_type_side_read_path = root / "output" / "models" / "deposit_type_side_read.csv"
+    export_frame(deposit_type_side_read, deposit_type_side_read_path)
     counterpart_channel_scorecard_path = root / "output" / "models" / "counterpart_channel_scorecard.json"
     write_json_payload(counterpart_channel_scorecard_path, counterpart_channel_scorecard)
     if provenance_validation_payload["status"] != "passed":
@@ -1162,6 +1231,7 @@ def _materialize_real_outputs(
             backend_evidence_packet_report_path,
             backend_closeout_report_path,
             deposit_component_scorecard_path,
+            deposit_type_side_read_path,
             counterpart_channel_scorecard_path,
             overview_path,
         ],
@@ -1228,6 +1298,7 @@ def _materialize_real_outputs(
         "backend_evidence_packet_report_path": str(backend_evidence_packet_report_path),
         "backend_closeout_report_path": str(backend_closeout_report_path),
         "deposit_component_scorecard_path": str(deposit_component_scorecard_path),
+        "deposit_type_side_read_path": str(deposit_type_side_read_path),
         "counterpart_channel_scorecard_path": str(counterpart_channel_scorecard_path),
         "overview_path": str(overview_path),
         "raw_downloads_path": str(manifest_paths["raw_downloads"]),

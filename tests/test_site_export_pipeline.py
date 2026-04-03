@@ -195,6 +195,7 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
         "output/models/deposit_component_scorecard.json",
+        "output/models/deposit_type_side_read.csv",
         "output/models/counterpart_channel_scorecard.json",
         "output/models/period_sensitivity_summary.json",
     }
@@ -230,6 +231,12 @@ def test_quarterly_pipeline_materializes_contract_bundle(tmp_path: Path) -> None
                 source_root / rel,
                 ["outcome", "horizon", "beta", "se", "lower95", "upper95", "n", "spec_name", "decomposition_mode", "outcome_construction", "inference_method"],
                 [["total_deposits_bank_qoq", 0, 0.1, 0.01, 0.0, 0.2, 1, "identity_baseline", "exact_identity_baseline", "estimated", "shared_bootstrap"]],
+            )
+        elif rel.endswith("deposit_type_side_read.csv"):
+            _write_csv(
+                source_root / rel,
+                ["outcome", "display_name", "horizon", "horizon_label", "beta", "se", "lower95", "upper95", "n", "ci_excludes_zero", "sign_label", "interpretation_note"],
+                [["checkable_deposits_bank_qoq", "Checkable deposits", 0, "impact", 1.0, 0.5, 0.1, 1.9, 1, True, "positive", "stub"]],
             )
         elif rel.endswith("identity_measurement_ladder.csv"):
             _write_csv(

@@ -46,6 +46,7 @@ def test_output_contract_has_required_artifacts() -> None:
         "output/models/result_readiness_summary.json",
         "output/models/pass_through_summary.json",
         "output/models/deposit_component_scorecard.json",
+        "output/models/deposit_type_side_read.csv",
         "output/models/counterpart_channel_scorecard.json",
         "output/models/sample_construction_summary.json",
         "output/manifests/raw_downloads.json",
@@ -76,6 +77,7 @@ def test_output_contract_has_required_artifacts() -> None:
             "site/data/direct_identification_summary.json",
             "site/data/result_readiness_summary.json",
             "site/data/pass_through_summary.json",
+            "site/data/deposit_type_side_read.csv",
             "site/data/counterpart_channel_scorecard.json",
             "site/data/sample_construction_summary.json",
         }

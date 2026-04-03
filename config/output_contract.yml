@@ -518,6 +518,21 @@ artifacts:
       - creator_channel_outcomes_present
       - horizons
       - takeaways
+  - path: output/models/deposit_type_side_read.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - display_name
+      - horizon
+      - horizon_label
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - ci_excludes_zero
+      - sign_label
+      - interpretation_note
   - path: output/models/counterpart_channel_scorecard.json
     kind: json
     required_keys:
@@ -875,6 +890,21 @@ artifacts:
       - funding_accommodation_outcomes_present
       - horizons
       - takeaways
+  - path: site/data/deposit_type_side_read.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - display_name
+      - horizon
+      - horizon_label
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - ci_excludes_zero
+      - sign_label
+      - interpretation_note
   - path: site/data/sample_construction_summary.json
     kind: json
     required_keys:

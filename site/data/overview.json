@@ -107,6 +107,7 @@
     "site/data/result_readiness_summary.json",
     "site/data/direct_identification_summary.json",
     "site/data/pass_through_summary.json",
+    "site/data/deposit_type_side_read.csv",
     "site/data/counterpart_channel_scorecard.json"
   ]
 }
