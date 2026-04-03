@@ -101,7 +101,9 @@ where:
 - `Shock^{TDC}_t` is the unexpected TDC innovation,
 - `X_{t-1}` are pre-treatment controls.
 
-Use HAC/Newey-West standard errors.
+For the approximate LP surfaces, use HAC/Newey-West standard errors.
+
+For the exact identity-preserving baseline, report uncertainty from the shared nested circular block bootstrap that jointly re-estimates the headline shock and propagates uncertainty through the mechanically derived `other_component_qoq = total - tdc` object.
 
 ### Why LP first
 
