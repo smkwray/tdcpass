@@ -1,5 +1,7 @@
 # tdcpass
 
+[Live site](https://smkwray.github.io/tdcpass/)
+
 > In progress: this is a public methods-and-reproducibility release, and the design, estimates, and wording may still tighten.
 
 `tdcpass` studies one question:
