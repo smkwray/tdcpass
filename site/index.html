@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>TDC Pass-Through</title>
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="#">TDC<span>Pass</span></a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#result">Main Result</a></li>
+      <li><a href="#periods">Time Variation</a></li>
+      <li><a href="#channels">Counterparts</a></li>
+      <li><a href="#deposit-types">Deposit Types</a></li>
+      <li><a href="#robustness">Robustness</a></li>
+      <li><a href="#data">Data</a></li>
+    </ul>
+  </nav>
+  <div class="header-controls">
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme"></button>
+    <button id="nav-toggle" class="nav-btn" aria-label="Toggle navigation">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Unexpected TDC raises match total deposits on impact &mdash; but less than one-for-one</h1>
+  <p class="hero-sub">When unexpected transaction deposit creation (TDC) rises, total bank deposits rise &mdash; but the non-TDC component falls. The impact-stage result is the clearest finding. Medium-horizon persistence remains unsettled. This is a methods and reproducibility public stopping point, not a finished mechanism paper.</p>
+  <div class="stats-row">
+    <div class="stat-chip">
+      <span class="stat-value up" id="stat-tdc">&mdash;</span>
+      <span class="stat-label">TDC impact (h0), $B per 1&sigma;</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-value up" id="stat-total">&mdash;</span>
+      <span class="stat-label">Total deposits impact (h0)</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-value down" id="stat-other">&mdash;</span>
+      <span class="stat-label">Non-TDC residual (h0)</span>
+    </div>
+    <div class="stat-chip">
+      <span class="stat-value neutral" id="stat-share">&mdash;</span>
+      <span class="stat-label">Quarters with negative non-TDC</span>
+    </div>
+  </div>
+</section>
+
+<main class="content">
+
+  <!-- ========== TDC Explainer ========== -->
+  <div class="insight-box" style="margin-bottom: 32px">
+    <strong>What is TDC?</strong> TDC is the Treasury-attributed component of deposits: an upstream quarterly estimate of how much deposit growth is tied to Treasury-related flows. It is not the TGA or literal Treasury deposit balances. <a href="https://github.com/smkwray/tdcest" target="_blank" rel="noopener">Source: tdcest</a>.
+    <details style="margin-top: 8px">
+      <summary style="cursor:pointer;color:var(--c-teal);font-size:0.85rem">More detail</summary>
+      <p style="margin-top:8px;font-size:0.85rem">In this repo, TDC is imported from the upstream <a href="https://github.com/smkwray/tdcest" target="_blank" rel="noopener">tdcest</a> project. The specific headline estimate used here is the bank-only transaction-flow series <code>tdc_base_bank_only_ru_flow</code>, which appears in this repo as <code>tdc_bank_only_qoq</code>. Conceptually, it measures reserve-user net acquisition of marketable Treasuries, minus Treasury operating-cash drain, plus positive Fed remittances only.</p>
+    </details>
+  </div>
+
+  <!-- ========== Main Result ========== -->
+  <section class="section" id="result">
+    <div class="section-header">
+      <h2>Exact-Baseline Impulse Responses</h2>
+      <span class="section-tag">Primary Result</span>
+    </div>
+    <p>Cumulative responses to a one-standard-deviation unexpected TDC shock, estimated via identity-preserving local projections on 68 usable quarters (2009Q1&ndash;2025Q4). Shaded bands are bootstrap 95% confidence intervals.</p>
+
+    <div class="chart-single">
+      <div class="chart-container">
+        <canvas id="irfChart"></canvas>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <strong>Less than one-for-one.</strong> TDC rises sharply on impact (+$128B) but total deposits gain only +$56B because the non-TDC residual drops &minus;$73B. The gap between the TDC line and the total-deposit line is the crowd-out signal &mdash; each dollar of unexpected TDC does not create a full dollar of new deposits. On impact, a $100B increase in TDC is associated with roughly a $40&ndash;45B increase in total deposits.
+    </div>
+
+    <div class="chart-pair">
+      <div class="chart-container">
+        <p class="chart-title">Impact (h0) decomposition</p>
+        <canvas id="impactBar"></canvas>
+      </div>
+      <div class="chart-container">
+        <p class="chart-title">h0 / h4 / h8 comparison</p>
+        <canvas id="horizonBar"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Time Variation ========== -->
+  <section class="section" id="periods">
+    <div class="section-header">
+      <h2>Period Sensitivity</h2>
+      <span class="section-tag">Secondary</span>
+    </div>
+    <p>How stable is the impact-stage signal across sub-periods? The chart and table compare the headline all-usable sample against three sub-windows. Impact (h0) is more stable than medium-horizon persistence (h4). The COVID/post-COVID window shows the strongest impact-stage total-deposit response.</p>
+
+    <div class="chart-single">
+      <div class="chart-container">
+        <p class="chart-title">Impact (h0) by period</p>
+        <canvas id="periodH0Chart"></canvas>
+      </div>
+    </div>
+
+    <div id="periodTable"></div>
+
+    <div class="insight-box caution">
+      <strong>Persistence varies.</strong> All four periods show a negative non-TDC residual on impact, but the h4 patterns diverge: post-GFC early and pre-COVID windows lose separation, while COVID/post-COVID retains a positive total-deposit signal at h4. The COVID/post-COVID period has the largest impact-stage total-deposit point estimate (+$91B). Medium-horizon persistence remains unsettled.
+    </div>
+  </section>
+
+  <!-- ========== Counterpart Channels ========== -->
+  <section class="section" id="channels">
+    <div class="section-header">
+      <h2>Counterpart Channels</h2>
+      <span class="section-tag">Partial &middot; Provisional</span>
+    </div>
+    <p>Which first-wave channels line up with the non-TDC deposit response? This is partial and provisional &mdash; the scorecard below covers creator lending, domestic escape, external banking, and funding accommodation lanes. No single channel decisively explains the negative non-TDC residual.</p>
+
+    <div class="chart-pair">
+      <div class="chart-container">
+        <p class="chart-title">Impact (h0) by channel</p>
+        <p class="chart-subtitle">Point estimates with 95% CI. Filled markers = CI excludes zero.</p>
+        <canvas id="channelH0Chart"></canvas>
+      </div>
+      <div class="chart-container">
+        <p class="chart-title">Key channels across horizons</p>
+        <p class="chart-subtitle">Foreign nontransaction stays significant; creator lending emerges at h4+.</p>
+        <canvas id="channelHorizonChart"></canvas>
+      </div>
+    </div>
+
+    <div class="channel-grid">
+      <div class="channel-card">
+        <span class="channel-status not-decisive">Not decisive</span>
+        <h4>Broad Creator Lending</h4>
+        <p>The legacy private-credit proxy shows no decisive positive impact-stage offset. Point estimate is small and the confidence interval includes zero at h0. It becomes significant only at later horizons.</p>
+        <p class="mono" id="ch-creator">&mdash;</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-status decisive">Clearest signal</span>
+        <h4>Foreign Nontransaction Pressure</h4>
+        <p>The clearest currently materialized external counterpart signal. Positive and statistically separated at h0, h4, and h8.</p>
+        <p class="mono" id="ch-foreign">&mdash;</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-status partial">Partial</span>
+        <h4>Domestic Escape (MMF / Repo)</h4>
+        <p>MMF and repo reallocation channels are materialized but neither is individually decisive at h0. Confidence intervals include zero.</p>
+        <p class="mono" id="ch-mmf">&mdash;</p>
+      </div>
+      <div class="channel-card">
+        <span class="channel-status partial">Partial</span>
+        <h4>ON RRP / Funding / Other</h4>
+        <p>ON RRP drainage, funding accommodation, and remaining lanes are materialized but should be read as partial diagnostics, not settled mechanism evidence.</p>
+        <p class="mono">&mdash; see scorecard</p>
+      </div>
+    </div>
+
+    <div class="insight-box caution">
+      <strong>Do not overstate mechanism.</strong> The counterpart scorecard covers creator, escape, external, and funding blocks. Foreign nontransaction pressure is the clearest signal, but the full counterpart accounting remains incomplete. These are partial diagnostics rather than settled mechanism evidence.
+    </div>
+  </section>
+
+  <!-- ========== Deposit-Type Side Read ========== -->
+  <section class="section" id="deposit-types">
+    <div class="section-header">
+      <h2>Observed Deposit Categories</h2>
+      <span class="section-tag">Secondary Side Read</span>
+    </div>
+    <p>Direct deposit-type categories are informative but do not provide a clean public decomposition of the non-TDC residual.</p>
+
+    <div class="chart-pair">
+      <div class="chart-container">
+        <p class="chart-title">Deposit categories across horizons</p>
+        <p class="chart-subtitle">Interbank transactions is the clearest positive impact-stage category. Filled markers = CI excludes zero.</p>
+        <canvas id="depositTypeChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <p class="chart-title">Impact (h0) by deposit type</p>
+        <p class="chart-subtitle">Point estimates with 95% CI whiskers. Only interbank is statistically separated.</p>
+        <canvas id="depositTypeH0Chart"></canvas>
+      </div>
+    </div>
+
+    <div class="insight-box caution">
+      <strong>Partial side read only.</strong> Direct observed deposit categories provide only a partial side read. The visible movements are more consistent with checkable and interbank adjustments than with a clean time-and-savings story, but these categories do not by themselves explain the non-TDC residual. These are not a decomposition of the residual.
+    </div>
+  </section>
+
+  <!-- ========== Robustness ========== -->
+  <section class="section" id="robustness">
+    <div class="section-header">
+      <h2>Robustness &amp; Limits</h2>
+      <span class="section-tag">Diagnostics</span>
+    </div>
+    <p>The treatment shock passes all six quality gates. Robustness is intentionally narrow: exact-baseline treatment, control-set, sample, and period sensitivity. The exact identity baseline is primary; the approximate dynamic LP path is a secondary robustness check. Ratio-based pass-through and crowd-out headlines are out of scope.</p>
+
+    <div class="gate-grid" id="gateGrid"></div>
+
+    <div class="table-wrap">
+      <table class="data-table" id="robustnessTable">
+        <thead>
+          <tr>
+            <th>Diagnostic</th>
+            <th>Value</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="insight-box negative">
+      <strong>What remains unsettled.</strong> Medium-horizon persistence is sensitive to period and sample. The approximate dynamic LP path diverges from the exact baseline at key horizons. Structural proxy cross-checks are mixed. Headline pass-through ratios are out of scope until a dimensionally coherent first-stage gate is resolved. Persistence and mechanism remain unsettled.
+    </div>
+  </section>
+
+  <!-- ========== Data & Links ========== -->
+  <section class="section" id="data">
+    <div class="section-header">
+      <h2>Data &amp; Methods</h2>
+      <span class="section-tag">Reproducibility</span>
+    </div>
+    <p>All results derive from public quarterly data (FRED, Call Reports). The exact identity-preserving baseline uses a frozen rolling 40-quarter ridge unexpected-TDC shock with nested circular block bootstrap inference (4q blocks, 250 reps).</p>
+
+    <div class="links-grid">
+      <a class="link-card" href="https://github.com/smkwray/tdcpass" target="_blank" rel="noopener">
+        <h4>Repository</h4>
+        <p>Source code, estimation pipeline, and all data construction.</p>
+      </a>
+      <a class="link-card" href="https://github.com/smkwray/tdcpass#readme" target="_blank" rel="noopener">
+        <h4>README</h4>
+        <p>Project overview, methodology, and release status.</p>
+      </a>
+      <a class="link-card" href="https://github.com/smkwray/tdcest" target="_blank" rel="noopener">
+        <h4>TDC Estimation (tdcest)</h4>
+        <p>Upstream project that produces the TDC series used as the treatment shock.</p>
+      </a>
+    </div>
+
+    <div class="links-grid" style="margin-top: 12px">
+      <a class="link-card" href="https://github.com/smkwray/tdcpass/tree/main/site/data" target="_blank" rel="noopener">
+        <h4>Public Artifacts</h4>
+        <p>JSON and CSV data files powering this site.</p>
+      </a>
+    </div>
+
+    <div class="table-wrap" style="margin-top: 24px">
+      <table class="data-table">
+        <thead>
+          <tr><th>Artifact</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>lp_irf_identity_baseline.csv</td><td>Primary exact-baseline impulse responses (h0&ndash;h8)</td></tr>
+          <tr><td>period_sensitivity.csv</td><td>Period-variant impulse responses across four sub-windows</td></tr>
+          <tr><td>counterpart_channel_scorecard.json</td><td>Creator, escape, external, and funding channel results</td></tr>
+          <tr><td>overview.json</td><td>Headline metrics, sample metadata, and evidence tiers</td></tr>
+          <tr><td>result_readiness_summary.json</td><td>Treatment quality gates and readiness diagnostics</td></tr>
+          <tr><td>pass_through_summary.json</td><td>Full pass-through analysis with ratio reporting gates</td></tr>
+          <tr><td>direct_identification_summary.json</td><td>Identification status and first-stage checks</td></tr>
+          <tr><td>identity_measurement_ladder.csv</td><td>Treatment-variant measurement sensitivity</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>TDC Pass-Through &mdash; Deposit response to unexpected transaction deposit creation</p>
+  <p>Public preview. Methods and reproducibility stopping point; not a settled causal decomposition.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="js/charts.js"></script>
+</body>
+</html>

@@ -17,6 +17,10 @@ prompts/
 site/*
 !site/data/
 !site/data/**
+!site/css/
+!site/css/**
+!site/js/
+!site/js/**
 !site/index.html
 
 *.plan.md
