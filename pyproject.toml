@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tdcpass"
 version = "0.1.0"
-description = "Seeded starter repo for Treasury deposit component pass-through research"
+description = "Public research code for Treasury Contribution to Deposits and independently measured non-TDC deposit evidence"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

@@ -4,6 +4,8 @@
 
 > In progress: this is a public methods-and-reproducibility release, and the design, estimates, and wording may still tighten.
 
+> Important: the broad TDC estimate and the independently confirmed non-TDC evidence are not the same object. The broad TDC result is the main matched-deposit empirical result; the independently confirmed non-TDC side is narrower and currently loan-led. Residual accounting is used for alignment and diagnostics, not as independent channel evidence.
+
 `tdcpass` studies one question:
 
 **When the Treasury Contribution to Deposits (TDC) rises unexpectedly, do matched total bank deposits rise too, or does that increase mostly replace other deposit-creating channels?**
@@ -19,6 +21,14 @@ Current stopping point:
 - the strict empirical expansion branch is effectively complete under current public data
 - trade flows, Fed MBS / QE incidence, and offshore/correspondent routing remain outside the independently confirmed core because same-scope domestic deposit settlement incidence is not identified tightly enough in public data
 - the repo is now in writeup and results-packaging mode unless new same-scope transaction or incidence evidence appears
+
+## Start here
+
+If you only read three things, read these:
+
+1. **Broad TDC result:** unexpected TDC is associated with higher matched total bank deposits on impact.
+2. **Independent non-TDC evidence:** the independently confirmed side is narrower, loan-led, and does not currently support a complete independently measured non-TDC deposit total.
+3. **Boundary rule:** Treasury other-checkable deposits, rest-of-world deposits, trade flows, Fed MBS/QE incidence, and offshore/correspondent routing remain outside the strict independently confirmed object under current public data.
 
 ## Status
 
@@ -44,6 +54,15 @@ The repo also imports a selective broad-estimate comparison ladder from sibling 
 - `tdc_row_mrv_nondefault_pilot_qoq`
 
 These rows are comparison or bounded-sensitivity measures only. They do not replace the frozen strict interpretation.
+
+### Why the canonical broad headline is retained
+
+The corrected `tdcest` ladder is important, but it is not treated as a direct replacement for the canonical broad headline.
+
+- Tier 2 and Tier 3 change the broad estimate materially, especially through interest and fiscal corrections.
+- Those corrected variants are kept as broad-estimate comparison rows rather than promoted into the independently confirmed non-TDC evidence hierarchy.
+- The sign difference between the canonical headline and the corrected ladder is therefore a broad-measurement issue, not a reason to widen the strict independent object.
+- Nothing in the corrected ladder promotes Treasury other-checkable deposits, rest-of-world deposits, or other excluded support channels into the independently confirmed core.
 
 For the historical extension before transaction coverage begins, the repo now uses a regime-aware TT&L-era cash-term refinement in the backfill path. That historical refinement is separate from the modern broad-versus-strict interpretation and does not alter the transaction-era headline after `2002Q4`.
 
@@ -146,6 +165,8 @@ The best concise summary is: the repo can defend full TDC as a broad Treasury Co
 ## Environment
 
 The repo uses an external virtualenv and external cache directories. It does not use a repo-local `.venv` or repo-local test/cache directories.
+
+For a precise public reproducibility guide, see [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 
 Example setup:
 

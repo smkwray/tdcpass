@@ -602,6 +602,11 @@ code {
   background: rgba(163, 110, 22, 0.07);
 }
 
+.insight-box.subtle {
+  border-left-color: var(--c-blue-muted);
+  background: rgba(47, 110, 243, 0.03);
+}
+
 .channel-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 18px;

@@ -78,6 +78,8 @@
       populatePeriodTable(_data);
       initReveal();
       buildAll(_data);
+    }).catch(function (err) {
+      console.error('Failed to load interactive site data.', err);
     });
   }
 

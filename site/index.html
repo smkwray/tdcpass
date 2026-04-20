@@ -51,19 +51,19 @@
       <p class="panel-kicker">Impact snapshot (frozen estimate)</p>
       <div class="hero-metric">
         <span class="metric-label">Broad TDC</span>
-        <span class="metric-value up" id="stat-tdc">&mdash;</span>
+        <span class="metric-value up" id="stat-tdc">+$128B</span>
       </div>
       <div class="hero-metric">
         <span class="metric-label">Matched total deposits</span>
-        <span class="metric-value up" id="stat-total">&mdash;</span>
+        <span class="metric-value up" id="stat-total">+$56B</span>
       </div>
       <div class="hero-metric">
         <span class="metric-label">Implied other component</span>
-        <span class="metric-value down" id="stat-other">&mdash;</span>
+        <span class="metric-value down" id="stat-other">-$73B</span>
       </div>
       <div class="hero-metric muted">
         <span class="metric-label">Quarters with negative other component</span>
-        <span class="metric-value neutral" id="stat-share">&mdash;</span>
+        <span class="metric-value neutral" id="stat-share">44.6%</span>
       </div>
     </aside>
   </div>
@@ -95,20 +95,24 @@
       </article>
     </div>
 
+    <div class="insight-box">
+      <strong>Do not equate these two layers.</strong> The broad TDC estimate is the main matched-deposit empirical result. The independently confirmed non-TDC side is narrower and currently loan-led. Residual accounting is used for alignment and diagnostics, not as independent channel evidence.
+    </div>
+
     <div class="evidence-strip">
       <div>
         <span class="strip-label">Direct evidence</span>
-        <strong id="strict-core-h0">&mdash;</strong>
+        <strong id="strict-core-h0">-$10.66B</strong>
         <span class="strip-note">Loan core (minimum), on impact</span>
       </div>
       <div>
         <span class="strip-label">Impact view</span>
-        <strong id="strict-mortgage-h0">&mdash;</strong>
+        <strong id="strict-mortgage-h0">-$5.04B</strong>
         <span class="strip-note">Mortgage lending, on impact</span>
       </div>
       <div>
         <span class="strip-label">Bridge comparison</span>
-        <strong id="strict-bridge-h0">&mdash;</strong>
+        <strong id="strict-bridge-h0">+$9.44B</strong>
         <span class="strip-note">Loan core + nonfinancial corporate, on impact</span>
       </div>
     </div>
@@ -128,7 +132,7 @@
     </div>
 
     <div class="insight-box">
-      <strong>Broad result.</strong> On impact, the broad TDC response is about <span id="broad-tdc-inline">&mdash;</span> while matched total deposits rise about <span id="broad-total-inline">&mdash;</span>. That broad estimate remains useful, but it should not be read as if the full amount has already been independently confirmed as pure deposit creation.
+      <strong>Broad result.</strong> On impact, the broad TDC response is about <span id="broad-tdc-inline">+$128.49B</span> while matched total deposits rise about <span id="broad-total-inline">+$55.75B</span>. That broad estimate remains useful, but it should not be read as if the full amount has already been independently confirmed as pure deposit creation.
     </div>
 
     <div class="broad-grid">
@@ -151,11 +155,19 @@
         </p>
       </div>
       <div class="ladder-figures">
-        <div><span>Headline bank-only</span><strong id="ladder-headline">&mdash;</strong></div>
-        <div><span>Tier 2 bank-only</span><strong id="ladder-tier2">&mdash;</strong></div>
-        <div><span>Tier 3 bank-only</span><strong id="ladder-tier3">&mdash;</strong></div>
-        <div><span>Tier 3 broad depository</span><strong id="ladder-broad">&mdash;</strong></div>
+        <div><span>Headline bank-only</span><strong id="ladder-headline">+$69.00B</strong></div>
+        <div><span>Tier 2 bank-only</span><strong id="ladder-tier2">-$38.09B</strong></div>
+        <div><span>Tier 3 bank-only</span><strong id="ladder-tier3">-$40.16B</strong></div>
+        <div><span>Tier 3 broad depository</span><strong id="ladder-broad">-$39.94B</strong></div>
       </div>
+    </div>
+
+    <div class="insight-box caution">
+      <strong>Why the canonical broad headline stays in front.</strong> The corrected Tier 2 and Tier 3 ladder rows materially change the broad estimate, especially through interest and fiscal corrections. They are kept as comparison evidence for broad-measurement sensitivity, not as replacements for the independently confirmed non-TDC evidence hierarchy.
+    </div>
+
+    <div class="insight-box subtle">
+      <strong>What the sign difference means.</strong> A large difference between the headline broad estimate and the corrected ladder means the broad measurement question is still active. It does not, by itself, promote treasury other-checkable deposits, rest-of-world deposits, or other excluded support channels into the independently confirmed core.
     </div>
   </section>
 
@@ -173,23 +185,23 @@
         <p class="plane-tag">Main direct evidence</p>
         <h3>Loan core (minimum)</h3>
         <dl class="metric-list">
-          <div><dt>h0</dt><dd id="strict-core-h0-panel">&mdash;</dd></div>
-          <div><dt>h4</dt><dd id="strict-core-h4-panel">&mdash;</dd></div>
-          <div><dt>h8</dt><dd id="strict-core-h8-panel">&mdash;</dd></div>
+          <div><dt>h0</dt><dd id="strict-core-h0-panel">-$10.66B</dd></div>
+          <div><dt>h4</dt><dd id="strict-core-h4-panel">-$39.14B</dd></div>
+          <div><dt>h8</dt><dd id="strict-core-h8-panel">-$34.07B</dd></div>
         </dl>
       </article>
 
       <article class="strict-panel">
         <p class="plane-tag">Impact view</p>
         <h3>Mortgage lending</h3>
-        <p class="strict-number" id="strict-mortgage-panel">&mdash;</p>
+        <p class="strict-number" id="strict-mortgage-panel">-$5.04B</p>
         <p class="strict-note">Closest direct lending component on impact, but not the best summary across horizons.</p>
       </article>
 
       <article class="strict-panel">
         <p class="plane-tag">Bridge comparison</p>
         <h3>Loan core + nonfinancial corporate</h3>
-        <p class="strict-number positive" id="strict-bridge-panel">&mdash;</p>
+        <p class="strict-number positive" id="strict-bridge-panel">+$9.44B</p>
         <p class="strict-note">A comparison row only, not direct independent verification.</p>
       </article>
     </div>
@@ -212,11 +224,12 @@
         <p>
           These are real measured support legs, but current public data do not validate them as clean in-scope deposit components.
         </p>
+        <p class="strict-note">These channels are economically relevant diagnostics, but they stay outside the independently confirmed core until same-scope, timing-matched incidence evidence is available.</p>
         <dl class="metric-list compact">
-          <div><dt>Treasury other-checkable deposit share</dt><dd id="toc-share">&mdash;</dd></div>
-          <div><dt>Treasury reserve share</dt><dd id="toc-reserve">&mdash;</dd></div>
-          <div><dt>Rest-of-world checkable share</dt><dd id="row-share">&mdash;</dd></div>
-          <div><dt>Rest-of-world external share</dt><dd id="row-external">&mdash;</dd></div>
+          <div><dt>Treasury other-checkable deposit share</dt><dd id="toc-share">0.66</dd></div>
+          <div><dt>Treasury reserve share</dt><dd id="toc-reserve">1.26</dd></div>
+          <div><dt>Rest-of-world checkable share</dt><dd id="row-share">0.02</dd></div>
+          <div><dt>Rest-of-world external share</dt><dd id="row-external">2.26</dd></div>
         </dl>
       </article>
 
@@ -358,10 +371,10 @@
   <section class="section reveal" id="data">
     <div class="section-heading">
       <p class="eyebrow">Data and methods</p>
-      <h2>Everything here is reproducible from the public bundle.</h2>
+      <h2>Public artifacts and a rerunnable pipeline.</h2>
     </div>
     <p class="section-intro">
-      The site is driven by public quarterly data and a frozen set of public result files. It brings the broad TDC estimate, the independent non-TDC evidence, and the main exclusions into one readable summary.
+      This site can be rebuilt from the committed public artifact bundle. The full analysis pipeline can also be rerun from public data sources, with optional sibling caches used only as accelerators.
     </p>
 
     <div class="links-grid">
