@@ -1,0 +1,289 @@
+{
+  "status": "available",
+  "headline_question": "How should the TDC treatment be split into a deposit-proximate core and a separate TOC/ROW support bundle?",
+  "estimation_path": {
+    "summary_artifact": "split_treatment_architecture_summary.json",
+    "source_artifacts": [
+      "tdc_treatment_audit_summary.json",
+      "toc_row_path_split_summary.json",
+      "treatment_object_comparison_summary.json"
+    ]
+  },
+  "series_definitions": {
+    "baseline_treatment": "tdc_bank_only_qoq",
+    "core_deposit_proximate_treatment": "tdc_core_deposit_proximate_bank_only_qoq",
+    "support_bundle_treatment": "tdc_toc_row_support_bundle_qoq",
+    "baseline_residual": "other_component_qoq",
+    "core_deposit_proximate_residual": "other_component_core_deposit_proximate_bank_only_qoq",
+    "support_bundle_formula": "tdc_row_treasury_transactions_qoq - tdc_treasury_operating_cash_qoq"
+  },
+  "quarterly_alignment": {
+    "status": "available",
+    "rows": 92,
+    "tdc_identity": {
+      "max_abs_gap_beta": 4.263256414560601e-14,
+      "mean_abs_gap_beta": 4.002459595637445e-15,
+      "worst_quarter": "2013Q4",
+      "worst_gap_beta": -4.263256414560601e-14,
+      "quarterly_alignment": "exact"
+    },
+    "residual_identity": {
+      "max_abs_gap_beta": 1.1368683772161603e-13,
+      "mean_abs_gap_beta": 1.2102260618772282e-14,
+      "worst_quarter": "2025Q1",
+      "worst_gap_beta": 1.1368683772161603e-13,
+      "quarterly_alignment": "exact"
+    }
+  },
+  "architecture_recommendation": {
+    "status": "recommended_interpretation_redesign",
+    "headline_decision_now": "keep current headline provisional and do not promote the TOC_ROW_excluded object",
+    "recommended_next_branch": "split_core_plus_support_bundle"
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline_target_response": {
+        "beta": 128.49398892100785,
+        "se": 14.082533270452723,
+        "lower95": 100.89222371092052,
+        "upper95": 156.0957541310952,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "core_deposit_proximate_target_response": {
+        "beta": 63.097364377454454,
+        "se": 6.645584881083331,
+        "lower95": 48.51986146486273,
+        "upper95": 76.30719288010935,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "support_bundle_beta": 65.3966245435534,
+      "support_bundle_share_of_baseline_tdc_beta": 0.508946956139374,
+      "baseline_residual_response": {
+        "beta": -72.74365367294723,
+        "se": 23.353496740068078,
+        "lower95": -111.67491859993335,
+        "upper95": -31.72872933058706,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "core_deposit_proximate_residual_response": {
+        "beta": -5.508313542362046,
+        "se": 20.434623564952794,
+        "lower95": -52.89475074430617,
+        "upper95": 7.0832519271867245,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "support_bundle_residual_shift_vs_baseline_beta": 67.23534013058519,
+      "row_signed_beta": 11.756792842555686,
+      "toc_signed_beta": 70.44115908786216,
+      "direct_support_bundle_signed_beta": 82.19795193041784,
+      "support_bundle_minus_direct_component_gap_beta": -16.801327386864443,
+      "quarterly_preferred_path": "direct_deposit_path_dominant",
+      "horizon_preferred_path": "broad_support_path_dominant",
+      "broad_support_path_response": {
+        "beta": 87.77282221303257,
+        "se": 17.188445746769325,
+        "lower95": 54.08346854936469,
+        "upper95": 121.46217587670046,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "direct_deposit_path_response": {
+        "beta": 61.41009378099726,
+        "se": 19.711186006721512,
+        "lower95": 22.776169207823095,
+        "upper95": 100.04401835417141,
+        "n": 68,
+        "ci_excludes_zero": true
+      }
+    },
+    "h1": {
+      "baseline_target_response": {
+        "beta": 177.53974642600284,
+        "se": 27.083004995283464,
+        "lower95": 124.45705663524726,
+        "upper95": 230.62243621675842,
+        "n": 67,
+        "ci_excludes_zero": true
+      },
+      "core_deposit_proximate_target_response": {
+        "beta": 141.60401990915378,
+        "se": 21.513312539018926,
+        "lower95": 89.53594217808886,
+        "upper95": 156.19203420272467,
+        "n": 67,
+        "ci_excludes_zero": true
+      },
+      "support_bundle_beta": 35.93572651684906,
+      "support_bundle_share_of_baseline_tdc_beta": 0.2024094730349679,
+      "baseline_residual_response": {
+        "beta": -81.73501268106114,
+        "se": 69.26962551323872,
+        "lower95": -159.79587104284744,
+        "upper95": 68.55665573955687,
+        "n": 67,
+        "ci_excludes_zero": false
+      },
+      "core_deposit_proximate_residual_response": {
+        "beta": -23.71715232934119,
+        "se": 24.278247274138455,
+        "lower95": -73.81777941147121,
+        "upper95": 2.3956221583348496,
+        "n": 67,
+        "ci_excludes_zero": false
+      },
+      "support_bundle_residual_shift_vs_baseline_beta": 58.017860351719946,
+      "row_signed_beta": 12.207052405526362,
+      "toc_signed_beta": 54.24265292895619,
+      "direct_support_bundle_signed_beta": 66.44970533448256,
+      "support_bundle_minus_direct_component_gap_beta": -30.5139788176335,
+      "quarterly_preferred_path": "direct_deposit_path_dominant",
+      "horizon_preferred_path": "broad_support_path_dominant",
+      "broad_support_path_response": {
+        "beta": 71.93855037982472,
+        "se": 33.39048385879253,
+        "lower95": 6.493202016591368,
+        "upper95": 137.38389874305807,
+        "n": 67,
+        "ci_excludes_zero": true
+      },
+      "direct_deposit_path_response": {
+        "beta": 48.219184948253776,
+        "se": 43.538693957995555,
+        "lower95": -37.11665520941751,
+        "upper95": 133.55502510592507,
+        "n": 67,
+        "ci_excludes_zero": false
+      }
+    },
+    "h4": {
+      "baseline_target_response": {
+        "beta": 278.13971316628357,
+        "se": 69.29214131662822,
+        "lower95": 142.32711618569226,
+        "upper95": 413.9523101468749,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "core_deposit_proximate_target_response": {
+        "beta": 212.64368952952745,
+        "se": 51.87758362948109,
+        "lower95": 78.25722324051245,
+        "upper95": 262.0718448536628,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "support_bundle_beta": 65.49602363675612,
+      "support_bundle_share_of_baseline_tdc_beta": 0.2354788638097137,
+      "baseline_residual_response": {
+        "beta": -110.80901568738503,
+        "se": 50.582600640491876,
+        "lower95": -197.13904381598593,
+        "upper95": -49.55641130250566,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "core_deposit_proximate_residual_response": {
+        "beta": -43.17170635060543,
+        "se": 21.491399261803593,
+        "lower95": -86.77549247437325,
+        "upper95": -7.134147590933695,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "support_bundle_residual_shift_vs_baseline_beta": 67.6373093367796,
+      "row_signed_beta": 34.66439319115932,
+      "toc_signed_beta": 48.04547363643367,
+      "direct_support_bundle_signed_beta": 82.70986682759299,
+      "support_bundle_minus_direct_component_gap_beta": -17.21384319083687,
+      "quarterly_preferred_path": "direct_deposit_path_dominant",
+      "horizon_preferred_path": "broad_support_path_dominant",
+      "broad_support_path_response": {
+        "beta": 70.58320720960461,
+        "se": 39.19106779390551,
+        "lower95": -6.231285666450191,
+        "upper95": 147.3977000856594,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "direct_deposit_path_response": {
+        "beta": 33.87385627732221,
+        "se": 39.95822183400889,
+        "lower95": -44.44425851733521,
+        "upper95": 112.19197107197962,
+        "n": 64,
+        "ci_excludes_zero": false
+      }
+    },
+    "h8": {
+      "baseline_target_response": {
+        "beta": 347.6946386730543,
+        "se": 113.67922702128271,
+        "lower95": 124.88335371134022,
+        "upper95": 570.5059236347685,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "core_deposit_proximate_target_response": {
+        "beta": 250.44523079159632,
+        "se": 82.8880060597224,
+        "lower95": 40.00599359583024,
+        "upper95": 306.8129701581808,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "support_bundle_beta": 97.24940788145801,
+      "support_bundle_share_of_baseline_tdc_beta": 0.27969774930266894,
+      "baseline_residual_response": {
+        "beta": -233.47077668651042,
+        "se": 68.89208359677387,
+        "lower95": -329.0993395357397,
+        "upper95": -96.29311856593844,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "core_deposit_proximate_residual_response": {
+        "beta": -67.3357664947678,
+        "se": 36.6147178958457,
+        "lower95": -174.7837750113576,
+        "upper95": -18.004871102951455,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "support_bundle_residual_shift_vs_baseline_beta": 166.13501019174262,
+      "row_signed_beta": 66.95416192387714,
+      "toc_signed_beta": 108.72102920527965,
+      "direct_support_bundle_signed_beta": 175.6751911291568,
+      "support_bundle_minus_direct_component_gap_beta": -78.42578324769877,
+      "quarterly_preferred_path": "direct_deposit_path_dominant",
+      "horizon_preferred_path": "broad_support_path_dominant",
+      "broad_support_path_response": {
+        "beta": 123.30017664216302,
+        "se": 49.08850365082946,
+        "lower95": 27.086709486537288,
+        "upper95": 219.51364379778875,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "direct_deposit_path_response": {
+        "beta": 93.03899580102497,
+        "se": 43.207773164115075,
+        "lower95": 8.35176039935942,
+        "upper95": 177.7262312026905,
+        "n": 60,
+        "ci_excludes_zero": true
+      }
+    }
+  },
+  "takeaways": [
+    "The split architecture defines a deposit-proximate core treatment separately from the mixed TOC/ROW support bundle instead of forcing one headline treatment object to do both jobs.",
+    "The quarterly split is mechanically exact in the panel: max TDC decomposition gap \u2248 4.26e-14, max residual decomposition gap \u2248 1.14e-13.",
+    "At h0, baseline residual \u2248 -72.74, core residual \u2248 -5.51, so the split support bundle carries about 65.40 of treatment-side movement.",
+    "At h0, the deposit-proximate core treatment response is still sizable (\u2248 63.10), which is why the split should be treated as an interpretation redesign rather than a zeroing-out exercise.",
+    "Path evidence stays mixed inside the support bundle: quarter by quarter the preferred path is `direct_deposit_path_dominant`, but at h0 the preferred path is `broad_support_path_dominant`.",
+    "This split directly implements the repo-level redesign recommendation: `split_core_plus_support_bundle`."
+  ]
+}

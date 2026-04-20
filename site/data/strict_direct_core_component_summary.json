@@ -1,0 +1,281 @@
+{
+  "status": "available",
+  "headline_question": "Should the current strict direct core remain bundled, or is one direct-core subcomponent the real headline candidate under the current non-TOC/ROW framework?",
+  "estimation_path": {
+    "summary_artifact": "strict_direct_core_component_summary.json",
+    "baseline_spec_name": "strict_direct_core_component_baseline_reference",
+    "core_spec_name": "strict_direct_core_component_core_reference",
+    "source_artifacts": [
+      "strict_release_framing_summary.json"
+    ]
+  },
+  "candidate_definitions": {
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "mortgages_only_candidate": "strict_loan_mortgages_qoq",
+    "consumer_credit_only_candidate": "strict_loan_consumer_credit_qoq"
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline": {
+        "residual_response": {
+          "beta": -81.17833439216805,
+          "se": 20.082089282921977,
+          "lower95": -120.53922938669513,
+          "upper95": -41.81743939764098,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "mortgages_response": {
+          "beta": -7.634333280458566,
+          "se": 1.924910501099335,
+          "lower95": -11.407157862613262,
+          "upper95": -3.86150869830387,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "consumer_credit_response": {
+          "beta": -9.614618825387854,
+          "se": 2.140794030705782,
+          "lower95": -13.810575125571187,
+          "upper95": -5.418662525204522,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "direct_core_response": {
+          "beta": -20.95916493909567,
+          "se": 3.154984044707307,
+          "lower95": -27.14293366672199,
+          "upper95": -14.775396211469346,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_residual_beta": {
+          "strict_loan_mortgages_qoq": 73.54400111170949,
+          "strict_loan_consumer_credit_qoq": 71.5637155667802,
+          "strict_loan_core_min_qoq": 60.21916945307238
+        },
+        "dominant_component_by_abs_beta": "strict_loan_consumer_credit_qoq"
+      },
+      "core_deposit_proximate": {
+        "residual_response": {
+          "beta": -5.501727161440428,
+          "se": 10.900899392583673,
+          "lower95": -26.867489970904426,
+          "upper95": 15.86403564802357,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "mortgages_response": {
+          "beta": -5.039345380614919,
+          "se": 1.6661966147510618,
+          "lower95": -8.305090745527,
+          "upper95": -1.7736000157028378,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "consumer_credit_response": {
+          "beta": -4.345147195040074,
+          "se": 1.3457426987862577,
+          "lower95": -6.9828028846611385,
+          "upper95": -1.7074915054190085,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "direct_core_response": {
+          "beta": -10.658905058923395,
+          "se": 2.1604322831093974,
+          "lower95": -14.893352333817813,
+          "upper95": -6.424457784028976,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_residual_beta": {
+          "strict_loan_mortgages_qoq": 0.46238178082550885,
+          "strict_loan_consumer_credit_qoq": 1.1565799664003542,
+          "strict_loan_core_min_qoq": 5.157177897482967
+        },
+        "dominant_component_by_abs_beta": "strict_loan_mortgages_qoq"
+      }
+    },
+    "h4": {
+      "baseline": {
+        "residual_response": {
+          "beta": -100.99420217322476,
+          "se": 48.95277771700546,
+          "lower95": -196.94164649855549,
+          "upper95": -5.046757847894057,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "mortgages_response": {
+          "beta": -15.114894056479741,
+          "se": 11.663081919578339,
+          "lower95": -37.97453461885328,
+          "upper95": 7.744746505893801,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "consumer_credit_response": {
+          "beta": -13.69868049030553,
+          "se": 9.312658022572304,
+          "lower95": -31.951490214547245,
+          "upper95": 4.554129233936184,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "direct_core_response": {
+          "beta": -39.60708317233486,
+          "se": 21.70497515481175,
+          "lower95": -82.14883447576588,
+          "upper95": 2.934668131096167,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "candidate_abs_gap_to_residual_beta": {
+          "strict_loan_mortgages_qoq": 85.87930811674502,
+          "strict_loan_consumer_credit_qoq": 87.29552168291923,
+          "strict_loan_core_min_qoq": 61.3871190008899
+        },
+        "dominant_component_by_abs_beta": "strict_loan_mortgages_qoq"
+      },
+      "core_deposit_proximate": {
+        "residual_response": {
+          "beta": -43.4358709731528,
+          "se": 19.209068844634526,
+          "lower95": -81.08564590863648,
+          "upper95": -5.786096037669132,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "mortgages_response": {
+          "beta": -23.093561792318305,
+          "se": 4.01858971263961,
+          "lower95": -30.96999762909194,
+          "upper95": -15.21712595554467,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "consumer_credit_response": {
+          "beta": -14.756394751148848,
+          "se": 4.352158901895064,
+          "lower95": -23.286626198863175,
+          "upper95": -6.226163303434523,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "direct_core_response": {
+          "beta": -39.14425119341881,
+          "se": 8.210890028884426,
+          "lower95": -55.23759565003229,
+          "upper95": -23.050906736805334,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_residual_beta": {
+          "strict_loan_mortgages_qoq": 20.342309180834498,
+          "strict_loan_consumer_credit_qoq": 28.679476222003956,
+          "strict_loan_core_min_qoq": 4.291619779733992
+        },
+        "dominant_component_by_abs_beta": "strict_loan_mortgages_qoq"
+      }
+    },
+    "h8": {
+      "baseline": {
+        "residual_response": {
+          "beta": -230.24311066594305,
+          "se": 57.83146784928568,
+          "lower95": -343.59278765054296,
+          "upper95": -116.89343368134313,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "mortgages_response": {
+          "beta": -4.094456817922129,
+          "se": 24.426486286172292,
+          "lower95": -51.97036993881982,
+          "upper95": 43.78145630297556,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "consumer_credit_response": {
+          "beta": -6.925480264059907,
+          "se": 9.731899505476983,
+          "lower95": -26.000003294794794,
+          "upper95": 12.149042766674981,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "direct_core_response": {
+          "beta": -27.699009281406575,
+          "se": 34.68650038016008,
+          "lower95": -95.68455002652034,
+          "upper95": 40.28653146370719,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "candidate_abs_gap_to_residual_beta": {
+          "strict_loan_mortgages_qoq": 226.14865384802093,
+          "strict_loan_consumer_credit_qoq": 223.31763040188315,
+          "strict_loan_core_min_qoq": 202.54410138453648
+        },
+        "dominant_component_by_abs_beta": "strict_loan_consumer_credit_qoq"
+      },
+      "core_deposit_proximate": {
+        "residual_response": {
+          "beta": -67.48146063709291,
+          "se": 23.54347510422652,
+          "lower95": -113.62667184137689,
+          "upper95": -21.336249432808927,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "mortgages_response": {
+          "beta": -22.609373840489837,
+          "se": 6.53117167004177,
+          "lower95": -35.41047031377171,
+          "upper95": -9.808277367207968,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "consumer_credit_response": {
+          "beta": -9.879519914821154,
+          "se": 3.815458978633482,
+          "lower95": -17.35781951294278,
+          "upper95": -2.40122031669953,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "direct_core_response": {
+          "beta": -34.07468511503987,
+          "se": 10.078203497890714,
+          "lower95": -53.82796397090567,
+          "upper95": -14.321406259174072,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_residual_beta": {
+          "strict_loan_mortgages_qoq": 44.87208679660307,
+          "strict_loan_consumer_credit_qoq": 57.601940722271756,
+          "strict_loan_core_min_qoq": 33.40677552205304
+        },
+        "dominant_component_by_abs_beta": "strict_loan_mortgages_qoq"
+      }
+    }
+  },
+  "classification": {
+    "h0_dominant_component": "strict_loan_mortgages_qoq",
+    "recommendation_status": "mortgages_only_candidate_deserves_review"
+  },
+  "recommendation": {
+    "status": "mortgages_only_candidate_deserves_review",
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "next_branch": "test_narrower_single_component_direct_core_candidate"
+  },
+  "takeaways": [
+    "This summary asks whether the current headline strict direct core should stay bundled or narrow further inside the current non-TOC/ROW framework.",
+    "The comparison is intentionally narrow: mortgages only, consumer credit only, and the current bundled direct core, all judged against the same residual object.",
+    "At h0 under the core-deposit-proximate shock: residual \u2248 -5.50, mortgages \u2248 -5.04, consumer credit \u2248 -4.35, bundled direct core \u2248 -10.66.",
+    "The dominant direct-core subcomponent at h0 is `strict_loan_mortgages_qoq`.",
+    "Current recommendation: `mortgages_only_candidate_deserves_review`."
+  ]
+}

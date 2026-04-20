@@ -1,0 +1,89 @@
+{
+  "status": "available",
+  "headline_question": "Does any narrow validated TOC share belong in the strict deposit component once the raw-incidence gate and direct-core comparison are applied together?",
+  "estimation_path": {
+    "summary_artifact": "toc_validated_share_candidate_summary.json",
+    "source_artifacts": [
+      "toc_row_liability_incidence_raw_summary.json",
+      "strict_component_framework_summary.json"
+    ]
+  },
+  "candidate_definitions": {
+    "current_strict_core_treatment": "tdc_core_deposit_proximate_bank_only_qoq",
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "toc_signed_leg": "tdc_toc_signed_qoq",
+    "candidate_rows": [
+      "h0_private_checkable_share_candidate",
+      "h0_deposits_only_share_candidate",
+      "h0_total_deposits_upper_envelope"
+    ]
+  },
+  "quarterly_gate": {
+    "status": "fails",
+    "best_in_scope_corr": 0.2520808011751136,
+    "best_support_corr": 0.9472142089908314,
+    "best_in_scope_same_sign_share": 0.532608695652174
+  },
+  "key_horizons": {
+    "h0": {
+      "core_residual_beta": -5.508313542362046,
+      "headline_direct_core_beta": -10.658905058923445,
+      "baseline_abs_gap_to_direct_core": 5.1505915165613985,
+      "toc_leg_beta": 70.4411590878622,
+      "candidates": {
+        "h0_private_checkable_share_candidate": {
+          "label": "h0_private_checkable_share_candidate",
+          "share": 0.40679164607684437,
+          "candidate_increment_beta": 28.65487505691233,
+          "implied_residual_beta": -34.16318859927438,
+          "abs_gap_to_direct_core": 23.504283540350933,
+          "improves_vs_core_residual_gap": false
+        },
+        "h0_deposits_only_share_candidate": {
+          "label": "h0_deposits_only_share_candidate",
+          "share": 0.6638359960227482,
+          "candidate_increment_beta": 46.76137700408787,
+          "implied_residual_beta": -52.269690546449915,
+          "abs_gap_to_direct_core": 41.61078548752647,
+          "improves_vs_core_residual_gap": false
+        },
+        "h0_total_deposits_upper_envelope": {
+          "label": "h0_total_deposits_upper_envelope",
+          "share": 0.7914454556110087,
+          "candidate_increment_beta": 55.750335248060644,
+          "implied_residual_beta": -61.25864879042269,
+          "abs_gap_to_direct_core": 50.599743731499245,
+          "improves_vs_core_residual_gap": false
+        }
+      },
+      "best_candidate": {
+        "label": "h0_private_checkable_share_candidate",
+        "share": 0.40679164607684437,
+        "candidate_increment_beta": 28.65487505691233,
+        "implied_residual_beta": -34.16318859927438,
+        "abs_gap_to_direct_core": 23.504283540350933,
+        "improves_vs_core_residual_gap": false
+      }
+    }
+  },
+  "classification": {
+    "quarterly_stability_gate": "fails",
+    "direct_core_fit_gate": "fails",
+    "decision": "keep_toc_outside_strict_object_under_current_evidence",
+    "row_status": "keep_outside_strict_object"
+  },
+  "recommendation": {
+    "status": "toc_candidate_gate_completed",
+    "toc_rule": "keep_outside_strict_object",
+    "row_rule": "keep_outside_strict_object",
+    "next_branch": "finalize_release_framing_that_toc_and_row_stay_outside_strict_object"
+  },
+  "takeaways": [
+    "This summary tests the only remaining reincorporation question after the raw-incidence gate: whether any narrow TOC share can be added back to the strict object without violating the strict standard.",
+    "The rule is strict, not fit-chasing: a candidate must both clear the quarterly incidence gate and improve the direct-core comparison relative to the current core residual.",
+    "The baseline comparison benchmark is the current core residual versus the headline direct strict core: core residual \u2248 -5.51, direct core \u2248 -10.66, abs gap \u2248 5.15.",
+    "Even the best narrow TOC candidate does not help under the current evidence: `h0_private_checkable_share_candidate` implies residual \u2248 -34.16 with abs gap to the direct core \u2248 23.50.",
+    "The quarterly gate still fails for TOC incidence stability: best in-scope deposit corr \u2248 0.25 versus best support corr \u2248 0.95.",
+    "Current decision: keep TOC outside the strict object alongside ROW. Under the present evidence, TOC remains a real measured support leg, not a validated strict deposit component."
+  ]
+}

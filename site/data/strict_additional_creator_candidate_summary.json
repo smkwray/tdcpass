@@ -1,0 +1,1309 @@
+{
+  "status": "available",
+  "headline_question": "Beyond the current direct core, do any remaining creator channels deserve strict-candidate status, or do they only serve as broader validation proxies?",
+  "estimation_path": {
+    "summary_artifact": "strict_additional_creator_candidate_summary.json",
+    "baseline_spec_name": "strict_additional_creator_baseline_reference",
+    "core_spec_name": "strict_additional_creator_core_reference",
+    "source_artifacts": [
+      "strict_release_framing_summary.json",
+      "strict_direct_core_horizon_stability_summary.json"
+    ]
+  },
+  "candidate_groups": {
+    "validation_proxies": [
+      "closed_end_residential_loans_qoq",
+      "closed_end_residential_loans_ex_chargeoffs_qoq",
+      "consumer_loans_qoq",
+      "consumer_loans_ex_chargeoffs_qoq"
+    ],
+    "extension_candidates": [
+      "commercial_industrial_loans_qoq",
+      "commercial_industrial_loans_ex_chargeoffs_qoq",
+      "construction_land_development_loans_qoq",
+      "cre_multifamily_loans_qoq",
+      "cre_nonfarm_nonresidential_loans_qoq",
+      "loans_to_commercial_banks_qoq",
+      "loans_to_nondepository_financial_institutions_qoq",
+      "loans_for_purchasing_or_carrying_securities_qoq"
+    ]
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline": {
+        "validation_proxies": {
+          "residual_response": {
+            "beta": -81.17833439216805,
+            "se": 20.082089282921977,
+            "lower95": -120.53922938669513,
+            "upper95": -41.81743939764098,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "consumer_loans_qoq",
+              "response": {
+                "beta": -3.7282847317091514,
+                "se": 2.154655217457532,
+                "lower95": -7.951408957925914,
+                "upper95": 0.49483949450761155,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 77.4500496604589,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -3.5216454047319803,
+                "se": 2.097136555160895,
+                "lower95": -7.6320330528473335,
+                "upper95": 0.5887422433833733,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 77.65668898743607,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "closed_end_residential_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -3.244587318877208,
+                "se": 0.9975946765131697,
+                "lower95": -5.19987288484302,
+                "upper95": -1.2893017529113953,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 77.93374707329085,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "closed_end_residential_loans_qoq",
+              "response": {
+                "beta": -3.1981811911101747,
+                "se": 0.9594388883715897,
+                "lower95": -5.078681412318491,
+                "upper95": -1.3176809699018588,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 77.98015320105787,
+              "same_sign_as_residual": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "consumer_loans_qoq",
+            "response": {
+              "beta": -3.7282847317091514,
+              "se": 2.154655217457532,
+              "lower95": -7.951408957925914,
+              "upper95": 0.49483949450761155,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 77.4500496604589,
+            "same_sign_as_residual": true
+          }
+        },
+        "extension_candidates": {
+          "residual_response": {
+            "beta": -81.17833439216805,
+            "se": 20.082089282921977,
+            "lower95": -120.53922938669513,
+            "upper95": -41.81743939764098,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "cre_multifamily_loans_qoq",
+              "response": {
+                "beta": -0.7423248032636791,
+                "se": 0.5238820223799037,
+                "lower95": -1.7691335671282902,
+                "upper95": 0.28448396060093195,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 80.43600958890437,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "cre_nonfarm_nonresidential_loans_qoq",
+              "response": {
+                "beta": -0.44804772330285036,
+                "se": 0.7043910558993449,
+                "lower95": -1.8286541928655664,
+                "upper95": 0.9325587462598657,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 80.7302866688652,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "construction_land_development_loans_qoq",
+              "response": {
+                "beta": -0.044672384437953516,
+                "se": 0.24414336077208715,
+                "lower95": -0.5231933715512442,
+                "upper95": 0.43384860267533726,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 81.1336620077301,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": 0.6785152791545411,
+                "se": 0.5420148784865765,
+                "lower95": -0.38383388267914864,
+                "upper95": 1.740864440988231,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 81.85684967132259,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 0.8834031527673665,
+                "se": 0.7350944801097216,
+                "lower95": -0.5573820282476878,
+                "upper95": 2.3241883337824207,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 82.06173754493543,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_qoq",
+              "response": {
+                "beta": 1.098050009942594,
+                "se": 8.921674589380077,
+                "lower95": -16.38843218524236,
+                "upper95": 18.584532205127545,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 82.27638440211065,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": 1.204459571443623,
+                "se": 8.959877941625487,
+                "lower95": -16.35690119414233,
+                "upper95": 18.76582033702958,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 82.38279396361168,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 7.837548246683385,
+                "se": 5.124117871980959,
+                "lower95": -2.2057227823992935,
+                "upper95": 17.880819275766065,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 89.01588263885144,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "cre_multifamily_loans_qoq",
+            "response": {
+              "beta": -0.7423248032636791,
+              "se": 0.5238820223799037,
+              "lower95": -1.7691335671282902,
+              "upper95": 0.28448396060093195,
+              "n": 42,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 80.43600958890437,
+            "same_sign_as_residual": true
+          }
+        }
+      },
+      "core_deposit_proximate": {
+        "validation_proxies": {
+          "residual_response": {
+            "beta": -5.501727161440428,
+            "se": 10.900899392583673,
+            "lower95": -26.867489970904426,
+            "upper95": 15.86403564802357,
+            "n": 68,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "closed_end_residential_loans_qoq",
+              "response": {
+                "beta": -2.5559540894495694,
+                "se": 1.3234270174606726,
+                "lower95": -5.149871043672487,
+                "upper95": 0.03796286477334876,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 2.9457730719908586,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "closed_end_residential_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -2.380118943690964,
+                "se": 1.3266077890943353,
+                "lower95": -4.980270210315862,
+                "upper95": 0.22003232293393316,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 3.121608217749464,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_qoq",
+              "response": {
+                "beta": -1.0052432549320354,
+                "se": 1.4989201952698432,
+                "lower95": -3.9431268376609276,
+                "upper95": 1.9326403277968571,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 4.496483906508392,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -0.6996281501589157,
+                "se": 1.4637107095956292,
+                "lower95": -3.5685011409663487,
+                "upper95": 2.1692448406485174,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 4.802099011281513,
+              "same_sign_as_residual": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "closed_end_residential_loans_qoq",
+            "response": {
+              "beta": -2.5559540894495694,
+              "se": 1.3234270174606726,
+              "lower95": -5.149871043672487,
+              "upper95": 0.03796286477334876,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 2.9457730719908586,
+            "same_sign_as_residual": true
+          }
+        },
+        "extension_candidates": {
+          "residual_response": {
+            "beta": -5.501727161440428,
+            "se": 10.900899392583673,
+            "lower95": -26.867489970904426,
+            "upper95": 15.86403564802357,
+            "n": 68,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "cre_multifamily_loans_qoq",
+              "response": {
+                "beta": -0.2911592866784063,
+                "se": 0.4551591437921018,
+                "lower95": -1.1832712085109258,
+                "upper95": 0.6009526351541132,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 5.210567874762022,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "construction_land_development_loans_qoq",
+              "response": {
+                "beta": 0.08297977357595698,
+                "se": 0.1116032636560844,
+                "lower95": -0.13576262318996846,
+                "upper95": 0.3017221703418824,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 5.584706935016385,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "cre_nonfarm_nonresidential_loans_qoq",
+              "response": {
+                "beta": 0.18065063080475696,
+                "se": 0.4262995863914063,
+                "lower95": -0.6548965585223994,
+                "upper95": 1.0161978201319133,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 5.682377792245185,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 0.5930191140285268,
+                "se": 0.6169806714377727,
+                "lower95": -0.6162630019895077,
+                "upper95": 1.8023012300465613,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 6.094746275468955,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": 0.7140122090512605,
+                "se": 0.7066393962411982,
+                "lower95": -0.671001007581488,
+                "upper95": 2.099025425684009,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 6.215739370491688,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 5.133716347292747,
+                "se": 1.117289958504065,
+                "lower95": 2.9438280286247798,
+                "upper95": 7.323604665960715,
+                "n": 42,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 10.635443508733175,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_qoq",
+              "response": {
+                "beta": 18.04603209697148,
+                "se": 5.154906631817996,
+                "lower95": 7.942415098608208,
+                "upper95": 28.149649095334752,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 23.547759258411908,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": 18.145878324885995,
+                "se": 5.170887849972237,
+                "lower95": 8.01093813894041,
+                "upper95": 28.28081851083158,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 23.647605486326423,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "cre_multifamily_loans_qoq",
+            "response": {
+              "beta": -0.2911592866784063,
+              "se": 0.4551591437921018,
+              "lower95": -1.1832712085109258,
+              "upper95": 0.6009526351541132,
+              "n": 42,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 5.210567874762022,
+            "same_sign_as_residual": true
+          }
+        }
+      }
+    },
+    "h4": {
+      "baseline": {
+        "validation_proxies": {
+          "residual_response": {
+            "beta": -100.99420217322476,
+            "se": 48.95277771700546,
+            "lower95": -196.94164649855549,
+            "upper95": -5.046757847894057,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "closed_end_residential_loans_qoq",
+              "response": {
+                "beta": -3.5015622128002057,
+                "se": 4.152382039580392,
+                "lower95": -11.640231010377773,
+                "upper95": 4.637106584777362,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 97.49263996042455,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "closed_end_residential_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -3.390601894242341,
+                "se": 4.033719216616499,
+                "lower95": -11.296691558810679,
+                "upper95": 4.515487770325996,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 97.60360027898243,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_qoq",
+              "response": {
+                "beta": 0.9693002100028867,
+                "se": 7.894348425113118,
+                "lower95": -14.503622703218824,
+                "upper95": 16.442223123224597,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 101.96350238322765,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "consumer_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": 1.2519071970819589,
+                "se": 7.800832180962786,
+                "lower95": -14.037723877605101,
+                "upper95": 16.54153827176902,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 102.24610937030673,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "closed_end_residential_loans_qoq",
+            "response": {
+              "beta": -3.5015622128002057,
+              "se": 4.152382039580392,
+              "lower95": -11.640231010377773,
+              "upper95": 4.637106584777362,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 97.49263996042455,
+            "same_sign_as_residual": true
+          }
+        },
+        "extension_candidates": {
+          "residual_response": {
+            "beta": -100.99420217322476,
+            "se": 48.95277771700546,
+            "lower95": -196.94164649855549,
+            "upper95": -5.046757847894057,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "commercial_industrial_loans_qoq",
+              "response": {
+                "beta": -14.344298739521744,
+                "se": 10.332033206268198,
+                "lower95": -34.595083823807414,
+                "upper95": 5.906486344763923,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 86.64990343370302,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "commercial_industrial_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -14.058919649462974,
+                "se": 10.350731431947066,
+                "lower95": -34.346353256079226,
+                "upper95": 6.228513957153277,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 86.93528252376179,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "cre_multifamily_loans_qoq",
+              "response": {
+                "beta": -3.178104881928485,
+                "se": 1.5422837606467064,
+                "lower95": -6.200981052796029,
+                "upper95": -0.15522871106094094,
+                "n": 38,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 97.81609729129627,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "cre_nonfarm_nonresidential_loans_qoq",
+              "response": {
+                "beta": -2.4420479138803532,
+                "se": 1.960977109771233,
+                "lower95": -6.285563049031969,
+                "upper95": 1.4014672212712633,
+                "n": 38,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 98.5521542593444,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "construction_land_development_loans_qoq",
+              "response": {
+                "beta": -1.0765373733073162,
+                "se": 1.028634463658963,
+                "lower95": -3.092660922078884,
+                "upper95": 0.9395861754642514,
+                "n": 38,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 99.91766479991745,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": -0.5161840577863466,
+                "se": 0.6443221946750719,
+                "lower95": -1.7790555593494874,
+                "upper95": 0.7466874437767943,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 100.47801811543842,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 3.3941744342094147,
+                "se": 3.297315468518008,
+                "lower95": -3.068563884085881,
+                "upper95": 9.85691275250471,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 104.38837660743418,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 10.961677081454521,
+                "se": 5.699860074838644,
+                "lower95": -0.21004866522921972,
+                "upper95": 22.133402828138262,
+                "n": 38,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 111.95587925467929,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "commercial_industrial_loans_qoq",
+            "response": {
+              "beta": -14.344298739521744,
+              "se": 10.332033206268198,
+              "lower95": -34.595083823807414,
+              "upper95": 5.906486344763923,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 86.64990343370302,
+            "same_sign_as_residual": true
+          }
+        }
+      },
+      "core_deposit_proximate": {
+        "validation_proxies": {
+          "residual_response": {
+            "beta": -43.4358709731528,
+            "se": 19.209068844634526,
+            "lower95": -81.08564590863648,
+            "upper95": -5.786096037669132,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "closed_end_residential_loans_qoq",
+              "response": {
+                "beta": -9.183436396733413,
+                "se": 1.943951206299787,
+                "lower95": -12.993580761080995,
+                "upper95": -5.37329203238583,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 34.25243457641939,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_qoq",
+              "response": {
+                "beta": -9.05841511004718,
+                "se": 3.9830601121203393,
+                "lower95": -16.865212929803043,
+                "upper95": -1.2516172902913159,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 34.377455863105624,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -8.612879914089842,
+                "se": 4.132930094308975,
+                "lower95": -16.713422898935434,
+                "upper95": -0.5123369292442508,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 34.82299105906296,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "closed_end_residential_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -8.285736272991548,
+                "se": 1.9361540503355665,
+                "lower95": -12.080598211649258,
+                "upper95": -4.490874334333837,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 35.15013470016125,
+              "same_sign_as_residual": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "closed_end_residential_loans_qoq",
+            "response": {
+              "beta": -9.183436396733413,
+              "se": 1.943951206299787,
+              "lower95": -12.993580761080995,
+              "upper95": -5.37329203238583,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "abs_gap_to_residual_beta": 34.25243457641939,
+            "same_sign_as_residual": true
+          }
+        },
+        "extension_candidates": {
+          "residual_response": {
+            "beta": -43.4358709731528,
+            "se": 19.209068844634526,
+            "lower95": -81.08564590863648,
+            "upper95": -5.786096037669132,
+            "n": 64,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "cre_multifamily_loans_qoq",
+              "response": {
+                "beta": -1.620271070505654,
+                "se": 0.549464751466772,
+                "lower95": -2.697221983380527,
+                "upper95": -0.5433201576307809,
+                "n": 38,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 41.81559990264715,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "cre_nonfarm_nonresidential_loans_qoq",
+              "response": {
+                "beta": -1.0998337031822145,
+                "se": 1.0368372236266596,
+                "lower95": -3.1320346614904673,
+                "upper95": 0.9323672551260382,
+                "n": 38,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 42.33603726997059,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": -0.5420801624207762,
+                "se": 0.37691348690387216,
+                "lower95": -1.2808305967523657,
+                "upper95": 0.1966702719108132,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 42.89379081073203,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "construction_land_development_loans_qoq",
+              "response": {
+                "beta": -0.11334268011954177,
+                "se": 0.4967819012528453,
+                "lower95": -1.0870352065751185,
+                "upper95": 0.8603498463360351,
+                "n": 38,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 43.32252829303326,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 1.1043588890553946,
+                "se": 2.279991211009157,
+                "lower95": -3.364423884522553,
+                "upper95": 5.573141662633342,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 44.5402298622082,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 5.6596302772225915,
+                "se": 2.777293465045571,
+                "lower95": 0.21613508573327245,
+                "upper95": 11.10312546871191,
+                "n": 38,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 49.09550125037539,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_qoq",
+              "response": {
+                "beta": 10.508917945514934,
+                "se": 5.414844001906099,
+                "lower95": -0.10417629822102015,
+                "upper95": 21.12201218925089,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 53.94478891866774,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": 10.81398619652645,
+                "se": 5.321704119304922,
+                "lower95": 0.3834461226888042,
+                "upper95": 21.244526270364098,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 54.24985716967925,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "cre_multifamily_loans_qoq",
+            "response": {
+              "beta": -1.620271070505654,
+              "se": 0.549464751466772,
+              "lower95": -2.697221983380527,
+              "upper95": -0.5433201576307809,
+              "n": 38,
+              "ci_excludes_zero": true
+            },
+            "abs_gap_to_residual_beta": 41.81559990264715,
+            "same_sign_as_residual": true
+          }
+        }
+      }
+    },
+    "h8": {
+      "baseline": {
+        "validation_proxies": {
+          "residual_response": {
+            "beta": -230.24311066594305,
+            "se": 57.83146784928568,
+            "lower95": -343.59278765054296,
+            "upper95": -116.89343368134313,
+            "n": 60,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "closed_end_residential_loans_qoq",
+              "response": {
+                "beta": 3.0021112493963713,
+                "se": 6.185995119900328,
+                "lower95": -9.122439185608272,
+                "upper95": 15.126661684401014,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 233.2452219153394,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "closed_end_residential_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": 3.580007139609542,
+                "se": 5.56531887130273,
+                "lower95": -7.3280178481438085,
+                "upper95": 14.488032127362892,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 233.82311780555258,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "consumer_loans_qoq",
+              "response": {
+                "beta": 6.871995309788108,
+                "se": 7.755171113869945,
+                "lower95": -8.328140073396984,
+                "upper95": 22.0721306929732,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 237.11510597573115,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "consumer_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": 7.162546849378707,
+                "se": 7.559693461322385,
+                "lower95": -7.654452334813168,
+                "upper95": 21.979546033570582,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 237.40565751532176,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "closed_end_residential_loans_qoq",
+            "response": {
+              "beta": 3.0021112493963713,
+              "se": 6.185995119900328,
+              "lower95": -9.122439185608272,
+              "upper95": 15.126661684401014,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 233.2452219153394,
+            "same_sign_as_residual": false
+          }
+        },
+        "extension_candidates": {
+          "residual_response": {
+            "beta": -230.24311066594305,
+            "se": 57.83146784928568,
+            "lower95": -343.59278765054296,
+            "upper95": -116.89343368134313,
+            "n": 60,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "commercial_industrial_loans_qoq",
+              "response": {
+                "beta": -16.296003404405724,
+                "se": 10.609832273524864,
+                "lower95": -37.09127466051446,
+                "upper95": 4.49926785170301,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 213.94710726153733,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "commercial_industrial_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -16.190948049802728,
+                "se": 10.356221074320219,
+                "lower95": -36.48914135547035,
+                "upper95": 4.1072452558649,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 214.05216261614032,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": -2.128775587207633,
+                "se": 2.670591779978974,
+                "lower95": -7.363135475966422,
+                "upper95": 3.105584301551156,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 228.11433507873542,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": -0.3096059240786566,
+                "se": 0.8179723757747144,
+                "lower95": -1.9128317805970967,
+                "upper95": 1.2936199324397835,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 229.9335047418644,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "construction_land_development_loans_qoq",
+              "response": {
+                "beta": 1.2560446957659046,
+                "se": 0.8050955545796895,
+                "lower95": -0.3219425912102869,
+                "upper95": 2.834031982742096,
+                "n": 34,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 231.49915536170894,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "cre_multifamily_loans_qoq",
+              "response": {
+                "beta": 2.3727107558901626,
+                "se": 1.0437502194922808,
+                "lower95": 0.3269603256852922,
+                "upper95": 4.418461186095033,
+                "n": 34,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 232.6158214218332,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "cre_nonfarm_nonresidential_loans_qoq",
+              "response": {
+                "beta": 3.4592974113260127,
+                "se": 1.6694340990386036,
+                "lower95": 0.1872065772103495,
+                "upper95": 6.731388245441676,
+                "n": 34,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 233.70240807726907,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 5.226172403281055,
+                "se": 4.7999936878449745,
+                "lower95": -4.181815224895095,
+                "upper95": 14.634160031457204,
+                "n": 34,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 235.4692830692241,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "commercial_industrial_loans_qoq",
+            "response": {
+              "beta": -16.296003404405724,
+              "se": 10.609832273524864,
+              "lower95": -37.09127466051446,
+              "upper95": 4.49926785170301,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 213.94710726153733,
+            "same_sign_as_residual": true
+          }
+        }
+      },
+      "core_deposit_proximate": {
+        "validation_proxies": {
+          "residual_response": {
+            "beta": -67.48146063709291,
+            "se": 23.54347510422652,
+            "lower95": -113.62667184137689,
+            "upper95": -21.336249432808927,
+            "n": 60,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "closed_end_residential_loans_qoq",
+              "response": {
+                "beta": -8.049658485794891,
+                "se": 2.8205262111827754,
+                "lower95": -13.577889859713132,
+                "upper95": -2.521427111876652,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 59.431802151298015,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "closed_end_residential_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -6.38810966783087,
+                "se": 2.838557721712407,
+                "lower95": -11.951682802387186,
+                "upper95": -0.8245365332745527,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 61.09335096926204,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": -3.5413685549142713,
+                "se": 3.5469772721687796,
+                "lower95": -10.49344400836508,
+                "upper95": 3.410706898536537,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 63.94009208217864,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "consumer_loans_qoq",
+              "response": {
+                "beta": -2.843289508883565,
+                "se": 3.339193335722011,
+                "lower95": -9.388108446898705,
+                "upper95": 3.7015294291315763,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 64.63817112820934,
+              "same_sign_as_residual": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "closed_end_residential_loans_qoq",
+            "response": {
+              "beta": -8.049658485794891,
+              "se": 2.8205262111827754,
+              "lower95": -13.577889859713132,
+              "upper95": -2.521427111876652,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "abs_gap_to_residual_beta": 59.431802151298015,
+            "same_sign_as_residual": true
+          }
+        },
+        "extension_candidates": {
+          "residual_response": {
+            "beta": -67.48146063709291,
+            "se": 23.54347510422652,
+            "lower95": -113.62667184137689,
+            "upper95": -21.336249432808927,
+            "n": 60,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": -1.8900909791398353,
+                "se": 1.4479827676491386,
+                "lower95": -4.728137203732147,
+                "upper95": 0.9479552454524764,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 65.59136965795307,
+              "same_sign_as_residual": true
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": 0.0039772740612391555,
+                "se": 0.6104046112803801,
+                "lower95": -1.192415764048306,
+                "upper95": 1.2003703121707843,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 67.48543791115415,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "construction_land_development_loans_qoq",
+              "response": {
+                "beta": 0.7711777286322494,
+                "se": 0.75735088024894,
+                "lower95": -0.713229996655673,
+                "upper95": 2.2555854539201716,
+                "n": 34,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 68.25263836572516,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "cre_multifamily_loans_qoq",
+              "response": {
+                "beta": 1.0190890357275173,
+                "se": 0.8775028736861227,
+                "lower95": -0.700816596697283,
+                "upper95": 2.7389946681523174,
+                "n": 34,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 68.50054967282043,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_ex_chargeoffs_qoq",
+              "response": {
+                "beta": 2.554613124836809,
+                "se": 7.71027556428967,
+                "lower95": -12.557526981170945,
+                "upper95": 17.666753230844563,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 70.03607376192971,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "commercial_industrial_loans_qoq",
+              "response": {
+                "beta": 2.670746905460927,
+                "se": 7.863064345078015,
+                "lower95": -12.740859210891982,
+                "upper95": 18.082353021813837,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 70.15220754255384,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 2.6721814153617327,
+                "se": 1.747279523633421,
+                "lower95": -0.7524864509597724,
+                "upper95": 6.096849281683237,
+                "n": 34,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_residual_beta": 70.15364205245464,
+              "same_sign_as_residual": false
+            },
+            {
+              "outcome": "cre_nonfarm_nonresidential_loans_qoq",
+              "response": {
+                "beta": 3.473906290661962,
+                "se": 1.251815568517908,
+                "lower95": 1.0203477763668625,
+                "upper95": 5.9274648049570615,
+                "n": 34,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_residual_beta": 70.95536692775487,
+              "same_sign_as_residual": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+            "response": {
+              "beta": -1.8900909791398353,
+              "se": 1.4479827676491386,
+              "lower95": -4.728137203732147,
+              "upper95": 0.9479552454524764,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_residual_beta": 65.59136965795307,
+            "same_sign_as_residual": true
+          }
+        }
+      }
+    }
+  },
+  "classification": {
+    "impact_horizon_direct_core_candidate": "strict_loan_mortgages_qoq",
+    "h0_best_validation_proxy": "closed_end_residential_loans_qoq",
+    "h0_best_extension_candidate": "cre_multifamily_loans_qoq",
+    "recommendation_status": "no_additional_extension_candidate_supported"
+  },
+  "recommendation": {
+    "status": "no_additional_extension_candidate_supported",
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "impact_horizon_candidate": "strict_loan_mortgages_qoq",
+    "best_validation_proxy": "closed_end_residential_loans_qoq",
+    "best_extension_candidate": "cre_multifamily_loans_qoq",
+    "next_branch": "freeze_creator_search_and_only_reopen_if_new_same_scope_channel_appears"
+  },
+  "takeaways": [
+    "This surface asks a narrower question than the earlier bridge work: are there any additional mechanical creator candidates beyond the current direct core, or only broader validation proxies?",
+    "Validation proxies are broad all-bank residential and consumer loan families that overlap the current direct core conceptually; extension candidates are business, CRE, and clearly noncore loan families outside the current direct core.",
+    "At h0 under the core-deposit-proximate shock, the closest broad validation proxy is `closed_end_residential_loans_qoq` with beta \u2248 -2.56 against residual \u2248 -5.50.",
+    "The closest additional extension candidate at h0 is `cre_multifamily_loans_qoq` with beta \u2248 -0.29; this is the best remaining non-core creator candidate, not a promoted strict channel.",
+    "The impact-horizon direct-core candidate remains `strict_loan_mortgages_qoq`, so broad validation proxies should be read mainly as cross-checks on that existing channel rather than as new strict components.",
+    "Current recommendation: `no_additional_extension_candidate_supported`."
+  ]
+}

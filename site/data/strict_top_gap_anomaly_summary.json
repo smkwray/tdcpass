@@ -1,0 +1,220 @@
+{
+  "status": "available",
+  "headline_question": "Why does the main within-bucket anomaly differ from the dominant top-gap inversion profile?",
+  "estimation_path": {
+    "input_panel": "quarterly_panel_with_shocks",
+    "comparison_artifact": "strict_top_gap_anomaly_summary.json",
+    "baseline_shock_column": "tdc_residual_z",
+    "toc_row_excluded_shock_column": "tdc_no_toc_no_row_bank_only_residual_z",
+    "top_gap_limit": 5,
+    "anomaly_quarter": "2009Q4"
+  },
+  "anomaly_quarter": {
+    "quarter": "2009Q4",
+    "period_bucket": "post_gfc_early",
+    "baseline_shock": -0.2810596542553419,
+    "toc_row_excluded_shock": -3.4428656402507976,
+    "shock_gap": -3.1618059859954557,
+    "shock_gap_sign": "negative",
+    "abs_shock_gap": 3.1618059859954557,
+    "bundle_qoq": 208.777,
+    "bundle_sign": "positive",
+    "gap_alignment_to_bundle": "opposed",
+    "row_leg_qoq": 127.107,
+    "row_leg_alignment_to_gap": "opposed",
+    "toc_signed_contribution_qoq": 81.67,
+    "toc_leg_alignment_to_gap": "opposed",
+    "directional_driver": "both_legs_oppose_gap",
+    "excluded_other_component_qoq": 73.64099999999998,
+    "strict_identifiable_total_qoq": -68.394,
+    "excluded_strict_gap_qoq": 142.03499999999997,
+    "strict_identifiable_net_after_funding_qoq": 97.46699999999998,
+    "excluded_strict_gap_after_funding_qoq": -23.826000000000008,
+    "foreign_nonts_qoq": 43.228,
+    "tga_qoq": 80.613,
+    "reserves_qoq": 142.356,
+    "residual_strict_pattern": "positive_residual_negative_strict",
+    "strict_loan_source_qoq": -114.68,
+    "strict_non_treasury_securities_qoq": 46.285999999999994,
+    "strict_funding_offset_total_qoq": -165.861
+  },
+  "peer_quarters": [
+    {
+      "quarter": "2020Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 3.810380466186416,
+      "toc_row_excluded_shock": 13.09521127559779,
+      "shock_gap": 9.284830809411375,
+      "shock_gap_sign": "positive",
+      "abs_shock_gap": 9.284830809411375,
+      "bundle_qoq": -367.053,
+      "bundle_sign": "negative",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": -255.649,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": -111.404,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap",
+      "excluded_other_component_qoq": 171.72799999999904,
+      "strict_identifiable_total_qoq": 515.764,
+      "excluded_strict_gap_qoq": -344.03600000000097,
+      "strict_identifiable_net_after_funding_qoq": 338.824,
+      "excluded_strict_gap_after_funding_qoq": -167.09600000000097,
+      "foreign_nonts_qoq": 559.303,
+      "tga_qoq": 22.432,
+      "reserves_qoq": 535.044,
+      "residual_strict_pattern": "positive_residual_positive_strict",
+      "strict_loan_source_qoq": 408.623,
+      "strict_non_treasury_securities_qoq": 107.141,
+      "strict_funding_offset_total_qoq": 176.94
+    },
+    {
+      "quarter": "2021Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 5.58228501055368,
+      "toc_row_excluded_shock": 0.6017768725534413,
+      "shock_gap": -4.980508138000239,
+      "shock_gap_sign": "negative",
+      "abs_shock_gap": 4.980508138000239,
+      "bundle_qoq": 827.2830000000001,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": 220.665,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": 606.618,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap",
+      "excluded_other_component_qoq": 255.70499999999703,
+      "strict_identifiable_total_qoq": 313.971,
+      "excluded_strict_gap_qoq": -58.266000000002975,
+      "strict_identifiable_net_after_funding_qoq": 339.497,
+      "excluded_strict_gap_after_funding_qoq": -83.79200000000299,
+      "foreign_nonts_qoq": 30.291,
+      "tga_qoq": -565.328,
+      "reserves_qoq": 754.006,
+      "residual_strict_pattern": "positive_residual_positive_strict",
+      "strict_loan_source_qoq": -60.055,
+      "strict_non_treasury_securities_qoq": 374.026,
+      "strict_funding_offset_total_qoq": -25.526
+    }
+  ],
+  "peer_pattern_summary": [
+    {
+      "residual_strict_pattern": "positive_residual_positive_strict",
+      "abs_gap_weight": 14.265338947411614,
+      "abs_gap_share": 1.0
+    }
+  ],
+  "peer_bucket_weight": 14.265338947411614,
+  "weighted_peer_means": {
+    "excluded_other_component_qoq": 201.04718641727837,
+    "strict_loan_source_qoq": 244.99179560262976,
+    "strict_non_treasury_securities_qoq": 200.3195020538454,
+    "strict_identifiable_total_qoq": 445.3112976564752,
+    "strict_funding_offset_total_qoq": 106.25233079103783,
+    "excluded_strict_gap_qoq": -244.26411123919684,
+    "strict_identifiable_net_after_funding_qoq": 339.0589668654373,
+    "excluded_strict_gap_after_funding_qoq": -138.011780448159,
+    "bundle_qoq": 49.92974323765485,
+    "row_leg_qoq": -89.35181197041679,
+    "toc_signed_contribution_qoq": 139.2815552080716,
+    "foreign_nonts_qoq": 374.6071732262628,
+    "tga_qoq": -182.77472337211972,
+    "reserves_qoq": 611.4909759136485
+  },
+  "anomaly_vs_peer_deltas": {
+    "excluded_other_component_qoq": -127.40618641727839,
+    "strict_loan_source_qoq": -359.6717956026298,
+    "strict_non_treasury_securities_qoq": -154.0335020538454,
+    "strict_identifiable_total_qoq": -513.7052976564752,
+    "strict_funding_offset_total_qoq": -272.1133307910378,
+    "excluded_strict_gap_qoq": 386.2991112391968,
+    "strict_identifiable_net_after_funding_qoq": -241.5919668654373,
+    "excluded_strict_gap_after_funding_qoq": 114.18578044815898,
+    "bundle_qoq": 158.84725676234513,
+    "row_leg_qoq": 216.45881197041678,
+    "toc_signed_contribution_qoq": -57.61155520807161,
+    "foreign_nonts_qoq": -331.37917322626276,
+    "tga_qoq": 263.3877233721197,
+    "reserves_qoq": -469.13497591364853
+  },
+  "ranked_anomaly_component_deltas": [
+    {
+      "metric": "strict_identifiable_total_qoq",
+      "anomaly_minus_peer_delta": -513.7052976564752,
+      "abs_delta": 513.7052976564752
+    },
+    {
+      "metric": "reserves_qoq",
+      "anomaly_minus_peer_delta": -469.13497591364853,
+      "abs_delta": 469.13497591364853
+    },
+    {
+      "metric": "excluded_strict_gap_qoq",
+      "anomaly_minus_peer_delta": 386.2991112391968,
+      "abs_delta": 386.2991112391968
+    },
+    {
+      "metric": "strict_loan_source_qoq",
+      "anomaly_minus_peer_delta": -359.6717956026298,
+      "abs_delta": 359.6717956026298
+    },
+    {
+      "metric": "foreign_nonts_qoq",
+      "anomaly_minus_peer_delta": -331.37917322626276,
+      "abs_delta": 331.37917322626276
+    },
+    {
+      "metric": "strict_funding_offset_total_qoq",
+      "anomaly_minus_peer_delta": -272.1133307910378,
+      "abs_delta": 272.1133307910378
+    },
+    {
+      "metric": "tga_qoq",
+      "anomaly_minus_peer_delta": 263.3877233721197,
+      "abs_delta": 263.3877233721197
+    },
+    {
+      "metric": "strict_identifiable_net_after_funding_qoq",
+      "anomaly_minus_peer_delta": -241.5919668654373,
+      "abs_delta": 241.5919668654373
+    },
+    {
+      "metric": "row_leg_qoq",
+      "anomaly_minus_peer_delta": 216.45881197041678,
+      "abs_delta": 216.45881197041678
+    },
+    {
+      "metric": "bundle_qoq",
+      "anomaly_minus_peer_delta": 158.84725676234513,
+      "abs_delta": 158.84725676234513
+    },
+    {
+      "metric": "strict_non_treasury_securities_qoq",
+      "anomaly_minus_peer_delta": -154.0335020538454,
+      "abs_delta": 154.0335020538454
+    },
+    {
+      "metric": "excluded_other_component_qoq",
+      "anomaly_minus_peer_delta": -127.40618641727839,
+      "abs_delta": 127.40618641727839
+    },
+    {
+      "metric": "excluded_strict_gap_after_funding_qoq",
+      "anomaly_minus_peer_delta": 114.18578044815898,
+      "abs_delta": 114.18578044815898
+    },
+    {
+      "metric": "toc_signed_contribution_qoq",
+      "anomaly_minus_peer_delta": -57.61155520807161,
+      "abs_delta": 57.61155520807161
+    }
+  ],
+  "interpretation": "anomaly_flips_strict_total_negative_mainly_through_loan_contraction_relative_to_peers",
+  "takeaways": [
+    "The anomaly quarter is `2009Q4` inside the `both_legs_oppose_gap` bucket, with excluded residual \u2248 73.64 versus strict total \u2248 -68.39.",
+    "Relative to same-bucket peers, the anomaly quarter differs by loan source \u2248 -359.67, securities \u2248 -154.03, strict total \u2248 -513.71, funding offset \u2248 -272.11, foreign NONTS \u2248 -331.38, reserves \u2248 -469.13.",
+    "Among same-bucket peers, the leading residual-versus-strict pattern is `positive_residual_positive_strict` with abs-gap share \u2248 1.00.",
+    "The largest anomaly-minus-peer component delta is `strict_identifiable_total_qoq` at \u2248 -513.71."
+  ]
+}

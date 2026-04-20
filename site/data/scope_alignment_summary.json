@@ -1,0 +1,819 @@
+{
+  "status": "available",
+  "headline_question": "How much of the current residual gap is scope mismatch versus the treatment definition?",
+  "variant_definitions": {
+    "baseline": {
+      "target": "tdc_bank_only_qoq",
+      "description": "Imported bank-only headline: Fed + bank-sector + rest-of-world Treasury transactions - Treasury operating cash + positive Fed remittances."
+    },
+    "domestic_bank_only": {
+      "target": "tdc_domestic_bank_only_qoq",
+      "description": "No-ROW sensitivity from upstream `tdcest`; removes the rest-of-world Treasury-acquisition term only."
+    },
+    "us_chartered_bank_only": {
+      "target": "tdc_us_chartered_bank_only_qoq",
+      "description": "Local matched-bank-leg sensitivity: Fed Treasury transactions + U.S.-chartered bank Treasury transactions - Treasury operating cash + positive Fed remittances."
+    }
+  },
+  "deposit_concepts": {
+    "total_deposits_including_interbank": {
+      "total_outcome": "total_deposits_bank_qoq",
+      "residual_outcome": "other_component_qoq",
+      "comparison_variants": [
+        "domestic_bank_only",
+        "us_chartered_bank_only"
+      ],
+      "key_horizons": {
+        "h0": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 128.49398892100785,
+              "se": 13.487107351599608,
+              "lower95": 101.74203191194763,
+              "upper95": 153.71550482391984,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 55.75033524806063,
+              "se": 21.683675520344966,
+              "lower95": 15.003158943291321,
+              "upper95": 91.8448395095884,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -72.74365367294723,
+              "se": 23.353496740068078,
+              "lower95": -111.67491859993335,
+              "upper95": -31.72872933058706,
+              "n": 68,
+              "ci_excludes_zero": true
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 121.43506301279888,
+                "se": 20.15367752001472,
+                "lower95": 83.33716169722652,
+                "upper95": 155.87455391161288,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 68.66197083010917,
+                "se": 25.091265224322868,
+                "lower95": 22.575479175553912,
+                "upper95": 99.26512521038356,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -52.77309218268971,
+                "se": 23.648678870841305,
+                "lower95": -100.36758674323063,
+                "upper95": -29.226536357236522,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -7.058925908208977,
+                "total_response": 12.91163558204854,
+                "residual_response": 19.970561490257523
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 120.3152568784267,
+                "se": 15.41756271651815,
+                "lower95": 91.33410406360383,
+                "upper95": 146.75935522916362,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 57.201665882527884,
+                "se": 22.73302224746962,
+                "lower95": 20.242326987706758,
+                "upper95": 96.71129261937286,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -63.11359099589881,
+                "se": 21.464278613325156,
+                "lower95": -100.54381188970281,
+                "upper95": -26.370570298216805,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -8.17873204258116,
+                "total_response": 1.4513306344672543,
+                "residual_response": 9.630062677048421
+              }
+            }
+          }
+        },
+        "h1": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 177.53974642600284,
+              "se": 32.57606094714911,
+              "lower95": 107.36249013571627,
+              "upper95": 212.17611345497176,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 95.8047337449417,
+              "se": 78.19103475745447,
+              "lower95": -29.918591829143924,
+              "upper95": 232.81672659944013,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -81.73501268106114,
+              "se": 69.26962551323872,
+              "lower95": -159.79587104284744,
+              "upper95": 68.55665573955687,
+              "n": 67,
+              "ci_excludes_zero": false
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 165.03303216835923,
+                "se": 37.199713703806225,
+                "lower95": 106.05339296940048,
+                "upper95": 236.95429675444325,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 140.7622987757545,
+                "se": 58.5145066491033,
+                "lower95": 22.135808521609754,
+                "upper95": 227.60784058984348,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -24.27073339260474,
+                "se": 63.67048068712889,
+                "lower95": -134.1352639669848,
+                "upper95": 64.96697487551133,
+                "n": 67,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -12.506714257643608,
+                "total_response": 44.95756503081279,
+                "residual_response": 57.464279288456396
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 165.9520681082538,
+                "se": 29.6908198647901,
+                "lower95": 121.50264343534823,
+                "upper95": 237.61507448125107,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 122.47465349781675,
+                "se": 60.442574733757986,
+                "lower95": 15.29504515015584,
+                "upper95": 211.56973722432917,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -43.47741461043705,
+                "se": 63.59136998847192,
+                "lower95": -151.73652717647653,
+                "upper95": 67.55225753925049,
+                "n": 67,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -11.587678317749038,
+                "total_response": 26.669919752875046,
+                "residual_response": 38.257598070624084
+              }
+            }
+          }
+        },
+        "h4": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 278.13971316628357,
+              "se": 70.0854577470743,
+              "lower95": 120.86494926491977,
+              "upper95": 386.43705999220725,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 167.33069747889854,
+              "se": 91.65110516787428,
+              "lower95": -15.123860762491622,
+              "upper95": 349.2218977438808,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -110.80901568738503,
+              "se": 50.582600640491876,
+              "lower95": -197.13904381598593,
+              "upper95": -49.55641130250566,
+              "n": 64,
+              "ci_excludes_zero": true
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 257.69534690282995,
+                "se": 71.37116705849414,
+                "lower95": 141.4008612620621,
+                "upper95": 373.47281800073523,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 230.3985232137405,
+                "se": 77.77216349309471,
+                "lower95": 78.72277827629613,
+                "upper95": 361.422258821378,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -27.29682368908945,
+                "se": 43.9479310868509,
+                "lower95": -123.52191910480181,
+                "upper95": 31.59890901542471,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -20.444366263453617,
+                "total_response": 63.06782573484196,
+                "residual_response": 83.51219199829558
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 241.19566407599865,
+                "se": 69.25718718570637,
+                "lower95": 69.22711650929705,
+                "upper95": 312.985420413419,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 194.00377720462467,
+                "se": 84.43106321141617,
+                "lower95": 30.51910475085662,
+                "upper95": 305.2922693136241,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -47.19188687137398,
+                "se": 36.09475303435071,
+                "lower95": -108.42517331411736,
+                "upper95": 4.64369719805758,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -36.94404909028492,
+                "total_response": 26.673079725726126,
+                "residual_response": 63.617128816011046
+              }
+            }
+          }
+        },
+        "h8": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 347.6946386730543,
+              "se": 112.93166602956802,
+              "lower95": 138.99931802247033,
+              "upper95": 569.7962431461576,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 114.22386198654391,
+              "se": 108.92428820889296,
+              "lower95": -54.55946684633398,
+              "upper95": 281.91593326492756,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -233.47077668651042,
+              "se": 68.89208359677387,
+              "lower95": -329.0993395357397,
+              "upper95": -96.29311856593844,
+              "n": 60,
+              "ci_excludes_zero": true
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 325.69744295586025,
+                "se": 103.10483176989833,
+                "lower95": 38.76818437981781,
+                "upper95": 403.05768095135954,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 218.13997805137478,
+                "se": 94.6966901392698,
+                "lower95": -19.04265784877181,
+                "upper95": 314.7195418927033,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "residual_response": {
+                "beta": -107.55746490448547,
+                "se": 50.473083602209144,
+                "lower95": -180.51337590832384,
+                "upper95": -13.734374625767673,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -21.997195717194074,
+                "total_response": 103.91611606483087,
+                "residual_response": 125.91331178202495
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 295.325649221157,
+                "se": 108.63279177514336,
+                "lower95": 48.02438217636605,
+                "upper95": 459.26021617582893,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 169.38808890502816,
+                "se": 103.25604215962073,
+                "lower95": -20.502780243537664,
+                "upper95": 314.29479900060477,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "residual_response": {
+                "beta": -125.93756031612884,
+                "se": 58.64955674891033,
+                "lower95": -276.17676171220774,
+                "upper95": -47.01413922261565,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -52.368989451897335,
+                "total_response": 55.164226918484246,
+                "residual_response": 107.53321637038158
+              }
+            }
+          }
+        }
+      }
+    },
+    "deposits_only_ex_interbank": {
+      "total_outcome": "deposits_only_bank_qoq",
+      "residual_outcome": "deposits_only_other_component_qoq",
+      "comparison_variants": [
+        "domestic_bank_only",
+        "us_chartered_bank_only"
+      ],
+      "key_horizons": {
+        "h0": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 128.49398892100785,
+              "se": 13.487107351599608,
+              "lower95": 101.74203191194763,
+              "upper95": 153.71550482391984,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 46.76137700408783,
+              "se": 21.703928128233777,
+              "lower95": -1.3173478188301968,
+              "upper95": 78.38514173113617,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -81.73261191692004,
+              "se": 21.605500385495684,
+              "lower95": -116.54387917006598,
+              "upper95": -45.45730124404493,
+              "n": 68,
+              "ci_excludes_zero": true
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 121.43506301279888,
+                "se": 20.15367752001472,
+                "lower95": 83.33716169722652,
+                "upper95": 155.87455391161288,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 58.684578682048596,
+                "se": 24.976856177388232,
+                "lower95": 4.134299185997687,
+                "upper95": 90.66412870327517,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -62.75048433075028,
+                "se": 22.14075609996604,
+                "lower95": -111.13200762223919,
+                "upper95": -41.58764768955975,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -7.058925908208977,
+                "total_response": 11.923201677960769,
+                "residual_response": 18.982127586169753
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 120.3152568784267,
+                "se": 15.41756271651815,
+                "lower95": 91.33410406360383,
+                "upper95": 146.75935522916362,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 48.53707871848761,
+                "se": 23.147779090581725,
+                "lower95": 9.769519523814289,
+                "upper95": 83.72271726759702,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -71.77817815993909,
+                "se": 20.089573910480485,
+                "lower95": -108.62188344038287,
+                "upper95": -38.382653599670896,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -8.17873204258116,
+                "total_response": 1.77570171439978,
+                "residual_response": 9.954433756980947
+              }
+            }
+          }
+        },
+        "h1": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 177.53974642600284,
+              "se": 32.57606094714911,
+              "lower95": 107.36249013571627,
+              "upper95": 212.17611345497176,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 89.37120170943726,
+              "se": 74.18741409497794,
+              "lower95": -32.10017439088532,
+              "upper95": 216.22066978227963,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -88.16854471656558,
+              "se": 65.39395507887137,
+              "lower95": -166.26815009915595,
+              "upper95": 51.96059892239635,
+              "n": 67,
+              "ci_excludes_zero": false
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 165.03303216835923,
+                "se": 37.199713703806225,
+                "lower95": 106.05339296940048,
+                "upper95": 236.95429675444325,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 130.6711539642436,
+                "se": 54.44410841309447,
+                "lower95": 23.050174336747094,
+                "upper95": 209.56882484864272,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -34.36187820411564,
+                "se": 60.40006717234077,
+                "lower95": -138.86566537534736,
+                "upper95": 47.050222884771074,
+                "n": 67,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -12.506714257643608,
+                "total_response": 41.29995225480633,
+                "residual_response": 53.80666651244994
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 165.9520681082538,
+                "se": 29.6908198647901,
+                "lower95": 121.50264343534823,
+                "upper95": 237.61507448125107,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 113.28625670341728,
+                "se": 57.494877544487224,
+                "lower95": 11.789101810588873,
+                "upper95": 192.33858990922025,
+                "n": 67,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -52.66581140483652,
+                "se": 61.28858347398065,
+                "lower95": -164.40923333047138,
+                "upper95": 50.57948297745748,
+                "n": 67,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -11.587678317749038,
+                "total_response": 23.91505499398002,
+                "residual_response": 35.50273331172906
+              }
+            }
+          }
+        },
+        "h4": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 278.13971316628357,
+              "se": 70.0854577470743,
+              "lower95": 120.86494926491977,
+              "upper95": 386.43705999220725,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 162.82997613578442,
+              "se": 88.94576650654822,
+              "lower95": -13.087793053636009,
+              "upper95": 331.3942876057285,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -115.30973703049915,
+              "se": 50.17191133016197,
+              "lower95": -194.79162208995075,
+              "upper95": -48.86900703531933,
+              "n": 64,
+              "ci_excludes_zero": true
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 257.69534690282995,
+                "se": 71.37116705849414,
+                "lower95": 141.4008612620621,
+                "upper95": 373.47281800073523,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 223.31186518757974,
+                "se": 73.19775269008586,
+                "lower95": 74.05460641186872,
+                "upper95": 342.6955199335166,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -34.38348171525021,
+                "se": 47.3436426220482,
+                "lower95": -141.68727412840516,
+                "upper95": 16.0415770888601,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -20.444366263453617,
+                "total_response": 60.48188905179532,
+                "residual_response": 80.92625531524894
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 241.19566407599865,
+                "se": 69.25718718570637,
+                "lower95": 69.22711650929705,
+                "upper95": 312.985420413419,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 189.14324953456037,
+                "se": 80.82711715921047,
+                "lower95": 34.1519264160969,
+                "upper95": 298.62560824712,
+                "n": 64,
+                "ci_excludes_zero": true
+              },
+              "residual_response": {
+                "beta": -52.05241454143828,
+                "se": 38.03671345886856,
+                "lower95": -111.62229064016958,
+                "upper95": 6.587276421475906,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -36.94404909028492,
+                "total_response": 26.313273398775948,
+                "residual_response": 63.25732248906087
+              }
+            }
+          }
+        },
+        "h8": {
+          "baseline": {
+            "target": "tdc_bank_only_qoq",
+            "target_response": {
+              "beta": 347.6946386730543,
+              "se": 112.93166602956802,
+              "lower95": 138.99931802247033,
+              "upper95": 569.7962431461576,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 98.97886287581736,
+              "se": 110.90010726202333,
+              "lower95": -63.0395619771526,
+              "upper95": 268.4010666620155,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -248.71577579723697,
+              "se": 75.96639573701617,
+              "lower95": -354.94633109464087,
+              "upper95": -101.80202625045524,
+              "n": 60,
+              "ci_excludes_zero": true
+            }
+          },
+          "variants": {
+            "domestic_bank_only": {
+              "target": "tdc_domestic_bank_only_qoq",
+              "target_response": {
+                "beta": 325.69744295586025,
+                "se": 103.10483176989833,
+                "lower95": 38.76818437981781,
+                "upper95": 403.05768095135954,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 198.79508397300845,
+                "se": 94.06735765521651,
+                "lower95": -27.40235148638514,
+                "upper95": 296.6322789234123,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "residual_response": {
+                "beta": -126.90235898285181,
+                "se": 60.41929860306667,
+                "lower95": -231.85678662999493,
+                "upper95": -14.767743719264573,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -21.997195717194074,
+                "total_response": 99.81622109719109,
+                "residual_response": 121.81341681438516
+              }
+            },
+            "us_chartered_bank_only": {
+              "target": "tdc_us_chartered_bank_only_qoq",
+              "target_response": {
+                "beta": 295.325649221157,
+                "se": 108.63279177514336,
+                "lower95": 48.02438217636605,
+                "upper95": 459.26021617582893,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "total_response": {
+                "beta": 154.12837567727547,
+                "se": 105.73541631713663,
+                "lower95": -19.094343918395783,
+                "upper95": 303.88649456470404,
+                "n": 60,
+                "ci_excludes_zero": false
+              },
+              "residual_response": {
+                "beta": -141.19727354388152,
+                "se": 67.14589105607838,
+                "lower95": -306.96961230546395,
+                "upper95": -56.61393304405056,
+                "n": 60,
+                "ci_excludes_zero": true
+              },
+              "differences_vs_baseline_beta": {
+                "target_response": -52.368989451897335,
+                "total_response": 55.149512801458116,
+                "residual_response": 107.51850225335545
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "recommended_policy": {
+    "decision_status": "keep_current_headline_outcome_for_now",
+    "headline_deposit_concept": "total_deposits_including_interbank",
+    "headline_outcome": "total_deposits_bank_qoq",
+    "preferred_scope_check_variant": "us_chartered_bank_only",
+    "secondary_scope_sensitivity_variant": "domestic_bank_only",
+    "secondary_outcome_sensitivity": "deposits_only_ex_interbank",
+    "headline_read": "Keep `total_deposits_bank_qoq` as the headline outcome for now, use `tdc_us_chartered_bank_only_qoq` as the standard scope-check comparison, and keep the no-ROW and deposits-only comparisons as secondary sensitivities.",
+    "rationale": "A full headline migration to deposits-only would change the project object more broadly than a scope diagnostic. The cleaner immediate step is to keep the established headline outcome but standardize the true U.S.-chartered bank-leg match as the main scope check, because it isolates bank-leg matching rather than only removing the rest-of-world term."
+  },
+  "takeaways": [
+    "The `domestic_bank_only` variant removes the rest-of-world Treasury-acquisition term only; it is not a true U.S.-chartered-only bank-leg match.",
+    "The `us_chartered_bank_only` variant is the first true bank-leg-matched TDC sensitivity in this repo: Fed Treasury transactions + U.S.-chartered bank Treasury transactions - Treasury operating cash + positive Fed remittances.",
+    "The deposits-only concept removes interbank-transactions liabilities from the outcome so the project can distinguish 'deposit scope' from the broader `total_deposits_bank_qoq` object.",
+    "At h0 for `total_deposits_including_interbank`, the U.S.-chartered bank-leg-matched TDC makes the derived non-TDC residual less negative than the current baseline by about 9.63.",
+    "At h0 for `total_deposits_including_interbank`, removing only the rest-of-world term makes the derived non-TDC residual less negative than the current baseline by about 19.97.",
+    "At h0 for `deposits_only_ex_interbank`, the U.S.-chartered bank-leg-matched TDC makes the derived non-TDC residual less negative than the current baseline by about 9.95.",
+    "At h0 for `deposits_only_ex_interbank`, removing only the rest-of-world term makes the derived non-TDC residual less negative than the current baseline by about 18.98."
+  ]
+}

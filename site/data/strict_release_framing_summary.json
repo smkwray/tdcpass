@@ -1,0 +1,82 @@
+{
+  "status": "available",
+  "headline_question": "What is the final release-facing rule for strict deposit-component interpretation after the TOC/ROW incidence gates?",
+  "estimation_path": {
+    "summary_artifact": "strict_release_framing_summary.json",
+    "source_artifacts": [
+      "strict_component_framework_summary.json",
+      "toc_row_liability_incidence_raw_summary.json",
+      "toc_validated_share_candidate_summary.json"
+    ]
+  },
+  "release_position": {
+    "full_tdc_release_role": "broad_treasury_attributed_object_only",
+    "strict_object_rule": "exclude_toc_and_row_under_current_evidence",
+    "toc_rule": "outside_strict_object",
+    "row_rule": "outside_strict_object",
+    "accounting_lane_role": "descriptive_only_not_independent_evidence",
+    "headline_direct_benchmark": "strict_loan_core_min_qoq",
+    "multihorizon_direct_benchmark": "strict_loan_core_min_qoq",
+    "impact_horizon_candidate": "strict_loan_mortgages_qoq",
+    "standard_bridge_comparison": "strict_loan_core_plus_nonfinancial_corporate_qoq",
+    "diagnostic_envelope": "strict_loan_core_plus_private_borrower_qoq"
+  },
+  "evidence_tiers": {
+    "independent_evidence": [
+      "strict_loan_core_min_qoq"
+    ],
+    "comparison_rows": [
+      "strict_loan_core_plus_nonfinancial_corporate_qoq"
+    ],
+    "impact_horizon_candidates": [
+      "strict_loan_mortgages_qoq"
+    ],
+    "diagnostic_only": [
+      "strict_loan_core_plus_private_borrower_qoq",
+      "toc_row_support_bundle_qoq",
+      "strict_loan_source_qoq"
+    ],
+    "outside_strict_object": [
+      "tdc_treasury_operating_cash_qoq",
+      "tdc_rest_of_world_treasury_transactions_qoq"
+    ],
+    "unresolved": [
+      "Whether any future TOC incidence evidence justifies a validated strict share.",
+      "Whether the strict lane is still missing major direct creator channels beyond the current loan core."
+    ]
+  },
+  "classification": {
+    "release_state": "strict_release_framing_finalized",
+    "raw_incidence_gate": "full_reincorporation_not_supported",
+    "toc_narrow_share_decision": "keep_toc_outside_strict_object_under_current_evidence",
+    "strict_object_scope": "toc_and_row_excluded_under_current_evidence"
+  },
+  "h0_snapshot": {
+    "toc_row_support_bundle_beta": 65.3966245435534,
+    "core_residual_beta": -5.508313542362046,
+    "headline_direct_core_beta": -10.658905058923445,
+    "standard_bridge_beta": 9.437768587339647,
+    "toc_deposits_only_share": 0.6638359960227482,
+    "toc_reserve_share": 1.2615781222068045,
+    "row_checkable_share": 0.019049876218032797,
+    "row_external_share": 2.261390009711832,
+    "best_toc_candidate_implied_residual_beta": -34.16318859927438,
+    "best_toc_candidate_abs_gap_to_direct_core": 23.504283540350933
+  },
+  "recommendation": {
+    "status": "strict_release_framing_finalized",
+    "headline_rule": "full_tdc_is_broad_object_only",
+    "strict_rule": "exclude_toc_and_row_from_strict_object",
+    "reopen_rule": "reopen_only_if_new_scope_and_timing_matched_incidence_evidence_appears",
+    "next_branch": "return_to_other_strict_channel_work_or_stop"
+  },
+  "takeaways": [
+    "This summary freezes the release-facing rule after the incidence gates, not just the intermediate diagnostics.",
+    "Full TDC remains in the repo as the broad Treasury-attributed object, but TOC and ROW stay outside the strict object under current evidence.",
+    "The strict evidence hierarchy is now fixed around `strict_loan_core_min_qoq` as the headline direct benchmark and `strict_loan_core_plus_nonfinancial_corporate_qoq` as the standard bridge comparison; `strict_loan_core_plus_private_borrower_qoq` stays diagnostic.",
+    "The direct-core rule is horizon-specific rather than one-size-fits-all: multihorizon benchmark = `strict_loan_core_min_qoq`, impact-horizon candidate = `strict_loan_mortgages_qoq`.",
+    "The h0 release snapshot is now explicit: TOC/ROW support bundle \u2248 65.40, core residual \u2248 -5.51, headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.44.",
+    "The raw incidence gate is what keeps the support bundle outside the strict object: TOC deposits-only share \u2248 0.66 versus reserves share \u2248 1.26, ROW-checkable share \u2248 0.02 versus foreign-NONTS share \u2248 2.26.",
+    "The narrow-TOC rescue branch is closed too: even the best candidate implies residual \u2248 -34.16 with abs gap \u2248 23.50 to the headline direct core."
+  ]
+}

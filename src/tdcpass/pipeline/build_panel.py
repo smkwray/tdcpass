@@ -136,12 +136,121 @@ FRED_AVERAGE_KEYS = {
     "other_consumer_chargeoff_rate",
     "closed_end_residential_chargeoff_rate",
 }
+TDC_COMPONENT_TRANSACTION_SERIES = {
+    "tdc_fed_treasury_transactions_qoq": ("BOGZ1FU713061103Q",),
+    "tdc_us_chartered_treasury_transactions_qoq": ("BOGZ1FU763061100Q",),
+    "tdc_foreign_offices_treasury_transactions_qoq": ("BOGZ1FU753061103Q",),
+    "tdc_affiliated_areas_treasury_transactions_qoq": ("BOGZ1FU743061103Q",),
+    "tdc_row_treasury_transactions_qoq": ("BOGZ1FU263061105Q",),
+    "tdc_treasury_operating_cash_qoq": ("BOGZ1FU313024000Q",),
+}
+TDC_REMIT_SERIES_ID = "RESPPLLOPNWW"
+STRICT_Z1_TRANSACTION_DIVISOR = 1000.0
+STRICT_SOURCE_KIND = "z1_transactions_via_fred"
+STRICT_Z1_TRANSACTION_SERIES = {
+    "strict_loan_source_qoq": ("BOGZ1FU764023005Q",),
+    "strict_loan_mortgages_qoq": ("BOGZ1FU763065005Q",),
+    "strict_loan_consumer_credit_qoq": ("BOGZ1FU763066005Q", "BOGZ1FU763066000Q"),
+    "strict_loan_di_loans_nec_qoq": ("BOGZ1FU763068005Q",),
+    "strict_di_loans_nec_systemwide_liability_total_qoq": ("BOGZ1FU793068005Q",),
+    "strict_di_loans_nec_households_nonprofits_qoq": ("BOGZ1FU153168005Q",),
+    "strict_di_loans_nec_nonfinancial_corporate_qoq": ("BOGZ1FU103168005Q",),
+    "strict_di_loans_nec_nonfinancial_noncorporate_qoq": ("BOGZ1FU113168005Q",),
+    "strict_di_loans_nec_state_local_qoq": ("BOGZ1FU213168003Q",),
+    "strict_di_loans_nec_domestic_financial_qoq": ("BOGZ1FU793168005Q",),
+    "strict_di_loans_nec_rest_of_world_qoq": ("BOGZ1FU263168005Q",),
+    "strict_loan_other_advances_qoq": ("BOGZ1FU763069005Q",),
+    "strict_non_treasury_agency_gse_qoq": ("BOGZ1FU763061705Q",),
+    "strict_non_treasury_municipal_qoq": ("BOGZ1FU763062005Q",),
+    "strict_non_treasury_corporate_foreign_bonds_qoq": ("BOGZ1FU763063005Q",),
+    "strict_funding_fedfunds_repo_qoq": ("BOGZ1FU762150005Q",),
+    "strict_funding_debt_securities_qoq": ("BOGZ1FU764122005Q",),
+    "strict_funding_fhlb_advances_qoq": ("BOGZ1FU763169305Q",),
+    "broad_strict_loan_foreign_offices_qoq": ("BOGZ1FU754023005Q",),
+    "broad_strict_loan_affiliated_areas_qoq": ("BOGZ1FU744023003Q",),
+}
+STRICT_LOAN_COMPONENT_COLUMNS = (
+    "strict_loan_mortgages_qoq",
+    "strict_loan_consumer_credit_qoq",
+    "strict_loan_di_loans_nec_qoq",
+    "strict_loan_other_advances_qoq",
+)
+STRICT_DI_LOANS_NEC_BORROWER_COLUMNS = (
+    "strict_di_loans_nec_households_nonprofits_qoq",
+    "strict_di_loans_nec_nonfinancial_corporate_qoq",
+    "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+    "strict_di_loans_nec_state_local_qoq",
+    "strict_di_loans_nec_domestic_financial_qoq",
+    "strict_di_loans_nec_rest_of_world_qoq",
+)
+STRICT_DI_LOANS_NEC_PRIVATE_DOMESTIC_COLUMNS = (
+    "strict_di_loans_nec_households_nonprofits_qoq",
+    "strict_di_loans_nec_nonfinancial_corporate_qoq",
+    "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+)
+STRICT_DI_LOANS_NEC_NONCORE_SYSTEM_COLUMNS = (
+    "strict_di_loans_nec_state_local_qoq",
+    "strict_di_loans_nec_domestic_financial_qoq",
+    "strict_di_loans_nec_rest_of_world_qoq",
+    "strict_di_loans_nec_systemwide_borrower_gap_qoq",
+)
+STRICT_SECURITIES_COMPONENT_COLUMNS = (
+    "strict_non_treasury_agency_gse_qoq",
+    "strict_non_treasury_municipal_qoq",
+    "strict_non_treasury_corporate_foreign_bonds_qoq",
+)
+STRICT_FUNDING_COMPONENT_COLUMNS = (
+    "strict_funding_fedfunds_repo_qoq",
+    "strict_funding_debt_securities_qoq",
+    "strict_funding_fhlb_advances_qoq",
+)
+STRICT_DERIVED_COLUMNS = (
+    "strict_di_loans_nec_systemwide_borrower_total_qoq",
+    "strict_di_loans_nec_systemwide_borrower_gap_qoq",
+    "strict_di_loans_nec_private_domestic_borrower_qoq",
+    "strict_di_loans_nec_noncore_system_borrower_qoq",
+    "strict_loan_core_min_qoq",
+    "strict_loan_core_plus_private_borrower_qoq",
+    "strict_loan_noncore_system_qoq",
+    "strict_non_treasury_securities_qoq",
+    "strict_identifiable_total_qoq",
+    "strict_identifiable_gap_qoq",
+    "strict_funding_offset_total_qoq",
+    "strict_identifiable_net_after_funding_qoq",
+    "strict_gap_after_funding_qoq",
+)
+STRICT_ALL_COLUMNS = (
+    "strict_loan_source_qoq",
+    *STRICT_LOAN_COMPONENT_COLUMNS,
+    *STRICT_DI_LOANS_NEC_BORROWER_COLUMNS,
+    *STRICT_SECURITIES_COMPONENT_COLUMNS,
+    *STRICT_FUNDING_COMPONENT_COLUMNS,
+    *STRICT_DERIVED_COLUMNS,
+)
+BROAD_SCOPE_COLUMNS = (
+    "checkable_deposits_foreign_offices_qoq",
+    "time_savings_deposits_foreign_offices_qoq",
+    "checkable_deposits_affiliated_areas_qoq",
+    "time_savings_deposits_affiliated_areas_qoq",
+    "broad_bank_deposits_qoq",
+    "broad_bank_other_component_qoq",
+    "broad_strict_loan_foreign_offices_qoq",
+    "broad_strict_loan_affiliated_areas_qoq",
+    "broad_strict_loan_source_qoq",
+    "broad_strict_gap_qoq",
+)
 Z1_SERIES = {
     "total_deposits_bank_level": "FL764100005",
     "checkable_deposits_bank_level": "FL763127005",
     "interbank_transactions_bank_level": "FL764110005",
     "time_savings_deposits_bank_level": "FL763130005",
+    "checkable_deposits_foreign_offices_level": "FL753127005",
+    "time_savings_deposits_foreign_offices_level": "FL753130005",
+    "checkable_deposits_affiliated_areas_level": "FL743127003",
+    "time_savings_deposits_affiliated_areas_level": "FL743130003",
     "checkable_federal_govt_bank_level": "FL763123005",
+    "federal_govt_checkable_total_level": "FL313020005",
+    "federal_govt_time_savings_total_level": "FL313030003",
     "checkable_state_local_bank_level": "FL763128000",
     "checkable_rest_of_world_bank_level": "FL763122605",
     "checkable_private_domestic_bank_level": "FL763129205",
@@ -172,12 +281,18 @@ Z1_TABLE_MEMBERS = {
     ),
     "csv/l203.csv": (
         "checkable_deposits_bank_level",
+        "checkable_deposits_foreign_offices_level",
+        "checkable_deposits_affiliated_areas_level",
         "checkable_federal_govt_bank_level",
         "checkable_state_local_bank_level",
         "checkable_rest_of_world_bank_level",
         "checkable_private_domestic_bank_level",
     ),
-    "csv/l204.csv": ("time_savings_deposits_bank_level",),
+    "csv/l204.csv": (
+        "time_savings_deposits_bank_level",
+        "time_savings_deposits_foreign_offices_level",
+        "time_savings_deposits_affiliated_areas_level",
+    ),
     "csv/l207.csv": ("fedfunds_repo_liabilities_bank_level",),
     "csv/l111.csv": (
         "treasury_securities_bank_level",
@@ -198,7 +313,30 @@ TDCEST_BROAD_DEPOSITORY_METHOD = "tdc_base_broad_depository_np_cu_ru_flow"
 TDCEST_DOMESTIC_BANK_ONLY_METHOD = "tdc_domestic_bank_only_ru_flow"
 TDCEST_NO_REMIT_BANK_ONLY_METHOD = "tdc_no_remit_bank_only"
 TDCEST_CREDIT_UNION_SENSITIVE_METHOD = "tdc_credit_union_aggregate_sensitivity"
+TDCEST_TIER2_BANK_ONLY_METHOD = "tdc_tier2_interest_corrected_bank_only_ru_flow"
+TDCEST_TIER3_BANK_ONLY_METHOD = "tdc_tier3_fiscal_corrected_bank_only_ru_flow"
+TDCEST_TIER3_BROAD_DEPOSITORY_METHOD = "tdc_tier3_fiscal_corrected_broad_depository_np_cu_ru_flow"
+TDCEST_BANK_ONLY_EXTENDED_METHOD = "tdc_bank_only_extended_1990"
+TDCEST_BROAD_DEPOSITORY_EXTENDED_METHOD = "tdc_broad_depository_extended_1990"
+TDCEST_HISTORICAL_BANK_RECEIPT_OVERLAY_SERIES_KEY = (
+    "tdc_tier3_bank_only_plus_historical_bank_receipt_candidate"
+)
+TDCEST_ROW_MRV_PILOT_SERIES_KEY = "row_mrv_primary_nondefault_pilot_series"
+TDCEST_TRANSACTION_START_QUARTER = "2002Q4"
 TDCEST_NOMINAL_TO_BILLIONS = 1000.0
+ACCOUNTING_IMPORTED_BUNDLE_DIVISOR = 1000.0
+ACCOUNTING_IMPORTED_BUNDLE_RESCALE_THRESHOLD = 5000.0
+ACCOUNTING_COMPONENT_COLUMNS = (
+    "accounting_deposit_substitution_qoq",
+    "accounting_bank_balance_sheet_qoq",
+    "accounting_public_liquidity_qoq",
+    "accounting_external_flow_qoq",
+)
+ACCOUNTING_DERIVED_COLUMNS = (
+    "accounting_identity_total_qoq",
+    "accounting_identity_gap_qoq",
+)
+ACCOUNTING_ALL_COLUMNS = (*ACCOUNTING_COMPONENT_COLUMNS, *ACCOUNTING_DERIVED_COLUMNS)
 
 
 @dataclass(frozen=True)
@@ -210,6 +348,8 @@ class QuarterlyPanelBuildResult:
     sample_construction_summary_path: Path
     canonical_tdc_source_path: Path | None
     canonical_tdc_source_kind: str
+    accounting_source_kind: str
+    strict_source_kind: str
     rows: int
 
 
@@ -217,6 +357,12 @@ class QuarterlyPanelBuildResult:
 class CanonicalTdcSeriesResult:
     frame: pd.DataFrame
     source_path: Path | None
+    source_kind: str
+
+
+@dataclass(frozen=True)
+class ImportedAccountingSeriesResult:
+    frame: pd.DataFrame
     source_kind: str
 
 
@@ -447,6 +593,44 @@ def _download_fiscaldata_auctions_csv(
     return destination
 
 
+def _load_quarterly_candidate_fred_series(
+    candidate_ids: Iterable[str],
+    *,
+    raw_dir: Path,
+    manifest_path: Path,
+    fixture_root: Path | None,
+    timeout: int = DEFAULT_TIMEOUT,
+    scale_divisor: float = STRICT_Z1_TRANSACTION_DIVISOR,
+) -> tuple[pd.Series, str]:
+    last_error: str | None = None
+    for series_id in candidate_ids:
+        try:
+            if fixture_root is not None:
+                fixture_path = fixture_root / "fred" / f"{series_id}.csv"
+                if not fixture_path.exists():
+                    continue
+                csv_path = _copy_fixture_file(
+                    fixture_path,
+                    raw_dir / "fred" / f"{series_id}.csv",
+                    manifest_path,
+                    source_key="fixture_fred_graph",
+                )
+            else:
+                csv_path = _download_fred_csv(series_id, raw_dir, manifest_path, timeout=timeout)
+            quarterly = _quarter_end_level(_load_fred_series(csv_path)) / float(scale_divisor)
+            quarterly = quarterly.dropna()
+            if quarterly.empty:
+                raise ValueError(f"No usable quarterly observations for {series_id}.")
+            return quarterly, series_id
+        except Exception as exc:  # noqa: BLE001 - try alternate public series aliases before failing
+            last_error = f"{series_id}: {exc}"
+            continue
+    raise FileNotFoundError(
+        "Could not load any candidate FRED/Z.1 transaction series from "
+        f"{tuple(candidate_ids)}. Last error: {last_error or 'none'}"
+    )
+
+
 def _load_fred_series(path: Path) -> pd.Series:
     frame = pd.read_csv(path)
     date_column = "DATE" if "DATE" in frame.columns else "observation_date"
@@ -484,6 +668,12 @@ def _quarter_end_level(series: pd.Series) -> pd.Series:
 
 def _quarter_average_level(series: pd.Series) -> pd.Series:
     grouped = series.groupby(series.index.to_period("Q")).mean()
+    grouped.index = grouped.index.astype(str)
+    return grouped
+
+
+def _quarter_sum(series: pd.Series) -> pd.Series:
+    grouped = series.groupby(series.index.to_period("Q")).sum()
     grouped.index = grouped.index.astype(str)
     return grouped
 
@@ -542,6 +732,26 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
             out["tdc_credit_union_sensitive_qoq"] = pd.to_numeric(
                 frame[TDCEST_CREDIT_UNION_SENSITIVE_METHOD], errors="coerce"
             ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_tier2_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER3_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_tier3_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER3_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER3_BROAD_DEPOSITORY_METHOD in frame.columns:
+            out["tdc_tier3_broad_depository_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER3_BROAD_DEPOSITORY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_BANK_ONLY_EXTENDED_METHOD in frame.columns:
+            out["tdc_bank_only_extended_1990_qoq"] = pd.to_numeric(
+                frame[TDCEST_BANK_ONLY_EXTENDED_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_BROAD_DEPOSITORY_EXTENDED_METHOD in frame.columns:
+            out["tdc_broad_depository_extended_1990_qoq"] = pd.to_numeric(
+                frame[TDCEST_BROAD_DEPOSITORY_EXTENDED_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
         out["tdc_bank_only_qoq"] = (
             pd.to_numeric(out["tdc_bank_only_qoq"], errors="coerce") / TDCEST_NOMINAL_TO_BILLIONS
         )
@@ -550,6 +760,13 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
             "tdc_domestic_bank_only_qoq",
             "tdc_no_remit_bank_only_qoq",
             "tdc_credit_union_sensitive_qoq",
+            "tdc_tier2_bank_only_qoq",
+            "tdc_tier3_bank_only_qoq",
+            "tdc_tier3_broad_depository_qoq",
+            "tdc_bank_only_extended_1990_qoq",
+            "tdc_broad_depository_extended_1990_qoq",
+            "tdc_bank_receipt_historical_overlay_qoq",
+            "tdc_row_mrv_nondefault_pilot_qoq",
         ):
             if column not in out.columns:
                 out[column] = pd.NA
@@ -564,11 +781,30 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
             out["tdc_no_remit_bank_only_qoq"] = pd.to_numeric(frame["tdc_no_remit_bank_only_qoq"], errors="coerce")
         if "tdc_credit_union_sensitive_qoq" in frame.columns:
             out["tdc_credit_union_sensitive_qoq"] = pd.to_numeric(frame["tdc_credit_union_sensitive_qoq"], errors="coerce")
+        if "tdc_tier2_bank_only_qoq" in frame.columns:
+            out["tdc_tier2_bank_only_qoq"] = pd.to_numeric(frame["tdc_tier2_bank_only_qoq"], errors="coerce")
+        if "tdc_tier3_bank_only_qoq" in frame.columns:
+            out["tdc_tier3_bank_only_qoq"] = pd.to_numeric(frame["tdc_tier3_bank_only_qoq"], errors="coerce")
+        if "tdc_tier3_broad_depository_qoq" in frame.columns:
+            out["tdc_tier3_broad_depository_qoq"] = pd.to_numeric(frame["tdc_tier3_broad_depository_qoq"], errors="coerce")
+        if "tdc_bank_only_extended_1990_qoq" in frame.columns:
+            out["tdc_bank_only_extended_1990_qoq"] = pd.to_numeric(frame["tdc_bank_only_extended_1990_qoq"], errors="coerce")
+        if "tdc_broad_depository_extended_1990_qoq" in frame.columns:
+            out["tdc_broad_depository_extended_1990_qoq"] = pd.to_numeric(
+                frame["tdc_broad_depository_extended_1990_qoq"], errors="coerce"
+            )
         for column in (
             "tdc_broad_depository_qoq",
             "tdc_domestic_bank_only_qoq",
             "tdc_no_remit_bank_only_qoq",
             "tdc_credit_union_sensitive_qoq",
+            "tdc_tier2_bank_only_qoq",
+            "tdc_tier3_bank_only_qoq",
+            "tdc_tier3_broad_depository_qoq",
+            "tdc_bank_only_extended_1990_qoq",
+            "tdc_broad_depository_extended_1990_qoq",
+            "tdc_bank_receipt_historical_overlay_qoq",
+            "tdc_row_mrv_nondefault_pilot_qoq",
         ):
             if column not in out.columns:
                 out[column] = pd.NA
@@ -580,10 +816,124 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
             "tdc_domestic_bank_only_qoq",
             "tdc_no_remit_bank_only_qoq",
             "tdc_credit_union_sensitive_qoq",
+            "tdc_tier2_bank_only_qoq",
+            "tdc_tier3_bank_only_qoq",
+            "tdc_tier3_broad_depository_qoq",
+            "tdc_bank_only_extended_1990_qoq",
+            "tdc_broad_depository_extended_1990_qoq",
+            "tdc_bank_receipt_historical_overlay_qoq",
+            "tdc_row_mrv_nondefault_pilot_qoq",
         ):
             out[column] = pd.NA
         return out
     return None
+
+
+def _load_tdcest_downstream_series_csv(path: Path) -> pd.DataFrame | None:
+    if not path.exists() or path.suffix.lower() != ".csv":
+        return None
+    try:
+        frame = pd.read_csv(path)
+    except (FileNotFoundError, pd.errors.ParserError, OSError):
+        return None
+    required = {"date", "series_key", "value_millions"}
+    if not required.issubset(frame.columns):
+        return None
+    sample = frame[
+        frame["series_key"].isin(
+            [
+                TDCEST_HISTORICAL_BANK_RECEIPT_OVERLAY_SERIES_KEY,
+                TDCEST_ROW_MRV_PILOT_SERIES_KEY,
+            ]
+        )
+    ].copy()
+    if sample.empty:
+        return None
+    sample["quarter"] = pd.to_datetime(sample["date"], errors="coerce").dt.to_period("Q").astype(str)
+    sample["value_billions"] = pd.to_numeric(sample["value_millions"], errors="coerce") / TDCEST_NOMINAL_TO_BILLIONS
+    sample = sample[sample["quarter"].notna()].copy()
+    if sample.empty:
+        return None
+    pivot = (
+        sample.pivot_table(index="quarter", columns="series_key", values="value_billions", aggfunc="last")
+        .reset_index()
+        .rename_axis(None, axis=1)
+    )
+    out = pivot[["quarter"]].copy()
+    if TDCEST_HISTORICAL_BANK_RECEIPT_OVERLAY_SERIES_KEY in pivot.columns:
+        out["tdc_bank_receipt_historical_overlay_qoq"] = pd.to_numeric(
+            pivot[TDCEST_HISTORICAL_BANK_RECEIPT_OVERLAY_SERIES_KEY], errors="coerce"
+        )
+    else:
+        out["tdc_bank_receipt_historical_overlay_qoq"] = pd.NA
+    if TDCEST_ROW_MRV_PILOT_SERIES_KEY in pivot.columns:
+        out["tdc_row_mrv_nondefault_pilot_qoq"] = pd.to_numeric(
+            pivot[TDCEST_ROW_MRV_PILOT_SERIES_KEY], errors="coerce"
+        )
+    else:
+        out["tdc_row_mrv_nondefault_pilot_qoq"] = pd.NA
+    return out
+
+
+def _merge_tdcest_downstream_overlay(frame: pd.DataFrame, supplement: pd.DataFrame | None) -> pd.DataFrame:
+    if supplement is None or supplement.empty:
+        out = frame.copy()
+    else:
+        out = frame.copy()
+        if "quarter" not in out.columns:
+            raise KeyError("Canonical tdcest frame must contain 'quarter' before merging downstream overlay.")
+        for column in ("tdc_bank_receipt_historical_overlay_qoq", "tdc_row_mrv_nondefault_pilot_qoq"):
+            if column in supplement.columns:
+                mapping = supplement.set_index("quarter")[column]
+                existing = pd.to_numeric(out[column], errors="coerce") if column in out.columns else pd.Series(pd.NA, index=out.index)
+                incoming = pd.to_numeric(out["quarter"].map(mapping), errors="coerce")
+                out[column] = incoming.combine_first(existing)
+            elif column not in out.columns:
+                out[column] = pd.NA
+    for column in ("tdc_bank_receipt_historical_overlay_qoq", "tdc_row_mrv_nondefault_pilot_qoq"):
+        if column not in out.columns:
+            out[column] = pd.NA
+    return out
+
+
+def _apply_regime_aware_historical_cash_backfill(panel: pd.DataFrame) -> pd.DataFrame:
+    required = {"quarter", "tdc_treasury_operating_cash_qoq", "federal_govt_cash_balance_proxy_qoq"}
+    if not required.issubset(panel.columns):
+        return panel
+    out = panel.copy()
+    quarter_period = pd.PeriodIndex(out["quarter"].astype(str), freq="Q")
+    historical_mask = quarter_period < pd.Period(TDCEST_TRANSACTION_START_QUARTER, freq="Q")
+    cash_adjustment = (
+        pd.to_numeric(out["tdc_treasury_operating_cash_qoq"], errors="coerce")
+        - pd.to_numeric(out["federal_govt_cash_balance_proxy_qoq"], errors="coerce")
+    )
+
+    if "tdc_bank_only_extended_1990_qoq" in out.columns:
+        out["tdc_bank_only_regime_aware_extended_1990_qoq"] = pd.to_numeric(
+            out["tdc_bank_only_extended_1990_qoq"], errors="coerce"
+        )
+        out.loc[historical_mask, "tdc_bank_only_regime_aware_extended_1990_qoq"] = (
+            pd.to_numeric(out.loc[historical_mask, "tdc_bank_only_extended_1990_qoq"], errors="coerce")
+            + cash_adjustment.loc[historical_mask]
+        )
+        out["tdc_bank_only_qoq"] = pd.to_numeric(out["tdc_bank_only_qoq"], errors="coerce").combine_first(
+            out["tdc_bank_only_regime_aware_extended_1990_qoq"]
+        )
+
+    if "tdc_broad_depository_extended_1990_qoq" in out.columns:
+        out["tdc_broad_depository_regime_aware_extended_1990_qoq"] = pd.to_numeric(
+            out["tdc_broad_depository_extended_1990_qoq"], errors="coerce"
+        )
+        out.loc[historical_mask, "tdc_broad_depository_regime_aware_extended_1990_qoq"] = (
+            pd.to_numeric(out.loc[historical_mask, "tdc_broad_depository_extended_1990_qoq"], errors="coerce")
+            + cash_adjustment.loc[historical_mask]
+        )
+        if "tdc_broad_depository_qoq" in out.columns:
+            out["tdc_broad_depository_qoq"] = pd.to_numeric(
+                out["tdc_broad_depository_qoq"], errors="coerce"
+            ).combine_first(out["tdc_broad_depository_regime_aware_extended_1990_qoq"])
+
+    return out
 
 
 def _load_reused_tdc_series(reuse_payload: Mapping[str, object]) -> CanonicalTdcSeriesResult | None:
@@ -603,18 +953,18 @@ def _load_reused_tdc_series(reuse_payload: Mapping[str, object]) -> CanonicalTdc
     return None
 
 
-def _candidate_tdcest_csv_paths(*, root: Path, fixture_root: Path | None) -> list[Path]:
+def _candidate_tdcest_processed_paths(*, root: Path, fixture_root: Path | None, filename: str) -> list[Path]:
     candidates: list[Path] = []
     workspace_root = repo_root()
     if fixture_root is not None:
-        candidates.append(fixture_root / "tdcest" / "tdc_estimates.csv")
+        candidates.append(fixture_root / "tdcest" / filename)
     env_root = os.getenv("TDCEST_ROOT")
     if env_root:
-        candidates.append(Path(os.path.expanduser(os.path.expandvars(env_root))) / "data" / "processed" / "tdc_estimates.csv")
-    candidates.append(workspace_root.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
-    candidates.append(workspace_root.parent.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
-    candidates.append(root.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
-    candidates.append(root.parent.parent / "tdcest" / "data" / "processed" / "tdc_estimates.csv")
+        candidates.append(Path(os.path.expanduser(os.path.expandvars(env_root))) / "data" / "processed" / filename)
+    candidates.append(workspace_root.parent / "tdcest" / "data" / "processed" / filename)
+    candidates.append(workspace_root.parent.parent / "tdcest" / "data" / "processed" / filename)
+    candidates.append(root.parent / "tdcest" / "data" / "processed" / filename)
+    candidates.append(root.parent.parent / "tdcest" / "data" / "processed" / filename)
     seen: set[str] = set()
     out: list[Path] = []
     for candidate in candidates:
@@ -625,6 +975,14 @@ def _candidate_tdcest_csv_paths(*, root: Path, fixture_root: Path | None) -> lis
     return out
 
 
+def _candidate_tdcest_csv_paths(*, root: Path, fixture_root: Path | None) -> list[Path]:
+    return _candidate_tdcest_processed_paths(
+        root=root,
+        fixture_root=fixture_root,
+        filename="tdc_estimates.csv",
+    )
+
+
 def _load_canonical_tdc_series(
     *,
     root: Path,
@@ -632,15 +990,27 @@ def _load_canonical_tdc_series(
     fixture_root: Path | None,
 ) -> CanonicalTdcSeriesResult:
     reused = _load_reused_tdc_series(reuse_payload)
+    supplement: pd.DataFrame | None = None
+    for path in _candidate_tdcest_processed_paths(
+        root=root,
+        fixture_root=fixture_root,
+        filename="tdc_downstream_deposit_effect_series_panel.csv",
+    ):
+        supplement = _load_tdcest_downstream_series_csv(path)
+        if supplement is not None:
+            break
     if reused is not None and "tdc_broad_depository_qoq" in reused.frame.columns:
-        return reused
+        frame = _merge_tdcest_downstream_overlay(reused.frame, supplement)
+        return CanonicalTdcSeriesResult(frame=frame, source_path=reused.source_path, source_kind=reused.source_kind)
     for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
         frame = _load_canonical_tdc_series_csv(path)
         if frame is not None and "tdc_broad_depository_qoq" in frame.columns:
+            frame = _merge_tdcest_downstream_overlay(frame, supplement)
             return CanonicalTdcSeriesResult(frame=frame, source_path=path, source_kind="tdcest_processed_csv")
     for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
         frame = _load_canonical_tdc_series_csv(path)
         if frame is not None:
+            frame = _merge_tdcest_downstream_overlay(frame, supplement)
             return CanonicalTdcSeriesResult(frame=frame, source_path=path, source_kind="tdcest_processed_csv")
     raise FileNotFoundError(
         "Could not locate canonical TDC estimates. Expected a tdcest processed file such as "
@@ -648,11 +1018,125 @@ def _load_canonical_tdc_series(
     )
 
 
+def _quarter_from_period_end(value: object) -> str | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    if not text:
+        return None
+    try:
+        timestamp = pd.Timestamp(text)
+    except (TypeError, ValueError):
+        return None
+    quarter = ((int(timestamp.month) - 1) // 3) + 1
+    return f"{int(timestamp.year)}Q{quarter}"
+
+
+def _load_imported_accounting_series_csv(path: Path) -> pd.DataFrame | None:
+    try:
+        frame = pd.read_csv(path)
+    except (FileNotFoundError, pd.errors.ParserError, OSError):
+        return None
+    required = {"series_id", "period_end", "value"}
+    if not required.issubset(frame.columns):
+        return None
+    sample = frame[frame["series_id"].isin(ACCOUNTING_COMPONENT_COLUMNS)].copy()
+    if sample.empty:
+        return None
+    sample["quarter"] = sample["period_end"].map(_quarter_from_period_end)
+    sample = sample[sample["quarter"].notna()].copy()
+    if sample.empty:
+        return None
+    if "available_at" in sample.columns:
+        sample["available_at_sort"] = pd.to_datetime(sample["available_at"], errors="coerce")
+        sample = sample.sort_values(["quarter", "series_id", "available_at_sort"])
+    else:
+        sample = sample.sort_values(["quarter", "series_id"])
+    sample = sample.drop_duplicates(subset=["quarter", "series_id"], keep="last")
+    sample["value"] = pd.to_numeric(sample["value"], errors="coerce")
+    if "units" in sample.columns:
+        units = sample["units"].astype(str).str.strip().str.lower()
+    else:
+        units = pd.Series([""], index=sample.index, dtype="object")
+    max_abs_value = sample["value"].abs().max(skipna=True)
+    # The imported EA accounting bundle is labeled usd_billions, but the bundled
+    # values are stored at a 1,000x larger scale than the rest of this panel.
+    if (
+        pd.notna(max_abs_value)
+        and float(max_abs_value) > ACCOUNTING_IMPORTED_BUNDLE_RESCALE_THRESHOLD
+        and units.eq("usd_billions").all()
+    ):
+        sample["value"] = sample["value"] / ACCOUNTING_IMPORTED_BUNDLE_DIVISOR
+    pivot = (
+        sample.pivot(index="quarter", columns="series_id", values="value")
+        .reset_index()
+        .sort_values("quarter")
+        .reset_index(drop=True)
+    )
+    pivot.columns.name = None
+    for column in ACCOUNTING_COMPONENT_COLUMNS:
+        if column not in pivot.columns:
+            pivot[column] = pd.NA
+    return pivot[["quarter", *ACCOUNTING_COMPONENT_COLUMNS]]
+
+
+def _candidate_accounting_bundle_paths(*, root: Path, fixture_root: Path | None) -> list[Path]:
+    candidates: list[Path] = []
+    workspace_root = repo_root()
+    if fixture_root is not None:
+        candidates.append(fixture_root / "accounting" / "standardized_series.csv")
+    candidates.append(workspace_root / "data" / "bundles" / "accounting" / "standardized_series.csv")
+    env_root = os.getenv("EATDC_ROOT")
+    if env_root:
+        candidates.append(
+            Path(os.path.expanduser(os.path.expandvars(env_root))) / "data" / "bundles" / "accounting" / "standardized_series.csv"
+        )
+    for base in (
+        workspace_root.parent / "ea-tdc",
+        workspace_root.parent.parent / "ea-tdc",
+        root.parent / "ea-tdc",
+        root.parent.parent / "ea-tdc",
+    ):
+        candidates.append(base / "data" / "bundles" / "accounting" / "standardized_series.csv")
+    seen: set[str] = set()
+    out: list[Path] = []
+    for candidate in candidates:
+        key = str(candidate)
+        if key not in seen:
+            seen.add(key)
+            out.append(candidate)
+    return out
+
+
+def _accounting_source_kind(path: Path, *, fixture_root: Path | None) -> str:
+    if fixture_root is not None and path == (fixture_root / "accounting" / "standardized_series.csv"):
+        return "fixture_accounting_bundle"
+    if path == (repo_root() / "data" / "bundles" / "accounting" / "standardized_series.csv"):
+        return "local_accounting_bundle"
+    return "ea_tdc_accounting_bundle"
+
+
+def _load_imported_accounting_series(
+    *,
+    root: Path,
+    fixture_root: Path | None,
+) -> ImportedAccountingSeriesResult | None:
+    for path in _candidate_accounting_bundle_paths(root=root, fixture_root=fixture_root):
+        frame = _load_imported_accounting_series_csv(path)
+        if frame is not None:
+            return ImportedAccountingSeriesResult(
+                frame=frame,
+                source_kind=_accounting_source_kind(path, fixture_root=fixture_root),
+            )
+    return None
+
+
 def _write_proxy_unit_audit(
     path: Path,
     *,
     fred_levels_raw: Mapping[str, pd.Series],
     fred_levels_scaled: Mapping[str, pd.Series],
+    strict_transaction_series_ids: Mapping[str, str],
     panel: pd.DataFrame,
 ) -> Path:
     source_series = []
@@ -729,11 +1213,27 @@ def _write_proxy_unit_audit(
             }
         )
 
+    strict_source_channels = []
+    for channel_name, series_id in strict_transaction_series_ids.items():
+        series = panel[["quarter", channel_name]].dropna()
+        strict_source_channels.append(
+            {
+                "channel": channel_name,
+                "series_id": series_id,
+                "units": "billions_usd",
+                "start_quarter": None if series.empty else str(series["quarter"].iloc[0]),
+                "end_quarter": None if series.empty else str(series["quarter"].iloc[-1]),
+                "non_missing_obs": int(len(series)),
+                "median_abs_qoq": None if series.empty else float(series[channel_name].abs().median()),
+            }
+        )
+
     takeaways = [
         "FRED level series are now scaled with an explicit per-series divisor rather than a blanket /1000 rule.",
         "TOTBKCR and TNMACBW027SBOG are treated as already being in billions_usd, while WTREGEN and WRESBAL are converted from millions_usd to billions_usd.",
         "The creator-lane lending series are H.8/FRED balance levels quarterlyized by taking the last observation in each quarter and then differencing q/q, except for the securities-purpose lane that comes from quarterly Z.1 levels.",
         "The first asset-purchase creator lanes come from quarterly Z.1 L.111 holdings for Treasury, agency/GSE-backed, municipal, and corporate/foreign bond assets.",
+        "The strict independent lane uses quarterly Z.1 transaction series accessed through FRED, scaled from millions_usd to billions_usd, with an explicit fallback for the consumer-credit series code transition.",
         "Charge-off-adjusted creator lanes add back an approximate quarterly destruction flow computed from lagged balances and official annualized charge-off rates.",
     ]
     payload = {
@@ -742,6 +1242,7 @@ def _write_proxy_unit_audit(
         "derived_proxies": derived_proxies,
         "creator_channels": creator_channels,
         "creator_channel_adjustments": creator_channel_adjustments,
+        "strict_source_channels": strict_source_channels,
         "takeaways": takeaways,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -898,7 +1399,21 @@ def build_public_quarterly_panel(
             "checkable_deposits_bank_qoq": _qoq_change(z1_levels["checkable_deposits_bank_level"]),
             "interbank_transactions_bank_qoq": _qoq_change(z1_levels["interbank_transactions_bank_level"]),
             "time_savings_deposits_bank_qoq": _qoq_change(z1_levels["time_savings_deposits_bank_level"]),
+            "checkable_deposits_foreign_offices_qoq": _qoq_change(
+                z1_levels["checkable_deposits_foreign_offices_level"]
+            ),
+            "time_savings_deposits_foreign_offices_qoq": _qoq_change(
+                z1_levels["time_savings_deposits_foreign_offices_level"]
+            ),
+            "checkable_deposits_affiliated_areas_qoq": _qoq_change(
+                z1_levels["checkable_deposits_affiliated_areas_level"]
+            ),
+            "time_savings_deposits_affiliated_areas_qoq": _qoq_change(
+                z1_levels["time_savings_deposits_affiliated_areas_level"]
+            ),
             "checkable_federal_govt_bank_qoq": _qoq_change(z1_levels["checkable_federal_govt_bank_level"]),
+            "federal_govt_checkable_total_qoq": _qoq_change(z1_levels["federal_govt_checkable_total_level"]),
+            "federal_govt_time_savings_total_qoq": _qoq_change(z1_levels["federal_govt_time_savings_total_level"]),
             "checkable_state_local_bank_qoq": _qoq_change(z1_levels["checkable_state_local_bank_level"]),
             "checkable_rest_of_world_bank_qoq": _qoq_change(z1_levels["checkable_rest_of_world_bank_level"]),
             "checkable_private_domestic_bank_qoq": _qoq_change(z1_levels["checkable_private_domestic_bank_level"]),
@@ -934,6 +1449,10 @@ def build_public_quarterly_panel(
     )
     panel = panel.merge(bill_share, on="quarter", how="left")
     panel = panel.merge(canonical_tdc.frame, on="quarter", how="left")
+    imported_accounting = _load_imported_accounting_series(root=root, fixture_root=fixture_root)
+    accounting_source_kind = "not_available" if imported_accounting is None else imported_accounting.source_kind
+    if imported_accounting is not None:
+        panel = panel.merge(imported_accounting.frame, on="quarter", how="left")
 
     fred_levels_raw: dict[str, pd.Series] = {}
     fred_levels: dict[str, pd.Series] = {}
@@ -986,19 +1505,229 @@ def build_public_quarterly_panel(
     fred_frame = fred_frame.sort_values("quarter").reset_index(drop=True)
     fred_frame["cb_nonts_qoq"] = fred_frame["reserves_qoq"] + fred_frame["tga_qoq"]
 
+    strict_transaction_series_ids: dict[str, str] = {}
+    strict_frame: pd.DataFrame | None = None
+    for outcome_name, candidate_ids in STRICT_Z1_TRANSACTION_SERIES.items():
+        series, resolved_series_id = _load_quarterly_candidate_fred_series(
+            candidate_ids,
+            raw_dir=raw_dir,
+            manifest_path=raw_download_manifest_path,
+            fixture_root=fixture_root,
+            timeout=timeout,
+        )
+        strict_transaction_series_ids[outcome_name] = resolved_series_id
+        series_frame = _quarterly_series_frame(outcome_name, series)
+        strict_frame = series_frame if strict_frame is None else strict_frame.merge(series_frame, on="quarter", how="outer")
+    if strict_frame is None:
+        strict_frame = pd.DataFrame(columns=["quarter"])
+    strict_frame = strict_frame.sort_values("quarter").reset_index(drop=True)
+
+    tdc_component_frame: pd.DataFrame | None = None
+    for outcome_name, candidate_ids in TDC_COMPONENT_TRANSACTION_SERIES.items():
+        series, _ = _load_quarterly_candidate_fred_series(
+            candidate_ids,
+            raw_dir=raw_dir,
+            manifest_path=raw_download_manifest_path,
+            fixture_root=fixture_root,
+            timeout=timeout,
+        )
+        series_frame = _quarterly_series_frame(outcome_name, series)
+        tdc_component_frame = (
+            series_frame if tdc_component_frame is None else tdc_component_frame.merge(series_frame, on="quarter", how="outer")
+        )
+    if fixture_root is not None:
+        remit_csv_path = _copy_fixture_file(
+            fixture_root / "fred" / f"{TDC_REMIT_SERIES_ID}.csv",
+            raw_dir / "fred" / f"{TDC_REMIT_SERIES_ID}.csv",
+            raw_download_manifest_path,
+            source_key="fixture_fred_graph",
+        )
+    else:
+        remit_csv_path = _download_fred_csv(TDC_REMIT_SERIES_ID, raw_dir, raw_download_manifest_path, timeout=timeout)
+    remit_series = _quarter_sum(_load_fred_series(remit_csv_path).clip(lower=0.0)) / STRICT_Z1_TRANSACTION_DIVISOR
+    remit_frame = _quarterly_series_frame("tdc_fed_remit_positive_qoq", remit_series)
+    if tdc_component_frame is None:
+        tdc_component_frame = remit_frame
+    else:
+        tdc_component_frame = tdc_component_frame.merge(remit_frame, on="quarter", how="outer")
+    tdc_component_frame = tdc_component_frame.sort_values("quarter").reset_index(drop=True)
+
     panel = panel.merge(fred_frame, on="quarter", how="outer").sort_values("quarter").reset_index(drop=True)
+    panel = panel.merge(strict_frame, on="quarter", how="outer").sort_values("quarter").reset_index(drop=True)
+    panel = panel.merge(tdc_component_frame, on="quarter", how="outer").sort_values("quarter").reset_index(drop=True)
+    panel["federal_govt_cash_balance_proxy_qoq"] = panel[
+        ["federal_govt_checkable_total_qoq", "federal_govt_time_savings_total_qoq"]
+    ].sum(axis=1, min_count=2)
+    panel = _apply_regime_aware_historical_cash_backfill(panel)
+    panel["deposits_only_bank_qoq"] = panel[["checkable_deposits_bank_qoq", "time_savings_deposits_bank_qoq"]].sum(
+        axis=1,
+        min_count=2,
+    )
+    panel["broad_bank_deposits_qoq"] = panel[
+        [
+            "checkable_deposits_bank_qoq",
+            "time_savings_deposits_bank_qoq",
+            "checkable_deposits_foreign_offices_qoq",
+            "time_savings_deposits_foreign_offices_qoq",
+            "checkable_deposits_affiliated_areas_qoq",
+            "time_savings_deposits_affiliated_areas_qoq",
+        ]
+    ].sum(
+        axis=1,
+        min_count=6,
+    )
+    panel["tdc_us_chartered_bank_only_qoq"] = (
+        panel["tdc_fed_treasury_transactions_qoq"]
+        + panel["tdc_us_chartered_treasury_transactions_qoq"]
+        - panel["tdc_treasury_operating_cash_qoq"]
+        + panel["tdc_fed_remit_positive_qoq"]
+    )
+    panel["tdc_no_foreign_bank_sectors_qoq"] = (
+        panel["tdc_fed_treasury_transactions_qoq"]
+        + panel["tdc_us_chartered_treasury_transactions_qoq"]
+        + panel["tdc_row_treasury_transactions_qoq"]
+        - panel["tdc_treasury_operating_cash_qoq"]
+        + panel["tdc_fed_remit_positive_qoq"]
+    )
+    panel["tdc_no_toc_bank_only_qoq"] = (
+        panel["tdc_fed_treasury_transactions_qoq"]
+        + panel["tdc_us_chartered_treasury_transactions_qoq"]
+        + panel["tdc_foreign_offices_treasury_transactions_qoq"]
+        + panel["tdc_affiliated_areas_treasury_transactions_qoq"]
+        + panel["tdc_row_treasury_transactions_qoq"]
+        + panel["tdc_fed_remit_positive_qoq"]
+    )
+    panel["tdc_no_toc_no_row_bank_only_qoq"] = (
+        panel["tdc_fed_treasury_transactions_qoq"]
+        + panel["tdc_us_chartered_treasury_transactions_qoq"]
+        + panel["tdc_foreign_offices_treasury_transactions_qoq"]
+        + panel["tdc_affiliated_areas_treasury_transactions_qoq"]
+        + panel["tdc_fed_remit_positive_qoq"]
+    )
+    panel["tdc_core_deposit_proximate_bank_only_qoq"] = panel["tdc_no_toc_no_row_bank_only_qoq"]
+    panel["tdc_toc_row_support_bundle_qoq"] = (
+        panel["tdc_bank_only_qoq"] - panel["tdc_core_deposit_proximate_bank_only_qoq"]
+    )
     panel["other_component_qoq"] = panel["total_deposits_bank_qoq"] - panel["tdc_bank_only_qoq"]
+    panel["other_component_domestic_bank_only_qoq"] = panel["total_deposits_bank_qoq"] - panel["tdc_domestic_bank_only_qoq"]
+    panel["other_component_us_chartered_bank_only_qoq"] = (
+        panel["total_deposits_bank_qoq"] - panel["tdc_us_chartered_bank_only_qoq"]
+    )
+    panel["other_component_no_foreign_bank_sectors_qoq"] = (
+        panel["total_deposits_bank_qoq"] - panel["tdc_no_foreign_bank_sectors_qoq"]
+    )
+    panel["other_component_no_toc_bank_only_qoq"] = panel["total_deposits_bank_qoq"] - panel["tdc_no_toc_bank_only_qoq"]
+    panel["other_component_no_toc_no_row_bank_only_qoq"] = (
+        panel["total_deposits_bank_qoq"] - panel["tdc_no_toc_no_row_bank_only_qoq"]
+    )
+    panel["other_component_core_deposit_proximate_bank_only_qoq"] = (
+        panel["total_deposits_bank_qoq"] - panel["tdc_core_deposit_proximate_bank_only_qoq"]
+    )
+    panel["deposits_only_other_component_qoq"] = panel["deposits_only_bank_qoq"] - panel["tdc_bank_only_qoq"]
+    panel["deposits_only_other_component_domestic_bank_only_qoq"] = (
+        panel["deposits_only_bank_qoq"] - panel["tdc_domestic_bank_only_qoq"]
+    )
+    panel["deposits_only_other_component_us_chartered_bank_only_qoq"] = (
+        panel["deposits_only_bank_qoq"] - panel["tdc_us_chartered_bank_only_qoq"]
+    )
+    panel["broad_bank_other_component_qoq"] = panel["broad_bank_deposits_qoq"] - panel["tdc_bank_only_qoq"]
+    for column in ACCOUNTING_COMPONENT_COLUMNS:
+        if column not in panel.columns:
+            panel[column] = pd.NA
+    for column in STRICT_ALL_COLUMNS:
+        if column not in panel.columns:
+            panel[column] = pd.NA
+    for column in BROAD_SCOPE_COLUMNS:
+        if column not in panel.columns:
+            panel[column] = pd.NA
+    panel[list(ACCOUNTING_COMPONENT_COLUMNS)] = panel[list(ACCOUNTING_COMPONENT_COLUMNS)].apply(
+        pd.to_numeric,
+        errors="coerce",
+    )
+    panel[list(STRICT_ALL_COLUMNS)] = panel[list(STRICT_ALL_COLUMNS)].apply(pd.to_numeric, errors="coerce")
+    panel[list(BROAD_SCOPE_COLUMNS)] = panel[list(BROAD_SCOPE_COLUMNS)].apply(pd.to_numeric, errors="coerce")
+    panel["accounting_identity_total_qoq"] = panel[list(ACCOUNTING_COMPONENT_COLUMNS)].sum(
+        axis=1,
+        min_count=len(ACCOUNTING_COMPONENT_COLUMNS),
+    )
+    panel["accounting_identity_gap_qoq"] = panel["other_component_qoq"] - panel["accounting_identity_total_qoq"]
+    panel["strict_di_loans_nec_systemwide_borrower_total_qoq"] = panel[list(STRICT_DI_LOANS_NEC_BORROWER_COLUMNS)].sum(
+        axis=1,
+        min_count=len(STRICT_DI_LOANS_NEC_BORROWER_COLUMNS),
+    )
+    panel["strict_di_loans_nec_systemwide_borrower_gap_qoq"] = (
+        panel["strict_di_loans_nec_systemwide_liability_total_qoq"]
+        - panel["strict_di_loans_nec_systemwide_borrower_total_qoq"]
+    )
+    panel["strict_di_loans_nec_private_domestic_borrower_qoq"] = panel[
+        list(STRICT_DI_LOANS_NEC_PRIVATE_DOMESTIC_COLUMNS)
+    ].sum(axis=1, min_count=len(STRICT_DI_LOANS_NEC_PRIVATE_DOMESTIC_COLUMNS))
+    panel["strict_di_loans_nec_noncore_system_borrower_qoq"] = panel[
+        list(STRICT_DI_LOANS_NEC_NONCORE_SYSTEM_COLUMNS)
+    ].sum(axis=1, min_count=len(STRICT_DI_LOANS_NEC_NONCORE_SYSTEM_COLUMNS))
+    panel["strict_loan_core_min_qoq"] = panel[
+        ["strict_loan_mortgages_qoq", "strict_loan_consumer_credit_qoq"]
+    ].sum(axis=1, min_count=2)
+    panel["strict_loan_core_plus_private_borrower_qoq"] = panel[
+        ["strict_loan_core_min_qoq", "strict_di_loans_nec_private_domestic_borrower_qoq"]
+    ].sum(axis=1, min_count=2)
+    panel["strict_loan_core_plus_nonfinancial_corporate_qoq"] = panel[
+        ["strict_loan_core_min_qoq", "strict_di_loans_nec_nonfinancial_corporate_qoq"]
+    ].sum(axis=1, min_count=2)
+    panel["strict_loan_noncore_system_qoq"] = panel[
+        ["strict_di_loans_nec_noncore_system_borrower_qoq", "strict_loan_other_advances_qoq"]
+    ].sum(axis=1, min_count=2)
+    panel["strict_non_treasury_securities_qoq"] = panel[list(STRICT_SECURITIES_COMPONENT_COLUMNS)].sum(
+        axis=1,
+        min_count=len(STRICT_SECURITIES_COMPONENT_COLUMNS),
+    )
+    panel["strict_identifiable_total_qoq"] = panel[
+        ["strict_loan_source_qoq", "strict_non_treasury_securities_qoq"]
+    ].sum(axis=1, min_count=2)
+    panel["strict_identifiable_gap_qoq"] = panel["other_component_qoq"] - panel["strict_identifiable_total_qoq"]
+    panel["strict_funding_offset_total_qoq"] = panel[list(STRICT_FUNDING_COMPONENT_COLUMNS)].sum(
+        axis=1,
+        min_count=len(STRICT_FUNDING_COMPONENT_COLUMNS),
+    )
+    panel["strict_identifiable_net_after_funding_qoq"] = (
+        panel["strict_identifiable_total_qoq"] - panel["strict_funding_offset_total_qoq"]
+    )
+    panel["strict_gap_after_funding_qoq"] = (
+        panel["other_component_qoq"] - panel["strict_identifiable_net_after_funding_qoq"]
+    )
+    panel["broad_strict_loan_source_qoq"] = panel[
+        [
+            "strict_loan_source_qoq",
+            "broad_strict_loan_foreign_offices_qoq",
+            "broad_strict_loan_affiliated_areas_qoq",
+        ]
+    ].sum(axis=1, min_count=3)
+    panel["broad_strict_gap_qoq"] = panel["broad_bank_other_component_qoq"] - panel["broad_strict_loan_source_qoq"]
     for column in [
         "tdc_bank_only_qoq",
         "tdc_broad_depository_qoq",
         "tdc_domestic_bank_only_qoq",
+        "tdc_us_chartered_bank_only_qoq",
+        "tdc_no_foreign_bank_sectors_qoq",
+        "tdc_no_toc_no_row_bank_only_qoq",
+        "tdc_core_deposit_proximate_bank_only_qoq",
+        "tdc_toc_row_support_bundle_qoq",
         "tdc_no_remit_bank_only_qoq",
         "tdc_credit_union_sensitive_qoq",
         "total_deposits_bank_qoq",
+        "deposits_only_bank_qoq",
+        "broad_bank_deposits_qoq",
         "checkable_deposits_bank_qoq",
+        "checkable_deposits_foreign_offices_qoq",
+        "checkable_deposits_affiliated_areas_qoq",
         "interbank_transactions_bank_qoq",
         "time_savings_deposits_bank_qoq",
+        "time_savings_deposits_foreign_offices_qoq",
+        "time_savings_deposits_affiliated_areas_qoq",
         "checkable_federal_govt_bank_qoq",
+        "federal_govt_checkable_total_qoq",
+        "federal_govt_time_savings_total_qoq",
+        "federal_govt_cash_balance_proxy_qoq",
         "checkable_state_local_bank_qoq",
         "checkable_rest_of_world_bank_qoq",
         "checkable_private_domestic_bank_qoq",
@@ -1016,6 +1745,57 @@ def build_public_quarterly_panel(
         "commercial_bank_borrowings_qoq",
         "fed_borrowings_depository_institutions_qoq",
         "other_component_qoq",
+        "other_component_domestic_bank_only_qoq",
+        "other_component_us_chartered_bank_only_qoq",
+        "other_component_no_foreign_bank_sectors_qoq",
+        "other_component_no_toc_no_row_bank_only_qoq",
+        "other_component_core_deposit_proximate_bank_only_qoq",
+        "deposits_only_other_component_qoq",
+        "deposits_only_other_component_domestic_bank_only_qoq",
+        "deposits_only_other_component_us_chartered_bank_only_qoq",
+        "broad_bank_other_component_qoq",
+        "accounting_deposit_substitution_qoq",
+        "accounting_bank_balance_sheet_qoq",
+        "accounting_public_liquidity_qoq",
+        "accounting_external_flow_qoq",
+        "accounting_identity_total_qoq",
+        "accounting_identity_gap_qoq",
+        "strict_loan_source_qoq",
+        "strict_loan_mortgages_qoq",
+        "strict_loan_consumer_credit_qoq",
+        "strict_loan_di_loans_nec_qoq",
+        "strict_di_loans_nec_households_nonprofits_qoq",
+        "strict_di_loans_nec_nonfinancial_corporate_qoq",
+        "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+        "strict_di_loans_nec_state_local_qoq",
+        "strict_di_loans_nec_domestic_financial_qoq",
+        "strict_di_loans_nec_rest_of_world_qoq",
+        "strict_di_loans_nec_systemwide_liability_total_qoq",
+        "strict_di_loans_nec_systemwide_borrower_total_qoq",
+        "strict_di_loans_nec_systemwide_borrower_gap_qoq",
+        "strict_di_loans_nec_private_domestic_borrower_qoq",
+        "strict_di_loans_nec_noncore_system_borrower_qoq",
+        "strict_loan_other_advances_qoq",
+        "strict_loan_core_min_qoq",
+        "strict_loan_core_plus_private_borrower_qoq",
+        "strict_loan_core_plus_nonfinancial_corporate_qoq",
+        "strict_loan_noncore_system_qoq",
+        "broad_strict_loan_foreign_offices_qoq",
+        "broad_strict_loan_affiliated_areas_qoq",
+        "broad_strict_loan_source_qoq",
+        "broad_strict_gap_qoq",
+        "strict_non_treasury_agency_gse_qoq",
+        "strict_non_treasury_municipal_qoq",
+        "strict_non_treasury_corporate_foreign_bonds_qoq",
+        "strict_non_treasury_securities_qoq",
+        "strict_identifiable_total_qoq",
+        "strict_identifiable_gap_qoq",
+        "strict_funding_fedfunds_repo_qoq",
+        "strict_funding_debt_securities_qoq",
+        "strict_funding_fhlb_advances_qoq",
+        "strict_funding_offset_total_qoq",
+        "strict_identifiable_net_after_funding_qoq",
+        "strict_gap_after_funding_qoq",
         "bank_credit_private_qoq",
         "commercial_industrial_loans_qoq",
         "construction_land_development_loans_qoq",
@@ -1049,6 +1829,11 @@ def build_public_quarterly_panel(
         "fedfunds",
         "unemployment",
         "inflation",
+        "tdc_tier2_bank_only_qoq",
+        "tdc_tier3_bank_only_qoq",
+        "tdc_tier3_broad_depository_qoq",
+        "tdc_no_toc_bank_only_qoq",
+        "tdc_no_toc_no_row_bank_only_qoq",
     ]:
         panel[f"lag_{column}"] = panel[column].shift(1)
 
@@ -1066,6 +1851,7 @@ def build_public_quarterly_panel(
         proxy_unit_audit_path,
         fred_levels_raw=fred_levels_raw,
         fred_levels_scaled=fred_levels,
+        strict_transaction_series_ids=strict_transaction_series_ids,
         panel=panel,
     )
     _write_sample_construction_summary(
@@ -1084,5 +1870,7 @@ def build_public_quarterly_panel(
         sample_construction_summary_path=sample_construction_summary_path,
         canonical_tdc_source_path=canonical_tdc.source_path,
         canonical_tdc_source_kind=canonical_tdc.source_kind,
+        accounting_source_kind=accounting_source_kind,
+        strict_source_kind=STRICT_SOURCE_KIND,
         rows=int(len(panel)),
     )

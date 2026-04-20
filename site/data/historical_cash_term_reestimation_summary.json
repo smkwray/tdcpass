@@ -1,0 +1,124 @@
+{
+  "status": "available",
+  "headline_question": "How much does the 1990-to-2002 historical TDC backfill change when the pre-transaction Treasury-cash term is replaced with an explicit TT&L-era cash-balance proxy?",
+  "estimation_path": {
+    "summary_artifact": "historical_cash_term_reestimation_summary.json",
+    "canonical_extended_source_path": "tdcest/tdc_estimates.csv",
+    "historical_extension_source_column": "tdc_bank_only_extended_1990",
+    "candidate_formula": "candidate_tdc_extended_qoq = current_tdc_extended_qoq + current_cash_term_qoq - candidate_cash_term_qoq, applied only before 2002Q4"
+  },
+  "definitions": {
+    "current_cash_term_qoq": "Current Treasury-cash term used in the historical backfill comparison (`tdc_treasury_operating_cash_qoq`).",
+    "candidate_cash_term_qoq": "TT&L-aware pre-transaction cash term = broad federal cash-balance proxy before 2002Q4; current cash term otherwise.",
+    "current_tdc_extended_qoq": "Current tdcest historical extension (`tdc_bank_only_extended_1990`).",
+    "candidate_tdc_extended_qoq": "Historical extension after replacing the pre-2002 Treasury-cash term with the TT&L-aware cash proxy."
+  },
+  "windows": {
+    "historical_backfill_window": {
+      "start": "1990Q1",
+      "end": "2002Q3"
+    },
+    "pre_shift_ttl_regime": {
+      "start": "1990Q1",
+      "end": "2008Q2"
+    },
+    "transaction_headline_start": "2002Q4"
+  },
+  "comparison": {
+    "historical_backfill_window": {
+      "rows": 51,
+      "mean_abs_adjustment": 2.328137254901961,
+      "median_abs_adjustment": 1.1780000000000008,
+      "max_abs_adjustment": 16.410000000000004,
+      "current_vs_candidate_corr": 0.9956889281707897,
+      "candidate_minus_current_mean": -0.6918235294117651
+    },
+    "pre_shift_ttl_regime": {
+      "rows": 51,
+      "mean_abs_adjustment": 2.328137254901961,
+      "median_abs_adjustment": 1.1780000000000008,
+      "max_abs_adjustment": 16.410000000000004,
+      "current_vs_candidate_corr": 0.9956889281707897,
+      "candidate_minus_current_mean": -0.6918235294117651
+    }
+  },
+  "top_adjustment_quarters": [
+    {
+      "quarter": "1991Q4",
+      "current_tdc_extended_qoq": 35.696,
+      "candidate_tdc_extended_qoq": 19.285999999999994,
+      "candidate_minus_current_tdc_qoq": -16.410000000000004,
+      "current_cash_term_qoq": 7.298,
+      "candidate_cash_term_qoq": 23.708000000000002
+    },
+    {
+      "quarter": "2002Q3",
+      "current_tdc_extended_qoq": 61.598,
+      "candidate_tdc_extended_qoq": 50.141999999999996,
+      "candidate_minus_current_tdc_qoq": -11.456000000000003,
+      "current_cash_term_qoq": 21.256,
+      "candidate_cash_term_qoq": 32.712
+    },
+    {
+      "quarter": "1991Q3",
+      "current_tdc_extended_qoq": 36.477,
+      "candidate_tdc_extended_qoq": 47.385999999999996,
+      "candidate_minus_current_tdc_qoq": 10.908999999999999,
+      "current_cash_term_qoq": -2.099,
+      "candidate_cash_term_qoq": -13.008
+    },
+    {
+      "quarter": "1991Q1",
+      "current_tdc_extended_qoq": 26.313,
+      "candidate_tdc_extended_qoq": 18.973999999999997,
+      "candidate_minus_current_tdc_qoq": -7.339,
+      "current_cash_term_qoq": -0.187,
+      "candidate_cash_term_qoq": 7.152
+    },
+    {
+      "quarter": "2001Q4",
+      "current_tdc_extended_qoq": 100.526,
+      "candidate_tdc_extended_qoq": 93.51299999999999,
+      "candidate_minus_current_tdc_qoq": -7.013,
+      "current_cash_term_qoq": 8.133,
+      "candidate_cash_term_qoq": 15.145999999999999
+    },
+    {
+      "quarter": "1996Q2",
+      "current_tdc_extended_qoq": 9.194,
+      "candidate_tdc_extended_qoq": 3.4680000000000017,
+      "candidate_minus_current_tdc_qoq": -5.725999999999999,
+      "current_cash_term_qoq": 16.159,
+      "candidate_cash_term_qoq": 21.884999999999998
+    },
+    {
+      "quarter": "1997Q4",
+      "current_tdc_extended_qoq": 33.145,
+      "candidate_tdc_extended_qoq": 28.496000000000002,
+      "candidate_minus_current_tdc_qoq": -4.649000000000001,
+      "current_cash_term_qoq": -11.736,
+      "candidate_cash_term_qoq": -7.087
+    },
+    {
+      "quarter": "2001Q2",
+      "current_tdc_extended_qoq": -34.299,
+      "candidate_tdc_extended_qoq": -38.659,
+      "candidate_minus_current_tdc_qoq": -4.360000000000001,
+      "current_cash_term_qoq": 15.403,
+      "candidate_cash_term_qoq": 19.763
+    }
+  ],
+  "classification": {
+    "historical_adjustment_classification": "historical_backfill_changes_nontrivially"
+  },
+  "recommendation": {
+    "status": "promote_regime_aware_historical_cash_term",
+    "next_branch": "decide_whether_to_replace_current_historical_backfill_cash_term"
+  },
+  "takeaways": [
+    "This branch re-estimates only the historical backfill by swapping the pre-transaction Treasury-cash term from the current operating-cash series to an explicit TT&L-era broad federal cash-balance proxy.",
+    "The transaction-era headline itself is unchanged; only the 1990-to-2002 backfill is being stress-tested.",
+    "Across the historical backfill window, the alternative TT&L-aware cash term changes TDC by about 2.33 on average in absolute q/q terms, with a max absolute change around 16.41.",
+    "The current versus TT&L-aware historical extensions stay correlated at about 1.00 over the backfill window."
+  ]
+}

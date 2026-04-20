@@ -1,0 +1,247 @@
+{
+  "status": "available",
+  "headline_question": "Should the standard secondary strict comparison remain the broad private bridge, or narrow to the nonfinancial-corporate bridge once the small offset block is separated out?",
+  "estimation_path": {
+    "summary_artifact": "strict_corporate_bridge_secondary_comparison_summary.json",
+    "baseline_spec": "identity_baseline",
+    "comparison_spec": "unexpected_tdc_core_deposit_proximate_bank_only"
+  },
+  "candidate_definitions": {
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "core_plus_private_bridge": "strict_loan_core_plus_private_borrower_qoq",
+    "core_plus_nonfinancial_corporate": "strict_loan_core_plus_nonfinancial_corporate_qoq",
+    "private_offset_residual": "strict_di_loans_nec_private_offset_residual_qoq"
+  },
+  "recommendation": {
+    "status": "promote_corporate_bridge_for_strict_role",
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "standard_secondary_candidate": "strict_loan_core_plus_nonfinancial_corporate_qoq",
+    "secondary_comparison_retained_for_diagnostics": "strict_loan_core_plus_private_borrower_qoq",
+    "fit_preferred_secondary_candidate": "strict_loan_core_plus_private_borrower_qoq",
+    "role_decision_basis": "strict_design_over_fit_heuristic",
+    "private_offset_role": "diagnostic_only",
+    "next_branch": "tighten_framework_roles_and_start_toc_row_incidence_audit"
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline": {
+        "core_residual_response": {
+          "beta": -81.17833439216729,
+          "se": 20.082089282921796,
+          "lower95": -120.539229386694,
+          "upper95": -41.81743939764057,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "headline_direct_core_response": {
+          "beta": -20.959164939095672,
+          "se": 3.1549840447073088,
+          "lower95": -27.142933666721998,
+          "upper95": -14.775396211469346,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "core_plus_private_bridge_response": {
+          "beta": -18.024897659338134,
+          "se": 10.509068730802364,
+          "lower95": -38.62267237171076,
+          "upper95": 2.5728770530344995,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "core_plus_nonfinancial_corporate_response": {
+          "beta": -12.89773973920645,
+          "se": 9.972266225492001,
+          "lower95": -32.44338154117077,
+          "upper95": 6.647902062757872,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "private_offset_residual_response": {
+          "beta": -4.88621084571467,
+          "se": 1.6499001019293535,
+          "lower95": -8.120015045496203,
+          "upper95": -1.6524066459331372,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_core_residual_beta": {
+          "headline_direct_core": 60.219169453071615,
+          "core_plus_private_bridge": 63.15343673282915,
+          "core_plus_nonfinancial_corporate": 68.28059465296084
+        },
+        "candidate_signed_gap_to_core_residual_beta": {
+          "headline_direct_core": 60.219169453071615,
+          "core_plus_private_bridge": 63.15343673282915,
+          "core_plus_nonfinancial_corporate": 68.28059465296084
+        }
+      },
+      "core_deposit_proximate": {
+        "core_residual_response": {
+          "beta": -5.5017271614404075,
+          "se": 10.900899392583762,
+          "lower95": -26.86748997090458,
+          "upper95": 15.864035648023766,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "headline_direct_core_response": {
+          "beta": -10.658905058923445,
+          "se": 2.1604322831094116,
+          "lower95": -14.89335233381789,
+          "upper95": -6.424457784028998,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "core_plus_private_bridge_response": {
+          "beta": 8.485186147303951,
+          "se": 7.570896097479558,
+          "lower95": -6.353770203755982,
+          "upper95": 23.324142498363884,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "core_plus_nonfinancial_corporate_response": {
+          "beta": 9.437768587339647,
+          "se": 7.1734677069540815,
+          "lower95": -4.6222281182903515,
+          "upper95": 23.497765292969646,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "private_offset_residual_response": {
+          "beta": -0.935069231849752,
+          "se": 0.46316960205928587,
+          "lower95": -1.8428816518859523,
+          "upper95": -0.027256811813551662,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_core_residual_beta": {
+          "headline_direct_core": 5.157177897483037,
+          "core_plus_private_bridge": 13.98691330874436,
+          "core_plus_nonfinancial_corporate": 14.939495748780054
+        },
+        "candidate_signed_gap_to_core_residual_beta": {
+          "headline_direct_core": -5.157177897483037,
+          "core_plus_private_bridge": 13.98691330874436,
+          "core_plus_nonfinancial_corporate": 14.939495748780054
+        }
+      }
+    },
+    "h4": {
+      "baseline": {
+        "core_residual_response": {
+          "beta": -100.99420217322478,
+          "se": 48.95277771700602,
+          "lower95": -196.94164649855657,
+          "upper95": -5.046757847892977,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "headline_direct_core_response": {
+          "beta": -39.60708317233477,
+          "se": 21.704975154811738,
+          "lower95": -82.14883447576577,
+          "upper95": 2.934668131096238,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "core_plus_private_bridge_response": {
+          "beta": -36.09446880211384,
+          "se": 18.50553920530457,
+          "lower95": -72.36532564451079,
+          "upper95": 0.17638804028311483,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "core_plus_nonfinancial_corporate_response": {
+          "beta": -30.70282954123921,
+          "se": 17.193896916956398,
+          "lower95": -64.40286749847374,
+          "upper95": 2.997208415995324,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "private_offset_residual_response": {
+          "beta": -5.786757919607739,
+          "se": 2.049370880951401,
+          "lower95": -9.803524846272484,
+          "upper95": -1.7699909929429936,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_core_residual_beta": {
+          "headline_direct_core": 61.38711900089001,
+          "core_plus_private_bridge": 64.89973337111094,
+          "core_plus_nonfinancial_corporate": 70.29137263198557
+        },
+        "candidate_signed_gap_to_core_residual_beta": {
+          "headline_direct_core": 61.38711900089001,
+          "core_plus_private_bridge": 64.89973337111094,
+          "core_plus_nonfinancial_corporate": 70.29137263198557
+        }
+      },
+      "core_deposit_proximate": {
+        "core_residual_response": {
+          "beta": -43.435870973152795,
+          "se": 19.209068844634526,
+          "lower95": -81.08564590863647,
+          "upper95": -5.786096037669125,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "headline_direct_core_response": {
+          "beta": -39.14425119341881,
+          "se": 8.210890028884428,
+          "lower95": -55.23759565003229,
+          "upper95": -23.05090673680533,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "core_plus_private_bridge_response": {
+          "beta": -37.931149522994986,
+          "se": 13.728557188202194,
+          "lower95": -64.83912161187129,
+          "upper95": -11.023177434118686,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "core_plus_nonfinancial_corporate_response": {
+          "beta": -34.108670514169766,
+          "se": 12.644603023282125,
+          "lower95": -58.89209243980273,
+          "upper95": -9.325248588536802,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "private_offset_residual_response": {
+          "beta": -4.035475752303865,
+          "se": 1.5521510437441806,
+          "lower95": -7.077691798042459,
+          "upper95": -0.9932597065652713,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "candidate_abs_gap_to_core_residual_beta": {
+          "headline_direct_core": 4.291619779733985,
+          "core_plus_private_bridge": 5.50472145015781,
+          "core_plus_nonfinancial_corporate": 9.327200458983029
+        },
+        "candidate_signed_gap_to_core_residual_beta": {
+          "headline_direct_core": 4.291619779733985,
+          "core_plus_private_bridge": 5.50472145015781,
+          "core_plus_nonfinancial_corporate": 9.327200458983029
+        }
+      }
+    }
+  },
+  "takeaways": [
+    "This surface separates the empirical fit result from the strict role-assignment rule for the bridge comparison.",
+    "It keeps the headline direct core fixed and compares only the bridge rows against the same residual target.",
+    "At h0 under the core-deposit-proximate shock, the direct comparison is explicit: core residual \u2248 -5.50, headline direct core \u2248 -10.66, core + private bridge \u2248 8.49, core + nonfinancial corporate \u2248 9.44.",
+    "Absolute h0 gaps to the core residual are now explicit: direct core \u2248 5.16, core + private bridge \u2248 13.99, core + nonfinancial corporate \u2248 14.94.",
+    "Under a strict design rule, the standard bridge comparison should narrow to the nonfinancial-corporate bridge, while the broader private bridge becomes a wider diagnostic envelope.",
+    "The broader private bridge is only slightly closer numerically at h0 because it includes a known small opposing offset; that is treated as a fit heuristic, not the strict role-assignment rule."
+  ]
+}

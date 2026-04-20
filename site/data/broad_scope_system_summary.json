@@ -1,0 +1,1676 @@
+{
+  "status": "available",
+  "headline_question": "Does a broad matched-scope system materially reduce the strict gap, and which TDC components move the residual most when removed?",
+  "estimation_path": {
+    "broad_identity_mode": "exact_identity_baseline",
+    "broad_identity_spec_name": "broad_scope_identity_baseline",
+    "broad_strict_spec_name": "broad_scope_strict_baseline",
+    "summary_artifact": "broad_scope_system_summary.json"
+  },
+  "usc_matched_context": {
+    "key_horizons": {
+      "h0": {
+        "us_chartered_total_response": {
+          "beta": 57.201665882527884,
+          "se": 22.73302224746962,
+          "lower95": 20.242326987706758,
+          "upper95": 96.71129261937286,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "us_chartered_residual_response": {
+          "beta": -63.11359099589881,
+          "se": 21.464278613325156,
+          "lower95": -100.54381188970281,
+          "upper95": -26.370570298216805,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "us_chartered_residual_shift_vs_baseline_beta": 9.630062677048421,
+        "us_chartered_remaining_share_of_baseline_strict_gap": 0.9193451054410284
+      },
+      "h1": {
+        "us_chartered_total_response": {
+          "beta": 122.47465349781675,
+          "se": 60.442574733757986,
+          "lower95": 15.29504515015584,
+          "upper95": 211.56973722432917,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "us_chartered_residual_response": {
+          "beta": -43.47741461043705,
+          "se": 63.59136998847192,
+          "lower95": -151.73652717647653,
+          "upper95": 67.55225753925049,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "us_chartered_residual_shift_vs_baseline_beta": 38.257598070624084,
+        "us_chartered_remaining_share_of_baseline_strict_gap": 0.6034509359003776
+      },
+      "h4": {
+        "us_chartered_total_response": {
+          "beta": 194.00377720462467,
+          "se": 84.43106321141617,
+          "lower95": 30.51910475085662,
+          "upper95": 305.2922693136241,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "us_chartered_residual_response": {
+          "beta": -47.19188687137398,
+          "se": 36.09475303435071,
+          "lower95": -108.42517331411736,
+          "upper95": 4.64369719805758,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "us_chartered_residual_shift_vs_baseline_beta": 63.617128816011046,
+        "us_chartered_remaining_share_of_baseline_strict_gap": 0.3757651187587929
+      },
+      "h8": {
+        "us_chartered_total_response": {
+          "beta": 169.38808890502816,
+          "se": 103.25604215962073,
+          "lower95": -20.502780243537664,
+          "upper95": 314.29479900060477,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "us_chartered_residual_response": {
+          "beta": -125.93756031612884,
+          "se": 58.64955674891033,
+          "lower95": -276.17676171220774,
+          "upper95": -47.01413922261565,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "us_chartered_residual_shift_vs_baseline_beta": 107.53321637038158,
+        "us_chartered_remaining_share_of_baseline_strict_gap": 0.5297211915653726
+      }
+    }
+  },
+  "broad_matched_system": {
+    "total_outcome": "broad_bank_deposits_qoq",
+    "residual_outcome": "broad_bank_other_component_qoq",
+    "strict_core_outcome": "broad_strict_loan_source_qoq",
+    "key_horizons": {
+      "h0": {
+        "broad_tdc": {
+          "beta": 128.49398892100785,
+          "se": 35.35607638823668,
+          "lower95": 121.98116262105009,
+          "upper95": 240.37795249062742,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "broad_deposits": {
+          "beta": 57.638009664599096,
+          "se": 35.07772128198774,
+          "lower95": 25.181801745820582,
+          "upper95": 150.48262151829007,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "broad_other_component": {
+          "beta": -70.85597925640876,
+          "se": 42.0555547040929,
+          "lower95": -167.82695382208496,
+          "upper95": -25.41916837030753,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "broad_strict_loan_foreign_offices": {
+          "beta": 2.189564361695515,
+          "se": 3.232901823075836,
+          "lower95": -4.146923211533124,
+          "upper95": 8.526051934924155,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_affiliated_areas": {
+          "beta": 0.1473031074317365,
+          "se": 0.15595074436324913,
+          "lower95": -0.15836035152023178,
+          "upper95": 0.4529665663837048,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_source": {
+          "beta": -17.289845786712693,
+          "se": 12.186065278976601,
+          "lower95": -41.174533733506834,
+          "upper95": 6.594842160081445,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_gap": {
+          "beta": -57.480974493309574,
+          "se": 10.074363690344088,
+          "lower95": -77.22672732638398,
+          "upper95": -37.73522166023516,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "broad_strict_gap_share_of_residual": 0.8112367523042955,
+        "interpretation": "large_broad_scope_strict_gap"
+      },
+      "h1": {
+        "broad_tdc": {
+          "beta": 177.53974642600284,
+          "se": 66.84375294787888,
+          "lower95": 130.28064867498605,
+          "upper95": 377.23093707775735,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "broad_deposits": {
+          "beta": 105.25892716487547,
+          "se": 124.67498280664334,
+          "lower95": -24.34257234062078,
+          "upper95": 397.98135133234587,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "broad_other_component": {
+          "beta": -72.28081926112736,
+          "se": 107.90515457522831,
+          "lower95": -252.10463514025423,
+          "upper95": 128.54642850109224,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_foreign_offices": {
+          "beta": 1.0106936104001605,
+          "se": 2.6821747254233257,
+          "lower95": -4.2463688514295574,
+          "upper95": 6.267756072229878,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_affiliated_areas": {
+          "beta": 0.19944870254018426,
+          "se": 0.20256988057173028,
+          "lower95": -0.19758826338040708,
+          "upper95": 0.5964856684607756,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_source": {
+          "beta": -14.507130399283135,
+          "se": 12.560653326043996,
+          "lower95": -39.12601091832937,
+          "upper95": 10.111750119763098,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_gap": {
+          "beta": -62.813808183812874,
+          "se": 33.48979974895248,
+          "lower95": -128.45381569175973,
+          "upper95": 2.826199324133988,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_gap_share_of_residual": 0.8690245742357565,
+        "interpretation": "large_broad_scope_strict_gap"
+      },
+      "h4": {
+        "broad_tdc": {
+          "beta": 278.13971316628357,
+          "se": 135.53925372460046,
+          "lower95": 99.95004110815775,
+          "upper95": 573.0392517689081,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "broad_deposits": {
+          "beta": 175.31279653359357,
+          "se": 152.21145664630993,
+          "lower95": -15.45482348151226,
+          "upper95": 534.5451636644444,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "broad_other_component": {
+          "beta": -102.82691663269,
+          "se": 92.12441419321257,
+          "lower95": -245.90819261433515,
+          "upper95": 92.79190294865799,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_foreign_offices": {
+          "beta": 0.20147210691269812,
+          "se": 4.567142179230452,
+          "lower95": -8.750126564378988,
+          "upper95": 9.153070778204384,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_affiliated_areas": {
+          "beta": 0.02496003299269367,
+          "se": 0.26425603652904067,
+          "lower95": -0.4929817986042261,
+          "upper95": 0.5429018645896134,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_source": {
+          "beta": -34.37088186231767,
+          "se": 22.85045088841195,
+          "lower95": -79.15776560360509,
+          "upper95": 10.416001878969752,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_gap": {
+          "beta": -61.055901721491225,
+          "se": 51.5709801893182,
+          "lower95": -162.1350228925549,
+          "upper95": 40.02321944957244,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_gap_share_of_residual": 0.5937735344101601,
+        "interpretation": "partial_broad_scope_strict_coverage"
+      },
+      "h8": {
+        "broad_tdc": {
+          "beta": 347.6946386730543,
+          "se": 221.9754872462717,
+          "lower95": 96.67772805372198,
+          "upper95": 906.744733598528,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "broad_deposits": {
+          "beta": 109.03089900774052,
+          "se": 205.11297793361817,
+          "lower95": -67.26390829652476,
+          "upper95": 562.7503279274612,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "broad_other_component": {
+          "beta": -238.6637396653138,
+          "se": 149.0576240696651,
+          "lower95": -508.59791980769756,
+          "upper95": -23.56814462490353,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "broad_strict_loan_foreign_offices": {
+          "beta": 4.052321079788825,
+          "se": 4.286817549875314,
+          "lower95": -4.34984131796679,
+          "upper95": 12.454483477544441,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_affiliated_areas": {
+          "beta": -0.11003462896588956,
+          "se": 0.282894897791585,
+          "lower95": -0.6645086286373961,
+          "upper95": 0.444439370705617,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_loan_source": {
+          "beta": -23.007308279822936,
+          "se": 41.94361366958429,
+          "lower95": -105.21679107220814,
+          "upper95": 59.202174512562266,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "broad_strict_gap": {
+          "beta": -201.46239073332836,
+          "se": 67.25774885880288,
+          "lower95": -333.287578496582,
+          "upper95": -69.63720297007472,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "broad_strict_gap_share_of_residual": 0.8441265146345476,
+        "interpretation": "large_broad_scope_strict_gap"
+      }
+    }
+  },
+  "tdc_component_audit": {
+    "status": "available",
+    "artifact": "tdc_treatment_audit_summary.json",
+    "key_horizons": {
+      "h0": {
+        "baseline_tdc_response": {
+          "beta": 128.49398892100785,
+          "se": 14.082533270452723,
+          "lower95": 100.89222371092052,
+          "upper95": 156.0957541310952,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "baseline_total_response": {
+          "beta": 55.75033524806063,
+          "se": 21.683675520344966,
+          "lower95": 15.003158943291321,
+          "upper95": 91.8448395095884,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "baseline_residual_response": {
+          "beta": -72.74365367294723,
+          "se": 23.353496740068078,
+          "lower95": -111.67491859993335,
+          "upper95": -31.72872933058706,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "direct_component_responses": {
+          "fed_treasury_transactions": {
+            "outcome": "tdc_fed_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Fed Treasury-security transactions",
+            "raw_response": {
+              "beta": 44.18058534720373,
+              "se": 19.44257409392381,
+              "lower95": 6.073140123113063,
+              "upper95": 82.2880305712944,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 44.18058534720373,
+            "share_of_baseline_tdc_beta": 0.343833868947472
+          },
+          "us_chartered_bank_treasury_transactions": {
+            "outcome": "tdc_us_chartered_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "U.S.-chartered bank Treasury-security transactions",
+            "raw_response": {
+              "beta": 2.8628562225547283,
+              "se": 2.7659109770777146,
+              "lower95": -2.558329292517592,
+              "upper95": 8.28404173762705,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 2.8628562225547283,
+            "share_of_baseline_tdc_beta": 0.022280078987311068
+          },
+          "foreign_offices_treasury_transactions": {
+            "outcome": "tdc_foreign_offices_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Foreign banking offices in the U.S. Treasury-security transactions",
+            "raw_response": {
+              "beta": -0.4225749187113736,
+              "se": 0.8371707456930845,
+              "lower95": -2.063429580269819,
+              "upper95": 1.218279742847072,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": -0.4225749187113736,
+            "share_of_baseline_tdc_beta": -0.0032886746085153684
+          },
+          "affiliated_areas_treasury_transactions": {
+            "outcome": "tdc_affiliated_areas_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Banks in U.S.-affiliated areas Treasury-security transactions",
+            "raw_response": {
+              "beta": 0.01422235750209655,
+              "se": 0.115784508941633,
+              "lower95": -0.21271528002350412,
+              "upper95": 0.24115999502769722,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 0.01422235750209655,
+            "share_of_baseline_tdc_beta": 0.00011068500263339008
+          },
+          "rest_of_world_treasury_transactions": {
+            "outcome": "tdc_row_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Rest-of-world Treasury-security transactions",
+            "raw_response": {
+              "beta": 11.756792842555686,
+              "se": 10.114287407003816,
+              "lower95": -8.067210475171795,
+              "upper95": 31.580796160283167,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 11.756792842555686,
+            "share_of_baseline_tdc_beta": 0.09149683141818578
+          },
+          "treasury_operating_cash_drain": {
+            "outcome": "tdc_treasury_operating_cash_qoq",
+            "formula_role": "minus",
+            "description": "Treasury operating cash drain",
+            "raw_response": {
+              "beta": -70.44115908786216,
+              "se": 19.51500183613833,
+              "lower95": -108.69056268669328,
+              "upper95": -32.19175548903103,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 70.44115908786216,
+            "share_of_baseline_tdc_beta": 0.548205870791093
+          },
+          "positive_fed_remittances": {
+            "outcome": "tdc_fed_remit_positive_qoq",
+            "formula_role": "plus",
+            "description": "Positive Fed remittances due to Treasury",
+            "raw_response": {
+              "beta": -0.33905201795915163,
+              "se": 0.39596956120148036,
+              "lower95": -1.1151523579140532,
+              "upper95": 0.43704832199574983,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": -0.33905201795915163,
+            "share_of_baseline_tdc_beta": -0.0026386605381796117
+          }
+        },
+        "signed_component_ranking": [
+          {
+            "component": "treasury_operating_cash_drain",
+            "signed_beta": 70.44115908786216,
+            "abs_signed_beta": 70.44115908786216
+          },
+          {
+            "component": "fed_treasury_transactions",
+            "signed_beta": 44.18058534720373,
+            "abs_signed_beta": 44.18058534720373
+          },
+          {
+            "component": "rest_of_world_treasury_transactions",
+            "signed_beta": 11.756792842555686,
+            "abs_signed_beta": 11.756792842555686
+          },
+          {
+            "component": "us_chartered_bank_treasury_transactions",
+            "signed_beta": 2.8628562225547283,
+            "abs_signed_beta": 2.8628562225547283
+          },
+          {
+            "component": "foreign_offices_treasury_transactions",
+            "signed_beta": -0.4225749187113736,
+            "abs_signed_beta": 0.4225749187113736
+          },
+          {
+            "component": "positive_fed_remittances",
+            "signed_beta": -0.33905201795915163,
+            "abs_signed_beta": 0.33905201795915163
+          },
+          {
+            "component": "affiliated_areas_treasury_transactions",
+            "signed_beta": 0.01422235750209655,
+            "abs_signed_beta": 0.01422235750209655
+          }
+        ],
+        "dominant_signed_component": "treasury_operating_cash_drain",
+        "foreign_bank_sectors_signed_beta_sum": -0.40835256120927704,
+        "signed_component_sum_beta": 128.49398892100788,
+        "signed_component_sum_minus_direct_tdc_beta": 2.842170943040401e-14,
+        "variant_removal_diagnostics": {
+          "domestic_bank_only": {
+            "target": "tdc_domestic_bank_only_qoq",
+            "target_response": {
+              "beta": 121.43506301279888,
+              "se": 20.15367752001472,
+              "lower95": 83.33716169722652,
+              "upper95": 155.87455391161288,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 68.66197083010917,
+              "se": 25.091265224322868,
+              "lower95": 22.575479175553912,
+              "upper95": 99.26512521038356,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -52.77309218268971,
+              "se": 23.648678870841305,
+              "lower95": -100.36758674323063,
+              "upper95": -29.226536357236522,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -7.058925908208977,
+            "total_shift_vs_baseline_beta": 12.91163558204854,
+            "residual_shift_vs_baseline_beta": 19.970561490257523
+          },
+          "no_foreign_bank_sectors": {
+            "target": "tdc_no_foreign_bank_sectors_qoq",
+            "target_response": {
+              "beta": 127.89518286597382,
+              "se": 13.845467381284609,
+              "lower95": 106.3187964299927,
+              "upper95": 147.1932749850352,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 54.97820510550795,
+              "se": 28.45915125387571,
+              "lower95": 20.09444814069957,
+              "upper95": 132.35741923826313,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -72.91697776046587,
+              "se": 25.796461193605897,
+              "lower95": -100.44401226647852,
+              "upper95": -3.3863333205714885,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -0.5988060550340322,
+            "total_shift_vs_baseline_beta": -0.7721301425526761,
+            "residual_shift_vs_baseline_beta": -0.17332408751863682
+          },
+          "no_toc_bank_only": {
+            "target": "tdc_no_toc_bank_only_qoq",
+            "target_response": {
+              "beta": 102.76395754683806,
+              "se": 7.509853023269381,
+              "lower95": 86.89348535542837,
+              "upper95": 114.23816851753836,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 81.73168385000403,
+              "se": 30.390300630430584,
+              "lower95": 10.626546998508758,
+              "upper95": 122.94774045781031,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -21.032273696834025,
+              "se": 24.38613686824247,
+              "lower95": -77.05875953003779,
+              "upper95": 13.585454652778948,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "target_shift_vs_baseline_beta": -25.730031374169798,
+            "total_shift_vs_baseline_beta": 25.981348601943402,
+            "residual_shift_vs_baseline_beta": 51.71137997611321
+          },
+          "us_chartered_bank_only": {
+            "target": "tdc_us_chartered_bank_only_qoq",
+            "target_response": {
+              "beta": 120.3152568784267,
+              "se": 18.21282217802718,
+              "lower95": 94.89504586087398,
+              "upper95": 159.94496033211848,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 57.201665882527884,
+              "se": 18.97548952671765,
+              "lower95": 26.62997366774997,
+              "upper95": 90.6497672943433,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -63.11359099589881,
+              "se": 22.5518752836733,
+              "lower95": -112.81185405828182,
+              "upper95": -38.15320886259367,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -8.17873204258116,
+            "total_shift_vs_baseline_beta": 1.4513306344672543,
+            "residual_shift_vs_baseline_beta": 9.630062677048421
+          },
+          "no_remit_bank_only": {
+            "target": "tdc_no_remit_bank_only_qoq",
+            "target_response": {
+              "beta": 128.08452006768587,
+              "se": 12.192846454239593,
+              "lower95": 103.93649779760065,
+              "upper95": 151.38042131041166,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 54.88202161955895,
+              "se": 22.601875252853784,
+              "lower95": 10.660090921723327,
+              "upper95": 102.53305714124893,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -73.20249844812693,
+              "se": 21.068365459599093,
+              "lower95": -108.56126645857843,
+              "upper95": -36.64790876909616,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -0.40946885332198235,
+            "total_shift_vs_baseline_beta": -0.8683136285016815,
+            "residual_shift_vs_baseline_beta": -0.4588447751796991
+          }
+        },
+        "largest_residual_shift_variant": "no_toc_bank_only",
+        "largest_abs_residual_shift_beta": 51.71137997611321
+      },
+      "h1": {
+        "baseline_tdc_response": {
+          "beta": 177.53974642600284,
+          "se": 27.083004995283464,
+          "lower95": 124.45705663524726,
+          "upper95": 230.62243621675842,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "baseline_total_response": {
+          "beta": 95.8047337449417,
+          "se": 78.19103475745447,
+          "lower95": -29.918591829143924,
+          "upper95": 232.81672659944013,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "baseline_residual_response": {
+          "beta": -81.73501268106114,
+          "se": 69.26962551323872,
+          "lower95": -159.79587104284744,
+          "upper95": 68.55665573955687,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "direct_component_responses": {
+          "fed_treasury_transactions": {
+            "outcome": "tdc_fed_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Fed Treasury-security transactions",
+            "raw_response": {
+              "beta": 102.63513507179627,
+              "se": 45.33955094070458,
+              "lower95": 13.769615228015297,
+              "upper95": 191.50065491557723,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 102.63513507179627,
+            "share_of_baseline_tdc_beta": 0.578096663636803
+          },
+          "us_chartered_bank_treasury_transactions": {
+            "outcome": "tdc_us_chartered_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "U.S.-chartered bank Treasury-security transactions",
+            "raw_response": {
+              "beta": 9.954740976656677,
+              "se": 5.141795806271482,
+              "lower95": -0.12317880363542777,
+              "upper95": 20.03266075694878,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 9.954740976656677,
+            "share_of_baseline_tdc_beta": 0.056070492253438776
+          },
+          "foreign_offices_treasury_transactions": {
+            "outcome": "tdc_foreign_offices_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Foreign banking offices in the U.S. Treasury-security transactions",
+            "raw_response": {
+              "beta": -1.6504311169510015,
+              "se": 0.7294695208747343,
+              "lower95": -3.0801913778654804,
+              "upper95": -0.22067085603652248,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": -1.6504311169510015,
+            "share_of_baseline_tdc_beta": -0.009296121855389087
+          },
+          "affiliated_areas_treasury_transactions": {
+            "outcome": "tdc_affiliated_areas_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Banks in U.S.-affiliated areas Treasury-security transactions",
+            "raw_response": {
+              "beta": 0.12505112007702182,
+              "se": 0.08870290977304368,
+              "lower95": -0.048806583078143784,
+              "upper95": 0.2989088232321874,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 0.12505112007702182,
+            "share_of_baseline_tdc_beta": 0.0007043556307496595
+          },
+          "rest_of_world_treasury_transactions": {
+            "outcome": "tdc_row_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Rest-of-world Treasury-security transactions",
+            "raw_response": {
+              "beta": 12.207052405526362,
+              "se": 11.716769221640421,
+              "lower95": -10.757815268888862,
+              "upper95": 35.171920079941586,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 12.207052405526362,
+            "share_of_baseline_tdc_beta": 0.06875672997885104
+          },
+          "treasury_operating_cash_drain": {
+            "outcome": "tdc_treasury_operating_cash_qoq",
+            "formula_role": "minus",
+            "description": "Treasury operating cash drain",
+            "raw_response": {
+              "beta": -54.24265292895619,
+              "se": 42.015800984733666,
+              "lower95": -136.59362285903416,
+              "upper95": 28.10831700112179,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 54.24265292895619,
+            "share_of_baseline_tdc_beta": 0.30552399685646786
+          },
+          "positive_fed_remittances": {
+            "outcome": "tdc_fed_remit_positive_qoq",
+            "formula_role": "plus",
+            "description": "Positive Fed remittances due to Treasury",
+            "raw_response": {
+              "beta": 0.025545039941289538,
+              "se": 0.8809595259682441,
+              "lower95": -1.701135630956469,
+              "upper95": 1.752225710839048,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 0.025545039941289538,
+            "share_of_baseline_tdc_beta": 0.00014388349907853737
+          }
+        },
+        "signed_component_ranking": [
+          {
+            "component": "fed_treasury_transactions",
+            "signed_beta": 102.63513507179627,
+            "abs_signed_beta": 102.63513507179627
+          },
+          {
+            "component": "treasury_operating_cash_drain",
+            "signed_beta": 54.24265292895619,
+            "abs_signed_beta": 54.24265292895619
+          },
+          {
+            "component": "rest_of_world_treasury_transactions",
+            "signed_beta": 12.207052405526362,
+            "abs_signed_beta": 12.207052405526362
+          },
+          {
+            "component": "us_chartered_bank_treasury_transactions",
+            "signed_beta": 9.954740976656677,
+            "abs_signed_beta": 9.954740976656677
+          },
+          {
+            "component": "foreign_offices_treasury_transactions",
+            "signed_beta": -1.6504311169510015,
+            "abs_signed_beta": 1.6504311169510015
+          },
+          {
+            "component": "affiliated_areas_treasury_transactions",
+            "signed_beta": 0.12505112007702182,
+            "abs_signed_beta": 0.12505112007702182
+          },
+          {
+            "component": "positive_fed_remittances",
+            "signed_beta": 0.025545039941289538,
+            "abs_signed_beta": 0.025545039941289538
+          }
+        ],
+        "dominant_signed_component": "fed_treasury_transactions",
+        "foreign_bank_sectors_signed_beta_sum": -1.5253799968739796,
+        "signed_component_sum_beta": 177.5397464260028,
+        "signed_component_sum_minus_direct_tdc_beta": -2.842170943040401e-14,
+        "variant_removal_diagnostics": {
+          "domestic_bank_only": {
+            "target": "tdc_domestic_bank_only_qoq",
+            "target_response": {
+              "beta": 165.03303216835923,
+              "se": 37.199713703806225,
+              "lower95": 106.05339296940048,
+              "upper95": 236.95429675444325,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 140.7622987757545,
+              "se": 58.5145066491033,
+              "lower95": 22.135808521609754,
+              "upper95": 227.60784058984348,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -24.27073339260474,
+              "se": 63.67048068712889,
+              "lower95": -134.1352639669848,
+              "upper95": 64.96697487551133,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "target_shift_vs_baseline_beta": -12.506714257643608,
+            "total_shift_vs_baseline_beta": 44.95756503081279,
+            "residual_shift_vs_baseline_beta": 57.464279288456396
+          },
+          "no_foreign_bank_sectors": {
+            "target": "tdc_no_foreign_bank_sectors_qoq",
+            "target_response": {
+              "beta": 177.89018820016094,
+              "se": 28.576193229691295,
+              "lower95": 103.74825177615635,
+              "upper95": 225.82237679910833,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 95.90878223489709,
+              "se": 62.431540184007716,
+              "lower95": -7.17072391748897,
+              "upper95": 235.3296365406845,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -81.98140596526385,
+              "se": 56.86265219237376,
+              "lower95": -142.78295987625998,
+              "upper95": 56.63904835494233,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "target_shift_vs_baseline_beta": 0.3504417741580994,
+            "total_shift_vs_baseline_beta": 0.10404848995538885,
+            "residual_shift_vs_baseline_beta": -0.24639328420271056
+          },
+          "no_toc_bank_only": {
+            "target": "tdc_no_toc_bank_only_qoq",
+            "target_response": {
+              "beta": 172.99961033516692,
+              "se": 26.434749275214276,
+              "lower95": 99.60539475933743,
+              "upper95": 203.59186321904457,
+              "n": 66,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 122.32211733165516,
+              "se": 41.443909758397425,
+              "lower95": 17.39803089675078,
+              "upper95": 185.80204843809517,
+              "n": 66,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -50.677493003511756,
+              "se": 18.309313884221336,
+              "lower95": -85.7621694821725,
+              "upper95": -17.78981478094938,
+              "n": 66,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -4.540136090835915,
+            "total_shift_vs_baseline_beta": 26.517383586713464,
+            "residual_shift_vs_baseline_beta": 31.05751967754938
+          },
+          "us_chartered_bank_only": {
+            "target": "tdc_us_chartered_bank_only_qoq",
+            "target_response": {
+              "beta": 165.9520681082538,
+              "se": 24.871471227408307,
+              "lower95": 107.16386709615885,
+              "upper95": 205.7168993011088,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 122.47465349781675,
+              "se": 59.80716867961466,
+              "lower95": 16.35940609455152,
+              "upper95": 229.32309248823694,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -43.47741461043705,
+              "se": 55.68767011904814,
+              "lower95": -126.88748060871104,
+              "upper95": 74.95031743865528,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "target_shift_vs_baseline_beta": -11.587678317749038,
+            "total_shift_vs_baseline_beta": 26.669919752875046,
+            "residual_shift_vs_baseline_beta": 38.257598070624084
+          },
+          "no_remit_bank_only": {
+            "target": "tdc_no_remit_bank_only_qoq",
+            "target_response": {
+              "beta": 177.2086840949548,
+              "se": 24.267970554876186,
+              "lower95": 115.42925268802766,
+              "upper95": 208.9718446811752,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 94.26243912666294,
+              "se": 48.76038912704828,
+              "lower95": -16.384273079644206,
+              "upper95": 198.86930331354588,
+              "n": 67,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -82.94624496829186,
+              "se": 44.77015240477949,
+              "lower95": -159.06885803435202,
+              "upper95": -10.374073499480943,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -0.33106233104803096,
+            "total_shift_vs_baseline_beta": -1.5422946182787598,
+            "residual_shift_vs_baseline_beta": -1.2112322872307288
+          }
+        },
+        "largest_residual_shift_variant": "domestic_bank_only",
+        "largest_abs_residual_shift_beta": 57.464279288456396
+      },
+      "h4": {
+        "baseline_tdc_response": {
+          "beta": 278.13971316628357,
+          "se": 69.29214131662822,
+          "lower95": 142.32711618569226,
+          "upper95": 413.9523101468749,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "baseline_total_response": {
+          "beta": 167.33069747889854,
+          "se": 91.65110516787428,
+          "lower95": -15.123860762491622,
+          "upper95": 349.2218977438808,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "baseline_residual_response": {
+          "beta": -110.80901568738503,
+          "se": 50.582600640491876,
+          "lower95": -197.13904381598593,
+          "upper95": -49.55641130250566,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "direct_component_responses": {
+          "fed_treasury_transactions": {
+            "outcome": "tdc_fed_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Fed Treasury-security transactions",
+            "raw_response": {
+              "beta": 166.32811302795255,
+              "se": 75.43876640222928,
+              "lower95": 18.468130879583185,
+              "upper95": 314.1880951763219,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 166.32811302795255,
+            "share_of_baseline_tdc_beta": 0.5980020297515538
+          },
+          "us_chartered_bank_treasury_transactions": {
+            "outcome": "tdc_us_chartered_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "U.S.-chartered bank Treasury-security transactions",
+            "raw_response": {
+              "beta": 30.013209620083053,
+              "se": 13.78387986146558,
+              "lower95": 2.996805091610515,
+              "upper95": 57.029614148555595,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 30.013209620083053,
+            "share_of_baseline_tdc_beta": 0.10790695538734485
+          },
+          "foreign_offices_treasury_transactions": {
+            "outcome": "tdc_foreign_offices_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Foreign banking offices in the U.S. Treasury-security transactions",
+            "raw_response": {
+              "beta": -2.375299609648652,
+              "se": 1.6756337279435334,
+              "lower95": -5.659541716417977,
+              "upper95": 0.9089424971206732,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": -2.375299609648652,
+            "share_of_baseline_tdc_beta": -0.008539951316583829
+          },
+          "affiliated_areas_treasury_transactions": {
+            "outcome": "tdc_affiliated_areas_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Banks in U.S.-affiliated areas Treasury-security transactions",
+            "raw_response": {
+              "beta": 0.2388849302190632,
+              "se": 0.308644788193587,
+              "lower95": -0.36605885464036725,
+              "upper95": 0.8438287150784937,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 0.2388849302190632,
+            "share_of_baseline_tdc_beta": 0.0008588666735132778
+          },
+          "rest_of_world_treasury_transactions": {
+            "outcome": "tdc_row_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Rest-of-world Treasury-security transactions",
+            "raw_response": {
+              "beta": 34.66439319115932,
+              "se": 16.63271023043861,
+              "lower95": 2.0642811394996414,
+              "upper95": 67.264505242819,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 34.66439319115932,
+            "share_of_baseline_tdc_beta": 0.12462942740735299
+          },
+          "treasury_operating_cash_drain": {
+            "outcome": "tdc_treasury_operating_cash_qoq",
+            "formula_role": "minus",
+            "description": "Treasury operating cash drain",
+            "raw_response": {
+              "beta": -48.04547363643367,
+              "se": 38.54605530474574,
+              "lower95": -123.59574203373532,
+              "upper95": 27.50479476086798,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 48.04547363643367,
+            "share_of_baseline_tdc_beta": 0.17273863228481173
+          },
+          "positive_fed_remittances": {
+            "outcome": "tdc_fed_remit_positive_qoq",
+            "formula_role": "plus",
+            "description": "Positive Fed remittances due to Treasury",
+            "raw_response": {
+              "beta": 1.2249383700845833,
+              "se": 2.9016949220613166,
+              "lower95": -4.462383677155597,
+              "upper95": 6.912260417324764,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 1.2249383700845833,
+            "share_of_baseline_tdc_beta": 0.004404039812007226
+          }
+        },
+        "signed_component_ranking": [
+          {
+            "component": "fed_treasury_transactions",
+            "signed_beta": 166.32811302795255,
+            "abs_signed_beta": 166.32811302795255
+          },
+          {
+            "component": "treasury_operating_cash_drain",
+            "signed_beta": 48.04547363643367,
+            "abs_signed_beta": 48.04547363643367
+          },
+          {
+            "component": "rest_of_world_treasury_transactions",
+            "signed_beta": 34.66439319115932,
+            "abs_signed_beta": 34.66439319115932
+          },
+          {
+            "component": "us_chartered_bank_treasury_transactions",
+            "signed_beta": 30.013209620083053,
+            "abs_signed_beta": 30.013209620083053
+          },
+          {
+            "component": "foreign_offices_treasury_transactions",
+            "signed_beta": -2.375299609648652,
+            "abs_signed_beta": 2.375299609648652
+          },
+          {
+            "component": "positive_fed_remittances",
+            "signed_beta": 1.2249383700845833,
+            "abs_signed_beta": 1.2249383700845833
+          },
+          {
+            "component": "affiliated_areas_treasury_transactions",
+            "signed_beta": 0.2388849302190632,
+            "abs_signed_beta": 0.2388849302190632
+          }
+        ],
+        "dominant_signed_component": "fed_treasury_transactions",
+        "foreign_bank_sectors_signed_beta_sum": -2.136414679429589,
+        "signed_component_sum_beta": 278.13971316628357,
+        "signed_component_sum_minus_direct_tdc_beta": 0.0,
+        "variant_removal_diagnostics": {
+          "domestic_bank_only": {
+            "target": "tdc_domestic_bank_only_qoq",
+            "target_response": {
+              "beta": 257.69534690282995,
+              "se": 71.37116705849414,
+              "lower95": 141.4008612620621,
+              "upper95": 373.47281800073523,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 230.3985232137405,
+              "se": 77.77216349309471,
+              "lower95": 78.72277827629613,
+              "upper95": 361.422258821378,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -27.29682368908945,
+              "se": 43.9479310868509,
+              "lower95": -123.52191910480181,
+              "upper95": 31.59890901542471,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "target_shift_vs_baseline_beta": -20.444366263453617,
+            "total_shift_vs_baseline_beta": 63.06782573484196,
+            "residual_shift_vs_baseline_beta": 83.51219199829558
+          },
+          "no_foreign_bank_sectors": {
+            "target": "tdc_no_foreign_bank_sectors_qoq",
+            "target_response": {
+              "beta": 278.4683150664023,
+              "se": 88.3954097360263,
+              "lower95": 64.8992143122251,
+              "upper95": 400.3219042848411,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 168.67634513317455,
+              "se": 103.29290725082588,
+              "lower95": -23.132404861386537,
+              "upper95": 356.1983927477583,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -109.79196993322773,
+              "se": 44.51505366213658,
+              "lower95": -156.62775817999864,
+              "upper95": -19.540611582380876,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": 0.3286019001187128,
+            "total_shift_vs_baseline_beta": 1.3456476542760072,
+            "residual_shift_vs_baseline_beta": 1.0170457541572944
+          },
+          "no_toc_bank_only": {
+            "target": "tdc_no_toc_bank_only_qoq",
+            "target_response": {
+              "beta": 290.21044073255774,
+              "se": 91.1699199988396,
+              "lower95": 55.90055911508809,
+              "upper95": 344.57279424275407,
+              "n": 63,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 194.56923296566754,
+              "se": 100.36598251346143,
+              "lower95": -14.007800774745975,
+              "upper95": 272.69205053063064,
+              "n": 63,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -95.6412077668902,
+              "se": 37.6842645470372,
+              "lower95": -169.8644977548068,
+              "upper95": -13.522542346196175,
+              "n": 63,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": 12.070727566274172,
+            "total_shift_vs_baseline_beta": 27.238535486768995,
+            "residual_shift_vs_baseline_beta": 15.167807920494823
+          },
+          "us_chartered_bank_only": {
+            "target": "tdc_us_chartered_bank_only_qoq",
+            "target_response": {
+              "beta": 241.19566407599865,
+              "se": 58.60579258727215,
+              "lower95": 93.1445164889209,
+              "upper95": 330.98654512828085,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 194.00377720462467,
+              "se": 74.14461443616715,
+              "lower95": 29.5114552604298,
+              "upper95": 284.8905798231631,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -47.19188687137398,
+              "se": 35.13558713750717,
+              "lower95": -112.18904418826983,
+              "upper95": 13.852473768916987,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "target_shift_vs_baseline_beta": -36.94404909028492,
+            "total_shift_vs_baseline_beta": 26.673079725726126,
+            "residual_shift_vs_baseline_beta": 63.617128816011046
+          },
+          "no_remit_bank_only": {
+            "target": "tdc_no_remit_bank_only_qoq",
+            "target_response": {
+              "beta": 279.5363606646536,
+              "se": 73.47274959637954,
+              "lower95": 132.7423874624638,
+              "upper95": 400.5516006607281,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 166.63999787985875,
+              "se": 85.57012711030046,
+              "lower95": 7.831505551988026,
+              "upper95": 315.2754868491914,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "residual_response": {
+              "beta": -112.89636278479486,
+              "se": 39.79922828873512,
+              "lower95": -177.02823635126572,
+              "upper95": -34.26778649676472,
+              "n": 64,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": 1.3966474983700436,
+            "total_shift_vs_baseline_beta": -0.6906995990397888,
+            "residual_shift_vs_baseline_beta": -2.0873470974098325
+          }
+        },
+        "largest_residual_shift_variant": "domestic_bank_only",
+        "largest_abs_residual_shift_beta": 83.51219199829558
+      },
+      "h8": {
+        "baseline_tdc_response": {
+          "beta": 347.6946386730543,
+          "se": 113.67922702128271,
+          "lower95": 124.88335371134022,
+          "upper95": 570.5059236347685,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "baseline_total_response": {
+          "beta": 114.22386198654391,
+          "se": 108.92428820889296,
+          "lower95": -54.55946684633398,
+          "upper95": 281.91593326492756,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "baseline_residual_response": {
+          "beta": -233.47077668651042,
+          "se": 68.89208359677387,
+          "lower95": -329.0993395357397,
+          "upper95": -96.29311856593844,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "direct_component_responses": {
+          "fed_treasury_transactions": {
+            "outcome": "tdc_fed_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Fed Treasury-security transactions",
+            "raw_response": {
+              "beta": 144.64592871019337,
+              "se": 104.15797633249646,
+              "lower95": -59.503704901499674,
+              "upper95": 348.79556232188645,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 144.64592871019337,
+            "share_of_baseline_tdc_beta": 0.41601426257885854
+          },
+          "us_chartered_bank_treasury_transactions": {
+            "outcome": "tdc_us_chartered_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "U.S.-chartered bank Treasury-security transactions",
+            "raw_response": {
+              "beta": 28.40117837796266,
+              "se": 15.602778078581798,
+              "lower95": -2.1802666560576647,
+              "upper95": 58.982623411982985,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 28.40117837796266,
+            "share_of_baseline_tdc_beta": 0.08168425744599696
+          },
+          "foreign_offices_treasury_transactions": {
+            "outcome": "tdc_foreign_offices_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Foreign banking offices in the U.S. Treasury-security transactions",
+            "raw_response": {
+              "beta": -1.479727959427316,
+              "se": 1.8244668815047675,
+              "lower95": -5.05568304717666,
+              "upper95": 2.0962271283220284,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": -1.479727959427316,
+            "share_of_baseline_tdc_beta": -0.004255826218875753
+          },
+          "affiliated_areas_treasury_transactions": {
+            "outcome": "tdc_affiliated_areas_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Banks in U.S.-affiliated areas Treasury-security transactions",
+            "raw_response": {
+              "beta": 0.3117621871392521,
+              "se": 0.3424130781983659,
+              "lower95": -0.3593674461295451,
+              "upper95": 0.9828918204080492,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 0.3117621871392521,
+            "share_of_baseline_tdc_beta": 0.0008966551463924343
+          },
+          "rest_of_world_treasury_transactions": {
+            "outcome": "tdc_row_treasury_transactions_qoq",
+            "formula_role": "plus",
+            "description": "Rest-of-world Treasury-security transactions",
+            "raw_response": {
+              "beta": 66.95416192387714,
+              "se": 22.446647743759883,
+              "lower95": 22.958732346107766,
+              "upper95": 110.94959150164651,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 66.95416192387714,
+            "share_of_baseline_tdc_beta": 0.19256598887863713
+          },
+          "treasury_operating_cash_drain": {
+            "outcome": "tdc_treasury_operating_cash_qoq",
+            "formula_role": "minus",
+            "description": "Treasury operating cash drain",
+            "raw_response": {
+              "beta": -108.72102920527965,
+              "se": 42.04145271587888,
+              "lower95": -191.12227652840227,
+              "upper95": -26.319781882157045,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "signed_contribution_beta": 108.72102920527965,
+            "share_of_baseline_tdc_beta": 0.31269112926274556
+          },
+          "positive_fed_remittances": {
+            "outcome": "tdc_fed_remit_positive_qoq",
+            "formula_role": "plus",
+            "description": "Positive Fed remittances due to Treasury",
+            "raw_response": {
+              "beta": 0.14030622802965098,
+              "se": 5.034260459114349,
+              "lower95": -9.726844271834473,
+              "upper95": 10.007456727893775,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "signed_contribution_beta": 0.14030622802965098,
+            "share_of_baseline_tdc_beta": 0.0004035329062453112
+          }
+        },
+        "signed_component_ranking": [
+          {
+            "component": "fed_treasury_transactions",
+            "signed_beta": 144.64592871019337,
+            "abs_signed_beta": 144.64592871019337
+          },
+          {
+            "component": "treasury_operating_cash_drain",
+            "signed_beta": 108.72102920527965,
+            "abs_signed_beta": 108.72102920527965
+          },
+          {
+            "component": "rest_of_world_treasury_transactions",
+            "signed_beta": 66.95416192387714,
+            "abs_signed_beta": 66.95416192387714
+          },
+          {
+            "component": "us_chartered_bank_treasury_transactions",
+            "signed_beta": 28.40117837796266,
+            "abs_signed_beta": 28.40117837796266
+          },
+          {
+            "component": "foreign_offices_treasury_transactions",
+            "signed_beta": -1.479727959427316,
+            "abs_signed_beta": 1.479727959427316
+          },
+          {
+            "component": "affiliated_areas_treasury_transactions",
+            "signed_beta": 0.3117621871392521,
+            "abs_signed_beta": 0.3117621871392521
+          },
+          {
+            "component": "positive_fed_remittances",
+            "signed_beta": 0.14030622802965098,
+            "abs_signed_beta": 0.14030622802965098
+          }
+        ],
+        "dominant_signed_component": "fed_treasury_transactions",
+        "foreign_bank_sectors_signed_beta_sum": -1.1679657722880639,
+        "signed_component_sum_beta": 347.69463867305444,
+        "signed_component_sum_minus_direct_tdc_beta": 1.1368683772161603e-13,
+        "variant_removal_diagnostics": {
+          "domestic_bank_only": {
+            "target": "tdc_domestic_bank_only_qoq",
+            "target_response": {
+              "beta": 325.69744295586025,
+              "se": 103.10483176989833,
+              "lower95": 38.76818437981781,
+              "upper95": 403.05768095135954,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 218.13997805137478,
+              "se": 94.6966901392698,
+              "lower95": -19.04265784877181,
+              "upper95": 314.7195418927033,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -107.55746490448547,
+              "se": 50.473083602209144,
+              "lower95": -180.51337590832384,
+              "upper95": -13.734374625767673,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -21.997195717194074,
+            "total_shift_vs_baseline_beta": 103.91611606483087,
+            "residual_shift_vs_baseline_beta": 125.91331178202495
+          },
+          "no_foreign_bank_sectors": {
+            "target": "tdc_no_foreign_bank_sectors_qoq",
+            "target_response": {
+              "beta": 345.9994096990065,
+              "se": 116.62656039963927,
+              "lower95": 85.87335448482098,
+              "upper95": 566.0247297668247,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 116.83611377576239,
+              "se": 101.48532290080429,
+              "lower95": -40.40008038272263,
+              "upper95": 308.6120675556166,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -229.1632959232441,
+              "se": 75.42670465730622,
+              "lower95": -330.2000355508359,
+              "upper95": -89.03615699884017,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -1.6952289740478363,
+            "total_shift_vs_baseline_beta": 2.612251789218476,
+            "residual_shift_vs_baseline_beta": 4.307480763266312
+          },
+          "no_toc_bank_only": {
+            "target": "tdc_no_toc_bank_only_qoq",
+            "target_response": {
+              "beta": 346.9544148121501,
+              "se": 124.53527836598404,
+              "lower95": 47.890459205941205,
+              "upper95": 513.8194438699261,
+              "n": 59,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 195.54389876663714,
+              "se": 125.209080081138,
+              "lower95": -65.38193153279194,
+              "upper95": 359.19589258529106,
+              "n": 59,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -151.41051604551296,
+              "se": 40.85071112248268,
+              "lower95": -223.84783868122958,
+              "upper95": -75.33636528937477,
+              "n": 59,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -0.7402238609042229,
+            "total_shift_vs_baseline_beta": 81.32003678009323,
+            "residual_shift_vs_baseline_beta": 82.06026064099746
+          },
+          "us_chartered_bank_only": {
+            "target": "tdc_us_chartered_bank_only_qoq",
+            "target_response": {
+              "beta": 295.325649221157,
+              "se": 104.59801216784396,
+              "lower95": 29.585985250033417,
+              "upper95": 436.08866873038517,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 169.38808890502816,
+              "se": 106.82370428567633,
+              "lower95": -59.381548175264086,
+              "upper95": 316.73892247676764,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -125.93756031612884,
+              "se": 45.55569991831609,
+              "lower95": -206.80765470378512,
+              "upper95": -39.234486542844735,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": -52.368989451897335,
+            "total_shift_vs_baseline_beta": 55.164226918484246,
+            "residual_shift_vs_baseline_beta": 107.53321637038158
+          },
+          "no_remit_bank_only": {
+            "target": "tdc_no_remit_bank_only_qoq",
+            "target_response": {
+              "beta": 353.0788711989502,
+              "se": 120.66653116286655,
+              "lower95": 169.46248221902596,
+              "upper95": 548.8719627361717,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "total_response": {
+              "beta": 115.07076041647258,
+              "se": 107.65173546304064,
+              "lower95": -72.77317260134178,
+              "upper95": 291.85447568447654,
+              "n": 60,
+              "ci_excludes_zero": false
+            },
+            "residual_response": {
+              "beta": -238.00811078247762,
+              "se": 73.77125793581303,
+              "lower95": -354.104986579235,
+              "upper95": -90.9748811092518,
+              "n": 60,
+              "ci_excludes_zero": true
+            },
+            "target_shift_vs_baseline_beta": 5.384232525895868,
+            "total_shift_vs_baseline_beta": 0.8468984299286717,
+            "residual_shift_vs_baseline_beta": -4.537334095967196
+          }
+        },
+        "largest_residual_shift_variant": "domestic_bank_only",
+        "largest_abs_residual_shift_beta": 125.91331178202495
+      }
+    },
+    "takeaways": [
+      "This audit separates direct baseline-shock responses of the TDC building blocks from residual shifts created by removing whole treatment legs.",
+      "Use the direct component responses to see which TDC pieces move with the baseline shock, and use the variant-removal diagnostics to see which omitted legs actually change the residual most.",
+      "Quarter-level construction alignment is exact for the public-component reconstruction and all currently audited implied legs, so the remaining issue is dynamic interpretation rather than arithmetic mismatch.",
+      "At h0, the largest signed direct component contribution comes from `treasury_operating_cash_drain`.",
+      "At h0, removing Treasury operating cash from the treatment shifts the residual by about 51.71.",
+      "At h0, removing only ROW shifts the residual by about 19.97, while removing only foreign bank-sector Treasury legs shifts it by about -0.17.",
+      "At h0, the combined signed point contribution from foreign bank-sector Treasury legs is about -0.41 in the direct component read."
+    ]
+  },
+  "takeaways": [
+    "This artifact compares two matched-scope system reads rather than adding another narrow sensitivity: the current U.S.-chartered matched-bank-leg comparison and a broad-bank matched system built on broad-bank deposits plus a broad loan-led strict core.",
+    "The broad matched system keeps the broad headline TDC object and matches it to a broad-bank deposit outcome plus a broad loans-only strict core, rather than trying to force the current U.S.-chartered outcome to absorb the broader treatment.",
+    "At h0, the broad matched-scope system leaves about 0.81 of the broad non-TDC residual in the broad strict gap.",
+    "Compared with the U.S.-chartered matched-bank-leg read, the broad matched-scope strict gap is smaller at h0 (0.81 versus 0.92).",
+    "At h0, the largest treatment-side residual shift in the component audit comes from `no_toc_bank_only`, with an absolute change of about 51.71.",
+    "At h0, removing only ROW changes the headline residual by about 19.97, while removing only foreign bank-sector Treasury legs changes it by about -0.17."
+  ]
+}

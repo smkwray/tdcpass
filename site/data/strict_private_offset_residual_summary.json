@@ -1,0 +1,293 @@
+{
+  "status": "available",
+  "headline_question": "After isolating the nonfinancial-corporate bridge, is the remaining private detail a meaningful bridge of its own or mainly a small offset structure?",
+  "estimation_path": {
+    "summary_artifact": "strict_private_offset_residual_summary.json",
+    "baseline_spec": "identity_baseline",
+    "comparison_spec": "unexpected_tdc_core_deposit_proximate_bank_only"
+  },
+  "bridge_definitions": {
+    "private_bridge": "strict_di_loans_nec_private_domestic_borrower_qoq",
+    "nonfinancial_corporate": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+    "private_offset_total": "strict_di_loans_nec_private_offset_residual_qoq",
+    "private_minus_corporate": "strict_di_loans_nec_private_minus_corporate_qoq",
+    "households_nonprofits": "strict_di_loans_nec_households_nonprofits_qoq",
+    "nonfinancial_noncorporate": "strict_di_loans_nec_nonfinancial_noncorporate_qoq"
+  },
+  "recommendation": {
+    "status": "private_offset_diagnostic_role",
+    "next_branch": "assess_corporate_bridge_secondary_comparison_role"
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline": {
+        "core_residual_response": {
+          "beta": -81.17833439216739,
+          "se": 20.0820892829219,
+          "lower95": -120.5392293866943,
+          "upper95": -41.81743939764046,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "private_bridge_response": {
+          "beta": 1.8116428704396705,
+          "se": 11.41477840511276,
+          "lower95": -20.561322803581337,
+          "upper95": 24.184608544460676,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "nonfinancial_corporate_response": {
+          "beta": 6.802884737561426,
+          "se": 10.375400383193238,
+          "lower95": -13.53290001349732,
+          "upper95": 27.138669488620174,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "private_offset_total_response": {
+          "beta": -4.886210845714681,
+          "se": 1.649900101929352,
+          "lower95": -8.12001504549621,
+          "upper95": -1.652406645933151,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "private_minus_corporate_response": {
+          "beta": -4.886210845714673,
+          "se": 1.6499001019293549,
+          "lower95": -8.120015045496208,
+          "upper95": -1.6524066459331372,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "households_nonprofits_response": {
+          "beta": -1.0250293506610628,
+          "se": 1.0198846684298233,
+          "lower95": -3.0240033007835163,
+          "upper95": 0.9739445994613907,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "nonfinancial_noncorporate_response": {
+          "beta": -3.560438085975945,
+          "se": 1.4964725480331789,
+          "lower95": -6.493524280120976,
+          "upper95": -0.6273518918309144,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "private_offset_share_of_private_bridge_beta": -2.697115930210262,
+        "private_offset_share_of_core_residual_beta": 0.06019107046603969,
+        "households_share_of_private_offset_beta": 0.20978000807313446,
+        "nonfinancial_noncorporate_share_of_private_offset_beta": 0.7286705789821843,
+        "offset_alignment_gap_beta": -7.993605777301127e-15,
+        "offset_component_dominant": "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+        "interpretation": "offset_is_nonfinancial_noncorporate_dominant"
+      },
+      "core_deposit_proximate": {
+        "core_residual_response": {
+          "beta": -5.501727161440379,
+          "se": 10.900899392583606,
+          "lower95": -26.867489970904245,
+          "upper95": 15.864035648023489,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "private_bridge_response": {
+          "beta": 20.823558766114274,
+          "se": 6.85578524163978,
+          "lower95": 7.386219692500305,
+          "upper95": 34.260897839728244,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "nonfinancial_corporate_response": {
+          "beta": 20.8166137064566,
+          "se": 6.721119894693238,
+          "lower95": 7.6432187128578555,
+          "upper95": 33.99000870005534,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "private_offset_total_response": {
+          "beta": -0.935069231849769,
+          "se": 0.4631696020592905,
+          "lower95": -1.8428816518859783,
+          "upper95": -0.027256811813559656,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "private_minus_corporate_response": {
+          "beta": -0.9350692318497683,
+          "se": 0.4631696020592909,
+          "lower95": -1.8428816518859785,
+          "upper95": -0.0272568118135581,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "households_nonprofits_response": {
+          "beta": 1.2769498329269982,
+          "se": 0.5974110909266801,
+          "lower95": 0.10602409471070517,
+          "upper95": 2.447875571143291,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "nonfinancial_noncorporate_response": {
+          "beta": -1.8515493468477615,
+          "se": 0.7420159012524533,
+          "lower95": -3.30590051330257,
+          "upper95": -0.39719818039295296,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "private_offset_share_of_private_bridge_beta": -0.044904391336383236,
+        "private_offset_share_of_core_residual_beta": 0.16995921542662673,
+        "households_share_of_private_offset_beta": -1.3656206293954465,
+        "nonfinancial_noncorporate_share_of_private_offset_beta": 1.9801200636074794,
+        "offset_alignment_gap_beta": -6.661338147750939e-16,
+        "offset_component_dominant": "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+        "interpretation": "offset_is_small_opposing_structure"
+      }
+    },
+    "h4": {
+      "baseline": {
+        "core_residual_response": {
+          "beta": -100.99420217322485,
+          "se": 48.95277771700572,
+          "lower95": -196.94164649855605,
+          "upper95": -5.04675784789363,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "private_bridge_response": {
+          "beta": -13.088924455680957,
+          "se": 11.362875676779849,
+          "lower95": -35.36016078216946,
+          "upper95": 9.182311870807546,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "nonfinancial_corporate_response": {
+          "beta": -5.0964231617537195,
+          "se": 9.175178874092135,
+          "lower95": -23.0797737549743,
+          "upper95": 12.886927431466862,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "private_offset_total_response": {
+          "beta": -5.786757919607716,
+          "se": 2.0493708809513533,
+          "lower95": -9.803524846272367,
+          "upper95": -1.7699909929430637,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "private_minus_corporate_response": {
+          "beta": -5.786757919607718,
+          "se": 2.049370880951352,
+          "lower95": -9.803524846272367,
+          "upper95": -1.7699909929430682,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "households_nonprofits_response": {
+          "beta": 2.3948798625686667,
+          "se": 1.521683986874846,
+          "lower95": -0.5876207517060315,
+          "upper95": 5.377380476843365,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "nonfinancial_noncorporate_response": {
+          "beta": -7.733300611663638,
+          "se": 2.7393944676919157,
+          "lower95": -13.102513768339794,
+          "upper95": -2.364087454987483,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "private_offset_share_of_private_bridge_beta": 0.4421110335842837,
+        "private_offset_share_of_core_residual_beta": 0.057297922010238686,
+        "households_share_of_private_offset_beta": -0.4138552011055986,
+        "nonfinancial_noncorporate_share_of_private_offset_beta": 1.3363788012386524,
+        "offset_alignment_gap_beta": 1.7763568394002505e-15,
+        "offset_component_dominant": "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+        "interpretation": "offset_is_nonfinancial_noncorporate_dominant"
+      },
+      "core_deposit_proximate": {
+        "core_residual_response": {
+          "beta": -43.435870973152745,
+          "se": 19.209068844634533,
+          "lower95": -81.08564590863642,
+          "upper95": -5.786096037669061,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "private_bridge_response": {
+          "beta": 7.684600638857804,
+          "se": 6.378977906140083,
+          "lower95": -4.818196057176758,
+          "upper95": 20.187397334892367,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "nonfinancial_corporate_response": {
+          "beta": 9.31990512596066,
+          "se": 5.9168273316021995,
+          "lower95": -2.2770764439796523,
+          "upper95": 20.91688669590097,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "private_offset_total_response": {
+          "beta": -4.03547575230391,
+          "se": 1.5521510437441963,
+          "lower95": -7.077691798042535,
+          "upper95": -0.9932597065652851,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "private_minus_corporate_response": {
+          "beta": -4.035475752303816,
+          "se": 1.552151043744164,
+          "lower95": -7.077691798042377,
+          "upper95": -0.9932597065652544,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "households_nonprofits_response": {
+          "beta": 0.8165042452921885,
+          "se": 1.5662032769287386,
+          "lower95": -2.2532541774881394,
+          "upper95": 3.8862626680725163,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "nonfinancial_noncorporate_response": {
+          "beta": -2.0213255293047587,
+          "se": 1.9046424775473456,
+          "lower95": -5.754424785297556,
+          "upper95": 1.7117737266880386,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "private_offset_share_of_private_bridge_beta": -0.525137992454442,
+        "private_offset_share_of_core_residual_beta": 0.09290652315451887,
+        "households_share_of_private_offset_beta": -0.2023315949367394,
+        "nonfinancial_noncorporate_share_of_private_offset_beta": 0.5008890285490516,
+        "offset_alignment_gap_beta": -9.414691248821327e-14,
+        "offset_component_dominant": "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+        "interpretation": "offset_is_nonfinancial_noncorporate_dominant"
+      }
+    }
+  },
+  "takeaways": [
+    "This surface isolates the remaining private detail after the nonfinancial-corporate bridge, treating households/nonprofits plus nonfinancial-noncorporate as the offset block.",
+    "It asks whether the residual private detail is mostly offset structure or a meaningful rival bridge that should keep the broader private-borrower secondary comparison alive.",
+    "At h0 under the core-deposit-proximate shock, the private offset block is explicit: offset total \u2248 -0.94, private total \u2248 20.82, nonfinancial corporate \u2248 20.82, households/nonprofits \u2248 1.28, nonfinancial noncorporate \u2248 -1.85.",
+    "The offset block is about -0.04 of the signed private bridge at h0, so it should be treated as a diagnostic residual around the corporate bridge rather than as the main positive bridge candidate."
+  ]
+}

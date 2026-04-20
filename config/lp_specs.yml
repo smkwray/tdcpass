@@ -27,6 +27,43 @@ specs:
     - interbank_transactions_foreign_banks_asset_qoq
     - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_core_min_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_di_loans_nec_private_domestic_borrower_qoq
+    - strict_di_loans_nec_noncore_system_borrower_qoq
+    - strict_loan_core_plus_private_borrower_qoq
+    - strict_loan_noncore_system_qoq
+    - strict_di_loans_nec_households_nonprofits_qoq
+    - strict_di_loans_nec_nonfinancial_corporate_qoq
+    - strict_di_loans_nec_nonfinancial_noncorporate_qoq
+    - strict_di_loans_nec_state_local_qoq
+    - strict_di_loans_nec_domestic_financial_qoq
+    - strict_di_loans_nec_rest_of_world_qoq
+    - strict_di_loans_nec_systemwide_liability_total_qoq
+    - strict_di_loans_nec_systemwide_borrower_total_qoq
+    - strict_di_loans_nec_systemwide_borrower_gap_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
+    - strict_funding_fedfunds_repo_qoq
+    - strict_funding_debt_securities_qoq
+    - strict_funding_fhlb_advances_qoq
+    - strict_funding_offset_total_qoq
+    - strict_identifiable_net_after_funding_qoq
+    - strict_gap_after_funding_qoq
     - bank_credit_private_qoq
     - commercial_industrial_loans_qoq
     - construction_land_development_loans_qoq
@@ -100,6 +137,23 @@ specs:
     - interbank_transactions_foreign_banks_asset_qoq
     - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
     - bank_credit_private_qoq
     - commercial_industrial_loans_qoq
     - construction_land_development_loans_qoq
@@ -175,6 +229,23 @@ specs:
     - interbank_transactions_foreign_banks_asset_qoq
     - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
     - bank_credit_private_qoq
     - commercial_industrial_loans_qoq
     - construction_land_development_loans_qoq
@@ -238,6 +309,8 @@ specs:
     - 8
     cumulative: true
     nw_lags: 4
+    identity_bootstrap_reps: 40
+    identity_bootstrap_block_length: 4
     outcomes:
     - tdc_bank_only_qoq
     - total_deposits_bank_qoq
@@ -252,6 +325,23 @@ specs:
     - interbank_transactions_foreign_banks_asset_qoq
     - deposits_at_foreign_banks_asset_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
     - bank_credit_private_qoq
     - commercial_industrial_loans_qoq
     - construction_land_development_loans_qoq
@@ -334,12 +424,32 @@ specs:
         shock_column: tdc_domestic_bank_only_residual_z
         treatment_role: exploratory
         treatment_family: measurement
+      us_chartered_bank_only:
+        shock_column: tdc_us_chartered_bank_only_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
+      core_deposit_proximate:
+        shock_column: tdc_core_deposit_proximate_bank_only_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
       no_remit_bank_only:
         shock_column: tdc_no_remit_bank_only_residual_z
         treatment_role: exploratory
         treatment_family: measurement
       credit_union_sensitive:
         shock_column: tdc_credit_union_sensitive_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
+      tier2_bank_only:
+        shock_column: tdc_tier2_bank_only_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
+      tier3_bank_only:
+        shock_column: tdc_tier3_bank_only_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
+      tier3_broad_depository:
+        shock_column: tdc_tier3_broad_depository_residual_z
         treatment_role: exploratory
         treatment_family: measurement
   control_sensitivity:
@@ -355,10 +465,29 @@ specs:
     - 8
     cumulative: true
     nw_lags: 4
+    identity_bootstrap_reps: 40
+    identity_bootstrap_block_length: 4
     shock_column: tdc_residual_z
     outcomes:
     - total_deposits_bank_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
     - bank_credit_private_qoq
     - commercial_industrial_loans_qoq
     - construction_land_development_loans_qoq
@@ -442,6 +571,23 @@ specs:
     outcomes:
     - total_deposits_bank_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
     - bank_credit_private_qoq
     - cb_nonts_qoq
     - tga_qoq
@@ -493,11 +639,30 @@ specs:
     - 8
     cumulative: true
     nw_lags: 4
+    identity_bootstrap_reps: 40
+    identity_bootstrap_block_length: 4
     shock_column: tdc_residual_z
     outcomes:
     - tdc_bank_only_qoq
     - total_deposits_bank_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
     - bank_credit_private_qoq
     - commercial_industrial_loans_qoq
     - construction_land_development_loans_qoq
@@ -570,6 +735,23 @@ specs:
     - tdc_bank_only_qoq
     - total_deposits_bank_qoq
     - other_component_qoq
+    - accounting_deposit_substitution_qoq
+    - accounting_bank_balance_sheet_qoq
+    - accounting_public_liquidity_qoq
+    - accounting_external_flow_qoq
+    - accounting_identity_total_qoq
+    - accounting_identity_gap_qoq
+    - strict_loan_source_qoq
+    - strict_loan_mortgages_qoq
+    - strict_loan_consumer_credit_qoq
+    - strict_loan_di_loans_nec_qoq
+    - strict_loan_other_advances_qoq
+    - strict_non_treasury_agency_gse_qoq
+    - strict_non_treasury_municipal_qoq
+    - strict_non_treasury_corporate_foreign_bonds_qoq
+    - strict_non_treasury_securities_qoq
+    - strict_identifiable_total_qoq
+    - strict_identifiable_gap_qoq
     controls:
     - lag_tdc_bank_only_qoq
     - lag_fedfunds

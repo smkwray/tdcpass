@@ -1,0 +1,263 @@
+{
+  "status": "available",
+  "headline_question": "Does the Treasury-operating-cash leg behave like genuine TGA plumbing, or is it likely a sign/timing/object-definition problem?",
+  "estimation_path": {
+    "lp_spec_name": "treasury_operating_cash_audit",
+    "summary_artifact": "treasury_operating_cash_audit_summary.json"
+  },
+  "quarterly_alignment": {
+    "status": "available",
+    "rows": 92,
+    "contemporaneous_corr_tga_vs_toc": 0.9467815933251763,
+    "ols_tga_on_toc": {
+      "slope": 0.929140852888329,
+      "intercept": 0.5683794889504619,
+      "r2": 0.8963953854593595
+    },
+    "lead_lag_correlations": {
+      "tga_shift_-2q": -0.048216233541820655,
+      "tga_shift_-1q": 0.22496170230984336,
+      "tga_shift_+0q": 0.9467815933251763,
+      "tga_shift_+1q": 0.11062327092029134,
+      "tga_shift_+2q": -0.03021150493695835
+    },
+    "sign_match_share_tga_vs_toc": 0.7608695652173914,
+    "sign_match_share_cb_nonts_vs_toc": 0.4891304347826087,
+    "ratio_tga_over_toc": {
+      "mean": 0.2640301543021743,
+      "median": 0.4245319968648703,
+      "p10": -0.5024933651207775,
+      "p90": 1.6045939537888199
+    },
+    "worst_quarters_by_abs_diff": [
+      {
+        "quarter": "2008Q3",
+        "tdc_treasury_operating_cash_qoq": 318.292,
+        "tga_qoq": 0.0179999999999999,
+        "reserves_qoq": 97.385,
+        "cb_nonts_qoq": 97.403,
+        "toc_tga_diff_qoq": 318.274,
+        "toc_tga_sum_qoq": 318.30999999999995
+      },
+      {
+        "quarter": "2011Q1",
+        "tdc_treasury_operating_cash_qoq": -224.672,
+        "tga_qoq": -28.957,
+        "reserves_qoq": 423.202,
+        "cb_nonts_qoq": 394.245,
+        "toc_tga_diff_qoq": -195.715,
+        "toc_tga_sum_qoq": -253.629
+      },
+      {
+        "quarter": "2021Q4",
+        "tdc_treasury_operating_cash_qoq": 190.948,
+        "tga_qoq": 14.105,
+        "reserves_qoq": -9.152,
+        "cb_nonts_qoq": 4.953000000000001,
+        "toc_tga_diff_qoq": 176.84300000000002,
+        "toc_tga_sum_qoq": 205.053
+      },
+      {
+        "quarter": "2009Q4",
+        "tdc_treasury_operating_cash_qoq": -81.67,
+        "tga_qoq": 80.613,
+        "reserves_qoq": 142.356,
+        "cb_nonts_qoq": 222.969,
+        "toc_tga_diff_qoq": -162.28300000000002,
+        "toc_tga_sum_qoq": -1.0570000000000022
+      },
+      {
+        "quarter": "2024Q4",
+        "tdc_treasury_operating_cash_qoq": -163.833,
+        "tga_qoq": -42.001,
+        "reserves_qoq": 78.233,
+        "cb_nonts_qoq": 36.232000000000006,
+        "toc_tga_diff_qoq": -121.832,
+        "toc_tga_sum_qoq": -205.834
+      },
+      {
+        "quarter": "2022Q1",
+        "tdc_treasury_operating_cash_qoq": 245.415,
+        "tga_qoq": 363.216,
+        "reserves_qoq": -286.516,
+        "cb_nonts_qoq": 76.69999999999999,
+        "toc_tga_diff_qoq": -117.80100000000002,
+        "toc_tga_sum_qoq": 608.631
+      },
+      {
+        "quarter": "2008Q4",
+        "tdc_treasury_operating_cash_qoq": -4.96,
+        "tga_qoq": 109.141,
+        "reserves_qoq": 743.322,
+        "cb_nonts_qoq": 852.463,
+        "toc_tga_diff_qoq": -114.101,
+        "toc_tga_sum_qoq": 104.18100000000001
+      },
+      {
+        "quarter": "2010Q1",
+        "tdc_treasury_operating_cash_qoq": 24.907,
+        "tga_qoq": -82.627,
+        "reserves_qoq": 57.942,
+        "cb_nonts_qoq": -24.684999999999995,
+        "toc_tga_diff_qoq": 107.53399999999999,
+        "toc_tga_sum_qoq": -57.72
+      }
+    ]
+  },
+  "key_horizons": {
+    "h0": {
+      "treasury_operating_cash_response": {
+        "beta": -70.4411590878622,
+        "se": 19.51500183613834,
+        "lower95": -108.69056268669334,
+        "upper95": -32.19175548903106,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "treasury_operating_cash_signed_contribution_beta": 70.4411590878622,
+      "tga_response": {
+        "beta": -61.18612833262557,
+        "se": 19.904469139441925,
+        "lower95": -100.19888784593175,
+        "upper95": -22.1733688193194,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "reserves_response": {
+        "beta": 88.86702520813598,
+        "se": 15.355046836769874,
+        "lower95": 58.77113340806703,
+        "upper95": 118.96291700820494,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "cb_nonts_response": {
+        "beta": 27.680896875510427,
+        "se": 14.454812688822598,
+        "lower95": -0.6505359945818618,
+        "upper95": 56.01232974560271,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "toc_minus_tga_beta_gap": -9.255030755236632,
+      "interpretation": "treasury_cash_release_pattern"
+    },
+    "h1": {
+      "treasury_operating_cash_response": {
+        "beta": -54.242652928956154,
+        "se": 42.01580098473353,
+        "lower95": -136.59362285903387,
+        "upper95": 28.10831700112157,
+        "n": 67,
+        "ci_excludes_zero": false
+      },
+      "treasury_operating_cash_signed_contribution_beta": 54.242652928956154,
+      "tga_response": {
+        "beta": -48.09224413774307,
+        "se": 43.36577996251905,
+        "lower95": -133.0891728642804,
+        "upper95": 36.90468458879426,
+        "n": 67,
+        "ci_excludes_zero": false
+      },
+      "reserves_response": {
+        "beta": 122.10460290680561,
+        "se": 31.047632117091556,
+        "lower95": 61.25124395730616,
+        "upper95": 182.95796185630508,
+        "n": 67,
+        "ci_excludes_zero": true
+      },
+      "cb_nonts_response": {
+        "beta": 74.01235876906254,
+        "se": 61.27419916014067,
+        "lower95": -46.085071584813164,
+        "upper95": 194.10978912293825,
+        "n": 67,
+        "ci_excludes_zero": false
+      },
+      "toc_minus_tga_beta_gap": -6.150408791213081,
+      "interpretation": "treasury_cash_release_pattern"
+    },
+    "h4": {
+      "treasury_operating_cash_response": {
+        "beta": -48.04547363643368,
+        "se": 38.54605530474574,
+        "lower95": -123.59574203373532,
+        "upper95": 27.504794760867973,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "treasury_operating_cash_signed_contribution_beta": 48.04547363643368,
+      "tga_response": {
+        "beta": -33.402583825968584,
+        "se": 38.94916785464519,
+        "lower95": -109.74295282107315,
+        "upper95": 42.937785169135985,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "reserves_response": {
+        "beta": 142.630462811334,
+        "se": 62.589620235282396,
+        "lower95": 19.954807150180514,
+        "upper95": 265.3061184724875,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "cb_nonts_response": {
+        "beta": 109.22787898536542,
+        "se": 88.63839332074122,
+        "lower95": -64.50337192328736,
+        "upper95": 282.9591298940182,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "toc_minus_tga_beta_gap": -14.642889810465093,
+      "interpretation": "treasury_cash_release_pattern"
+    },
+    "h8": {
+      "treasury_operating_cash_response": {
+        "beta": -108.72102920527956,
+        "se": 42.041452715879146,
+        "lower95": -191.1222765284027,
+        "upper95": -26.319781882156434,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "treasury_operating_cash_signed_contribution_beta": 108.72102920527956,
+      "tga_response": {
+        "beta": -92.74816054911531,
+        "se": 42.595845322678805,
+        "lower95": -176.23601738156577,
+        "upper95": -9.26030371666485,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "reserves_response": {
+        "beta": 117.44367842763964,
+        "se": 73.08356173628034,
+        "lower95": -25.800102575469822,
+        "upper95": 260.6874594307491,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "cb_nonts_response": {
+        "beta": 24.695517878524342,
+        "se": 91.18998745751693,
+        "lower95": -154.03685753820884,
+        "upper95": 203.42789329525755,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "toc_minus_tga_beta_gap": -15.972868656164252,
+      "interpretation": "treasury_cash_release_pattern"
+    }
+  },
+  "takeaways": [
+    "This audit checks whether the Treasury-operating-cash leg behaves like genuine TGA plumbing or like a sign/timing/object-definition bug.",
+    "Quarter by quarter, the Z.1 Treasury-operating-cash flow and `tga_qoq` move together tightly: correlation \u2248 0.95, TGA-on-TOC slope \u2248 0.93.",
+    "At h0, the baseline TDC shock lines up with a Treasury-cash-release pattern: TOC \u2248 -70.44, TGA \u2248 -61.19, reserves \u2248 88.87.",
+    "Because the TDC identity subtracts the Treasury-operating-cash leg, the h0 signed TDC contribution from that leg is about 70.44."
+  ]
+}

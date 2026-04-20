@@ -1,0 +1,429 @@
+{
+  "status": "available",
+  "headline_question": "Why does the TOC/ROW-excluded strict lane flip positive while the remaining residual stays slightly negative?",
+  "estimation_path": {
+    "input_panel": "quarterly_panel_with_shocks",
+    "comparison_artifact": "strict_sign_mismatch_audit_summary.json",
+    "baseline_shock_column": "tdc_residual_z",
+    "toc_row_excluded_shock_column": "tdc_no_toc_no_row_bank_only_residual_z"
+  },
+  "shock_alignment": {
+    "overlap_rows": 68,
+    "shock_corr": 0.41818956226857457,
+    "same_sign_share": 0.7205882352941176,
+    "largest_gap_quarters": [
+      {
+        "quarter": "2020Q3",
+        "period_bucket": "covid_post",
+        "baseline_shock": 0.581904236918328,
+        "toc_row_excluded_shock": -8.869170411795452,
+        "shock_gap": -9.45107464871378,
+        "abs_shock_gap": 9.45107464871378,
+        "baseline_minus_excluded_target_qoq": 17.896000000000015,
+        "row_leg_qoq": 77.543,
+        "toc_signed_contribution_qoq": -59.647
+      },
+      {
+        "quarter": "2020Q1",
+        "period_bucket": "covid_post",
+        "baseline_shock": 3.810380466186416,
+        "toc_row_excluded_shock": 13.09521127559779,
+        "shock_gap": 9.284830809411375,
+        "abs_shock_gap": 9.284830809411375,
+        "baseline_minus_excluded_target_qoq": -367.053,
+        "row_leg_qoq": -255.649,
+        "toc_signed_contribution_qoq": -111.404
+      },
+      {
+        "quarter": "2021Q1",
+        "period_bucket": "covid_post",
+        "baseline_shock": 5.58228501055368,
+        "toc_row_excluded_shock": 0.6017768725534413,
+        "shock_gap": -4.980508138000239,
+        "abs_shock_gap": 4.980508138000239,
+        "baseline_minus_excluded_target_qoq": 827.2830000000001,
+        "row_leg_qoq": 220.665,
+        "toc_signed_contribution_qoq": 606.618
+      },
+      {
+        "quarter": "2009Q2",
+        "period_bucket": "post_gfc_early",
+        "baseline_shock": 0.321361895525654,
+        "toc_row_excluded_shock": 3.957372766258473,
+        "shock_gap": 3.636010870732819,
+        "abs_shock_gap": 3.636010870732819,
+        "baseline_minus_excluded_target_qoq": 70.08200000000002,
+        "row_leg_qoq": 119.119,
+        "toc_signed_contribution_qoq": -49.037
+      },
+      {
+        "quarter": "2009Q4",
+        "period_bucket": "post_gfc_early",
+        "baseline_shock": -0.2810596542553419,
+        "toc_row_excluded_shock": -3.4428656402507976,
+        "shock_gap": -3.1618059859954557,
+        "abs_shock_gap": 3.1618059859954557,
+        "baseline_minus_excluded_target_qoq": 208.777,
+        "row_leg_qoq": 127.107,
+        "toc_signed_contribution_qoq": 81.67
+      },
+      {
+        "quarter": "2017Q1",
+        "period_bucket": "pre_covid",
+        "baseline_shock": 2.3745109958432185,
+        "toc_row_excluded_shock": -0.7392047418827576,
+        "shock_gap": -3.1137157377259763,
+        "abs_shock_gap": 3.1137157377259763,
+        "baseline_minus_excluded_target_qoq": 378.875,
+        "row_leg_qoq": 71.89,
+        "toc_signed_contribution_qoq": 306.985
+      },
+      {
+        "quarter": "2011Q3",
+        "period_bucket": "post_gfc_early",
+        "baseline_shock": -0.2304563584612872,
+        "toc_row_excluded_shock": -2.806746272970191,
+        "shock_gap": -2.5762899145089038,
+        "abs_shock_gap": 2.5762899145089038,
+        "baseline_minus_excluded_target_qoq": 192.19799999999998,
+        "row_leg_qoq": 113.305,
+        "toc_signed_contribution_qoq": 78.893
+      },
+      {
+        "quarter": "2021Q3",
+        "period_bucket": "covid_post",
+        "baseline_shock": 2.907084490706761,
+        "toc_row_excluded_shock": 0.4675287532172712,
+        "shock_gap": -2.4395557374894894,
+        "abs_shock_gap": 2.4395557374894894,
+        "baseline_minus_excluded_target_qoq": 713.26,
+        "row_leg_qoq": 76.491,
+        "toc_signed_contribution_qoq": 636.769
+      },
+      {
+        "quarter": "2009Q1",
+        "period_bucket": "post_gfc_early",
+        "baseline_shock": 3.5535865285918655,
+        "toc_row_excluded_shock": 1.3030569011949609,
+        "shock_gap": -2.2505296273969044,
+        "abs_shock_gap": 2.2505296273969044,
+        "baseline_minus_excluded_target_qoq": 307.50300000000004,
+        "row_leg_qoq": 209.681,
+        "toc_signed_contribution_qoq": 97.822
+      },
+      {
+        "quarter": "2021Q4",
+        "period_bucket": "covid_post",
+        "baseline_shock": -1.9284236294714705,
+        "toc_row_excluded_shock": 0.2975793964411211,
+        "shock_gap": 2.2260030259125916,
+        "abs_shock_gap": 2.2260030259125916,
+        "baseline_minus_excluded_target_qoq": -16.87299999999999,
+        "row_leg_qoq": 174.075,
+        "toc_signed_contribution_qoq": -190.948
+      }
+    ]
+  },
+  "quarter_concentration": {
+    "total_abs_gap": 91.2399570439757,
+    "top3_abs_gap_share": 0.2599345107614922,
+    "top5_abs_gap_share": 0.3344393338342593,
+    "dominant_period_bucket": "covid_post",
+    "period_bucket_abs_gap_breakdown": [
+      {
+        "period_bucket": "covid_post",
+        "quarter_count": 24,
+        "abs_gap_sum": 46.25590709380013,
+        "abs_gap_share": 0.5069698473389874,
+        "top_quarter": "2020Q3",
+        "top_abs_gap": 9.45107464871378
+      },
+      {
+        "period_bucket": "post_gfc_early",
+        "quarter_count": 20,
+        "abs_gap_sum": 24.64464246017507,
+        "abs_gap_share": 0.2701080015666478,
+        "top_quarter": "2009Q2",
+        "top_abs_gap": 3.636010870732819
+      },
+      {
+        "period_bucket": "pre_covid",
+        "quarter_count": 24,
+        "abs_gap_sum": 20.339407490000518,
+        "abs_gap_share": 0.22292215109436492,
+        "top_quarter": "2017Q1",
+        "top_abs_gap": 3.1137157377259763
+      }
+    ]
+  },
+  "gap_driver_alignment": {
+    "shock_gap_driver_correlations": {
+      "baseline_minus_excluded_target_qoq": -0.46856752210382374,
+      "row_leg_qoq": -0.42961918664438814,
+      "toc_signed_contribution_qoq": -0.3309218507695352
+    },
+    "dominant_driver_by_abs_corr": "baseline_minus_excluded_target_qoq"
+  },
+  "component_alignment": {
+    "other_component_qoq": {
+      "baseline_shock_corr": -0.46090665401567193,
+      "toc_row_excluded_shock_corr": 0.07427967606245828,
+      "excluded_minus_baseline_corr": 0.5351863300781302
+    },
+    "other_component_no_toc_no_row_bank_only_qoq": {
+      "baseline_shock_corr": 0.03206483875983937,
+      "toc_row_excluded_shock_corr": -0.0007667487859652105,
+      "excluded_minus_baseline_corr": -0.03283158754580458
+    },
+    "total_deposits_bank_qoq": {
+      "baseline_shock_corr": 0.3007626130705636,
+      "toc_row_excluded_shock_corr": 0.3496015811680941,
+      "excluded_minus_baseline_corr": 0.048838968097530466
+    },
+    "strict_loan_core_min_qoq": {
+      "baseline_shock_corr": -0.4941998702424231,
+      "toc_row_excluded_shock_corr": -0.19649810184009528,
+      "excluded_minus_baseline_corr": 0.29770176840232787
+    },
+    "strict_loan_source_qoq": {
+      "baseline_shock_corr": -0.37741817301900166,
+      "toc_row_excluded_shock_corr": 0.18754879779953657,
+      "excluded_minus_baseline_corr": 0.5649669708185382
+    },
+    "strict_non_treasury_securities_qoq": {
+      "baseline_shock_corr": 0.40212714419620255,
+      "toc_row_excluded_shock_corr": 0.0159311382846054,
+      "excluded_minus_baseline_corr": -0.38619600591159714
+    },
+    "strict_identifiable_total_qoq": {
+      "baseline_shock_corr": -0.10845626299170096,
+      "toc_row_excluded_shock_corr": 0.1931563396225955,
+      "excluded_minus_baseline_corr": 0.30161260261429645
+    },
+    "strict_identifiable_net_after_funding_qoq": {
+      "baseline_shock_corr": -0.04074050157310587,
+      "toc_row_excluded_shock_corr": 0.11735015202303758,
+      "excluded_minus_baseline_corr": 0.15809065359614344
+    }
+  },
+  "h0_strict_context": {
+    "baseline": {
+      "residual_response": {
+        "beta": -81.17833439216739,
+        "se": 20.0820892829219,
+        "lower95": -120.5392293866943,
+        "upper95": -41.81743939764046,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core_response": {
+        "beta": -20.959164939095665,
+        "se": 3.154984044707311,
+        "lower95": -27.142933666721994,
+        "upper95": -14.775396211469335,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_loan_source_response": {
+        "beta": -19.97313706640162,
+        "se": 8.896555846407024,
+        "lower95": -37.410386525359385,
+        "upper95": -2.535887607443854,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_loan_core_plus_private_borrower_response": {
+        "beta": -18.024897659337825,
+        "se": 10.509068730802262,
+        "lower95": -38.62267237171026,
+        "upper95": 2.5728770530346097,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_loan_noncore_system_response": {
+        "beta": -0.9745232374736701,
+        "se": 5.23729803124129,
+        "lower95": -11.239627378706597,
+        "upper95": 9.290580903759256,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_non_treasury_securities_response": {
+        "beta": 15.30465101167281,
+        "se": 6.050671529441859,
+        "lower95": 3.4453348139667668,
+        "upper95": 27.163967209378853,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_identifiable_total_response": {
+        "beta": -2.0654490673922083,
+        "se": 12.647084899431377,
+        "lower95": -26.853735470277705,
+        "upper95": 22.72283733549329,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap_response": {
+        "beta": -75.57860724607202,
+        "se": 15.835634841558793,
+        "lower95": -106.61645153552726,
+        "upper95": -44.54076295661679,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_funding_offset_total_response": {
+        "beta": -1.6095374553041522,
+        "se": 5.625696398582565,
+        "lower95": -12.635902396525978,
+        "upper95": 9.416827485917675,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_net_after_funding_response": {
+        "beta": -3.9068288087150442,
+        "se": 9.42648023483478,
+        "lower95": -22.382730068991215,
+        "upper95": 14.569072451561127,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_gap_after_funding_response": {
+        "beta": -74.42656001270831,
+        "se": 19.081291982559193,
+        "lower95": -111.82589229852432,
+        "upper95": -37.02722772689229,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core_share_of_residual_abs": 0.2581866836272258,
+      "strict_loan_share_of_residual_abs": 0.24604024233747715,
+      "strict_securities_share_of_residual_abs": 0.18853122728210966,
+      "strict_identifiable_share_of_residual_abs": 0.025443353609771728,
+      "strict_gap_share_of_residual_abs": 0.9310194377844286,
+      "strict_funding_offset_share_of_identifiable_total_beta": 0.7792675601225644,
+      "strict_net_after_funding_share_of_residual_abs": 0.04812649628706844,
+      "strict_gap_after_funding_share_of_residual_abs": 0.9168278774131816
+    },
+    "toc_row_excluded": {
+      "residual_response": {
+        "beta": -5.501727161440379,
+        "se": 10.900899392583606,
+        "lower95": -26.867489970904245,
+        "upper95": 15.864035648023489,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_headline_direct_core_response": {
+        "beta": -10.658905058923462,
+        "se": 2.160432283109402,
+        "lower95": -14.89335233381789,
+        "upper95": -6.424457784029035,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_loan_source_response": {
+        "beta": 5.5796698433974985,
+        "se": 6.302476257768174,
+        "lower95": -6.773183621828123,
+        "upper95": 17.932523308623118,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_loan_core_plus_private_borrower_response": {
+        "beta": 8.485186147303903,
+        "se": 7.570896097479698,
+        "lower95": -6.353770203756305,
+        "upper95": 23.32414249836411,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_loan_noncore_system_response": {
+        "beta": 4.315368496420372,
+        "se": 3.1914413049194974,
+        "lower95": -1.9398564612218427,
+        "upper95": 10.570593454062585,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_non_treasury_securities_response": {
+        "beta": 3.483514563980094,
+        "se": 1.6631083972620497,
+        "lower95": 0.22382210534647662,
+        "upper95": 6.743207022613712,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_identifiable_total_response": {
+        "beta": 10.83191286873921,
+        "se": 5.571229269005378,
+        "lower95": -0.0876964985113311,
+        "upper95": 21.75152223598975,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap_response": {
+        "beta": -16.310112119609276,
+        "se": 7.007382610800299,
+        "lower95": -30.04458203677786,
+        "upper95": -2.57564220244069,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_funding_offset_total_response": {
+        "beta": 1.0272327406553474,
+        "se": 5.910456204919941,
+        "lower95": -10.557261420987736,
+        "upper95": 12.611726902298432,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_net_after_funding_response": {
+        "beta": 9.903810997234197,
+        "se": 5.2007520590926575,
+        "lower95": -0.2896630385874115,
+        "upper95": 20.097285033055805,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_gap_after_funding_response": {
+        "beta": -15.63591831244996,
+        "se": 9.200705750054997,
+        "lower95": -33.66930158255775,
+        "upper95": 2.397464957657835,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_headline_direct_core_share_of_residual_abs": 1.9373743455742194,
+      "strict_loan_share_of_residual_abs": 1.0141669478820017,
+      "strict_securities_share_of_residual_abs": 0.6331674511951068,
+      "strict_identifiable_share_of_residual_abs": 1.96882043599984,
+      "strict_gap_share_of_residual_abs": 2.9645439770116133,
+      "strict_funding_offset_share_of_identifiable_total_beta": 0.09483391835803358,
+      "strict_net_after_funding_share_of_residual_abs": 1.800127615677934,
+      "strict_gap_after_funding_share_of_residual_abs": 2.8420017666518382
+    },
+    "excluded_minus_baseline_beta": {
+      "residual_response": 75.676607230727,
+      "strict_headline_direct_core_response": 10.300259880172202,
+      "strict_loan_source_response": 25.552806909799116,
+      "strict_non_treasury_securities_response": -11.821136447692716,
+      "strict_identifiable_total_response": 12.897361936131418,
+      "strict_funding_offset_total_response": 2.6367701959594996,
+      "strict_identifiable_net_after_funding_response": 13.810639805949242,
+      "strict_identifiable_gap_response": 59.26849512646275,
+      "strict_gap_after_funding_response": 58.79064170025835,
+      "strict_identifiable_share_of_residual_abs": 1.9433770823900682,
+      "strict_gap_after_funding_share_of_residual_abs": 1.9251738892386565
+    },
+    "interpretation": "toc_row_exclusion_exposes_sign_mismatch_in_direct_counts"
+  },
+  "interpretation": "excluded_shock_only_partially_aligned_with_baseline",
+  "takeaways": [
+    "The TOC/ROW-excluded shock is not just a small perturbation of baseline: overlap correlation \u2248 0.42, same-sign share \u2248 0.72.",
+    "The excluded shock rotates materially toward positive direct-count channels: headline direct-core corr goes from -0.49 to -0.20, strict identifiable total corr goes from -0.11 to 0.19.",
+    "The rotation is concentrated rather than diffuse: the top five shock-gap quarters explain about 0.33 of absolute gap mass, with the largest share in `covid_post`.",
+    "The shock-gap lines up with the TOC/ROW target bundle itself: corr with baseline-minus-excluded target \u2248 -0.47, ROW leg \u2248 -0.43, TOC signed contribution \u2248 -0.33.",
+    "At h0 this shows up as a sign mismatch in the strict surface: TOC/ROW-excluded residual \u2248 -5.50, strict identifiable total \u2248 10.83."
+  ]
+}

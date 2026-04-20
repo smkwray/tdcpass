@@ -1,0 +1,84 @@
+{
+  "status": "available",
+  "headline_question": "Which TDC treatment object should be treated as the headline, which should stay diagnostic, and what redesign is most defensible given the current evidence?",
+  "estimation_path": {
+    "summary_artifact": "treatment_object_comparison_summary.json",
+    "source_artifacts": [
+      "scope_alignment_summary.json",
+      "broad_scope_system_summary.json",
+      "tdc_treatment_audit_summary.json",
+      "toc_row_excluded_interpretation_summary.json",
+      "strict_missing_channel_summary.json",
+      "strict_sign_mismatch_audit_summary.json"
+    ]
+  },
+  "candidate_objects": [
+    {
+      "candidate": "baseline_full_tdc",
+      "role": "current_headline",
+      "headline_eligibility": "provisional_only",
+      "object_definition": "Fed + bank-sector + ROW Treasury transactions - TOC + positive Fed remittances",
+      "why_it_exists": "Conceptually closest to the original full Treasury-attributed deposit object.",
+      "h0_residual_beta": -72.74365367294723,
+      "scope_alignment_note": "Broader than the U.S.-chartered headline outcome; scope mismatch is real but not dominant.",
+      "treatment_object_risk": "TOC and ROW appear to be a mixed support bundle rather than a clean same-object deposit-treatment leg."
+    },
+    {
+      "candidate": "us_chartered_bank_leg_match",
+      "role": "scope_check",
+      "headline_eligibility": "comparison_only",
+      "object_definition": "Bank-leg-matched TDC sensitivity on the U.S.-chartered outcome scope.",
+      "why_it_exists": "Best scope-diagnostic comparison against the current headline outcome.",
+      "h0_residual_beta": -63.11359099589881,
+      "h0_residual_shift_vs_baseline_beta": 9.630062677048421,
+      "scope_alignment_note": "Improves scope coherence but does not solve the main residual problem.",
+      "treatment_object_risk": "Too narrow to stand in for the full TDC object if ROW is conceptually part of TDC."
+    },
+    {
+      "candidate": "toc_row_excluded_core",
+      "role": "diagnostic_only",
+      "headline_eligibility": "not_headline",
+      "object_definition": "Baseline TDC with TOC and ROW removed together.",
+      "why_it_exists": "Tests how much of the residual problem is concentrated in the TOC/ROW block.",
+      "h0_residual_beta": -5.508313542362046,
+      "h0_residual_shift_vs_baseline_beta": 67.23534013058519,
+      "h0_strict_identifiable_total_beta": 10.831912868739106,
+      "h0_strict_gap_share_of_residual": 2.960999223115259,
+      "h0_gap_after_funding_share_of_residual_abs": 2.8420017666518227,
+      "shock_overlap_corr_with_baseline": 0.41818956226857457,
+      "shock_same_sign_share_with_baseline": 0.7205882352941176,
+      "top5_abs_gap_share": 0.3344393338342593,
+      "dominant_period_bucket": "covid_post",
+      "scope_alignment_note": "Useful diagnostic, not a stable replacement treatment.",
+      "treatment_object_risk": "Shock rotates materially and the independent lane still does not validate the remaining object."
+    },
+    {
+      "candidate": "split_core_plus_support_bundle",
+      "role": "recommended_redesign",
+      "headline_eligibility": "recommended_next_architecture",
+      "object_definition": "Publish a deposit-proximate core TDC separately from a TOC/ROW support bundle instead of forcing them into one headline object.",
+      "why_it_exists": "Current evidence says TOC/ROW dominates the treatment-side problem, while a TOC/ROW-excluded object is not stable enough to become the new headline shock.",
+      "h0_core_diagnostic_residual_beta": -5.508313542362046,
+      "h0_core_diagnostic_strict_total_beta": 10.831912868739106,
+      "h0_toc_shift_vs_baseline_beta": 50.32756893864634,
+      "h0_toc_row_shift_vs_baseline_beta": 67.23534013058519,
+      "h0_no_row_shift_vs_baseline_beta": 19.970561490257523,
+      "h0_no_foreign_bank_shift_vs_baseline_beta": -0.17332408751863682,
+      "broad_scope_gap_share_of_residual_h0": 0.8112367523042955,
+      "scope_alignment_note": "Preserves the broad TDC idea while separating the mixed support bundle from the deposit-proximate core.",
+      "treatment_object_risk": "Requires an explicit redesign of the headline interpretation layer rather than a simple variant swap."
+    }
+  ],
+  "recommendation": {
+    "recommended_next_branch": "split_core_plus_support_bundle",
+    "headline_decision_now": "keep current headline provisional and do not promote the TOC_ROW_excluded object",
+    "why": "Baseline full TDC still best represents the broad original concept, but the residual problem is concentrated in TOC/ROW. The TOC/ROW-excluded object is useful diagnostically yet too unstable to replace the headline. So the next serious branch should redesign the treatment architecture into a deposit-proximate core plus an explicit TOC/ROW support bundle."
+  },
+  "takeaways": [
+    "Baseline full TDC remains the broad conceptual object, but its h0 residual is about -72.74 and the main treatment-side movement comes from TOC/ROW rather than foreign bank sectors.",
+    "The U.S.-chartered bank-leg match is the right scope comparison, but it only shifts the h0 residual by about 9.63.",
+    "The TOC/ROW-excluded object is diagnostic only: h0 residual \u2248 -5.51, strict total \u2248 10.83, overlap corr with baseline \u2248 0.42.",
+    "The broad matched-scope system still leaves a large h0 strict gap share (\u2248 0.81), so the project does not currently have a clean validated replacement treatment object.",
+    "The most defensible next step is a split treatment architecture: keep the broad TDC concept visible, but separate the TOC/ROW support bundle from the deposit-proximate core instead of forcing one headline object to do both jobs."
+  ]
+}

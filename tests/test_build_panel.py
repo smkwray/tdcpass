@@ -15,8 +15,12 @@ def _write_z1_zip(path: Path) -> None:
         {
             "date": ["2000Q1", "2000Q2", "2000Q3", "2000Q4", "2001Q1"],
             "FL763127005": [60.0, 66.0, 72.0, 75.0, 79.0],
+            "FL753127005": [15.0, 16.0, 18.0, 19.0, 20.0],
+            "FL743127003": [4.0, 4.5, 5.0, 5.5, 6.0],
             "FL764110005": [15.0, 16.0, 18.0, 17.0, 19.0],
             "FL763130005": [25.0, 28.0, 31.0, 35.0, 35.0],
+            "FL753130005": [9.0, 10.0, 11.0, 12.0, 13.0],
+            "FL743130003": [2.0, 2.5, 3.0, 3.5, 4.0],
             "FL763123005": [10.0, 12.0, 16.0, 18.0, 21.0],
             "FL763128000": [5.0, 6.0, 7.0, 8.0, 9.0],
             "FL763122605": [12.0, 13.0, 14.0, 15.0, 15.0],
@@ -53,8 +57,12 @@ def _write_z1_multitable_zip(path: Path) -> None:
         {
             "date": ["2000Q1", "2000Q2", "2000Q3", "2000Q4", "2001Q1"],
             "FL763127005": [60.0, 66.0, 72.0, 75.0, 79.0],
+            "FL753127005": [15.0, 16.0, 18.0, 19.0, 20.0],
+            "FL743127003": [4.0, 4.5, 5.0, 5.5, 6.0],
             "FL764110005": [15.0, 16.0, 18.0, 17.0, 19.0],
             "FL763130005": [25.0, 28.0, 31.0, 35.0, 35.0],
+            "FL753130005": [9.0, 10.0, 11.0, 12.0, 13.0],
+            "FL743130003": [2.0, 2.5, 3.0, 3.5, 4.0],
             "FL763123005": [10.0, 12.0, 16.0, 18.0, 21.0],
             "FL763128000": [5.0, 6.0, 7.0, 8.0, 9.0],
             "FL763122605": [12.0, 13.0, 14.0, 15.0, 15.0],
@@ -93,6 +101,8 @@ def _write_z1_multitable_zip(path: Path) -> None:
                 [
                     "date",
                     "FL763127005",
+                    "FL753127005",
+                    "FL743127003",
                     "FL763123005",
                     "FL763128000",
                     "FL763122605",
@@ -112,7 +122,10 @@ def _write_z1_multitable_zip(path: Path) -> None:
                 ]
             ].to_csv(index=False),
         )
-        archive.writestr("csv/l204.csv", all_sectors[["date", "FL763130005"]].to_csv(index=False))
+        archive.writestr(
+            "csv/l204.csv",
+            all_sectors[["date", "FL763130005", "FL753130005", "FL743130003"]].to_csv(index=False),
+        )
         archive.writestr("csv/l207.csv", all_sectors[["date", "FL762150005"]].to_csv(index=False))
         archive.writestr(
             "csv/l111.csv",
@@ -164,6 +177,11 @@ def _fake_canonical_tdc_frame() -> pd.DataFrame:
             "tdc_domestic_bank_only_qoq": [None, 1.5, 3.5, 1.5, 2.5],
             "tdc_no_remit_bank_only_qoq": [None, 1.8, 3.8, 1.8, 2.8],
             "tdc_credit_union_sensitive_qoq": [None, 2.2, 4.2, 2.2, 3.2],
+            "tdc_tier2_bank_only_qoq": [None, 1.2, 3.2, 1.2, 2.2],
+            "tdc_tier3_bank_only_qoq": [None, 1.0, 3.0, 1.0, 2.0],
+            "tdc_tier3_broad_depository_qoq": [None, 1.1, 3.1, 1.1, 2.1],
+            "tdc_bank_receipt_historical_overlay_qoq": [None, None, 0.4, 0.5, 0.6],
+            "tdc_row_mrv_nondefault_pilot_qoq": [None, 0.0, 0.2, 0.0, 0.3],
         }
     )
 
@@ -176,11 +194,172 @@ def _fake_canonical_tdc_result() -> build_panel.CanonicalTdcSeriesResult:
     )
 
 
+def _fake_imported_accounting_frame() -> pd.DataFrame:
+    return pd.DataFrame(
+        {
+            "quarter": ["2000Q3", "2000Q4", "2001Q1"],
+            "accounting_deposit_substitution_qoq": [-1.0, -2.0, -3.0],
+            "accounting_bank_balance_sheet_qoq": [2.0, 3.0, 4.0],
+            "accounting_public_liquidity_qoq": [0.5, 0.25, -0.5],
+            "accounting_external_flow_qoq": [1.5, -0.25, 0.5],
+        }
+    )
+
+
+def _fake_imported_accounting_result() -> build_panel.ImportedAccountingSeriesResult:
+    return build_panel.ImportedAccountingSeriesResult(
+        frame=_fake_imported_accounting_frame(),
+        source_kind="fixture_accounting_bundle",
+    )
+
+
+def test_regime_aware_historical_cash_backfill_only_changes_pre_transaction_history() -> None:
+    frame = pd.DataFrame(
+        {
+            "quarter": ["2002Q3", "2002Q4"],
+            "tdc_bank_only_qoq": [pd.NA, 5.0],
+            "tdc_bank_only_extended_1990_qoq": [4.0, 6.0],
+            "tdc_broad_depository_qoq": [pd.NA, 7.0],
+            "tdc_broad_depository_extended_1990_qoq": [8.0, 9.0],
+            "tdc_treasury_operating_cash_qoq": [3.0, 10.0],
+            "federal_govt_cash_balance_proxy_qoq": [11.0, 1.0],
+        }
+    )
+
+    out = build_panel._apply_regime_aware_historical_cash_backfill(frame)
+
+    assert abs(float(out.loc[0, "tdc_bank_only_regime_aware_extended_1990_qoq"]) - (-4.0)) < 1e-12
+    assert abs(float(out.loc[0, "tdc_bank_only_qoq"]) - (-4.0)) < 1e-12
+    assert abs(float(out.loc[1, "tdc_bank_only_qoq"]) - 5.0) < 1e-12
+    assert abs(float(out.loc[0, "tdc_broad_depository_regime_aware_extended_1990_qoq"]) - 0.0) < 1e-12
+    assert abs(float(out.loc[0, "tdc_broad_depository_qoq"]) - 0.0) < 1e-12
+    assert abs(float(out.loc[1, "tdc_broad_depository_qoq"]) - 7.0) < 1e-12
+
+
+def _strict_series(values: list[float]) -> pd.Series:
+    return pd.Series(values, index=pd.Index(["2000Q1", "2000Q2", "2000Q3", "2000Q4", "2001Q1"], dtype="object"))
+
+
+def _fake_strict_transaction_series() -> dict[str, tuple[pd.Series, str]]:
+    return {
+        "strict_loan_source_qoq": (_strict_series([5.0, 6.0, 7.0, 8.0, 9.0]), "BOGZ1FU764023005Q"),
+        "strict_loan_mortgages_qoq": (_strict_series([1.0, 1.5, 2.0, 2.5, 3.0]), "BOGZ1FU763065005Q"),
+        "strict_loan_consumer_credit_qoq": (_strict_series([0.5, 0.75, 1.0, 1.25, 1.5]), "BOGZ1FU763066000Q"),
+        "strict_loan_di_loans_nec_qoq": (_strict_series([3.0, 3.25, 3.5, 3.75, 4.0]), "BOGZ1FU763068005Q"),
+        "strict_di_loans_nec_systemwide_liability_total_qoq": (_strict_series([3.0, 3.25, 3.5, 3.75, 4.0]), "BOGZ1FU793068005Q"),
+        "strict_di_loans_nec_households_nonprofits_qoq": (_strict_series([0.4, 0.45, 0.5, 0.55, 0.6]), "BOGZ1FU153168005Q"),
+        "strict_di_loans_nec_nonfinancial_corporate_qoq": (_strict_series([0.8, 0.9, 1.0, 1.1, 1.2]), "BOGZ1FU103168005Q"),
+        "strict_di_loans_nec_nonfinancial_noncorporate_qoq": (_strict_series([0.6, 0.65, 0.7, 0.75, 0.8]), "BOGZ1FU113168005Q"),
+        "strict_di_loans_nec_state_local_qoq": (_strict_series([0.3, 0.35, 0.4, 0.45, 0.5]), "BOGZ1FU213168003Q"),
+        "strict_di_loans_nec_domestic_financial_qoq": (_strict_series([0.7, 0.75, 0.8, 0.85, 0.9]), "BOGZ1FU793168005Q"),
+        "strict_di_loans_nec_rest_of_world_qoq": (_strict_series([0.2, 0.15, 0.1, 0.05, 0.0]), "BOGZ1FU263168005Q"),
+        "strict_loan_other_advances_qoq": (_strict_series([0.5, 0.5, 0.5, 0.5, 0.5]), "BOGZ1FU763069005Q"),
+        "strict_non_treasury_agency_gse_qoq": (_strict_series([0.2, 0.3, 0.4, 0.5, 0.6]), "BOGZ1FU763061705Q"),
+        "strict_non_treasury_municipal_qoq": (_strict_series([0.1, 0.1, 0.2, 0.2, 0.3]), "BOGZ1FU763062005Q"),
+        "strict_non_treasury_corporate_foreign_bonds_qoq": (_strict_series([0.4, 0.5, 0.6, 0.7, 0.8]), "BOGZ1FU763063005Q"),
+        "strict_funding_fedfunds_repo_qoq": (_strict_series([0.3, 0.35, 0.4, 0.45, 0.5]), "BOGZ1FU762150005Q"),
+        "strict_funding_debt_securities_qoq": (_strict_series([0.2, 0.25, 0.3, 0.35, 0.4]), "BOGZ1FU764122005Q"),
+        "strict_funding_fhlb_advances_qoq": (_strict_series([0.1, 0.15, 0.2, 0.25, 0.3]), "BOGZ1FU763169305Q"),
+        "broad_strict_loan_foreign_offices_qoq": (_strict_series([0.25, 0.3, 0.35, 0.4, 0.45]), "BOGZ1FU754023005Q"),
+        "broad_strict_loan_affiliated_areas_qoq": (_strict_series([0.05, 0.06, 0.07, 0.08, 0.09]), "BOGZ1FU744023003Q"),
+    }
+
+
+def _write_accounting_bundle_csv(path: Path) -> None:
+    frame = pd.DataFrame(
+        {
+            "series_id": [
+                "accounting_deposit_substitution_qoq",
+                "accounting_bank_balance_sheet_qoq",
+                "accounting_public_liquidity_qoq",
+                "accounting_external_flow_qoq",
+                "accounting_deposit_substitution_qoq",
+                "accounting_bank_balance_sheet_qoq",
+                "accounting_public_liquidity_qoq",
+                "accounting_external_flow_qoq",
+            ],
+            "period_end": [
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+                "2000-12-31",
+                "2000-12-31",
+                "2000-12-31",
+                "2000-12-31",
+            ],
+            "available_at": [
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+                "2000-12-31",
+                "2000-12-31",
+                "2000-12-31",
+                "2000-12-31",
+            ],
+            "units": [
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+            ],
+            "value": [-1.0, 2.0, 0.5, 1.5, -2.0, 3.0, 0.25, -0.25],
+        }
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(path, index=False)
+
+
+def _write_large_accounting_bundle_csv(path: Path) -> None:
+    frame = pd.DataFrame(
+        {
+            "series_id": [
+                "accounting_deposit_substitution_qoq",
+                "accounting_bank_balance_sheet_qoq",
+                "accounting_public_liquidity_qoq",
+                "accounting_external_flow_qoq",
+            ],
+            "period_end": [
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+            ],
+            "available_at": [
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+                "2000-09-30",
+            ],
+            "units": [
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+                "usd_billions",
+            ],
+            "value": [-10000.0, 20000.0, 5000.0, 15000.0],
+        }
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(path, index=False)
+
+
 def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, monkeypatch) -> None:
     z1_zip = tmp_path / "fixtures" / "z1.zip"
     _write_z1_zip(z1_zip)
 
     fred_data = {
+        "BOGZ1FU713061103Q": [("2000-03-31", 1000.0), ("2000-06-30", 1200.0), ("2000-09-30", 1500.0), ("2000-12-31", 1600.0), ("2001-03-31", 1700.0)],
+        "BOGZ1FU763061100Q": [("2000-03-31", 2000.0), ("2000-06-30", 2100.0), ("2000-09-30", 2200.0), ("2000-12-31", 2300.0), ("2001-03-31", 2400.0)],
+        "BOGZ1FU753061103Q": [("2000-03-31", 400.0), ("2000-06-30", 450.0), ("2000-09-30", 500.0), ("2000-12-31", 550.0), ("2001-03-31", 600.0)],
+        "BOGZ1FU743061103Q": [("2000-03-31", 100.0), ("2000-06-30", 120.0), ("2000-09-30", 140.0), ("2000-12-31", 160.0), ("2001-03-31", 180.0)],
+        "BOGZ1FU263061105Q": [("2000-03-31", 900.0), ("2000-06-30", 950.0), ("2000-09-30", 1000.0), ("2000-12-31", 1050.0), ("2001-03-31", 1100.0)],
+        "BOGZ1FU313024000Q": [("2000-03-31", 500.0), ("2000-06-30", 600.0), ("2000-09-30", 700.0), ("2000-12-31", 650.0), ("2001-03-31", 750.0)],
         "WTREGEN": [("2000-03-31", 1000.0), ("2000-06-30", 1020.0), ("2000-09-30", 980.0), ("2000-12-31", 990.0), ("2001-03-31", 1010.0)],
         "WRESBAL": [("2000-03-31", 2000.0), ("2000-06-30", 2010.0), ("2000-09-30", 1980.0), ("2000-12-31", 1995.0), ("2001-03-31", 2025.0)],
         "RRPONTSYD": [("2000-03-31", 1000.0), ("2000-06-30", 900.0), ("2000-09-30", 850.0), ("2000-12-31", 820.0), ("2001-03-31", 800.0)],
@@ -210,6 +389,7 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
         "FEDFUNDS": [("2000-01-31", 5.5), ("2000-02-29", 5.6), ("2000-03-31", 5.7), ("2000-04-30", 5.8), ("2000-05-31", 5.9), ("2000-06-30", 6.0), ("2000-07-31", 6.1), ("2000-08-31", 6.0), ("2000-09-30", 5.9), ("2000-10-31", 5.8), ("2000-11-30", 5.7), ("2000-12-31", 5.6), ("2001-01-31", 5.5), ("2001-02-28", 5.4), ("2001-03-31", 5.3)],
         "UNRATE": [("2000-01-31", 4.0), ("2000-02-29", 4.1), ("2000-03-31", 4.0), ("2000-04-30", 4.0), ("2000-05-31", 4.1), ("2000-06-30", 4.0), ("2000-07-31", 4.0), ("2000-08-31", 4.1), ("2000-09-30", 4.0), ("2000-10-31", 4.1), ("2000-11-30", 4.2), ("2000-12-31", 4.2), ("2001-01-31", 4.3), ("2001-02-28", 4.3), ("2001-03-31", 4.3)],
         "CPIAUCSL": [("2000-01-31", 168.8), ("2000-02-29", 169.8), ("2000-03-31", 171.2), ("2000-04-30", 171.3), ("2000-05-31", 171.5), ("2000-06-30", 172.4), ("2000-07-31", 172.8), ("2000-08-31", 172.8), ("2000-09-30", 173.7), ("2000-10-31", 174.0), ("2000-11-30", 174.1), ("2000-12-31", 174.0), ("2001-01-31", 175.1), ("2001-02-28", 175.8), ("2001-03-31", 176.2)],
+        "RESPPLLOPNWW": [("2000-01-05", -10.0), ("2000-02-02", 20.0), ("2000-03-01", 30.0), ("2000-04-05", 40.0), ("2000-05-03", -20.0), ("2000-06-07", 10.0), ("2000-07-05", 5.0), ("2000-08-02", 15.0), ("2000-09-06", 25.0), ("2000-10-04", 30.0), ("2000-11-01", 20.0), ("2000-12-06", 10.0), ("2001-01-03", 50.0), ("2001-02-07", 40.0), ("2001-03-07", 30.0)],
     }
     auctions_rows = [
         ("2000-01-15", "Bill", 60_000_000_000.0),
@@ -247,6 +427,30 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     monkeypatch.setattr(build_panel, "_download_fiscaldata_auctions_csv", fake_download_fiscaldata_auctions_csv)
     monkeypatch.setattr(build_panel, "build_cache_reuse_provenance", lambda reuse_mode=None: {"reuse_mode": "discover", "reused_artifacts": [], "fresh_downloads": []})
     monkeypatch.setattr(build_panel, "_load_canonical_tdc_series", lambda **kwargs: _fake_canonical_tdc_result())
+    monkeypatch.setattr(build_panel, "_load_imported_accounting_series", lambda **kwargs: _fake_imported_accounting_result())
+    strict_series = _fake_strict_transaction_series()
+
+    def fake_load_quarterly_candidate_fred_series(candidate_ids, **kwargs):
+        candidate_key = tuple(candidate_ids)
+        for key, ids in build_panel.STRICT_Z1_TRANSACTION_SERIES.items():
+            if candidate_key == tuple(ids):
+                return strict_series[key]
+        series_id = candidate_ids[0]
+        source = pd.Series(
+            [value for _, value in fred_data[series_id]],
+            index=pd.Index(
+                [pd.Period(date, freq="Q").strftime("%YQ%q") for date, _ in fred_data[series_id]],
+                dtype="object",
+            ),
+            dtype="float64",
+        )
+        return source / build_panel.STRICT_Z1_TRANSACTION_DIVISOR, series_id
+
+    monkeypatch.setattr(
+        build_panel,
+        "_load_quarterly_candidate_fred_series",
+        fake_load_quarterly_candidate_fred_series,
+    )
 
     result = build_panel.build_public_quarterly_panel(base_dir=tmp_path)
     frame = pd.read_csv(result.panel_path)
@@ -256,22 +460,120 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert result.reused_artifacts_path.exists()
     assert result.proxy_unit_audit_path.exists()
     assert result.sample_construction_summary_path.exists()
+    assert result.accounting_source_kind == "fixture_accounting_bundle"
+    assert result.strict_source_kind == build_panel.STRICT_SOURCE_KIND
     assert set(build_panel._required_panel_columns()).issubset(frame.columns)
     assert frame["quarter"].iloc[0] == "2000Q3"
     assert "tdc_domestic_bank_only_qoq" in frame.columns
+    assert "tdc_us_chartered_bank_only_qoq" in frame.columns
+    assert "tdc_no_foreign_bank_sectors_qoq" in frame.columns
+    assert "tdc_no_toc_bank_only_qoq" in frame.columns
+    assert "tdc_no_toc_no_row_bank_only_qoq" in frame.columns
+    assert "tdc_core_deposit_proximate_bank_only_qoq" in frame.columns
+    assert "tdc_toc_row_support_bundle_qoq" in frame.columns
+    assert "deposits_only_bank_qoq" in frame.columns
+    assert "broad_bank_deposits_qoq" in frame.columns
     assert "tdc_no_remit_bank_only_qoq" in frame.columns
     assert "tdc_credit_union_sensitive_qoq" in frame.columns
+    assert "tdc_tier2_bank_only_qoq" in frame.columns
+    assert "tdc_tier3_bank_only_qoq" in frame.columns
+    assert "tdc_tier3_broad_depository_qoq" in frame.columns
+    assert "tdc_bank_receipt_historical_overlay_qoq" in frame.columns
+    assert "tdc_row_mrv_nondefault_pilot_qoq" in frame.columns
     assert frame.loc[frame["quarter"] == "2000Q3", "bank_credit_private_qoq"].isna().all()
     assert (frame["other_component_qoq"] == frame["total_deposits_bank_qoq"] - frame["tdc_bank_only_qoq"]).all()
+    assert (
+        (
+            frame["deposits_only_bank_qoq"]
+            - (frame["checkable_deposits_bank_qoq"] + frame["time_savings_deposits_bank_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["other_component_us_chartered_bank_only_qoq"]
+            - (frame["total_deposits_bank_qoq"] - frame["tdc_us_chartered_bank_only_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["broad_bank_deposits_qoq"]
+            - (
+                frame["checkable_deposits_bank_qoq"]
+                + frame["time_savings_deposits_bank_qoq"]
+                + frame["checkable_deposits_foreign_offices_qoq"]
+                + frame["time_savings_deposits_foreign_offices_qoq"]
+                + frame["checkable_deposits_affiliated_areas_qoq"]
+                + frame["time_savings_deposits_affiliated_areas_qoq"]
+            )
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["other_component_no_foreign_bank_sectors_qoq"]
+            - (frame["total_deposits_bank_qoq"] - frame["tdc_no_foreign_bank_sectors_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["other_component_no_toc_bank_only_qoq"]
+            - (frame["total_deposits_bank_qoq"] - frame["tdc_no_toc_bank_only_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["other_component_no_toc_no_row_bank_only_qoq"]
+            - (frame["total_deposits_bank_qoq"] - frame["tdc_no_toc_no_row_bank_only_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["tdc_core_deposit_proximate_bank_only_qoq"] - frame["tdc_no_toc_no_row_bank_only_qoq"]
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["tdc_toc_row_support_bundle_qoq"]
+            - (frame["tdc_bank_only_qoq"] - frame["tdc_core_deposit_proximate_bank_only_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["other_component_core_deposit_proximate_bank_only_qoq"]
+            - (frame["total_deposits_bank_qoq"] - frame["tdc_core_deposit_proximate_bank_only_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
+    assert (
+        (
+            frame["broad_bank_other_component_qoq"]
+            - (frame["broad_bank_deposits_qoq"] - frame["tdc_bank_only_qoq"])
+        ).abs()
+        < 1e-12
+    ).all()
     assert frame["bill_share"].between(0.0, 1.0).all()
     assert (frame["reserve_drain_pressure"] == -frame["lag_reserves_qoq"]).all()
     assert frame["quarter_index"].tolist() == list(range(len(frame)))
     assert frame["quarter"].is_monotonic_increasing
     assert frame["quarter"].is_unique
     assert "checkable_deposits_bank_qoq" in frame.columns
+    assert "checkable_deposits_foreign_offices_qoq" in frame.columns
+    assert "checkable_deposits_affiliated_areas_qoq" in frame.columns
     assert "interbank_transactions_bank_qoq" in frame.columns
     assert "time_savings_deposits_bank_qoq" in frame.columns
+    assert "time_savings_deposits_foreign_offices_qoq" in frame.columns
+    assert "time_savings_deposits_affiliated_areas_qoq" in frame.columns
     assert "checkable_federal_govt_bank_qoq" in frame.columns
+    assert "federal_govt_checkable_total_qoq" in frame.columns
+    assert "federal_govt_time_savings_total_qoq" in frame.columns
+    assert "federal_govt_cash_balance_proxy_qoq" in frame.columns
     assert "checkable_state_local_bank_qoq" in frame.columns
     assert "checkable_rest_of_world_bank_qoq" in frame.columns
     assert "checkable_private_domestic_bank_qoq" in frame.columns
@@ -288,10 +590,53 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert "debt_securities_bank_liability_qoq" in frame.columns
     assert "fhlb_advances_sallie_mae_loans_bank_qoq" in frame.columns
     assert "holding_company_parent_funding_bank_qoq" in frame.columns
+    assert "accounting_deposit_substitution_qoq" in frame.columns
+    assert "accounting_bank_balance_sheet_qoq" in frame.columns
+    assert "accounting_public_liquidity_qoq" in frame.columns
+    assert "accounting_external_flow_qoq" in frame.columns
+    assert "accounting_identity_total_qoq" in frame.columns
+    assert "accounting_identity_gap_qoq" in frame.columns
+    assert "strict_loan_source_qoq" in frame.columns
+    assert "strict_loan_mortgages_qoq" in frame.columns
+    assert "strict_loan_consumer_credit_qoq" in frame.columns
+    assert "strict_loan_di_loans_nec_qoq" in frame.columns
+    assert "strict_di_loans_nec_households_nonprofits_qoq" in frame.columns
+    assert "strict_di_loans_nec_nonfinancial_corporate_qoq" in frame.columns
+    assert "strict_di_loans_nec_nonfinancial_noncorporate_qoq" in frame.columns
+    assert "strict_di_loans_nec_state_local_qoq" in frame.columns
+    assert "strict_di_loans_nec_domestic_financial_qoq" in frame.columns
+    assert "strict_di_loans_nec_rest_of_world_qoq" in frame.columns
+    assert "strict_di_loans_nec_systemwide_liability_total_qoq" in frame.columns
+    assert "strict_di_loans_nec_systemwide_borrower_total_qoq" in frame.columns
+    assert "strict_di_loans_nec_systemwide_borrower_gap_qoq" in frame.columns
+    assert "strict_loan_other_advances_qoq" in frame.columns
+    assert "strict_non_treasury_agency_gse_qoq" in frame.columns
+    assert "strict_non_treasury_municipal_qoq" in frame.columns
+    assert "strict_non_treasury_corporate_foreign_bonds_qoq" in frame.columns
+    assert "strict_non_treasury_securities_qoq" in frame.columns
+    assert "strict_identifiable_total_qoq" in frame.columns
+    assert "strict_identifiable_gap_qoq" in frame.columns
+    assert "strict_funding_fedfunds_repo_qoq" in frame.columns
+    assert "strict_funding_debt_securities_qoq" in frame.columns
+    assert "strict_funding_fhlb_advances_qoq" in frame.columns
+    assert "strict_funding_offset_total_qoq" in frame.columns
+    assert "strict_identifiable_net_after_funding_qoq" in frame.columns
+    assert "strict_gap_after_funding_qoq" in frame.columns
+    assert "broad_strict_loan_foreign_offices_qoq" in frame.columns
+    assert "broad_strict_loan_affiliated_areas_qoq" in frame.columns
+    assert "broad_strict_loan_source_qoq" in frame.columns
+    assert "broad_strict_gap_qoq" in frame.columns
     assert "lag_checkable_deposits_bank_qoq" in frame.columns
+    assert "lag_checkable_deposits_foreign_offices_qoq" in frame.columns
+    assert "lag_checkable_deposits_affiliated_areas_qoq" in frame.columns
     assert "lag_interbank_transactions_bank_qoq" in frame.columns
     assert "lag_time_savings_deposits_bank_qoq" in frame.columns
+    assert "lag_time_savings_deposits_foreign_offices_qoq" in frame.columns
+    assert "lag_time_savings_deposits_affiliated_areas_qoq" in frame.columns
     assert "lag_checkable_federal_govt_bank_qoq" in frame.columns
+    assert "lag_federal_govt_checkable_total_qoq" in frame.columns
+    assert "lag_federal_govt_time_savings_total_qoq" in frame.columns
+    assert "lag_federal_govt_cash_balance_proxy_qoq" in frame.columns
     assert "lag_checkable_state_local_bank_qoq" in frame.columns
     assert "lag_checkable_rest_of_world_bank_qoq" in frame.columns
     assert "lag_checkable_private_domestic_bank_qoq" in frame.columns
@@ -308,6 +653,38 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert "lag_debt_securities_bank_liability_qoq" in frame.columns
     assert "lag_fhlb_advances_sallie_mae_loans_bank_qoq" in frame.columns
     assert "lag_holding_company_parent_funding_bank_qoq" in frame.columns
+    assert "lag_strict_loan_source_qoq" in frame.columns
+    assert "lag_strict_loan_mortgages_qoq" in frame.columns
+    assert "lag_strict_loan_consumer_credit_qoq" in frame.columns
+    assert "lag_strict_loan_di_loans_nec_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_households_nonprofits_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_nonfinancial_corporate_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_nonfinancial_noncorporate_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_state_local_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_domestic_financial_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_rest_of_world_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_systemwide_liability_total_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_systemwide_borrower_total_qoq" in frame.columns
+    assert "lag_strict_di_loans_nec_systemwide_borrower_gap_qoq" in frame.columns
+    assert "lag_strict_loan_other_advances_qoq" in frame.columns
+    assert "lag_strict_non_treasury_agency_gse_qoq" in frame.columns
+    assert "lag_strict_non_treasury_municipal_qoq" in frame.columns
+    assert "lag_strict_non_treasury_corporate_foreign_bonds_qoq" in frame.columns
+    assert "lag_strict_non_treasury_securities_qoq" in frame.columns
+    assert "lag_strict_identifiable_total_qoq" in frame.columns
+    assert "lag_strict_identifiable_gap_qoq" in frame.columns
+    assert "lag_strict_funding_fedfunds_repo_qoq" in frame.columns
+    assert "lag_strict_funding_debt_securities_qoq" in frame.columns
+    assert "lag_strict_funding_fhlb_advances_qoq" in frame.columns
+    assert "lag_strict_funding_offset_total_qoq" in frame.columns
+    assert "lag_strict_identifiable_net_after_funding_qoq" in frame.columns
+    assert "lag_strict_gap_after_funding_qoq" in frame.columns
+    assert "lag_tdc_core_deposit_proximate_bank_only_qoq" in frame.columns
+    assert "lag_tdc_toc_row_support_bundle_qoq" in frame.columns
+    assert "lag_broad_strict_loan_foreign_offices_qoq" in frame.columns
+    assert "lag_broad_strict_loan_affiliated_areas_qoq" in frame.columns
+    assert "lag_broad_strict_loan_source_qoq" in frame.columns
+    assert "lag_broad_strict_gap_qoq" in frame.columns
     assert "commercial_industrial_loans_qoq" in frame.columns
     assert "construction_land_development_loans_qoq" in frame.columns
     assert "cre_multifamily_loans_qoq" in frame.columns
@@ -374,6 +751,66 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert abs(row_2000q3["debt_securities_bank_liability_qoq"] - 0.006) < 1e-12
     assert abs(row_2000q3["fhlb_advances_sallie_mae_loans_bank_qoq"] - 0.005) < 1e-12
     assert abs(row_2000q3["holding_company_parent_funding_bank_qoq"] - 0.002) < 1e-12
+    assert abs(row_2000q3["accounting_identity_total_qoq"] - 3.0) < 1e-12
+    assert abs(row_2000q3["accounting_identity_gap_qoq"] - (row_2000q3["other_component_qoq"] - 3.0)) < 1e-12
+    assert abs(row_2000q3["strict_loan_source_qoq"] - 7.0) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_households_nonprofits_qoq"] - 0.5) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_nonfinancial_corporate_qoq"] - 1.0) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_nonfinancial_noncorporate_qoq"] - 0.7) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_state_local_qoq"] - 0.4) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_domestic_financial_qoq"] - 0.8) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_rest_of_world_qoq"] - 0.1) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_systemwide_liability_total_qoq"] - 3.5) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_systemwide_borrower_total_qoq"] - 3.5) < 1e-12
+    assert abs(row_2000q3["strict_di_loans_nec_systemwide_borrower_gap_qoq"] - 0.0) < 1e-12
+    assert abs(row_2000q3["strict_non_treasury_securities_qoq"] - 1.2) < 1e-12
+    assert abs(row_2000q3["strict_identifiable_total_qoq"] - 8.2) < 1e-12
+    assert abs(row_2000q3["strict_identifiable_gap_qoq"] - (row_2000q3["other_component_qoq"] - 8.2)) < 1e-12
+    assert abs(row_2000q3["strict_funding_fedfunds_repo_qoq"] - 0.4) < 1e-12
+    assert abs(row_2000q3["strict_funding_debt_securities_qoq"] - 0.3) < 1e-12
+    assert abs(row_2000q3["strict_funding_fhlb_advances_qoq"] - 0.2) < 1e-12
+    assert abs(row_2000q3["strict_funding_offset_total_qoq"] - 0.9) < 1e-12
+    assert abs(row_2000q3["strict_identifiable_net_after_funding_qoq"] - 7.3) < 1e-12
+    assert abs(row_2000q3["strict_gap_after_funding_qoq"] - (row_2000q3["other_component_qoq"] - 7.3)) < 1e-12
+    assert abs(row_2000q3["checkable_deposits_foreign_offices_qoq"] - 0.002) < 1e-12
+    assert abs(row_2000q3["checkable_deposits_affiliated_areas_qoq"] - 0.0005) < 1e-12
+    assert abs(row_2000q3["time_savings_deposits_foreign_offices_qoq"] - 0.001) < 1e-12
+    assert abs(row_2000q3["time_savings_deposits_affiliated_areas_qoq"] - 0.0005) < 1e-12
+    assert abs(row_2000q3["federal_govt_checkable_total_qoq"] - 0.002) < 1e-12
+    assert abs(row_2000q3["federal_govt_time_savings_total_qoq"] - 0.001) < 1e-12
+    assert abs(row_2000q3["federal_govt_cash_balance_proxy_qoq"] - 0.003) < 1e-12
+    assert abs(row_2000q3["broad_bank_deposits_qoq"] - 0.013) < 1e-12
+    assert abs(
+        row_2000q3["other_component_no_foreign_bank_sectors_qoq"]
+        - (row_2000q3["total_deposits_bank_qoq"] - row_2000q3["tdc_no_foreign_bank_sectors_qoq"])
+    ) < 1e-12
+    assert abs(
+        row_2000q3["other_component_no_toc_bank_only_qoq"]
+        - (row_2000q3["total_deposits_bank_qoq"] - row_2000q3["tdc_no_toc_bank_only_qoq"])
+    ) < 1e-12
+    assert abs(
+        row_2000q3["other_component_no_toc_no_row_bank_only_qoq"]
+        - (row_2000q3["total_deposits_bank_qoq"] - row_2000q3["tdc_no_toc_no_row_bank_only_qoq"])
+    ) < 1e-12
+    assert abs(
+        row_2000q3["tdc_core_deposit_proximate_bank_only_qoq"] - row_2000q3["tdc_no_toc_no_row_bank_only_qoq"]
+    ) < 1e-12
+    assert abs(
+        row_2000q3["tdc_toc_row_support_bundle_qoq"]
+        - (row_2000q3["tdc_bank_only_qoq"] - row_2000q3["tdc_core_deposit_proximate_bank_only_qoq"])
+    ) < 1e-12
+    assert abs(
+        row_2000q3["other_component_core_deposit_proximate_bank_only_qoq"]
+        - (row_2000q3["total_deposits_bank_qoq"] - row_2000q3["tdc_core_deposit_proximate_bank_only_qoq"])
+    ) < 1e-12
+    assert abs(
+        row_2000q3["broad_bank_other_component_qoq"]
+        - (row_2000q3["broad_bank_deposits_qoq"] - row_2000q3["tdc_bank_only_qoq"])
+    ) < 1e-12
+    assert abs(row_2000q3["broad_strict_loan_foreign_offices_qoq"] - 0.35) < 1e-12
+    assert abs(row_2000q3["broad_strict_loan_affiliated_areas_qoq"] - 0.07) < 1e-12
+    assert abs(row_2000q3["broad_strict_loan_source_qoq"] - 7.42) < 1e-12
+    assert abs(row_2000q3["broad_strict_gap_qoq"] - (row_2000q3["broad_bank_other_component_qoq"] - 7.42)) < 1e-12
     assert abs(row_2000q3["on_rrp_reallocation_qoq"] - 0.05) < 1e-12
     assert abs(row_2000q3["household_treasury_securities_reallocation_qoq"] + 0.04) < 1e-12
     assert abs(row_2000q3["mmf_treasury_bills_reallocation_qoq"] + 0.01) < 1e-12
@@ -394,11 +831,47 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert construction_coverage["headline_sample_missing_obs"] > 0
 
 
+def test_load_imported_accounting_series_from_fixture_bundle(tmp_path: Path) -> None:
+    fixture_root = tmp_path / "fixtures"
+    _write_accounting_bundle_csv(fixture_root / "accounting" / "standardized_series.csv")
+
+    result = build_panel._load_imported_accounting_series(root=tmp_path, fixture_root=fixture_root)
+
+    assert result is not None
+    assert result.source_kind == "fixture_accounting_bundle"
+    assert result.frame["quarter"].tolist() == ["2000Q3", "2000Q4"]
+    row = result.frame.loc[result.frame["quarter"] == "2000Q3"].iloc[0]
+    assert abs(row["accounting_deposit_substitution_qoq"] + 1.0) < 1e-12
+    assert abs(row["accounting_bank_balance_sheet_qoq"] - 2.0) < 1e-12
+    assert abs(row["accounting_public_liquidity_qoq"] - 0.5) < 1e-12
+    assert abs(row["accounting_external_flow_qoq"] - 1.5) < 1e-12
+
+
+def test_load_imported_accounting_series_rescales_large_bundle_values(tmp_path: Path) -> None:
+    fixture_root = tmp_path / "fixtures"
+    _write_large_accounting_bundle_csv(fixture_root / "accounting" / "standardized_series.csv")
+
+    result = build_panel._load_imported_accounting_series(root=tmp_path, fixture_root=fixture_root)
+
+    assert result is not None
+    row = result.frame.loc[result.frame["quarter"] == "2000Q3"].iloc[0]
+    assert abs(row["accounting_deposit_substitution_qoq"] + 10.0) < 1e-12
+    assert abs(row["accounting_bank_balance_sheet_qoq"] - 20.0) < 1e-12
+    assert abs(row["accounting_public_liquidity_qoq"] - 5.0) < 1e-12
+    assert abs(row["accounting_external_flow_qoq"] - 15.0) < 1e-12
+
+
 def test_build_public_quarterly_panel_preserves_macro_history_when_tga_starts_later(tmp_path: Path, monkeypatch) -> None:
     z1_zip = tmp_path / "fixtures" / "z1.zip"
     _write_z1_zip(z1_zip)
 
     fred_data = {
+        "BOGZ1FU713061103Q": [("2002-03-31", 1000.0), ("2002-06-30", 1200.0), ("2002-09-30", 1500.0)],
+        "BOGZ1FU763061100Q": [("2002-03-31", 2000.0), ("2002-06-30", 2100.0), ("2002-09-30", 2200.0)],
+        "BOGZ1FU753061103Q": [("2002-03-31", 400.0), ("2002-06-30", 450.0), ("2002-09-30", 500.0)],
+        "BOGZ1FU743061103Q": [("2002-03-31", 100.0), ("2002-06-30", 120.0), ("2002-09-30", 140.0)],
+        "BOGZ1FU263061105Q": [("2002-03-31", 900.0), ("2002-06-30", 950.0), ("2002-09-30", 1000.0)],
+        "BOGZ1FU313024000Q": [("2002-03-31", 500.0), ("2002-06-30", 600.0), ("2002-09-30", 700.0)],
         "WTREGEN": [("2002-03-31", 1000.0), ("2002-06-30", 1020.0), ("2002-09-30", 980.0)],
         "WRESBAL": [("2002-03-31", 2000.0), ("2002-06-30", 2010.0), ("2002-09-30", 1980.0)],
         "RRPONTSYD": [("2002-03-31", 1000.0), ("2002-06-30", 950.0), ("2002-09-30", 900.0)],
@@ -428,6 +901,7 @@ def test_build_public_quarterly_panel_preserves_macro_history_when_tga_starts_la
         "FEDFUNDS": [("2000-01-31", 5.5), ("2000-02-29", 5.6), ("2000-03-31", 5.7), ("2000-04-30", 5.8), ("2000-05-31", 5.9), ("2000-06-30", 6.0), ("2000-07-31", 6.1), ("2000-08-31", 6.0), ("2000-09-30", 5.9), ("2000-10-31", 5.8), ("2000-11-30", 5.7), ("2000-12-31", 5.6), ("2001-01-31", 5.5), ("2001-02-28", 5.4), ("2001-03-31", 5.3)],
         "UNRATE": [("2000-01-31", 4.0), ("2000-02-29", 4.1), ("2000-03-31", 4.0), ("2000-04-30", 4.0), ("2000-05-31", 4.1), ("2000-06-30", 4.0), ("2000-07-31", 4.0), ("2000-08-31", 4.1), ("2000-09-30", 4.0), ("2000-10-31", 4.1), ("2000-11-30", 4.2), ("2000-12-31", 4.2), ("2001-01-31", 4.3), ("2001-02-28", 4.3), ("2001-03-31", 4.3)],
         "CPIAUCSL": [("2000-01-31", 168.8), ("2000-02-29", 169.8), ("2000-03-31", 171.2), ("2000-04-30", 171.3), ("2000-05-31", 171.5), ("2000-06-30", 172.4), ("2000-07-31", 172.8), ("2000-08-31", 172.8), ("2000-09-30", 173.7), ("2000-10-31", 174.0), ("2000-11-30", 174.1), ("2000-12-31", 174.0), ("2001-01-31", 175.1), ("2001-02-28", 175.8), ("2001-03-31", 176.2)],
+        "RESPPLLOPNWW": [("2002-01-02", 20.0), ("2002-02-06", 30.0), ("2002-03-06", 40.0), ("2002-04-03", 10.0), ("2002-05-01", 0.0), ("2002-06-05", 20.0), ("2002-07-03", 15.0), ("2002-08-07", 25.0), ("2002-09-04", 35.0)],
     }
     auctions_rows = [
         ("2000-01-15", "Bill", 60_000_000_000.0),
@@ -461,6 +935,29 @@ def test_build_public_quarterly_panel_preserves_macro_history_when_tga_starts_la
     monkeypatch.setattr(build_panel, "_download_fiscaldata_auctions_csv", fake_download_fiscaldata_auctions_csv)
     monkeypatch.setattr(build_panel, "build_cache_reuse_provenance", lambda reuse_mode=None: {"reuse_mode": "discover", "reused_artifacts": [], "fresh_downloads": []})
     monkeypatch.setattr(build_panel, "_load_canonical_tdc_series", lambda **kwargs: _fake_canonical_tdc_result())
+    strict_series = _fake_strict_transaction_series()
+
+    def fake_load_quarterly_candidate_fred_series(candidate_ids, **kwargs):
+        candidate_key = tuple(candidate_ids)
+        for key, ids in build_panel.STRICT_Z1_TRANSACTION_SERIES.items():
+            if candidate_key == tuple(ids):
+                return strict_series[key]
+        series_id = candidate_ids[0]
+        source = pd.Series(
+            [value for _, value in fred_data[series_id]],
+            index=pd.Index(
+                [pd.Period(date, freq="Q").strftime("%YQ%q") for date, _ in fred_data[series_id]],
+                dtype="object",
+            ),
+            dtype="float64",
+        )
+        return source / build_panel.STRICT_Z1_TRANSACTION_DIVISOR, series_id
+
+    monkeypatch.setattr(
+        build_panel,
+        "_load_quarterly_candidate_fred_series",
+        fake_load_quarterly_candidate_fred_series,
+    )
 
     result = build_panel.build_public_quarterly_panel(base_dir=tmp_path)
     sample_summary = json.loads(result.sample_construction_summary_path.read_text(encoding="utf-8"))
@@ -486,19 +983,29 @@ def test_reused_tdc_series_accepts_legacy_alias(tmp_path: Path) -> None:
     assert "tdc_domestic_bank_only_qoq" in frame.columns
     assert "tdc_no_remit_bank_only_qoq" in frame.columns
     assert "tdc_credit_union_sensitive_qoq" in frame.columns
+    assert "tdc_tier2_bank_only_qoq" in frame.columns
+    assert "tdc_tier3_bank_only_qoq" in frame.columns
+    assert "tdc_tier3_broad_depository_qoq" in frame.columns
+    assert "tdc_bank_receipt_historical_overlay_qoq" in frame.columns
+    assert "tdc_row_mrv_nondefault_pilot_qoq" in frame.columns
     assert frame["tdc_broad_depository_qoq"].isna().all()
     assert frame["tdc_domestic_bank_only_qoq"].isna().all()
     assert frame["tdc_no_remit_bank_only_qoq"].isna().all()
     assert frame["tdc_credit_union_sensitive_qoq"].isna().all()
+    assert frame["tdc_tier2_bank_only_qoq"].isna().all()
+    assert frame["tdc_tier3_bank_only_qoq"].isna().all()
+    assert frame["tdc_tier3_broad_depository_qoq"].isna().all()
+    assert frame["tdc_bank_receipt_historical_overlay_qoq"].isna().all()
+    assert frame["tdc_row_mrv_nondefault_pilot_qoq"].isna().all()
 
 
 def test_load_canonical_tdc_series_csv_accepts_tdcest_export(tmp_path: Path) -> None:
     path = tmp_path / "tdc_estimates.csv"
     path.write_text(
         (
-            "date,tdc_base_bank_only_ru_flow,tdc_base_broad_depository_np_cu_ru_flow,tdc_domestic_bank_only_ru_flow,tdc_no_remit_bank_only,tdc_credit_union_aggregate_sensitivity\n"
-            "2000-03-31,1000.0,2000.0,1100.0,1200.0,1300.0\n"
-            "2000-06-30,3000.0,4000.0,3100.0,3200.0,3300.0\n"
+            "date,tdc_base_bank_only_ru_flow,tdc_base_broad_depository_np_cu_ru_flow,tdc_domestic_bank_only_ru_flow,tdc_no_remit_bank_only,tdc_credit_union_aggregate_sensitivity,tdc_tier2_interest_corrected_bank_only_ru_flow,tdc_tier3_fiscal_corrected_bank_only_ru_flow,tdc_tier3_fiscal_corrected_broad_depository_np_cu_ru_flow\n"
+            "2000-03-31,1000.0,2000.0,1100.0,1200.0,1300.0,1400.0,1500.0,1600.0\n"
+            "2000-06-30,3000.0,4000.0,3100.0,3200.0,3300.0,3400.0,3500.0,3600.0\n"
         ),
         encoding="utf-8",
     )
@@ -510,6 +1017,9 @@ def test_load_canonical_tdc_series_csv_accepts_tdcest_export(tmp_path: Path) -> 
     assert frame["tdc_domestic_bank_only_qoq"].tolist() == [1.1, 3.1]
     assert frame["tdc_no_remit_bank_only_qoq"].tolist() == [1.2, 3.2]
     assert frame["tdc_credit_union_sensitive_qoq"].tolist() == [1.3, 3.3]
+    assert frame["tdc_tier2_bank_only_qoq"].tolist() == [1.4, 3.4]
+    assert frame["tdc_tier3_bank_only_qoq"].tolist() == [1.5, 3.5]
+    assert frame["tdc_tier3_broad_depository_qoq"].tolist() == [1.6, 3.6]
 
 
 def test_load_canonical_tdc_series_csv_backfills_optional_variants_when_absent(tmp_path: Path) -> None:
@@ -528,6 +1038,55 @@ def test_load_canonical_tdc_series_csv_backfills_optional_variants_when_absent(t
     assert frame["tdc_domestic_bank_only_qoq"].isna().all()
     assert frame["tdc_no_remit_bank_only_qoq"].isna().all()
     assert frame["tdc_credit_union_sensitive_qoq"].isna().all()
+    assert frame["tdc_tier2_bank_only_qoq"].isna().all()
+    assert frame["tdc_tier3_bank_only_qoq"].isna().all()
+    assert frame["tdc_tier3_broad_depository_qoq"].isna().all()
+
+
+def test_load_tdcest_downstream_series_csv_extracts_overlay_and_mrv(tmp_path: Path) -> None:
+    path = tmp_path / "tdc_downstream_deposit_effect_series_panel.csv"
+    path.write_text(
+        (
+            "date,series_key,value_millions\n"
+            "2024-12-31,tdc_tier3_bank_only_plus_historical_bank_receipt_candidate,2000.0\n"
+            "2025-03-31,row_mrv_primary_nondefault_pilot_series,500.0\n"
+        ),
+        encoding="utf-8",
+    )
+    frame = build_panel._load_tdcest_downstream_series_csv(path)
+    assert frame is not None
+    assert frame["quarter"].tolist() == ["2024Q4", "2025Q1"]
+    assert float(frame.loc[frame["quarter"] == "2024Q4", "tdc_bank_receipt_historical_overlay_qoq"].iloc[0]) == 2.0
+    assert pd.isna(frame.loc[frame["quarter"] == "2025Q1", "tdc_bank_receipt_historical_overlay_qoq"].iloc[0])
+    assert pd.isna(frame.loc[frame["quarter"] == "2024Q4", "tdc_row_mrv_nondefault_pilot_qoq"].iloc[0])
+    assert float(frame.loc[frame["quarter"] == "2025Q1", "tdc_row_mrv_nondefault_pilot_qoq"].iloc[0]) == 0.5
+
+
+def test_merge_tdcest_downstream_overlay_fills_placeholder_columns() -> None:
+    frame = pd.DataFrame(
+        {
+            "quarter": ["2024Q4", "2025Q1"],
+            "tdc_bank_only_qoq": [1.0, 2.0],
+            "tdc_bank_receipt_historical_overlay_qoq": [pd.NA, pd.NA],
+            "tdc_row_mrv_nondefault_pilot_qoq": [pd.NA, pd.NA],
+        }
+    )
+    supplement = pd.DataFrame(
+        {
+            "quarter": ["2024Q4", "2025Q1"],
+            "tdc_bank_receipt_historical_overlay_qoq": [103.07105627851948, pd.NA],
+            "tdc_row_mrv_nondefault_pilot_qoq": [0.6210987081222047, 0.6680884373253256],
+        }
+    )
+
+    out = build_panel._merge_tdcest_downstream_overlay(frame, supplement)
+
+    row_2024_q4 = out.loc[out["quarter"] == "2024Q4"].iloc[0]
+    row_2025_q1 = out.loc[out["quarter"] == "2025Q1"].iloc[0]
+    assert abs(float(row_2024_q4["tdc_bank_receipt_historical_overlay_qoq"]) - 103.07105627851948) < 1e-12
+    assert pd.isna(row_2025_q1["tdc_bank_receipt_historical_overlay_qoq"])
+    assert abs(float(row_2024_q4["tdc_row_mrv_nondefault_pilot_qoq"]) - 0.6210987081222047) < 1e-12
+    assert abs(float(row_2025_q1["tdc_row_mrv_nondefault_pilot_qoq"]) - 0.6680884373253256) < 1e-12
 
 
 def test_build_public_quarterly_panel_from_offline_raw_fixture(tmp_path: Path, monkeypatch) -> None:
@@ -538,7 +1097,7 @@ def test_build_public_quarterly_panel_from_offline_raw_fixture(tmp_path: Path, m
 
     assert result.panel_path.exists()
     manifest = json.loads(result.raw_download_manifest_path.read_text(encoding="utf-8"))
-    assert len(manifest["runs"]) == 31
+    assert len(manifest["runs"]) == 58
     assert all(entry["params"]["mode"] == "raw_fixture" for entry in manifest["runs"])
 
 
@@ -554,8 +1113,12 @@ def test_read_z1_levels_normalizes_live_multitable_zip_layout(tmp_path: Path) ->
     assert frame["domestic_nonfinancial_mmf_level"].notna().all()
     assert frame["domestic_nonfinancial_repo_level"].notna().all()
     assert frame["checkable_deposits_bank_level"].notna().all()
+    assert frame["checkable_deposits_foreign_offices_level"].notna().all()
+    assert frame["checkable_deposits_affiliated_areas_level"].notna().all()
     assert frame["interbank_transactions_bank_level"].notna().all()
     assert frame["time_savings_deposits_bank_level"].notna().all()
+    assert frame["time_savings_deposits_foreign_offices_level"].notna().all()
+    assert frame["time_savings_deposits_affiliated_areas_level"].notna().all()
     assert frame["checkable_federal_govt_bank_level"].notna().all()
     assert frame["checkable_state_local_bank_level"].notna().all()
     assert frame["checkable_rest_of_world_bank_level"].notna().all()

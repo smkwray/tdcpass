@@ -1,0 +1,335 @@
+{
+  "status": "available",
+  "headline_question": "What does the broad DI-loans-n.e.c. bucket mean once it is treated as a bridge problem rather than a headline strict component?",
+  "estimation_path": {
+    "summary_artifact": "strict_di_bucket_bridge_summary.json",
+    "baseline_spec": "identity_baseline",
+    "comparison_spec": "unexpected_tdc_core_deposit_proximate_bank_only"
+  },
+  "bridge_definitions": {
+    "di_asset": "strict_loan_di_loans_nec_qoq",
+    "private_borrower_bridge": "strict_di_loans_nec_private_domestic_borrower_qoq",
+    "noncore_system_bridge": "strict_di_loans_nec_noncore_system_borrower_qoq",
+    "systemwide_borrower_total": "strict_di_loans_nec_systemwide_borrower_total_qoq",
+    "bridge_residual_formula": "strict_loan_di_loans_nec_qoq - strict_di_loans_nec_systemwide_borrower_total_qoq"
+  },
+  "recommendation": {
+    "status": "bridge_surface_first",
+    "keep_di_bucket_release_role": "diagnostic_only",
+    "next_branch": "build_narrow_private_borrower_bridge_surface",
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "standard_secondary_comparison": "strict_loan_core_plus_private_borrower_qoq"
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline": {
+        "core_residual_response": {
+          "beta": -81.17833439216739,
+          "se": 20.0820892829219,
+          "lower95": -120.5392293866943,
+          "upper95": -41.81743939764046,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "di_asset_response": {
+          "beta": -0.26454114113574967,
+          "se": 9.534274569487632,
+          "lower95": -18.951719297331508,
+          "upper95": 18.422637015060012,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "private_borrower_bridge_response": {
+          "beta": 1.8116428704396705,
+          "se": 11.41477840511276,
+          "lower95": -20.561322803581337,
+          "upper95": 24.184608544460676,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "noncore_system_bridge_response": {
+          "beta": -1.331585746843807,
+          "se": 5.177131161147108,
+          "lower95": -11.478762822692138,
+          "upper95": 8.815591329004524,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "systemwide_liability_total_response": {
+          "beta": 1.4082818809715363,
+          "se": 14.485908928975322,
+          "lower95": -26.984099619820093,
+          "upper95": 29.800663381763165,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "systemwide_borrower_total_response": {
+          "beta": 1.4082818809715505,
+          "se": 14.4859089289753,
+          "lower95": -26.98409961982004,
+          "upper95": 29.80066338176314,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "systemwide_borrower_gap_response": {
+          "beta": -5.790705071028689e-17,
+          "se": 5.977988998868099e-16,
+          "lower95": -1.2295928944884344e-15,
+          "upper95": 1.1137787930678605e-15,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "other_advances_response": {
+          "beta": 0.21516102692308578,
+          "se": 0.1339037061144795,
+          "lower95": -0.04729023706129401,
+          "upper95": 0.4776122909074656,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "bridge_residual_beta": -1.6728230221073002,
+        "private_borrower_share_of_di_asset_beta": -6.848246222352324,
+        "noncore_system_share_of_di_asset_beta": 5.033567713237095,
+        "systemwide_borrower_total_share_of_di_asset_beta": -5.323489098615813,
+        "bridge_residual_share_of_di_asset_beta": 6.323489098615813,
+        "us_chartered_di_asset_share_of_systemwide_liability_beta": -0.18784672636223207,
+        "interpretation": "cross_scope_bridge_residual_large",
+        "borrower_gap_beta": -5.790705071028689e-17,
+        "other_advances_beta": 0.21516102692308578
+      },
+      "core_deposit_proximate": {
+        "core_residual_response": {
+          "beta": -5.501727161440379,
+          "se": 10.900899392583606,
+          "lower95": -26.867489970904245,
+          "upper95": 15.864035648023489,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "di_asset_response": {
+          "beta": 17.578672675488704,
+          "se": 5.630935448906296,
+          "lower95": 6.5420391956323645,
+          "upper95": 28.615306155345046,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "private_borrower_bridge_response": {
+          "beta": 20.823558766114274,
+          "se": 6.85578524163978,
+          "lower95": 7.386219692500305,
+          "upper95": 34.260897839728244,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "noncore_system_bridge_response": {
+          "beta": 4.129044622815961,
+          "se": 3.1038686528724146,
+          "lower95": -1.9545379368139715,
+          "upper95": 10.212627182445893,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "systemwide_liability_total_response": {
+          "beta": 24.290465905370223,
+          "se": 9.04033982830887,
+          "lower95": 6.571399841884837,
+          "upper95": 42.00953196885561,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "systemwide_borrower_total_response": {
+          "beta": 24.290465905370233,
+          "se": 9.04033982830885,
+          "lower95": 6.571399841884887,
+          "upper95": 42.00953196885558,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "systemwide_borrower_gap_response": {
+          "beta": 8.094854782035912e-16,
+          "se": 4.873445058023652e-16,
+          "lower95": -1.4570975316904457e-16,
+          "upper95": 1.764680709576227e-15,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "other_advances_response": {
+          "beta": 0.23927877054343608,
+          "se": 0.09871563646189165,
+          "lower95": 0.04579612307812844,
+          "upper95": 0.4327614180087437,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "bridge_residual_beta": -6.711793229881529,
+        "private_borrower_share_of_di_asset_beta": 1.1845922129917217,
+        "noncore_system_share_of_di_asset_beta": 0.23488944239649023,
+        "systemwide_borrower_total_share_of_di_asset_beta": 1.381814563237206,
+        "bridge_residual_share_of_di_asset_beta": -0.38181456323720614,
+        "us_chartered_di_asset_share_of_systemwide_liability_beta": 0.7236861056502975,
+        "interpretation": "private_borrower_bridge_dominant",
+        "borrower_gap_beta": 8.094854782035912e-16,
+        "other_advances_beta": 0.23927877054343608
+      }
+    },
+    "h4": {
+      "baseline": {
+        "core_residual_response": {
+          "beta": -100.99420217322485,
+          "se": 48.95277771700572,
+          "lower95": -196.94164649855605,
+          "upper95": -5.04675784789363,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "di_asset_response": {
+          "beta": -9.39031488156056,
+          "se": 10.03485908443932,
+          "lower95": -29.058638687061627,
+          "upper95": 10.278008923940508,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "private_borrower_bridge_response": {
+          "beta": -13.088924455680957,
+          "se": 11.362875676779849,
+          "lower95": -35.36016078216946,
+          "upper95": 9.182311870807546,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "noncore_system_bridge_response": {
+          "beta": -6.947588427267233,
+          "se": 10.319162967296444,
+          "lower95": -27.173147843168266,
+          "upper95": 13.277970988633799,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "systemwide_liability_total_response": {
+          "beta": -12.334859341667183,
+          "se": 15.10101531401085,
+          "lower95": -41.93284935712845,
+          "upper95": 17.26313067379408,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "systemwide_borrower_total_response": {
+          "beta": -12.334859341667062,
+          "se": 15.101015314010965,
+          "lower95": -41.93284935712855,
+          "upper95": 17.26313067379443,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "systemwide_borrower_gap_response": {
+          "beta": 7.029417539450013e-16,
+          "se": 2.0656273437769486e-15,
+          "lower95": -3.345687839857818e-15,
+          "upper95": 4.75157134774782e-15,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "other_advances_response": {
+          "beta": 0.11900051200720675,
+          "se": 0.21530177316259574,
+          "lower95": -0.3029909633914809,
+          "upper95": 0.5409919874058944,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "bridge_residual_beta": 2.9445444601065027,
+        "private_borrower_share_of_di_asset_beta": 1.3938749254706282,
+        "noncore_system_share_of_di_asset_beta": 0.7398674607717335,
+        "systemwide_borrower_total_share_of_di_asset_beta": 1.313572494346127,
+        "bridge_residual_share_of_di_asset_beta": -0.3135724943461272,
+        "us_chartered_di_asset_share_of_systemwide_liability_beta": 0.7612826884729893,
+        "interpretation": "private_borrower_bridge_dominant",
+        "borrower_gap_beta": 7.029417539450013e-16,
+        "other_advances_beta": 0.11900051200720675
+      },
+      "core_deposit_proximate": {
+        "core_residual_response": {
+          "beta": -43.435870973152745,
+          "se": 19.209068844634533,
+          "lower95": -81.08564590863642,
+          "upper95": -5.786096037669061,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "di_asset_response": {
+          "beta": 11.617987884435136,
+          "se": 6.386846719819363,
+          "lower95": -0.9002316864108142,
+          "upper95": 24.136207455281088,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "private_borrower_bridge_response": {
+          "beta": 7.684600638857804,
+          "se": 6.378977906140083,
+          "lower95": -4.818196057176758,
+          "upper95": 20.187397334892367,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "noncore_system_bridge_response": {
+          "beta": -2.4571428238957465,
+          "se": 4.803102544173357,
+          "lower95": -11.871223810475527,
+          "upper95": 6.956938162684033,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "systemwide_liability_total_response": {
+          "beta": 6.712737850643952,
+          "se": 10.186512127534195,
+          "lower95": -13.25282591932307,
+          "upper95": 26.678301620610974,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "systemwide_borrower_total_response": {
+          "beta": 6.712737850643956,
+          "se": 10.186512127534197,
+          "lower95": -13.25282591932307,
+          "upper95": 26.67830162061098,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "systemwide_borrower_gap_response": {
+          "beta": -1.211368814412496e-15,
+          "se": 1.6902313955686867e-15,
+          "lower95": -4.5242223497271215e-15,
+          "upper95": 2.10148472090213e-15,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "other_advances_response": {
+          "beta": 0.004172751364534738,
+          "se": 0.11013504821605344,
+          "lower95": -0.21169194313893,
+          "upper95": 0.22003744586799948,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "bridge_residual_beta": 4.90525003379118,
+        "private_borrower_share_of_di_asset_beta": 0.6614398909085648,
+        "noncore_system_share_of_di_asset_beta": -0.21149469670110713,
+        "systemwide_borrower_total_share_of_di_asset_beta": 0.5777883328349096,
+        "bridge_residual_share_of_di_asset_beta": 0.4222116671650904,
+        "us_chartered_di_asset_share_of_systemwide_liability_beta": 1.7307376130174104,
+        "interpretation": "private_borrower_bridge_dominant",
+        "borrower_gap_beta": -1.211368814412496e-15,
+        "other_advances_beta": 0.004172751364534738
+      }
+    }
+  },
+  "takeaways": [
+    "This surface converts the broad DI-loans-n.e.c. diagnostic into an explicit bridge problem instead of a vague subtotal.",
+    "The bridge rows remain mixed-scope by construction: the DI asset row is U.S.-chartered source-side, while the borrower rows are systemwide F.215 counterparts.",
+    "At h0 under the core-deposit-proximate shock, the DI bridge is now explicit: DI asset \u2248 17.58, private-borrower bridge \u2248 20.82, noncore/system bridge \u2248 4.13, bridge residual \u2248 -6.71.",
+    "The unresolved bridge residual is about -0.38 of the signed DI-asset response at h0, while the U.S.-chartered DI asset is about 0.72 of the signed systemwide liability counterpart."
+  ]
+}

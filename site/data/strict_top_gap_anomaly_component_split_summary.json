@@ -1,0 +1,325 @@
+{
+  "status": "available",
+  "headline_question": "What detailed loan, securities, funding, and liquidity/external subcomponents make the main within-bucket anomaly differ from its same-bucket peers?",
+  "estimation_path": {
+    "input_panel": "quarterly_panel_with_strict_components",
+    "comparison_artifact": "strict_top_gap_anomaly_component_split_summary.json",
+    "anomaly_source_artifact": "strict_top_gap_anomaly_summary.json",
+    "top_gap_limit": 5,
+    "anomaly_quarter": "2009Q4"
+  },
+  "anomaly_quarter": {
+    "quarter": "2009Q4",
+    "period_bucket": "post_gfc_early",
+    "baseline_shock": -0.2810596542553419,
+    "toc_row_excluded_shock": -3.4428656402507976,
+    "shock_gap": -3.1618059859954557,
+    "shock_gap_sign": "negative",
+    "abs_shock_gap": 3.1618059859954557,
+    "bundle_qoq": 208.777,
+    "bundle_sign": "positive",
+    "gap_alignment_to_bundle": "opposed",
+    "row_leg_qoq": 127.107,
+    "row_leg_alignment_to_gap": "opposed",
+    "toc_signed_contribution_qoq": 81.67,
+    "toc_leg_alignment_to_gap": "opposed",
+    "directional_driver": "both_legs_oppose_gap",
+    "excluded_other_component_qoq": 73.64099999999998,
+    "strict_identifiable_total_qoq": -68.394,
+    "excluded_strict_gap_qoq": 142.03499999999997,
+    "strict_identifiable_net_after_funding_qoq": 97.46699999999998,
+    "excluded_strict_gap_after_funding_qoq": -23.826000000000008,
+    "foreign_nonts_qoq": 43.228,
+    "tga_qoq": 80.613,
+    "reserves_qoq": 142.356,
+    "residual_strict_pattern": "positive_residual_negative_strict",
+    "strict_loan_source_qoq": -114.68,
+    "strict_non_treasury_securities_qoq": 46.285999999999994,
+    "strict_funding_offset_total_qoq": -165.861
+  },
+  "peer_quarters": [
+    {
+      "quarter": "2020Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 3.810380466186416,
+      "toc_row_excluded_shock": 13.09521127559779,
+      "shock_gap": 9.284830809411375,
+      "shock_gap_sign": "positive",
+      "abs_shock_gap": 9.284830809411375,
+      "bundle_qoq": -367.053,
+      "bundle_sign": "negative",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": -255.649,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": -111.404,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap",
+      "excluded_other_component_qoq": 171.72799999999904,
+      "strict_identifiable_total_qoq": 515.764,
+      "excluded_strict_gap_qoq": -344.03600000000097,
+      "strict_identifiable_net_after_funding_qoq": 338.824,
+      "excluded_strict_gap_after_funding_qoq": -167.09600000000097,
+      "foreign_nonts_qoq": 559.303,
+      "tga_qoq": 22.432,
+      "reserves_qoq": 535.044,
+      "residual_strict_pattern": "positive_residual_positive_strict",
+      "strict_loan_source_qoq": 408.623,
+      "strict_non_treasury_securities_qoq": 107.141,
+      "strict_funding_offset_total_qoq": 176.94
+    },
+    {
+      "quarter": "2021Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 5.58228501055368,
+      "toc_row_excluded_shock": 0.6017768725534413,
+      "shock_gap": -4.980508138000239,
+      "shock_gap_sign": "negative",
+      "abs_shock_gap": 4.980508138000239,
+      "bundle_qoq": 827.2830000000001,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": 220.665,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": 606.618,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap",
+      "excluded_other_component_qoq": 255.70499999999703,
+      "strict_identifiable_total_qoq": 313.971,
+      "excluded_strict_gap_qoq": -58.266000000002975,
+      "strict_identifiable_net_after_funding_qoq": 339.497,
+      "excluded_strict_gap_after_funding_qoq": -83.79200000000299,
+      "foreign_nonts_qoq": 30.291,
+      "tga_qoq": -565.328,
+      "reserves_qoq": 754.006,
+      "residual_strict_pattern": "positive_residual_positive_strict",
+      "strict_loan_source_qoq": -60.055,
+      "strict_non_treasury_securities_qoq": 374.026,
+      "strict_funding_offset_total_qoq": -25.526
+    }
+  ],
+  "peer_bucket_weight": 14.265338947411614,
+  "loan_subcomponent_deltas": [
+    {
+      "metric": "strict_loan_di_loans_nec_qoq",
+      "label": "DI loans n.e.c.",
+      "anomaly_value": -58.809,
+      "weighted_peer_mean": 293.68493987372295,
+      "anomaly_minus_peer_delta": -352.493939873723,
+      "abs_delta": 352.493939873723
+    },
+    {
+      "metric": "strict_loan_mortgages_qoq",
+      "label": "Mortgages",
+      "anomaly_value": -51.333,
+      "weighted_peer_mean": 8.978969443251009,
+      "anomaly_minus_peer_delta": -60.31196944325101,
+      "abs_delta": 60.31196944325101
+    },
+    {
+      "metric": "strict_loan_consumer_credit_qoq",
+      "label": "Consumer credit",
+      "anomaly_value": -4.538,
+      "weighted_peer_mean": -61.123244240094024,
+      "anomaly_minus_peer_delta": 56.58524424009403,
+      "abs_delta": 56.58524424009403
+    },
+    {
+      "metric": "strict_loan_other_advances_qoq",
+      "label": "Other advances",
+      "anomaly_value": 0.0,
+      "weighted_peer_mean": 3.451130525749829,
+      "anomaly_minus_peer_delta": -3.451130525749829,
+      "abs_delta": 3.451130525749829
+    }
+  ],
+  "securities_subcomponent_deltas": [
+    {
+      "metric": "strict_non_treasury_corporate_foreign_bonds_qoq",
+      "label": "Corporate and foreign bonds",
+      "anomaly_value": -50.394,
+      "weighted_peer_mean": 20.869836733314255,
+      "anomaly_minus_peer_delta": -71.26383673331425,
+      "abs_delta": 71.26383673331425
+    },
+    {
+      "metric": "strict_non_treasury_agency_gse_qoq",
+      "label": "Agency / GSE-backed securities",
+      "anomaly_value": 96.722,
+      "weighted_peer_mean": 158.01944354523346,
+      "anomaly_minus_peer_delta": -61.29744354523346,
+      "abs_delta": 61.29744354523346
+    },
+    {
+      "metric": "strict_non_treasury_municipal_qoq",
+      "label": "Municipal securities",
+      "anomaly_value": -0.042,
+      "weighted_peer_mean": 21.430221775297678,
+      "anomaly_minus_peer_delta": -21.47222177529768,
+      "abs_delta": 21.47222177529768
+    }
+  ],
+  "funding_subcomponent_deltas": [
+    {
+      "metric": "strict_funding_fedfunds_repo_qoq",
+      "label": "Fed funds / repo funding",
+      "anomaly_value": -119.731,
+      "weighted_peer_mean": 21.476421056045712,
+      "anomaly_minus_peer_delta": -141.20742105604572,
+      "abs_delta": 141.20742105604572
+    },
+    {
+      "metric": "strict_funding_fhlb_advances_qoq",
+      "label": "FHLB advances",
+      "anomaly_value": -41.755,
+      "weighted_peer_mean": 76.13807354139023,
+      "anomaly_minus_peer_delta": -117.89307354139024,
+      "abs_delta": 117.89307354139024
+    },
+    {
+      "metric": "strict_funding_debt_securities_qoq",
+      "label": "Debt securities funding",
+      "anomaly_value": -4.375,
+      "weighted_peer_mean": 8.637836193601911,
+      "anomaly_minus_peer_delta": -13.012836193601911,
+      "abs_delta": 13.012836193601911
+    }
+  ],
+  "liquidity_external_deltas": [
+    {
+      "metric": "reserves_qoq",
+      "label": "Reserves",
+      "anomaly_value": 142.356,
+      "weighted_peer_mean": 611.4909759136485,
+      "anomaly_minus_peer_delta": -469.13497591364853,
+      "abs_delta": 469.13497591364853
+    },
+    {
+      "metric": "foreign_nonts_qoq",
+      "label": "Foreign NONTS",
+      "anomaly_value": 43.228,
+      "weighted_peer_mean": 374.6071732262628,
+      "anomaly_minus_peer_delta": -331.37917322626276,
+      "abs_delta": 331.37917322626276
+    },
+    {
+      "metric": "tga_qoq",
+      "label": "TGA",
+      "anomaly_value": 80.613,
+      "weighted_peer_mean": -182.77472337211972,
+      "anomaly_minus_peer_delta": 263.3877233721197,
+      "abs_delta": 263.3877233721197
+    }
+  ],
+  "ranked_component_deltas": [
+    {
+      "metric": "reserves_qoq",
+      "label": "Reserves",
+      "anomaly_value": 142.356,
+      "weighted_peer_mean": 611.4909759136485,
+      "anomaly_minus_peer_delta": -469.13497591364853,
+      "abs_delta": 469.13497591364853
+    },
+    {
+      "metric": "strict_loan_di_loans_nec_qoq",
+      "label": "DI loans n.e.c.",
+      "anomaly_value": -58.809,
+      "weighted_peer_mean": 293.68493987372295,
+      "anomaly_minus_peer_delta": -352.493939873723,
+      "abs_delta": 352.493939873723
+    },
+    {
+      "metric": "foreign_nonts_qoq",
+      "label": "Foreign NONTS",
+      "anomaly_value": 43.228,
+      "weighted_peer_mean": 374.6071732262628,
+      "anomaly_minus_peer_delta": -331.37917322626276,
+      "abs_delta": 331.37917322626276
+    },
+    {
+      "metric": "tga_qoq",
+      "label": "TGA",
+      "anomaly_value": 80.613,
+      "weighted_peer_mean": -182.77472337211972,
+      "anomaly_minus_peer_delta": 263.3877233721197,
+      "abs_delta": 263.3877233721197
+    },
+    {
+      "metric": "strict_funding_fedfunds_repo_qoq",
+      "label": "Fed funds / repo funding",
+      "anomaly_value": -119.731,
+      "weighted_peer_mean": 21.476421056045712,
+      "anomaly_minus_peer_delta": -141.20742105604572,
+      "abs_delta": 141.20742105604572
+    },
+    {
+      "metric": "strict_funding_fhlb_advances_qoq",
+      "label": "FHLB advances",
+      "anomaly_value": -41.755,
+      "weighted_peer_mean": 76.13807354139023,
+      "anomaly_minus_peer_delta": -117.89307354139024,
+      "abs_delta": 117.89307354139024
+    },
+    {
+      "metric": "strict_non_treasury_corporate_foreign_bonds_qoq",
+      "label": "Corporate and foreign bonds",
+      "anomaly_value": -50.394,
+      "weighted_peer_mean": 20.869836733314255,
+      "anomaly_minus_peer_delta": -71.26383673331425,
+      "abs_delta": 71.26383673331425
+    },
+    {
+      "metric": "strict_non_treasury_agency_gse_qoq",
+      "label": "Agency / GSE-backed securities",
+      "anomaly_value": 96.722,
+      "weighted_peer_mean": 158.01944354523346,
+      "anomaly_minus_peer_delta": -61.29744354523346,
+      "abs_delta": 61.29744354523346
+    },
+    {
+      "metric": "strict_loan_mortgages_qoq",
+      "label": "Mortgages",
+      "anomaly_value": -51.333,
+      "weighted_peer_mean": 8.978969443251009,
+      "anomaly_minus_peer_delta": -60.31196944325101,
+      "abs_delta": 60.31196944325101
+    },
+    {
+      "metric": "strict_loan_consumer_credit_qoq",
+      "label": "Consumer credit",
+      "anomaly_value": -4.538,
+      "weighted_peer_mean": -61.123244240094024,
+      "anomaly_minus_peer_delta": 56.58524424009403,
+      "abs_delta": 56.58524424009403
+    },
+    {
+      "metric": "strict_non_treasury_municipal_qoq",
+      "label": "Municipal securities",
+      "anomaly_value": -0.042,
+      "weighted_peer_mean": 21.430221775297678,
+      "anomaly_minus_peer_delta": -21.47222177529768,
+      "abs_delta": 21.47222177529768
+    },
+    {
+      "metric": "strict_funding_debt_securities_qoq",
+      "label": "Debt securities funding",
+      "anomaly_value": -4.375,
+      "weighted_peer_mean": 8.637836193601911,
+      "anomaly_minus_peer_delta": -13.012836193601911,
+      "abs_delta": 13.012836193601911
+    },
+    {
+      "metric": "strict_loan_other_advances_qoq",
+      "label": "Other advances",
+      "anomaly_value": 0.0,
+      "weighted_peer_mean": 3.451130525749829,
+      "anomaly_minus_peer_delta": -3.451130525749829,
+      "abs_delta": 3.451130525749829
+    }
+  ],
+  "interpretation": "anomaly_is_di_loans_nec_contraction_with_weaker_liquidity_and_external_support",
+  "takeaways": [
+    "Within the anomaly quarter `2009Q4`, the largest loan-subcomponent gap versus same-bucket peers is `DI loans n.e.c.` at \u2248 -352.49.",
+    "The main liquidity/external comparison shows `Reserves` at \u2248 -469.13; TGA differs by \u2248 263.39.",
+    "Across the detailed anomaly blocks, the largest absolute anomaly-minus-peer gap is `reserves_qoq` at \u2248 -469.13."
+  ]
+}

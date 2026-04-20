@@ -17,6 +17,96 @@ series:
   preferred_source: frb_z1_or_sibling_tdcest
   quality_tier: tier_2_constructed
   notes: Sensitivity only.
+- key: tdc_tier2_bank_only_qoq
+  display_name: TDC, Tier 2 interest-corrected bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Broad-object comparison only; imported from the tdcest Tier 2 corrected ladder.
+- key: tdc_tier3_bank_only_qoq
+  display_name: TDC, Tier 3 fiscal-corrected bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Broad-object comparison only; imported from the tdcest Tier 3 corrected ladder.
+- key: tdc_tier3_broad_depository_qoq
+  display_name: TDC, Tier 3 fiscal-corrected broad depository, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Broad-object perimeter comparison only; imported from the tdcest Tier 3 corrected ladder.
+- key: tdc_domestic_bank_only_qoq
+  display_name: TDC, bank-only excluding rest of world, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_or_sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Upstream no-ROW sensitivity; removes the rest-of-world Treasury-acquisition term only.
+- key: tdc_us_chartered_bank_only_qoq
+  display_name: TDC, U.S.-chartered bank-leg-matched, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_h41_via_fred
+  quality_tier: tier_2_constructed
+  notes: Local matched-bank-leg sensitivity built as Fed Treasury transactions plus U.S.-chartered bank Treasury transactions minus Treasury operating cash plus positive Fed remittances.
+- key: tdc_no_foreign_bank_sectors_qoq
+  display_name: TDC, excluding foreign bank sectors but keeping ROW, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_h41_via_fred
+  quality_tier: tier_2_constructed
+  notes: Local sensitivity built as Fed Treasury transactions plus U.S.-chartered bank Treasury transactions plus rest-of-world Treasury transactions minus Treasury operating cash plus positive Fed remittances.
+- key: tdc_no_toc_bank_only_qoq
+  display_name: TDC, bank-only excluding Treasury operating cash, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_h41_via_fred
+  quality_tier: tier_2_constructed
+  notes: Local sensitivity built as the full bank-only public component reconstruction without subtracting Treasury operating cash.
+- key: tdc_no_toc_no_row_bank_only_qoq
+  display_name: TDC, bank-only excluding Treasury operating cash and ROW, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_h41_via_fred
+  quality_tier: tier_2_constructed
+  notes: Local sensitivity built as the bank-only public component reconstruction without subtracting Treasury operating cash and without the rest-of-world Treasury-acquisition term.
+- key: tdc_core_deposit_proximate_bank_only_qoq
+  display_name: TDC core, deposit-proximate bank-only quarterly change
+  role: treatment_interpretation
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Explicit split-treatment core currently defined as the bank-only public component reconstruction without Treasury operating cash and without the rest-of-world Treasury-acquisition term.
+- key: tdc_toc_row_support_bundle_qoq
+  display_name: TDC TOC/ROW support bundle, quarterly change
+  role: treatment_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Explicit support-bundle remainder defined as headline bank-only TDC minus the deposit-proximate core; algebraically equal to ROW Treasury transactions minus Treasury operating cash.
 - key: total_deposits_bank_qoq
   display_name: Total bank deposits, matched quarterly change
   role: outcome
@@ -26,6 +116,24 @@ series:
   preferred_source: frb_h8_or_derived_match
   quality_tier: tier_1_direct
   notes: Headline outcome.
+- key: deposits_only_bank_qoq
+  display_name: Deposits only, excluding interbank liabilities, quarterly change
+  role: outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Defined as checkable deposits plus time and savings deposits; excludes interbank-transactions liabilities.
+- key: broad_bank_deposits_qoq
+  display_name: Broad-bank deposits across matched bank sectors, quarterly change
+  role: outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Defined as checkable plus time and savings deposit liabilities for U.S.-chartered banks, foreign banking offices in the U.S., and banks in U.S.-affiliated areas.
 - key: checkable_deposits_bank_qoq
   display_name: Bank checkable deposits, quarterly change
   role: outcome_component
@@ -35,6 +143,24 @@ series:
   preferred_source: frb_z1
   quality_tier: tier_1_direct
   notes: Direct Z.1 liability component of total bank deposits.
+- key: checkable_deposits_foreign_offices_qoq
+  display_name: Foreign banking offices checkable deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 checkable-deposit liability component for foreign banking offices in the U.S.
+- key: checkable_deposits_affiliated_areas_qoq
+  display_name: Banks in U.S.-affiliated areas checkable deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 checkable-deposit liability component for banks in U.S.-affiliated areas.
 - key: interbank_transactions_bank_qoq
   display_name: Bank interbank transactions liabilities, quarterly change
   role: outcome_component
@@ -53,6 +179,24 @@ series:
   preferred_source: frb_z1
   quality_tier: tier_1_direct
   notes: Direct Z.1 liability component of total bank deposits.
+- key: time_savings_deposits_foreign_offices_qoq
+  display_name: Foreign banking offices time and savings deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 time-and-savings liability component for foreign banking offices in the U.S.
+- key: time_savings_deposits_affiliated_areas_qoq
+  display_name: Banks in U.S.-affiliated areas time and savings deposits, quarterly change
+  role: outcome_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1
+  quality_tier: tier_1_direct
+  notes: Z.1 time-and-savings liability component for banks in U.S.-affiliated areas.
 - key: checkable_federal_govt_bank_qoq
   display_name: Bank checkable federal government deposits, quarterly change
   role: outcome_component
@@ -143,6 +287,474 @@ series:
   preferred_source: derived
   quality_tier: tier_2_constructed
   notes: Defined as total deposits minus TDC.
+- key: other_component_domestic_bank_only_qoq
+  display_name: Non-TDC component under no-ROW TDC sensitivity, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as total deposits minus the upstream no-ROW TDC sensitivity.
+- key: other_component_us_chartered_bank_only_qoq
+  display_name: Non-TDC component under U.S.-chartered TDC sensitivity, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as total deposits minus the local U.S.-chartered bank-leg-matched TDC sensitivity.
+- key: other_component_no_foreign_bank_sectors_qoq
+  display_name: Non-TDC component under no-foreign-bank-sectors TDC sensitivity, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as total deposits minus the local sensitivity that removes foreign banking offices and affiliated-area bank Treasury legs while retaining the rest-of-world term.
+- key: other_component_no_toc_bank_only_qoq
+  display_name: Non-TDC component under no-TOC TDC sensitivity, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as total deposits minus the local sensitivity that keeps the full bank-only public component reconstruction but does not subtract Treasury operating cash.
+- key: other_component_no_toc_no_row_bank_only_qoq
+  display_name: Non-TDC component under no-TOC/no-ROW TDC sensitivity, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as total deposits minus the local sensitivity that omits both Treasury operating cash and the rest-of-world Treasury-acquisition term.
+- key: other_component_core_deposit_proximate_bank_only_qoq
+  display_name: Non-TDC component under deposit-proximate core TDC, quarterly change
+  role: derived_outcome_interpretation
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as total deposits minus the explicit deposit-proximate TDC core; use as a split-treatment interpretation surface rather than a replacement headline residual.
+- key: deposits_only_other_component_qoq
+  display_name: Deposits-only non-TDC component under headline TDC, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as deposits-only outcome minus headline TDC.
+- key: deposits_only_other_component_domestic_bank_only_qoq
+  display_name: Deposits-only non-TDC under no-ROW TDC sensitivity, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as deposits-only outcome minus the upstream no-ROW TDC sensitivity.
+- key: deposits_only_other_component_us_chartered_bank_only_qoq
+  display_name: Deposits-only non-TDC under U.S.-chartered TDC sensitivity, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as deposits-only outcome minus the local U.S.-chartered bank-leg-matched TDC sensitivity.
+- key: broad_bank_other_component_qoq
+  display_name: Broad-bank non-TDC component under headline TDC, quarterly change
+  role: derived_outcome_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as broad-bank deposits minus headline bank-only TDC.
+- key: accounting_deposit_substitution_qoq
+  display_name: Accounting deposit-substitution component, quarterly change
+  role: imported_accounting_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: imported_accounting_bundle
+  quality_tier: tier_3_curated
+  notes: Imported from the accounting reconstruction bundle used to cross-check the non-TDC residual; this is not a direct public-source measurement lane.
+- key: accounting_bank_balance_sheet_qoq
+  display_name: Accounting bank balance-sheet component, quarterly change
+  role: imported_accounting_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: imported_accounting_bundle
+  quality_tier: tier_3_curated
+  notes: Imported bank balance-sheet component from the accounting reconstruction bundle; interpret as curated reconstruction rather than direct public-source measurement.
+- key: accounting_public_liquidity_qoq
+  display_name: Accounting public-liquidity component, quarterly change
+  role: imported_accounting_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: imported_accounting_bundle
+  quality_tier: tier_3_curated
+  notes: Imported public-liquidity component from the accounting reconstruction bundle for residual-alignment checks.
+- key: accounting_external_flow_qoq
+  display_name: Accounting external-flow component, quarterly change
+  role: imported_accounting_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: imported_accounting_bundle
+  quality_tier: tier_3_curated
+  notes: Imported external-flow component from the accounting reconstruction bundle for residual-alignment checks.
+- key: accounting_identity_total_qoq
+  display_name: Accounting identity reconstructed total, quarterly change
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_3_curated
+  notes: Sum of the imported accounting component outcomes; used as a secondary reconstruction lane against the non-TDC residual.
+- key: accounting_identity_gap_qoq
+  display_name: Accounting identity closure gap, quarterly change
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_3_curated
+  notes: Defined as other_component_qoq minus accounting_identity_total_qoq; measures the closure gap in the imported accounting reconstruction.
+- key: strict_loan_source_qoq
+  display_name: Strict identifiable loan-source lane, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct U.S.-chartered depository-institution loan-asset transactions from the Z.1, accessed via FRED. This remains the broad published loan-source diagnostic, but it is no longer the preferred headline strict direct core because it still embeds the unresolved DI-loans-n.e.c. bucket.
+- key: strict_loan_mortgages_qoq
+  display_name: Strict loan-source mortgages component, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Z.1 transaction series for U.S.-chartered depository-institution mortgages; published as a direct strict-lane subcomponent.
+- key: strict_loan_consumer_credit_qoq
+  display_name: Strict loan-source consumer-credit component, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Z.1 transaction series for U.S.-chartered depository-institution consumer credit; loaded through a code-transition-aware FRED alias fallback.
+- key: strict_loan_di_loans_nec_qoq
+  display_name: Strict loan-source DI loans n.e.c. component, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Broad Z.1 depository-institution loans n.e.c. transaction bucket; high-quality direct source-side measurement but still broad in borrower composition.
+- key: strict_di_loans_nec_households_nonprofits_qoq
+  display_name: Strict DI loans n.e.c. households and nonprofits borrower counterpart, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Systemwide borrower-side F.215 liability row for the households and nonprofit share of the broad DI-loans-n.e.c. bucket; use only as a cross-scope counterpart diagnostic, not as a decomposition of the U.S.-chartered asset aggregate.
+- key: strict_di_loans_nec_nonfinancial_corporate_qoq
+  display_name: Strict DI loans n.e.c. nonfinancial corporate borrower counterpart, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Systemwide borrower-side F.215 liability row for the nonfinancial corporate share of the broad DI-loans-n.e.c. bucket; not a same-scope decomposition of U.S.-chartered bank assets.
+- key: strict_di_loans_nec_nonfinancial_noncorporate_qoq
+  display_name: Strict DI loans n.e.c. nonfinancial noncorporate borrower counterpart, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Systemwide borrower-side F.215 liability row for the nonfinancial noncorporate share of the broad DI-loans-n.e.c. bucket; use as a counterpart diagnostic only.
+- key: strict_di_loans_nec_state_local_qoq
+  display_name: Strict DI loans n.e.c. state and local borrower counterpart, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Systemwide borrower-side F.215 liability row for the state and local government share of the broad DI-loans-n.e.c. bucket; not a same-scope breakdown of the U.S.-chartered lender row.
+- key: strict_di_loans_nec_domestic_financial_qoq
+  display_name: Strict DI loans n.e.c. domestic financial borrower counterpart, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Systemwide borrower-side F.215 liability row for the domestic financial-sector share of the broad DI-loans-n.e.c. bucket; use only as a counterpart diagnostic.
+- key: strict_di_loans_nec_rest_of_world_qoq
+  display_name: Strict DI loans n.e.c. rest of world borrower counterpart, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Systemwide borrower-side F.215 liability row for the rest-of-world share of the broad DI-loans-n.e.c. bucket; use only as a counterpart diagnostic.
+- key: strict_di_loans_nec_systemwide_liability_total_qoq
+  display_name: Strict DI loans n.e.c. systemwide liability total, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Systemwide F.215 liability total for DI loans n.e.c. Used to anchor borrower-side counterpart diagnostics, not as a same-scope substitute for the U.S.-chartered lender asset row.
+- key: strict_di_loans_nec_systemwide_borrower_total_qoq
+  display_name: Strict DI loans n.e.c. systemwide borrower diagnostic total, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Sum of the currently materialized systemwide borrower-side DI-loans-n.e.c. liability rows.
+- key: strict_di_loans_nec_systemwide_borrower_gap_qoq
+  display_name: Strict DI loans n.e.c. systemwide borrower diagnostic gap, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Difference between the direct systemwide DI-loans-n.e.c. liability total and the currently materialized borrower-side liability-row sum.
+- key: strict_di_loans_nec_private_domestic_borrower_qoq
+  display_name: Strict DI loans n.e.c. private domestic borrower counterpart subtotal, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Sum of the currently materialized households/nonprofits, nonfinancial corporate, and nonfinancial noncorporate borrower-side DI-loans-n.e.c. liability rows; use as a cross-scope private-borrower diagnostic, not a same-scope lender decomposition.
+- key: strict_di_loans_nec_noncore_system_borrower_qoq
+  display_name: Strict DI loans n.e.c. noncore system borrower counterpart subtotal, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Sum of state/local, domestic financial, rest-of-world, and borrower-gap DI-loans-n.e.c. counterpart rows; use as a noncore/system diagnostic rather than a headline direct-count core.
+- key: strict_loan_other_advances_qoq
+  display_name: Strict loan-source other loans and advances component, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 transaction series for the residual other-loans-and-advances loan bucket inside the official loans aggregate.
+- key: strict_loan_core_min_qoq
+  display_name: Strict redesigned loan core, direct minimum, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Direct-only redesigned strict loan core defined as mortgages plus consumer credit; excludes the broad DI-loans-n.e.c. bucket until that bucket is subdivided more defensibly.
+- key: strict_loan_core_plus_private_borrower_qoq
+  display_name: Strict redesigned loan core with private-borrower add-on, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Diagnostic redesigned core defined as the direct-only minimum core plus the private-domestic borrower counterpart subtotal from DI loans n.e.c.; useful as a cross-scope diagnostic, not a same-scope headline core.
+- key: strict_loan_core_plus_nonfinancial_corporate_qoq
+  display_name: Strict redesigned loan core with nonfinancial-corporate add-on, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Narrower diagnostic redesigned core defined as the direct-only minimum core plus the nonfinancial-corporate borrower counterpart slice from DI loans n.e.c.; use as a tighter secondary comparison candidate than the broader private-borrower bridge.
+- key: strict_loan_noncore_system_qoq
+  display_name: Strict noncore/system loan diagnostic subtotal, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Diagnostic subtotal defined as the noncore/system borrower counterpart subtotal for DI loans n.e.c. plus other loans and advances; use to separate system/noncore loan content from the redesigned strict core.
+- key: broad_strict_loan_foreign_offices_qoq
+  display_name: Broad strict foreign-banking-offices loan source, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Z.1 transaction series for loans held by foreign banking offices in the U.S.; included only in the broad matched-scope strict lane.
+- key: broad_strict_loan_affiliated_areas_qoq
+  display_name: Broad strict affiliated-areas bank loan source, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Z.1 transaction series for loans held by banks in U.S.-affiliated areas; included only in the broad matched-scope strict lane.
+- key: broad_strict_loan_source_qoq
+  display_name: Broad matched-scope strict loan source, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Sum of U.S.-chartered, foreign-banking-office, and affiliated-area bank loan transaction series; the headline strict core for the broad matched-scope system.
+- key: broad_strict_gap_qoq
+  display_name: Broad matched-scope strict gap, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_2_constructed
+  notes: Defined as broad-bank non-TDC component minus the broad matched-scope strict loan source.
+- key: strict_non_treasury_agency_gse_qoq
+  display_name: Strict non-Treasury agency and GSE securities component, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 transaction series for agency- and GSE-backed securities; published as a lower-confidence add-on rather than folded into the headline strict core.
+- key: strict_non_treasury_municipal_qoq
+  display_name: Strict non-Treasury municipal securities component, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 transaction series for municipal securities; kept separate from the headline strict core because counterpart mapping is less clean than the loan lane.
+- key: strict_non_treasury_corporate_foreign_bonds_qoq
+  display_name: Strict non-Treasury corporate and foreign bonds component, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 transaction series for corporate and foreign bonds; published as part of the direct securities add-on, not the strict headline core.
+- key: strict_non_treasury_securities_qoq
+  display_name: Strict direct non-Treasury securities lane, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Sum of the direct non-Treasury securities transaction components; a direct source-side add-on that remains separate from the strict headline loan core.
+- key: strict_identifiable_total_qoq
+  display_name: Strict identifiable direct total, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Direct source-side sum of the current broad loan-source diagnostic and the strict non-Treasury securities add-on. This remains intentionally incomplete and should not be interpreted as a closure-by-construction accounting total or as the same object as the redesigned headline direct core.
+- key: strict_identifiable_gap_qoq
+  display_name: Strict identifiable gap, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Defined as other_component_qoq minus strict_identifiable_total_qoq; this gap is expected to remain nonzero because the strict lane leaves hard-to-measure channels outside the headline direct count.
+- key: strict_funding_fedfunds_repo_qoq
+  display_name: Strict funding fed-funds and repo liabilities, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 transaction series for bank fed-funds and repo liabilities; used only in the strict funding-offset sensitivity surface.
+- key: strict_funding_debt_securities_qoq
+  display_name: Strict funding debt-securities liabilities, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 transaction series for bank debt-securities liabilities; part of the strict funding-offset sensitivity surface.
+- key: strict_funding_fhlb_advances_qoq
+  display_name: Strict funding FHLB advances and Sallie Mae loans, quarterly flow
+  role: strict_identifiable_component
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: frb_z1_transactions_via_fred
+  quality_tier: tier_1_direct
+  notes: Direct Z.1 transaction series for bank FHLB advances and related secured funding; part of the strict funding-offset sensitivity surface.
+- key: strict_funding_offset_total_qoq
+  display_name: Strict funding-offset total, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Sum of the strict transaction-based funding-offset components; a secondary sensitivity rather than a headline strict measure.
+- key: strict_identifiable_net_after_funding_qoq
+  display_name: Strict identifiable total net of funding offsets, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Defined as strict_identifiable_total_qoq minus strict_funding_offset_total_qoq; a netted sensitivity rather than a headline direct-count lane.
+- key: strict_gap_after_funding_qoq
+  display_name: Strict gap after funding offsets, quarterly flow
+  role: derived_outcome
+  frequency: quarterly
+  units: billions_usd
+  status: planned_v1
+  preferred_source: derived
+  quality_tier: tier_1_direct
+  notes: Defined as other_component_qoq minus strict_identifiable_net_after_funding_qoq; shows how much residual remains after the funding-offset sensitivity is applied.
 - key: bank_credit_private_qoq
   display_name: Bank private-credit / non-Treasury proxy, quarterly change
   role: structural_proxy

@@ -1,0 +1,32 @@
+{
+  "status": "available",
+  "headline_question": "Is the best strict direct-core candidate stable across horizons, or only at impact?",
+  "estimation_path": {
+    "summary_artifact": "strict_direct_core_horizon_stability_summary.json",
+    "source_artifacts": [
+      "strict_direct_core_component_summary.json"
+    ]
+  },
+  "horizon_winners": {
+    "h0": "strict_loan_mortgages_qoq",
+    "h4": "strict_loan_core_min_qoq",
+    "h8": "strict_loan_core_min_qoq"
+  },
+  "classification": {
+    "impact_winner": "strict_loan_mortgages_qoq",
+    "medium_horizon_winner": "strict_loan_core_min_qoq",
+    "long_horizon_winner": "strict_loan_core_min_qoq",
+    "recommendation_status": "keep_bundled_core_for_multihorizon_use_flag_mortgages_as_impact_candidate"
+  },
+  "recommendation": {
+    "status": "keep_bundled_core_for_multihorizon_use_flag_mortgages_as_impact_candidate",
+    "impact_candidate": "strict_loan_mortgages_qoq",
+    "multihorizon_candidate": "strict_loan_core_min_qoq",
+    "next_branch": "keep_bundled_direct_core_but_surface_mortgages_as_impact_candidate"
+  },
+  "takeaways": [
+    "This summary asks whether the direct-core winner is stable across horizons or only an impact-horizon result.",
+    "Horizon-by-horizon winners = {'h0': 'strict_loan_mortgages_qoq', 'h4': 'strict_loan_core_min_qoq', 'h8': 'strict_loan_core_min_qoq'}.",
+    "Mortgages are the impact-horizon winner, but the bundled core retakes the closest-to-residual slot by h4 and h8, so the current bundled direct core should stay the multihorizon benchmark for now."
+  ]
+}

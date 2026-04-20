@@ -1,0 +1,72 @@
+{
+  "status": "available",
+  "headline_question": "What is the frozen release-facing framework for interpreting the strict deposit component and the current TDC construction?",
+  "estimation_path": {
+    "summary_artifact": "strict_component_framework_summary.json",
+    "source_artifacts": [
+      "big_picture_synthesis_summary.json",
+      "split_treatment_architecture_summary.json",
+      "core_treatment_promotion_summary.json",
+      "strict_loan_core_redesign_summary.json",
+      "strict_corporate_bridge_secondary_comparison_summary.json",
+      "toc_row_incidence_audit_summary.json"
+    ]
+  },
+  "frozen_roles": {
+    "accounting_lane_role": "non_evidence_for_independent_verification",
+    "full_tdc_role": "provisional_broad_treasury_attributed_object",
+    "toc_row_role": "measured_support_bundle_with_unresolved_strict_deposit_incidence",
+    "toc_narrow_share_role": "not_reincorporated_under_current_evidence",
+    "core_treatment_role": "interpretive_subobject_not_promoted",
+    "headline_direct_core": "strict_loan_core_min_qoq",
+    "multihorizon_direct_core": "strict_loan_core_min_qoq",
+    "impact_horizon_candidate": "strict_loan_mortgages_qoq",
+    "standard_secondary_comparison": "strict_loan_core_plus_nonfinancial_corporate_qoq",
+    "narrowing_diagnostic": "strict_loan_core_plus_private_borrower_qoq",
+    "private_offset_role": "diagnostic_only"
+  },
+  "h0_snapshot": {
+    "toc_row_support_bundle_beta": 65.3966245435534,
+    "core_residual_beta": -5.508313542362046,
+    "headline_direct_core_beta": -10.658905058923445,
+    "standard_secondary_beta": 9.437768587339647,
+    "narrowing_diagnostic_beta": 8.485186147303951
+  },
+  "classification": {
+    "strict_deposit_component_goal": "mechanical_or_near_mechanical_component_of_deposits",
+    "tdc_measurement_status": "mechanically_coherent_but_not_yet_settled_as_strict_component",
+    "independent_verification_status": "partial_and_not_fully_validated",
+    "project_interpretation": "treatment_side_problem_dominates_residual_but_independent_lane_still_not_validated",
+    "framework_state": "external_critique_incorporated_and_toc_candidate_gate_built",
+    "external_critique_readiness": "critique_incorporated",
+    "raw_incidence_decision_gate": "full_reincorporation_not_supported",
+    "toc_narrow_share_decision": "keep_toc_outside_strict_object_under_current_evidence",
+    "direct_core_horizon_rule": "keep_bundled_core_for_multihorizon_use_flag_mortgages_as_impact_candidate"
+  },
+  "recommendation": {
+    "status": "strict_release_framing_finalized",
+    "headline_tdc_release_role": "keep_full_tdc_provisional_broad_object",
+    "headline_strict_release_role": "strict_loan_core_min_qoq",
+    "multihorizon_direct_core": "strict_loan_core_min_qoq",
+    "impact_horizon_candidate": "strict_loan_mortgages_qoq",
+    "standard_secondary_release_role": "strict_loan_core_plus_nonfinancial_corporate_qoq",
+    "narrowing_diagnostic_role": "strict_loan_core_plus_private_borrower_qoq",
+    "toc_release_role": "keep_outside_strict_object",
+    "next_branch": "only_reopen_toc_or_row_if_new_incidence_evidence_appears"
+  },
+  "takeaways": [
+    "Closure-oriented accounting remains out of the independent-evidence tier; it can still be useful descriptively, but it is frozen as non-evidence for strict deposit-component verification.",
+    "The current full TDC stays in the repo as the provisional broad Treasury-attributed object, not as a settled strict deposit component.",
+    "TOC/ROW is now frozen as a real measured Treasury support bundle with unresolved strict deposit incidence, not just as vague specification risk.",
+    "The headline strict direct evidence is frozen as `strict_loan_core_min_qoq`.",
+    "The standard bridge comparison is frozen as `strict_loan_core_plus_nonfinancial_corporate_qoq`, while `strict_loan_core_plus_private_borrower_qoq` becomes the wider diagnostic envelope and the private-offset block stays `diagnostic_only`.",
+    "The split-treatment read stays central to the framing: h0 TOC/ROW support bundle \u2248 65.40, core residual \u2248 -5.51.",
+    "The strict comparison roles are frozen off the direct h0 comparison under the core-deposit-proximate shock: headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.44, wider diagnostic envelope \u2248 8.49.",
+    "The role assignment is no longer based on raw h0 fit alone: fit-preferred bridge = `strict_loan_core_plus_private_borrower_qoq`, but the frozen strict-design bridge stays `strict_loan_core_plus_nonfinancial_corporate_qoq`.",
+    "The direct-core headline is now explicitly horizon-aware: multihorizon benchmark = `strict_loan_core_min_qoq`, impact-horizon candidate = `strict_loan_mortgages_qoq`.",
+    "Current horizon winners = {'h0': 'strict_loan_mortgages_qoq', 'h4': 'strict_loan_core_min_qoq', 'h8': 'strict_loan_core_min_qoq'}.",
+    "The deposit-proximate core shock remains `keep_interpretive_only`, so the split architecture is still interpretive rather than promoted as the new headline treatment.",
+    "The raw-units TOC/ROW liability-incidence audit is now the main decision gate: decision = `full_reincorporation_not_supported`.",
+    "The narrow-TOC candidate gate is now settled too: decision = `keep_toc_outside_strict_object_under_current_evidence`."
+  ]
+}

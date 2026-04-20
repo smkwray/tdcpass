@@ -7,6 +7,9 @@ project:
   headline_universe: bank_only
   main_treatment: tdc_bank_only_qoq
   main_outcome: total_deposits_bank_qoq
+  standard_scope_check_variant: tdc_us_chartered_bank_only_qoq
+  secondary_scope_sensitivity_variant: tdc_domestic_bank_only_qoq
+  secondary_outcome_sensitivity: deposits_only_bank_qoq
   main_estimator: local_projections_hac
   main_shock_method: expanding_window_ols_residual
   optional_sibling_cache_reuse: true

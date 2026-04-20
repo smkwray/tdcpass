@@ -1,0 +1,1039 @@
+{
+  "status": "available",
+  "source_kind": "z1_transactions_via_fred",
+  "headline_question": "How much of the non-TDC deposit residual is covered by the direct source-side strict lane before any closure-oriented reconstruction?",
+  "estimation_path": {
+    "primary_artifact": "lp_irf_strict_identifiable.csv",
+    "alignment_artifact": "strict_identifiable_alignment.csv",
+    "summary_artifact": "strict_identifiable_summary.json"
+  },
+  "component_outcomes_present": [
+    "strict_di_loans_nec_noncore_system_borrower_qoq",
+    "strict_di_loans_nec_private_domestic_borrower_qoq",
+    "strict_loan_consumer_credit_qoq",
+    "strict_loan_core_min_qoq",
+    "strict_loan_core_plus_private_borrower_qoq",
+    "strict_loan_di_loans_nec_qoq",
+    "strict_loan_mortgages_qoq",
+    "strict_loan_noncore_system_qoq",
+    "strict_loan_other_advances_qoq",
+    "strict_loan_source_qoq",
+    "strict_non_treasury_agency_gse_qoq",
+    "strict_non_treasury_corporate_foreign_bonds_qoq",
+    "strict_non_treasury_municipal_qoq",
+    "strict_non_treasury_securities_qoq"
+  ],
+  "horizons": {
+    "h0": {
+      "other_component": {
+        "beta": -81.17833439216739,
+        "se": 20.0820892829219,
+        "lower95": -120.5392293866943,
+        "upper95": -41.81743939764046,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core": {
+        "beta": -20.959164939095665,
+        "se": 3.154984044707311,
+        "lower95": -27.142933666721994,
+        "upper95": -14.775396211469335,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_loan_source": {
+        "beta": -19.97313706640162,
+        "se": 8.896555846407024,
+        "lower95": -37.410386525359385,
+        "upper95": -2.535887607443854,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_non_treasury_securities": {
+        "beta": 15.30465101167281,
+        "se": 6.050671529441859,
+        "lower95": 3.4453348139667668,
+        "upper95": 27.163967209378853,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_identifiable_total": {
+        "beta": -2.0654490673922083,
+        "se": 12.647084899431377,
+        "lower95": -26.853735470277705,
+        "upper95": 22.72283733549329,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap": {
+        "beta": -75.57860724607202,
+        "se": 15.835634841558793,
+        "lower95": -106.61645153552726,
+        "upper95": -44.54076295661679,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_components": {
+        "strict_loan_source_qoq": {
+          "beta": -19.97313706640162,
+          "se": 8.896555846407024,
+          "lower95": -37.410386525359385,
+          "upper95": -2.535887607443854,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_mortgages_qoq": {
+          "beta": -7.6343332804585655,
+          "se": 1.9249105010993577,
+          "lower95": -11.407157862613307,
+          "upper95": -3.8615086983038247,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_consumer_credit_qoq": {
+          "beta": -9.614618825387861,
+          "se": 2.1407940307057847,
+          "lower95": -13.810575125571198,
+          "upper95": -5.418662525204524,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_di_loans_nec_qoq": {
+          "beta": -0.26454114113574967,
+          "se": 9.534274569487632,
+          "lower95": -18.951719297331508,
+          "upper95": 18.422637015060012,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_other_advances_qoq": {
+          "beta": 0.21516102692308578,
+          "se": 0.1339037061144795,
+          "lower95": -0.04729023706129401,
+          "upper95": 0.4776122909074656,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_agency_gse_qoq": {
+          "beta": 6.603267673094061,
+          "se": 3.8080339880284533,
+          "lower95": -0.8604789434417075,
+          "upper95": 14.06701428962983,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_municipal_qoq": {
+          "beta": -0.07086637984878053,
+          "se": 0.8109723418657935,
+          "lower95": -1.6603721699057357,
+          "upper95": 1.5186394102081746,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_corporate_foreign_bonds_qoq": {
+          "beta": 4.905821709254981,
+          "se": 2.9390305853783536,
+          "lower95": -0.8546782380865912,
+          "upper95": 10.666321656596555,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_qoq": {
+          "beta": 15.30465101167281,
+          "se": 6.050671529441859,
+          "lower95": 3.4453348139667668,
+          "upper95": 27.163967209378853,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_di_loans_nec_private_domestic_borrower_qoq": {
+          "beta": 1.8116428704396705,
+          "se": 11.41477840511276,
+          "lower95": -20.561322803581337,
+          "upper95": 24.184608544460676,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_noncore_system_borrower_qoq": {
+          "beta": -1.3315857468437755,
+          "se": 5.177131161147097,
+          "lower95": -11.478762822692085,
+          "upper95": 8.815591329004535,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_min_qoq": {
+          "beta": -20.959164939095665,
+          "se": 3.154984044707311,
+          "lower95": -27.142933666721994,
+          "upper95": -14.775396211469335,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_core_plus_private_borrower_qoq": {
+          "beta": -18.024897659337825,
+          "se": 10.509068730802262,
+          "lower95": -38.62267237171026,
+          "upper95": 2.5728770530346097,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_qoq": {
+          "beta": -0.9745232374736701,
+          "se": 5.23729803124129,
+          "lower95": -11.239627378706597,
+          "upper95": 9.290580903759256,
+          "n": 68,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -79.11288532477518,
+      "strict_gap_share_of_residual": 0.9310194377844286,
+      "interpretation": "large_unidentified_remainder"
+    },
+    "h4": {
+      "other_component": {
+        "beta": -100.99420217322485,
+        "se": 48.95277771700572,
+        "lower95": -196.94164649855605,
+        "upper95": -5.04675784789363,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core": {
+        "beta": -39.60708317233478,
+        "se": 21.704975154811446,
+        "lower95": -82.14883447576523,
+        "upper95": 2.9346681310956555,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_loan_source": {
+        "beta": -35.94429115979122,
+        "se": 19.174791564821454,
+        "lower95": -73.52688262684127,
+        "upper95": 1.638300307258831,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_non_treasury_securities": {
+        "beta": 43.740795858104896,
+        "se": 29.03941137689402,
+        "lower95": -13.176450440607383,
+        "upper95": 100.65804215681717,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_total": {
+        "beta": 9.627031230490644,
+        "se": 41.77812349712699,
+        "lower95": -72.25809082387826,
+        "upper95": 91.51215328485955,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap": {
+        "beta": -125.0890576085553,
+        "se": 43.55668314239158,
+        "lower95": -210.4601565676428,
+        "upper95": -39.7179586494678,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "strict_components": {
+        "strict_loan_source_qoq": {
+          "beta": -35.94429115979122,
+          "se": 19.174791564821454,
+          "lower95": -73.52688262684127,
+          "upper95": 1.638300307258831,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_mortgages_qoq": {
+          "beta": -15.114894056479715,
+          "se": 11.663081919578346,
+          "lower95": -37.97453461885327,
+          "upper95": 7.744746505893842,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_consumer_credit_qoq": {
+          "beta": -13.698680490305549,
+          "se": 9.312658022572286,
+          "lower95": -31.951490214547228,
+          "upper95": 4.554129233936131,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_di_loans_nec_qoq": {
+          "beta": -9.39031488156056,
+          "se": 10.03485908443932,
+          "lower95": -29.058638687061627,
+          "upper95": 10.278008923940508,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_other_advances_qoq": {
+          "beta": 0.11900051200720675,
+          "se": 0.21530177316259574,
+          "lower95": -0.3029909633914809,
+          "upper95": 0.5409919874058944,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_agency_gse_qoq": {
+          "beta": 23.39838592447497,
+          "se": 24.757844472996183,
+          "lower95": -25.12698924259755,
+          "upper95": 71.92376109154749,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_municipal_qoq": {
+          "beta": 1.6439553771463657,
+          "se": 3.458177561335459,
+          "lower95": -5.134072643071134,
+          "upper95": 8.421983397363865,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_corporate_foreign_bonds_qoq": {
+          "beta": 15.348781309978614,
+          "se": 6.957732372129726,
+          "lower95": 1.7116258606043502,
+          "upper95": 28.985936759352878,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_non_treasury_securities_qoq": {
+          "beta": 43.740795858104896,
+          "se": 29.03941137689402,
+          "lower95": -13.176450440607383,
+          "upper95": 100.65804215681717,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_private_domestic_borrower_qoq": {
+          "beta": -13.088924455680957,
+          "se": 11.362875676779849,
+          "lower95": -35.36016078216946,
+          "upper95": 9.182311870807546,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_noncore_system_borrower_qoq": {
+          "beta": -6.947588427267108,
+          "se": 10.31916296729635,
+          "lower95": -27.173147843167953,
+          "upper95": 13.27797098863374,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_min_qoq": {
+          "beta": -39.60708317233478,
+          "se": 21.704975154811446,
+          "lower95": -82.14883447576523,
+          "upper95": 2.9346681310956555,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_qoq": {
+          "beta": -36.09446880211357,
+          "se": 18.505539205304284,
+          "lower95": -72.36532564450997,
+          "upper95": 0.17638804028283062,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_qoq": {
+          "beta": -6.588510473401262,
+          "se": 10.22291777123132,
+          "lower95": -26.625429305014645,
+          "upper95": 13.448408358212124,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -110.6212334037155,
+      "strict_gap_share_of_residual": 1.2385766204083977,
+      "interpretation": "large_unidentified_remainder"
+    },
+    "h8": {
+      "other_component": {
+        "beta": -230.24311066594336,
+        "se": 57.831467849285815,
+        "lower95": -343.5927876505435,
+        "upper95": -116.89343368134317,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core": {
+        "beta": -27.699009281406582,
+        "se": 34.68650038016017,
+        "lower95": -95.6845500265205,
+        "upper95": 40.28653146370734,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_loan_source": {
+        "beta": -29.731649959892096,
+        "se": 39.098823599599555,
+        "lower95": -106.36534421510723,
+        "upper95": 46.90204429532304,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_non_treasury_securities": {
+        "beta": 44.71846401566029,
+        "se": 44.28293685418197,
+        "lower95": -42.076092218536374,
+        "upper95": 131.51302024985694,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_total": {
+        "beta": 9.626948380965132,
+        "se": 63.937595599711315,
+        "lower95": -115.69073899446904,
+        "upper95": 134.9446357563993,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap": {
+        "beta": -249.82357659783344,
+        "se": 66.88782681202387,
+        "lower95": -380.9237171494002,
+        "upper95": -118.72343604626664,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "strict_components": {
+        "strict_loan_source_qoq": {
+          "beta": -29.731649959892096,
+          "se": 39.098823599599555,
+          "lower95": -106.36534421510723,
+          "upper95": 46.90204429532304,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_mortgages_qoq": {
+          "beta": -4.0944568179221505,
+          "se": 24.426486286172334,
+          "lower95": -51.97036993881993,
+          "upper95": 43.78145630297563,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_consumer_credit_qoq": {
+          "beta": -6.925480264059906,
+          "se": 9.731899505476942,
+          "lower95": -26.000003294794713,
+          "upper95": 12.1490427666749,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_di_loans_nec_qoq": {
+          "beta": -17.25786996993061,
+          "se": 10.594077743799078,
+          "lower95": -38.0222623477768,
+          "upper95": 3.5065224079155826,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_other_advances_qoq": {
+          "beta": 0.004839987163186843,
+          "se": 0.21390409679197872,
+          "lower95": -0.4144120425490914,
+          "upper95": 0.4240920168754651,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_agency_gse_qoq": {
+          "beta": 16.76900472295646,
+          "se": 33.9992623394745,
+          "lower95": -49.86954946241355,
+          "upper95": 83.40755890832648,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_municipal_qoq": {
+          "beta": 1.7847959423615514,
+          "se": 5.2749497757971,
+          "lower95": -8.554105618200763,
+          "upper95": 12.123697502923866,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_corporate_foreign_bonds_qoq": {
+          "beta": 23.72385005647987,
+          "se": 9.854306935238538,
+          "lower95": 4.409408463412333,
+          "upper95": 43.0382916495474,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_non_treasury_securities_qoq": {
+          "beta": 44.71846401566029,
+          "se": 44.28293685418197,
+          "lower95": -42.076092218536374,
+          "upper95": 131.51302024985694,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_private_domestic_borrower_qoq": {
+          "beta": -18.527697803634318,
+          "se": 10.417209030001827,
+          "lower95": -38.945427502437894,
+          "upper95": 1.8900318951692618,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_noncore_system_borrower_qoq": {
+          "beta": -8.140289340365825,
+          "se": 11.550817869167771,
+          "lower95": -30.779892363934657,
+          "upper95": 14.499313683203006,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_min_qoq": {
+          "beta": -27.699009281406582,
+          "se": 34.68650038016017,
+          "lower95": -95.6845500265205,
+          "upper95": 40.28653146370734,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_qoq": {
+          "beta": -26.83044935709205,
+          "se": 35.836796354185175,
+          "lower95": -97.07057021129499,
+          "upper95": 43.40967149711089,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_qoq": {
+          "beta": -7.808924723792707,
+          "se": 11.458946618947886,
+          "lower95": -30.268460096930564,
+          "upper95": 14.65061064934515,
+          "n": 60,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -239.8700590469085,
+      "strict_gap_share_of_residual": 1.0850425703303632,
+      "interpretation": "large_unidentified_remainder"
+    }
+  },
+  "key_horizons": {
+    "h0": {
+      "other_component": {
+        "beta": -81.17833439216739,
+        "se": 20.0820892829219,
+        "lower95": -120.5392293866943,
+        "upper95": -41.81743939764046,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core": {
+        "beta": -20.959164939095665,
+        "se": 3.154984044707311,
+        "lower95": -27.142933666721994,
+        "upper95": -14.775396211469335,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_loan_source": {
+        "beta": -19.97313706640162,
+        "se": 8.896555846407024,
+        "lower95": -37.410386525359385,
+        "upper95": -2.535887607443854,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_non_treasury_securities": {
+        "beta": 15.30465101167281,
+        "se": 6.050671529441859,
+        "lower95": 3.4453348139667668,
+        "upper95": 27.163967209378853,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_identifiable_total": {
+        "beta": -2.0654490673922083,
+        "se": 12.647084899431377,
+        "lower95": -26.853735470277705,
+        "upper95": 22.72283733549329,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap": {
+        "beta": -75.57860724607202,
+        "se": 15.835634841558793,
+        "lower95": -106.61645153552726,
+        "upper95": -44.54076295661679,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "strict_components": {
+        "strict_loan_source_qoq": {
+          "beta": -19.97313706640162,
+          "se": 8.896555846407024,
+          "lower95": -37.410386525359385,
+          "upper95": -2.535887607443854,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_mortgages_qoq": {
+          "beta": -7.6343332804585655,
+          "se": 1.9249105010993577,
+          "lower95": -11.407157862613307,
+          "upper95": -3.8615086983038247,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_consumer_credit_qoq": {
+          "beta": -9.614618825387861,
+          "se": 2.1407940307057847,
+          "lower95": -13.810575125571198,
+          "upper95": -5.418662525204524,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_di_loans_nec_qoq": {
+          "beta": -0.26454114113574967,
+          "se": 9.534274569487632,
+          "lower95": -18.951719297331508,
+          "upper95": 18.422637015060012,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_other_advances_qoq": {
+          "beta": 0.21516102692308578,
+          "se": 0.1339037061144795,
+          "lower95": -0.04729023706129401,
+          "upper95": 0.4776122909074656,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_agency_gse_qoq": {
+          "beta": 6.603267673094061,
+          "se": 3.8080339880284533,
+          "lower95": -0.8604789434417075,
+          "upper95": 14.06701428962983,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_municipal_qoq": {
+          "beta": -0.07086637984878053,
+          "se": 0.8109723418657935,
+          "lower95": -1.6603721699057357,
+          "upper95": 1.5186394102081746,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_corporate_foreign_bonds_qoq": {
+          "beta": 4.905821709254981,
+          "se": 2.9390305853783536,
+          "lower95": -0.8546782380865912,
+          "upper95": 10.666321656596555,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_qoq": {
+          "beta": 15.30465101167281,
+          "se": 6.050671529441859,
+          "lower95": 3.4453348139667668,
+          "upper95": 27.163967209378853,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_di_loans_nec_private_domestic_borrower_qoq": {
+          "beta": 1.8116428704396705,
+          "se": 11.41477840511276,
+          "lower95": -20.561322803581337,
+          "upper95": 24.184608544460676,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_noncore_system_borrower_qoq": {
+          "beta": -1.3315857468437755,
+          "se": 5.177131161147097,
+          "lower95": -11.478762822692085,
+          "upper95": 8.815591329004535,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_min_qoq": {
+          "beta": -20.959164939095665,
+          "se": 3.154984044707311,
+          "lower95": -27.142933666721994,
+          "upper95": -14.775396211469335,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_core_plus_private_borrower_qoq": {
+          "beta": -18.024897659337825,
+          "se": 10.509068730802262,
+          "lower95": -38.62267237171026,
+          "upper95": 2.5728770530346097,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_qoq": {
+          "beta": -0.9745232374736701,
+          "se": 5.23729803124129,
+          "lower95": -11.239627378706597,
+          "upper95": 9.290580903759256,
+          "n": 68,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -79.11288532477518,
+      "strict_gap_share_of_residual": 0.9310194377844286,
+      "interpretation": "large_unidentified_remainder"
+    },
+    "h4": {
+      "other_component": {
+        "beta": -100.99420217322485,
+        "se": 48.95277771700572,
+        "lower95": -196.94164649855605,
+        "upper95": -5.04675784789363,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core": {
+        "beta": -39.60708317233478,
+        "se": 21.704975154811446,
+        "lower95": -82.14883447576523,
+        "upper95": 2.9346681310956555,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_loan_source": {
+        "beta": -35.94429115979122,
+        "se": 19.174791564821454,
+        "lower95": -73.52688262684127,
+        "upper95": 1.638300307258831,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_non_treasury_securities": {
+        "beta": 43.740795858104896,
+        "se": 29.03941137689402,
+        "lower95": -13.176450440607383,
+        "upper95": 100.65804215681717,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_total": {
+        "beta": 9.627031230490644,
+        "se": 41.77812349712699,
+        "lower95": -72.25809082387826,
+        "upper95": 91.51215328485955,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap": {
+        "beta": -125.0890576085553,
+        "se": 43.55668314239158,
+        "lower95": -210.4601565676428,
+        "upper95": -39.7179586494678,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "strict_components": {
+        "strict_loan_source_qoq": {
+          "beta": -35.94429115979122,
+          "se": 19.174791564821454,
+          "lower95": -73.52688262684127,
+          "upper95": 1.638300307258831,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_mortgages_qoq": {
+          "beta": -15.114894056479715,
+          "se": 11.663081919578346,
+          "lower95": -37.97453461885327,
+          "upper95": 7.744746505893842,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_consumer_credit_qoq": {
+          "beta": -13.698680490305549,
+          "se": 9.312658022572286,
+          "lower95": -31.951490214547228,
+          "upper95": 4.554129233936131,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_di_loans_nec_qoq": {
+          "beta": -9.39031488156056,
+          "se": 10.03485908443932,
+          "lower95": -29.058638687061627,
+          "upper95": 10.278008923940508,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_other_advances_qoq": {
+          "beta": 0.11900051200720675,
+          "se": 0.21530177316259574,
+          "lower95": -0.3029909633914809,
+          "upper95": 0.5409919874058944,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_agency_gse_qoq": {
+          "beta": 23.39838592447497,
+          "se": 24.757844472996183,
+          "lower95": -25.12698924259755,
+          "upper95": 71.92376109154749,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_municipal_qoq": {
+          "beta": 1.6439553771463657,
+          "se": 3.458177561335459,
+          "lower95": -5.134072643071134,
+          "upper95": 8.421983397363865,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_corporate_foreign_bonds_qoq": {
+          "beta": 15.348781309978614,
+          "se": 6.957732372129726,
+          "lower95": 1.7116258606043502,
+          "upper95": 28.985936759352878,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_non_treasury_securities_qoq": {
+          "beta": 43.740795858104896,
+          "se": 29.03941137689402,
+          "lower95": -13.176450440607383,
+          "upper95": 100.65804215681717,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_private_domestic_borrower_qoq": {
+          "beta": -13.088924455680957,
+          "se": 11.362875676779849,
+          "lower95": -35.36016078216946,
+          "upper95": 9.182311870807546,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_noncore_system_borrower_qoq": {
+          "beta": -6.947588427267108,
+          "se": 10.31916296729635,
+          "lower95": -27.173147843167953,
+          "upper95": 13.27797098863374,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_min_qoq": {
+          "beta": -39.60708317233478,
+          "se": 21.704975154811446,
+          "lower95": -82.14883447576523,
+          "upper95": 2.9346681310956555,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_qoq": {
+          "beta": -36.09446880211357,
+          "se": 18.505539205304284,
+          "lower95": -72.36532564450997,
+          "upper95": 0.17638804028283062,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_qoq": {
+          "beta": -6.588510473401262,
+          "se": 10.22291777123132,
+          "lower95": -26.625429305014645,
+          "upper95": 13.448408358212124,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -110.6212334037155,
+      "strict_gap_share_of_residual": 1.2385766204083977,
+      "interpretation": "large_unidentified_remainder"
+    },
+    "h8": {
+      "other_component": {
+        "beta": -230.24311066594336,
+        "se": 57.831467849285815,
+        "lower95": -343.5927876505435,
+        "upper95": -116.89343368134317,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "strict_headline_direct_core": {
+        "beta": -27.699009281406582,
+        "se": 34.68650038016017,
+        "lower95": -95.6845500265205,
+        "upper95": 40.28653146370734,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_loan_source": {
+        "beta": -29.731649959892096,
+        "se": 39.098823599599555,
+        "lower95": -106.36534421510723,
+        "upper95": 46.90204429532304,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_non_treasury_securities": {
+        "beta": 44.71846401566029,
+        "se": 44.28293685418197,
+        "lower95": -42.076092218536374,
+        "upper95": 131.51302024985694,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_total": {
+        "beta": 9.626948380965132,
+        "se": 63.937595599711315,
+        "lower95": -115.69073899446904,
+        "upper95": 134.9446357563993,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "strict_identifiable_gap": {
+        "beta": -249.82357659783344,
+        "se": 66.88782681202387,
+        "lower95": -380.9237171494002,
+        "upper95": -118.72343604626664,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "strict_components": {
+        "strict_loan_source_qoq": {
+          "beta": -29.731649959892096,
+          "se": 39.098823599599555,
+          "lower95": -106.36534421510723,
+          "upper95": 46.90204429532304,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_mortgages_qoq": {
+          "beta": -4.0944568179221505,
+          "se": 24.426486286172334,
+          "lower95": -51.97036993881993,
+          "upper95": 43.78145630297563,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_consumer_credit_qoq": {
+          "beta": -6.925480264059906,
+          "se": 9.731899505476942,
+          "lower95": -26.000003294794713,
+          "upper95": 12.1490427666749,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_di_loans_nec_qoq": {
+          "beta": -17.25786996993061,
+          "se": 10.594077743799078,
+          "lower95": -38.0222623477768,
+          "upper95": 3.5065224079155826,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_other_advances_qoq": {
+          "beta": 0.004839987163186843,
+          "se": 0.21390409679197872,
+          "lower95": -0.4144120425490914,
+          "upper95": 0.4240920168754651,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_agency_gse_qoq": {
+          "beta": 16.76900472295646,
+          "se": 33.9992623394745,
+          "lower95": -49.86954946241355,
+          "upper95": 83.40755890832648,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_municipal_qoq": {
+          "beta": 1.7847959423615514,
+          "se": 5.2749497757971,
+          "lower95": -8.554105618200763,
+          "upper95": 12.123697502923866,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_corporate_foreign_bonds_qoq": {
+          "beta": 23.72385005647987,
+          "se": 9.854306935238538,
+          "lower95": 4.409408463412333,
+          "upper95": 43.0382916495474,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_non_treasury_securities_qoq": {
+          "beta": 44.71846401566029,
+          "se": 44.28293685418197,
+          "lower95": -42.076092218536374,
+          "upper95": 131.51302024985694,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_private_domestic_borrower_qoq": {
+          "beta": -18.527697803634318,
+          "se": 10.417209030001827,
+          "lower95": -38.945427502437894,
+          "upper95": 1.8900318951692618,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_di_loans_nec_noncore_system_borrower_qoq": {
+          "beta": -8.140289340365825,
+          "se": 11.550817869167771,
+          "lower95": -30.779892363934657,
+          "upper95": 14.499313683203006,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_min_qoq": {
+          "beta": -27.699009281406582,
+          "se": 34.68650038016017,
+          "lower95": -95.6845500265205,
+          "upper95": 40.28653146370734,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_qoq": {
+          "beta": -26.83044935709205,
+          "se": 35.836796354185175,
+          "lower95": -97.07057021129499,
+          "upper95": 43.40967149711089,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_qoq": {
+          "beta": -7.808924723792707,
+          "se": 11.458946618947886,
+          "lower95": -30.268460096930564,
+          "upper95": 14.65061064934515,
+          "n": 60,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -239.8700590469085,
+      "strict_gap_share_of_residual": 1.0850425703303632,
+      "interpretation": "large_unidentified_remainder"
+    }
+  },
+  "takeaways": [
+    "This strict lane is source-side and gross: it is meant to count directly measured non-Treasury bank asset transactions without using the residual to close the books.",
+    "The headline strict direct core is `strict_loan_core_min_qoq`; the older broad `strict_loan_source_qoq` remains published as a diagnostic because it still embeds the unresolved DI-loans-n.e.c. bucket.",
+    "Strict source kind: z1_transactions_via_fred.",
+    "Observed strict component outcomes currently present: strict_di_loans_nec_noncore_system_borrower_qoq, strict_di_loans_nec_private_domestic_borrower_qoq, strict_loan_consumer_credit_qoq, strict_loan_core_min_qoq, strict_loan_core_plus_private_borrower_qoq, strict_loan_di_loans_nec_qoq, strict_loan_mortgages_qoq, strict_loan_noncore_system_qoq, strict_loan_other_advances_qoq, strict_loan_source_qoq, strict_non_treasury_agency_gse_qoq, strict_non_treasury_corporate_foreign_bonds_qoq, strict_non_treasury_municipal_qoq, strict_non_treasury_securities_qoq.",
+    "All reported horizons still show a large unidentified remainder. That is compatible with the design: the strict lane is intentionally incomplete and leaves funding substitutions, portfolio reallocations, and other hard-to-measure channels in the gap."
+  ]
+}

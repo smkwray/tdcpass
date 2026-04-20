@@ -1,0 +1,405 @@
+{
+  "status": "available",
+  "source_kind": "local_accounting_bundle",
+  "headline_question": "Does an imported accounting reconstruction line up with the non-TDC deposit component under the baseline TDC shock design?",
+  "estimation_path": {
+    "primary_artifact": "lp_irf_accounting_identity.csv",
+    "alignment_artifact": "accounting_identity_alignment.csv",
+    "summary_artifact": "accounting_identity_summary.json"
+  },
+  "component_outcomes_present": [
+    "accounting_bank_balance_sheet_qoq",
+    "accounting_deposit_substitution_qoq",
+    "accounting_external_flow_qoq",
+    "accounting_public_liquidity_qoq"
+  ],
+  "horizons": {
+    "h0": {
+      "other_component": {
+        "beta": -81.17833439216729,
+        "se": 20.082089282921796,
+        "lower95": -120.539229386694,
+        "upper95": -41.81743939764057,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_total": {
+        "beta": -79.28663616354343,
+        "se": 20.28462739200929,
+        "lower95": -119.04450585188164,
+        "upper95": -39.528766475205224,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_gap": {
+        "beta": -1.1484438136459578,
+        "se": 1.0927399854882076,
+        "lower95": -3.290214185202845,
+        "upper95": 0.9933265579109289,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "accounting_components": {
+        "accounting_deposit_substitution_qoq": {
+          "beta": 0.11311457462228802,
+          "se": 1.1009125131811874,
+          "lower95": -2.0446739512128396,
+          "upper95": 2.2709031004574154,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "accounting_bank_balance_sheet_qoq": {
+          "beta": -25.479815977363394,
+          "se": 13.452340176451983,
+          "lower95": -51.84640272320928,
+          "upper95": 0.8867707684824921,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "accounting_public_liquidity_qoq": {
+          "beta": 66.39529419065903,
+          "se": 20.395329256708294,
+          "lower95": 26.420448847510777,
+          "upper95": 106.37013953380728,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "accounting_external_flow_qoq": {
+          "beta": -124.32342221595432,
+          "se": 24.98021614058896,
+          "lower95": -173.28464585150869,
+          "upper95": -75.36219858039996,
+          "n": 68,
+          "ci_excludes_zero": true
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -1.8916982286238522,
+      "identity_gap_share_of_residual": 0.014147171437367758,
+      "interpretation": "tight_closure"
+    },
+    "h4": {
+      "other_component": {
+        "beta": -100.99420217322478,
+        "se": 48.95277771700602,
+        "lower95": -196.94164649855657,
+        "upper95": -5.046757847892977,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_total": {
+        "beta": -98.58976106605922,
+        "se": 48.90531551949647,
+        "lower95": -194.4441794842723,
+        "upper95": -2.735342647846153,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_gap": {
+        "beta": -2.8185638279001,
+        "se": 2.1113040319876446,
+        "lower95": -6.956719730595884,
+        "upper95": 1.319592074795683,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "accounting_components": {
+        "accounting_deposit_substitution_qoq": {
+          "beta": -4.332735785076238,
+          "se": 4.608066381026184,
+          "lower95": -13.364545891887559,
+          "upper95": 4.6990743217350825,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "accounting_bank_balance_sheet_qoq": {
+          "beta": -42.80376531208054,
+          "se": 15.902486276756534,
+          "lower95": -73.97263841452335,
+          "upper95": -11.634892209637737,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "accounting_public_liquidity_qoq": {
+          "beta": 29.815446587434472,
+          "se": 44.711736612518585,
+          "lower95": -57.81955717310195,
+          "upper95": 117.4504503479709,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "accounting_external_flow_qoq": {
+          "beta": -72.83640731575717,
+          "se": 74.46292307793331,
+          "lower95": -218.78373654850645,
+          "upper95": 73.11092191699213,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -2.404441107165553,
+      "identity_gap_share_of_residual": 0.02790817460061433,
+      "interpretation": "tight_closure"
+    },
+    "h8": {
+      "other_component": {
+        "beta": -230.2431106659432,
+        "se": 57.8314678492858,
+        "lower95": -343.59278765054336,
+        "upper95": -116.89343368134303,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_total": {
+        "beta": -229.21567714750506,
+        "se": 59.041291943178166,
+        "lower95": -344.9366093561343,
+        "upper95": -113.49474493887585,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_gap": {
+        "beta": -0.4143413430771603,
+        "se": 4.043412760380576,
+        "lower95": -8.33943035342309,
+        "upper95": 7.5107476672687685,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "accounting_components": {
+        "accounting_deposit_substitution_qoq": {
+          "beta": -8.64674705601776,
+          "se": 4.848135263923394,
+          "lower95": -18.149092173307615,
+          "upper95": 0.8555980612720919,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "accounting_bank_balance_sheet_qoq": {
+          "beta": -43.15389619871051,
+          "se": 19.906157783065577,
+          "lower95": -82.16996545351904,
+          "upper95": -4.137826943901985,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "accounting_public_liquidity_qoq": {
+          "beta": 93.10294497937844,
+          "se": 45.36642922066311,
+          "lower95": 4.1847437068787485,
+          "upper95": 182.02114625187812,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "accounting_external_flow_qoq": {
+          "beta": -260.61005381297434,
+          "se": 87.70982456940524,
+          "lower95": -432.5213099690086,
+          "upper95": -88.69879765694006,
+          "n": 60,
+          "ci_excludes_zero": true
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -1.02743351843813,
+      "identity_gap_share_of_residual": 0.0017995819370175332,
+      "interpretation": "tight_closure"
+    }
+  },
+  "key_horizons": {
+    "h0": {
+      "other_component": {
+        "beta": -81.17833439216729,
+        "se": 20.082089282921796,
+        "lower95": -120.539229386694,
+        "upper95": -41.81743939764057,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_total": {
+        "beta": -79.28663616354343,
+        "se": 20.28462739200929,
+        "lower95": -119.04450585188164,
+        "upper95": -39.528766475205224,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_gap": {
+        "beta": -1.1484438136459578,
+        "se": 1.0927399854882076,
+        "lower95": -3.290214185202845,
+        "upper95": 0.9933265579109289,
+        "n": 68,
+        "ci_excludes_zero": false
+      },
+      "accounting_components": {
+        "accounting_deposit_substitution_qoq": {
+          "beta": 0.11311457462228802,
+          "se": 1.1009125131811874,
+          "lower95": -2.0446739512128396,
+          "upper95": 2.2709031004574154,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "accounting_bank_balance_sheet_qoq": {
+          "beta": -25.479815977363394,
+          "se": 13.452340176451983,
+          "lower95": -51.84640272320928,
+          "upper95": 0.8867707684824921,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "accounting_public_liquidity_qoq": {
+          "beta": 66.39529419065903,
+          "se": 20.395329256708294,
+          "lower95": 26.420448847510777,
+          "upper95": 106.37013953380728,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "accounting_external_flow_qoq": {
+          "beta": -124.32342221595432,
+          "se": 24.98021614058896,
+          "lower95": -173.28464585150869,
+          "upper95": -75.36219858039996,
+          "n": 68,
+          "ci_excludes_zero": true
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -1.8916982286238522,
+      "identity_gap_share_of_residual": 0.014147171437367758,
+      "interpretation": "tight_closure"
+    },
+    "h4": {
+      "other_component": {
+        "beta": -100.99420217322478,
+        "se": 48.95277771700602,
+        "lower95": -196.94164649855657,
+        "upper95": -5.046757847892977,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_total": {
+        "beta": -98.58976106605922,
+        "se": 48.90531551949647,
+        "lower95": -194.4441794842723,
+        "upper95": -2.735342647846153,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_gap": {
+        "beta": -2.8185638279001,
+        "se": 2.1113040319876446,
+        "lower95": -6.956719730595884,
+        "upper95": 1.319592074795683,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "accounting_components": {
+        "accounting_deposit_substitution_qoq": {
+          "beta": -4.332735785076238,
+          "se": 4.608066381026184,
+          "lower95": -13.364545891887559,
+          "upper95": 4.6990743217350825,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "accounting_bank_balance_sheet_qoq": {
+          "beta": -42.80376531208054,
+          "se": 15.902486276756534,
+          "lower95": -73.97263841452335,
+          "upper95": -11.634892209637737,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "accounting_public_liquidity_qoq": {
+          "beta": 29.815446587434472,
+          "se": 44.711736612518585,
+          "lower95": -57.81955717310195,
+          "upper95": 117.4504503479709,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "accounting_external_flow_qoq": {
+          "beta": -72.83640731575717,
+          "se": 74.46292307793331,
+          "lower95": -218.78373654850645,
+          "upper95": 73.11092191699213,
+          "n": 64,
+          "ci_excludes_zero": false
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -2.404441107165553,
+      "identity_gap_share_of_residual": 0.02790817460061433,
+      "interpretation": "tight_closure"
+    },
+    "h8": {
+      "other_component": {
+        "beta": -230.2431106659432,
+        "se": 57.8314678492858,
+        "lower95": -343.59278765054336,
+        "upper95": -116.89343368134303,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_total": {
+        "beta": -229.21567714750506,
+        "se": 59.041291943178166,
+        "lower95": -344.9366093561343,
+        "upper95": -113.49474493887585,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "accounting_identity_gap": {
+        "beta": -0.4143413430771603,
+        "se": 4.043412760380576,
+        "lower95": -8.33943035342309,
+        "upper95": 7.5107476672687685,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "accounting_components": {
+        "accounting_deposit_substitution_qoq": {
+          "beta": -8.64674705601776,
+          "se": 4.848135263923394,
+          "lower95": -18.149092173307615,
+          "upper95": 0.8555980612720919,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "accounting_bank_balance_sheet_qoq": {
+          "beta": -43.15389619871051,
+          "se": 19.906157783065577,
+          "lower95": -82.16996545351904,
+          "upper95": -4.137826943901985,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "accounting_public_liquidity_qoq": {
+          "beta": 93.10294497937844,
+          "se": 45.36642922066311,
+          "lower95": 4.1847437068787485,
+          "upper95": 182.02114625187812,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "accounting_external_flow_qoq": {
+          "beta": -260.61005381297434,
+          "se": 87.70982456940524,
+          "lower95": -432.5213099690086,
+          "upper95": -88.69879765694006,
+          "n": 60,
+          "ci_excludes_zero": true
+        }
+      },
+      "arithmetic_residual_minus_total_beta": -1.02743351843813,
+      "identity_gap_share_of_residual": 0.0017995819370175332,
+      "interpretation": "tight_closure"
+    }
+  },
+  "takeaways": [
+    "This accounting lane is separate from the current public counterpart/proxy scorecard and should be read as an imported reconstruction check on the non-TDC residual.",
+    "Imported accounting source kind: local_accounting_bundle.",
+    "Observed accounting component outcomes currently present: accounting_bank_balance_sheet_qoq, accounting_deposit_substitution_qoq, accounting_external_flow_qoq, accounting_public_liquidity_qoq.",
+    "Arithmetic residual-minus-total and the direct gap response need not match exactly because LP outcomes can use outcome-specific samples.",
+    "All reported horizons show tight accounting closure in the imported lane. Read that as a closure-oriented cross-check on the non-TDC residual, not by itself as independent validation of each accounting component."
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "status": "available",
+  "headline_question": "Should the split architecture remain interpretive only, or should the core deposit-proximate treatment be estimated and reported as a separate shock?",
+  "estimation_path": {
+    "summary_artifact": "core_treatment_promotion_summary.json",
+    "source_artifacts": [
+      "unexpected_tdc.csv",
+      "identity_treatment_sensitivity.csv",
+      "split_treatment_architecture_summary.json",
+      "strict_missing_channel_summary.json"
+    ]
+  },
+  "series_alias_check": {
+    "status": "available",
+    "current_core_series": "tdc_core_deposit_proximate_bank_only_qoq",
+    "legacy_equivalent_series": "tdc_no_toc_no_row_bank_only_qoq",
+    "legacy_equivalent_shock_name": "unexpected_tdc_no_toc_no_row_bank_only",
+    "max_abs_gap_beta": 0.0,
+    "mean_abs_gap_beta": 0.0
+  },
+  "shock_quality": {
+    "baseline": {
+      "status": "available",
+      "model_name": "unexpected_tdc_default",
+      "target": "tdc_bank_only_qoq",
+      "shock_column": "tdc_residual_z",
+      "predictors": [
+        "lag_tdc_bank_only_qoq",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "usable_sample": {
+        "rows": 68,
+        "start_quarter": "2009Q1",
+        "end_quarter": "2025Q4"
+      },
+      "shock_target_correlation_usable": 0.7657956791364907,
+      "usable_target_sd": 263.42967242082716,
+      "initial_train_target_sd": 78.16313994116379,
+      "train_to_usable_target_volatility_ratio": 0.29671349936729485,
+      "flagged_observations": 4,
+      "flagged_share": 0.058823529411764705,
+      "realized_scale_fit_ratio_quantiles": {
+        "p50": 0.9466380733484647,
+        "p90": 3.363598256430674,
+        "p95": 4.817056239502941,
+        "p99": 27.895931796070258
+      },
+      "max_train_condition_number": 7.301481999130325
+    },
+    "core_deposit_proximate": {
+      "status": "available",
+      "model_name": "unexpected_tdc_core_deposit_proximate_bank_only",
+      "target": "tdc_core_deposit_proximate_bank_only_qoq",
+      "shock_column": "tdc_core_deposit_proximate_bank_only_residual_z",
+      "predictors": [
+        "lag_tdc_core_deposit_proximate_bank_only_qoq",
+        "lag_fedfunds",
+        "lag_unemployment",
+        "lag_inflation"
+      ],
+      "usable_sample": {
+        "rows": 68,
+        "start_quarter": "2009Q1",
+        "end_quarter": "2025Q4"
+      },
+      "shock_target_correlation_usable": 0.37986895222649925,
+      "usable_target_sd": 235.64625395669387,
+      "initial_train_target_sd": 43.1400650221361,
+      "train_to_usable_target_volatility_ratio": 0.18307129562969504,
+      "flagged_observations": 6,
+      "flagged_share": 0.08823529411764706,
+      "realized_scale_fit_ratio_quantiles": {
+        "p50": 0.8822991065457217,
+        "p90": 4.274274859108455,
+        "p95": 9.925515684139148,
+        "p99": 21.442991082463685
+      },
+      "max_train_condition_number": 6.424779880256554
+    },
+    "baseline_vs_core_overlap": {
+      "status": "available",
+      "rows": 68,
+      "start_quarter": "2009Q1",
+      "end_quarter": "2025Q4",
+      "shock_corr": 0.41818956226857457,
+      "same_sign_share": 0.7205882352941176,
+      "opposite_sign_share": 0.27941176470588236,
+      "core_to_baseline_sd_ratio": 1.470755154991529
+    }
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline_target_response": {
+        "beta": 128.49398892100785,
+        "se": 13.487107351599608,
+        "lower95": 101.74203191194763,
+        "upper95": 153.71550482391984,
+        "n": 68,
+        "target": "tdc_bank_only_qoq",
+        "shock_column": "tdc_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "baseline_total_response": {
+        "beta": 55.75033524806063,
+        "se": 21.683675520344966,
+        "lower95": 15.003158943291321,
+        "upper95": 91.8448395095884,
+        "n": 68,
+        "target": "tdc_bank_only_qoq",
+        "shock_column": "tdc_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "baseline_residual_response": {
+        "beta": -72.74365367294723,
+        "se": 23.353496740068078,
+        "lower95": -111.67491859993335,
+        "upper95": -31.72872933058706,
+        "n": 68,
+        "target": "tdc_bank_only_qoq",
+        "shock_column": "tdc_residual_z",
+        "outcome_construction": "derived_total_minus_tdc"
+      },
+      "core_target_response": {
+        "beta": 63.097364377454454,
+        "se": 10.251312054920865,
+        "lower95": 45.540376187580556,
+        "upper95": 85.93832091279036,
+        "n": 68,
+        "target": "tdc_core_deposit_proximate_bank_only_qoq",
+        "shock_column": "tdc_core_deposit_proximate_bank_only_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "core_total_response": {
+        "beta": 57.58905083509241,
+        "se": 29.329823113876063,
+        "lower95": -23.09490869259148,
+        "upper95": 76.66830704547306,
+        "n": 68,
+        "target": "tdc_core_deposit_proximate_bank_only_qoq",
+        "shock_column": "tdc_core_deposit_proximate_bank_only_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "core_residual_response": {
+        "beta": -5.508313542362046,
+        "se": 24.76984244074715,
+        "lower95": -71.7564196216731,
+        "upper95": 8.884834991558561,
+        "n": 68,
+        "target": "tdc_core_deposit_proximate_bank_only_qoq",
+        "shock_column": "tdc_core_deposit_proximate_bank_only_residual_z",
+        "outcome_construction": "derived_total_minus_tdc"
+      },
+      "core_minus_baseline_residual_beta": 67.23534013058519
+    },
+    "h4": {
+      "baseline_target_response": {
+        "beta": 278.13971316628357,
+        "se": 70.0854577470743,
+        "lower95": 120.86494926491977,
+        "upper95": 386.43705999220725,
+        "n": 64,
+        "target": "tdc_bank_only_qoq",
+        "shock_column": "tdc_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "baseline_total_response": {
+        "beta": 167.33069747889854,
+        "se": 91.65110516787428,
+        "lower95": -15.123860762491622,
+        "upper95": 349.2218977438808,
+        "n": 64,
+        "target": "tdc_bank_only_qoq",
+        "shock_column": "tdc_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "baseline_residual_response": {
+        "beta": -110.80901568738503,
+        "se": 50.582600640491876,
+        "lower95": -197.13904381598593,
+        "upper95": -49.55641130250566,
+        "n": 64,
+        "target": "tdc_bank_only_qoq",
+        "shock_column": "tdc_residual_z",
+        "outcome_construction": "derived_total_minus_tdc"
+      },
+      "core_target_response": {
+        "beta": 212.64368952952745,
+        "se": 69.01945838600113,
+        "lower95": 41.53944804063135,
+        "upper95": 293.0390641126675,
+        "n": 64,
+        "target": "tdc_core_deposit_proximate_bank_only_qoq",
+        "shock_column": "tdc_core_deposit_proximate_bank_only_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "core_total_response": {
+        "beta": 169.47198317892202,
+        "se": 81.11793275050208,
+        "lower95": -24.494885784250602,
+        "upper95": 226.8883959835381,
+        "n": 64,
+        "target": "tdc_core_deposit_proximate_bank_only_qoq",
+        "shock_column": "tdc_core_deposit_proximate_bank_only_residual_z",
+        "outcome_construction": "estimated_common_design"
+      },
+      "core_residual_response": {
+        "beta": -43.17170635060543,
+        "se": 36.77801667591564,
+        "lower95": -145.1498781938344,
+        "upper95": -15.371372608261622,
+        "n": 64,
+        "target": "tdc_core_deposit_proximate_bank_only_qoq",
+        "shock_column": "tdc_core_deposit_proximate_bank_only_residual_z",
+        "outcome_construction": "derived_total_minus_tdc"
+      },
+      "core_minus_baseline_residual_beta": 67.6373093367796
+    }
+  },
+  "strict_validation_check": {
+    "status": "available",
+    "comparison_target": "tdc_no_toc_no_row_bank_only_qoq",
+    "comparison_residual_outcome": "other_component_no_toc_no_row_bank_only_qoq",
+    "h0_core_residual_beta": -5.508313542362046,
+    "h0_strict_identifiable_total_beta": 10.831912868739106,
+    "h0_sign_match": false,
+    "h0_gap_after_funding_beta": -15.635918312449956
+  },
+  "promotion_recommendation": {
+    "status": "keep_interpretive_only",
+    "why": "The core deposit-proximate series is currently a semantic alias of the no-TOC/no-ROW treatment, and the separately estimated core shock should stay interpretive until it delivers a clearer validated object than the existing diagnostic branch.",
+    "current_release_role": "keep split architecture interpretive and diagnostic"
+  },
+  "takeaways": [
+    "The current core deposit-proximate target is mechanically the same series as the legacy no-TOC/no-ROW diagnostic, so promoting it is a semantic and reporting decision, not a new target-data discovery.",
+    "Baseline and core shocks overlap only moderately (corr \u2248 0.42, same-sign share \u2248 0.72), so a promoted core shock would not just be a trivial relabeling of the frozen baseline shock.",
+    "Under separate estimation, the core treatment still has a live h0 target response (\u2248 63.10) and a small remaining residual (\u2248 -5.51).",
+    "But the direct-count validation is still not there at h0: core residual \u2248 -5.51, strict identifiable total \u2248 10.83, sign_match = false.",
+    "The core deposit-proximate series is currently a semantic alias of the no-TOC/no-ROW treatment, and the separately estimated core shock should stay interpretive until it delivers a clearer validated object than the existing diagnostic branch."
+  ]
+}

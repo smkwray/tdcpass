@@ -1,0 +1,518 @@
+{
+  "status": "available",
+  "headline_question": "Does current public data isolate any same-scope transaction-based subcomponent inside `strict_loan_di_loans_nec_qoq` that deserves promotion into the strict object?",
+  "estimation_path": {
+    "summary_artifact": "strict_di_loans_nec_measurement_audit_summary.json",
+    "target_outcome": "strict_loan_di_loans_nec_qoq",
+    "source_families": [
+      "cross_scope_transaction_bridges",
+      "same_scope_proxies"
+    ]
+  },
+  "candidate_groups": {
+    "same_scope_transaction_subcomponents": [],
+    "cross_scope_transaction_bridges": [
+      "strict_di_loans_nec_private_domestic_borrower_qoq",
+      "strict_di_loans_nec_nonfinancial_corporate_qoq",
+      "strict_di_loans_nec_noncore_system_borrower_qoq",
+      "strict_di_loans_nec_systemwide_liability_total_qoq"
+    ],
+    "same_scope_proxies": [
+      "loans_to_commercial_banks_qoq",
+      "loans_to_nondepository_financial_institutions_qoq",
+      "loans_for_purchasing_or_carrying_securities_qoq"
+    ]
+  },
+  "classification": {
+    "same_scope_transaction_subcomponent_status": "not_available_from_current_public_data",
+    "h0_best_cross_scope_transaction_bridge": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+    "h0_best_same_scope_proxy": "loans_to_nondepository_financial_institutions_qoq",
+    "promotion_gate": "no_promotable_same_scope_transaction_subcomponent_supported"
+  },
+  "recommendation": {
+    "status": "no_promotable_same_scope_transaction_subcomponent_supported",
+    "strict_rule": "keep_di_bucket_out_of_strict_object",
+    "next_branch": "freeze_framework_and_move_to_writeup_if_no_new_public_transaction_split_appears"
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline": {
+        "cross_scope_transaction_bridges": {
+          "target_response": {
+            "beta": -0.26454114113574967,
+            "se": 9.534274569487632,
+            "lower95": -18.951719297331508,
+            "upper95": 18.422637015060012,
+            "n": 68,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "strict_di_loans_nec_systemwide_liability_total_qoq",
+              "response": {
+                "beta": 1.4082818809715363,
+                "se": 14.485908928975322,
+                "lower95": -26.984099619820093,
+                "upper95": 29.800663381763165,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 1.672823022107286,
+              "same_sign_as_target": false
+            },
+            {
+              "outcome": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+              "response": {
+                "beta": 6.802884737561426,
+                "se": 10.375400383193238,
+                "lower95": -13.53290001349732,
+                "upper95": 27.138669488620174,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 7.0674258786971755,
+              "same_sign_as_target": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "strict_di_loans_nec_systemwide_liability_total_qoq",
+            "response": {
+              "beta": 1.4082818809715363,
+              "se": 14.485908928975322,
+              "lower95": -26.984099619820093,
+              "upper95": 29.800663381763165,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_target_beta": 1.672823022107286,
+            "same_sign_as_target": false
+          }
+        },
+        "same_scope_proxies": {
+          "target_response": {
+            "beta": -0.26454114113574967,
+            "se": 9.534274569487632,
+            "lower95": -18.951719297331508,
+            "upper95": 18.422637015060012,
+            "n": 68,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": 0.6785152791545407,
+                "se": 0.5420148784865759,
+                "lower95": -0.3838338826791482,
+                "upper95": 1.7408644409882297,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 0.9430564202902904,
+              "same_sign_as_target": false
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 0.8834031527673665,
+                "se": 0.7350944801097316,
+                "lower95": -0.5573820282477073,
+                "upper95": 2.3241883337824403,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 1.1479442939031161,
+              "same_sign_as_target": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 7.837548246683385,
+                "se": 5.124117871980959,
+                "lower95": -2.2057227823992935,
+                "upper95": 17.880819275766065,
+                "n": 42,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 8.102089387819134,
+              "same_sign_as_target": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "loans_to_commercial_banks_qoq",
+            "response": {
+              "beta": 0.6785152791545407,
+              "se": 0.5420148784865759,
+              "lower95": -0.3838338826791482,
+              "upper95": 1.7408644409882297,
+              "n": 68,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_target_beta": 0.9430564202902904,
+            "same_sign_as_target": false
+          }
+        }
+      },
+      "core_deposit_proximate": {
+        "cross_scope_transaction_bridges": {
+          "target_response": {
+            "beta": 17.578672675488704,
+            "se": 5.630935448906296,
+            "lower95": 6.5420391956323645,
+            "upper95": 28.615306155345046,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+              "response": {
+                "beta": 20.8166137064566,
+                "se": 6.721119894693238,
+                "lower95": 7.6432187128578555,
+                "upper95": 33.99000870005534,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_target_beta": 3.237941030967896,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "strict_di_loans_nec_systemwide_liability_total_qoq",
+              "response": {
+                "beta": 24.290465905370223,
+                "se": 9.04033982830887,
+                "lower95": 6.571399841884837,
+                "upper95": 42.00953196885561,
+                "n": 68,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_target_beta": 6.711793229881518,
+              "same_sign_as_target": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+            "response": {
+              "beta": 20.8166137064566,
+              "se": 6.721119894693238,
+              "lower95": 7.6432187128578555,
+              "upper95": 33.99000870005534,
+              "n": 68,
+              "ci_excludes_zero": true
+            },
+            "abs_gap_to_target_beta": 3.237941030967896,
+            "same_sign_as_target": true
+          }
+        },
+        "same_scope_proxies": {
+          "target_response": {
+            "beta": 17.578672675488704,
+            "se": 5.630935448906296,
+            "lower95": 6.5420391956323645,
+            "upper95": 28.615306155345046,
+            "n": 68,
+            "ci_excludes_zero": true
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 5.133716347292747,
+                "se": 1.117289958504065,
+                "lower95": 2.9438280286247798,
+                "upper95": 7.323604665960715,
+                "n": 42,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_target_beta": 12.444956328195957,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": 0.7140122090512594,
+                "se": 0.7066393962411962,
+                "lower95": -0.6710010075814851,
+                "upper95": 2.0990254256840037,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 16.864660466437446,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 0.5930191140285268,
+                "se": 0.6169806714377714,
+                "lower95": -0.616263001989505,
+                "upper95": 1.8023012300465586,
+                "n": 68,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 16.98565356146018,
+              "same_sign_as_target": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "loans_to_nondepository_financial_institutions_qoq",
+            "response": {
+              "beta": 5.133716347292747,
+              "se": 1.117289958504065,
+              "lower95": 2.9438280286247798,
+              "upper95": 7.323604665960715,
+              "n": 42,
+              "ci_excludes_zero": true
+            },
+            "abs_gap_to_target_beta": 12.444956328195957,
+            "same_sign_as_target": true
+          }
+        }
+      }
+    },
+    "h4": {
+      "baseline": {
+        "cross_scope_transaction_bridges": {
+          "target_response": {
+            "beta": -9.39031488156056,
+            "se": 10.03485908443932,
+            "lower95": -29.058638687061627,
+            "upper95": 10.278008923940508,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "strict_di_loans_nec_systemwide_liability_total_qoq",
+              "response": {
+                "beta": -12.334859341667183,
+                "se": 15.10101531401085,
+                "lower95": -41.93284935712845,
+                "upper95": 17.26313067379408,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 2.9445444601066235,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+              "response": {
+                "beta": -5.0964231617537195,
+                "se": 9.175178874092135,
+                "lower95": -23.0797737549743,
+                "upper95": 12.886927431466862,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 4.29389171980684,
+              "same_sign_as_target": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "strict_di_loans_nec_systemwide_liability_total_qoq",
+            "response": {
+              "beta": -12.334859341667183,
+              "se": 15.10101531401085,
+              "lower95": -41.93284935712845,
+              "upper95": 17.26313067379408,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_target_beta": 2.9445444601066235,
+            "same_sign_as_target": true
+          }
+        },
+        "same_scope_proxies": {
+          "target_response": {
+            "beta": -9.39031488156056,
+            "se": 10.03485908443932,
+            "lower95": -29.058638687061627,
+            "upper95": 10.278008923940508,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": -0.5161840577863458,
+                "se": 0.6443221946750732,
+                "lower95": -1.7790555593494894,
+                "upper95": 0.7466874437767977,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 8.874130823774214,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 3.394174434209317,
+                "se": 3.2973154685179984,
+                "lower95": -3.06856388408596,
+                "upper95": 9.856912752504595,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 12.784489315769877,
+              "same_sign_as_target": false
+            },
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 10.961677081454521,
+                "se": 5.699860074838644,
+                "lower95": -0.21004866522921972,
+                "upper95": 22.133402828138262,
+                "n": 38,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 20.35199196301508,
+              "same_sign_as_target": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "loans_to_commercial_banks_qoq",
+            "response": {
+              "beta": -0.5161840577863458,
+              "se": 0.6443221946750732,
+              "lower95": -1.7790555593494894,
+              "upper95": 0.7466874437767977,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_target_beta": 8.874130823774214,
+            "same_sign_as_target": true
+          }
+        }
+      },
+      "core_deposit_proximate": {
+        "cross_scope_transaction_bridges": {
+          "target_response": {
+            "beta": 11.617987884435136,
+            "se": 6.386846719819363,
+            "lower95": -0.9002316864108142,
+            "upper95": 24.136207455281088,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+              "response": {
+                "beta": 9.31990512596066,
+                "se": 5.9168273316021995,
+                "lower95": -2.2770764439796523,
+                "upper95": 20.91688669590097,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 2.298082758474477,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "strict_di_loans_nec_systemwide_liability_total_qoq",
+              "response": {
+                "beta": 6.712737850643952,
+                "se": 10.186512127534195,
+                "lower95": -13.25282591932307,
+                "upper95": 26.678301620610974,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 4.905250033791184,
+              "same_sign_as_target": true
+            }
+          ],
+          "best_candidate": {
+            "outcome": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+            "response": {
+              "beta": 9.31990512596066,
+              "se": 5.9168273316021995,
+              "lower95": -2.2770764439796523,
+              "upper95": 20.91688669590097,
+              "n": 64,
+              "ci_excludes_zero": false
+            },
+            "abs_gap_to_target_beta": 2.298082758474477,
+            "same_sign_as_target": true
+          }
+        },
+        "same_scope_proxies": {
+          "target_response": {
+            "beta": 11.617987884435136,
+            "se": 6.386846719819363,
+            "lower95": -0.9002316864108142,
+            "upper95": 24.136207455281088,
+            "n": 64,
+            "ci_excludes_zero": false
+          },
+          "ranked_candidates": [
+            {
+              "outcome": "loans_to_nondepository_financial_institutions_qoq",
+              "response": {
+                "beta": 5.6596302772225915,
+                "se": 2.777293465045571,
+                "lower95": 0.21613508573327245,
+                "upper95": 11.10312546871191,
+                "n": 38,
+                "ci_excludes_zero": true
+              },
+              "abs_gap_to_target_beta": 5.958357607212545,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "loans_for_purchasing_or_carrying_securities_qoq",
+              "response": {
+                "beta": 1.1043588890553901,
+                "se": 2.2799912110091682,
+                "lower95": -3.3644238845225796,
+                "upper95": 5.573141662633359,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 10.513628995379745,
+              "same_sign_as_target": true
+            },
+            {
+              "outcome": "loans_to_commercial_banks_qoq",
+              "response": {
+                "beta": -0.5420801624207753,
+                "se": 0.376913486903872,
+                "lower95": -1.2808305967523643,
+                "upper95": 0.19667027191081377,
+                "n": 64,
+                "ci_excludes_zero": false
+              },
+              "abs_gap_to_target_beta": 12.160068046855912,
+              "same_sign_as_target": false
+            }
+          ],
+          "best_candidate": {
+            "outcome": "loans_to_nondepository_financial_institutions_qoq",
+            "response": {
+              "beta": 5.6596302772225915,
+              "se": 2.777293465045571,
+              "lower95": 0.21613508573327245,
+              "upper95": 11.10312546871191,
+              "n": 38,
+              "ci_excludes_zero": true
+            },
+            "abs_gap_to_target_beta": 5.958357607212545,
+            "same_sign_as_target": true
+          }
+        }
+      }
+    }
+  },
+  "takeaways": [
+    "This audit asks a narrower measurement question than the bridge surfaces: can the broad DI-loans-n.e.c. lender transaction row be split into any clean same-scope transaction-based subcomponent using current public data?",
+    "The answer is constrained by the current data map itself: the repo has one direct lender-side transaction row for the DI bucket, a cross-scope borrower-counterpart family, and only proxy-level same-scope slices for likely noncore pieces.",
+    "At h0 under the core-deposit-proximate shock, the closest cross-scope transaction bridge is `strict_di_loans_nec_nonfinancial_corporate_qoq` with beta \u2248 20.82 against DI aggregate \u2248 17.58.",
+    "The closest same-scope proxy slice is `loans_to_nondepository_financial_institutions_qoq` with beta \u2248 5.13, but it remains a proxy-level level-change family rather than a clean lender-side transaction split.",
+    "So the current public data do not support promoting any DI-loans-n.e.c. subcomponent into the strict object: the exact same-scope transaction subcomponent is unavailable, the best bridges are cross-scope, and the best same-scope slices are proxy-only."
+  ]
+}

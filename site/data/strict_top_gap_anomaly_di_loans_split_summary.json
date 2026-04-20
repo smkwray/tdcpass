@@ -1,0 +1,205 @@
+{
+  "status": "available",
+  "headline_question": "Within the DI-loans-n.e.c. anomaly, which borrower-side counterpart buckets differ most from the same-bucket peers?",
+  "estimation_path": {
+    "input_panel": "quarterly_panel_with_di_loans_nec_components",
+    "comparison_artifact": "strict_top_gap_anomaly_di_loans_split_summary.json",
+    "anomaly_source_artifact": "strict_top_gap_anomaly_summary.json",
+    "top_gap_limit": 5,
+    "anomaly_quarter": "2009Q4"
+  },
+  "anomaly_quarter": {
+    "quarter": "2009Q4",
+    "period_bucket": "post_gfc_early",
+    "baseline_shock": -0.2810596542553419,
+    "toc_row_excluded_shock": -3.4428656402507976,
+    "shock_gap": -3.1618059859954557,
+    "shock_gap_sign": "negative",
+    "abs_shock_gap": 3.1618059859954557,
+    "bundle_qoq": 208.777,
+    "bundle_sign": "positive",
+    "gap_alignment_to_bundle": "opposed",
+    "row_leg_qoq": 127.107,
+    "row_leg_alignment_to_gap": "opposed",
+    "toc_signed_contribution_qoq": 81.67,
+    "toc_leg_alignment_to_gap": "opposed",
+    "directional_driver": "both_legs_oppose_gap",
+    "excluded_other_component_qoq": 73.64099999999998,
+    "strict_identifiable_total_qoq": -68.394,
+    "excluded_strict_gap_qoq": 142.03499999999997,
+    "strict_identifiable_net_after_funding_qoq": 97.46699999999998,
+    "excluded_strict_gap_after_funding_qoq": -23.826000000000008,
+    "foreign_nonts_qoq": 43.228,
+    "tga_qoq": 80.613,
+    "reserves_qoq": 142.356,
+    "residual_strict_pattern": "positive_residual_negative_strict",
+    "strict_loan_source_qoq": -114.68,
+    "strict_non_treasury_securities_qoq": 46.285999999999994,
+    "strict_funding_offset_total_qoq": -165.861
+  },
+  "peer_quarters": [
+    {
+      "quarter": "2020Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 3.810380466186416,
+      "toc_row_excluded_shock": 13.09521127559779,
+      "shock_gap": 9.284830809411375,
+      "shock_gap_sign": "positive",
+      "abs_shock_gap": 9.284830809411375,
+      "bundle_qoq": -367.053,
+      "bundle_sign": "negative",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": -255.649,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": -111.404,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap",
+      "excluded_other_component_qoq": 171.72799999999904,
+      "strict_identifiable_total_qoq": 515.764,
+      "excluded_strict_gap_qoq": -344.03600000000097,
+      "strict_identifiable_net_after_funding_qoq": 338.824,
+      "excluded_strict_gap_after_funding_qoq": -167.09600000000097,
+      "foreign_nonts_qoq": 559.303,
+      "tga_qoq": 22.432,
+      "reserves_qoq": 535.044,
+      "residual_strict_pattern": "positive_residual_positive_strict",
+      "strict_loan_source_qoq": 408.623,
+      "strict_non_treasury_securities_qoq": 107.141,
+      "strict_funding_offset_total_qoq": 176.94
+    },
+    {
+      "quarter": "2021Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 5.58228501055368,
+      "toc_row_excluded_shock": 0.6017768725534413,
+      "shock_gap": -4.980508138000239,
+      "shock_gap_sign": "negative",
+      "abs_shock_gap": 4.980508138000239,
+      "bundle_qoq": 827.2830000000001,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": 220.665,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": 606.618,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap",
+      "excluded_other_component_qoq": 255.70499999999703,
+      "strict_identifiable_total_qoq": 313.971,
+      "excluded_strict_gap_qoq": -58.266000000002975,
+      "strict_identifiable_net_after_funding_qoq": 339.497,
+      "excluded_strict_gap_after_funding_qoq": -83.79200000000299,
+      "foreign_nonts_qoq": 30.291,
+      "tga_qoq": -565.328,
+      "reserves_qoq": 754.006,
+      "residual_strict_pattern": "positive_residual_positive_strict",
+      "strict_loan_source_qoq": -60.055,
+      "strict_non_treasury_securities_qoq": 374.026,
+      "strict_funding_offset_total_qoq": -25.526
+    }
+  ],
+  "peer_bucket_weight": 14.265338947411614,
+  "di_loans_nec_component_deltas": [
+    {
+      "metric": "strict_di_loans_nec_systemwide_liability_total_qoq",
+      "label": "Systemwide DI loans n.e.c. liability total",
+      "anomaly_value": -123.451,
+      "weighted_peer_mean": 432.92867249791135,
+      "anomaly_minus_peer_delta": -556.3796724979113,
+      "abs_delta": 556.3796724979113
+    },
+    {
+      "metric": "strict_di_loans_nec_systemwide_borrower_total_qoq",
+      "label": "Systemwide named borrower total",
+      "anomaly_value": -123.451,
+      "weighted_peer_mean": 432.92867249791135,
+      "anomaly_minus_peer_delta": -556.3796724979113,
+      "abs_delta": 556.3796724979113
+    },
+    {
+      "metric": "strict_loan_di_loans_nec_qoq",
+      "label": "U.S.-chartered DI loans n.e.c.",
+      "anomaly_value": -58.809,
+      "weighted_peer_mean": 293.68493987372295,
+      "anomaly_minus_peer_delta": -352.493939873723,
+      "abs_delta": 352.493939873723
+    },
+    {
+      "metric": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+      "label": "Nonfinancial corporate",
+      "anomaly_value": -39.829,
+      "weighted_peer_mean": 306.0581110835949,
+      "anomaly_minus_peer_delta": -345.8871110835949,
+      "abs_delta": 345.8871110835949
+    },
+    {
+      "metric": "strict_di_loans_nec_domestic_financial_qoq",
+      "label": "Domestic financial",
+      "anomaly_value": -61.31,
+      "weighted_peer_mean": 47.03331856190398,
+      "anomaly_minus_peer_delta": -108.34331856190398,
+      "abs_delta": 108.34331856190398
+    },
+    {
+      "metric": "strict_di_loans_nec_rest_of_world_qoq",
+      "label": "Rest of world",
+      "anomaly_value": -3.799,
+      "weighted_peer_mean": 60.3552069195673,
+      "anomaly_minus_peer_delta": -64.1542069195673,
+      "abs_delta": 64.1542069195673
+    },
+    {
+      "metric": "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+      "label": "Nonfinancial noncorporate",
+      "anomaly_value": -30.313,
+      "weighted_peer_mean": -3.727290056923959,
+      "anomaly_minus_peer_delta": -26.58570994307604,
+      "abs_delta": 26.58570994307604
+    },
+    {
+      "metric": "strict_di_loans_nec_households_nonprofits_qoq",
+      "label": "Households / nonprofits",
+      "anomaly_value": 11.148,
+      "weighted_peer_mean": 21.849913102740317,
+      "anomaly_minus_peer_delta": -10.701913102740317,
+      "abs_delta": 10.701913102740317
+    },
+    {
+      "metric": "strict_di_loans_nec_state_local_qoq",
+      "label": "State / local",
+      "anomaly_value": 0.652,
+      "weighted_peer_mean": 1.3594128870288575,
+      "anomaly_minus_peer_delta": -0.7074128870288575,
+      "abs_delta": 0.7074128870288575
+    },
+    {
+      "metric": "strict_di_loans_nec_systemwide_borrower_gap_qoq",
+      "label": "Systemwide borrower gap",
+      "anomaly_value": 1.4210854715202004e-14,
+      "weighted_peer_mean": 0.0,
+      "anomaly_minus_peer_delta": 1.4210854715202004e-14,
+      "abs_delta": 1.4210854715202004e-14
+    }
+  ],
+  "dominant_borrower_component": {
+    "metric": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+    "label": "Nonfinancial corporate",
+    "anomaly_value": -39.829,
+    "weighted_peer_mean": 306.0581110835949,
+    "anomaly_minus_peer_delta": -345.8871110835949,
+    "abs_delta": 345.8871110835949
+  },
+  "borrower_gap_row": {
+    "metric": "strict_di_loans_nec_systemwide_borrower_gap_qoq",
+    "label": "Systemwide borrower gap",
+    "anomaly_value": 1.4210854715202004e-14,
+    "weighted_peer_mean": 0.0,
+    "anomaly_minus_peer_delta": 1.4210854715202004e-14,
+    "abs_delta": 1.4210854715202004e-14
+  },
+  "interpretation": "di_loans_nec_anomaly_is_nonfinancial_corporate_shortfall",
+  "takeaways": [
+    "Inside the DI-loans-n.e.c. borrower-side split, the largest named borrower delta is `Nonfinancial corporate` at \u2248 -345.89.",
+    "The DI-loans-n.e.c. systemwide borrower-gap delta is \u2248 0.00.",
+    "This artifact should be read as a borrower-side counterpart diagnostic for the DI-loans-n.e.c. block, not as a same-scope decomposition of the U.S.-chartered lender asset series."
+  ]
+}

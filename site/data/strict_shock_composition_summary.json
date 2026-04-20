@@ -1,0 +1,229 @@
+{
+  "status": "available",
+  "headline_question": "Is the baseline-versus-excluded shock rotation driven by a handful of quarters or by a broader sample-composition problem?",
+  "estimation_path": {
+    "input_panel": "quarterly_panel_with_shocks",
+    "comparison_artifact": "strict_shock_composition_summary.json",
+    "baseline_shock_column": "tdc_residual_z",
+    "toc_row_excluded_shock_column": "tdc_no_toc_no_row_bank_only_residual_z"
+  },
+  "top_gap_quarters": [
+    {
+      "quarter": "2020Q3",
+      "period_bucket": "covid_post",
+      "baseline_shock": 0.581904236918328,
+      "toc_row_excluded_shock": -8.869170411795452,
+      "shock_gap": -9.45107464871378,
+      "abs_shock_gap": 9.45107464871378,
+      "baseline_minus_excluded_target_qoq": 17.896000000000015,
+      "row_leg_qoq": 77.543,
+      "toc_signed_contribution_qoq": -59.647,
+      "row_share_of_bundle_abs": 4.332979436745638,
+      "toc_share_of_bundle_abs": 3.3329794367456387
+    },
+    {
+      "quarter": "2020Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 3.810380466186416,
+      "toc_row_excluded_shock": 13.09521127559779,
+      "shock_gap": 9.284830809411375,
+      "abs_shock_gap": 9.284830809411375,
+      "baseline_minus_excluded_target_qoq": -367.053,
+      "row_leg_qoq": -255.649,
+      "toc_signed_contribution_qoq": -111.404,
+      "row_share_of_bundle_abs": 0.6964906975286947,
+      "toc_share_of_bundle_abs": 0.30350930247130525
+    },
+    {
+      "quarter": "2021Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 5.58228501055368,
+      "toc_row_excluded_shock": 0.6017768725534413,
+      "shock_gap": -4.980508138000239,
+      "abs_shock_gap": 4.980508138000239,
+      "baseline_minus_excluded_target_qoq": 827.2830000000001,
+      "row_leg_qoq": 220.665,
+      "toc_signed_contribution_qoq": 606.618,
+      "row_share_of_bundle_abs": 0.2667345998890343,
+      "toc_share_of_bundle_abs": 0.7332654001109656
+    },
+    {
+      "quarter": "2009Q2",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": 0.321361895525654,
+      "toc_row_excluded_shock": 3.9573727662584726,
+      "shock_gap": 3.6360108707328185,
+      "abs_shock_gap": 3.6360108707328185,
+      "baseline_minus_excluded_target_qoq": 70.08200000000002,
+      "row_leg_qoq": 119.119,
+      "toc_signed_contribution_qoq": -49.037,
+      "row_share_of_bundle_abs": 1.6997089124168825,
+      "toc_share_of_bundle_abs": 0.6997089124168828
+    },
+    {
+      "quarter": "2009Q4",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": -0.2810596542553419,
+      "toc_row_excluded_shock": -3.4428656402507976,
+      "shock_gap": -3.1618059859954557,
+      "abs_shock_gap": 3.1618059859954557,
+      "baseline_minus_excluded_target_qoq": 208.777,
+      "row_leg_qoq": 127.107,
+      "toc_signed_contribution_qoq": 81.67,
+      "row_share_of_bundle_abs": 0.6088170631822472,
+      "toc_share_of_bundle_abs": 0.39118293681775296
+    },
+    {
+      "quarter": "2017Q1",
+      "period_bucket": "pre_covid",
+      "baseline_shock": 2.3745109958432185,
+      "toc_row_excluded_shock": -0.7392047418827576,
+      "shock_gap": -3.1137157377259763,
+      "abs_shock_gap": 3.1137157377259763,
+      "baseline_minus_excluded_target_qoq": 378.875,
+      "row_leg_qoq": 71.89,
+      "toc_signed_contribution_qoq": 306.985,
+      "row_share_of_bundle_abs": 0.1897459584295612,
+      "toc_share_of_bundle_abs": 0.8102540415704388
+    },
+    {
+      "quarter": "2011Q3",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": -0.23045635846128726,
+      "toc_row_excluded_shock": -2.806746272970191,
+      "shock_gap": -2.5762899145089038,
+      "abs_shock_gap": 2.5762899145089038,
+      "baseline_minus_excluded_target_qoq": 192.19799999999998,
+      "row_leg_qoq": 113.305,
+      "toc_signed_contribution_qoq": 78.893,
+      "row_share_of_bundle_abs": 0.5895222634991,
+      "toc_share_of_bundle_abs": 0.41047773650090014
+    },
+    {
+      "quarter": "2021Q3",
+      "period_bucket": "covid_post",
+      "baseline_shock": 2.907084490706761,
+      "toc_row_excluded_shock": 0.4675287532172712,
+      "shock_gap": -2.4395557374894894,
+      "abs_shock_gap": 2.4395557374894894,
+      "baseline_minus_excluded_target_qoq": 713.26,
+      "row_leg_qoq": 76.491,
+      "toc_signed_contribution_qoq": 636.769,
+      "row_share_of_bundle_abs": 0.10724139864845919,
+      "toc_share_of_bundle_abs": 0.8927586013515408
+    }
+  ],
+  "period_bucket_profiles": [
+    {
+      "period_bucket": "covid_post",
+      "rows": 24,
+      "abs_gap_sum": 46.25590709380013,
+      "abs_gap_share": 0.5069698473389874,
+      "subset_rotation": {
+        "rows": 24,
+        "shock_corr": 0.37775147020182304,
+        "same_sign_share": 0.625,
+        "baseline_loan_corr": -0.22806120145653647,
+        "excluded_loan_corr": 0.4900809081026488,
+        "baseline_total_corr": 0.310568266320181,
+        "excluded_total_corr": 0.5042849396689696,
+        "interpretation": "excluded_shock_only_partially_aligned_with_baseline"
+      }
+    },
+    {
+      "period_bucket": "post_gfc_early",
+      "rows": 20,
+      "abs_gap_sum": 24.644642460175067,
+      "abs_gap_share": 0.27010800156664777,
+      "subset_rotation": {
+        "rows": 20,
+        "shock_corr": 0.6217918774912643,
+        "same_sign_share": 0.85,
+        "baseline_loan_corr": -0.49758067272399437,
+        "excluded_loan_corr": -0.33124267898093457,
+        "baseline_total_corr": -0.40514625407609867,
+        "excluded_total_corr": -0.25690905991175234,
+        "interpretation": "excluded_shock_close_to_baseline"
+      }
+    },
+    {
+      "period_bucket": "pre_covid",
+      "rows": 24,
+      "abs_gap_sum": 20.339407490000514,
+      "abs_gap_share": 0.2229221510943649,
+      "subset_rotation": {
+        "rows": 24,
+        "shock_corr": 0.2795755845463694,
+        "same_sign_share": 0.7083333333333334,
+        "baseline_loan_corr": -0.6610708097302084,
+        "excluded_loan_corr": 0.21605268100464728,
+        "baseline_total_corr": -0.5742418748473759,
+        "excluded_total_corr": 0.18077653576148256,
+        "interpretation": "excluded_shock_rotates_toward_positive_direct_count_channels"
+      }
+    }
+  ],
+  "trim_diagnostics": {
+    "full_sample": {
+      "rows": 68,
+      "shock_corr": 0.41818956226857457,
+      "same_sign_share": 0.7205882352941176,
+      "baseline_loan_corr": -0.37741817301900166,
+      "excluded_loan_corr": 0.18754879779953657,
+      "baseline_total_corr": -0.10845626299170096,
+      "excluded_total_corr": 0.19315633962259554,
+      "interpretation": "excluded_shock_rotates_toward_positive_direct_count_channels",
+      "dropped_quarters": []
+    },
+    "drop_top3_gap_quarters": {
+      "rows": 65,
+      "shock_corr": 0.4815389554766451,
+      "same_sign_share": 0.7230769230769231,
+      "baseline_loan_corr": -0.5207161111388593,
+      "excluded_loan_corr": -0.2720390836027543,
+      "baseline_total_corr": -0.4061312127204204,
+      "excluded_total_corr": -0.20511599481473064,
+      "interpretation": "excluded_shock_only_partially_aligned_with_baseline",
+      "dropped_quarters": [
+        "2020Q3",
+        "2020Q1",
+        "2021Q1"
+      ]
+    },
+    "drop_top5_gap_quarters": {
+      "rows": 63,
+      "shock_corr": 0.5393362784046632,
+      "same_sign_share": 0.7142857142857143,
+      "baseline_loan_corr": -0.5495169130047606,
+      "excluded_loan_corr": -0.3209979854267301,
+      "baseline_total_corr": -0.421132533374349,
+      "excluded_total_corr": -0.2570486591951104,
+      "interpretation": "excluded_shock_only_partially_aligned_with_baseline",
+      "dropped_quarters": [
+        "2020Q3",
+        "2020Q1",
+        "2021Q1",
+        "2009Q2",
+        "2009Q4"
+      ]
+    },
+    "drop_covid_post": {
+      "rows": 44,
+      "shock_corr": 0.5584428062873764,
+      "same_sign_share": 0.7727272727272727,
+      "baseline_loan_corr": -0.5783733180171297,
+      "excluded_loan_corr": -0.24499305307703853,
+      "baseline_total_corr": -0.5098723055528681,
+      "excluded_total_corr": -0.20963026310467078,
+      "interpretation": "excluded_shock_moderately_aligned_but_distinct",
+      "dropped_quarters": []
+    }
+  },
+  "interpretation": "rotation_fragile_under_both_top_quarter_and_covid_post_trims",
+  "takeaways": [
+    "The largest absolute shock-gap share sits in `covid_post`, but the rotation is not limited to a single episode.",
+    "Dropping the five largest shock-gap quarters changes the overlap structure to corr \u2248 0.54, same-sign share \u2248 0.71, interpretation = `excluded_shock_only_partially_aligned_with_baseline`.",
+    "Dropping the full `covid_post` bucket changes the overlap structure to corr \u2248 0.56, same-sign share \u2248 0.77, interpretation = `excluded_shock_moderately_aligned_but_distinct`.",
+    "The largest single quarter right now is `2020Q3` (covid_post), with shock gap \u2248 -9.45 and TOC/ROW bundle \u2248 17.90."
+  ]
+}

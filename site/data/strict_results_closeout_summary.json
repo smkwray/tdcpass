@@ -1,0 +1,85 @@
+{
+  "status": "available",
+  "headline_question": "What is the final closeout position on the strict deposit-component branch after the frozen framework and last measurement audits?",
+  "estimation_path": {
+    "summary_artifact": "strict_results_closeout_summary.json",
+    "source_artifacts": [
+      "strict_release_framing_summary.json",
+      "strict_component_framework_summary.json",
+      "strict_di_loans_nec_measurement_audit_summary.json",
+      "strict_additional_creator_candidate_summary.json"
+    ]
+  },
+  "release_position": {
+    "full_tdc_role": "broad_treasury_attributed_object_only",
+    "strict_object_rule": "exclude_toc_and_row_under_current_evidence",
+    "headline_direct_benchmark": "strict_loan_core_min_qoq",
+    "impact_horizon_candidate": "strict_loan_mortgages_qoq",
+    "standard_bridge_comparison": "strict_loan_core_plus_nonfinancial_corporate_qoq",
+    "diagnostic_envelope": "strict_loan_core_plus_private_borrower_qoq"
+  },
+  "settled_findings": [
+    "Full TDC remains the broad Treasury-attributed object; it is not currently validated as the strict deposit component.",
+    "The strict object excludes both TOC and ROW under current evidence.",
+    "The multihorizon direct strict benchmark is `strict_loan_core_min_qoq`.",
+    "The impact-horizon candidate is `strict_loan_mortgages_qoq`.",
+    "The standard narrow bridge comparison is `strict_loan_core_plus_nonfinancial_corporate_qoq`.",
+    "Closure-style accounting is descriptive only and does not count as independent verification.",
+    "The additional creator-channel search is closed under current evidence: `no_additional_extension_candidate_supported`.",
+    "The final DI-loans-n.e.c. audit is also closed under current public data: `no_promotable_same_scope_transaction_subcomponent_supported`."
+  ],
+  "evidence_tiers": {
+    "independent_evidence": [
+      "strict_loan_core_min_qoq"
+    ],
+    "comparison_rows": [
+      "strict_loan_core_plus_nonfinancial_corporate_qoq"
+    ],
+    "impact_horizon_candidates": [
+      "strict_loan_mortgages_qoq"
+    ],
+    "diagnostic_only": [
+      "strict_loan_core_plus_private_borrower_qoq",
+      "toc_row_support_bundle_qoq",
+      "strict_loan_source_qoq"
+    ],
+    "outside_strict_object": [
+      "tdc_treasury_operating_cash_qoq",
+      "tdc_rest_of_world_treasury_transactions_qoq"
+    ],
+    "unresolved": [
+      "Whether any future TOC incidence evidence justifies a validated strict share.",
+      "Whether the strict lane is still missing major direct creator channels beyond the current loan core."
+    ]
+  },
+  "unresolved_questions": [
+    "Whether any future scope- and timing-matched incidence evidence validates a narrow in-scope TOC share.",
+    "Whether a new public same-scope transaction split ever becomes available inside `strict_loan_di_loans_nec_qoq`.",
+    "Whether any genuinely new same-scope mechanical deposit-creation channel appears beyond the current direct core."
+  ],
+  "h0_snapshot": {
+    "toc_row_support_bundle_beta": 65.3966245435534,
+    "core_residual_beta": -5.508313542362046,
+    "headline_direct_core_beta": -10.658905058923445,
+    "standard_bridge_beta": 9.437768587339647
+  },
+  "classification": {
+    "branch_state": "strict_empirical_expansion_effectively_complete",
+    "di_bucket_state": "not_available_from_current_public_data",
+    "creator_extension_state": "no_additional_extension_candidate_supported",
+    "closeout_readiness": "writeup_ready_under_current_evidence"
+  },
+  "recommendation": {
+    "status": "move_to_writeup_and_results_packaging",
+    "reopen_rule": "only_reopen_on_new_same_scope_transaction_or_incidence_evidence",
+    "next_branch": "writeup_results_and_release_packaging"
+  },
+  "takeaways": [
+    "This is the final closeout surface for the strict branch: it summarizes what is settled, what remains unresolved, and whether further empirical expansion is still justified.",
+    "The repo now has a frozen broad-vs-strict split rather than an open-ended TDC redesign loop.",
+    "The strict side is intentionally narrow: direct core first, bridge second, support bundle outside.",
+    "Current h0 snapshot: TOC/ROW support bundle \u2248 65.40, core residual \u2248 -5.51, headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.44.",
+    "The unresolved DI bucket still does not yield a promotable same-scope transaction split: best cross-scope bridge = `strict_di_loans_nec_nonfinancial_corporate_qoq`, best same-scope proxy = `loans_to_nondepository_financial_institutions_qoq`.",
+    "The remaining creator-channel search is also exhausted for now: best extension candidate = `cre_multifamily_loans_qoq`, but no additional extension candidate is supported."
+  ]
+}

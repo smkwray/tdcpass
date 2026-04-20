@@ -105,6 +105,143 @@ shocks:
     scale_ratio_column: tdc_domestic_bank_only_fitted_to_target_scale_ratio
     train_target_scale_ratio_column: tdc_domestic_bank_only_fitted_to_train_target_sd_ratio
     flag_column: tdc_domestic_bank_only_shock_flag
+  unexpected_tdc_us_chartered_bank_only:
+    target: tdc_us_chartered_bank_only_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_us_chartered_bank_only
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    predictors:
+    - lag_tdc_us_chartered_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_us_chartered_bank_only_model_name
+    residual_column: tdc_us_chartered_bank_only_residual
+    standardized_column: tdc_us_chartered_bank_only_residual_z
+    fitted_column: tdc_us_chartered_bank_only_fitted
+    train_start_obs_column: tdc_us_chartered_bank_only_train_start_obs
+    condition_number_column: tdc_us_chartered_bank_only_train_condition_number
+    target_sd_column: tdc_us_chartered_bank_only_train_target_sd
+    residual_sd_column: tdc_us_chartered_bank_only_train_resid_sd
+    scale_ratio_column: tdc_us_chartered_bank_only_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_us_chartered_bank_only_fitted_to_train_target_sd_ratio
+    flag_column: tdc_us_chartered_bank_only_shock_flag
+  unexpected_tdc_no_foreign_bank_sectors:
+    target: tdc_no_foreign_bank_sectors_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_no_foreign_bank_sectors
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    predictors:
+    - lag_tdc_no_foreign_bank_sectors_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_no_foreign_bank_sectors_model_name
+    residual_column: tdc_no_foreign_bank_sectors_residual
+    standardized_column: tdc_no_foreign_bank_sectors_residual_z
+    fitted_column: tdc_no_foreign_bank_sectors_fitted
+    train_start_obs_column: tdc_no_foreign_bank_sectors_train_start_obs
+    condition_number_column: tdc_no_foreign_bank_sectors_train_condition_number
+    target_sd_column: tdc_no_foreign_bank_sectors_train_target_sd
+    residual_sd_column: tdc_no_foreign_bank_sectors_train_resid_sd
+    scale_ratio_column: tdc_no_foreign_bank_sectors_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_no_foreign_bank_sectors_fitted_to_train_target_sd_ratio
+    flag_column: tdc_no_foreign_bank_sectors_shock_flag
+  unexpected_tdc_no_toc_bank_only:
+    target: tdc_no_toc_bank_only_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_no_toc_bank_only
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    predictors:
+    - lag_tdc_no_toc_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_no_toc_bank_only_model_name
+    residual_column: tdc_no_toc_bank_only_residual
+    standardized_column: tdc_no_toc_bank_only_residual_z
+    fitted_column: tdc_no_toc_bank_only_fitted
+    train_start_obs_column: tdc_no_toc_bank_only_train_start_obs
+    condition_number_column: tdc_no_toc_bank_only_train_condition_number
+    target_sd_column: tdc_no_toc_bank_only_train_target_sd
+    residual_sd_column: tdc_no_toc_bank_only_train_resid_sd
+    scale_ratio_column: tdc_no_toc_bank_only_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_no_toc_bank_only_fitted_to_train_target_sd_ratio
+    flag_column: tdc_no_toc_bank_only_shock_flag
+  unexpected_tdc_no_toc_no_row_bank_only:
+    target: tdc_no_toc_no_row_bank_only_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_no_toc_no_row_bank_only
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    predictors:
+    - lag_tdc_no_toc_no_row_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_no_toc_no_row_bank_only_model_name
+    residual_column: tdc_no_toc_no_row_bank_only_residual
+    standardized_column: tdc_no_toc_no_row_bank_only_residual_z
+    fitted_column: tdc_no_toc_no_row_bank_only_fitted
+    train_start_obs_column: tdc_no_toc_no_row_bank_only_train_start_obs
+    condition_number_column: tdc_no_toc_no_row_bank_only_train_condition_number
+    target_sd_column: tdc_no_toc_no_row_bank_only_train_target_sd
+    residual_sd_column: tdc_no_toc_no_row_bank_only_train_resid_sd
+    scale_ratio_column: tdc_no_toc_no_row_bank_only_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_no_toc_no_row_bank_only_fitted_to_train_target_sd_ratio
+    flag_column: tdc_no_toc_no_row_bank_only_shock_flag
+  unexpected_tdc_core_deposit_proximate_bank_only:
+    target: tdc_core_deposit_proximate_bank_only_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_core_deposit_proximate_bank_only
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    quality_gate:
+      min_usable_observations: 60
+      min_shock_target_correlation: 0.5
+      max_flagged_share: 0.2
+      max_realized_scale_ratio_p95: 25.0
+      max_realized_scale_ratio_p99: 100.0
+      max_initial_train_to_usable_volatility_ratio: 2.0
+    predictors:
+    - lag_tdc_core_deposit_proximate_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_core_deposit_proximate_bank_only_model_name
+    residual_column: tdc_core_deposit_proximate_bank_only_residual
+    standardized_column: tdc_core_deposit_proximate_bank_only_residual_z
+    fitted_column: tdc_core_deposit_proximate_bank_only_fitted
+    train_start_obs_column: tdc_core_deposit_proximate_bank_only_train_start_obs
+    condition_number_column: tdc_core_deposit_proximate_bank_only_train_condition_number
+    target_sd_column: tdc_core_deposit_proximate_bank_only_train_target_sd
+    residual_sd_column: tdc_core_deposit_proximate_bank_only_train_resid_sd
+    scale_ratio_column: tdc_core_deposit_proximate_bank_only_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_core_deposit_proximate_bank_only_fitted_to_train_target_sd_ratio
+    flag_column: tdc_core_deposit_proximate_bank_only_shock_flag
   unexpected_tdc_no_remit_bank_only:
     target: tdc_no_remit_bank_only_qoq
     method: rolling_window_ridge
@@ -157,6 +294,84 @@ shocks:
     scale_ratio_column: tdc_credit_union_sensitive_fitted_to_target_scale_ratio
     train_target_scale_ratio_column: tdc_credit_union_sensitive_fitted_to_train_target_sd_ratio
     flag_column: tdc_credit_union_sensitive_shock_flag
+  unexpected_tdc_tier2_bank_only:
+    target: tdc_tier2_bank_only_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_tier2_bank_only
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    predictors:
+    - lag_tdc_tier2_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_tier2_bank_only_model_name
+    residual_column: tdc_tier2_bank_only_residual
+    standardized_column: tdc_tier2_bank_only_residual_z
+    fitted_column: tdc_tier2_bank_only_fitted
+    train_start_obs_column: tdc_tier2_bank_only_train_start_obs
+    condition_number_column: tdc_tier2_bank_only_train_condition_number
+    target_sd_column: tdc_tier2_bank_only_train_target_sd
+    residual_sd_column: tdc_tier2_bank_only_train_resid_sd
+    scale_ratio_column: tdc_tier2_bank_only_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_tier2_bank_only_fitted_to_train_target_sd_ratio
+    flag_column: tdc_tier2_bank_only_shock_flag
+  unexpected_tdc_tier3_bank_only:
+    target: tdc_tier3_bank_only_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_tier3_bank_only
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    predictors:
+    - lag_tdc_tier3_bank_only_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_tier3_bank_only_model_name
+    residual_column: tdc_tier3_bank_only_residual
+    standardized_column: tdc_tier3_bank_only_residual_z
+    fitted_column: tdc_tier3_bank_only_fitted
+    train_start_obs_column: tdc_tier3_bank_only_train_start_obs
+    condition_number_column: tdc_tier3_bank_only_train_condition_number
+    target_sd_column: tdc_tier3_bank_only_train_target_sd
+    residual_sd_column: tdc_tier3_bank_only_train_resid_sd
+    scale_ratio_column: tdc_tier3_bank_only_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_tier3_bank_only_fitted_to_train_target_sd_ratio
+    flag_column: tdc_tier3_bank_only_shock_flag
+  unexpected_tdc_tier3_broad_depository:
+    target: tdc_tier3_broad_depository_qoq
+    method: rolling_window_ridge
+    model_name: unexpected_tdc_tier3_broad_depository
+    min_train_obs: 24
+    max_train_obs: 40
+    ridge_alpha: 125.0
+    predictors:
+    - lag_tdc_tier3_broad_depository_qoq
+    - lag_fedfunds
+    - lag_unemployment
+    - lag_inflation
+    standardize_residual: true
+    max_condition_number: 1000000
+    max_scale_ratio: 5
+    model_name_column: tdc_tier3_broad_depository_model_name
+    residual_column: tdc_tier3_broad_depository_residual
+    standardized_column: tdc_tier3_broad_depository_residual_z
+    fitted_column: tdc_tier3_broad_depository_fitted
+    train_start_obs_column: tdc_tier3_broad_depository_train_start_obs
+    condition_number_column: tdc_tier3_broad_depository_train_condition_number
+    target_sd_column: tdc_tier3_broad_depository_train_target_sd
+    residual_sd_column: tdc_tier3_broad_depository_train_resid_sd
+    scale_ratio_column: tdc_tier3_broad_depository_fitted_to_target_scale_ratio
+    train_target_scale_ratio_column: tdc_tier3_broad_depository_fitted_to_train_target_sd_ratio
+    flag_column: tdc_tier3_broad_depository_shock_flag
   unexpected_tdc_no_bill_share:
     target: tdc_bank_only_qoq
     method: expanding_window_ols

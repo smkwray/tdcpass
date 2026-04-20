@@ -1,0 +1,138 @@
+{
+  "status": "available",
+  "headline_question": "Within the largest baseline-versus-excluded shock-gap quarters, is the TOC/ROW bundle mainly TOC-driven, ROW-driven, or mixed?",
+  "estimation_path": {
+    "input_panel": "quarterly_panel_with_shocks",
+    "comparison_artifact": "strict_top_gap_quarter_audit_summary.json",
+    "baseline_shock_column": "tdc_residual_z",
+    "toc_row_excluded_shock_column": "tdc_no_toc_no_row_bank_only_residual_z",
+    "top_gap_limit": 5
+  },
+  "top_gap_quarters": [
+    {
+      "quarter": "2020Q3",
+      "period_bucket": "covid_post",
+      "baseline_shock": 0.581904236918328,
+      "toc_row_excluded_shock": -8.869170411795452,
+      "shock_gap": -9.45107464871378,
+      "abs_shock_gap": 9.45107464871378,
+      "bundle_qoq": 17.896000000000015,
+      "bundle_sign": "positive",
+      "row_leg_qoq": 77.543,
+      "toc_signed_contribution_qoq": -59.647,
+      "row_leg_abs_share": 0.5652234127851885,
+      "toc_leg_abs_share": 0.43477658721481155,
+      "row_leg_alignment_to_bundle": "positive",
+      "toc_leg_alignment_to_bundle": "negative",
+      "dominant_leg": "mixed",
+      "contribution_pattern": "offsetting"
+    },
+    {
+      "quarter": "2020Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 3.810380466186416,
+      "toc_row_excluded_shock": 13.09521127559779,
+      "shock_gap": 9.284830809411375,
+      "abs_shock_gap": 9.284830809411375,
+      "bundle_qoq": -367.053,
+      "bundle_sign": "negative",
+      "row_leg_qoq": -255.649,
+      "toc_signed_contribution_qoq": -111.404,
+      "row_leg_abs_share": 0.6964906975286947,
+      "toc_leg_abs_share": 0.30350930247130525,
+      "row_leg_alignment_to_bundle": "positive",
+      "toc_leg_alignment_to_bundle": "positive",
+      "dominant_leg": "row_dominant",
+      "contribution_pattern": "reinforcing"
+    },
+    {
+      "quarter": "2021Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 5.58228501055368,
+      "toc_row_excluded_shock": 0.6017768725534413,
+      "shock_gap": -4.980508138000239,
+      "abs_shock_gap": 4.980508138000239,
+      "bundle_qoq": 827.2830000000001,
+      "bundle_sign": "positive",
+      "row_leg_qoq": 220.665,
+      "toc_signed_contribution_qoq": 606.618,
+      "row_leg_abs_share": 0.2667345998890343,
+      "toc_leg_abs_share": 0.7332654001109657,
+      "row_leg_alignment_to_bundle": "positive",
+      "toc_leg_alignment_to_bundle": "positive",
+      "dominant_leg": "toc_dominant",
+      "contribution_pattern": "reinforcing"
+    },
+    {
+      "quarter": "2009Q2",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": 0.321361895525654,
+      "toc_row_excluded_shock": 3.9573727662584726,
+      "shock_gap": 3.6360108707328185,
+      "abs_shock_gap": 3.6360108707328185,
+      "bundle_qoq": 70.08200000000002,
+      "bundle_sign": "positive",
+      "row_leg_qoq": 119.119,
+      "toc_signed_contribution_qoq": -49.037,
+      "row_leg_abs_share": 0.708383881633721,
+      "toc_leg_abs_share": 0.29161611836627893,
+      "row_leg_alignment_to_bundle": "positive",
+      "toc_leg_alignment_to_bundle": "negative",
+      "dominant_leg": "row_dominant",
+      "contribution_pattern": "offsetting"
+    },
+    {
+      "quarter": "2009Q4",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": -0.2810596542553419,
+      "toc_row_excluded_shock": -3.4428656402507976,
+      "shock_gap": -3.1618059859954557,
+      "abs_shock_gap": 3.1618059859954557,
+      "bundle_qoq": 208.777,
+      "bundle_sign": "positive",
+      "row_leg_qoq": 127.107,
+      "toc_signed_contribution_qoq": 81.67,
+      "row_leg_abs_share": 0.6088170631822472,
+      "toc_leg_abs_share": 0.39118293681775296,
+      "row_leg_alignment_to_bundle": "positive",
+      "toc_leg_alignment_to_bundle": "positive",
+      "dominant_leg": "mixed",
+      "contribution_pattern": "reinforcing"
+    }
+  ],
+  "dominant_leg_summary": [
+    {
+      "dominant_leg": "row_dominant",
+      "abs_gap_weight": 12.920841680144193,
+      "abs_gap_share": 0.4234365896956725
+    },
+    {
+      "dominant_leg": "mixed",
+      "abs_gap_weight": 12.612880634709235,
+      "abs_gap_share": 0.4133442150604748
+    },
+    {
+      "dominant_leg": "toc_dominant",
+      "abs_gap_weight": 4.980508138000239,
+      "abs_gap_share": 0.16321919524385273
+    }
+  ],
+  "contribution_pattern_summary": [
+    {
+      "contribution_pattern": "reinforcing",
+      "abs_gap_weight": 17.42714493340707,
+      "abs_gap_share": 0.5711153345431098
+    },
+    {
+      "contribution_pattern": "offsetting",
+      "abs_gap_weight": 13.087085519446598,
+      "abs_gap_share": 0.42888466545689025
+    }
+  ],
+  "interpretation": "top_gap_quarters_are_mixed_or_offsetting_toc_row_bundles",
+  "takeaways": [
+    "Across the top-gap quarters, the largest dominant-leg bucket is `row_dominant` with abs-gap share \u2248 0.42.",
+    "Across the top-gap quarters, the largest contribution pattern is `reinforcing` with abs-gap share \u2248 0.57.",
+    "The largest top-gap quarter is `2020Q3` with dominant leg `mixed` and contribution pattern `offsetting`."
+  ]
+}

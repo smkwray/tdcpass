@@ -1,0 +1,85 @@
+{
+  "status": "available",
+  "headline_question": "With the treatment side now split into a deposit-proximate core and a TOC/ROW support bundle, what exactly is failing in the strict lane and what should be built next?",
+  "estimation_path": {
+    "summary_artifact": "strict_redesign_summary.json",
+    "source_artifacts": [
+      "strict_identifiable_followup_summary.json",
+      "strict_missing_channel_summary.json",
+      "split_treatment_architecture_summary.json",
+      "core_treatment_promotion_summary.json"
+    ],
+    "release_role": "strict_redesign_planning_surface"
+  },
+  "current_strict_problem_definition": {
+    "label": "treatment_split_fixed_but_core_direct_counts_still_point_the_wrong_way",
+    "promotion_status": "keep_interpretive_only",
+    "split_next_branch": "split_core_plus_support_bundle",
+    "h0_support_bundle_beta": 65.3966245435534,
+    "h0_core_deposit_proximate_target_beta": 63.097364377454454,
+    "h0_core_residual_beta": -5.508313542362046,
+    "h0_baseline_strict_gap_beta": -75.57860724607262,
+    "h0_baseline_strict_identifiable_total_beta": -2.065449067392155,
+    "h0_toc_row_excluded_residual_beta": -5.5017271614404075,
+    "h0_toc_row_excluded_strict_identifiable_total_beta": 10.831912868739106,
+    "h0_toc_row_excluded_net_after_funding_beta": 9.903810997234132,
+    "h0_gap_after_funding_beta": -15.635918312449956,
+    "h0_sign_match": false,
+    "toc_row_excluded_interpretation": "toc_row_exclusion_exposes_sign_mismatch_in_direct_counts"
+  },
+  "failure_modes": {
+    "scope_mismatch_not_primary": {
+      "status": "not_primary",
+      "h0_remaining_share_of_baseline_strict_gap": 0.9193451054410284,
+      "h0_relief_share_of_baseline_strict_gap": 0.08065489455897161
+    },
+    "sign_mismatch_under_core_residual": {
+      "status": "confirmed",
+      "h0_core_residual_beta": -5.508313542362046,
+      "h0_strict_identifiable_total_beta": 10.831912868739106,
+      "h0_toc_row_excluded_residual_beta": -5.5017271614404075,
+      "h0_toc_row_excluded_strict_identifiable_total_beta": 10.831912868739106
+    },
+    "loan_bucket_shape": {
+      "status": "loan_core_not_h0_di_loans_nec_concentrated",
+      "h0_dominant_loan_component": "strict_loan_consumer_credit_qoq",
+      "h0_di_loans_nec_share_of_signed_loan_source_beta": 0.013244846828831753
+    },
+    "funding_offset_instability": {
+      "status": "material",
+      "h0_funding_offset_share_of_identifiable_total_beta": 0.7792675601225991,
+      "h0_gap_after_funding_beta": -15.635918312449956
+    },
+    "remaining_unmeasured_channels": {
+      "status": "large",
+      "h0_toc_row_excluded_gap_share_of_residual_abs": 2.9645439770115987,
+      "h0_toc_row_excluded_gap_after_funding_share_of_residual_abs": 2.8420017666518227
+    }
+  },
+  "recommended_build_order": [
+    {
+      "step": "redesign_strict_loan_core_before_adding_more_channels",
+      "why": "The treatment split is now explicit but the direct-count failure remains: the h0 core residual is still about -5.51 while the strict identifiable total is about 10.83.",
+      "deliverable": "Create a release-facing core-loan subtotal that keeps consumer credit and mortgages explicit and moves broad DI-loans-n.e.c. content out of the headline core until it is subdivided."
+    },
+    {
+      "step": "split_di_loans_nec_into_core_vs_noncore_credit_buckets",
+      "why": "At h0 the dominant loan block is `strict_loan_consumer_credit_qoq` and DI-loans-n.e.c. contributes only about 0.01 of signed loan-source beta, so the next problem is not simply \u201cadd more DI loans n.e.c.\u201d; it is classifying broad system/financial/external credit separately from deposit-proximate core credit.",
+      "deliverable": "Publish a DI-loans-n.e.c. split that separates private-credit-like content from system, financial, interbank, and external content using the existing borrower-side diagnostics as scaffolding."
+    },
+    {
+      "step": "keep_securities_and_funding_secondary_until_loan_core_stabilizes",
+      "why": "Funding offsets are already about 0.78 of the signed strict identifiable total at h0, so broadening the headline strict lane with more netting now would blur the failure rather than clarify it.",
+      "deliverable": "Leave securities and funding-offset blocks as sensitivities while the loan-core redesign is evaluated against the split treatment architecture."
+    }
+  ],
+  "takeaways": [
+    "The treatment-side redesign is now stable enough to stop debating the headline split and return to the strict lane itself.",
+    "At h0, the split treatment leaves a large support bundle (\u2248 65.40) but a much smaller core residual (\u2248 -5.51).",
+    "The matched-bank-leg scope check is no longer the main strict-lane issue: about 0.92 of the baseline strict gap still remains when only that scope shift is applied.",
+    "Even on the TOC/ROW-excluded comparison, the direct-count strict lane still points the wrong way at h0: residual \u2248 -5.50, strict identifiable total \u2248 10.83.",
+    "The h0 loan picture does not justify treating DI-loans-n.e.c. as the headline core: the dominant loan block is `strict_loan_consumer_credit_qoq` and DI-loans-n.e.c. contributes only about 0.01 of signed loan-source beta.",
+    "Funding offsets are already material at h0 (about 0.78 of signed identifiable total), so the next strict branch should stabilize the loan core before revisiting more netting.",
+    "The separate core-treatment shock stays interpretive only for now, so strict-lane redesign should proceed under the current split architecture rather than around a newly promoted treatment."
+  ]
+}

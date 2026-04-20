@@ -1,0 +1,251 @@
+{
+  "status": "available",
+  "headline_question": "Does the TOC/ROW bundle have validated strict deposit incidence, or does it remain a measured Treasury support bundle with unresolved in-scope deposit incidence?",
+  "estimation_path": {
+    "summary_artifact": "toc_row_incidence_audit_summary.json",
+    "source_artifacts": [
+      "treasury_operating_cash_audit_summary.json",
+      "rest_of_world_treasury_audit_summary.json",
+      "toc_row_path_split_summary.json",
+      "split_treatment_architecture_summary.json"
+    ],
+    "raw_quarterly_scope": "uses raw quarterly alignment diagnostics from existing TOC and ROW audit surfaces plus LP h0/h1 responses"
+  },
+  "leg_definitions": {
+    "toc_leg": "tdc_treasury_operating_cash_qoq",
+    "row_leg": "tdc_row_treasury_transactions_qoq",
+    "support_bundle": "tdc_toc_row_support_bundle_qoq",
+    "toc_in_scope_deposit_proxy": "cb_nonts_qoq",
+    "toc_reserve_proxy": "reserves_qoq",
+    "row_in_scope_deposit_proxy": "checkable_rest_of_world_bank_qoq",
+    "row_external_support_proxy": "foreign_nonts_qoq"
+  },
+  "quarterly_alignment": {
+    "toc_tga_corr": 0.9467815933251763,
+    "row_checkable_bank_corr": 0.01755465440801652,
+    "row_external_support_corr": -0.17456304904597456,
+    "bundle_quarterly_preferred_path": "direct_deposit_path_dominant",
+    "bundle_direct_deposit_corr": 0.8619441907978307,
+    "bundle_broad_support_corr": 0.751538071224028
+  },
+  "key_horizons": {
+    "h0": {
+      "toc_leg": {
+        "toc_signed_contribution_beta": 70.4411590878622,
+        "treasury_operating_cash_response": {
+          "beta": -70.4411590878622,
+          "se": 19.51500183613834,
+          "lower95": -108.69056268669334,
+          "upper95": -32.19175548903106,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "tga_response": {
+          "beta": -61.18612833262557,
+          "se": 19.904469139441925,
+          "lower95": -100.19888784593175,
+          "upper95": -22.1733688193194,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "reserves_response": {
+          "beta": 88.86702520813598,
+          "se": 15.355046836769874,
+          "lower95": 58.77113340806703,
+          "upper95": 118.96291700820494,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "in_scope_deposit_proxy_response": {
+          "beta": 27.680896875510427,
+          "se": 14.454812688822598,
+          "lower95": -0.6505359945818618,
+          "upper95": 56.01232974560271,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "reserve_capture_share_of_toc_beta": 1.2615781222068045,
+        "in_scope_deposit_proxy_share_of_toc_beta": 0.3929648125321685,
+        "interpretation": "reserve_plumbing_real_but_strict_deposit_incidence_partial"
+      },
+      "row_leg": {
+        "row_treasury_response": {
+          "beta": 11.756792842555717,
+          "se": 10.114287407003827,
+          "lower95": -8.067210475171786,
+          "upper95": 31.58079616028322,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "in_scope_deposit_proxy_response": {
+          "beta": 0.22396544837174034,
+          "se": 0.5412190543641806,
+          "lower95": -0.8368238981820535,
+          "upper95": 1.2847547949255342,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "external_support_proxy_response": {
+          "beta": 26.58669388040707,
+          "se": 12.835216475201248,
+          "lower95": 1.4296695890126223,
+          "upper95": 51.74371817180152,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "foreign_bank_asset_proxy_response": {
+          "beta": 4.997581988112529,
+          "se": 2.7473496074068193,
+          "lower95": -0.3872232424048372,
+          "upper95": 10.382387218629894,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "in_scope_deposit_proxy_share_of_row_beta": 0.019049876218032797,
+        "external_support_share_of_row_beta": 2.261390009711832,
+        "foreign_bank_asset_share_of_row_beta": 0.4250803816175895,
+        "interpretation": "weak_in_scope_deposit_incidence_external_support_dominant"
+      },
+      "bundle": {
+        "support_bundle_beta": 65.3966245435534,
+        "broad_support_path_response": {
+          "beta": 87.77282221303257,
+          "se": 17.188445746769325,
+          "lower95": 54.08346854936469,
+          "upper95": 121.46217587670046,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "direct_deposit_path_response": {
+          "beta": 61.41009378099726,
+          "se": 19.711186006721512,
+          "lower95": 22.776169207823095,
+          "upper95": 100.04401835417141,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "preferred_horizon_path": "broad_support_path_dominant"
+      }
+    },
+    "h1": {
+      "toc_leg": {
+        "toc_signed_contribution_beta": 54.242652928956154,
+        "treasury_operating_cash_response": {
+          "beta": -54.242652928956154,
+          "se": 42.01580098473353,
+          "lower95": -136.59362285903387,
+          "upper95": 28.10831700112157,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "tga_response": {
+          "beta": -48.09224413774307,
+          "se": 43.36577996251905,
+          "lower95": -133.0891728642804,
+          "upper95": 36.90468458879426,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "reserves_response": {
+          "beta": 122.10460290680561,
+          "se": 31.047632117091556,
+          "lower95": 61.25124395730616,
+          "upper95": 182.95796185630508,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "in_scope_deposit_proxy_response": {
+          "beta": 74.01235876906254,
+          "se": 61.27419916014067,
+          "lower95": -46.085071584813164,
+          "upper95": 194.10978912293825,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "reserve_capture_share_of_toc_beta": 2.2510809540737444,
+        "in_scope_deposit_proxy_share_of_toc_beta": 1.3644679006758684,
+        "interpretation": "deposit_incidence_not_separable_from_reserve_release"
+      },
+      "row_leg": {
+        "row_treasury_response": {
+          "beta": 12.207052405526355,
+          "se": 11.716769221640384,
+          "lower95": -10.757815268888798,
+          "upper95": 35.17192007994151,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "in_scope_deposit_proxy_response": {
+          "beta": 0.12694081051066647,
+          "se": 0.6300632339148259,
+          "lower95": -1.1079831279623924,
+          "upper95": 1.3618647489837252,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "external_support_proxy_response": {
+          "beta": 23.84630624208157,
+          "se": 12.325503293192112,
+          "lower95": -0.3116802125749665,
+          "upper95": 48.004292696738105,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "foreign_bank_asset_proxy_response": {
+          "beta": 1.5793663501633712,
+          "se": 2.840922144562137,
+          "lower95": -3.988841053178417,
+          "upper95": 7.14757375350516,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "in_scope_deposit_proxy_share_of_row_beta": 0.01039897317498187,
+        "external_support_share_of_row_beta": 1.9534860218414327,
+        "foreign_bank_asset_share_of_row_beta": 0.12938146717944485,
+        "interpretation": "weak_in_scope_deposit_incidence_external_support_dominant"
+      },
+      "bundle": {
+        "support_bundle_beta": null,
+        "broad_support_path_response": {
+          "beta": 71.93855037982472,
+          "se": 33.39048385879253,
+          "lower95": 6.493202016591368,
+          "upper95": 137.38389874305807,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "direct_deposit_path_response": {
+          "beta": 48.219184948253776,
+          "se": 43.538693957995555,
+          "lower95": -37.11665520941751,
+          "upper95": 133.55502510592507,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "preferred_horizon_path": "broad_support_path_dominant"
+      }
+    }
+  },
+  "classification": {
+    "bundle_role": "measured_support_bundle_with_unresolved_strict_deposit_incidence",
+    "toc_leg_status": "reserve_plumbing_real_but_strict_deposit_incidence_partial",
+    "row_leg_status": "weak_in_scope_deposit_incidence_external_support_dominant",
+    "framework_verdict": "toc_partial_deposit_incidence_row_weak_deposit_incidence"
+  },
+  "recommendation": {
+    "status": "use_as_next_binary_decision_gate",
+    "strict_component_rule": "reincorporate_only_validated_in_scope_deposit_incidence_share",
+    "if_no_validated_share": "keep_toc_row_outside_strict_object_and_leave_full_tdc_broad",
+    "next_branch": "run_leg_split_scope_and_timing_matched_liability_incidence_audit_in_raw_units"
+  },
+  "takeaways": [
+    "This is the first-pass liability-incidence audit for the TOC/ROW block. It treats the bundle as economically real and asks whether each leg behaves like an in-scope bank-deposit component rather than only like broad support.",
+    "The goal here is not to relitigate arithmetic. It is to test strict deposit incidence by leg using the already-built TOC, ROW, and path-split evidence.",
+    "TOC continues to look like real Treasury cash plumbing in raw quarterly data: contemporaneous TGA-vs-TOC corr \u2248 0.95.",
+    "But TOC does not yet earn strict-component status: at h0 the in-scope deposit proxy captures only about 0.39 of TOC while reserves capture about 1.26.",
+    "ROW looks weaker as an in-scope deposit leg and stronger as broader external support: checkable-ROW-bank corr \u2248 0.02, foreign-NONTS corr \u2248 -0.17.",
+    "The h0 ROW split points the same way: in-scope deposit proxy share \u2248 0.02, external-support share \u2248 2.26.",
+    "The combined support bundle remains the dominant treatment-side issue: h0 TOC/ROW support bundle \u2248 65.40, with TOC signed contribution \u2248 70.44, ROW signed contribution \u2248 11.76, while the remaining core residual is only \u2248 -5.51.",
+    "The existing path split still matters for interpretation: quarterly preferred bundle path = `direct_deposit_path_dominant`, but the bundle is not yet validated as a strict bank-deposit component."
+  ]
+}

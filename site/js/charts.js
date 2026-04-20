@@ -55,7 +55,10 @@
       fetch(base + 'period_sensitivity_summary.json').then(function (r) { return r.json(); }),
       fetch(base + 'counterpart_channel_scorecard.json').then(function (r) { return r.json(); }),
       fetch(base + 'result_readiness_summary.json').then(function (r) { return r.json(); }),
-      fetch(base + 'deposit_type_side_read.csv').then(function (r) { return r.text(); })
+      fetch(base + 'deposit_type_side_read.csv').then(function (r) { return r.text(); }),
+      fetch(base + 'strict_release_framing_summary.json').then(function (r) { return r.json(); }),
+      fetch(base + 'strict_direct_core_component_summary.json').then(function (r) { return r.json(); }),
+      fetch(base + 'tdcest_broad_object_comparison_summary.json').then(function (r) { return r.json(); })
     ]).then(function (results) {
       _data = {
         irf: parseCSV(results[0]),
@@ -63,12 +66,17 @@
         periodSummary: results[2],
         counterpart: results[3],
         readiness: results[4],
-        depositTypes: parseCSV(results[5])
+        depositTypes: parseCSV(results[5]),
+        strictRelease: results[6],
+        strictDirect: results[7],
+        tdcestBroad: results[8]
       };
       populateHero(_data);
+      populateFramework(_data);
       populateChannels(_data);
       populateRobustness(_data);
       populatePeriodTable(_data);
+      initReveal();
       buildAll(_data);
     });
   }
@@ -81,6 +89,49 @@
     el('stat-total').textContent = '+$' + ke.total_deposits_h0.beta.toFixed(0) + 'B';
     el('stat-other').textContent = '-$' + Math.abs(ke.other_component_h0.beta).toFixed(0) + 'B';
     el('stat-share').textContent = fmtPct(d.overview.headline_metrics.share_other_negative);
+  }
+
+  function setText(id, value) {
+    var node = el(id);
+    if (node) node.textContent = value;
+  }
+
+  function signedMoney(v) {
+    return (v >= 0 ? '+$' : '-$') + Math.abs(v).toFixed(2) + 'B';
+  }
+
+  function unsignedNum(v) {
+    return typeof v === 'number' ? v.toFixed(2) : '—';
+  }
+
+  function populateFramework(d) {
+    var strict = d.strictRelease.h0_snapshot;
+    var coreHz = d.strictDirect.key_horizons;
+    var broad = d.tdcestBroad.latest_common_broad_comparison;
+    var ke = d.readiness.key_estimates;
+
+    setText('strict-core-h0', signedMoney(strict.headline_direct_core_beta));
+    setText('strict-mortgage-h0', signedMoney(coreHz.h0.core_deposit_proximate.mortgages_response.beta));
+    setText('strict-bridge-h0', signedMoney(strict.standard_bridge_beta));
+
+    setText('strict-core-h0-panel', signedMoney(coreHz.h0.core_deposit_proximate.direct_core_response.beta));
+    setText('strict-core-h4-panel', signedMoney(coreHz.h4.core_deposit_proximate.direct_core_response.beta));
+    setText('strict-core-h8-panel', signedMoney(coreHz.h8.core_deposit_proximate.direct_core_response.beta));
+    setText('strict-mortgage-panel', signedMoney(coreHz.h0.core_deposit_proximate.mortgages_response.beta));
+    setText('strict-bridge-panel', signedMoney(strict.standard_bridge_beta));
+
+    setText('toc-share', unsignedNum(strict.toc_deposits_only_share));
+    setText('toc-reserve', unsignedNum(strict.toc_reserve_share));
+    setText('row-share', unsignedNum(strict.row_checkable_share));
+    setText('row-external', unsignedNum(strict.row_external_share));
+
+    setText('ladder-headline', signedMoney(broad.headline_bank_only_beta));
+    setText('ladder-tier2', signedMoney(broad.tier2_bank_only_beta));
+    setText('ladder-tier3', signedMoney(broad.tier3_bank_only_beta));
+    setText('ladder-broad', signedMoney(broad.tier3_broad_depository_beta));
+
+    setText('broad-tdc-inline', signedMoney(ke.tdc_h0.beta));
+    setText('broad-total-inline', signedMoney(ke.total_deposits_h0.beta));
   }
 
   /* ---- counterpart channel cards ---- */
@@ -251,7 +302,7 @@
           tension: 0.3, fill: false
         },
         {
-          label: 'Non-TDC residual',
+          label: 'Other component',
           data: other.map(function (r) { return r.beta; }),
           borderColor: c.red, backgroundColor: c.red,
           borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: c.red,
@@ -266,7 +317,7 @@
       ]
     );
 
-    var visibleLabels = ['TDC (bank-only)', 'Total deposits', 'Non-TDC residual'];
+    var visibleLabels = ['TDC (bank-only)', 'Total deposits', 'Other component'];
 
     /* Map each main-line dataset index to its CI band pair indices */
     var lineToBand = { 6: [0, 1], 7: [2, 3], 8: [4, 5] };
@@ -336,7 +387,7 @@
     instances.push(new Chart(el('impactBar'), {
       type: 'bar',
       data: {
-        labels: ['TDC', 'Total Deposits', 'Non-TDC'],
+        labels: ['TDC', 'Total Deposits', 'Other Component'],
         datasets: [{
           data: [ke.tdc_h0.beta, ke.total_deposits_h0.beta, ke.other_component_h0.beta],
           _ciLower: [ke.tdc_h0.lower95, ke.total_deposits_h0.lower95, ke.other_component_h0.lower95],
@@ -404,7 +455,7 @@
             borderRadius: 3
           },
           {
-            label: 'Non-TDC',
+            label: 'Other Component',
             data: [ke.other_component_h0.beta, ke.other_component_h4.beta, othH8 ? othH8.beta : 0],
             _ciLower: [ke.other_component_h0.lower95, ke.other_component_h4.lower95, othH8 ? othH8.lower95 : 0],
             _ciUpper: [ke.other_component_h0.upper95, ke.other_component_h4.upper95, othH8 ? othH8.upper95 : 0],
@@ -469,7 +520,7 @@
             borderRadius: 3
           },
           {
-            label: 'Non-TDC',
+            label: 'Other Component',
             data: periods.map(function (p) { return p.key_horizons.h0.other_component.beta; }),
             _ciLower: periods.map(function (p) { return p.key_horizons.h0.other_component.lower95; }),
             _ciUpper: periods.map(function (p) { return p.key_horizons.h0.other_component.upper95; }),
@@ -997,6 +1048,20 @@
       });
     }
   });
+
+  function initReveal() {
+    var items = document.querySelectorAll('.reveal');
+    if (!items.length || typeof IntersectionObserver === 'undefined') return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    items.forEach(function (item) { io.observe(item); });
+  }
 
   /* ---- init ---- */
 

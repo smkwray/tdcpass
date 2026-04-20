@@ -7,7 +7,7 @@ __pycache__/
 .env
 
 # Never publish local orchestration state.
-do/
+/do/
 
 # Non-public working material.
 docs/
@@ -43,6 +43,8 @@ data/derived/*
 
 data/examples/*
 !data/examples/.gitkeep
+
+data/bundles/
 
 output/*
 !output/.gitkeep

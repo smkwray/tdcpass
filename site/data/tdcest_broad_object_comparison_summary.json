@@ -1,0 +1,62 @@
+{
+  "classification": {
+    "headline_object_status": "canonical_bank_only_headline_retained",
+    "role": "broad_object_comparison_only",
+    "strict_framework_effect": "unchanged"
+  },
+  "estimation_path": {
+    "source_artifacts": [
+      "quarterly_panel.csv",
+      "tdcest_ladder_integration_summary.json"
+    ],
+    "summary_artifact": "tdcest_broad_object_comparison_summary.json"
+  },
+  "headline_question": "How do the newly integrated tdcest corrected-ladder rows compare to the canonical broad headline inside tdcpass?",
+  "latest_common_broad_comparison": {
+    "headline_bank_only_beta": 68.996,
+    "quarter": "2025Q4",
+    "tier2_bank_only_beta": -38.086565167702794,
+    "tier2_minus_headline_beta": -107.0825651677028,
+    "tier3_bank_only_beta": -40.1625295472228,
+    "tier3_broad_depository_beta": -39.94452954722279,
+    "tier3_broad_minus_headline_beta": -108.94052954722278,
+    "tier3_minus_headline_beta": -109.1585295472228
+  },
+  "recommendation": {
+    "standard_broad_comparison_rows": [
+      "tdc_tier2_bank_only_qoq",
+      "tdc_tier3_bank_only_qoq",
+      "tdc_tier3_broad_depository_qoq"
+    ],
+    "status": "use_as_broad_object_comparison_layer_only",
+    "supplemental_only": [
+      "tdc_bank_receipt_historical_overlay_qoq",
+      "tdc_row_mrv_nondefault_pilot_qoq"
+    ]
+  },
+  "status": "available",
+  "supplemental_surfaces": {
+    "historical_bank_receipt_overlay": {
+      "available": true,
+      "latest_nonzero_quarter": "2024Q4",
+      "latest_nonzero_value": 103.07105627851948,
+      "latest_quarter": "2024Q4",
+      "latest_value": 103.07105627851948
+    },
+    "row_mrv_nondefault_pilot": {
+      "available": true,
+      "latest_nonzero_quarter": "2025Q3",
+      "latest_nonzero_value": 0.5783988717818795,
+      "latest_quarter": "2025Q4",
+      "latest_value": 0.0
+    }
+  },
+  "takeaways": [
+    "The sibling tdcest ladder is now fully visible inside tdcpass as broad-object comparison rows rather than a replacement strict framework.",
+    "Tier 2 and Tier 3 stay in the broad-object comparison tier; they are not promoted into the strict deposit-component object.",
+    "The historical bank-receipt overlay and the MRV ROW pilot are now live in the quarterly panel, but they remain fenced to historical-only and nondefault-sensitivity roles.",
+    "Latest common broad-object quarter 2025Q4: headline \u2248 69.00, Tier 2 \u2248 -38.09, Tier 3 \u2248 -40.16, Tier 3 broad-depository \u2248 -39.94.",
+    "Historical overlay remains active only in a narrow historical window: latest nonzero quarter = 2024Q4.",
+    "The bounded ROW MRV pilot is live but explicitly nondefault: latest nonzero quarter = 2025Q3."
+  ]
+}

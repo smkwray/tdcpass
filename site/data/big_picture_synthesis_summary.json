@@ -1,0 +1,61 @@
+{
+  "status": "available",
+  "headline_question": "What is the big-picture read after separating scope issues, treatment construction issues, and strict-lane verification issues?",
+  "estimation_path": {
+    "summary_artifact": "big_picture_synthesis_summary.json",
+    "source_artifacts": [
+      "scope_alignment_summary.json",
+      "broad_scope_system_summary.json",
+      "tdc_treatment_audit_summary.json",
+      "toc_row_excluded_interpretation_summary.json",
+      "strict_missing_channel_summary.json",
+      "strict_sign_mismatch_audit_summary.json",
+      "strict_top_gap_anomaly_backdrop_summary.json"
+    ]
+  },
+  "h0_snapshot": {
+    "us_chartered_scope_relief_beta": 9.630062677048421,
+    "domestic_no_row_scope_relief_beta": 19.970561490257523,
+    "broad_strict_gap_share_of_residual": 0.8112367523042955,
+    "baseline_residual_beta": -72.74365367294723,
+    "no_row_residual_shift_vs_baseline_beta": 19.970561490257523,
+    "no_foreign_bank_sectors_residual_shift_vs_baseline_beta": -0.17332408751863682,
+    "no_toc_residual_shift_vs_baseline_beta": 50.32756893864634,
+    "no_toc_no_row_residual_shift_vs_baseline_beta": 67.23534013058519,
+    "toc_row_excluded_residual_beta": -5.508313542362046,
+    "toc_row_excluded_strict_gap_share_of_residual": 2.960999223115259,
+    "toc_row_excluded_strict_identifiable_total_beta": 10.831912868739106,
+    "toc_row_excluded_funding_adjusted_net_beta": 9.903810997234132,
+    "toc_row_excluded_gap_after_funding_share_of_residual_abs": 2.8420017666518227
+  },
+  "quarter_composition": {
+    "shock_overlap_corr": 0.41818956226857457,
+    "shock_same_sign_share": 0.7205882352941176,
+    "top5_abs_gap_share": 0.3344393338342593,
+    "dominant_period_bucket": "covid_post"
+  },
+  "supporting_case": {
+    "anomaly_quarter": "2009Q4",
+    "interpretation": "anomaly_combines_corporate_credit_shortfall_with_even_larger_liquidity_external_shortfall",
+    "liquidity_external_abs_to_corporate_abs_ratio": 2.3143798178314916
+  },
+  "classification": {
+    "scope_issue_status": "real_but_partial",
+    "treatment_issue_status": "toc_row_dominant",
+    "independent_lane_status": "not_validated",
+    "single_quarter_drill_priority": "secondary_only",
+    "toc_row_excluded_interpretation": "toc_row_exclusion_removes_most_residual_but_strict_gap_remains",
+    "strict_missing_channel_interpretation": "toc_row_exclusion_exposes_sign_mismatch_in_direct_counts"
+  },
+  "interpretation": "treatment_side_problem_dominates_residual_but_independent_lane_still_not_validated",
+  "takeaways": [
+    "Scope mismatch is real but partial: at h0 the true U.S.-chartered bank-leg match shifts the residual by about 9.63, versus about 19.97 for the no-ROW sensitivity.",
+    "Even after broadening to a matched-scope bank system, the strict lane still leaves a large gap: about 0.81 of the broad residual remains in the broad strict gap at h0.",
+    "The residual problem is concentrated in TOC/ROW, not foreign bank sectors: baseline h0 residual \u2248 -72.74, removing TOC shifts it by about 50.33, and removing TOC+ROW shifts it by about 67.24.",
+    "But TOC/ROW exclusion does not validate the independent lane: the h0 residual shrinks to about -5.51 while the strict identifiable total is about 10.83, with strict-gap share about 2.96.",
+    "Funding adjustment does not rescue the strict lane under that comparison: funding-adjusted net is about 9.90 and the remaining gap-after-funding share is about 2.84.",
+    "The TOC/ROW-excluded shock is not a stable replacement object: overlap correlation with baseline is about 0.42, same-sign share about 0.72, and the top five gap quarters explain about 0.33 of gap mass.",
+    "That instability is concentrated in `covid_post`, so the excluded shock rotates around specific windows rather than delivering a clean new baseline.",
+    "The quarter-level anomaly work is now enough for classification and should stay secondary: in `2009Q4`, the combined liquidity/external shortfall is about 2.31 times the corporate-credit shortfall (anomaly_combines_corporate_credit_shortfall_with_even_larger_liquidity_external_shortfall)."
+  ]
+}

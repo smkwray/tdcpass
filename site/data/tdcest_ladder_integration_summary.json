@@ -1,0 +1,102 @@
+{
+  "classification": {
+    "broad_object_effect": "richer_comparison_ladder_available",
+    "decision": "selective_integration_not_wholesale_pivot",
+    "strict_framework_effect": "unchanged"
+  },
+  "estimation_path": {
+    "source_artifacts": [
+      "quarterly_panel.csv",
+      "../tdcest/data/processed/tdc_estimates.csv",
+      "../tdcest/data/processed/tdc_downstream_deposit_effect_series_panel.csv"
+    ],
+    "summary_artifact": "tdcest_ladder_integration_summary.json"
+  },
+  "headline_question": "How should tdcpass use the newer tdcest corrected ladder and receipt-side proxy surfaces?",
+  "recommendation": {
+    "broad_corrected_comparisons": [
+      "tdc_tier2_bank_only_qoq",
+      "tdc_tier3_bank_only_qoq",
+      "tdc_tier3_broad_depository_qoq"
+    ],
+    "do_not_promote": [
+      "tdc_tier3_bank_only_qoq_as_strict_object",
+      "tdc_row_mrv_nondefault_pilot_qoq_as_default_tdc_leg",
+      "tdc_bank_receipt_historical_overlay_qoq_outside_historical_window"
+    ],
+    "historical_only_overlay": "tdc_bank_receipt_historical_overlay_qoq",
+    "nondefault_row_sensitivity": "tdc_row_mrv_nondefault_pilot_qoq",
+    "status": "import_selected_tdcest_ladder_rows_only"
+  },
+  "series_roles": [
+    {
+      "description": "Canonical broad bank-only TDC headline imported from tdcest.",
+      "latest_nonzero_quarter": "2025Q4",
+      "latest_nonzero_value": 68.996,
+      "latest_quarter": "2025Q4",
+      "latest_value": 68.996,
+      "role": "broad_headline_anchor",
+      "series_key": "tdc_bank_only_qoq",
+      "tier": "default_headline"
+    },
+    {
+      "description": "Interest-cleaned broad bank-only comparison from the tdcest Tier 2 ladder.",
+      "latest_nonzero_quarter": "2025Q4",
+      "latest_nonzero_value": -38.086565167702794,
+      "latest_quarter": "2025Q4",
+      "latest_value": -38.086565167702794,
+      "role": "broad_corrected_comparison",
+      "series_key": "tdc_tier2_bank_only_qoq",
+      "tier": "comparison_only"
+    },
+    {
+      "description": "Fiscal-corrected broad bank-only comparison from the tdcest Tier 3 ladder.",
+      "latest_nonzero_quarter": "2025Q4",
+      "latest_nonzero_value": -40.1625295472228,
+      "latest_quarter": "2025Q4",
+      "latest_value": -40.1625295472228,
+      "role": "broad_corrected_comparison",
+      "series_key": "tdc_tier3_bank_only_qoq",
+      "tier": "comparison_only_partial_receipt_cells"
+    },
+    {
+      "description": "Fiscal-corrected broad-depository comparison from the tdcest Tier 3 ladder.",
+      "latest_nonzero_quarter": "2025Q4",
+      "latest_nonzero_value": -39.94452954722279,
+      "latest_quarter": "2025Q4",
+      "latest_value": -39.94452954722279,
+      "role": "broad_perimeter_comparison",
+      "series_key": "tdc_tier3_broad_depository_qoq",
+      "tier": "comparison_only_partial_receipt_cells"
+    },
+    {
+      "description": "Historical bank-receipt overlay candidate from tdcest's age-eligible window.",
+      "latest_nonzero_quarter": "2024Q4",
+      "latest_nonzero_value": 103.07105627851948,
+      "latest_quarter": "2024Q4",
+      "latest_value": 103.07105627851948,
+      "role": "historical_only_overlay",
+      "series_key": "tdc_bank_receipt_historical_overlay_qoq",
+      "tier": "historical_only"
+    },
+    {
+      "description": "Bounded MRV/CBSP ROW receipt pilot imported as a nondefault sensitivity only.",
+      "latest_nonzero_quarter": "2025Q3",
+      "latest_nonzero_value": 0.5783988717818795,
+      "latest_quarter": "2025Q4",
+      "latest_value": 0.0,
+      "role": "nondefault_row_sensitivity",
+      "series_key": "tdc_row_mrv_nondefault_pilot_qoq",
+      "tier": "bounded_nondefault_only"
+    }
+  ],
+  "status": "available",
+  "takeaways": [
+    "tdcpass already uses the canonical tdcest broad headline; this integration adds the richer corrected ladder and bounded downstream surfaces rather than replacing the strict framework.",
+    "Tier 2 and Tier 3 are comparison rows for the broad object, not new strict deposit-component defaults.",
+    "The historical bank-receipt overlay is useful historical-only context, and the MRV ROW branch remains bounded nondefault sensitivity only.",
+    "Latest corrected broad-bank read: Tier 2 \u2248 -38.09, Tier 3 \u2248 -40.16.",
+    "Historical overlay is present and should stay fenced to the historical-age window: latest nonzero quarter = 2024Q4.",
+    "The ROW MRV pilot is now directly importable, but it remains explicitly nondefault: latest nonzero quarter = 2025Q3."
+  ]
+}

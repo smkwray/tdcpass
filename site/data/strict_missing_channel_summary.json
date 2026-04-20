@@ -1,0 +1,875 @@
+{
+  "status": "available",
+  "headline_question": "Once the TOC/ROW treatment bundle is excluded as a diagnostic comparison, which direct-count strict pieces still fail to verify the non-TDC residual?",
+  "estimation_path": {
+    "baseline_strict_artifact": "lp_irf_strict_identifiable.csv",
+    "comparison_artifact": "strict_missing_channel_summary.json",
+    "comparison_shock_column": "tdc_no_toc_no_row_bank_only_residual_z"
+  },
+  "comparison_definition": {
+    "baseline_target": "tdc_bank_only_qoq",
+    "comparison_target": "tdc_no_toc_no_row_bank_only_qoq",
+    "baseline_residual_outcome": "other_component_qoq",
+    "comparison_residual_outcome": "other_component_no_toc_no_row_bank_only_qoq",
+    "release_role": "strict_missing_channel_diagnostic"
+  },
+  "key_horizons": {
+    "h0": {
+      "baseline": {
+        "residual_response": {
+          "beta": -81.17833439216739,
+          "se": 20.0820892829219,
+          "lower95": -120.5392293866943,
+          "upper95": -41.81743939764046,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -20.959164939095665,
+          "se": 3.154984044707311,
+          "lower95": -27.142933666721994,
+          "upper95": -14.775396211469335,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_source_response": {
+          "beta": -19.97313706640162,
+          "se": 8.896555846407024,
+          "lower95": -37.410386525359385,
+          "upper95": -2.535887607443854,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": -18.024897659337825,
+          "se": 10.509068730802262,
+          "lower95": -38.62267237171026,
+          "upper95": 2.5728770530346097,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": -0.9745232374736701,
+          "se": 5.23729803124129,
+          "lower95": -11.239627378706597,
+          "upper95": 9.290580903759256,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 15.30465101167281,
+          "se": 6.050671529441859,
+          "lower95": 3.4453348139667668,
+          "upper95": 27.163967209378853,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_total_response": {
+          "beta": -2.0654490673922083,
+          "se": 12.647084899431377,
+          "lower95": -26.853735470277705,
+          "upper95": 22.72283733549329,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -75.57860724607202,
+          "se": 15.835634841558793,
+          "lower95": -106.61645153552726,
+          "upper95": -44.54076295661679,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": -1.6095374553041522,
+          "se": 5.625696398582565,
+          "lower95": -12.635902396525978,
+          "upper95": 9.416827485917675,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": -3.9068288087150442,
+          "se": 9.42648023483478,
+          "lower95": -22.382730068991215,
+          "upper95": 14.569072451561127,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -74.42656001270831,
+          "se": 19.081291982559193,
+          "lower95": -111.82589229852432,
+          "upper95": -37.02722772689229,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 0.2581866836272258,
+        "strict_loan_share_of_residual_abs": 0.24604024233747715,
+        "strict_securities_share_of_residual_abs": 0.18853122728210966,
+        "strict_identifiable_share_of_residual_abs": 0.025443353609771728,
+        "strict_gap_share_of_residual_abs": 0.9310194377844286,
+        "strict_funding_offset_share_of_identifiable_total_beta": 0.7792675601225644,
+        "strict_net_after_funding_share_of_residual_abs": 0.04812649628706844,
+        "strict_gap_after_funding_share_of_residual_abs": 0.9168278774131816
+      },
+      "toc_row_excluded": {
+        "residual_response": {
+          "beta": -5.501727161440379,
+          "se": 10.900899392583606,
+          "lower95": -26.867489970904245,
+          "upper95": 15.864035648023489,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -10.658905058923462,
+          "se": 2.160432283109402,
+          "lower95": -14.89335233381789,
+          "upper95": -6.424457784029035,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_source_response": {
+          "beta": 5.5796698433974985,
+          "se": 6.302476257768174,
+          "lower95": -6.773183621828123,
+          "upper95": 17.932523308623118,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": 8.485186147303903,
+          "se": 7.570896097479698,
+          "lower95": -6.353770203756305,
+          "upper95": 23.32414249836411,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": 4.315368496420372,
+          "se": 3.1914413049194974,
+          "lower95": -1.9398564612218427,
+          "upper95": 10.570593454062585,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 3.483514563980094,
+          "se": 1.6631083972620497,
+          "lower95": 0.22382210534647662,
+          "upper95": 6.743207022613712,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_total_response": {
+          "beta": 10.83191286873921,
+          "se": 5.571229269005378,
+          "lower95": -0.0876964985113311,
+          "upper95": 21.75152223598975,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -16.310112119609276,
+          "se": 7.007382610800299,
+          "lower95": -30.04458203677786,
+          "upper95": -2.57564220244069,
+          "n": 68,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": 1.0272327406553474,
+          "se": 5.910456204919941,
+          "lower95": -10.557261420987736,
+          "upper95": 12.611726902298432,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": 9.903810997234197,
+          "se": 5.2007520590926575,
+          "lower95": -0.2896630385874115,
+          "upper95": 20.097285033055805,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -15.63591831244996,
+          "se": 9.200705750054997,
+          "lower95": -33.66930158255775,
+          "upper95": 2.397464957657835,
+          "n": 68,
+          "ci_excludes_zero": false
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 1.9373743455742194,
+        "strict_loan_share_of_residual_abs": 1.0141669478820017,
+        "strict_securities_share_of_residual_abs": 0.6331674511951068,
+        "strict_identifiable_share_of_residual_abs": 1.96882043599984,
+        "strict_gap_share_of_residual_abs": 2.9645439770116133,
+        "strict_funding_offset_share_of_identifiable_total_beta": 0.09483391835803358,
+        "strict_net_after_funding_share_of_residual_abs": 1.800127615677934,
+        "strict_gap_after_funding_share_of_residual_abs": 2.8420017666518382
+      },
+      "excluded_minus_baseline_beta": {
+        "residual_response": 75.676607230727,
+        "strict_headline_direct_core_response": 10.300259880172202,
+        "strict_loan_source_response": 25.552806909799116,
+        "strict_non_treasury_securities_response": -11.821136447692716,
+        "strict_identifiable_total_response": 12.897361936131418,
+        "strict_funding_offset_total_response": 2.6367701959594996,
+        "strict_identifiable_net_after_funding_response": 13.810639805949242,
+        "strict_identifiable_gap_response": 59.26849512646275,
+        "strict_gap_after_funding_response": 58.79064170025835,
+        "strict_identifiable_share_of_residual_abs": 1.9433770823900682,
+        "strict_gap_after_funding_share_of_residual_abs": 1.9251738892386565
+      },
+      "interpretation": "toc_row_exclusion_exposes_sign_mismatch_in_direct_counts"
+    },
+    "h1": {
+      "baseline": {
+        "residual_response": {
+          "beta": -88.82606789492539,
+          "se": 46.7856406435434,
+          "lower95": -180.52592355627047,
+          "upper95": 2.8737877664196816,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -23.68311505374398,
+          "se": 8.159767418916271,
+          "lower95": -39.67625919481987,
+          "upper95": -7.6899709126680875,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_source_response": {
+          "beta": -16.80509310603452,
+          "se": 10.034464624999032,
+          "lower95": -36.47264377103262,
+          "upper95": 2.862457558963584,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": -15.180127719479106,
+          "se": 11.864278110274233,
+          "lower95": -38.4341128156166,
+          "upper95": 8.073857376658388,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": -3.7923173310458287,
+          "se": 7.425856242514777,
+          "lower95": -18.34699556637479,
+          "upper95": 10.762360904283135,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 20.851274479627072,
+          "se": 9.40121819163145,
+          "lower95": 2.4248868240294286,
+          "upper95": 39.277662135224716,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_total_response": {
+          "beta": 7.344266170371938,
+          "se": 17.658122502542483,
+          "lower95": -27.26565393461133,
+          "upper95": 41.954186275355205,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -95.96925375260912,
+          "se": 39.920705898833845,
+          "lower95": -174.21383731432346,
+          "upper95": -17.724670190894784,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": -9.652673779679228,
+          "se": 6.584362636434313,
+          "lower95": -22.558024547090483,
+          "upper95": 3.252676987732025,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": 12.673144107964568,
+          "se": 18.533520753420277,
+          "lower95": -23.652556568739172,
+          "upper95": 48.99884478466831,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -102.9538933843051,
+          "se": 42.836928505445286,
+          "lower95": -186.91427325497784,
+          "upper95": -18.99351351363235,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 0.26662347681267773,
+        "strict_loan_share_of_residual_abs": 0.18919100557185184,
+        "strict_securities_share_of_residual_abs": 0.23474273908299728,
+        "strict_identifiable_share_of_residual_abs": 0.08268142837370283,
+        "strict_gap_share_of_residual_abs": 1.0804176749795296,
+        "strict_funding_offset_share_of_identifiable_total_beta": -1.3143142630940872,
+        "strict_net_after_funding_share_of_residual_abs": 0.14267370388336847,
+        "strict_gap_after_funding_share_of_residual_abs": 1.1590504434586915
+      },
+      "toc_row_excluded": {
+        "residual_response": {
+          "beta": -23.928928431597125,
+          "se": 14.264821209168861,
+          "lower95": -51.887978001568094,
+          "upper95": 4.030121138373843,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -21.610548727645917,
+          "se": 2.889335199963539,
+          "lower95": -27.273645719574453,
+          "upper95": -15.94745173571738,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_source_response": {
+          "beta": 2.1082587040201393,
+          "se": 7.518718354304853,
+          "lower95": -12.628429270417373,
+          "upper95": 16.844946678457653,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": 4.407893887590312,
+          "se": 8.634843707603286,
+          "lower95": -12.516399779312128,
+          "upper95": 21.33218755449275,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": -0.2717623129176432,
+          "se": 3.4961102961295363,
+          "lower95": -7.124138493331534,
+          "upper95": 6.580613867496249,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 7.091108548953656,
+          "se": 4.0184471728544064,
+          "lower95": -0.7850479098409808,
+          "upper95": 14.967265007748292,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_total_response": {
+          "beta": 10.939907534566082,
+          "se": 8.771361863073398,
+          "lower95": -6.251961717057778,
+          "upper95": 28.131776786189942,
+          "n": 67,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -32.647483749168934,
+          "se": 9.372834225880338,
+          "lower95": -51.018238831894394,
+          "upper95": -14.276728666443471,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": -14.623475271768857,
+          "se": 6.562846058271384,
+          "lower95": -27.48665354598077,
+          "upper95": -1.7602969975569458,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": 24.125389267247566,
+          "se": 9.172140503129949,
+          "lower95": 6.147993881112868,
+          "upper95": 42.102784653382265,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -48.77826181967886,
+          "se": 12.356243161689294,
+          "lower95": -72.99649841658987,
+          "upper95": -24.560025222767845,
+          "n": 67,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 0.9031139354786197,
+        "strict_loan_share_of_residual_abs": 0.08810501941391884,
+        "strict_securities_share_of_residual_abs": 0.2963404136221224,
+        "strict_identifiable_share_of_residual_abs": 0.4571833446632906,
+        "strict_gap_share_of_residual_abs": 1.3643520996978422,
+        "strict_funding_offset_share_of_identifiable_total_beta": -1.3367092203991722,
+        "strict_net_after_funding_share_of_residual_abs": 1.0082101810873831,
+        "strict_gap_after_funding_share_of_residual_abs": 2.038464110882176
+      },
+      "excluded_minus_baseline_beta": {
+        "residual_response": 64.89713946332826,
+        "strict_headline_direct_core_response": 2.0725663260980625,
+        "strict_loan_source_response": 18.913351810054657,
+        "strict_non_treasury_securities_response": -13.760165930673416,
+        "strict_identifiable_total_response": 3.595641364194144,
+        "strict_funding_offset_total_response": -4.970801492089629,
+        "strict_identifiable_net_after_funding_response": 11.452245159282999,
+        "strict_identifiable_gap_response": 63.321770003440186,
+        "strict_gap_after_funding_response": 54.175631564626244,
+        "strict_identifiable_share_of_residual_abs": 0.37450191628958773,
+        "strict_gap_after_funding_share_of_residual_abs": 0.8794136674234847
+      },
+      "interpretation": "toc_row_exclusion_exposes_sign_mismatch_in_direct_counts"
+    },
+    "h4": {
+      "baseline": {
+        "residual_response": {
+          "beta": -100.99420217322485,
+          "se": 48.95277771700572,
+          "lower95": -196.94164649855605,
+          "upper95": -5.04675784789363,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -39.60708317233478,
+          "se": 21.704975154811446,
+          "lower95": -82.14883447576523,
+          "upper95": 2.9346681310956555,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_source_response": {
+          "beta": -35.94429115979122,
+          "se": 19.174791564821454,
+          "lower95": -73.52688262684127,
+          "upper95": 1.638300307258831,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": -36.09446880211357,
+          "se": 18.505539205304284,
+          "lower95": -72.36532564450997,
+          "upper95": 0.17638804028283062,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": -6.588510473401262,
+          "se": 10.22291777123132,
+          "lower95": -26.625429305014645,
+          "upper95": 13.448408358212124,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 43.740795858104896,
+          "se": 29.03941137689402,
+          "lower95": -13.176450440607383,
+          "upper95": 100.65804215681717,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_total_response": {
+          "beta": 9.627031230490644,
+          "se": 41.77812349712699,
+          "lower95": -72.25809082387826,
+          "upper95": 91.51215328485955,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -125.0890576085553,
+          "se": 43.55668314239158,
+          "lower95": -210.4601565676428,
+          "upper95": -39.7179586494678,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": -22.241013975832185,
+          "se": 11.504138958145784,
+          "lower95": -44.789126333797924,
+          "upper95": 0.30709838213354956,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": 25.902662927486475,
+          "se": 44.37370902708535,
+          "lower95": -61.0698067656008,
+          "upper95": 112.87513262057375,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -152.22544416073958,
+          "se": 43.84110024829063,
+          "lower95": -238.1540006473892,
+          "upper95": -66.29688767408996,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 0.3921718506612971,
+        "strict_loan_share_of_residual_abs": 0.3559045013112705,
+        "strict_securities_share_of_residual_abs": 0.4331020486015708,
+        "strict_identifiable_share_of_residual_abs": 0.09532261281670802,
+        "strict_gap_share_of_residual_abs": 1.2385766204083977,
+        "strict_funding_offset_share_of_identifiable_total_beta": -2.3102671470921017,
+        "strict_net_after_funding_share_of_residual_abs": 0.25647673203119453,
+        "strict_gap_after_funding_share_of_residual_abs": 1.5072691390704103
+      },
+      "toc_row_excluded": {
+        "residual_response": {
+          "beta": -43.435870973152745,
+          "se": 19.209068844634533,
+          "lower95": -81.08564590863642,
+          "upper95": -5.786096037669061,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -39.144251193418825,
+          "se": 8.210890028884647,
+          "lower95": -55.23759565003273,
+          "upper95": -23.05090673680492,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_source_response": {
+          "beta": -32.900385114414085,
+          "se": 12.831401321199078,
+          "lower95": -58.049931703964276,
+          "upper95": -7.7508385248638945,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": -37.93114952299555,
+          "se": 13.728557188202304,
+          "lower95": -64.83912161187206,
+          "upper95": -11.023177434119031,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": -2.569821315186207,
+          "se": 4.80739814483423,
+          "lower95": -11.992321679061298,
+          "upper95": 6.852679048688884,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 44.42548420392528,
+          "se": 13.498909319036668,
+          "lower95": 17.96762193861341,
+          "upper95": 70.88334646923715,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_total_response": {
+          "beta": 19.5344604711879,
+          "se": 16.465590531819203,
+          "lower95": -12.73809697117774,
+          "upper95": 51.80701791355354,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -58.42375848257316,
+          "se": 18.955979947284064,
+          "lower95": -95.57747917924993,
+          "upper95": -21.2700377858964,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": -23.07376031896957,
+          "se": 6.985299798614163,
+          "lower95": -36.76494792425333,
+          "upper95": -9.38257271368581,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": 37.722999903487356,
+          "se": 19.734115506944143,
+          "lower95": -0.9558664901231637,
+          "upper95": 76.40186629709788,
+          "n": 64,
+          "ci_excludes_zero": false
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -82.01463470636082,
+          "se": 19.57596358572017,
+          "lower95": -120.38352333437236,
+          "upper95": -43.64574607834929,
+          "n": 64,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 0.901196414770029,
+        "strict_loan_share_of_residual_abs": 0.757447344264133,
+        "strict_securities_share_of_residual_abs": 1.022783317304359,
+        "strict_identifiable_share_of_residual_abs": 0.4497310640613594,
+        "strict_gap_share_of_residual_abs": 1.3450578329299365,
+        "strict_funding_offset_share_of_identifiable_total_beta": -1.1811823701505304,
+        "strict_net_after_funding_share_of_residual_abs": 0.8684757334969418,
+        "strict_gap_after_funding_share_of_residual_abs": 1.8881775101747864
+      },
+      "excluded_minus_baseline_beta": {
+        "residual_response": 57.558331200072104,
+        "strict_headline_direct_core_response": 0.4628319789159576,
+        "strict_loan_source_response": 3.0439060453771347,
+        "strict_non_treasury_securities_response": 0.6846883458203834,
+        "strict_identifiable_total_response": 9.907429240697255,
+        "strict_funding_offset_total_response": -0.8327463431373836,
+        "strict_identifiable_net_after_funding_response": 11.820336976000881,
+        "strict_identifiable_gap_response": 66.66529912598213,
+        "strict_gap_after_funding_response": 70.21080945437876,
+        "strict_identifiable_share_of_residual_abs": 0.35440845124465137,
+        "strict_gap_after_funding_share_of_residual_abs": 0.38090837110437614
+      },
+      "interpretation": "missing_channel_story_broadly_unchanged"
+    },
+    "h8": {
+      "baseline": {
+        "residual_response": {
+          "beta": -230.24311066594336,
+          "se": 57.831467849285815,
+          "lower95": -343.5927876505435,
+          "upper95": -116.89343368134317,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -27.699009281406582,
+          "se": 34.68650038016017,
+          "lower95": -95.6845500265205,
+          "upper95": 40.28653146370734,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_source_response": {
+          "beta": -29.731649959892096,
+          "se": 39.098823599599555,
+          "lower95": -106.36534421510723,
+          "upper95": 46.90204429532304,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": -26.83044935709205,
+          "se": 35.836796354185175,
+          "lower95": -97.07057021129499,
+          "upper95": 43.40967149711089,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": -7.808924723792707,
+          "se": 11.458946618947886,
+          "lower95": -30.268460096930564,
+          "upper95": 14.65061064934515,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 44.71846401566029,
+          "se": 44.28293685418197,
+          "lower95": -42.076092218536374,
+          "upper95": 131.51302024985694,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_total_response": {
+          "beta": 9.626948380965132,
+          "se": 63.937595599711315,
+          "lower95": -115.69073899446904,
+          "upper95": 134.9446357563993,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -249.82357659783344,
+          "se": 66.88782681202387,
+          "lower95": -380.9237171494002,
+          "upper95": -118.72343604626664,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": 5.092741475640988,
+          "se": 24.489502862379684,
+          "lower95": -42.90668413462319,
+          "upper95": 53.092167085905174,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": 4.768038554736648,
+          "se": 55.277161298156464,
+          "lower95": -103.57519758965002,
+          "upper95": 113.11127469912331,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -254.34334938508556,
+          "se": 56.976908550778184,
+          "lower95": -366.0180901446108,
+          "upper95": -142.66860862556032,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 0.12030331418512974,
+        "strict_loan_share_of_residual_abs": 0.12913155088070952,
+        "strict_securities_share_of_residual_abs": 0.19422281034302785,
+        "strict_identifiable_share_of_residual_abs": 0.041812101795882795,
+        "strict_gap_share_of_residual_abs": 1.0850425703303632,
+        "strict_funding_offset_share_of_identifiable_total_beta": 0.5290089106232877,
+        "strict_net_after_funding_share_of_residual_abs": 0.0207087132420415,
+        "strict_gap_after_funding_share_of_residual_abs": 1.1046730069335664
+      },
+      "toc_row_excluded": {
+        "residual_response": {
+          "beta": -67.48146063709291,
+          "se": 23.543475104226605,
+          "lower95": -113.62667184137706,
+          "upper95": -21.336249432808764,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_response": {
+          "beta": -34.07468511503978,
+          "se": 10.07820349789055,
+          "lower95": -53.82796397090526,
+          "upper95": -14.3214062591743,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_source_response": {
+          "beta": -40.74681948665889,
+          "se": 14.910859132935977,
+          "lower95": -69.97210338721341,
+          "upper95": -11.521535586104378,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_core_plus_private_borrower_response": {
+          "beta": -47.521456888483684,
+          "se": 15.883035813963469,
+          "lower95": -78.65220708385209,
+          "upper95": -16.390706693115284,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_loan_noncore_system_response": {
+          "beta": -3.1385770115553466,
+          "se": 5.247958467694136,
+          "lower95": -13.424575608235854,
+          "upper95": 7.14742158512516,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_non_treasury_securities_response": {
+          "beta": 68.79517317333395,
+          "se": 19.254008886382017,
+          "lower95": 31.057315756025197,
+          "upper95": 106.53303059064271,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_total_response": {
+          "beta": 31.120247707268813,
+          "se": 26.365149749724026,
+          "lower95": -20.555445802190274,
+          "upper95": 82.7959412167279,
+          "n": 60,
+          "ci_excludes_zero": false
+        },
+        "strict_identifiable_gap_response": {
+          "beta": -95.89414155088384,
+          "se": 20.82812100100519,
+          "lower95": -136.717258712854,
+          "upper95": -55.07102438891367,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_funding_offset_total_response": {
+          "beta": -28.261682060336586,
+          "se": 8.02709922728763,
+          "lower95": -43.99479654582034,
+          "upper95": -12.528567574852831,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_identifiable_net_after_funding_response": {
+          "beta": 58.35813310691409,
+          "se": 28.485812625425034,
+          "lower95": 2.5259403610810267,
+          "upper95": 114.19032585274715,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_gap_after_funding_response": {
+          "beta": -125.84079213830367,
+          "se": 22.568990260252853,
+          "lower95": -170.07601304839926,
+          "upper95": -81.60557122820808,
+          "n": 60,
+          "ci_excludes_zero": true
+        },
+        "strict_headline_direct_core_share_of_residual_abs": 0.5049488377006137,
+        "strict_loan_share_of_residual_abs": 0.6038224291822955,
+        "strict_securities_share_of_residual_abs": 1.019467754903914,
+        "strict_identifiable_share_of_residual_abs": 0.4611673697258825,
+        "strict_gap_share_of_residual_abs": 1.421044248976632,
+        "strict_funding_offset_share_of_identifiable_total_beta": -0.9081445085585053,
+        "strict_net_after_funding_share_of_residual_abs": 0.8648024591636662,
+        "strict_gap_after_funding_share_of_residual_abs": 1.8648202180308477
+      },
+      "excluded_minus_baseline_beta": {
+        "residual_response": 162.76165002885045,
+        "strict_headline_direct_core_response": -6.375675833633196,
+        "strict_loan_source_response": -11.015169526766798,
+        "strict_non_treasury_securities_response": 24.076709157673662,
+        "strict_identifiable_total_response": 21.49329932630368,
+        "strict_funding_offset_total_response": -33.354423535977574,
+        "strict_identifiable_net_after_funding_response": 53.59009455217744,
+        "strict_identifiable_gap_response": 153.9294350469496,
+        "strict_gap_after_funding_response": 128.5025572467819,
+        "strict_identifiable_share_of_residual_abs": 0.4193552679299997,
+        "strict_gap_after_funding_share_of_residual_abs": 0.7601472110972813
+      },
+      "interpretation": "toc_row_exclusion_exposes_sign_mismatch_in_direct_counts"
+    }
+  },
+  "takeaways": [
+    "This artifact returns to the strict lane after separating the treatment-side TOC/ROW issue: it asks which direct-count pieces still fail to verify the non-TDC residual once the suspect treatment bundle is excluded.",
+    "Read the TOC/ROW-excluded block as a diagnostic comparison, not as a replacement headline treatment.",
+    "At h0, the strict missing-channel comparison starts from a much smaller residual once TOC/ROW is excluded: baseline residual \u2248 -81.18, TOC/ROW-excluded residual \u2248 -5.50.",
+    "Under the TOC/ROW-excluded comparison at h0, the directly counted pieces still need to be read separately: headline direct core \u2248 -10.66, current broad loan source \u2248 5.58, private-borrower-augmented core \u2248 8.49, noncore/system diagnostic \u2248 4.32, securities \u2248 3.48, funding-adjusted net \u2248 9.90.",
+    "At h0, the TOC/ROW-excluded comparison exposes a sign mismatch inside the strict lane: the residual stays negative at about -5.50, while the strict identifiable total turns positive at about 10.83.",
+    "Even after excluding TOC/ROW, the direct-count verification problem remains large: strict gap share of residual \u2248 2.96, gap-after-funding share \u2248 2.84.",
+    "H0 interpretation: `toc_row_exclusion_exposes_sign_mismatch_in_direct_counts`."
+  ]
+}

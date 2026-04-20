@@ -16,10 +16,21 @@ artifacts:
     required_columns:
       - quarter
       - tdc_bank_only_qoq
+      - tdc_tier2_bank_only_qoq
+      - tdc_tier3_bank_only_qoq
+      - tdc_tier3_broad_depository_qoq
+      - tdc_bank_receipt_historical_overlay_qoq
+      - tdc_row_mrv_nondefault_pilot_qoq
       - total_deposits_bank_qoq
+      - deposits_only_bank_qoq
+      - broad_bank_deposits_qoq
       - checkable_deposits_bank_qoq
+      - checkable_deposits_foreign_offices_qoq
+      - checkable_deposits_affiliated_areas_qoq
       - interbank_transactions_bank_qoq
       - time_savings_deposits_bank_qoq
+      - time_savings_deposits_foreign_offices_qoq
+      - time_savings_deposits_affiliated_areas_qoq
       - checkable_federal_govt_bank_qoq
       - checkable_state_local_bank_qoq
       - checkable_rest_of_world_bank_qoq
@@ -28,6 +39,44 @@ artifacts:
       - interbank_transactions_foreign_banks_asset_qoq
       - deposits_at_foreign_banks_asset_qoq
       - other_component_qoq
+      - accounting_deposit_substitution_qoq
+      - accounting_bank_balance_sheet_qoq
+      - accounting_public_liquidity_qoq
+      - accounting_external_flow_qoq
+      - accounting_identity_total_qoq
+      - accounting_identity_gap_qoq
+      - strict_loan_source_qoq
+      - strict_loan_mortgages_qoq
+      - strict_loan_consumer_credit_qoq
+      - strict_loan_di_loans_nec_qoq
+      - strict_di_loans_nec_households_nonprofits_qoq
+      - strict_di_loans_nec_nonfinancial_corporate_qoq
+      - strict_di_loans_nec_nonfinancial_noncorporate_qoq
+      - strict_di_loans_nec_state_local_qoq
+      - strict_di_loans_nec_domestic_financial_qoq
+      - strict_di_loans_nec_rest_of_world_qoq
+      - strict_di_loans_nec_systemwide_liability_total_qoq
+      - strict_di_loans_nec_systemwide_borrower_total_qoq
+      - strict_di_loans_nec_systemwide_borrower_gap_qoq
+      - strict_di_loans_nec_private_domestic_borrower_qoq
+      - strict_di_loans_nec_noncore_system_borrower_qoq
+      - strict_loan_other_advances_qoq
+      - strict_loan_core_min_qoq
+      - strict_loan_core_plus_private_borrower_qoq
+      - strict_loan_core_plus_nonfinancial_corporate_qoq
+      - strict_loan_noncore_system_qoq
+      - strict_non_treasury_agency_gse_qoq
+      - strict_non_treasury_municipal_qoq
+      - strict_non_treasury_corporate_foreign_bonds_qoq
+      - strict_non_treasury_securities_qoq
+      - strict_identifiable_total_qoq
+      - strict_identifiable_gap_qoq
+      - strict_funding_fedfunds_repo_qoq
+      - strict_funding_debt_securities_qoq
+      - strict_funding_fhlb_advances_qoq
+      - strict_funding_offset_total_qoq
+      - strict_identifiable_net_after_funding_qoq
+      - strict_gap_after_funding_qoq
       - bank_credit_private_qoq
       - commercial_industrial_loans_qoq
       - construction_land_development_loans_qoq
@@ -65,22 +114,49 @@ artifacts:
       - household_treasury_securities_reallocation_qoq
       - mmf_treasury_bills_reallocation_qoq
       - currency_reallocation_qoq
+      - other_component_no_foreign_bank_sectors_qoq
+      - other_component_no_toc_bank_only_qoq
+      - other_component_no_toc_no_row_bank_only_qoq
+      - other_component_core_deposit_proximate_bank_only_qoq
+      - broad_bank_other_component_qoq
+      - broad_strict_loan_foreign_offices_qoq
+      - broad_strict_loan_affiliated_areas_qoq
+      - broad_strict_loan_source_qoq
+      - broad_strict_gap_qoq
       - bill_share
       - reserve_drain_pressure
       - quarter_index
       - tga_qoq
       - reserves_qoq
       - tdc_domestic_bank_only_qoq
+      - tdc_us_chartered_bank_only_qoq
+      - tdc_no_foreign_bank_sectors_qoq
+      - tdc_no_toc_bank_only_qoq
+      - tdc_no_toc_no_row_bank_only_qoq
+      - tdc_core_deposit_proximate_bank_only_qoq
+      - tdc_toc_row_support_bundle_qoq
       - tdc_no_remit_bank_only_qoq
       - tdc_credit_union_sensitive_qoq
       - fedfunds
       - unemployment
       - inflation
       - lag_tdc_bank_only_qoq
+      - lag_tdc_us_chartered_bank_only_qoq
+      - lag_tdc_no_foreign_bank_sectors_qoq
+      - lag_tdc_no_toc_bank_only_qoq
+      - lag_tdc_no_toc_no_row_bank_only_qoq
+      - lag_tdc_core_deposit_proximate_bank_only_qoq
+      - lag_tdc_toc_row_support_bundle_qoq
       - lag_total_deposits_bank_qoq
+      - lag_deposits_only_bank_qoq
+      - lag_broad_bank_deposits_qoq
       - lag_checkable_deposits_bank_qoq
+      - lag_checkable_deposits_foreign_offices_qoq
+      - lag_checkable_deposits_affiliated_areas_qoq
       - lag_interbank_transactions_bank_qoq
       - lag_time_savings_deposits_bank_qoq
+      - lag_time_savings_deposits_foreign_offices_qoq
+      - lag_time_savings_deposits_affiliated_areas_qoq
       - lag_checkable_federal_govt_bank_qoq
       - lag_checkable_state_local_bank_qoq
       - lag_checkable_rest_of_world_bank_qoq
@@ -88,6 +164,42 @@ artifacts:
       - lag_interbank_transactions_foreign_banks_liability_qoq
       - lag_interbank_transactions_foreign_banks_asset_qoq
       - lag_deposits_at_foreign_banks_asset_qoq
+      - lag_strict_loan_source_qoq
+      - lag_strict_loan_mortgages_qoq
+      - lag_strict_loan_consumer_credit_qoq
+      - lag_strict_loan_di_loans_nec_qoq
+      - lag_strict_di_loans_nec_households_nonprofits_qoq
+      - lag_strict_di_loans_nec_nonfinancial_corporate_qoq
+      - lag_strict_di_loans_nec_nonfinancial_noncorporate_qoq
+      - lag_strict_di_loans_nec_state_local_qoq
+      - lag_strict_di_loans_nec_domestic_financial_qoq
+      - lag_strict_di_loans_nec_rest_of_world_qoq
+      - lag_strict_di_loans_nec_systemwide_liability_total_qoq
+      - lag_strict_di_loans_nec_systemwide_borrower_total_qoq
+      - lag_strict_di_loans_nec_systemwide_borrower_gap_qoq
+      - lag_strict_di_loans_nec_private_domestic_borrower_qoq
+      - lag_strict_di_loans_nec_noncore_system_borrower_qoq
+      - lag_strict_loan_other_advances_qoq
+      - lag_strict_loan_core_min_qoq
+      - lag_strict_loan_core_plus_private_borrower_qoq
+      - lag_strict_loan_core_plus_nonfinancial_corporate_qoq
+      - lag_strict_loan_noncore_system_qoq
+      - lag_strict_non_treasury_agency_gse_qoq
+      - lag_strict_non_treasury_municipal_qoq
+      - lag_strict_non_treasury_corporate_foreign_bonds_qoq
+      - lag_strict_non_treasury_securities_qoq
+      - lag_strict_identifiable_total_qoq
+      - lag_strict_identifiable_gap_qoq
+      - lag_broad_strict_loan_foreign_offices_qoq
+      - lag_broad_strict_loan_affiliated_areas_qoq
+      - lag_broad_strict_loan_source_qoq
+      - lag_broad_strict_gap_qoq
+      - lag_strict_funding_fedfunds_repo_qoq
+      - lag_strict_funding_debt_securities_qoq
+      - lag_strict_funding_fhlb_advances_qoq
+      - lag_strict_funding_offset_total_qoq
+      - lag_strict_identifiable_net_after_funding_qoq
+      - lag_strict_gap_after_funding_qoq
       - lag_bank_credit_private_qoq
       - lag_commercial_industrial_loans_qoq
       - lag_construction_land_development_loans_qoq
@@ -192,6 +304,571 @@ artifacts:
       - decomposition_mode
       - outcome_construction
       - inference_method
+  - path: output/models/lp_irf_accounting_identity.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/lp_irf_strict_identifiable.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: output/models/accounting_identity_alignment.csv
+    kind: csv
+    required_columns:
+      - horizon
+      - residual_beta
+      - accounting_total_beta
+      - identity_gap_beta
+      - arithmetic_residual_minus_total_beta
+      - identity_gap_share_of_residual
+      - residual_n
+      - accounting_total_n
+      - identity_gap_n
+      - interpretation
+  - path: output/models/strict_identifiable_alignment.csv
+    kind: csv
+    required_columns:
+      - horizon
+      - residual_beta
+      - strict_loan_source_beta
+      - strict_non_treasury_securities_beta
+      - strict_identifiable_total_beta
+      - strict_identifiable_gap_beta
+      - arithmetic_residual_minus_total_beta
+      - strict_gap_share_of_residual
+      - residual_n
+      - strict_total_n
+      - strict_gap_n
+      - interpretation
+  - path: output/models/strict_funding_offset_alignment.csv
+    kind: csv
+    required_columns:
+      - horizon
+      - strict_identifiable_total_beta
+      - strict_funding_offset_total_beta
+      - strict_funding_offset_share_of_identifiable_total_beta
+      - strict_identifiable_net_after_funding_beta
+      - strict_gap_after_funding_beta
+      - identifiable_total_n
+      - funding_total_n
+      - net_after_funding_n
+      - gap_after_funding_n
+      - interpretation
+  - path: output/models/accounting_identity_summary.json
+    kind: json
+    required_keys:
+      - status
+      - source_kind
+      - headline_question
+      - estimation_path
+      - component_outcomes_present
+      - horizons
+      - takeaways
+  - path: output/models/strict_identifiable_summary.json
+    kind: json
+    required_keys:
+      - status
+      - source_kind
+      - headline_question
+      - estimation_path
+      - component_outcomes_present
+      - horizons
+      - takeaways
+  - path: output/models/strict_identifiable_followup_summary.json
+    kind: json
+    required_keys:
+      - status
+      - strict_source_kind
+      - headline_question
+      - estimation_path
+      - measurement_variant_comparison
+      - strict_component_diagnostics
+      - di_loans_nec_borrower_diagnostics
+      - funding_offset_sensitivity
+      - takeaways
+  - path: output/models/scope_alignment_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - variant_definitions
+      - deposit_concepts
+      - takeaways
+  - path: output/models/broad_scope_system_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - usc_matched_context
+      - broad_matched_system
+      - tdc_component_audit
+      - takeaways
+  - path: output/models/treasury_operating_cash_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - quarterly_alignment
+      - key_horizons
+      - takeaways
+  - path: output/models/rest_of_world_treasury_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - quarterly_alignment
+      - key_horizons
+      - takeaways
+  - path: output/models/toc_row_bundle_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - quarterly_alignment
+      - key_horizons
+      - takeaways
+  - path: output/models/toc_row_path_split_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - path_definitions
+      - quarterly_split
+      - key_horizons
+      - takeaways
+  - path: output/models/toc_row_excluded_interpretation_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - comparison_definition
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_missing_channel_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - comparison_definition
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_sign_mismatch_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - shock_alignment
+      - quarter_concentration
+      - gap_driver_alignment
+      - component_alignment
+      - interpretation
+      - takeaways
+  - path: output/models/strict_shock_composition_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - period_bucket_profiles
+      - trim_diagnostics
+      - interpretation
+      - takeaways
+  - path: output/models/strict_top_gap_quarter_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - dominant_leg_summary
+      - contribution_pattern_summary
+      - interpretation
+      - takeaways
+  - path: output/models/strict_top_gap_quarter_direction_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - gap_bundle_alignment_summary
+      - directional_driver_summary
+      - interpretation
+      - takeaways
+  - path: output/models/strict_top_gap_inversion_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - directional_driver_context_summary
+      - residual_strict_pattern_summary
+      - interpretation
+      - takeaways
+  - path: output/models/strict_top_gap_anomaly_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_pattern_summary
+      - weighted_peer_means
+      - anomaly_vs_peer_deltas
+      - ranked_anomaly_component_deltas
+      - interpretation
+      - takeaways
+  - path: output/models/strict_top_gap_anomaly_component_split_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_bucket_weight
+      - loan_subcomponent_deltas
+      - securities_subcomponent_deltas
+      - funding_subcomponent_deltas
+      - liquidity_external_deltas
+      - ranked_component_deltas
+      - interpretation
+      - takeaways
+  - path: output/models/strict_top_gap_anomaly_di_loans_split_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_bucket_weight
+      - di_loans_nec_component_deltas
+      - dominant_borrower_component
+      - borrower_gap_row
+      - interpretation
+      - takeaways
+  - path: output/models/strict_top_gap_anomaly_backdrop_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_bucket_weight
+      - backdrop_rows
+      - corporate_credit_row
+      - loan_source_row
+      - reserves_row
+      - foreign_nonts_row
+      - tga_row
+      - residual_row
+      - liquidity_external_abs_to_corporate_abs_ratio
+      - interpretation
+      - takeaways
+  - path: output/models/big_picture_synthesis_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - h0_snapshot
+      - quarter_composition
+      - supporting_case
+      - classification
+      - interpretation
+      - takeaways
+  - path: output/models/treatment_object_comparison_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_objects
+      - recommendation
+      - takeaways
+  - path: output/models/split_treatment_architecture_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - series_definitions
+      - quarterly_alignment
+      - architecture_recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/core_treatment_promotion_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - series_alias_check
+      - shock_quality
+      - key_horizons
+      - strict_validation_check
+      - promotion_recommendation
+      - takeaways
+  - path: output/models/strict_redesign_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - current_strict_problem_definition
+      - failure_modes
+      - recommended_build_order
+      - takeaways
+  - path: output/models/strict_loan_core_redesign_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - published_roles
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_di_bucket_role_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - release_taxonomy
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_di_bucket_bridge_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_private_borrower_bridge_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_nonfinancial_corporate_bridge_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_private_offset_residual_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_corporate_bridge_secondary_comparison_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_component_framework_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - frozen_roles
+      - h0_snapshot
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/strict_release_framing_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - release_position
+      - evidence_tiers
+      - classification
+      - h0_snapshot
+      - recommendation
+      - takeaways
+  - path: output/models/strict_direct_core_component_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/strict_direct_core_horizon_stability_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - horizon_winners
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/strict_additional_creator_candidate_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_groups
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/strict_di_loans_nec_measurement_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_groups
+      - classification
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: output/models/strict_results_closeout_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - release_position
+      - settled_findings
+      - evidence_tiers
+      - unresolved_questions
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/treasury_cash_regime_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - definitions
+      - regime_windows
+      - full_sample
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/historical_cash_term_reestimation_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - definitions
+      - windows
+      - comparison
+      - top_adjustment_quarters
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/toc_row_incidence_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - leg_definitions
+      - quarterly_alignment
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/toc_row_liability_incidence_raw_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - leg_definitions
+      - quarterly_alignment
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/toc_validated_share_candidate_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - quarterly_gate
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/tdc_treatment_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - component_definitions
+      - variant_definitions
+      - baseline_target
+      - construction_alignment
+      - key_horizons
+      - takeaways
   - path: output/models/identity_measurement_ladder.csv
     kind: csv
     required_columns:
@@ -505,9 +1182,79 @@ artifacts:
       - structural_proxy_context
       - proxy_coverage_context
       - counterpart_channel_context
+      - scope_alignment_context
+      - strict_gap_scope_check_context
+      - broad_scope_system_context
+      - tdc_treatment_audit_context
+      - treasury_operating_cash_audit_context
+      - rest_of_world_treasury_audit_context
+      - toc_row_path_split_context
+      - toc_row_excluded_interpretation_context
+      - strict_missing_channel_context
+      - strict_sign_mismatch_audit_context
+      - strict_shock_composition_context
+      - strict_top_gap_quarter_audit_context
+      - strict_top_gap_quarter_direction_context
+      - strict_top_gap_inversion_context
+      - strict_top_gap_anomaly_context
+      - strict_top_gap_anomaly_component_split_context
+      - strict_top_gap_anomaly_di_loans_split_context
+      - strict_top_gap_anomaly_backdrop_context
+      - big_picture_synthesis_context
+      - treatment_object_comparison_context
+      - split_treatment_architecture_context
+      - core_treatment_promotion_context
+      - strict_redesign_context
+      - strict_loan_core_redesign_context
+      - strict_di_bucket_role_context
+      - strict_di_bucket_bridge_context
+      - strict_private_borrower_bridge_context
+      - strict_nonfinancial_corporate_bridge_context
+      - strict_private_offset_residual_context
+      - strict_corporate_bridge_secondary_comparison_context
+      - strict_component_framework_context
+      - strict_release_framing_context
+      - strict_direct_core_component_context
+      - strict_direct_core_horizon_stability_context
+      - strict_additional_creator_candidate_context
+      - toc_row_incidence_audit_context
+      - tdcest_ladder_integration_context
+      - tdcest_broad_object_comparison_context
+      - tdcest_broad_treatment_sensitivity_context
       - published_regime_contexts
       - readiness_reasons
       - readiness_warnings
+  - path: output/models/tdcest_ladder_integration_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - classification
+      - series_roles
+      - recommendation
+      - takeaways
+  - path: output/models/tdcest_broad_object_comparison_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - latest_common_broad_comparison
+      - supplemental_surfaces
+      - classification
+      - recommendation
+      - takeaways
+  - path: output/models/tdcest_broad_treatment_sensitivity_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - classification
+      - key_horizons
+      - recommendation
+      - takeaways
   - path: output/models/deposit_component_scorecard.json
     kind: json
     required_keys:
@@ -629,6 +1376,571 @@ artifacts:
       - decomposition_mode
       - outcome_construction
       - inference_method
+  - path: site/data/lp_irf_accounting_identity.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/lp_irf_strict_identifiable.csv
+    kind: csv
+    required_columns:
+      - outcome
+      - horizon
+      - beta
+      - se
+      - lower95
+      - upper95
+      - n
+      - spec_name
+  - path: site/data/accounting_identity_alignment.csv
+    kind: csv
+    required_columns:
+      - horizon
+      - residual_beta
+      - accounting_total_beta
+      - identity_gap_beta
+      - arithmetic_residual_minus_total_beta
+      - identity_gap_share_of_residual
+      - residual_n
+      - accounting_total_n
+      - identity_gap_n
+      - interpretation
+  - path: site/data/strict_identifiable_alignment.csv
+    kind: csv
+    required_columns:
+      - horizon
+      - residual_beta
+      - strict_loan_source_beta
+      - strict_non_treasury_securities_beta
+      - strict_identifiable_total_beta
+      - strict_identifiable_gap_beta
+      - arithmetic_residual_minus_total_beta
+      - strict_gap_share_of_residual
+      - residual_n
+      - strict_total_n
+      - strict_gap_n
+      - interpretation
+  - path: site/data/strict_funding_offset_alignment.csv
+    kind: csv
+    required_columns:
+      - horizon
+      - strict_identifiable_total_beta
+      - strict_funding_offset_total_beta
+      - strict_funding_offset_share_of_identifiable_total_beta
+      - strict_identifiable_net_after_funding_beta
+      - strict_gap_after_funding_beta
+      - identifiable_total_n
+      - funding_total_n
+      - net_after_funding_n
+      - gap_after_funding_n
+      - interpretation
+  - path: site/data/accounting_identity_summary.json
+    kind: json
+    required_keys:
+      - status
+      - source_kind
+      - headline_question
+      - estimation_path
+      - component_outcomes_present
+      - horizons
+      - takeaways
+  - path: site/data/strict_identifiable_summary.json
+    kind: json
+    required_keys:
+      - status
+      - source_kind
+      - headline_question
+      - estimation_path
+      - component_outcomes_present
+      - horizons
+      - takeaways
+  - path: site/data/strict_identifiable_followup_summary.json
+    kind: json
+    required_keys:
+      - status
+      - strict_source_kind
+      - headline_question
+      - estimation_path
+      - measurement_variant_comparison
+      - strict_component_diagnostics
+      - di_loans_nec_borrower_diagnostics
+      - funding_offset_sensitivity
+      - takeaways
+  - path: site/data/scope_alignment_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - variant_definitions
+      - deposit_concepts
+      - takeaways
+  - path: site/data/broad_scope_system_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - usc_matched_context
+      - broad_matched_system
+      - tdc_component_audit
+      - takeaways
+  - path: site/data/treasury_operating_cash_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - quarterly_alignment
+      - key_horizons
+      - takeaways
+  - path: site/data/rest_of_world_treasury_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - quarterly_alignment
+      - key_horizons
+      - takeaways
+  - path: site/data/toc_row_bundle_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - quarterly_alignment
+      - key_horizons
+      - takeaways
+  - path: site/data/toc_row_path_split_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - path_definitions
+      - quarterly_split
+      - key_horizons
+      - takeaways
+  - path: site/data/toc_row_excluded_interpretation_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - comparison_definition
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_missing_channel_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - comparison_definition
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_sign_mismatch_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - shock_alignment
+      - quarter_concentration
+      - gap_driver_alignment
+      - component_alignment
+      - interpretation
+      - takeaways
+  - path: site/data/strict_shock_composition_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - period_bucket_profiles
+      - trim_diagnostics
+      - interpretation
+      - takeaways
+  - path: site/data/strict_top_gap_quarter_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - dominant_leg_summary
+      - contribution_pattern_summary
+      - interpretation
+      - takeaways
+  - path: site/data/strict_top_gap_quarter_direction_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - gap_bundle_alignment_summary
+      - directional_driver_summary
+      - interpretation
+      - takeaways
+  - path: site/data/strict_top_gap_inversion_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - top_gap_quarters
+      - directional_driver_context_summary
+      - residual_strict_pattern_summary
+      - interpretation
+      - takeaways
+  - path: site/data/strict_top_gap_anomaly_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_pattern_summary
+      - weighted_peer_means
+      - anomaly_vs_peer_deltas
+      - ranked_anomaly_component_deltas
+      - interpretation
+      - takeaways
+  - path: site/data/strict_top_gap_anomaly_component_split_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_bucket_weight
+      - loan_subcomponent_deltas
+      - securities_subcomponent_deltas
+      - funding_subcomponent_deltas
+      - liquidity_external_deltas
+      - ranked_component_deltas
+      - interpretation
+      - takeaways
+  - path: site/data/strict_top_gap_anomaly_di_loans_split_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_bucket_weight
+      - di_loans_nec_component_deltas
+      - dominant_borrower_component
+      - borrower_gap_row
+      - interpretation
+      - takeaways
+  - path: site/data/strict_top_gap_anomaly_backdrop_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - anomaly_quarter
+      - peer_quarters
+      - peer_bucket_weight
+      - backdrop_rows
+      - corporate_credit_row
+      - loan_source_row
+      - reserves_row
+      - foreign_nonts_row
+      - tga_row
+      - residual_row
+      - liquidity_external_abs_to_corporate_abs_ratio
+      - interpretation
+      - takeaways
+  - path: site/data/big_picture_synthesis_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - h0_snapshot
+      - quarter_composition
+      - supporting_case
+      - classification
+      - interpretation
+      - takeaways
+  - path: site/data/treatment_object_comparison_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_objects
+      - recommendation
+      - takeaways
+  - path: site/data/split_treatment_architecture_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - series_definitions
+      - quarterly_alignment
+      - architecture_recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/core_treatment_promotion_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - series_alias_check
+      - shock_quality
+      - key_horizons
+      - strict_validation_check
+      - promotion_recommendation
+      - takeaways
+  - path: site/data/strict_redesign_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - current_strict_problem_definition
+      - failure_modes
+      - recommended_build_order
+      - takeaways
+  - path: site/data/strict_loan_core_redesign_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - published_roles
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_di_bucket_role_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - release_taxonomy
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_di_bucket_bridge_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_private_borrower_bridge_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_nonfinancial_corporate_bridge_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_private_offset_residual_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - bridge_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_corporate_bridge_secondary_comparison_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_component_framework_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - frozen_roles
+      - h0_snapshot
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/strict_release_framing_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - release_position
+      - evidence_tiers
+      - classification
+      - h0_snapshot
+      - recommendation
+      - takeaways
+  - path: site/data/strict_direct_core_component_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/strict_direct_core_horizon_stability_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - horizon_winners
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/strict_additional_creator_candidate_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_groups
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/strict_di_loans_nec_measurement_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_groups
+      - classification
+      - recommendation
+      - key_horizons
+      - takeaways
+  - path: site/data/strict_results_closeout_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - release_position
+      - settled_findings
+      - evidence_tiers
+      - unresolved_questions
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/treasury_cash_regime_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - definitions
+      - regime_windows
+      - full_sample
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/historical_cash_term_reestimation_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - definitions
+      - windows
+      - comparison
+      - top_adjustment_quarters
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/toc_row_incidence_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - leg_definitions
+      - quarterly_alignment
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/toc_row_liability_incidence_raw_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - leg_definitions
+      - quarterly_alignment
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/toc_validated_share_candidate_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - candidate_definitions
+      - quarterly_gate
+      - key_horizons
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/tdc_treatment_audit_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - component_definitions
+      - variant_definitions
+      - baseline_target
+      - construction_alignment
+      - key_horizons
+      - takeaways
   - path: site/data/identity_measurement_ladder.csv
     kind: csv
     required_columns:
@@ -876,9 +2188,79 @@ artifacts:
       - structural_proxy_context
       - proxy_coverage_context
       - counterpart_channel_context
+      - scope_alignment_context
+      - strict_gap_scope_check_context
+      - broad_scope_system_context
+      - tdc_treatment_audit_context
+      - treasury_operating_cash_audit_context
+      - rest_of_world_treasury_audit_context
+      - toc_row_path_split_context
+      - toc_row_excluded_interpretation_context
+      - strict_missing_channel_context
+      - strict_sign_mismatch_audit_context
+      - strict_shock_composition_context
+      - strict_top_gap_quarter_audit_context
+      - strict_top_gap_quarter_direction_context
+      - strict_top_gap_inversion_context
+      - strict_top_gap_anomaly_context
+      - strict_top_gap_anomaly_component_split_context
+      - strict_top_gap_anomaly_di_loans_split_context
+      - strict_top_gap_anomaly_backdrop_context
+      - big_picture_synthesis_context
+      - treatment_object_comparison_context
+      - split_treatment_architecture_context
+      - core_treatment_promotion_context
+      - strict_redesign_context
+      - strict_loan_core_redesign_context
+      - strict_di_bucket_role_context
+      - strict_di_bucket_bridge_context
+      - strict_private_borrower_bridge_context
+      - strict_nonfinancial_corporate_bridge_context
+      - strict_private_offset_residual_context
+      - strict_corporate_bridge_secondary_comparison_context
+      - strict_component_framework_context
+      - strict_release_framing_context
+      - strict_direct_core_component_context
+      - strict_direct_core_horizon_stability_context
+      - strict_additional_creator_candidate_context
+      - toc_row_incidence_audit_context
+      - tdcest_ladder_integration_context
+      - tdcest_broad_object_comparison_context
+      - tdcest_broad_treatment_sensitivity_context
       - published_regime_contexts
       - readiness_reasons
       - readiness_warnings
+  - path: site/data/tdcest_ladder_integration_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - classification
+      - series_roles
+      - recommendation
+      - takeaways
+  - path: site/data/tdcest_broad_object_comparison_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - latest_common_broad_comparison
+      - supplemental_surfaces
+      - classification
+      - recommendation
+      - takeaways
+  - path: site/data/tdcest_broad_treatment_sensitivity_summary.json
+    kind: json
+    required_keys:
+      - status
+      - headline_question
+      - estimation_path
+      - classification
+      - key_horizons
+      - recommendation
+      - takeaways
   - path: site/data/counterpart_channel_scorecard.json
     kind: json
     required_keys:

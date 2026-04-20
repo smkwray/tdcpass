@@ -1,0 +1,133 @@
+{
+  "status": "available",
+  "headline_question": "In the top shock-gap quarters, does the gap direction line up with the TOC/ROW bundle sign, the ROW leg, the TOC leg, or oppose the whole bundle?",
+  "estimation_path": {
+    "input_panel": "quarterly_panel_with_shocks",
+    "comparison_artifact": "strict_top_gap_quarter_direction_summary.json",
+    "baseline_shock_column": "tdc_residual_z",
+    "toc_row_excluded_shock_column": "tdc_no_toc_no_row_bank_only_residual_z",
+    "top_gap_limit": 5
+  },
+  "top_gap_quarters": [
+    {
+      "quarter": "2020Q3",
+      "period_bucket": "covid_post",
+      "baseline_shock": 0.581904236918328,
+      "toc_row_excluded_shock": -8.869170411795452,
+      "shock_gap": -9.45107464871378,
+      "shock_gap_sign": "negative",
+      "abs_shock_gap": 9.45107464871378,
+      "bundle_qoq": 17.896000000000015,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": 77.543,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": -59.647,
+      "toc_leg_alignment_to_gap": "aligned",
+      "directional_driver": "toc_driven_gap_direction"
+    },
+    {
+      "quarter": "2020Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 3.810380466186416,
+      "toc_row_excluded_shock": 13.09521127559779,
+      "shock_gap": 9.284830809411375,
+      "shock_gap_sign": "positive",
+      "abs_shock_gap": 9.284830809411375,
+      "bundle_qoq": -367.053,
+      "bundle_sign": "negative",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": -255.649,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": -111.404,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap"
+    },
+    {
+      "quarter": "2021Q1",
+      "period_bucket": "covid_post",
+      "baseline_shock": 5.58228501055368,
+      "toc_row_excluded_shock": 0.6017768725534413,
+      "shock_gap": -4.980508138000239,
+      "shock_gap_sign": "negative",
+      "abs_shock_gap": 4.980508138000239,
+      "bundle_qoq": 827.2830000000001,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": 220.665,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": 606.618,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap"
+    },
+    {
+      "quarter": "2009Q2",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": 0.321361895525654,
+      "toc_row_excluded_shock": 3.9573727662584726,
+      "shock_gap": 3.6360108707328185,
+      "shock_gap_sign": "positive",
+      "abs_shock_gap": 3.6360108707328185,
+      "bundle_qoq": 70.08200000000002,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "aligned",
+      "row_leg_qoq": 119.119,
+      "row_leg_alignment_to_gap": "aligned",
+      "toc_signed_contribution_qoq": -49.037,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "row_driven_gap_direction"
+    },
+    {
+      "quarter": "2009Q4",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": -0.2810596542553419,
+      "toc_row_excluded_shock": -3.4428656402507976,
+      "shock_gap": -3.1618059859954557,
+      "shock_gap_sign": "negative",
+      "abs_shock_gap": 3.1618059859954557,
+      "bundle_qoq": 208.777,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "opposed",
+      "row_leg_qoq": 127.107,
+      "row_leg_alignment_to_gap": "opposed",
+      "toc_signed_contribution_qoq": 81.67,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "both_legs_oppose_gap"
+    }
+  ],
+  "gap_bundle_alignment_summary": [
+    {
+      "gap_alignment_to_bundle": "opposed",
+      "abs_gap_weight": 26.87821958212085,
+      "abs_gap_share": 0.880842124583457
+    },
+    {
+      "gap_alignment_to_bundle": "aligned",
+      "abs_gap_weight": 3.6360108707328185,
+      "abs_gap_share": 0.11915787541654296
+    }
+  ],
+  "directional_driver_summary": [
+    {
+      "directional_driver": "both_legs_oppose_gap",
+      "abs_gap_weight": 17.42714493340707,
+      "abs_gap_share": 0.5711153345431098
+    },
+    {
+      "directional_driver": "toc_driven_gap_direction",
+      "abs_gap_weight": 9.45107464871378,
+      "abs_gap_share": 0.3097267900403473
+    },
+    {
+      "directional_driver": "row_driven_gap_direction",
+      "abs_gap_weight": 3.6360108707328185,
+      "abs_gap_share": 0.11915787541654296
+    }
+  ],
+  "interpretation": "top_gap_gap_direction_often_opposes_both_toc_and_row_legs",
+  "takeaways": [
+    "Across the top-gap quarters, the leading gap-versus-bundle alignment is `opposed` with abs-gap share \u2248 0.88.",
+    "Across the top-gap quarters, the leading directional-driver bucket is `both_legs_oppose_gap` with abs-gap share \u2248 0.57.",
+    "The largest top-gap quarter is `2020Q3` with gap-versus-bundle alignment `opposed` and directional driver `toc_driven_gap_direction`."
+  ]
+}

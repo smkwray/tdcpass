@@ -1,0 +1,190 @@
+{
+  "status": "available",
+  "headline_question": "In the historical TT&L regime, does the Treasury-operating-cash term line up with TGA alone or with a broader Treasury cash-balance concept that includes bank-side federal-government balances?",
+  "estimation_path": {
+    "summary_artifact": "treasury_cash_regime_audit_summary.json",
+    "required_panel_columns": [
+      "quarter",
+      "tdc_treasury_operating_cash_qoq",
+      "tga_qoq",
+      "checkable_federal_govt_bank_qoq",
+      "federal_govt_checkable_total_qoq",
+      "federal_govt_time_savings_total_qoq",
+      "federal_govt_cash_balance_proxy_qoq"
+    ]
+  },
+  "definitions": {
+    "tga_qoq": "Quarter-over-quarter change in the TGA proxy from FRED WTREGEN.",
+    "checkable_federal_govt_bank_qoq": "Quarter-over-quarter change in U.S.-chartered bank liabilities to the federal government, including demand notes and tax-and-loan accounts.",
+    "federal_govt_checkable_total_qoq": "Quarter-over-quarter change in federal-government checkable deposits and currency asset.",
+    "federal_govt_time_savings_total_qoq": "Quarter-over-quarter change in federal-government time and savings deposits asset.",
+    "federal_govt_cash_balance_proxy_qoq": "Broad federal cash-balance proxy = federal-government checkable total + federal-government time and savings deposits."
+  },
+  "regime_windows": {
+    "pre_shift_ttl_regime": {
+      "status": "available",
+      "window": {
+        "start": "1990-03-31",
+        "end": "2008-06-30"
+      },
+      "rows": 21,
+      "toc_vs_tga_corr": -0.10641988469138446,
+      "toc_vs_broad_cash_proxy_corr": 0.9640852630037186,
+      "toc_vs_total_checkable_corr": 0.9755774058067085,
+      "toc_vs_ttl_bank_component_corr": 0.9819132830861124,
+      "toc_vs_implied_fed_side_checkable_corr": 0.17240328434904212,
+      "tga_vs_broad_cash_proxy_corr": -0.05181526136223814,
+      "ttl_bank_share_of_cash_balance_proxy_abs": {
+        "mean": 0.9552561020991348,
+        "median": 0.8664715719063544,
+        "p10": 0.39234568668261316,
+        "p90": 1.3990582695703355
+      },
+      "ttl_bank_share_of_total_checkable_abs": {
+        "mean": 1.0228527245021217,
+        "median": 0.9358974358974359,
+        "p10": 0.31003937007874016,
+        "p90": 1.393232430348019
+      },
+      "time_savings_share_of_cash_balance_proxy_abs": {
+        "mean": 0.27551566903506164,
+        "median": 0.05861204013377925,
+        "p10": 0.0034595968510608252,
+        "p90": 0.3895705521472393
+      },
+      "tga_over_broad_cash_proxy": {
+        "mean": 0.014346496176759194,
+        "median": -0.003212350769525819,
+        "p10": -0.0646153846153846,
+        "p90": 0.07455558503581851
+      },
+      "classification": "broad_cash_proxy_tracks_toc_better_than_tga"
+    },
+    "transition_2008_2009": {
+      "status": "available",
+      "window": {
+        "start": "2008-09-30",
+        "end": "2009-12-31"
+      },
+      "rows": 5,
+      "toc_vs_tga_corr": 0.14770210343292461,
+      "toc_vs_broad_cash_proxy_corr": 0.9999611446083649,
+      "toc_vs_total_checkable_corr": 0.9999515977515633,
+      "toc_vs_ttl_bank_component_corr": -0.057686898002157934,
+      "toc_vs_implied_fed_side_checkable_corr": 0.9942575070519308,
+      "tga_vs_broad_cash_proxy_corr": 0.14802588499470568,
+      "ttl_bank_share_of_cash_balance_proxy_abs": {
+        "mean": 1.6824564716862653,
+        "median": 0.00875990642358785,
+        "p10": 0.006438516727300695,
+        "p90": 5.028675600247274
+      },
+      "ttl_bank_share_of_total_checkable_abs": {
+        "mean": 2.3340996830176373,
+        "median": 0.00874611569567633,
+        "p10": 0.006408956701213604,
+        "p90": 6.983635289647415
+      },
+      "time_savings_share_of_cash_balance_proxy_abs": {
+        "mean": 0.05895175277607312,
+        "median": 0.0033545214268105835,
+        "p10": 0.0019317729507015804,
+        "p90": 0.17101922432394145
+      },
+      "tga_over_broad_cash_proxy": {
+        "mean": -4.1900267174936,
+        "median": 0.3725124442200076,
+        "p10": -14.411201124056948,
+        "p90": 1.4451552209718808
+      },
+      "classification": "broad_cash_proxy_tracks_toc_better_than_tga"
+    },
+    "post_shift_tga_dominant_regime": {
+      "status": "available",
+      "window": {
+        "start": "2010-03-31",
+        "end": null
+      },
+      "rows": 64,
+      "toc_vs_tga_corr": 0.9688013306622916,
+      "toc_vs_broad_cash_proxy_corr": 0.9999913148932609,
+      "toc_vs_total_checkable_corr": 0.9999684024725213,
+      "toc_vs_ttl_bank_component_corr": -0.01900544259914023,
+      "toc_vs_implied_fed_side_checkable_corr": 0.999969651336868,
+      "tga_vs_broad_cash_proxy_corr": 0.9689291679549762,
+      "ttl_bank_share_of_cash_balance_proxy_abs": {
+        "mean": 0.009859784352585435,
+        "median": 0.0033692855761373935,
+        "p10": 0.0003652877207436292,
+        "p90": 0.026355273024202274
+      },
+      "ttl_bank_share_of_total_checkable_abs": {
+        "mean": 0.00985086364812371,
+        "median": 0.003371642430736693,
+        "p10": 0.0003646520609938295,
+        "p90": 0.026450442833640973
+      },
+      "time_savings_share_of_cash_balance_proxy_abs": {
+        "mean": 0.006518259703683062,
+        "median": 0.002837672089455542,
+        "p10": 0.0003139324643845331,
+        "p90": 0.012387261807242093
+      },
+      "tga_over_broad_cash_proxy": {
+        "mean": 0.7109973983614912,
+        "median": 0.9100500081455642,
+        "p10": -0.7135962143232424,
+        "p90": 1.6884466650322112
+      },
+      "classification": "mixed_or_transition_regime"
+    }
+  },
+  "full_sample": {
+    "rows": 92,
+    "toc_vs_tga_corr": 0.9467815933251763,
+    "toc_vs_broad_cash_proxy_corr": 0.9998582880789806,
+    "toc_vs_total_checkable_corr": 0.9998920588953345,
+    "toc_vs_ttl_bank_component_corr": 0.030822932799669276,
+    "toc_vs_implied_fed_side_checkable_corr": 0.9985154046468353,
+    "tga_vs_broad_cash_proxy_corr": 0.9464571642693809,
+    "ttl_bank_share_of_cash_balance_proxy_abs": {
+      "mean": 0.325819065765991,
+      "median": 0.005959105952275549,
+      "p10": 0.0003979043708285268,
+      "p90": 0.9272332419467447
+    },
+    "ttl_bank_share_of_total_checkable_abs": {
+      "mean": 0.3748295133492469,
+      "median": 0.005966937031186295,
+      "p10": 0.00039603148809585386,
+      "p90": 0.9780301348999473
+    },
+    "time_savings_share_of_cash_balance_proxy_abs": {
+      "mean": 0.07323205259210902,
+      "median": 0.004012324364650852,
+      "p10": 0.0005079526898201206,
+      "p90": 0.14337996813116546
+    },
+    "tga_over_broad_cash_proxy": {
+      "mean": 0.2585067679487749,
+      "median": 0.3846007604711428,
+      "p10": -0.2974961029393048,
+      "p90": 1.6457242985142924
+    },
+    "classification": "mixed_or_transition_regime"
+  },
+  "classification": {
+    "pre_shift_regime_classification": "broad_cash_proxy_tracks_toc_better_than_tga",
+    "recommendation_gate": "historical_reestimate_with_explicit_ttl_era_cash_term_warranted"
+  },
+  "recommendation": {
+    "status": "historical_reestimate_with_explicit_ttl_era_cash_term_warranted",
+    "next_branch": "historical_cash_term_reestimation"
+  },
+  "takeaways": [
+    "This audit checks whether the current Treasury-operating-cash term behaves more like TGA alone or like a broader federal-cash-balance concept that includes TT&L-era bank-side balances.",
+    "In the pre-shift TT&L regime, TOC/TGA corr \u2248 -0.11, TOC/broad-cash-proxy corr \u2248 0.96, and the bank-side federal-government component averages about 0.96 of the broad cash-balance proxy in absolute-flow terms.",
+    "In the post-shift regime, TOC/TGA corr \u2248 0.97 versus TOC/broad-cash-proxy corr \u2248 1.00.",
+    "The decision question is historical only: whether older-period TDC should use an explicit TT&L-era Treasury-cash term rather than relying on TGA-style cash alone."
+  ]
+}

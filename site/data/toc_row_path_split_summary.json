@@ -1,0 +1,202 @@
+{
+  "status": "available",
+  "headline_question": "Within the combined TOC/ROW bundle, does the TGA-anchored direct-deposit path or the broader support path dominate?",
+  "estimation_path": {
+    "lp_spec_name": "toc_row_path_split",
+    "summary_artifact": "toc_row_path_split_summary.json"
+  },
+  "path_definitions": {
+    "bundle": "tdc_toc_row_bundle_qoq",
+    "broad_support_path": "toc_row_broad_support_counterpart_qoq",
+    "direct_deposit_path": "toc_row_direct_deposit_counterpart_qoq",
+    "liquidity_external_path": "toc_row_liquidity_external_counterpart_qoq"
+  },
+  "quarterly_split": {
+    "status": "available",
+    "rows": 92,
+    "bundle_contemporaneous_corr": {
+      "broad_support_path": 0.751538071224028,
+      "direct_deposit_path": 0.8619441907978307,
+      "liquidity_external_path": 0.19553221293478895,
+      "direct_minus_broad_gap": 0.11040611957380264
+    },
+    "bundle_sign_match_share": {
+      "broad_support_path": 0.6521739130434783,
+      "direct_deposit_path": 0.6413043478260869,
+      "liquidity_external_path": 0.6304347826086957
+    },
+    "preferred_quarterly_path": "direct_deposit_path_dominant"
+  },
+  "key_horizons": {
+    "h0": {
+      "bundle_response": {
+        "beta": 82.19795193041784,
+        "se": 23.571703617374965,
+        "lower95": 35.99741284036291,
+        "upper95": 128.39849102047276,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "broad_support_path_response": {
+        "beta": 87.77282221303257,
+        "se": 17.188445746769325,
+        "lower95": 54.08346854936469,
+        "upper95": 121.46217587670046,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "direct_deposit_path_response": {
+        "beta": 61.41009378099726,
+        "se": 19.711186006721512,
+        "lower95": 22.776169207823095,
+        "upper95": 100.04401835417141,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "liquidity_external_path_response": {
+        "beta": 115.45371908854301,
+        "se": 20.6890667381674,
+        "lower95": 74.9031482817349,
+        "upper95": 156.00428989535112,
+        "n": 68,
+        "ci_excludes_zero": true
+      },
+      "direct_minus_broad_beta_gap": -26.36272843203531,
+      "coverage_share_of_bundle_beta": {
+        "broad_support_path": 1.0678224962020217,
+        "direct_deposit_path": 0.747100047370792,
+        "liquidity_external_path": 1.4045814570450224
+      },
+      "preferred_horizon_path": "broad_support_path_dominant"
+    },
+    "h1": {
+      "bundle_response": {
+        "beta": 66.44970533448253,
+        "se": 50.7272010585081,
+        "lower95": -32.97560874019335,
+        "upper95": 165.87501940915843,
+        "n": 67,
+        "ci_excludes_zero": false
+      },
+      "broad_support_path_response": {
+        "beta": 71.93855037982472,
+        "se": 33.39048385879253,
+        "lower95": 6.493202016591368,
+        "upper95": 137.38389874305807,
+        "n": 67,
+        "ci_excludes_zero": true
+      },
+      "direct_deposit_path_response": {
+        "beta": 48.219184948253776,
+        "se": 43.538693957995555,
+        "lower95": -37.11665520941751,
+        "upper95": 133.55502510592507,
+        "n": 67,
+        "ci_excludes_zero": false
+      },
+      "liquidity_external_path_response": {
+        "beta": 145.95090914888732,
+        "se": 39.889333409746335,
+        "lower95": 67.76781566578451,
+        "upper95": 224.13400263199014,
+        "n": 67,
+        "ci_excludes_zero": true
+      },
+      "direct_minus_broad_beta_gap": -23.719365431570942,
+      "coverage_share_of_bundle_beta": {
+        "broad_support_path": 1.0826014956381436,
+        "direct_deposit_path": 0.7256493419427031,
+        "liquidity_external_path": 2.1964116833058323
+      },
+      "preferred_horizon_path": "broad_support_path_dominant"
+    },
+    "h4": {
+      "bundle_response": {
+        "beta": 82.709866827593,
+        "se": 49.034429546642535,
+        "lower95": -13.397615083826366,
+        "upper95": 178.81734873901237,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "broad_support_path_response": {
+        "beta": 70.58320720960461,
+        "se": 39.19106779390551,
+        "lower95": -6.231285666450191,
+        "upper95": 147.3977000856594,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "direct_deposit_path_response": {
+        "beta": 33.87385627732221,
+        "se": 39.95822183400889,
+        "lower95": -44.44425851733521,
+        "upper95": 112.19197107197962,
+        "n": 64,
+        "ci_excludes_zero": false
+      },
+      "liquidity_external_path_response": {
+        "beta": 179.81108619497002,
+        "se": 69.2292999062561,
+        "lower95": 44.12165837870805,
+        "upper95": 315.500514011232,
+        "n": 64,
+        "ci_excludes_zero": true
+      },
+      "direct_minus_broad_beta_gap": -36.7093509322824,
+      "coverage_share_of_bundle_beta": {
+        "broad_support_path": 0.8533831562893679,
+        "direct_deposit_path": 0.4095503665594283,
+        "liquidity_external_path": 2.17399801368055
+      },
+      "preferred_horizon_path": "broad_support_path_dominant"
+    },
+    "h8": {
+      "bundle_response": {
+        "beta": 175.67519112915676,
+        "se": 47.504099061856195,
+        "lower95": 82.56715696791862,
+        "upper95": 268.7832252903949,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "broad_support_path_response": {
+        "beta": 123.30017664216302,
+        "se": 49.08850365082946,
+        "lower95": 27.086709486537288,
+        "upper95": 219.51364379778875,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "direct_deposit_path_response": {
+        "beta": 93.03899580102497,
+        "se": 43.207773164115075,
+        "lower95": 8.35176039935942,
+        "upper95": 177.7262312026905,
+        "n": 60,
+        "ci_excludes_zero": true
+      },
+      "liquidity_external_path_response": {
+        "beta": 147.99569452068727,
+        "se": 81.76380455389574,
+        "lower95": -12.261362404948386,
+        "upper95": 308.2527514463229,
+        "n": 60,
+        "ci_excludes_zero": false
+      },
+      "direct_minus_broad_beta_gap": -30.261180841138057,
+      "coverage_share_of_bundle_beta": {
+        "broad_support_path": 0.7018644798371814,
+        "direct_deposit_path": 0.5296080522412667,
+        "liquidity_external_path": 0.8424393539545406
+      },
+      "preferred_horizon_path": "broad_support_path_dominant"
+    }
+  },
+  "takeaways": [
+    "This summary forces a formal split between the TGA-anchored direct-deposit path and the broader support path inside the combined TOC/ROW bundle.",
+    "Quarter by quarter, the preferred path is `direct_deposit_path_dominant`: broad-support corr \u2248 0.75, direct-deposit corr \u2248 0.86.",
+    "At h0, the preferred path is `broad_support_path_dominant`: broad-support \u2248 87.77, direct-deposit \u2248 61.41.",
+    "The broader liquidity-plus-external path remains a larger upper-envelope counterpart at h0, about 115.45."
+  ]
+}
