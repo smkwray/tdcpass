@@ -27,25 +27,18 @@
     }
   },
   "missing_variants": {
-    "tier2_bank_only": {
-      "label": "Tier 2 interest-corrected bank-only",
-      "target_column": "tdc_tier2_bank_only_qoq",
-      "shock_column": "tdc_tier2_bank_only_residual_z",
-      "target_nonnull_count": 13,
-      "usable_shock_count": 0
-    },
     "tier3_bank_only": {
       "label": "Tier 3 fiscal-corrected bank-only",
       "target_column": "tdc_tier3_bank_only_qoq",
       "shock_column": "tdc_tier3_bank_only_residual_z",
-      "target_nonnull_count": 13,
+      "target_nonnull_count": 16,
       "usable_shock_count": 0
     },
     "tier3_broad_depository": {
       "label": "Tier 3 fiscal-corrected broad-depository",
       "target_column": "tdc_tier3_broad_depository_qoq",
       "shock_column": "tdc_tier3_broad_depository_residual_z",
-      "target_nonnull_count": 13,
+      "target_nonnull_count": 16,
       "usable_shock_count": 0
     }
   },
@@ -56,15 +49,15 @@
   "takeaways": [
     "Baseline h0 broad-object read remains total deposits up and other component down: total \u2248 28.77, residual \u2248 -56.69.",
     "Corrected tdcest broad-treatment LP sensitivity is not currently estimable under the frozen shock-design gate because the corrected series do not have enough history to enter the sensitivity ladder.",
-    "Current availability by corrected variant: Tier 2 interest-corrected bank-only: target non-null count = 13, usable shock count = 0; Tier 3 fiscal-corrected bank-only: target non-null count = 13, usable shock count = 0; Tier 3 fiscal-corrected broad-depository: target non-null count = 13, usable shock count = 0.",
+    "Current availability by corrected variant: Tier 3 fiscal-corrected bank-only: target non-null count = 16, usable shock count = 0; Tier 3 fiscal-corrected broad-depository: target non-null count = 16, usable shock count = 0.",
     "A separate short-history exploratory h0 check is available, but it is not comparable to the frozen rolling-shock LP design."
   ],
   "exploratory_short_history": {
     "status": "available",
     "sample_window": {
-      "start_quarter": "2022Q4",
+      "start_quarter": "2022Q1",
       "end_quarter": "2025Q4",
-      "n_quarters": 13
+      "n_quarters": 16
     },
     "shock_construction": {
       "method": "full_sample_ar1_residual_standardized",
@@ -86,19 +79,19 @@
     "baseline": {
       "label": "Canonical bank-only headline",
       "total_deposits": {
-        "beta": 86.16889624937689,
-        "se": 30.067298818015747,
-        "lower95": 27.23699056606602,
-        "upper95": 145.10080193268774,
-        "n": 12,
+        "beta": 79.48440609286114,
+        "se": 25.68655727860288,
+        "lower95": 29.138753826799494,
+        "upper95": 129.83005835892277,
+        "n": 15,
         "ci_excludes_zero": true
       },
       "other_component": {
-        "beta": -136.317094205183,
-        "se": 33.63816885412829,
-        "lower95": -202.24790515927444,
-        "upper95": -70.38628325109156,
-        "n": 12,
+        "beta": -122.68197021733661,
+        "se": 26.8329925243603,
+        "lower95": -175.2746355650828,
+        "upper95": -70.08930486959042,
+        "n": 15,
         "ci_excludes_zero": true
       }
     },
@@ -106,64 +99,64 @@
       "tier2_bank_only": {
         "label": "Tier 2 interest-corrected bank-only",
         "total_deposits": {
-          "beta": 85.75019956461902,
-          "se": 28.633418124776973,
-          "lower95": 29.62870004005616,
-          "upper95": 141.8716990891819,
-          "n": 12,
+          "beta": 73.25680848934685,
+          "se": 25.97440874769844,
+          "lower95": 22.346967343857912,
+          "upper95": 124.16664963483579,
+          "n": 15,
           "ci_excludes_zero": true
         },
         "other_component": {
-          "beta": -137.07967993158192,
-          "se": 36.94194079859946,
-          "lower95": -209.48588389683687,
-          "upper95": -64.67347596632698,
-          "n": 12,
+          "beta": -129.13873106778522,
+          "se": 25.020819961672498,
+          "lower95": -178.1795381926633,
+          "upper95": -80.09792394290713,
+          "n": 15,
           "ci_excludes_zero": true
         }
       },
       "tier3_bank_only": {
         "label": "Tier 3 fiscal-corrected bank-only",
         "total_deposits": {
-          "beta": 85.40054844055993,
-          "se": 28.65844280585551,
-          "lower95": 29.23000054108313,
-          "upper95": 141.57109634003672,
-          "n": 12,
+          "beta": 72.81035821137326,
+          "se": 26.045476846034898,
+          "lower95": 21.761223593144855,
+          "upper95": 123.85949282960166,
+          "n": 15,
           "ci_excludes_zero": true
         },
         "other_component": {
-          "beta": -137.3058513504859,
-          "se": 36.73745845514588,
-          "lower95": -209.31126992257182,
-          "upper95": -65.3004327784,
-          "n": 12,
+          "beta": -129.4619547562015,
+          "se": 24.891897005861985,
+          "lower95": -178.25007288769098,
+          "upper95": -80.67383662471201,
+          "n": 15,
           "ci_excludes_zero": true
         }
       },
       "tier3_broad_depository": {
         "label": "Tier 3 fiscal-corrected broad-depository",
         "total_deposits": {
-          "beta": 85.42814149823653,
-          "se": 28.607999907094687,
-          "lower95": 29.356461680330945,
-          "upper95": 141.49982131614212,
-          "n": 12,
+          "beta": 72.31967785471278,
+          "se": 25.89050791474193,
+          "lower95": 21.574282341818595,
+          "upper95": 123.06507336760697,
+          "n": 15,
           "ci_excludes_zero": true
         },
         "other_component": {
-          "beta": -137.47072610934305,
-          "se": 36.69494522804109,
-          "lower95": -209.3928187563036,
-          "upper95": -65.54863346238251,
-          "n": 12,
+          "beta": -130.13413527101122,
+          "se": 24.711798888581804,
+          "lower95": -178.56926109263156,
+          "upper95": -81.69900944939089,
+          "n": 15,
           "ci_excludes_zero": true
         }
       }
     },
     "takeaways": [
-      "Short-history common-sample baseline h0 read is total \u2248 86.17, residual \u2248 -136.32 over 2022Q4 to 2025Q4.",
-      "Short-history corrected-variant h0 reads: Tier 2 interest-corrected bank-only: total \u2248 85.75, residual \u2248 -137.08; Tier 3 fiscal-corrected bank-only: total \u2248 85.40, residual \u2248 -137.31; Tier 3 fiscal-corrected broad-depository: total \u2248 85.43, residual \u2248 -137.47."
+      "Short-history common-sample baseline h0 read is total \u2248 79.48, residual \u2248 -122.68 over 2022Q1 to 2025Q4.",
+      "Short-history corrected-variant h0 reads: Tier 2 interest-corrected bank-only: total \u2248 73.26, residual \u2248 -129.14; Tier 3 fiscal-corrected bank-only: total \u2248 72.81, residual \u2248 -129.46; Tier 3 fiscal-corrected broad-depository: total \u2248 72.32, residual \u2248 -130.13."
     ]
   }
 }

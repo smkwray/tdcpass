@@ -15,6 +15,7 @@ Current stopping point:
 - the exact baseline shows positive impact effects on matched total bank deposits and negative effects on the non-TDC residual
 - full TDC remains the broad Treasury-attributed measure, not a validated strict deposit component
 - the repo now exposes a live `tdcest` comparison ladder with corrected broad-estimate variants, while keeping that ladder outside the independently confirmed core
+- the upstream DU fiscal-flow first-pass branch is intentionally not imported here because it remains exploratory proxy/residual research rather than a comparison-grade public measure
 - the independently confirmed core currently excludes Treasury other-checkable and rest-of-world deposit channels
 - the pre-`2002Q4` historical backfill now uses a TT&L-aware Treasury cash term; the post-`2002Q4` transaction-era headline is unchanged
 - the strongest independent evidence remains narrow and loan-led, with a nonfinancial-corporate bridge kept as comparison evidence rather than direct validation
@@ -54,6 +55,8 @@ The repo also imports a selective broad-estimate comparison ladder from sibling 
 - `tdc_row_mrv_nondefault_pilot_qoq`
 
 These rows are comparison or bounded-sensitivity measures only. They do not replace the frozen strict interpretation.
+
+The repo intentionally does **not** import upstream DU fiscal-flow first-pass rows. In current upstream form, they combine total MTS cash totals with DU-side Treasury-security proxies and coupon proxies, with fallback residual logic where direct coverage is incomplete. That makes them useful research context upstream, but not strong enough for `tdcpass`'s public comparison layer.
 
 ### Why the canonical broad headline is retained
 
@@ -98,6 +101,17 @@ Under current evidence:
 This is the key release discipline of the repo:
 
 - **full TDC** and the **strict deposit component** are not treated as interchangeable labels
+
+### Minimal Defensible Independent Non-TDC Read
+
+If the question is the smallest independent non-TDC measure this repo can defend, the answer is narrower than the full residual.
+
+- minimum direct benchmark: `strict_loan_core_min_qoq`
+- impact-horizon subcomponent: `strict_loan_mortgages_qoq`
+- standard narrow bridge comparison: `strict_loan_core_plus_nonfinancial_corporate_qoq`
+- wider private-borrower and closure-style rows: diagnostic only
+
+In plain language: the most defensible partial independent non-TDC read is loan-led and starts with mortgages plus consumer credit, not with a full independently measured non-TDC deposit total.
 
 ## What the repo does
 
@@ -158,7 +172,7 @@ The current release should be read in this order:
 4. The strongest current strict evidence is narrow and loan-led, with mortgage lending strongest on impact and a nonfinancial-corporate bridge kept as comparison evidence only.
 5. Closure-style accounting remains descriptive only and is not independent verification.
 6. Historical TT&L-era handling is a separate backfill issue: the repo now refines the pre-`2002Q4` cash term, but that does not change the modern strict-component result.
-7. The `tdcest` corrected ladder is now part of the broad-estimate read only: at the latest common quarter (`2025Q4`), headline bank-only is about `68.996`, Tier 2 is about `-38.09`, Tier 3 is about `-40.16`, and Tier 3 broad-depository is about `-39.94`.
+7. The `tdcest` corrected ladder is now part of the broad-estimate read only: at the latest common quarter (`2025Q4`), headline bank-only is about `68.996`, Tier 2 is about `-49.49`, Tier 3 is about `-51.57`, and Tier 3 broad-depository is about `-51.35`.
 
 The best concise summary is: the repo can defend full TDC as a broad Treasury Contribution to Deposits object, but it cannot yet defend full TDC as the strict deposit component of deposits.
 
