@@ -1,14 +1,17 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-from tdcpass.analysis.accounting import compute_other_component, build_accounting_summary, summary_to_frame
-from tdcpass.analysis.shocks import expanding_window_residual
+from tdcpass.analysis.accounting import (
+    build_accounting_summary,
+    compute_other_component,
+    summary_to_frame,
+)
 from tdcpass.analysis.local_projections import run_local_projections
+from tdcpass.analysis.shocks import expanding_window_residual
 from tdcpass.core.manifest import write_manifest
 from tdcpass.core.paths import ensure_repo_dirs, repo_root
 from tdcpass.reports.site_export import export_frame, write_overview_json
@@ -86,7 +89,7 @@ def generate_synthetic_panel(n_periods: int = 96, seed: int = 42) -> pd.DataFram
 
 def run_demo_pipeline(base_dir: Path | None = None) -> dict:
     root = base_dir or repo_root()
-    dirs = ensure_repo_dirs(root)
+    ensure_repo_dirs(root)
 
     df = generate_synthetic_panel()
     df = compute_other_component(df)
@@ -142,7 +145,7 @@ def run_demo_pipeline(base_dir: Path | None = None) -> dict:
     irf_path = root / "output" / "demo" / "lp_irf.csv"
     export_frame(irf, irf_path)
 
-    overview_path = root / "site" / "data" / "overview.json"
+    overview_path = root / "output" / "demo" / "overview.json"
     write_overview_json(
         overview_path,
         headline_metrics={
