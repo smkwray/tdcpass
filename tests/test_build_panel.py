@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import zipfile
 from pathlib import Path
@@ -476,6 +477,15 @@ def test_build_public_quarterly_panel_writes_contract_columns(tmp_path: Path, mo
     assert "tdc_no_remit_bank_only_qoq" in frame.columns
     assert "tdc_credit_union_sensitive_qoq" in frame.columns
     assert "tdc_tier2_bank_only_qoq" in frame.columns
+    assert "tdc_tier2_di_np_cu_qoq" in frame.columns
+    assert "tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq" in frame.columns
+    assert "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq" in frame.columns
+    assert "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq" in frame.columns
+    assert "tdc_tier2_regression_bank_row_method_tier" in frame.columns
+    assert "tdc_tier2_mmf_rrp_prop_bank_only_qoq" in frame.columns
+    assert "tdc_tier2_mmf_rrp_lb_bank_only_qoq" in frame.columns
+    assert "tdc_tier2_mmf_rrp_ub_bank_only_qoq" in frame.columns
+    assert "tdc_tier2_mmf_rrp_prop_di_np_cu_qoq" in frame.columns
     assert "tdc_tier3_bank_only_qoq" in frame.columns
     assert "tdc_tier3_broad_depository_qoq" in frame.columns
     assert "tdc_bank_receipt_historical_overlay_qoq" in frame.columns
@@ -993,6 +1003,9 @@ def test_reused_tdc_series_accepts_legacy_alias(tmp_path: Path) -> None:
     assert frame["tdc_no_remit_bank_only_qoq"].isna().all()
     assert frame["tdc_credit_union_sensitive_qoq"].isna().all()
     assert frame["tdc_tier2_bank_only_qoq"].isna().all()
+    assert frame["tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq"].isna().all()
+    assert frame["tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq"].isna().all()
+    assert frame["tdc_tier2_mmf_rrp_prop_bank_only_qoq"].isna().all()
     assert frame["tdc_tier3_bank_only_qoq"].isna().all()
     assert frame["tdc_tier3_broad_depository_qoq"].isna().all()
     assert frame["tdc_bank_receipt_historical_overlay_qoq"].isna().all()
@@ -1003,9 +1016,9 @@ def test_load_canonical_tdc_series_csv_accepts_tdcest_export(tmp_path: Path) -> 
     path = tmp_path / "tdc_estimates.csv"
     path.write_text(
         (
-            "date,tdc_base_bank_only_ru_flow,tdc_base_broad_depository_np_cu_ru_flow,tdc_domestic_bank_only_ru_flow,tdc_no_remit_bank_only,tdc_credit_union_aggregate_sensitivity,tdc_tier2_interest_corrected_bank_only_ru_flow,tdc_tier3_fiscal_corrected_bank_only_ru_flow,tdc_tier3_fiscal_corrected_broad_depository_np_cu_ru_flow\n"
-            "2000-03-31,1000.0,2000.0,1100.0,1200.0,1300.0,1400.0,1500.0,1600.0\n"
-            "2000-06-30,3000.0,4000.0,3100.0,3200.0,3300.0,3400.0,3500.0,3600.0\n"
+            "date,tdc_base_bank_only_ru_flow,tdc_base_broad_depository_np_cu_ru_flow,tdc_domestic_bank_only_ru_flow,tdc_no_remit_bank_only,tdc_credit_union_aggregate_sensitivity,tdc_tier2_interest_corrected_bank_only_ru_flow,tdc_tier2_interest_corrected_depository_institution_np_cu_ru_flow,tdc_tier2_canonical_depository_institution_mmf_rrp_prop_ru_flow,tdc_tier2_mmf_rrp_prop_bank_only_ru_flow,tdc_tier2_mmf_rrp_lb_bank_only_ru_flow,tdc_tier2_mmf_rrp_ub_bank_only_ru_flow,tdc_tier2_mmf_rrp_prop_depository_institution_np_cu_ru_flow,tdc_tier2_treasury_interest_robust_bank_only_ru_flow,tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_ru_flow,tdc_tier2_treasury_interest_robust_depository_institution_np_cu_ru_flow,tdc_tier2_treasury_interest_robust_mmf_rrp_prop_depository_institution_np_cu_ru_flow,tdc_tier3_fiscal_corrected_bank_only_ru_flow,tdc_tier3_fiscal_corrected_broad_depository_np_cu_ru_flow\n"
+            "2000-03-31,1000.0,2000.0,1100.0,1200.0,1300.0,1400.0,1410.0,1415.0,1420.0,1430.0,1440.0,1450.0,1460.0,1470.0,1480.0,1490.0,1500.0,1600.0\n"
+            "2000-06-30,3000.0,4000.0,3100.0,3200.0,3300.0,3400.0,3410.0,3415.0,3420.0,3430.0,3440.0,3450.0,3460.0,3470.0,3480.0,3490.0,3500.0,3600.0\n"
         ),
         encoding="utf-8",
     )
@@ -1018,8 +1031,49 @@ def test_load_canonical_tdc_series_csv_accepts_tdcest_export(tmp_path: Path) -> 
     assert frame["tdc_no_remit_bank_only_qoq"].tolist() == [1.2, 3.2]
     assert frame["tdc_credit_union_sensitive_qoq"].tolist() == [1.3, 3.3]
     assert frame["tdc_tier2_bank_only_qoq"].tolist() == [1.4, 3.4]
+    assert frame["tdc_tier2_di_np_cu_qoq"].tolist() == [1.41, 3.41]
+    assert frame["tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq"].tolist() == [1.415, 3.415]
+    assert frame["tdc_tier2_mmf_rrp_prop_bank_only_qoq"].tolist() == [1.42, 3.42]
+    assert frame["tdc_tier2_mmf_rrp_lb_bank_only_qoq"].tolist() == [1.43, 3.43]
+    assert frame["tdc_tier2_mmf_rrp_ub_bank_only_qoq"].tolist() == [1.44, 3.44]
+    assert frame["tdc_tier2_mmf_rrp_prop_di_np_cu_qoq"].tolist() == [1.45, 3.45]
+    assert frame["tdc_tier2_treasury_interest_robust_bank_only_qoq"].tolist() == [1.46, 3.46]
+    assert frame["tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_qoq"].tolist() == [1.47, 3.47]
+    assert frame["tdc_tier2_treasury_interest_robust_di_np_cu_qoq"].tolist() == [1.48, 3.48]
+    assert frame["tdc_tier2_treasury_interest_robust_mmf_rrp_prop_di_np_cu_qoq"].tolist() == [1.49, 3.49]
     assert frame["tdc_tier3_bank_only_qoq"].tolist() == [1.5, 3.5]
     assert frame["tdc_tier3_broad_depository_qoq"].tolist() == [1.6, 3.6]
+
+
+def test_load_tdcest_tier2_regression_series_csv_accepts_tdcest_export(tmp_path: Path) -> None:
+    path = tmp_path / "tdc_tier2_regression_series.csv"
+    path.write_text(
+        (
+            "date,tdc_tier2_regression_mmf_rrp_lb_bank_only_ru_flow,tdc_tier2_regression_mmf_rrp_prop_bank_only_ru_flow,tdc_tier2_regression_mmf_rrp_ub_bank_only_ru_flow,tdc_tier2_regression_mmf_rrp_lb_depository_institution_np_cu_ru_flow,tdc_tier2_regression_mmf_rrp_prop_depository_institution_np_cu_ru_flow,tdc_tier2_regression_mmf_rrp_ub_depository_institution_np_cu_ru_flow,bank_method_tier,row_method_tier,credit_union_method_tier,tier2_regression_bank_row_method_tier,tier2_regression_di_method_tier\n"
+            "2000-03-31,2100.0,2200.0,2300.0,2400.0,2500.0,2600.0,bank,row,cu,bank_row,di\n"
+            "2000-06-30,3100.0,3200.0,3300.0,3400.0,3500.0,3600.0,bank,row,cu,bank_row,di\n"
+        ),
+        encoding="utf-8",
+    )
+    frame = build_panel._load_tdcest_tier2_regression_series_csv(path)
+    assert frame is not None
+    assert frame["quarter"].tolist() == ["2000Q1", "2000Q2"]
+    assert frame["tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq"].tolist() == [2.2, 3.2]
+    assert frame["tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq"].tolist() == [2.5, 3.5]
+    assert frame["tdc_tier2_regression_bank_row_method_tier"].tolist() == ["bank_row", "bank_row"]
+    assert frame["tdc_tier2_regression_di_method_tier"].tolist() == ["di", "di"]
+
+
+def test_tdcest_tier2_regression_fixture_matches_recorded_provenance() -> None:
+    fixture_dir = Path(__file__).resolve().parent / "fixtures" / "offline_raw_fixture" / "tdcest"
+    fixture_path = fixture_dir / "tdc_tier2_regression_series.csv"
+    provenance = json.loads((fixture_dir / "tdc_tier2_regression_series.provenance.json").read_text())
+
+    assert hashlib.sha256(fixture_path.read_bytes()).hexdigest() == provenance["fixture_sha256"]
+    assert provenance["source_project"] == "tdcest"
+    assert provenance["source_artifact_sha256"] == (
+        "7457fdd4e8442ef2718489eb6ab0d3e7cf453496d8bc48e9eb49467355dcd6d5"
+    )
 
 
 def test_load_canonical_tdc_series_csv_backfills_optional_variants_when_absent(tmp_path: Path) -> None:
@@ -1039,6 +1093,8 @@ def test_load_canonical_tdc_series_csv_backfills_optional_variants_when_absent(t
     assert frame["tdc_no_remit_bank_only_qoq"].isna().all()
     assert frame["tdc_credit_union_sensitive_qoq"].isna().all()
     assert frame["tdc_tier2_bank_only_qoq"].isna().all()
+    assert frame["tdc_tier2_di_np_cu_qoq"].isna().all()
+    assert frame["tdc_tier2_mmf_rrp_prop_bank_only_qoq"].isna().all()
     assert frame["tdc_tier3_bank_only_qoq"].isna().all()
     assert frame["tdc_tier3_broad_depository_qoq"].isna().all()
 

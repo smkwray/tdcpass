@@ -17,6 +17,24 @@ artifacts:
       - quarter
       - tdc_bank_only_qoq
       - tdc_tier2_bank_only_qoq
+      - tdc_tier2_di_np_cu_qoq
+      - tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq
+      - tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq
+      - tdc_tier2_regression_mmf_rrp_lb_bank_only_qoq
+      - tdc_tier2_regression_mmf_rrp_ub_bank_only_qoq
+      - tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq
+      - tdc_tier2_regression_mmf_rrp_lb_di_np_cu_qoq
+      - tdc_tier2_regression_mmf_rrp_ub_di_np_cu_qoq
+      - tdc_tier2_regression_bank_row_method_tier
+      - tdc_tier2_regression_di_method_tier
+      - tdc_tier2_mmf_rrp_prop_bank_only_qoq
+      - tdc_tier2_mmf_rrp_lb_bank_only_qoq
+      - tdc_tier2_mmf_rrp_ub_bank_only_qoq
+      - tdc_tier2_mmf_rrp_prop_di_np_cu_qoq
+      - tdc_tier2_treasury_interest_robust_bank_only_qoq
+      - tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_qoq
+      - tdc_tier2_treasury_interest_robust_di_np_cu_qoq
+      - tdc_tier2_treasury_interest_robust_mmf_rrp_prop_di_np_cu_qoq
       - tdc_tier3_bank_only_qoq
       - tdc_tier3_broad_depository_qoq
       - tdc_bank_receipt_historical_overlay_qoq

@@ -1,0 +1,13 @@
+{
+  "artifact": "tdc_tier2_regression_series.csv",
+  "fixture_rows": [
+    "2002-03-31",
+    "2002-06-30"
+  ],
+  "fixture_sha256": "175b6119f5e93a5c8e0ad132fc7591df53417d23190ecd2c5e5cc8f3b644f8c1",
+  "source_artifact_sha256": "7457fdd4e8442ef2718489eb6ab0d3e7cf453496d8bc48e9eb49467355dcd6d5",
+  "source_path": "data/processed/tdc_tier2_regression_series.csv",
+  "source_project": "tdcest",
+  "source_project_head_at_import": "7a89cfaf4651f6edecbfc22e696fad57ea819c4f",
+  "source_project_verified_through_commit": "b77b4d04705e4602ab67da166747ca23587cb389"
+}

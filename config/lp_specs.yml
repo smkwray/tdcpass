@@ -444,6 +444,14 @@ specs:
         shock_column: tdc_tier2_bank_only_residual_z
         treatment_role: exploratory
         treatment_family: measurement
+      tier2_regression_mmf_rrp_bank_only:
+        shock_column: tdc_tier2_regression_mmf_rrp_bank_only_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
+      tier2_regression_mmf_rrp_di_np_cu:
+        shock_column: tdc_tier2_regression_mmf_rrp_di_np_cu_residual_z
+        treatment_role: exploratory
+        treatment_family: measurement
       tier3_bank_only:
         shock_column: tdc_tier3_bank_only_residual_z
         treatment_role: exploratory

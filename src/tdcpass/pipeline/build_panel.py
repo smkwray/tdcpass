@@ -314,6 +314,36 @@ TDCEST_DOMESTIC_BANK_ONLY_METHOD = "tdc_domestic_bank_only_ru_flow"
 TDCEST_NO_REMIT_BANK_ONLY_METHOD = "tdc_no_remit_bank_only"
 TDCEST_CREDIT_UNION_SENSITIVE_METHOD = "tdc_credit_union_aggregate_sensitivity"
 TDCEST_TIER2_BANK_ONLY_METHOD = "tdc_tier2_interest_corrected_bank_only_ru_flow"
+TDCEST_TIER2_DI_NP_CU_METHOD = "tdc_tier2_interest_corrected_depository_institution_np_cu_ru_flow"
+TDCEST_MODERN_CANONICAL_DI_MMF_RRP_METHOD = "tdc_tier2_canonical_depository_institution_mmf_rrp_prop_ru_flow"
+TDCEST_TIER2_REGRESSION_MMF_RRP_PROP_BANK_ONLY_METHOD = (
+    "tdc_tier2_regression_mmf_rrp_prop_bank_only_ru_flow"
+)
+TDCEST_TIER2_REGRESSION_MMF_RRP_LB_BANK_ONLY_METHOD = "tdc_tier2_regression_mmf_rrp_lb_bank_only_ru_flow"
+TDCEST_TIER2_REGRESSION_MMF_RRP_UB_BANK_ONLY_METHOD = "tdc_tier2_regression_mmf_rrp_ub_bank_only_ru_flow"
+TDCEST_TIER2_REGRESSION_MMF_RRP_PROP_DI_NP_CU_METHOD = (
+    "tdc_tier2_regression_mmf_rrp_prop_depository_institution_np_cu_ru_flow"
+)
+TDCEST_TIER2_REGRESSION_MMF_RRP_LB_DI_NP_CU_METHOD = (
+    "tdc_tier2_regression_mmf_rrp_lb_depository_institution_np_cu_ru_flow"
+)
+TDCEST_TIER2_REGRESSION_MMF_RRP_UB_DI_NP_CU_METHOD = (
+    "tdc_tier2_regression_mmf_rrp_ub_depository_institution_np_cu_ru_flow"
+)
+TDCEST_TIER2_MMF_RRP_PROP_BANK_ONLY_METHOD = "tdc_tier2_mmf_rrp_prop_bank_only_ru_flow"
+TDCEST_TIER2_MMF_RRP_LB_BANK_ONLY_METHOD = "tdc_tier2_mmf_rrp_lb_bank_only_ru_flow"
+TDCEST_TIER2_MMF_RRP_UB_BANK_ONLY_METHOD = "tdc_tier2_mmf_rrp_ub_bank_only_ru_flow"
+TDCEST_TIER2_MMF_RRP_PROP_DI_NP_CU_METHOD = "tdc_tier2_mmf_rrp_prop_depository_institution_np_cu_ru_flow"
+TDCEST_TIER2_TREASURY_INTEREST_ROBUST_BANK_ONLY_METHOD = "tdc_tier2_treasury_interest_robust_bank_only_ru_flow"
+TDCEST_TIER2_TREASURY_INTEREST_ROBUST_MMF_RRP_PROP_BANK_ONLY_METHOD = (
+    "tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_ru_flow"
+)
+TDCEST_TIER2_TREASURY_INTEREST_ROBUST_DI_NP_CU_METHOD = (
+    "tdc_tier2_treasury_interest_robust_depository_institution_np_cu_ru_flow"
+)
+TDCEST_TIER2_TREASURY_INTEREST_ROBUST_MMF_RRP_PROP_DI_NP_CU_METHOD = (
+    "tdc_tier2_treasury_interest_robust_mmf_rrp_prop_depository_institution_np_cu_ru_flow"
+)
 TDCEST_TIER3_BANK_ONLY_METHOD = "tdc_tier3_fiscal_corrected_bank_only_ru_flow"
 TDCEST_TIER3_BROAD_DEPOSITORY_METHOD = "tdc_tier3_fiscal_corrected_broad_depository_np_cu_ru_flow"
 TDCEST_BANK_ONLY_EXTENDED_METHOD = "tdc_bank_only_extended_1990"
@@ -324,6 +354,40 @@ TDCEST_HISTORICAL_BANK_RECEIPT_OVERLAY_SERIES_KEY = (
 TDCEST_ROW_MRV_PILOT_SERIES_KEY = "row_mrv_primary_nondefault_pilot_series"
 TDCEST_TRANSACTION_START_QUARTER = "2002Q4"
 TDCEST_NOMINAL_TO_BILLIONS = 1000.0
+TDCEST_OPTIONAL_CANONICAL_COLUMNS = (
+    "tdc_broad_depository_qoq",
+    "tdc_domestic_bank_only_qoq",
+    "tdc_no_remit_bank_only_qoq",
+    "tdc_credit_union_sensitive_qoq",
+    "tdc_tier2_bank_only_qoq",
+    "tdc_tier2_di_np_cu_qoq",
+    "tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq",
+    "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+    "tdc_tier2_regression_mmf_rrp_lb_bank_only_qoq",
+    "tdc_tier2_regression_mmf_rrp_ub_bank_only_qoq",
+    "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
+    "tdc_tier2_regression_mmf_rrp_lb_di_np_cu_qoq",
+    "tdc_tier2_regression_mmf_rrp_ub_di_np_cu_qoq",
+    "tdc_tier2_regression_bank_row_method_tier",
+    "tdc_tier2_regression_di_method_tier",
+    "tdc_tier2_regression_bank_method_tier",
+    "tdc_tier2_regression_row_method_tier",
+    "tdc_tier2_regression_credit_union_method_tier",
+    "tdc_tier2_mmf_rrp_prop_bank_only_qoq",
+    "tdc_tier2_mmf_rrp_lb_bank_only_qoq",
+    "tdc_tier2_mmf_rrp_ub_bank_only_qoq",
+    "tdc_tier2_mmf_rrp_prop_di_np_cu_qoq",
+    "tdc_tier2_treasury_interest_robust_bank_only_qoq",
+    "tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_qoq",
+    "tdc_tier2_treasury_interest_robust_di_np_cu_qoq",
+    "tdc_tier2_treasury_interest_robust_mmf_rrp_prop_di_np_cu_qoq",
+    "tdc_tier3_bank_only_qoq",
+    "tdc_tier3_broad_depository_qoq",
+    "tdc_bank_only_extended_1990_qoq",
+    "tdc_broad_depository_extended_1990_qoq",
+    "tdc_bank_receipt_historical_overlay_qoq",
+    "tdc_row_mrv_nondefault_pilot_qoq",
+)
 ACCOUNTING_IMPORTED_BUNDLE_DIVISOR = 1000.0
 ACCOUNTING_IMPORTED_BUNDLE_RESCALE_THRESHOLD = 5000.0
 ACCOUNTING_COMPONENT_COLUMNS = (
@@ -701,6 +765,14 @@ def _quarterly_series_frame(name: str, series: pd.Series) -> pd.DataFrame:
     return frame.sort_values("quarter").reset_index(drop=True)
 
 
+def _ensure_optional_tdc_columns(frame: pd.DataFrame) -> pd.DataFrame:
+    out = frame.copy()
+    for column in TDCEST_OPTIONAL_CANONICAL_COLUMNS:
+        if column not in out.columns:
+            out[column] = pd.NA
+    return out
+
+
 def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
     if not path.exists() or path.suffix.lower() != ".csv":
         return None
@@ -736,6 +808,47 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
             out["tdc_tier2_bank_only_qoq"] = pd.to_numeric(
                 frame[TDCEST_TIER2_BANK_ONLY_METHOD], errors="coerce"
             ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_DI_NP_CU_METHOD in frame.columns:
+            out["tdc_tier2_di_np_cu_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_DI_NP_CU_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_MODERN_CANONICAL_DI_MMF_RRP_METHOD in frame.columns:
+            out["tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq"] = pd.to_numeric(
+                frame[TDCEST_MODERN_CANONICAL_DI_MMF_RRP_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_MMF_RRP_PROP_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_tier2_mmf_rrp_prop_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_MMF_RRP_PROP_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_MMF_RRP_LB_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_tier2_mmf_rrp_lb_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_MMF_RRP_LB_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_MMF_RRP_UB_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_tier2_mmf_rrp_ub_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_MMF_RRP_UB_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_MMF_RRP_PROP_DI_NP_CU_METHOD in frame.columns:
+            out["tdc_tier2_mmf_rrp_prop_di_np_cu_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_MMF_RRP_PROP_DI_NP_CU_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_TREASURY_INTEREST_ROBUST_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_tier2_treasury_interest_robust_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_TREASURY_INTEREST_ROBUST_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_TREASURY_INTEREST_ROBUST_MMF_RRP_PROP_BANK_ONLY_METHOD in frame.columns:
+            out["tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_TREASURY_INTEREST_ROBUST_MMF_RRP_PROP_BANK_ONLY_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_TREASURY_INTEREST_ROBUST_DI_NP_CU_METHOD in frame.columns:
+            out["tdc_tier2_treasury_interest_robust_di_np_cu_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_TREASURY_INTEREST_ROBUST_DI_NP_CU_METHOD], errors="coerce"
+            ) / TDCEST_NOMINAL_TO_BILLIONS
+        if TDCEST_TIER2_TREASURY_INTEREST_ROBUST_MMF_RRP_PROP_DI_NP_CU_METHOD in frame.columns:
+            out["tdc_tier2_treasury_interest_robust_mmf_rrp_prop_di_np_cu_qoq"] = pd.to_numeric(
+                frame[TDCEST_TIER2_TREASURY_INTEREST_ROBUST_MMF_RRP_PROP_DI_NP_CU_METHOD],
+                errors="coerce",
+            ) / TDCEST_NOMINAL_TO_BILLIONS
         if TDCEST_TIER3_BANK_ONLY_METHOD in frame.columns:
             out["tdc_tier3_bank_only_qoq"] = pd.to_numeric(
                 frame[TDCEST_TIER3_BANK_ONLY_METHOD], errors="coerce"
@@ -755,77 +868,16 @@ def _load_canonical_tdc_series_csv(path: Path) -> pd.DataFrame | None:
         out["tdc_bank_only_qoq"] = (
             pd.to_numeric(out["tdc_bank_only_qoq"], errors="coerce") / TDCEST_NOMINAL_TO_BILLIONS
         )
-        for column in (
-            "tdc_broad_depository_qoq",
-            "tdc_domestic_bank_only_qoq",
-            "tdc_no_remit_bank_only_qoq",
-            "tdc_credit_union_sensitive_qoq",
-            "tdc_tier2_bank_only_qoq",
-            "tdc_tier3_bank_only_qoq",
-            "tdc_tier3_broad_depository_qoq",
-            "tdc_bank_only_extended_1990_qoq",
-            "tdc_broad_depository_extended_1990_qoq",
-            "tdc_bank_receipt_historical_overlay_qoq",
-            "tdc_row_mrv_nondefault_pilot_qoq",
-        ):
-            if column not in out.columns:
-                out[column] = pd.NA
-        return out
+        return _ensure_optional_tdc_columns(out)
     if "tdc_bank_only_qoq" in frame.columns:
         out = frame[["quarter", "tdc_bank_only_qoq"]].copy()
-        if "tdc_broad_depository_qoq" in frame.columns:
-            out["tdc_broad_depository_qoq"] = pd.to_numeric(frame["tdc_broad_depository_qoq"], errors="coerce")
-        if "tdc_domestic_bank_only_qoq" in frame.columns:
-            out["tdc_domestic_bank_only_qoq"] = pd.to_numeric(frame["tdc_domestic_bank_only_qoq"], errors="coerce")
-        if "tdc_no_remit_bank_only_qoq" in frame.columns:
-            out["tdc_no_remit_bank_only_qoq"] = pd.to_numeric(frame["tdc_no_remit_bank_only_qoq"], errors="coerce")
-        if "tdc_credit_union_sensitive_qoq" in frame.columns:
-            out["tdc_credit_union_sensitive_qoq"] = pd.to_numeric(frame["tdc_credit_union_sensitive_qoq"], errors="coerce")
-        if "tdc_tier2_bank_only_qoq" in frame.columns:
-            out["tdc_tier2_bank_only_qoq"] = pd.to_numeric(frame["tdc_tier2_bank_only_qoq"], errors="coerce")
-        if "tdc_tier3_bank_only_qoq" in frame.columns:
-            out["tdc_tier3_bank_only_qoq"] = pd.to_numeric(frame["tdc_tier3_bank_only_qoq"], errors="coerce")
-        if "tdc_tier3_broad_depository_qoq" in frame.columns:
-            out["tdc_tier3_broad_depository_qoq"] = pd.to_numeric(frame["tdc_tier3_broad_depository_qoq"], errors="coerce")
-        if "tdc_bank_only_extended_1990_qoq" in frame.columns:
-            out["tdc_bank_only_extended_1990_qoq"] = pd.to_numeric(frame["tdc_bank_only_extended_1990_qoq"], errors="coerce")
-        if "tdc_broad_depository_extended_1990_qoq" in frame.columns:
-            out["tdc_broad_depository_extended_1990_qoq"] = pd.to_numeric(
-                frame["tdc_broad_depository_extended_1990_qoq"], errors="coerce"
-            )
-        for column in (
-            "tdc_broad_depository_qoq",
-            "tdc_domestic_bank_only_qoq",
-            "tdc_no_remit_bank_only_qoq",
-            "tdc_credit_union_sensitive_qoq",
-            "tdc_tier2_bank_only_qoq",
-            "tdc_tier3_bank_only_qoq",
-            "tdc_tier3_broad_depository_qoq",
-            "tdc_bank_only_extended_1990_qoq",
-            "tdc_broad_depository_extended_1990_qoq",
-            "tdc_bank_receipt_historical_overlay_qoq",
-            "tdc_row_mrv_nondefault_pilot_qoq",
-        ):
-            if column not in out.columns:
-                out[column] = pd.NA
-        return out
+        for column in TDCEST_OPTIONAL_CANONICAL_COLUMNS:
+            if column in frame.columns:
+                out[column] = pd.to_numeric(frame[column], errors="coerce")
+        return _ensure_optional_tdc_columns(out)
     if "tdc_qoq" in frame.columns:
         out = frame[["quarter", "tdc_qoq"]].rename(columns={"tdc_qoq": "tdc_bank_only_qoq"})
-        for column in (
-            "tdc_broad_depository_qoq",
-            "tdc_domestic_bank_only_qoq",
-            "tdc_no_remit_bank_only_qoq",
-            "tdc_credit_union_sensitive_qoq",
-            "tdc_tier2_bank_only_qoq",
-            "tdc_tier3_bank_only_qoq",
-            "tdc_tier3_broad_depository_qoq",
-            "tdc_bank_only_extended_1990_qoq",
-            "tdc_broad_depository_extended_1990_qoq",
-            "tdc_bank_receipt_historical_overlay_qoq",
-            "tdc_row_mrv_nondefault_pilot_qoq",
-        ):
-            out[column] = pd.NA
-        return out
+        return _ensure_optional_tdc_columns(out)
     return None
 
 
@@ -893,6 +945,83 @@ def _merge_tdcest_downstream_overlay(frame: pd.DataFrame, supplement: pd.DataFra
     for column in ("tdc_bank_receipt_historical_overlay_qoq", "tdc_row_mrv_nondefault_pilot_qoq"):
         if column not in out.columns:
             out[column] = pd.NA
+    return out
+
+
+def _load_tdcest_tier2_regression_series_csv(path: Path) -> pd.DataFrame | None:
+    if not path.exists() or path.suffix.lower() != ".csv":
+        return None
+    try:
+        frame = pd.read_csv(path)
+    except (FileNotFoundError, pd.errors.ParserError, OSError):
+        return None
+    if "quarter" not in frame.columns:
+        if "date" not in frame.columns:
+            return None
+        dates = pd.to_datetime(frame["date"], errors="coerce")
+        if dates.isna().all():
+            return None
+        frame = frame.assign(quarter=dates.dt.to_period("Q").astype(str))
+    out = frame[["quarter"]].copy()
+    numeric_columns = {
+        "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq": (
+            TDCEST_TIER2_REGRESSION_MMF_RRP_PROP_BANK_ONLY_METHOD
+        ),
+        "tdc_tier2_regression_mmf_rrp_lb_bank_only_qoq": (
+            TDCEST_TIER2_REGRESSION_MMF_RRP_LB_BANK_ONLY_METHOD
+        ),
+        "tdc_tier2_regression_mmf_rrp_ub_bank_only_qoq": (
+            TDCEST_TIER2_REGRESSION_MMF_RRP_UB_BANK_ONLY_METHOD
+        ),
+        "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq": (
+            TDCEST_TIER2_REGRESSION_MMF_RRP_PROP_DI_NP_CU_METHOD
+        ),
+        "tdc_tier2_regression_mmf_rrp_lb_di_np_cu_qoq": (
+            TDCEST_TIER2_REGRESSION_MMF_RRP_LB_DI_NP_CU_METHOD
+        ),
+        "tdc_tier2_regression_mmf_rrp_ub_di_np_cu_qoq": (
+            TDCEST_TIER2_REGRESSION_MMF_RRP_UB_DI_NP_CU_METHOD
+        ),
+    }
+    found = False
+    for out_column, source_column in numeric_columns.items():
+        if source_column in frame.columns:
+            out[out_column] = pd.to_numeric(frame[source_column], errors="coerce") / TDCEST_NOMINAL_TO_BILLIONS
+            found = True
+    tier_columns = {
+        "tdc_tier2_regression_bank_row_method_tier": "tier2_regression_bank_row_method_tier",
+        "tdc_tier2_regression_di_method_tier": "tier2_regression_di_method_tier",
+        "tdc_tier2_regression_bank_method_tier": "bank_method_tier",
+        "tdc_tier2_regression_row_method_tier": "row_method_tier",
+        "tdc_tier2_regression_credit_union_method_tier": "credit_union_method_tier",
+    }
+    for out_column, source_column in tier_columns.items():
+        if source_column in frame.columns:
+            out[out_column] = frame[source_column].astype("string")
+            found = True
+    return out if found else None
+
+
+def _merge_tdcest_tier2_regression_series(
+    frame: pd.DataFrame,
+    regression: pd.DataFrame | None,
+) -> pd.DataFrame:
+    if regression is None or regression.empty:
+        return frame
+    out = frame.copy()
+    incoming = regression.copy()
+    mapped_columns = [column for column in incoming.columns if column != "quarter"]
+    for column in mapped_columns:
+        mapping = incoming.set_index("quarter")[column]
+        if column in out.columns:
+            values = out["quarter"].map(mapping)
+            if pd.api.types.is_numeric_dtype(incoming[column]):
+                incoming_values = pd.to_numeric(values, errors="coerce")
+                out[column] = incoming_values.combine_first(pd.to_numeric(out[column], errors="coerce"))
+            else:
+                out[column] = values.combine_first(out[column])
+        else:
+            out[column] = out["quarter"].map(mapping)
     return out
 
 
@@ -991,6 +1120,7 @@ def _load_canonical_tdc_series(
 ) -> CanonicalTdcSeriesResult:
     reused = _load_reused_tdc_series(reuse_payload)
     supplement: pd.DataFrame | None = None
+    regression: pd.DataFrame | None = None
     for path in _candidate_tdcest_processed_paths(
         root=root,
         fixture_root=fixture_root,
@@ -999,18 +1129,29 @@ def _load_canonical_tdc_series(
         supplement = _load_tdcest_downstream_series_csv(path)
         if supplement is not None:
             break
+    for path in _candidate_tdcest_processed_paths(
+        root=root,
+        fixture_root=fixture_root,
+        filename="tdc_tier2_regression_series.csv",
+    ):
+        regression = _load_tdcest_tier2_regression_series_csv(path)
+        if regression is not None:
+            break
     if reused is not None and "tdc_broad_depository_qoq" in reused.frame.columns:
         frame = _merge_tdcest_downstream_overlay(reused.frame, supplement)
+        frame = _merge_tdcest_tier2_regression_series(frame, regression)
         return CanonicalTdcSeriesResult(frame=frame, source_path=reused.source_path, source_kind=reused.source_kind)
     for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
         frame = _load_canonical_tdc_series_csv(path)
         if frame is not None and "tdc_broad_depository_qoq" in frame.columns:
             frame = _merge_tdcest_downstream_overlay(frame, supplement)
+            frame = _merge_tdcest_tier2_regression_series(frame, regression)
             return CanonicalTdcSeriesResult(frame=frame, source_path=path, source_kind="tdcest_processed_csv")
     for path in _candidate_tdcest_csv_paths(root=root, fixture_root=fixture_root):
         frame = _load_canonical_tdc_series_csv(path)
         if frame is not None:
             frame = _merge_tdcest_downstream_overlay(frame, supplement)
+            frame = _merge_tdcest_tier2_regression_series(frame, regression)
             return CanonicalTdcSeriesResult(frame=frame, source_path=path, source_kind="tdcest_processed_csv")
     raise FileNotFoundError(
         "Could not locate canonical TDC estimates. Expected a tdcest processed file such as "
@@ -1448,7 +1589,7 @@ def build_public_quarterly_panel(
         }
     )
     panel = panel.merge(bill_share, on="quarter", how="left")
-    panel = panel.merge(canonical_tdc.frame, on="quarter", how="left")
+    panel = panel.merge(_ensure_optional_tdc_columns(canonical_tdc.frame), on="quarter", how="left")
     imported_accounting = _load_imported_accounting_series(root=root, fixture_root=fixture_root)
     accounting_source_kind = "not_available" if imported_accounting is None else imported_accounting.source_kind
     if imported_accounting is not None:
@@ -1830,6 +1971,14 @@ def build_public_quarterly_panel(
         "unemployment",
         "inflation",
         "tdc_tier2_bank_only_qoq",
+        "tdc_tier2_di_np_cu_qoq",
+        "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+        "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
+        "tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq",
+        "tdc_tier2_mmf_rrp_prop_bank_only_qoq",
+        "tdc_tier2_mmf_rrp_lb_bank_only_qoq",
+        "tdc_tier2_mmf_rrp_ub_bank_only_qoq",
+        "tdc_tier2_mmf_rrp_prop_di_np_cu_qoq",
         "tdc_tier3_bank_only_qoq",
         "tdc_tier3_broad_depository_qoq",
         "tdc_no_toc_bank_only_qoq",

@@ -18,14 +18,122 @@ series:
   quality_tier: tier_2_constructed
   notes: Sensitivity only.
 - key: tdc_tier2_bank_only_qoq
-  display_name: TDC, Tier 2 interest-corrected bank-only, quarterly change
+  display_name: TDC, legacy Tier 2 H15/WAMEST interest-corrected bank-only, quarterly change
   role: treatment_sensitivity
   frequency: quarterly
   units: billions_usd
   status: planned_v1
   preferred_source: sibling_tdcest
   quality_tier: tier_2_constructed
-  notes: Broad-object comparison only; imported from the tdcest Tier 2 corrected ladder.
+  notes: Legacy broad-object sensitivity; superseded for long-history work by the regression/MMF-RRP Tier 2 rows.
+- key: tdc_tier2_di_np_cu_qoq
+  display_name: TDC, legacy Tier 2 depository-institution NP-CU candidate, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: candidate
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Legacy scope candidate; retained as sensitivity after the regression/MMF-RRP Tier 2 rebuild.
+- key: tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq
+  display_name: TDC, long-history Tier 2 regression/MMF-RRP bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: preferred_historical_candidate
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed_with_method_tiers
+  notes: Preferred long-history broad-object comparison; 2002+ tiered interest proxy with MMF/RRP add-back active from 2013Q3 onward.
+- key: tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq
+  display_name: TDC, long-history Tier 2 regression/MMF-RRP DI NP-CU, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: matched_perimeter_historical_candidate
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed_with_method_tiers
+  notes: Matched-perimeter companion to the short modern DI/MMF-RRP canonical row.
+- key: tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq
+  display_name: TDC, short modern canonical Tier 2 DI/MMF-RRP, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: modern_measurement_default
+  preferred_source: sibling_tdcest
+  quality_tier: tier_1_short_modern_measurement
+  notes: Best current-period measurement object, but short 2022Q1-2025Q4 history makes it a benchmark rather than the long-history regression row.
+- key: tdc_tier2_mmf_rrp_prop_bank_only_qoq
+  display_name: TDC, Tier 2 plus MMF/RRP proportional adjustment, bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: candidate
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Candidate MMF/RRP source-of-funds upgrade; broad-object comparison only until upstream audits clear.
+- key: tdc_tier2_mmf_rrp_lb_bank_only_qoq
+  display_name: TDC, Tier 2 plus MMF/RRP lower bound, bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: candidate
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Lower-bound MMF/RRP robustness row.
+- key: tdc_tier2_mmf_rrp_ub_bank_only_qoq
+  display_name: TDC, Tier 2 plus MMF/RRP upper bound, bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: candidate
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Upper-bound MMF/RRP robustness row.
+- key: tdc_tier2_mmf_rrp_prop_di_np_cu_qoq
+  display_name: TDC, Tier 2 plus MMF/RRP proportional adjustment, DI NP-CU, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: candidate
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Candidate combining the credit-union interest-corrected depository-institution scope with the preferred MMF/RRP proportional adjustment.
+- key: tdc_tier2_treasury_interest_robust_bank_only_qoq
+  display_name: TDC, Tier 2 bill-discount robustness, bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: robustness
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Robustness only; subtracts estimated bank and ROW Treasury bill-discount interest from Tier 2.
+- key: tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_qoq
+  display_name: TDC, Tier 2 plus MMF/RRP bill-discount robustness, bank-only, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: robustness
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Robustness only; applies bill-discount interest correction to the preferred Tier 2 plus MMF/RRP bank-scope row.
+- key: tdc_tier2_treasury_interest_robust_di_np_cu_qoq
+  display_name: TDC, Tier 2 bill-discount robustness, DI NP-CU, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: robustness
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Scope robustness only; subtracts estimated bank, ROW, and credit-union Treasury bill-discount interest from DI NP-CU Tier 2.
+- key: tdc_tier2_treasury_interest_robust_mmf_rrp_prop_di_np_cu_qoq
+  display_name: TDC, Tier 2 plus MMF/RRP bill-discount robustness, DI NP-CU, quarterly change
+  role: treatment_sensitivity
+  frequency: quarterly
+  units: billions_usd
+  status: robustness
+  preferred_source: sibling_tdcest
+  quality_tier: tier_2_constructed
+  notes: Scope robustness only; applies bill-discount interest correction to the DI NP-CU plus MMF/RRP row.
 - key: tdc_tier3_bank_only_qoq
   display_name: TDC, Tier 3 fiscal-corrected bank-only, quarterly change
   role: treatment_sensitivity

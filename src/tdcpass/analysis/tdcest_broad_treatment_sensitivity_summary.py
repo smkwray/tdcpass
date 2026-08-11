@@ -10,19 +10,25 @@ from tdcpass.analysis.local_projections import run_local_projections
 
 _VARIANT_LABELS = {
     "baseline": "Canonical bank-only headline",
-    "tier2_bank_only": "Tier 2 interest-corrected bank-only",
+    "tier2_bank_only": "Legacy Tier 2 H15/WAMEST bank-only",
+    "tier2_regression_mmf_rrp_bank_only": "Long-history Tier 2 regression/MMF-RRP bank-only",
+    "tier2_regression_mmf_rrp_di_np_cu": "Long-history Tier 2 regression/MMF-RRP DI NP-CU",
     "tier3_bank_only": "Tier 3 fiscal-corrected bank-only",
     "tier3_broad_depository": "Tier 3 fiscal-corrected broad-depository",
 }
 
 _VARIANT_TARGET_COLUMNS = {
     "tier2_bank_only": "tdc_tier2_bank_only_qoq",
+    "tier2_regression_mmf_rrp_bank_only": "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+    "tier2_regression_mmf_rrp_di_np_cu": "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
     "tier3_bank_only": "tdc_tier3_bank_only_qoq",
     "tier3_broad_depository": "tdc_tier3_broad_depository_qoq",
 }
 
 _VARIANT_SHOCK_COLUMNS = {
     "tier2_bank_only": "tdc_tier2_bank_only_residual_z",
+    "tier2_regression_mmf_rrp_bank_only": "tdc_tier2_regression_mmf_rrp_bank_only_residual_z",
+    "tier2_regression_mmf_rrp_di_np_cu": "tdc_tier2_regression_mmf_rrp_di_np_cu_residual_z",
     "tier3_bank_only": "tdc_tier3_bank_only_residual_z",
     "tier3_broad_depository": "tdc_tier3_broad_depository_residual_z",
 }
@@ -30,7 +36,14 @@ _VARIANT_SHOCK_COLUMNS = {
 _FOCUS_VARIANTS = tuple(_VARIANT_LABELS.keys())
 _FOCUS_OUTCOMES = ("total_deposits_bank_qoq", "other_component_qoq")
 _FOCUS_HORIZONS = (0, 4, 8)
-_SHORT_HISTORY_VARIANTS = ("baseline", "tier2_bank_only", "tier3_bank_only", "tier3_broad_depository")
+_SHORT_HISTORY_VARIANTS = (
+    "baseline",
+    "tier2_bank_only",
+    "tier2_regression_mmf_rrp_bank_only",
+    "tier2_regression_mmf_rrp_di_np_cu",
+    "tier3_bank_only",
+    "tier3_broad_depository",
+)
 _SHORT_HISTORY_TARGETS = {
     "baseline": "tdc_bank_only_qoq",
     **_VARIANT_TARGET_COLUMNS,
@@ -274,7 +287,7 @@ def build_tdcest_broad_treatment_sensitivity_summary(
                 f"total ≈ {baseline_h0_total['beta']:.2f}, residual ≈ {baseline_h0_other['beta']:.2f}."
             )
         takeaways.append(
-            "Corrected tdcest broad-treatment LP sensitivity is not currently estimable under the frozen shock-design gate because the corrected series do not have enough history to enter the sensitivity ladder."
+            "Corrected tdcest broad-treatment LP sensitivity is not fully estimable under the frozen shock-design gate because at least one corrected comparison row lacks enough history."
         )
         if availability:
             bits = []
@@ -289,7 +302,7 @@ def build_tdcest_broad_treatment_sensitivity_summary(
         payload = {
             "status": "insufficient_history",
             "headline_question": "Do the corrected tdcest broad-treatment variants materially change the broad deposit and residual LP results?",
-            "reason": "corrected_tdcest_variants_do_not_clear_current_shock_history_gate",
+            "reason": "some_corrected_tdcest_variants_do_not_clear_current_shock_history_gate",
             "estimation_path": {
                 "summary_artifact": "tdcest_broad_treatment_sensitivity_summary.json",
                 "source_artifacts": [
@@ -302,9 +315,9 @@ def build_tdcest_broad_treatment_sensitivity_summary(
             },
             "missing_variants": availability,
             "recommendation": {
-                "status": "use_tdcest_ladder_as_level_comparison_only",
+                "status": "use_available_long_history_rows_and_keep_short_rows_as_level_comparison",
                 "why": (
-                    "The corrected tdcest broad-treatment variants currently add value as broad-object level/ladder diagnostics, but there is not enough history to run the frozen LP sensitivity design on them."
+                    "The long-history regression/MMF-RRP rows can enter the frozen LP sensitivity design; short modern canonical rows remain level/benchmark diagnostics."
                 ),
             },
             "takeaways": takeaways,
@@ -372,7 +385,13 @@ def build_tdcest_broad_treatment_sensitivity_summary(
     h0_variants = key_horizons.get("h0", {}).get("variants", {})
     if h0_variants:
         pieces = []
-        for variant in ("tier2_bank_only", "tier3_bank_only", "tier3_broad_depository"):
+        for variant in (
+            "tier2_regression_mmf_rrp_bank_only",
+            "tier2_regression_mmf_rrp_di_np_cu",
+            "tier2_bank_only",
+            "tier3_bank_only",
+            "tier3_broad_depository",
+        ):
             payload = h0_variants.get(variant, {})
             total = dict(payload.get("total_deposits") or {})
             other = dict(payload.get("other_component") or {})
