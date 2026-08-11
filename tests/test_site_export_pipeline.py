@@ -5,10 +5,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from tdcpass.core.yaml_utils import load_yaml
 from tdcpass.analysis.accounting import AccountingSummary
-from tdcpass.pipeline.quarterly import _default_overview_payload
-from tdcpass.pipeline.quarterly import run_quarterly_pipeline
+from tdcpass.core.yaml_utils import load_yaml
+from tdcpass.pipeline.quarterly import _default_overview_payload, run_quarterly_pipeline
 from tdcpass.reports.site_export import contract_paths, load_output_contract
 
 
@@ -1711,13 +1710,15 @@ def test_default_overview_payload_stays_methods_preview() -> None:
             "key_horizons": {
                 "h0": {
                     "decisive_positive_core_creator_channels": [],
-                    "deposit_retention_support_channels": {
+                    "counterpart_reallocation_proxy_channels": {
                         "on_rrp_reallocation_qoq": {"beta": -1.0, "ci_excludes_zero": True}
                     },
-                    "escape_support_context": {"interpretation": "escape_pressure_signal"},
+                    "counterpart_reallocation_proxy_context": {
+                        "interpretation": "sign_normalized_movement_toward_named_channel"
+                    },
                 },
-                "h4": {"deposit_retention_support_channels": {}},
-                "h8": {"deposit_retention_support_channels": {}},
+                "h4": {"counterpart_reallocation_proxy_channels": {}},
+                "h8": {"counterpart_reallocation_proxy_channels": {}},
             }
         },
         scope_alignment_summary={

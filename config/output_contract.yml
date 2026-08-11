@@ -53,6 +53,7 @@ artifacts:
       - checkable_state_local_bank_qoq
       - checkable_rest_of_world_bank_qoq
       - checkable_private_domestic_bank_qoq
+      - z1_households_nonprofits_nonfinancial_business_currency_deposit_assets_qoq
       - interbank_transactions_foreign_banks_liability_qoq
       - interbank_transactions_foreign_banks_asset_qoq
       - deposits_at_foreign_banks_asset_qoq

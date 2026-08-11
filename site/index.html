@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>TDC Pass-Through</title>
-  <meta name="description" content="A public research site on Treasury Contribution to Deposits, strict independent non-TDC deposits, and the limits of current public-data identification.">
+  <meta name="description" content="A public arithmetic and boundary comparison of Treasury Deposit Component proxies and named deposit outcomes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap" rel="stylesheet">
@@ -18,12 +18,12 @@
   <a class="site-logo" href="#top">TDC<span>Pass</span></a>
   <nav>
     <ul class="nav-links">
-      <li><a href="#thesis">Thesis</a></li>
-      <li><a href="#broad-object">Broad estimate</a></li>
-      <li><a href="#strict-object">Independent evidence</a></li>
-      <li><a href="#exclusions">Exclusions</a></li>
-      <li><a href="#periods">Stability</a></li>
-      <li><a href="#channels">Channels</a></li>
+      <li><a href="#scope">Scope</a></li>
+      <li><a href="#broad-object">Quarterly comparison</a></li>
+      <li><a href="#strict-object">Outcome boundary</a></li>
+      <li><a href="#exclusions">Boundary checks</a></li>
+      <li><a href="#periods">Time variation</a></li>
+      <li><a href="#channels">Counterparts</a></li>
       <li><a href="#data">Data</a></li>
     </ul>
   </nav>
@@ -37,20 +37,20 @@
   <div class="hero-shell">
     <div class="hero-copy reveal">
       <p class="eyebrow">Treasury Contribution to Deposits</p>
-      <h1>TDC effects on deposits and independently measured non-TDC deposits.</h1>
+      <h1>How TDC arithmetic changes across flow and deposit perimeters.</h1>
       <p class="hero-sub">
-        TDC Pass studies how Treasury contributions affect deposits, and what independent evidence says about non-Treasury deposit creation. That independent evidence is concentrated in lending and excludes treasury other-checkable and rest-of-world deposit channels under current evidence.
+        TDC Pass compares a quarterly Treasury Deposit Component proxy with named deposit outcomes, then shows how the comparison changes with measurement, perimeter, clock, and counterpart series. It is an arithmetic and boundary comparator, not a separate estimator or causal evidence chain.
       </p>
       <div class="hero-actions">
-        <a class="cta-primary" href="#strict-object">View independent evidence</a>
-        <a class="cta-secondary" href="#broad-object">View broad estimate</a>
+        <a class="cta-primary" href="#strict-object">View the outcome boundary</a>
+        <a class="cta-secondary" href="#broad-object">View the quarterly comparison</a>
       </div>
     </div>
 
     <aside class="hero-panel reveal">
-      <p class="panel-kicker">Impact snapshot (frozen estimate)</p>
+      <p class="panel-kicker">Latest matched comparison</p>
       <div class="hero-metric">
-        <span class="metric-label">Broad TDC</span>
+        <span class="metric-label">Broad TDC proxy</span>
         <span class="metric-value up" id="stat-tdc">+$128B</span>
       </div>
       <div class="hero-metric">
@@ -58,11 +58,11 @@
         <span class="metric-value up" id="stat-total">+$56B</span>
       </div>
       <div class="hero-metric">
-        <span class="metric-label">Implied other component</span>
+        <span class="metric-label">Arithmetic difference</span>
         <span class="metric-value down" id="stat-other">-$73B</span>
       </div>
       <div class="hero-metric muted">
-        <span class="metric-label">Quarters with negative other component</span>
+        <span class="metric-label">Quarters with negative difference</span>
         <span class="metric-value neutral" id="stat-share">44.6%</span>
       </div>
     </aside>
@@ -71,7 +71,7 @@
 
 <main class="content">
 
-  <section class="section thesis-section reveal" id="thesis">
+  <section class="section scope-section reveal" id="scope">
     <div class="section-heading">
       <p class="eyebrow">Research scope</p>
       <h2>What TDC Pass measures.</h2>
@@ -79,52 +79,52 @@
 
     <div class="split-stage">
       <article class="split-plane">
-        <p class="plane-tag">TDC effect on deposits</p>
-        <h3>The broad TDC estimate remains the primary empirical result.</h3>
+        <p class="plane-tag">Source-flow input</p>
+        <h3>The quarterly TDC proxy enters as an upstream measured object.</h3>
         <p>
-          The broad estimate remains the project's primary measure. It answers the deposit-response question at the aggregate level, but it has not been independently validated as pure deposit creation.
+          The comparator takes the published quarterly proxy and its sensitivity variants as inputs. It does not create a second estimate or elevate one measurement variant through the comparison itself.
         </p>
       </article>
 
       <article class="split-plane">
-        <p class="plane-tag">Independent non-TDC deposits</p>
-        <h3>The independent evidence is narrower and loan-led.</h3>
+        <p class="plane-tag">Deposit-outcome boundary</p>
+        <h3>Each comparison names the deposit claim being measured.</h3>
         <p>
-          The independent side uses direct same-scope evidence first, bridging comparisons second, and keeps accounting-closure estimates plus unresolved support categories outside the core evidence.
+          The covered domestic nonbank deposit-claim perimeter is distinct from the settlement-system complement. Loan, mortgage, and broader holder-asset series are sensitivity comparisons, not interchangeable definitions of the matched outcome.
         </p>
       </article>
     </div>
 
     <div class="insight-box">
-      <strong>Do not equate these two layers.</strong> The broad TDC estimate is the main matched-deposit empirical result. The independently confirmed non-TDC side is narrower and currently loan-led. Residual accounting is used for alignment and diagnostics, not as independent channel evidence.
+      <strong>Read the two objects separately.</strong> The TDC proxy names the source-flow perimeter; the deposit series names the outcome perimeter. Their arithmetic difference is useful for comparison and diagnostics, but it is not an independently estimated deposit-creation channel.
     </div>
 
     <div class="evidence-strip">
       <div>
-        <span class="strip-label">Direct evidence</span>
+        <span class="strip-label">Loan-component comparison</span>
         <strong id="strict-core-h0">-$10.66B</strong>
-        <span class="strip-note">Loan core (minimum), on impact</span>
+        <span class="strip-note">Displayed conditional coefficient, h0</span>
       </div>
       <div>
-        <span class="strip-label">Impact view</span>
+        <span class="strip-label">Mortgage comparison</span>
         <strong id="strict-mortgage-h0">-$5.04B</strong>
-        <span class="strip-note">Mortgage lending, on impact</span>
+        <span class="strip-note">Displayed conditional coefficient, h0</span>
       </div>
       <div>
-        <span class="strip-label">Bridge comparison</span>
+        <span class="strip-label">Broader lending bridge</span>
         <strong id="strict-bridge-h0">+$9.44B</strong>
-        <span class="strip-note">Loan core + nonfinancial corporate, on impact</span>
+        <span class="strip-note">Loan core + nonfinancial corporate, h0</span>
       </div>
     </div>
   </section>
 
   <section class="section reveal" id="broad-object">
     <div class="section-heading">
-      <p class="eyebrow">Broad Treasury Contribution to Deposits estimate</p>
-      <h2>The headline TDC estimate still matters.</h2>
+      <p class="eyebrow">Quarterly source-and-outcome comparison</p>
+      <h2>The headline proxy and matched deposit outcome move differently.</h2>
     </div>
     <p class="section-intro">
-      The broad estimate is the project's headline measure. It captures a large positive TDC shock on impact and a smaller positive matched total-deposit response, with the gap showing up in the other component. This remains the primary empirical result.
+      The displayed upstream TDC proxy is positive on impact, while the matched total-deposit outcome is also positive but smaller. Their difference is the comparator's headline arithmetic object; it is not a causal decomposition of where funds went.
     </p>
 
     <div class="chart-container hero-chart">
@@ -132,7 +132,7 @@
     </div>
 
     <div class="insight-box">
-      <strong>Broad result.</strong> On impact, the broad TDC response is about <span id="broad-tdc-inline">+$128.49B</span> while matched total deposits rise about <span id="broad-total-inline">+$55.75B</span>. That broad estimate remains useful, but it should not be read as if the full amount has already been independently confirmed as pure deposit creation.
+      <strong>Displayed comparison.</strong> On impact, the broad TDC proxy is about <span id="broad-tdc-inline">+$128.49B</span> while the matched total-deposit coefficient is about <span id="broad-total-inline">+$55.75B</span>. If the two series share the intended clock and perimeter, the gap is consistent with offsetting movements elsewhere in the matched accounting system; the comparison alone does not identify those movements.
     </div>
 
     <div class="broad-grid">
@@ -148,10 +148,10 @@
 
     <div class="ladder-block">
       <div class="ladder-copy">
-        <p class="plane-tag">TDC sensitivity comparison ladder</p>
-        <h3>The corrected ladder changes the broad estimate, not the independently confirmed core.</h3>
+        <p class="plane-tag">TDC measurement ladder</p>
+        <h3>The source-flow definition materially changes the comparison.</h3>
         <p>
-          The site now carries the corrected TDC sensitivity ladder as comparison evidence only. It sharpens the broad-estimate discussion, but it does not replace the narrow independent hierarchy.
+          The corrected sensitivity ladder shows how interest, fiscal, and depository-perimeter choices change the upstream TDC input. It therefore measures definition sensitivity rather than adjudicating a preferred estimator.
         </p>
       </div>
       <div class="ladder-figures">
@@ -163,27 +163,27 @@
     </div>
 
     <div class="insight-box caution">
-      <strong>Why the canonical broad headline stays in front.</strong> The corrected Tier 2 and Tier 3 ladder rows materially change the broad estimate, especially through interest and fiscal corrections. They are kept as comparison evidence for broad-measurement sensitivity, not as replacements for the independently confirmed non-TDC evidence hierarchy.
+      <strong>Why the headline remains visible.</strong> The headline and corrected Tier 2 and Tier 3 rows answer different measurement questions. Displaying them together makes the sensitivity transparent without treating arithmetic agreement as validation.
     </div>
 
     <div class="insight-box subtle">
-      <strong>What the sign difference means.</strong> A large difference between the headline broad estimate and the corrected ladder means the broad measurement question is still active. It does not, by itself, promote treasury other-checkable deposits, rest-of-world deposits, or other excluded support channels into the independently confirmed core.
+      <strong>What the sign difference means.</strong> The headline and corrected rows can imply different signs. If the corrections better match the intended source-flow definition, the corrected rows show how much of the headline comparison depends on measurement scope. They do not, by themselves, determine which counterpart absorbed the difference.
     </div>
   </section>
 
   <section class="section reveal" id="strict-object">
     <div class="section-heading">
-      <p class="eyebrow">Independent non-TDC deposits</p>
-      <h2>Independent evidence is concentrated in lending, not a complete accounting closure.</h2>
+      <p class="eyebrow">Deposit-outcome boundary</p>
+      <h2>Loan-component comparisons are sensitivities, not a second evidence chain.</h2>
     </div>
     <p class="section-intro">
-      The strongest independent evidence is concentrated in the direct loan core. The wider total does not behave like a clean accounting closure, which is exactly why the independently confirmed portion remains narrower than the broad TDC estimate.
+      The displayed loan-core coefficients are negative at h0, h4, and h8, while the broader loan-plus-corporate bridge is positive at h0. If these series track stable parts of the covered deposit perimeter, the pattern is consistent with different portfolio components moving in opposite directions. It does not identify a complete deposit-flow decomposition.
     </p>
 
     <div class="strict-grid">
       <article class="strict-panel">
-        <p class="plane-tag">Main direct evidence</p>
-        <h3>Loan core (minimum)</h3>
+        <p class="plane-tag">Narrow sensitivity</p>
+        <h3>Loan-component core</h3>
         <dl class="metric-list">
           <div><dt>h0</dt><dd id="strict-core-h0-panel">-$10.66B</dd></div>
           <div><dt>h4</dt><dd id="strict-core-h4-panel">-$39.14B</dd></div>
@@ -192,39 +192,39 @@
       </article>
 
       <article class="strict-panel">
-        <p class="plane-tag">Impact view</p>
+        <p class="plane-tag">Component view</p>
         <h3>Mortgage lending</h3>
         <p class="strict-number" id="strict-mortgage-panel">-$5.04B</p>
-        <p class="strict-note">Closest direct lending component on impact, but not the best summary across horizons.</p>
+        <p class="strict-note">A narrower h0 lending comparison; later horizons should be read from the full loan-component series.</p>
       </article>
 
       <article class="strict-panel">
-        <p class="plane-tag">Bridge comparison</p>
+        <p class="plane-tag">Broader bridge</p>
         <h3>Loan core + nonfinancial corporate</h3>
         <p class="strict-number positive" id="strict-bridge-panel">+$9.44B</p>
-        <p class="strict-note">A comparison row only, not direct independent verification.</p>
+        <p class="strict-note">Adds a nonfinancial-corporate component and therefore changes the outcome boundary.</p>
       </article>
     </div>
 
     <div class="insight-box caution">
-      <strong>What is missing.</strong> The evidence supports a negative independent direct lending core. It does not yet support a complete independently measured non-TDC deposit total from current public data.
+      <strong>How to use the pattern.</strong> The negative loan-component path is a descriptive conditional result worth reporting. Under a stable measurement mapping, it is consistent with a lending-linked offset to the broader deposit response. Establishing that mechanism requires evidence outside this comparator.
     </div>
   </section>
 
   <section class="section reveal" id="exclusions">
     <div class="section-heading">
-      <p class="eyebrow">Exclusions and evidence tiers</p>
-      <h2>What stays out of the independently confirmed core, and why.</h2>
+      <p class="eyebrow">Boundary checks and comparison tiers</p>
+      <h2>Some measured series sit outside the covered deposit-claim perimeter.</h2>
     </div>
 
     <div class="evidence-lattice">
       <article class="lattice-panel emphasis">
-        <p class="plane-tag">Outside the confirmed core</p>
-        <h3>Treasury other-checkable and rest-of-world deposits</h3>
+        <p class="plane-tag">Different claim boundaries</p>
+        <h3>Treasury and rest-of-world deposit series</h3>
         <p>
-          These are real measured support legs, but current public data do not validate them as clean in-scope deposit components.
+          These series are observed and economically relevant, but they do not directly measure the covered domestic nonbank deposit claim.
         </p>
-        <p class="strict-note">These channels are economically relevant diagnostics, but they stay outside the independently confirmed core until same-scope, timing-matched incidence evidence is available.</p>
+        <p class="strict-note">They remain useful boundary diagnostics. If a future design supplies the same clock and claim incidence, their relationship to the covered outcome can be tested directly.</p>
         <dl class="metric-list compact">
           <div><dt>Treasury other-checkable deposit share</dt><dd id="toc-share">0.66</dd></div>
           <div><dt>Treasury reserve share</dt><dd id="toc-reserve">1.26</dd></div>
@@ -237,19 +237,19 @@
         <p class="plane-tag">Also excluded</p>
         <h3>Trade, QE, offshore routing</h3>
         <ul class="plain-list">
-          <li>Exports and imports are theoretically relevant but not same-scope deposit-settlement measures.</li>
-          <li>Fed MBS / QE incidence is real in theory but not promotable under current seller-incidence limits.</li>
-          <li>Offshore / correspondent / foreign-bank routing remains context and leakage, not a strict creator channel.</li>
+          <li>Exports and imports are economically relevant but are not same-scope deposit-settlement measures.</li>
+          <li>Fed MBS and QE transactions require seller-incidence information before they can be mapped to the covered claim.</li>
+          <li>Offshore, correspondent, and foreign-bank series provide external counterpart context without assigning a source or destination of funds.</li>
         </ul>
       </article>
 
       <article class="lattice-panel">
-        <p class="plane-tag">Evidence hierarchy</p>
-        <h3>What counts</h3>
+        <p class="plane-tag">Comparison hierarchy</p>
+        <h3>How the rows are used</h3>
         <ul class="plain-list">
-          <li><strong>Independent evidence:</strong> loan core (minimum)</li>
-          <li><strong>Bridge comparison:</strong> loan core + nonfinancial corporate</li>
-          <li><strong>Diagnostic only:</strong> broader private comparisons, treasury/rest-of-world support channels, and accounting closure estimates</li>
+          <li><strong>Matched arithmetic:</strong> a named source-flow proxy against a named deposit outcome</li>
+          <li><strong>Outcome sensitivities:</strong> loan components and the broader loan-plus-corporate bridge</li>
+          <li><strong>Boundary diagnostics:</strong> broader private, Treasury, rest-of-world, and settlement-system complement series</li>
         </ul>
       </article>
     </div>
@@ -258,10 +258,10 @@
   <section class="section reveal" id="periods">
     <div class="section-heading">
       <p class="eyebrow">Time variation</p>
-      <h2>Impact survives better than persistence.</h2>
+      <h2>The h0 comparison varies less than the later-horizon path.</h2>
     </div>
     <p class="section-intro">
-      The impact-stage total-deposit result is more stable than the medium-horizon path. The COVID/post-COVID window carries the strongest impact-stage total-deposit response, while medium-horizon persistence remains unsettled.
+      The h0 total-deposit coefficient is more stable across the displayed periods than the medium-horizon coefficients. The COVID and post-COVID window has the largest h0 response. If the measurement relationship is comparable across periods, that difference is consistent with state-dependent absorption; the period split does not identify the state mechanism.
     </p>
 
     <div class="chart-container">
@@ -274,11 +274,11 @@
 
   <section class="section reveal" id="channels">
     <div class="section-heading">
-      <p class="eyebrow">Supporting channel context</p>
-      <h2>Useful, partial, and not enough on their own.</h2>
+      <p class="eyebrow">Counterpart-series context</p>
+      <h2>Conditional patterns suggest where to look next.</h2>
     </div>
     <p class="section-intro">
-      These channel readings remain valuable as context, but they are not a substitute for direct independent evidence. Foreign nontransaction pressure appears earliest, while lending evidence strengthens more at later horizons.
+      These coefficients compare the TDC proxy with lending, external, funding, and counterpart-asset series. Foreign nontransaction movements are most visible at h0, while lending movements become more pronounced at later horizons. If the mappings are stable, that sequence is consistent with an early external adjustment followed by slower portfolio movement; it does not assign transaction-level incidence.
     </p>
 
     <div class="broad-grid">
@@ -289,7 +289,7 @@
       </div>
       <div class="chart-container">
         <p class="chart-title">Key channels across horizons</p>
-        <p class="chart-subtitle">Foreign nontransaction remains the clearest external signal.</p>
+        <p class="chart-subtitle">Foreign nontransaction has the clearest displayed external association.</p>
         <canvas id="channelHorizonChart"></canvas>
       </div>
     </div>
@@ -297,26 +297,26 @@
     <div class="channel-grid">
       <div class="channel-card">
         <span class="channel-status not-decisive">Not decisive</span>
-        <h4>Broad creator lending</h4>
-        <p>The legacy private-credit proxy still does not solve the mechanism question on impact.</p>
+        <h4>Broad lending comparison</h4>
+        <p>The legacy private-credit proxy summarizes a broad conditional lending association at h0.</p>
         <p class="mono" id="ch-creator">&mdash;</p>
       </div>
       <div class="channel-card">
-        <span class="channel-status decisive">Clearest signal</span>
-        <h4>Foreign nontransaction pressure</h4>
-        <p>The strongest external signal currently visible in the public data.</p>
+        <span class="channel-status decisive">Clearest association</span>
+        <h4>Foreign nontransaction movement</h4>
+        <p>The largest displayed h0 external association whose interval excludes zero.</p>
         <p class="mono" id="ch-foreign">&mdash;</p>
       </div>
       <div class="channel-card">
         <span class="channel-status partial">Partial</span>
-        <h4>Domestic escape</h4>
-        <p>MMF and repo reallocation remain material but not decisive at h0.</p>
+        <h4>Domestic counterpart-asset proxies</h4>
+        <p>MMF and repo movements are material comparison rows at h0, without an assigned source or destination of funds.</p>
         <p class="mono" id="ch-mmf">&mdash;</p>
       </div>
       <div class="channel-card">
         <span class="channel-status partial">Context only</span>
-        <h4>Funding and support lanes</h4>
-        <p>Useful context for leakage and accommodation, but not part of the independently confirmed evidence.</p>
+        <h4>Funding and accommodation series</h4>
+        <p>These rows describe borrowing-side movements separately from deposit claims and counterpart-asset proxies.</p>
         <p class="mono">&mdash; see scorecard</p>
       </div>
     </div>
@@ -328,7 +328,7 @@
       <h2>Interesting, but not a decomposition.</h2>
     </div>
     <p class="section-intro">
-      Direct observed deposit categories are a side read only. They help show where the response appears, but they do not independently account for the non-TDC total.
+      Directly observed deposit categories show where conditional movements appear. Because the categories do not share a complete matched boundary, they should not be summed as a reconciliation of the total.
     </p>
 
     <div class="broad-grid">
@@ -345,11 +345,11 @@
 
   <section class="section reveal" id="robustness">
     <div class="section-heading">
-      <p class="eyebrow">Readiness and limits</p>
-      <h2>The results are fixed, but the claims stay disciplined.</h2>
+      <p class="eyebrow">Reproducibility and interpretation</p>
+      <h2>The comparison is reproducible and its scope is explicit.</h2>
     </div>
     <p class="section-intro">
-      The shock estimate passes quality checks, but persistence, mechanism, and ratio interpretations remain bounded. This release is a reproducibility checkpoint, not a finished mechanism paper.
+      The imported shock and displayed conditional coefficients pass the reported quality checks. The arithmetic, sensitivity, and counterpart patterns can therefore be reproduced as shown. Causal incidence, portfolio mechanism, and stock-response interpretations require designs outside this comparator.
     </p>
 
     <div class="gate-grid" id="gateGrid"></div>
@@ -371,20 +371,20 @@
   <section class="section reveal" id="data">
     <div class="section-heading">
       <p class="eyebrow">Data and methods</p>
-      <h2>Public artifacts and a rerunnable pipeline.</h2>
+      <h2>Public artifacts and a rerunnable comparison pipeline.</h2>
     </div>
     <p class="section-intro">
-      This site can be rebuilt from the committed public artifact bundle. The full analysis pipeline can also be rerun from public data sources, with optional sibling caches used only as accelerators.
+      This site can be rebuilt from the committed public artifact bundle. The comparison pipeline can also be rerun from public data sources, with optional sibling caches used only as accelerators.
     </p>
 
     <div class="links-grid">
       <a class="link-card" href="https://github.com/smkwray/tdcpass" target="_blank" rel="noopener">
         <h4>Repository</h4>
-        <p>Source code, front-end site, estimation pipeline, and downloadable public results.</p>
+        <p>Source code, front-end site, comparison pipeline, and downloadable public artifacts.</p>
       </a>
       <a class="link-card" href="https://github.com/smkwray/tdcpass#readme" target="_blank" rel="noopener">
         <h4>README</h4>
-        <p>Project framing, broad-vs-strict interpretation, and release status.</p>
+        <p>Project framing, perimeter definitions, comparison contract, and release status.</p>
       </a>
       <a class="link-card" href="https://github.com/smkwray/tdcest" target="_blank" rel="noopener">
         <h4>TDC Sensitivity (tdcest)</h4>
@@ -393,10 +393,10 @@
     </div>
 
     <div class="artifact-strip">
-      <div><span>Primary exact baseline</span><strong>Baseline impulse-response file</strong></div>
-      <div><span>Strict release rule</span><strong>Strict evidence framing summary</strong></div>
-      <div><span>Strict closeout</span><strong>Strict results closeout summary</strong></div>
-      <div><span>Broad estimate ladder</span><strong>Broad TDC comparison summary</strong></div>
+      <div><span>Baseline comparison</span><strong>Impulse-response comparison file</strong></div>
+      <div><span>Outcome boundary</span><strong>Public framing summary</strong></div>
+      <div><span>Comparison closeout</span><strong>Results closeout summary</strong></div>
+      <div><span>TDC measurement ladder</span><strong>Broad TDC comparison summary</strong></div>
     </div>
   </section>
 
@@ -404,7 +404,7 @@
 
 <footer class="site-footer">
   <p>TDC Pass-Through</p>
-  <p>Public methods-and-results site for Treasury Contribution to Deposits and the independent evidence on non-TDC deposits.</p>
+  <p>Public arithmetic and boundary comparison for Treasury Deposit Component proxies and named deposit outcomes.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>

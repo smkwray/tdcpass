@@ -107,10 +107,12 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
                     "decisive_positive_creator_channels": [],
                     "decisive_negative_creator_channels": [],
                     "decisive_positive_asset_purchase_channels": ["agency_gse_backed_securities_bank_qoq"],
-                    "decisive_positive_retention_support_channels": ["on_rrp_reallocation_qoq"],
-                    "decisive_negative_retention_support_channels": [],
-                    "escape_support_context": {
-                        "interpretation": "deposit_retention_support_signal",
+                    "decisive_positive_counterpart_reallocation_proxy_channels": [
+                        "on_rrp_reallocation_qoq"
+                    ],
+                    "decisive_negative_counterpart_reallocation_proxy_channels": [],
+                    "counterpart_reallocation_proxy_context": {
+                        "interpretation": "sign_normalized_movement_away_from_named_channel",
                         "decisive_positive_channels": ["on_rrp_reallocation_qoq"],
                     },
                     "asset_purchase_plumbing_context": {
@@ -155,12 +157,16 @@ def test_pass_through_summary_builds_release_answer_object() -> None:
     assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_asset_purchase_channels"] == [
         "agency_gse_backed_securities_bank_qoq"
     ]
-    assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_retention_support_channels"] == [
+    assert payload["counterpart_channel_context"]["key_horizons"]["h0"][
+        "decisive_positive_counterpart_reallocation_proxy_channels"
+    ] == [
         "on_rrp_reallocation_qoq"
     ]
     assert (
-        payload["counterpart_channel_context"]["key_horizons"]["h0"]["escape_support_context"]["interpretation"]
-        == "deposit_retention_support_signal"
+        payload["counterpart_channel_context"]["key_horizons"]["h0"]["counterpart_reallocation_proxy_context"][
+            "interpretation"
+        ]
+        == "sign_normalized_movement_away_from_named_channel"
     )
     assert (
         payload["counterpart_channel_context"]["key_horizons"]["h0"]["asset_purchase_plumbing_context"]["interpretation"]
@@ -1030,7 +1036,7 @@ def test_pass_through_summary_surfaces_scope_alignment_context() -> None:
             },
             "classification": {
                 "framework_state": "frozen_for_release_framing",
-                "external_critique_readiness": "ready_for_gpt_pro_critique",
+                "external_critique_readiness": "ready_for_external_critique",
             },
             "recommendation": {
                 "status": "strict_release_framing_finalized",

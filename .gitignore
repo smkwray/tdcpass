@@ -8,6 +8,9 @@ __pycache__/
 
 # Never publish local orchestration state.
 /do/
+/AGENTS.md
+/CLAUDE.md
+/.worktrees/
 
 # Non-public working material.
 docs/

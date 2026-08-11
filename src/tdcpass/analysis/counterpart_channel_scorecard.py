@@ -43,7 +43,7 @@ ACTIVE_FUNDING_ACCOMMODATION_OUTCOMES: tuple[str, ...] = (
 FUNDING_ACCOMMODATION_CLEANUP_CANDIDATES: tuple[str, ...] = (
     "holding_company_parent_funding_bank_qoq",
 )
-ESCAPE_SUPPORT_OUTCOMES: tuple[str, ...] = (
+COUNTERPART_REALLOCATION_PROXY_OUTCOMES: tuple[str, ...] = (
     "domestic_nonfinancial_mmf_reallocation_qoq",
     "domestic_nonfinancial_repo_reallocation_qoq",
     "on_rrp_reallocation_qoq",
@@ -51,7 +51,7 @@ ESCAPE_SUPPORT_OUTCOMES: tuple[str, ...] = (
     "mmf_treasury_bills_reallocation_qoq",
     "currency_reallocation_qoq",
 )
-EXTERNAL_ESCAPE_OUTCOMES: tuple[str, ...] = (
+EXTERNAL_COUNTERPART_REALLOCATION_OUTCOMES: tuple[str, ...] = (
     "foreign_nonts_qoq",
     "checkable_rest_of_world_bank_qoq",
     "interbank_transactions_foreign_banks_liability_qoq",
@@ -196,7 +196,7 @@ def _plumbing_rows(lp_irf: pd.DataFrame, *, horizon: int) -> dict[str, Any]:
     return rows
 
 
-def _escape_rows(
+def _channel_rows(
     lp_irf: pd.DataFrame,
     *,
     horizon: int,
@@ -237,16 +237,16 @@ def _asset_purchase_plumbing_interpretation(
     return "mixed_or_nondecisive_plumbing_context"
 
 
-def _escape_support_interpretation(escape_rows: dict[str, Any]) -> str:
-    decisive_positive = _decisive_snapshot_channels(escape_rows, sign="positive")
-    decisive_negative = _decisive_snapshot_channels(escape_rows, sign="negative")
+def _counterpart_reallocation_interpretation(channel_rows: dict[str, Any]) -> str:
+    decisive_positive = _decisive_snapshot_channels(channel_rows, sign="positive")
+    decisive_negative = _decisive_snapshot_channels(channel_rows, sign="negative")
     if decisive_positive and decisive_negative:
-        return "mixed_escape_and_support_signals"
+        return "mixed_sign_normalized_counterpart_movements"
     if decisive_positive:
-        return "deposit_retention_support_signal"
+        return "sign_normalized_movement_away_from_named_channel"
     if decisive_negative:
-        return "escape_pressure_signal"
-    return "escape_support_unresolved"
+        return "sign_normalized_movement_toward_named_channel"
+    return "counterpart_reallocation_direction_unresolved"
 
 
 def _funding_accommodation_interpretation(funding_rows: dict[str, Any]) -> str:
@@ -272,15 +272,15 @@ def _target_mapping_payload() -> dict[str, Any]:
             "outcomes": list(ASSET_PURCHASE_CREATOR_OUTCOMES),
             "interpretation": "Potential creator evidence from quarterly bank asset accumulation; pair with TGA and Fed context rather than treating raw securities growth as direct deposit creation by itself.",
         },
-        "destroyer_escape_lane": {
+        "counterpart_reallocation_proxy_lane": {
             "status": "materialized",
-            "outcomes": list(ESCAPE_SUPPORT_OUTCOMES),
-            "interpretation": "Sign-normalized reallocation support channels spanning MMFs, repo, ON RRP, direct Treasury / bill absorption, and public currency; positive means less deposit escape / more retention support, negative means escape pressure out of bank deposits.",
+            "outcomes": list(COUNTERPART_REALLOCATION_PROXY_OUTCOMES),
+            "interpretation": "A positive value records a decline in the named channel's balance or holdings under the chosen sign convention; a negative value records an increase. The series does not identify the source or destination of funds and therefore does not establish a debit from, credit to, retention in, or escape from covered deposits.",
         },
-        "external_escape_lane": {
+        "external_counterpart_reallocation_proxy_lane": {
             "status": "expanded",
-            "outcomes": list(EXTERNAL_ESCAPE_OUTCOMES),
-            "interpretation": "External banking context now spans broad foreign nontransaction liabilities plus bank-specific foreign interbank liabilities, foreign interbank assets, and deposits at foreign banks; keep these separate from the domestic escape-support subtotal.",
+            "outcomes": list(EXTERNAL_COUNTERPART_REALLOCATION_OUTCOMES),
+            "interpretation": "External banking context spans broad foreign nontransaction liabilities plus bank-specific foreign interbank liabilities, foreign interbank assets, and deposits at foreign banks; keep these separate from the domestic counterpart-asset reallocation proxies.",
         },
         "funding_accommodation_lane": {
             "status": "materialized_with_cleanup_candidate",
@@ -313,14 +313,22 @@ def build_counterpart_channel_scorecard(
         core_creators = _creator_rows(lp_irf, horizon=horizon, outcomes=CORE_CREATOR_LENDING_OUTCOMES)
         noncore_creators = _creator_rows(lp_irf, horizon=horizon, outcomes=NONCORE_CREATOR_LENDING_OUTCOMES)
         asset_purchase_creators = _creator_rows(lp_irf, horizon=horizon, outcomes=ASSET_PURCHASE_CREATOR_OUTCOMES)
-        funding_accommodation_rows = _escape_rows(
+        funding_accommodation_rows = _channel_rows(
             lp_irf, horizon=horizon, outcomes=ACTIVE_FUNDING_ACCOMMODATION_OUTCOMES
         )
-        funding_cleanup_candidate_rows = _escape_rows(
+        funding_cleanup_candidate_rows = _channel_rows(
             lp_irf, horizon=horizon, outcomes=FUNDING_ACCOMMODATION_CLEANUP_CANDIDATES
         )
-        escape_support_rows = _escape_rows(lp_irf, horizon=horizon, outcomes=ESCAPE_SUPPORT_OUTCOMES)
-        external_escape_rows = _escape_rows(lp_irf, horizon=horizon, outcomes=EXTERNAL_ESCAPE_OUTCOMES)
+        counterpart_reallocation_proxy_rows = _channel_rows(
+            lp_irf,
+            horizon=horizon,
+            outcomes=COUNTERPART_REALLOCATION_PROXY_OUTCOMES,
+        )
+        external_counterpart_reallocation_proxy_rows = _channel_rows(
+            lp_irf,
+            horizon=horizon,
+            outcomes=EXTERNAL_COUNTERPART_REALLOCATION_OUTCOMES,
+        )
         plumbing_rows = _plumbing_rows(lp_irf, horizon=horizon)
         observed_creators.update(creators)
         observed_funding.update(funding_accommodation_rows)
@@ -345,8 +353,8 @@ def build_counterpart_channel_scorecard(
             "creator_asset_purchase_channels": asset_purchase_creators,
             "funding_accommodation_channels": funding_accommodation_rows,
             "funding_accommodation_cleanup_candidates": funding_cleanup_candidate_rows,
-            "deposit_retention_support_channels": escape_support_rows,
-            "external_escape_channels": external_escape_rows,
+            "counterpart_reallocation_proxy_channels": counterpart_reallocation_proxy_rows,
+            "external_counterpart_reallocation_proxy_channels": external_counterpart_reallocation_proxy_rows,
             "funding_accommodation_context": {
                 "channels": funding_accommodation_rows,
                 "decisive_positive_channels": _decisive_snapshot_channels(
@@ -359,11 +367,17 @@ def build_counterpart_channel_scorecard(
                     funding_accommodation_rows
                 ),
             },
-            "escape_support_context": {
-                "channels": escape_support_rows,
-                "decisive_positive_channels": _decisive_snapshot_channels(escape_support_rows, sign="positive"),
-                "decisive_negative_channels": _decisive_snapshot_channels(escape_support_rows, sign="negative"),
-                "interpretation": _escape_support_interpretation(escape_support_rows),
+            "counterpart_reallocation_proxy_context": {
+                "channels": counterpart_reallocation_proxy_rows,
+                "decisive_positive_channels": _decisive_snapshot_channels(
+                    counterpart_reallocation_proxy_rows, sign="positive"
+                ),
+                "decisive_negative_channels": _decisive_snapshot_channels(
+                    counterpart_reallocation_proxy_rows, sign="negative"
+                ),
+                "interpretation": _counterpart_reallocation_interpretation(
+                    counterpart_reallocation_proxy_rows
+                ),
             },
             "asset_purchase_plumbing_context": {
                 "channels": plumbing_rows,
@@ -392,17 +406,17 @@ def build_counterpart_channel_scorecard(
             "decisive_negative_noncore_creator_channels": _decisive_creator_channels(noncore_creators, sign="negative"),
             "decisive_positive_asset_purchase_channels": decisive_positive_asset_purchase_channels,
             "decisive_negative_asset_purchase_channels": decisive_negative_asset_purchase_channels,
-            "decisive_positive_retention_support_channels": _decisive_snapshot_channels(
-                escape_support_rows, sign="positive"
+            "decisive_positive_counterpart_reallocation_proxy_channels": _decisive_snapshot_channels(
+                counterpart_reallocation_proxy_rows, sign="positive"
             ),
-            "decisive_negative_retention_support_channels": _decisive_snapshot_channels(
-                escape_support_rows, sign="negative"
+            "decisive_negative_counterpart_reallocation_proxy_channels": _decisive_snapshot_channels(
+                counterpart_reallocation_proxy_rows, sign="negative"
             ),
-            "decisive_positive_external_escape_channels": _decisive_snapshot_channels(
-                external_escape_rows, sign="positive"
+            "decisive_positive_external_counterpart_reallocation_proxy_channels": _decisive_snapshot_channels(
+                external_counterpart_reallocation_proxy_rows, sign="positive"
             ),
-            "decisive_negative_external_escape_channels": _decisive_snapshot_channels(
-                external_escape_rows, sign="negative"
+            "decisive_negative_external_counterpart_reallocation_proxy_channels": _decisive_snapshot_channels(
+                external_counterpart_reallocation_proxy_rows, sign="negative"
             ),
             "decisive_positive_funding_accommodation_channels": _decisive_snapshot_channels(
                 funding_accommodation_rows, sign="positive"
@@ -443,24 +457,24 @@ def build_counterpart_channel_scorecard(
                 "Asset-purchase creator signals are now paired with raw TGA, reserves, and combined central-bank plumbing responses so positive securities accumulation is not interpreted without Treasury/Fed context."
             )
         if any(
-            name in key_horizon_payload.get("deposit_retention_support_channels", {})
+            name in key_horizon_payload.get("counterpart_reallocation_proxy_channels", {})
             for key_horizon_payload in key_horizons.values()
-            for name in ESCAPE_SUPPORT_OUTCOMES
+            for name in COUNTERPART_REALLOCATION_PROXY_OUTCOMES
         ):
             takeaways.append(
-                "The first destroyer / escape block is now live through sign-normalized MMF, repo, ON RRP, direct Treasury / bill, and currency reallocation support channels."
+                "The counterpart-reallocation proxy block tracks sign-normalized MMF, repo, ON RRP, direct Treasury or bill, and currency movements without assigning a source or destination of funds."
             )
         if observed_funding:
             takeaways.append(
-                "Funding accommodations are now tracked separately from creator and escape lanes so borrowing-side absorption is visible without being mislabeled as deposit creation."
+                "Funding accommodations are tracked separately from creator and counterpart-reallocation proxy lanes so borrowing-side absorption remains visible without being mislabeled as deposit creation."
             )
         takeaways.append(
             "Holding-company / parent funding remains a cleanup candidate rather than an active interpreted accommodation lane."
         )
         if any(
-            name in key_horizon_payload.get("external_escape_channels", {})
+            name in key_horizon_payload.get("external_counterpart_reallocation_proxy_channels", {})
             for key_horizon_payload in key_horizons.values()
-            for name in EXTERNAL_ESCAPE_OUTCOMES
+            for name in EXTERNAL_COUNTERPART_REALLOCATION_OUTCOMES
         ):
             takeaways.append(
                 "The external banking lane now includes broad foreign liabilities plus bank-specific foreign interbank positions and deposits at foreign banks."
@@ -473,7 +487,7 @@ def build_counterpart_channel_scorecard(
 
     return {
         "status": status,
-        "headline_question": "Which first-wave creator and escape counterpart channels line up with the exact non-TDC deposit response?",
+        "headline_question": "Which first-wave creator and counterpart-reallocation proxy channels line up with the exact non-TDC deposit response?",
         "estimation_path": {
             "primary_decomposition_mode": primary_decomposition_mode,
             "primary_artifact": (

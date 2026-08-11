@@ -341,6 +341,72 @@ series:
   preferred_source: frb_z1
   quality_tier: tier_1_direct
   notes: Z.1 checkable subcomponent for private domestic deposit liabilities.
+- key: z1_households_nonprofits_nonfinancial_business_currency_deposit_assets_qoq
+  display_name: Household/nonprofit and nonfinancial-business currency-and-deposit assets, quarterly change
+  role: outcome_sensitivity_unmatched
+  frequency: quarterly
+  units: billions_usd
+  status: retained_appendix_sensitivity
+  preferred_source: derived_z1_l203_l204
+  quality_tier: tier_2_constructed
+  notes: >-
+    Auxiliary legal-sector holder-asset sensitivity. If an EA-TDC result is
+    similar under this outcome, it is evidence that the result is not unique to
+    the issuer-side outcome, conditional on the currency, issuer, clock, and
+    perimeter differences declared here.
+  source_codes:
+  - FL153020005
+  - FL103020005
+  - FL113020005
+  - FL153030005
+  - FL103030003
+  - FL113030003
+  formula: >-
+    diff(FL153020005) + diff(FL103020005) + diff(FL113020005) +
+    diff(FL153030005) + diff(FL103030003) + diff(FL113030003)
+  vintage: >-
+    Current Federal Reserve Z.1 release at run time; the exact release URL and
+    retrieval time are recorded in output/manifests/raw_downloads.json.
+  mismatch_declaration: >-
+    End-of-quarter holder-asset stock-change sensitivity incorporating L.203
+    currency; not reconciled to the DU claim ledger, issuer perimeter,
+    settlement clock, or any TDC proxy.
+- key: z1_selected_domestic_holder_currency_deposit_assets_broad_qoq
+  display_name: Selected domestic holder-sector currency-and-deposit assets, broad quarterly change
+  role: rejected_boundary_candidate
+  frequency: quarterly
+  units: billions_usd
+  status: parked_boundary_failure
+  preferred_source: derived_z1_l203_l204
+  quality_tier: tier_2_constructed
+  notes: >-
+    Registry record only. The domestic-financial L.203 input contains explicit
+    RS assets, including monetary-authority coin and depository-institution
+    vault cash, together with unresolved nonbank claims. This candidate is not
+    produced as an empirical outcome or public sensitivity.
+  source_codes:
+  - FL153020005
+  - FL103020005
+  - FL113020005
+  - FL213020005
+  - FL793020005
+  - FL153030005
+  - FL103030003
+  - FL113030003
+  - FL213030000
+  - FL793030005
+  formula: >-
+    diff(FL153020005) + diff(FL103020005) + diff(FL113020005) +
+    diff(FL213020005) + diff(FL793020005) + diff(FL153030005) +
+    diff(FL103030003) + diff(FL113030003) + diff(FL213030000) +
+    diff(FL793030005)
+  vintage: >-
+    Current Federal Reserve Z.1 release at run time; no runtime series is
+    produced for this parked candidate.
+  mismatch_declaration: >-
+    Mixed holder-sector asset aggregation containing explicit RS positions;
+    not a domestic-nonbank deposit measure, DU outcome, or publication
+    sensitivity.
 - key: interbank_transactions_foreign_banks_liability_qoq
   display_name: Bank interbank liabilities to foreign banks, quarterly change
   role: counterpart_channel
@@ -358,7 +424,7 @@ series:
   status: planned_v1
   preferred_source: frb_z1_l202
   quality_tier: tier_1_direct
-  notes: Quarterly change in U.S.-chartered bank interbank claims on banks in foreign countries from Z.1 L.202; an external banking lane rather than a domestic escape-support proxy.
+  notes: Quarterly change in U.S.-chartered bank interbank claims on banks in foreign countries from Z.1 L.202; external banking context rather than a domestic counterpart-asset reallocation proxy.
 - key: deposits_at_foreign_banks_asset_qoq
   display_name: Bank deposits at foreign banks, quarterly change
   role: counterpart_channel
@@ -1114,7 +1180,7 @@ series:
   status: planned_v1
   preferred_source: frb_h41_or_fred
   quality_tier: tier_1_direct
-  notes: Sign-normalized decline in Federal Reserve ON RRP balances; positive values indicate less cash absorbed by ON RRP and therefore more support for bank-deposit retention, while negative values indicate escape pressure into ON RRP.
+  notes: Sign-normalized Federal Reserve ON RRP balance change; positive records a decline and negative an increase. The series does not identify the source or destination of funds.
 - key: household_treasury_securities_reallocation_qoq
   display_name: Household Treasury-holdings reallocation support proxy, quarterly change
   role: counterpart_channel
@@ -1123,7 +1189,7 @@ series:
   status: planned_v1
   preferred_source: frb_z1_l210
   quality_tier: tier_1_direct
-  notes: Sign-normalized decline in household-sector Treasury-security holdings from Z.1 L.210; positive values indicate less household cash absorbed into Treasuries, while negative values indicate direct Treasury-absorption escape pressure.
+  notes: Sign-normalized household-sector Treasury-security holdings change from Z.1 L.210; positive records a decline and negative an increase. The series does not identify the source or destination of funds.
 - key: mmf_treasury_bills_reallocation_qoq
   display_name: MMF Treasury-bill reallocation support proxy, quarterly change
   role: counterpart_channel
@@ -1132,7 +1198,7 @@ series:
   status: planned_v1
   preferred_source: frb_z1_l210
   quality_tier: tier_1_direct
-  notes: Sign-normalized decline in money market fund Treasury-bill holdings from Z.1 L.210; positive values indicate less direct bill absorption, while negative values indicate escape pressure into Treasury bills via MMFs.
+  notes: Sign-normalized money market fund Treasury-bill holdings change from Z.1 L.210; positive records a decline and negative an increase. The series does not identify the source or destination of funds.
 - key: currency_reallocation_qoq
   display_name: Public currency reallocation support proxy, quarterly change
   role: counterpart_channel
@@ -1141,7 +1207,7 @@ series:
   status: planned_v1
   preferred_source: fred_currency_component
   quality_tier: tier_1_direct
-  notes: Sign-normalized decline in public currency holdings from the FRED currency component of M1; positive values indicate less cash leakage out of deposits, while negative values indicate escape pressure into currency.
+  notes: Sign-normalized public currency holdings change from the FRED currency component of M1; positive records a decline and negative an increase. The series does not identify the source or destination of funds.
 - key: fedfunds_repo_liabilities_bank_qoq
   display_name: Bank fed funds and repo liabilities, quarterly change
   role: counterpart_channel
@@ -1150,7 +1216,7 @@ series:
   status: planned_v1
   preferred_source: frb_z1_l207
   quality_tier: tier_1_direct
-  notes: Quarterly change in bank fed-funds and repo liabilities from Z.1; a funding-accommodation lane rather than a creator or escape channel.
+  notes: Quarterly change in bank fed-funds and repo liabilities from Z.1; a funding-accommodation lane rather than a creator or counterpart-reallocation proxy.
 - key: commercial_bank_borrowings_qoq
   display_name: Commercial-bank borrowings, quarterly change
   role: counterpart_channel
@@ -1168,7 +1234,7 @@ series:
   status: planned_v1
   preferred_source: fred_borrow
   quality_tier: tier_1_direct
-  notes: Quarterly change in total borrowings from the Federal Reserve by depository institutions; a system-level funding-accommodation proxy rather than a bank-only creator or escape channel.
+  notes: Quarterly change in total borrowings from the Federal Reserve by depository institutions; a system-level funding-accommodation proxy rather than a bank-only creator or counterpart-reallocation proxy.
 - key: debt_securities_bank_liability_qoq
   display_name: Bank debt securities liabilities, quarterly change
   role: counterpart_channel

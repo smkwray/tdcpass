@@ -144,12 +144,12 @@
       var lp = h0.legacy_private_credit_proxy.snapshot;
       el('ch-creator').textContent = 'beta=' + fmt(lp.beta) + ', 95% CI [' + fmt(lp.lower95) + ', ' + fmt(lp.upper95) + ']';
     }
-    if (h0.external_escape_channels && h0.external_escape_channels.foreign_nonts_qoq) {
-      var fn = h0.external_escape_channels.foreign_nonts_qoq;
+    if (h0.external_counterpart_reallocation_proxy_channels && h0.external_counterpart_reallocation_proxy_channels.foreign_nonts_qoq) {
+      var fn = h0.external_counterpart_reallocation_proxy_channels.foreign_nonts_qoq;
       el('ch-foreign').textContent = 'beta=' + fmt(fn.beta) + ', 95% CI [' + fmt(fn.lower95) + ', ' + fmt(fn.upper95) + ']';
     }
-    if (h0.deposit_retention_support_channels && h0.deposit_retention_support_channels.domestic_nonfinancial_mmf_reallocation_qoq) {
-      var mm = h0.deposit_retention_support_channels.domestic_nonfinancial_mmf_reallocation_qoq;
+    if (h0.counterpart_reallocation_proxy_channels && h0.counterpart_reallocation_proxy_channels.domestic_nonfinancial_mmf_reallocation_qoq) {
+      var mm = h0.counterpart_reallocation_proxy_channels.domestic_nonfinancial_mmf_reallocation_qoq;
       el('ch-mmf').textContent = 'MMF beta=' + fmt(mm.beta) + ', 95% CI [' + fmt(mm.lower95) + ', ' + fmt(mm.upper95) + ']';
     }
   }
@@ -577,11 +577,11 @@
 
     /* Gather all channels with beta/CI at h0 */
     var channels = [
-      { label: 'Foreign nontx', data: chVal(h0, 'external_escape_channels.foreign_nonts_qoq') },
+      { label: 'Foreign nontx', data: chVal(h0, 'external_counterpart_reallocation_proxy_channels.foreign_nonts_qoq') },
       { label: 'CB nontx (asset)', data: chVal(h0, 'asset_purchase_plumbing_context.channels.cb_nonts_qoq') },
       { label: 'Legacy credit proxy', data: h0.legacy_private_credit_proxy ? h0.legacy_private_credit_proxy.snapshot : null },
-      { label: 'MMF reallocation', data: chVal(h0, 'deposit_retention_support_channels.domestic_nonfinancial_mmf_reallocation_qoq') },
-      { label: 'Repo reallocation', data: chVal(h0, 'deposit_retention_support_channels.domestic_nonfinancial_repo_reallocation_qoq') }
+      { label: 'MMF reallocation', data: chVal(h0, 'counterpart_reallocation_proxy_channels.domestic_nonfinancial_mmf_reallocation_qoq') },
+      { label: 'Repo reallocation', data: chVal(h0, 'counterpart_reallocation_proxy_channels.domestic_nonfinancial_repo_reallocation_qoq') }
     ].filter(function (ch) { return ch.data && typeof ch.data.beta === 'number'; });
 
     var labels = channels.map(function (ch) { return ch.label; });
@@ -705,10 +705,10 @@
     }
 
     var series = [
-      { label: 'Foreign nontx', path: 'external_escape_channels.foreign_nonts_qoq', color: c.teal },
+      { label: 'Foreign nontx', path: 'external_counterpart_reallocation_proxy_channels.foreign_nonts_qoq', color: c.teal },
       { label: 'Legacy credit proxy', path: null, color: c.blue },
       { label: 'CB nontx (asset)', path: 'asset_purchase_plumbing_context.channels.cb_nonts_qoq', color: c.amber },
-      { label: 'MMF reallocation', path: 'deposit_retention_support_channels.domestic_nonfinancial_mmf_reallocation_qoq', color: c.purple }
+      { label: 'MMF reallocation', path: 'counterpart_reallocation_proxy_channels.domestic_nonfinancial_mmf_reallocation_qoq', color: c.purple }
     ];
 
     var datasets = series.map(function (s) {

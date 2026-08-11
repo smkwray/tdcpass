@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, List
+from typing import Any, List
 
 from tdcpass.core.paths import repo_root
 from tdcpass.core.yaml_utils import load_yaml
@@ -19,6 +19,10 @@ class SeriesSpec:
     preferred_source: str
     quality_tier: str
     notes: str
+    source_codes: list[str] | None = None
+    formula: str | None = None
+    vintage: str | None = None
+    mismatch_declaration: str | None = None
 
 
 def config_path(name: str) -> Path:

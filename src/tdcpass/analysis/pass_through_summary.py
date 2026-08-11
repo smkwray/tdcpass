@@ -247,14 +247,21 @@ def _counterpart_channel_context(
                 "decisive_positive_asset_purchase_channels": list(
                     (key_horizons.get(f"h{horizon}") or {}).get("decisive_positive_asset_purchase_channels", [])
                 ),
-                "decisive_positive_retention_support_channels": list(
-                    (key_horizons.get(f"h{horizon}") or {}).get("decisive_positive_retention_support_channels", [])
+                "decisive_positive_counterpart_reallocation_proxy_channels": list(
+                    (key_horizons.get(f"h{horizon}") or {}).get(
+                        "decisive_positive_counterpart_reallocation_proxy_channels", []
+                    )
                 ),
-                "decisive_negative_retention_support_channels": list(
-                    (key_horizons.get(f"h{horizon}") or {}).get("decisive_negative_retention_support_channels", [])
+                "decisive_negative_counterpart_reallocation_proxy_channels": list(
+                    (key_horizons.get(f"h{horizon}") or {}).get(
+                        "decisive_negative_counterpart_reallocation_proxy_channels", []
+                    )
                 ),
-                "escape_support_context": dict(
-                    (key_horizons.get(f"h{horizon}") or {}).get("escape_support_context") or {}
+                "counterpart_reallocation_proxy_context": dict(
+                    (key_horizons.get(f"h{horizon}") or {}).get(
+                        "counterpart_reallocation_proxy_context"
+                    )
+                    or {}
                 ),
                 "asset_purchase_plumbing_context": dict(
                     (key_horizons.get(f"h{horizon}") or {}).get("asset_purchase_plumbing_context") or {}
@@ -619,7 +626,6 @@ def _rest_of_world_treasury_audit_context(
     h0 = dict(key_horizons.get("h0", {}))
     row_response = dict(h0.get("rest_of_world_treasury_response", {}) or {})
     foreign_nonts = dict(h0.get("foreign_nonts_response", {}) or {})
-    row_deposits = dict(h0.get("checkable_rest_of_world_bank_response", {}) or {})
     foreign_bank_assets = dict(h0.get("interbank_transactions_foreign_banks_asset_response", {}) or {})
     interpretation = h0.get("interpretation")
     counterparts = dict(quarterly_alignment.get("counterparts", {}))

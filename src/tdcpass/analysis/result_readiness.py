@@ -330,10 +330,10 @@ def build_result_readiness_summary(
     counterpart_h0_decisive_negative_creator_count = 0
     counterpart_h4_decisive_positive_creator_count = 0
     counterpart_h4_decisive_negative_creator_count = 0
-    counterpart_h0_decisive_positive_retention_support_count = 0
-    counterpart_h0_decisive_negative_retention_support_count = 0
-    counterpart_h4_decisive_positive_retention_support_count = 0
-    counterpart_h4_decisive_negative_retention_support_count = 0
+    counterpart_h0_decisive_positive_reallocation_proxy_count = 0
+    counterpart_h0_decisive_negative_reallocation_proxy_count = 0
+    counterpart_h4_decisive_positive_reallocation_proxy_count = 0
+    counterpart_h4_decisive_negative_reallocation_proxy_count = 0
     counterpart_legacy_private_credit_proxy_role = None
     counterpart_context: dict[str, Any] = {}
     if counterpart_channel_scorecard is not None:
@@ -347,18 +347,22 @@ def build_result_readiness_summary(
             horizon_payload = dict(key_horizons.get(f"h{horizon}", {}))
             positive_count = int(len(horizon_payload.get("decisive_positive_creator_channels", [])))
             negative_count = int(len(horizon_payload.get("decisive_negative_creator_channels", [])))
-            positive_support_count = int(len(horizon_payload.get("decisive_positive_retention_support_channels", [])))
-            negative_support_count = int(len(horizon_payload.get("decisive_negative_retention_support_channels", [])))
+            positive_proxy_count = int(
+                len(horizon_payload.get("decisive_positive_counterpart_reallocation_proxy_channels", []))
+            )
+            negative_proxy_count = int(
+                len(horizon_payload.get("decisive_negative_counterpart_reallocation_proxy_channels", []))
+            )
             if horizon == 0:
                 counterpart_h0_decisive_positive_creator_count = positive_count
                 counterpart_h0_decisive_negative_creator_count = negative_count
-                counterpart_h0_decisive_positive_retention_support_count = positive_support_count
-                counterpart_h0_decisive_negative_retention_support_count = negative_support_count
+                counterpart_h0_decisive_positive_reallocation_proxy_count = positive_proxy_count
+                counterpart_h0_decisive_negative_reallocation_proxy_count = negative_proxy_count
             else:
                 counterpart_h4_decisive_positive_creator_count = positive_count
                 counterpart_h4_decisive_negative_creator_count = negative_count
-                counterpart_h4_decisive_positive_retention_support_count = positive_support_count
-                counterpart_h4_decisive_negative_retention_support_count = negative_support_count
+                counterpart_h4_decisive_positive_reallocation_proxy_count = positive_proxy_count
+                counterpart_h4_decisive_negative_reallocation_proxy_count = negative_proxy_count
         counterpart_context = {
             "status": counterpart_channel_status,
             "artifact": "counterpart_channel_scorecard.json",
@@ -375,14 +379,21 @@ def build_result_readiness_summary(
                     "decisive_positive_asset_purchase_channels": list(
                         dict(key_horizons.get(f"h{horizon}", {})).get("decisive_positive_asset_purchase_channels", [])
                     ),
-                    "decisive_positive_retention_support_channels": list(
-                        dict(key_horizons.get(f"h{horizon}", {})).get("decisive_positive_retention_support_channels", [])
+                    "decisive_positive_counterpart_reallocation_proxy_channels": list(
+                        dict(key_horizons.get(f"h{horizon}", {})).get(
+                            "decisive_positive_counterpart_reallocation_proxy_channels", []
+                        )
                     ),
-                    "decisive_negative_retention_support_channels": list(
-                        dict(key_horizons.get(f"h{horizon}", {})).get("decisive_negative_retention_support_channels", [])
+                    "decisive_negative_counterpart_reallocation_proxy_channels": list(
+                        dict(key_horizons.get(f"h{horizon}", {})).get(
+                            "decisive_negative_counterpart_reallocation_proxy_channels", []
+                        )
                     ),
-                    "escape_support_context": dict(
-                        dict(key_horizons.get(f"h{horizon}", {})).get("escape_support_context") or {}
+                    "counterpart_reallocation_proxy_context": dict(
+                        dict(key_horizons.get(f"h{horizon}", {})).get(
+                            "counterpart_reallocation_proxy_context"
+                        )
+                        or {}
                     ),
                     "asset_purchase_plumbing_context": dict(
                         dict(key_horizons.get(f"h{horizon}", {})).get("asset_purchase_plumbing_context") or {}
@@ -569,10 +580,10 @@ def build_result_readiness_summary(
             "counterpart_h0_decisive_negative_creator_count": counterpart_h0_decisive_negative_creator_count,
             "counterpart_h4_decisive_positive_creator_count": counterpart_h4_decisive_positive_creator_count,
             "counterpart_h4_decisive_negative_creator_count": counterpart_h4_decisive_negative_creator_count,
-            "counterpart_h0_decisive_positive_retention_support_count": counterpart_h0_decisive_positive_retention_support_count,
-            "counterpart_h0_decisive_negative_retention_support_count": counterpart_h0_decisive_negative_retention_support_count,
-            "counterpart_h4_decisive_positive_retention_support_count": counterpart_h4_decisive_positive_retention_support_count,
-            "counterpart_h4_decisive_negative_retention_support_count": counterpart_h4_decisive_negative_retention_support_count,
+            "counterpart_h0_decisive_positive_reallocation_proxy_count": counterpart_h0_decisive_positive_reallocation_proxy_count,
+            "counterpart_h0_decisive_negative_reallocation_proxy_count": counterpart_h0_decisive_negative_reallocation_proxy_count,
+            "counterpart_h4_decisive_positive_reallocation_proxy_count": counterpart_h4_decisive_positive_reallocation_proxy_count,
+            "counterpart_h4_decisive_negative_reallocation_proxy_count": counterpart_h4_decisive_negative_reallocation_proxy_count,
             "counterpart_legacy_private_credit_proxy_role": counterpart_legacy_private_credit_proxy_role,
             "treatment_freeze_status": treatment_freeze_status,
             "treatment_candidate_count": int(len(treatment_candidates)),

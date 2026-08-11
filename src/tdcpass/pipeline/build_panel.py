@@ -254,6 +254,12 @@ Z1_SERIES = {
     "checkable_state_local_bank_level": "FL763128000",
     "checkable_rest_of_world_bank_level": "FL763122605",
     "checkable_private_domestic_bank_level": "FL763129205",
+    "z1_households_nonprofits_checkable_currency_level": "FL153020005",
+    "z1_nonfinancial_corporate_checkable_currency_level": "FL103020005",
+    "z1_nonfinancial_noncorporate_checkable_currency_level": "FL113020005",
+    "z1_households_nonprofits_time_savings_level": "FL153030005",
+    "z1_nonfinancial_corporate_time_savings_level": "FL103030003",
+    "z1_nonfinancial_noncorporate_time_savings_level": "FL113030003",
     "interbank_transactions_foreign_banks_liability_level": "FL764116005",
     "interbank_transactions_foreign_banks_asset_level": "FL764016005",
     "deposits_at_foreign_banks_asset_level": "FL764016205",
@@ -287,11 +293,17 @@ Z1_TABLE_MEMBERS = {
         "checkable_state_local_bank_level",
         "checkable_rest_of_world_bank_level",
         "checkable_private_domestic_bank_level",
+        "z1_households_nonprofits_checkable_currency_level",
+        "z1_nonfinancial_corporate_checkable_currency_level",
+        "z1_nonfinancial_noncorporate_checkable_currency_level",
     ),
     "csv/l204.csv": (
         "time_savings_deposits_bank_level",
         "time_savings_deposits_foreign_offices_level",
         "time_savings_deposits_affiliated_areas_level",
+        "z1_households_nonprofits_time_savings_level",
+        "z1_nonfinancial_corporate_time_savings_level",
+        "z1_nonfinancial_noncorporate_time_savings_level",
     ),
     "csv/l207.csv": ("fedfunds_repo_liabilities_bank_level",),
     "csv/l111.csv": (
@@ -744,6 +756,20 @@ def _quarter_sum(series: pd.Series) -> pd.Series:
 
 def _qoq_change(levels: pd.Series) -> pd.Series:
     return levels.astype(float).diff().round(12)
+
+
+def _z1_holder_asset_sensitivity_qoq(levels: pd.DataFrame) -> pd.Series:
+    """Construct the retained unmatched Z.1 holder-asset sensitivity."""
+    source_columns = (
+        "z1_households_nonprofits_checkable_currency_level",
+        "z1_nonfinancial_corporate_checkable_currency_level",
+        "z1_nonfinancial_noncorporate_checkable_currency_level",
+        "z1_households_nonprofits_time_savings_level",
+        "z1_nonfinancial_corporate_time_savings_level",
+        "z1_nonfinancial_noncorporate_time_savings_level",
+    )
+    changes = pd.concat([_qoq_change(levels[column]) for column in source_columns], axis=1)
+    return changes.sum(axis=1, min_count=len(source_columns)).round(12)
 
 
 def _approximate_chargeoff_flow(levels: pd.Series, annualized_rate: pd.Series) -> pd.Series:
@@ -1558,6 +1584,9 @@ def build_public_quarterly_panel(
             "checkable_state_local_bank_qoq": _qoq_change(z1_levels["checkable_state_local_bank_level"]),
             "checkable_rest_of_world_bank_qoq": _qoq_change(z1_levels["checkable_rest_of_world_bank_level"]),
             "checkable_private_domestic_bank_qoq": _qoq_change(z1_levels["checkable_private_domestic_bank_level"]),
+            "z1_households_nonprofits_nonfinancial_business_currency_deposit_assets_qoq": (
+                _z1_holder_asset_sensitivity_qoq(z1_levels)
+            ),
             "interbank_transactions_foreign_banks_liability_qoq": _qoq_change(
                 z1_levels["interbank_transactions_foreign_banks_liability_level"]
             ),

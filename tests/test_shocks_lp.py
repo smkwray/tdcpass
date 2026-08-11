@@ -1,6 +1,7 @@
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from pathlib import Path
 
 from tdcpass.analysis.local_projections import (
     run_local_projections,
@@ -378,6 +379,18 @@ def test_lp_spec_scaffolding_baseline_and_regimes_contract_columns():
     )
     lp_specs = load_yaml(Path("config/lp_specs.yml"))
     regime_specs = load_yaml(Path("config/regime_specs.yml"))
+    configured_outcomes = {
+        outcome
+        for spec in lp_specs["specs"].values()
+        for outcome in spec.get("outcomes", [])
+    }
+    rows = np.arange(len(shocked), dtype=float)
+    for offset, outcome in enumerate(sorted(configured_outcomes), start=1):
+        if outcome not in shocked.columns:
+            shocked[outcome] = rows * (offset / 100.0)
+        lagged_outcome = f"lag_{outcome}"
+        if lagged_outcome not in shocked.columns:
+            shocked[lagged_outcome] = shocked[outcome].shift(1)
     outputs = run_lp_from_specs(shocked, lp_specs=lp_specs, regime_specs=regime_specs)
 
     baseline = outputs["lp_irf"]

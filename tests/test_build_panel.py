@@ -26,6 +26,12 @@ def _write_z1_zip(path: Path) -> None:
             "FL763128000": [5.0, 6.0, 7.0, 8.0, 9.0],
             "FL763122605": [12.0, 13.0, 14.0, 15.0, 15.0],
             "FL763129205": [33.0, 35.0, 35.0, 34.0, 34.0],
+            "FL153020005": [110.0, 120.0, 130.0, 140.0, 150.0],
+            "FL103020005": [70.0, 75.0, 85.0, 90.0, 100.0],
+            "FL113020005": [50.0, 55.0, 60.0, 65.0, 70.0],
+            "FL153030005": [210.0, 230.0, 240.0, 260.0, 270.0],
+            "FL103030003": [80.0, 90.0, 100.0, 110.0, 120.0],
+            "FL113030003": [40.0, 45.0, 50.0, 55.0, 60.0],
             "FL764116005": [100.0, 110.0, 150.0, 145.0, 155.0],
             "FL764016005": [80.0, 82.0, 90.0, 89.0, 93.0],
             "FL764016205": [10.0, 11.0, 14.0, 13.0, 15.0],
@@ -68,6 +74,12 @@ def _write_z1_multitable_zip(path: Path) -> None:
             "FL763128000": [5.0, 6.0, 7.0, 8.0, 9.0],
             "FL763122605": [12.0, 13.0, 14.0, 15.0, 15.0],
             "FL763129205": [33.0, 35.0, 35.0, 34.0, 34.0],
+            "FL153020005": [110.0, 120.0, 130.0, 140.0, 150.0],
+            "FL103020005": [70.0, 75.0, 85.0, 90.0, 100.0],
+            "FL113020005": [50.0, 55.0, 60.0, 65.0, 70.0],
+            "FL153030005": [210.0, 230.0, 240.0, 260.0, 270.0],
+            "FL103030003": [80.0, 90.0, 100.0, 110.0, 120.0],
+            "FL113030003": [40.0, 45.0, 50.0, 55.0, 60.0],
             "FL764116005": [100.0, 110.0, 150.0, 145.0, 155.0],
             "FL764016005": [80.0, 82.0, 90.0, 89.0, 93.0],
             "FL764016205": [10.0, 11.0, 14.0, 13.0, 15.0],
@@ -108,6 +120,9 @@ def _write_z1_multitable_zip(path: Path) -> None:
                     "FL763128000",
                     "FL763122605",
                     "FL763129205",
+                    "FL153020005",
+                    "FL103020005",
+                    "FL113020005",
                 ]
             ].to_csv(index=False),
         )
@@ -125,7 +140,17 @@ def _write_z1_multitable_zip(path: Path) -> None:
         )
         archive.writestr(
             "csv/l204.csv",
-            all_sectors[["date", "FL763130005", "FL753130005", "FL743130003"]].to_csv(index=False),
+            all_sectors[
+                [
+                    "date",
+                    "FL763130005",
+                    "FL753130005",
+                    "FL743130003",
+                    "FL153030005",
+                    "FL103030003",
+                    "FL113030003",
+                ]
+            ].to_csv(index=False),
         )
         archive.writestr("csv/l207.csv", all_sectors[["date", "FL762150005"]].to_csv(index=False))
         archive.writestr(
@@ -1152,6 +1177,10 @@ def test_build_public_quarterly_panel_from_offline_raw_fixture(tmp_path: Path, m
     result = build_panel.build_public_quarterly_panel(base_dir=tmp_path, fixture_root=fixture_root, reuse_mode="rebuild")
 
     assert result.panel_path.exists()
+    panel = pd.read_csv(result.panel_path)
+    narrow = "z1_households_nonprofits_nonfinancial_business_currency_deposit_assets_qoq"
+    assert narrow in panel.columns
+    assert panel.loc[panel["quarter"] == "2000Q3", narrow].iloc[0] == 5.0
     manifest = json.loads(result.raw_download_manifest_path.read_text(encoding="utf-8"))
     assert len(manifest["runs"]) == 58
     assert all(entry["params"]["mode"] == "raw_fixture" for entry in manifest["runs"])
@@ -1179,6 +1208,12 @@ def test_read_z1_levels_normalizes_live_multitable_zip_layout(tmp_path: Path) ->
     assert frame["checkable_state_local_bank_level"].notna().all()
     assert frame["checkable_rest_of_world_bank_level"].notna().all()
     assert frame["checkable_private_domestic_bank_level"].notna().all()
+    assert frame["z1_households_nonprofits_checkable_currency_level"].notna().all()
+    assert frame["z1_nonfinancial_corporate_checkable_currency_level"].notna().all()
+    assert frame["z1_nonfinancial_noncorporate_checkable_currency_level"].notna().all()
+    assert frame["z1_households_nonprofits_time_savings_level"].notna().all()
+    assert frame["z1_nonfinancial_corporate_time_savings_level"].notna().all()
+    assert frame["z1_nonfinancial_noncorporate_time_savings_level"].notna().all()
     assert frame["interbank_transactions_foreign_banks_liability_level"].notna().all()
     assert frame["interbank_transactions_foreign_banks_asset_level"].notna().all()
     assert frame["deposits_at_foreign_banks_asset_level"].notna().all()

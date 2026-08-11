@@ -250,18 +250,24 @@ def test_result_readiness_surfaces_counterpart_channel_context_and_legacy_proxy_
                     "decisive_positive_creator_channels": [],
                     "decisive_negative_creator_channels": ["closed_end_residential_loans_qoq"],
                     "decisive_positive_asset_purchase_channels": ["agency_gse_backed_securities_bank_qoq"],
-                    "decisive_positive_retention_support_channels": ["on_rrp_reallocation_qoq"],
-                    "decisive_negative_retention_support_channels": [],
-                    "escape_support_context": {"interpretation": "deposit_retention_support_signal"},
+                    "decisive_positive_counterpart_reallocation_proxy_channels": ["on_rrp_reallocation_qoq"],
+                    "decisive_negative_counterpart_reallocation_proxy_channels": [],
+                    "counterpart_reallocation_proxy_context": {
+                        "interpretation": "sign_normalized_movement_away_from_named_channel"
+                    },
                     "asset_purchase_plumbing_context": {"interpretation": "treasury_drain_context"},
                 },
                 "h4": {
                     "other_component": {"beta": -1.2, "ci_excludes_zero": True},
                     "decisive_positive_creator_channels": ["auto_loans_qoq"],
                     "decisive_negative_creator_channels": [],
-                    "decisive_positive_retention_support_channels": [],
-                    "decisive_negative_retention_support_channels": ["domestic_nonfinancial_mmf_reallocation_qoq"],
-                    "escape_support_context": {"interpretation": "escape_pressure_signal"},
+                    "decisive_positive_counterpart_reallocation_proxy_channels": [],
+                    "decisive_negative_counterpart_reallocation_proxy_channels": [
+                        "domestic_nonfinancial_mmf_reallocation_qoq"
+                    ],
+                    "counterpart_reallocation_proxy_context": {
+                        "interpretation": "sign_normalized_movement_toward_named_channel"
+                    },
                 },
             },
         },
@@ -271,17 +277,21 @@ def test_result_readiness_surfaces_counterpart_channel_context_and_legacy_proxy_
     assert payload["counterpart_channel_context"]["legacy_private_credit_proxy_role"] == "coarse_legacy_creator_proxy"
     assert payload["diagnostics"]["counterpart_h0_decisive_positive_creator_count"] == 0
     assert payload["diagnostics"]["counterpart_h4_decisive_positive_creator_count"] == 1
-    assert payload["diagnostics"]["counterpart_h0_decisive_positive_retention_support_count"] == 1
-    assert payload["diagnostics"]["counterpart_h4_decisive_negative_retention_support_count"] == 1
+    assert payload["diagnostics"]["counterpart_h0_decisive_positive_reallocation_proxy_count"] == 1
+    assert payload["diagnostics"]["counterpart_h4_decisive_negative_reallocation_proxy_count"] == 1
     assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_asset_purchase_channels"] == [
         "agency_gse_backed_securities_bank_qoq"
     ]
-    assert payload["counterpart_channel_context"]["key_horizons"]["h0"]["decisive_positive_retention_support_channels"] == [
+    assert payload["counterpart_channel_context"]["key_horizons"]["h0"][
+        "decisive_positive_counterpart_reallocation_proxy_channels"
+    ] == [
         "on_rrp_reallocation_qoq"
     ]
     assert (
-        payload["counterpart_channel_context"]["key_horizons"]["h4"]["escape_support_context"]["interpretation"]
-        == "escape_pressure_signal"
+        payload["counterpart_channel_context"]["key_horizons"]["h4"]["counterpart_reallocation_proxy_context"][
+            "interpretation"
+        ]
+        == "sign_normalized_movement_toward_named_channel"
     )
     assert (
         payload["counterpart_channel_context"]["key_horizons"]["h0"]["asset_purchase_plumbing_context"]["interpretation"]

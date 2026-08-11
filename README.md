@@ -44,7 +44,13 @@ The current bundle is a diagnostics-heavy methods and reproducibility release bu
 
 Here, **TDC** means the canonically defined Treasury Contribution to Deposits from [`smkwray/tdcest`](https://github.com/smkwray/tdcest) / `tdcsim`. It is the project's measured Treasury-related deposit contribution, not a relabeling of literal Treasury deposit balances.
 
-In the upstream accounting, the preferred headline estimate is the bank-only transaction-flow series. In words, it measures reserve-user net acquisition of marketable Treasuries, minus Treasury operating-cash drain, plus positive Fed remittances only. In this repo, that imported quarterly series is the default headline treatment.
+In the upstream accounting, the preferred headline estimate is the bank-only transaction-flow series. In words, it measures RS settlement-side net acquisition of marketable Treasuries, minus Treasury operating-cash drain, plus positive Fed remittances. RS is the rest-of-system complement of DU; imported producer fields whose names contain `_ru_flow` retain that artifact name while public prose renders them as RS-coded settlement-side flows. In this repo, that imported quarterly series is the default headline treatment.
+
+### Z.1 holder-asset sensitivity
+
+TDCpass exports one auxiliary holder-side outcome: the quarterly change in L.203 checkable-deposits-and-currency plus L.204 time-and-savings-deposit assets held by households/nonprofits and nonfinancial corporate and noncorporate business. It is an unmatched legal-sector holder-asset sensitivity, not $\Delta D^{DU}$. EA-TDC owns any estimation using it; TDCpass supplies the arithmetic construction and boundary metadata. If an EA-TDC result is similar under this outcome, it supports the conditional interpretation that the result is not unique to the issuer-side outcome, assuming the currency, issuer, timing, and perimeter differences are not driving the comparison.
+
+The broader candidate that adds state/local governments and domestic financial sectors is parked. Its domestic-financial L.203 input contains monetary-authority coin, depository-institution vault cash, and other mixed claims, so it is neither a domestic-nonbank deposit measure nor a DU outcome. Subtracting a TDC proxy from either holder-side aggregation would be a descriptive arithmetic difference, not an accounting residual or non-TDC deposit component.
 
 The repo also imports a selective broad-estimate comparison ladder from sibling [`smkwray/tdcest`](https://github.com/smkwray/tdcest) processed outputs:
 
@@ -133,7 +139,7 @@ The package rebuilds a quarterly public-data bundle that includes:
 - public period-sensitivity tables because medium-horizon persistence differs across major usable-sample windows
 - local-projection response tables
 - structural-proxy cross-checks and readiness diagnostics
-- creator, escape, external, and funding counterpart-channel scorecards
+- creator, counterpart-reallocation proxy, external, and funding scorecards
 - an accounting-reconstruction cross-check that lines up closely with the non-TDC residual after normalizing the imported EA bundle scale, but still remains a secondary closure-oriented read
 - a separate strict source-side comparison surface that shows how much of the non-TDC residual is covered by direct identifiable bank asset transactions before any closure-oriented reconstruction
 - follow-up diagnostic surfaces for scope variants, borrower-counterpart diagnostics, and funding-offset sensitivities

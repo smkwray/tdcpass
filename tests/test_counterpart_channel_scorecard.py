@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import pandas as pd
 
-from tdcpass.analysis.counterpart_channel_scorecard import build_counterpart_channel_scorecard
+from tdcpass.analysis.counterpart_channel_scorecard import (
+    build_counterpart_channel_scorecard,
+)
 
 
 def test_counterpart_channel_scorecard_tracks_creator_channels_and_decisiveness() -> None:
@@ -49,7 +51,7 @@ def test_counterpart_channel_scorecard_tracks_creator_channels_and_decisiveness(
         lp_irf=lp_irf,
         identity_lp_irf=identity_lp,
         proxy_coverage_summary={
-            "major_uncovered_channel_families": ["loan_repayment_and_other_escape_channels"],
+            "major_uncovered_channel_families": ["loan_repayment_and_other_counterpart_channels"],
             "key_horizons": {"h0": {"coverage_label": "creator_channels_unresolved"}},
         },
     )
@@ -73,18 +75,23 @@ def test_counterpart_channel_scorecard_tracks_creator_channels_and_decisiveness(
     assert payload["key_horizons"]["h0"]["funding_accommodation_channels"]["commercial_bank_borrowings_qoq"]["beta"] == 8.0
     assert payload["key_horizons"]["h0"]["funding_accommodation_channels"]["debt_securities_bank_liability_qoq"]["beta"] == -2.0
     assert payload["key_horizons"]["h0"]["funding_accommodation_cleanup_candidates"]["holding_company_parent_funding_bank_qoq"]["beta"] == 0.5
-    assert payload["key_horizons"]["h0"]["deposit_retention_support_channels"]["on_rrp_reallocation_qoq"]["beta"] == 6.0
-    assert payload["key_horizons"]["h0"]["deposit_retention_support_channels"]["household_treasury_securities_reallocation_qoq"]["beta"] == -7.0
-    assert payload["key_horizons"]["h0"]["deposit_retention_support_channels"]["mmf_treasury_bills_reallocation_qoq"]["beta"] == -4.0
-    assert payload["key_horizons"]["h0"]["deposit_retention_support_channels"]["currency_reallocation_qoq"]["beta"] == 2.5
-    assert payload["key_horizons"]["h0"]["external_escape_channels"]["foreign_nonts_qoq"]["beta"] == -1.0
-    assert payload["key_horizons"]["h0"]["external_escape_channels"]["checkable_rest_of_world_bank_qoq"]["beta"] == 2.2
-    assert payload["key_horizons"]["h0"]["external_escape_channels"]["interbank_transactions_foreign_banks_liability_qoq"]["beta"] == 3.5
-    assert payload["key_horizons"]["h0"]["external_escape_channels"]["interbank_transactions_foreign_banks_asset_qoq"]["beta"] == -2.5
+    proxy_channels = payload["key_horizons"]["h0"]["counterpart_reallocation_proxy_channels"]
+    assert proxy_channels["on_rrp_reallocation_qoq"]["beta"] == 6.0
+    assert proxy_channels["household_treasury_securities_reallocation_qoq"]["beta"] == -7.0
+    assert proxy_channels["mmf_treasury_bills_reallocation_qoq"]["beta"] == -4.0
+    assert proxy_channels["currency_reallocation_qoq"]["beta"] == 2.5
+    external_channels = payload["key_horizons"]["h0"]["external_counterpart_reallocation_proxy_channels"]
+    assert external_channels["foreign_nonts_qoq"]["beta"] == -1.0
+    assert external_channels["checkable_rest_of_world_bank_qoq"]["beta"] == 2.2
+    assert external_channels["interbank_transactions_foreign_banks_liability_qoq"]["beta"] == 3.5
+    assert external_channels["interbank_transactions_foreign_banks_asset_qoq"]["beta"] == -2.5
     assert payload["key_horizons"]["h0"]["asset_purchase_plumbing_context"]["channels"]["tga_qoq"]["beta"] == 2.5
     assert payload["key_horizons"]["h0"]["asset_purchase_plumbing_context"]["treasury_drain_signal"] is True
     assert payload["key_horizons"]["h0"]["asset_purchase_plumbing_context"]["interpretation"] == "treasury_drain_context"
-    assert payload["key_horizons"]["h0"]["escape_support_context"]["interpretation"] == "mixed_escape_and_support_signals"
+    assert (
+        payload["key_horizons"]["h0"]["counterpart_reallocation_proxy_context"]["interpretation"]
+        == "mixed_sign_normalized_counterpart_movements"
+    )
     assert payload["key_horizons"]["h0"]["decisive_positive_creator_channels"] == [
         "commercial_industrial_loans_ex_chargeoffs_qoq",
         "commercial_industrial_loans_qoq",
@@ -107,20 +114,20 @@ def test_counterpart_channel_scorecard_tracks_creator_channels_and_decisiveness(
         "debt_securities_bank_liability_qoq",
     ]
     assert payload["key_horizons"]["h0"]["funding_accommodation_context"]["interpretation"] == "mixed_funding_accommodation_signals"
-    assert payload["key_horizons"]["h0"]["decisive_positive_retention_support_channels"] == [
+    assert payload["key_horizons"]["h0"]["decisive_positive_counterpart_reallocation_proxy_channels"] == [
         "currency_reallocation_qoq",
         "on_rrp_reallocation_qoq",
     ]
-    assert payload["key_horizons"]["h0"]["decisive_negative_retention_support_channels"] == [
+    assert payload["key_horizons"]["h0"]["decisive_negative_counterpart_reallocation_proxy_channels"] == [
         "domestic_nonfinancial_mmf_reallocation_qoq",
         "household_treasury_securities_reallocation_qoq",
         "mmf_treasury_bills_reallocation_qoq",
     ]
-    assert payload["key_horizons"]["h0"]["decisive_positive_external_escape_channels"] == [
+    assert payload["key_horizons"]["h0"]["decisive_positive_external_counterpart_reallocation_proxy_channels"] == [
         "checkable_rest_of_world_bank_qoq",
         "interbank_transactions_foreign_banks_liability_qoq",
     ]
-    assert payload["key_horizons"]["h0"]["decisive_negative_external_escape_channels"] == [
+    assert payload["key_horizons"]["h0"]["decisive_negative_external_counterpart_reallocation_proxy_channels"] == [
         "interbank_transactions_foreign_banks_asset_qoq",
     ]
     assert payload["target_mapping"]["priority_gap"] == "ci_us_qoq"
@@ -158,8 +165,8 @@ def test_counterpart_channel_scorecard_tracks_creator_channels_and_decisiveness(
         "The biggest remaining creator-target gap is ci_us_qoq: the live public path still uses all-commercial-bank C&I rather than exact U.S.-addressee domestic nonfinancial C&I."
     )
     assert "bank_asset_purchase_lane" in payload["target_mapping"]
-    assert "destroyer_escape_lane" in payload["target_mapping"]
-    assert payload["target_mapping"]["external_escape_lane"]["status"] == "expanded"
+    assert "counterpart_reallocation_proxy_lane" in payload["target_mapping"]
+    assert payload["target_mapping"]["external_counterpart_reallocation_proxy_lane"]["status"] == "expanded"
     assert payload["funding_accommodation_outcomes_present"] == [
         "commercial_bank_borrowings_qoq",
         "debt_securities_bank_liability_qoq",

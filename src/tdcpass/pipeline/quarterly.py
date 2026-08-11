@@ -17,39 +17,85 @@ from tdcpass.analysis.accounting_identity import (
     build_accounting_identity_summary,
     slice_accounting_identity_lp_irf,
 )
-from tdcpass.analysis.backend_decision_bundle import build_backend_decision_bundle
 from tdcpass.analysis.backend_closeout_summary import build_backend_closeout_summary
+from tdcpass.analysis.backend_decision_bundle import build_backend_decision_bundle
 from tdcpass.analysis.backend_evidence_packet import build_backend_evidence_packet
 from tdcpass.analysis.big_picture_synthesis import build_big_picture_synthesis_summary
 from tdcpass.analysis.broad_scope_system import build_broad_scope_system_summary
-from tdcpass.analysis.counterpart_channel_scorecard import build_counterpart_channel_scorecard
-from tdcpass.analysis.core_treatment_promotion import build_core_treatment_promotion_summary
+from tdcpass.analysis.core_treatment_promotion import (
+    build_core_treatment_promotion_summary,
+)
+from tdcpass.analysis.counterpart_channel_scorecard import (
+    build_counterpart_channel_scorecard,
+)
 from tdcpass.analysis.direct_identification import (
     build_direct_identification_summary,
     build_total_minus_other_contrast,
 )
-from tdcpass.analysis.factor_control_diagnostics import build_factor_control_diagnostics_summary
-from tdcpass.analysis.identity_baseline import build_identity_baseline_irf, build_identity_variant_ladder
+from tdcpass.analysis.factor_control_diagnostics import (
+    build_factor_control_diagnostics_summary,
+)
+from tdcpass.analysis.historical_cash_term_reestimation_summary import (
+    build_historical_cash_term_reestimation_summary,
+)
+from tdcpass.analysis.identity_baseline import (
+    build_identity_baseline_irf,
+    build_identity_variant_ladder,
+)
 from tdcpass.analysis.local_projections import run_local_projections, run_lp_from_specs
 from tdcpass.analysis.pass_through_summary import build_pass_through_summary
 from tdcpass.analysis.period_sensitivity import build_period_sensitivity_summary
-from tdcpass.analysis.published_state_proxy_comparator import build_published_state_proxy_comparator
-from tdcpass.analysis.published_state_proxy_vs_baseline import build_published_state_proxy_vs_baseline_summary
-from tdcpass.analysis.proxy_factor_diagnostics import build_proxy_factor_diagnostics
 from tdcpass.analysis.proxy_coverage import build_proxy_coverage_summary
-from tdcpass.analysis.rest_of_world_treasury_audit import build_rest_of_world_treasury_audit_summary
-from tdcpass.analysis.research_dashboard import build_research_dashboard_summary
+from tdcpass.analysis.proxy_factor_diagnostics import build_proxy_factor_diagnostics
+from tdcpass.analysis.published_state_proxy_comparator import (
+    build_published_state_proxy_comparator,
+)
+from tdcpass.analysis.published_state_proxy_vs_baseline import (
+    build_published_state_proxy_vs_baseline_summary,
+)
 from tdcpass.analysis.regime_diagnostics import build_regime_diagnostics_summary
+from tdcpass.analysis.research_dashboard import build_research_dashboard_summary
+from tdcpass.analysis.rest_of_world_treasury_audit import (
+    build_rest_of_world_treasury_audit_summary,
+)
 from tdcpass.analysis.result_readiness import build_result_readiness_summary
 from tdcpass.analysis.scope_alignment import build_scope_alignment_summary
 from tdcpass.analysis.shock_diagnostics import build_shock_diagnostics_summary
 from tdcpass.analysis.shocks import expanding_window_residual
-from tdcpass.analysis.split_treatment_architecture import build_split_treatment_architecture_summary
 from tdcpass.analysis.smoothed_local_projections import (
     build_smoothed_lp_diagnostics_summary,
     build_smoothed_lp_irf,
 )
-from tdcpass.analysis.state_proxy_factor_diagnostics import build_state_proxy_factor_diagnostics
+from tdcpass.analysis.split_treatment_architecture import (
+    build_split_treatment_architecture_summary,
+)
+from tdcpass.analysis.state_proxy_factor_diagnostics import (
+    build_state_proxy_factor_diagnostics,
+)
+from tdcpass.analysis.strict_additional_creator_candidate_summary import (
+    build_strict_additional_creator_candidate_summary,
+)
+from tdcpass.analysis.strict_component_framework_summary import (
+    build_strict_component_framework_summary,
+)
+from tdcpass.analysis.strict_corporate_bridge_secondary_comparison_summary import (
+    build_strict_corporate_bridge_secondary_comparison_summary,
+)
+from tdcpass.analysis.strict_di_bucket_bridge_summary import (
+    build_strict_di_bucket_bridge_summary,
+)
+from tdcpass.analysis.strict_di_bucket_role_summary import (
+    build_strict_di_bucket_role_summary,
+)
+from tdcpass.analysis.strict_di_loans_nec_measurement_audit_summary import (
+    build_strict_di_loans_nec_measurement_audit_summary,
+)
+from tdcpass.analysis.strict_direct_core_component_summary import (
+    build_strict_direct_core_component_summary,
+)
+from tdcpass.analysis.strict_direct_core_horizon_stability_summary import (
+    build_strict_direct_core_horizon_stability_summary,
+)
 from tdcpass.analysis.strict_identifiable import (
     build_strict_funding_offset_alignment_frame,
     build_strict_identifiable_alignment_frame,
@@ -57,52 +103,54 @@ from tdcpass.analysis.strict_identifiable import (
     build_strict_identifiable_summary,
     slice_strict_identifiable_lp_irf,
 )
-from tdcpass.analysis.strict_missing_channel_summary import build_strict_missing_channel_summary
-from tdcpass.analysis.strict_di_bucket_bridge_summary import build_strict_di_bucket_bridge_summary
-from tdcpass.analysis.strict_di_bucket_role_summary import build_strict_di_bucket_role_summary
-from tdcpass.analysis.strict_private_borrower_bridge_summary import build_strict_private_borrower_bridge_summary
-from tdcpass.analysis.strict_nonfinancial_corporate_bridge_summary import build_strict_nonfinancial_corporate_bridge_summary
-from tdcpass.analysis.strict_private_offset_residual_summary import build_strict_private_offset_residual_summary
-from tdcpass.analysis.strict_corporate_bridge_secondary_comparison_summary import (
-    build_strict_corporate_bridge_secondary_comparison_summary,
+from tdcpass.analysis.strict_loan_core_redesign_summary import (
+    build_strict_loan_core_redesign_summary,
 )
-from tdcpass.analysis.strict_component_framework_summary import build_strict_component_framework_summary
-from tdcpass.analysis.strict_additional_creator_candidate_summary import (
-    build_strict_additional_creator_candidate_summary,
+from tdcpass.analysis.strict_missing_channel_summary import (
+    build_strict_missing_channel_summary,
 )
-from tdcpass.analysis.strict_di_loans_nec_measurement_audit_summary import (
-    build_strict_di_loans_nec_measurement_audit_summary,
+from tdcpass.analysis.strict_nonfinancial_corporate_bridge_summary import (
+    build_strict_nonfinancial_corporate_bridge_summary,
+)
+from tdcpass.analysis.strict_private_borrower_bridge_summary import (
+    build_strict_private_borrower_bridge_summary,
+)
+from tdcpass.analysis.strict_private_offset_residual_summary import (
+    build_strict_private_offset_residual_summary,
+)
+from tdcpass.analysis.strict_redesign_summary import build_strict_redesign_summary
+from tdcpass.analysis.strict_release_framing_summary import (
+    build_strict_release_framing_summary,
 )
 from tdcpass.analysis.strict_results_closeout_summary import (
     build_strict_results_closeout_summary,
 )
-from tdcpass.analysis.strict_direct_core_component_summary import build_strict_direct_core_component_summary
-from tdcpass.analysis.strict_direct_core_horizon_stability_summary import (
-    build_strict_direct_core_horizon_stability_summary,
+from tdcpass.analysis.strict_shock_composition import (
+    build_strict_shock_composition_summary,
 )
-from tdcpass.analysis.strict_release_framing_summary import build_strict_release_framing_summary
-from tdcpass.analysis.strict_loan_core_redesign_summary import build_strict_loan_core_redesign_summary
-from tdcpass.analysis.strict_redesign_summary import build_strict_redesign_summary
-from tdcpass.analysis.strict_shock_composition import build_strict_shock_composition_summary
-from tdcpass.analysis.strict_sign_mismatch_audit import build_strict_sign_mismatch_audit_summary
-from tdcpass.analysis.strict_top_gap_quarter_audit import build_strict_top_gap_quarter_audit_summary
+from tdcpass.analysis.strict_sign_mismatch_audit import (
+    build_strict_sign_mismatch_audit_summary,
+)
 from tdcpass.analysis.strict_top_gap_anomaly import build_strict_top_gap_anomaly_summary
+from tdcpass.analysis.strict_top_gap_anomaly_backdrop import (
+    build_strict_top_gap_anomaly_backdrop_summary,
+)
 from tdcpass.analysis.strict_top_gap_anomaly_component_split import (
     build_strict_top_gap_anomaly_component_split_summary,
 )
 from tdcpass.analysis.strict_top_gap_anomaly_di_loans_split import (
     build_strict_top_gap_anomaly_di_loans_split_summary,
 )
-from tdcpass.analysis.strict_top_gap_anomaly_backdrop import (
-    build_strict_top_gap_anomaly_backdrop_summary,
+from tdcpass.analysis.strict_top_gap_inversion import (
+    build_strict_top_gap_inversion_summary,
 )
-from tdcpass.analysis.strict_top_gap_quarter_direction import build_strict_top_gap_quarter_direction_summary
-from tdcpass.analysis.strict_top_gap_inversion import build_strict_top_gap_inversion_summary
+from tdcpass.analysis.strict_top_gap_quarter_audit import (
+    build_strict_top_gap_quarter_audit_summary,
+)
+from tdcpass.analysis.strict_top_gap_quarter_direction import (
+    build_strict_top_gap_quarter_direction_summary,
+)
 from tdcpass.analysis.structural_proxy_evidence import build_structural_proxy_evidence
-from tdcpass.analysis.treatment_fingerprint import (
-    build_headline_treatment_fingerprint,
-    build_headline_treatment_fingerprint_validation_summary,
-)
 from tdcpass.analysis.tdc_treatment_audit import build_tdc_treatment_audit_summary
 from tdcpass.analysis.tdcest_broad_object_comparison_summary import (
     build_tdcest_broad_object_comparison_summary,
@@ -110,29 +158,54 @@ from tdcpass.analysis.tdcest_broad_object_comparison_summary import (
 from tdcpass.analysis.tdcest_broad_treatment_sensitivity_summary import (
     build_tdcest_broad_treatment_sensitivity_summary,
 )
-from tdcpass.analysis.tdcest_ladder_integration_summary import build_tdcest_ladder_integration_summary
-from tdcpass.analysis.treatment_object_comparison import build_treatment_object_comparison_summary
+from tdcpass.analysis.tdcest_ladder_integration_summary import (
+    build_tdcest_ladder_integration_summary,
+)
 from tdcpass.analysis.toc_row_bundle_audit import build_toc_row_bundle_audit_summary
-from tdcpass.analysis.toc_row_excluded_interpretation import build_toc_row_excluded_interpretation_summary
-from tdcpass.analysis.toc_row_incidence_audit_summary import build_toc_row_incidence_audit_summary
+from tdcpass.analysis.toc_row_excluded_interpretation import (
+    build_toc_row_excluded_interpretation_summary,
+)
+from tdcpass.analysis.toc_row_incidence_audit_summary import (
+    build_toc_row_incidence_audit_summary,
+)
 from tdcpass.analysis.toc_row_liability_incidence_raw_summary import (
     build_toc_row_liability_incidence_raw_summary,
 )
+from tdcpass.analysis.toc_row_path_split import build_toc_row_path_split_summary
 from tdcpass.analysis.toc_validated_share_candidate_summary import (
     build_toc_validated_share_candidate_summary,
 )
-from tdcpass.analysis.toc_row_path_split import build_toc_row_path_split_summary
 from tdcpass.analysis.treasury_cash_regime_audit_summary import (
     build_treasury_cash_regime_audit_summary,
 )
-from tdcpass.analysis.historical_cash_term_reestimation_summary import (
-    build_historical_cash_term_reestimation_summary,
+from tdcpass.analysis.treasury_operating_cash_audit import (
+    build_treasury_operating_cash_audit_summary,
 )
-from tdcpass.analysis.treasury_operating_cash_audit import build_treasury_operating_cash_audit_summary
+from tdcpass.analysis.treatment_fingerprint import (
+    build_headline_treatment_fingerprint,
+    build_headline_treatment_fingerprint_validation_summary,
+)
+from tdcpass.analysis.treatment_object_comparison import (
+    build_treatment_object_comparison_summary,
+)
 from tdcpass.core.paths import ensure_repo_dirs, repo_root
 from tdcpass.core.yaml_utils import load_yaml
 from tdcpass.pipeline.build_panel import build_public_quarterly_panel, load_panel
 from tdcpass.pipeline.call_report_components import build_call_report_deposit_components
+from tdcpass.reports.backend_closeout_report import write_backend_closeout_report
+from tdcpass.reports.backend_decision_bundle_report import (
+    write_backend_decision_bundle_report,
+)
+from tdcpass.reports.backend_evidence_packet_report import (
+    write_backend_evidence_packet_report,
+)
+from tdcpass.reports.published_state_proxy_report import (
+    write_published_state_proxy_report,
+)
+from tdcpass.reports.published_state_proxy_vs_baseline_report import (
+    write_published_state_proxy_vs_baseline_report,
+)
+from tdcpass.reports.research_dashboard_report import write_research_dashboard_report
 from tdcpass.reports.site_export import (
     contract_paths,
     export_frame,
@@ -143,12 +216,6 @@ from tdcpass.reports.site_export import (
     write_overview_json,
     write_pipeline_manifests,
 )
-from tdcpass.reports.published_state_proxy_report import write_published_state_proxy_report
-from tdcpass.reports.published_state_proxy_vs_baseline_report import write_published_state_proxy_vs_baseline_report
-from tdcpass.reports.research_dashboard_report import write_research_dashboard_report
-from tdcpass.reports.backend_decision_bundle_report import write_backend_decision_bundle_report
-from tdcpass.reports.backend_closeout_report import write_backend_closeout_report
-from tdcpass.reports.backend_evidence_packet_report import write_backend_evidence_packet_report
 
 GENERATED_CONTRACT_PATHS = {
     "output/manifests/raw_downloads.json",
@@ -253,10 +320,10 @@ def _default_overview_payload(
             for horizon_payload in external_horizons
         ):
             counterpart_findings.append(
-                "The currently materialized external counterpart preview most clearly shows foreign nontransaction pressure; creator, domestic escape, and funding lanes should still be read as partial diagnostics rather than settled mechanism evidence."
+                "The currently materialized external counterpart preview most clearly shows foreign nontransaction pressure; creator, domestic counterpart-asset reallocation, and funding lanes remain partial diagnostics rather than settled mechanism evidence."
             )
         counterpart_findings.append(
-            "See counterpart_channel_scorecard.json for the creator, escape, external, and funding blocks rather than relying on bank_credit_private_qoq alone."
+            "See counterpart_channel_scorecard.json for the creator, counterpart-reallocation proxy, external, and funding blocks rather than relying on bank_credit_private_qoq alone."
         )
     scope_findings: list[str] = []
     scope_caveats: list[str] = []
