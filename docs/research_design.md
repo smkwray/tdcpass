@@ -160,7 +160,7 @@ The current public bundle keeps `period_sensitivity.csv` and `period_sensitivity
 
 ## 7. Things not to do first
 
-- Do not start with the full giant mixed-frequency thesis stack.
+- Do not start with the full mixed-frequency research stack.
 - Do not start with bank-level micro panels.
 - Do not start with black-box ML shocks.
 - Do not claim precise mechanism from the residual alone.
