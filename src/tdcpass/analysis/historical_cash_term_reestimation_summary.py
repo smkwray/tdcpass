@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import math
-import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -10,9 +8,9 @@ import pandas as pd
 from tdcpass.pipeline.build_panel import (
     Z1_SERIES,
     _load_fred_series,
-    _normalize_z1_levels_frame,
     _qoq_change,
     _quarter_end_level,
+    _read_z1_levels,
 )
 
 _TX_START_QUARTER = "2002Q4"
@@ -59,15 +57,7 @@ def _build_raw_historical_cash_frame(root: Path) -> pd.DataFrame | None:
     if not fred_path.exists() or not z1_zip_path.exists():
         return None
     toc_qoq = _quarter_end_level(_load_fred_series(fred_path)) / 1000.0
-    z1_keys = {
-        "checkable_federal_govt_bank_level": Z1_SERIES["checkable_federal_govt_bank_level"],
-        "federal_govt_checkable_total_level": Z1_SERIES["federal_govt_checkable_total_level"],
-        "federal_govt_time_savings_total_level": Z1_SERIES["federal_govt_time_savings_total_level"],
-    }
-    with zipfile.ZipFile(z1_zip_path) as archive:
-        with archive.open("csv/all_sectors_levels_q.csv") as handle:
-            z1_frame = pd.read_csv(handle)
-    z1_levels = _normalize_z1_levels_frame(z1_frame, z1_keys)
+    z1_levels = _read_z1_levels(z1_zip_path, Z1_SERIES)
     z1_levels["checkable_federal_govt_bank_qoq"] = _qoq_change(z1_levels["checkable_federal_govt_bank_level"])
     z1_levels["federal_govt_checkable_total_qoq"] = _qoq_change(z1_levels["federal_govt_checkable_total_level"])
     z1_levels["federal_govt_time_savings_total_qoq"] = _qoq_change(z1_levels["federal_govt_time_savings_total_level"])

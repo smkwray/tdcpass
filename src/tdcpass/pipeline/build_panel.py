@@ -8,6 +8,7 @@ import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, Mapping
+from urllib.parse import urljoin
 
 import pandas as pd
 import requests
@@ -320,6 +321,55 @@ Z1_TABLE_MEMBERS = {
         "mmf_treasury_bills_level",
     ),
 }
+Z1_CURRENT_TABLE_MEMBERS = {
+    "csv/F2_s.csv": ("total_deposits_bank_level", "foreign_total_deposits_level"),
+    "csv/F2_1_s.csv": (
+        "interbank_transactions_bank_level",
+        "interbank_transactions_foreign_banks_liability_level",
+        "interbank_transactions_foreign_banks_asset_level",
+        "deposits_at_foreign_banks_asset_level",
+    ),
+    "csv/F2_2_s.csv": (
+        "checkable_deposits_bank_level",
+        "checkable_deposits_foreign_offices_level",
+        "checkable_deposits_affiliated_areas_level",
+        "checkable_federal_govt_bank_level",
+        "federal_govt_checkable_total_level",
+        "checkable_state_local_bank_level",
+        "checkable_rest_of_world_bank_level",
+        "checkable_private_domestic_bank_level",
+        "z1_households_nonprofits_checkable_currency_level",
+        "z1_nonfinancial_corporate_checkable_currency_level",
+        "z1_nonfinancial_noncorporate_checkable_currency_level",
+    ),
+    "csv/F2_3_s.csv": (
+        "time_savings_deposits_bank_level",
+        "time_savings_deposits_foreign_offices_level",
+        "time_savings_deposits_affiliated_areas_level",
+        "federal_govt_time_savings_total_level",
+        "z1_households_nonprofits_time_savings_level",
+        "z1_nonfinancial_corporate_time_savings_level",
+        "z1_nonfinancial_noncorporate_time_savings_level",
+    ),
+    "csv/F4_1_s.csv": ("fedfunds_repo_liabilities_bank_level",),
+    "csv/S122_1_s.csv": (
+        "treasury_securities_bank_level",
+        "agency_gse_backed_securities_bank_level",
+        "municipal_securities_bank_level",
+        "corporate_foreign_bonds_bank_level",
+        "debt_securities_bank_liability_level",
+        "fhlb_advances_sallie_mae_loans_bank_level",
+    ),
+    "csv/F3_2_s.csv": (
+        "household_treasury_securities_level",
+        "mmf_treasury_bills_level",
+    ),
+    "csv/M3s_Q.csv": (
+        "domestic_nonfinancial_mmf_level",
+        "domestic_nonfinancial_repo_level",
+    ),
+}
+Z1_CURRENT_UNAVAILABLE_KEYS = frozenset({"holding_company_parent_funding_bank_level"})
 TDCEST_BANK_ONLY_METHOD = "tdc_base_bank_only_ru_flow"
 TDCEST_BROAD_DEPOSITORY_METHOD = "tdc_base_broad_depository_np_cu_ru_flow"
 TDCEST_DOMESTIC_BANK_ONLY_METHOD = "tdc_domestic_bank_only_ru_flow"
@@ -521,10 +571,14 @@ def _download_current_z1_zip(raw_dir: Path, manifest_path: Path, *, timeout: int
         file_path=html_path,
     )
 
-    match = re.search(r'href="(?P<path>/releases/z1/\d+/z1_csv_files\.zip)"', response.text, flags=re.IGNORECASE)
+    match = re.search(
+        r'href=["\'](?P<path>(?:/releases/z1/(?:\d+|current)/|current/)z1_csv_files\.zip)["\']',
+        response.text,
+        flags=re.IGNORECASE,
+    )
     if match is None:
         raise ValueError("Could not locate current Z.1 CSV zip URL on the release page.")
-    zip_url = f"https://www.federalreserve.gov{match.group('path')}"
+    zip_url = urljoin(landing_url, match.group("path"))
     download_file(zip_url, zip_path, timeout=timeout)
     _append_raw_manifest(
         manifest_path,
@@ -567,7 +621,33 @@ def _finalize_z1_levels_frame(frame: pd.DataFrame, series_keys: Iterable[str]) -
 def _read_z1_levels(zip_path: Path, series_codes: Mapping[str, str]) -> pd.DataFrame:
     frames: list[pd.DataFrame] = []
     with zipfile.ZipFile(zip_path) as archive:
-        missing_members = [member_name for member_name in Z1_TABLE_MEMBERS if member_name not in archive.namelist()]
+        archive_members = set(archive.namelist())
+        if set(Z1_CURRENT_TABLE_MEMBERS).issubset(archive_members):
+            loaded_keys: set[str] = set()
+            for member_name, keys in Z1_CURRENT_TABLE_MEMBERS.items():
+                with archive.open(member_name) as handle:
+                    frame = pd.read_csv(handle)
+                frame = frame.rename(columns=lambda value: str(value).removesuffix(".Q"))
+                shaped = frame[["date"]].copy()
+                for key in keys:
+                    source_column = series_codes[key]
+                    if source_column not in frame.columns:
+                        raise KeyError(f"Current Z.1 chart table {member_name} lacks required series {source_column}")
+                    shaped[key] = frame[source_column]
+                    loaded_keys.add(key)
+                frames.append(shaped)
+            out = frames[0]
+            for frame in frames[1:]:
+                out = out.merge(frame, on="date", how="outer")
+            unexpected_missing = set(series_codes) - loaded_keys - Z1_CURRENT_UNAVAILABLE_KEYS
+            if unexpected_missing:
+                missing_list = ", ".join(sorted(unexpected_missing))
+                raise KeyError(f"Current Z.1 chart tables do not map required series keys: {missing_list}")
+            for key in Z1_CURRENT_UNAVAILABLE_KEYS & set(series_codes):
+                out[key] = pd.NA
+            return _finalize_z1_levels_frame(out, series_codes.keys())
+
+        missing_members = [member_name for member_name in Z1_TABLE_MEMBERS if member_name not in archive_members]
         if missing_members:
             with archive.open("csv/all_sectors_levels_q.csv") as handle:
                 frame = pd.read_csv(handle)

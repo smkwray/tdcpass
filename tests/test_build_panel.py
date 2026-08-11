@@ -59,6 +59,35 @@ def _write_z1_zip(path: Path) -> None:
         archive.writestr("csv/all_sectors_levels_q.csv", frame.to_csv(index=False))
 
 
+def test_download_current_z1_zip_accepts_current_release_link(tmp_path, monkeypatch) -> None:
+    class Response:
+        text = '<a href="current/z1_csv_files.zip">CSV</a>'
+
+        @staticmethod
+        def raise_for_status() -> None:
+            return None
+
+    downloaded: dict[str, str] = {}
+
+    monkeypatch.setattr(build_panel.requests, "get", lambda *args, **kwargs: Response())
+
+    def fake_download_file(url: str, path: Path, *, timeout: int) -> Path:
+        downloaded["url"] = url
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"fixture")
+        return path
+
+    monkeypatch.setattr(build_panel, "download_file", fake_download_file)
+
+    result = build_panel._download_current_z1_zip(
+        tmp_path / "raw",
+        tmp_path / "raw_downloads.json",
+    )
+
+    assert result.read_bytes() == b"fixture"
+    assert downloaded["url"] == "https://www.federalreserve.gov/releases/z1/current/z1_csv_files.zip"
+
+
 def _write_z1_multitable_zip(path: Path) -> None:
     all_sectors = pd.DataFrame(
         {
@@ -180,6 +209,16 @@ def _write_z1_multitable_zip(path: Path) -> None:
         )
         archive.writestr("csv/l205.csv", all_sectors[["date", "FL313030505"]].to_csv(index=False))
         archive.writestr("csv/all_sectors_levels_q.csv", all_sectors.to_csv(index=False))
+
+
+def _write_z1_current_chart_zip(path: Path) -> None:
+    _write_z1_multitable_zip(path)
+    with zipfile.ZipFile(path) as archive, archive.open("csv/all_sectors_levels_q.csv") as handle:
+        all_sectors = pd.read_csv(handle)
+    with zipfile.ZipFile(path, "w") as archive:
+        for member_name, keys in build_panel.Z1_CURRENT_TABLE_MEMBERS.items():
+            columns = ["date", *(build_panel.Z1_SERIES[key] for key in keys)]
+            archive.writestr(member_name, all_sectors[columns].to_csv(index=False))
 
 
 def _write_fred_csv(path: Path, *, header: str, rows: list[tuple[str, float]]) -> None:
@@ -1225,6 +1264,32 @@ def test_read_z1_levels_normalizes_live_multitable_zip_layout(tmp_path: Path) ->
     assert frame["debt_securities_bank_liability_level"].notna().all()
     assert frame["fhlb_advances_sallie_mae_loans_bank_level"].notna().all()
     assert frame["holding_company_parent_funding_bank_level"].notna().all()
+    assert frame["household_treasury_securities_level"].notna().all()
+    assert frame["mmf_treasury_bills_level"].notna().all()
+
+
+def test_read_z1_levels_normalizes_current_chart_zip_layout(tmp_path: Path) -> None:
+    z1_zip = tmp_path / "fixtures" / "z1_current_chart.zip"
+    _write_z1_current_chart_zip(z1_zip)
+
+    frame = build_panel._read_z1_levels(z1_zip, build_panel.Z1_SERIES)
+
+    assert frame["quarter"].tolist() == ["2000Q1", "2000Q2", "2000Q3", "2000Q4", "2001Q1"]
+    assert frame["total_deposits_bank_level"].tolist() == [0.1, 0.11, 0.121, 0.127, 0.133]
+    assert frame["z1_households_nonprofits_checkable_currency_level"].notna().all()
+    assert frame["z1_nonfinancial_noncorporate_time_savings_level"].notna().all()
+    assert frame["domestic_nonfinancial_repo_level"].notna().all()
+    assert frame["holding_company_parent_funding_bank_level"].isna().all()
+    assert frame["interbank_transactions_foreign_banks_liability_level"].notna().all()
+    assert frame["interbank_transactions_foreign_banks_asset_level"].notna().all()
+    assert frame["deposits_at_foreign_banks_asset_level"].notna().all()
+    assert frame["treasury_securities_bank_level"].notna().all()
+    assert frame["agency_gse_backed_securities_bank_level"].notna().all()
+    assert frame["municipal_securities_bank_level"].notna().all()
+    assert frame["corporate_foreign_bonds_bank_level"].notna().all()
+    assert frame["fedfunds_repo_liabilities_bank_level"].notna().all()
+    assert frame["debt_securities_bank_liability_level"].notna().all()
+    assert frame["fhlb_advances_sallie_mae_loans_bank_level"].notna().all()
     assert frame["household_treasury_securities_level"].notna().all()
     assert frame["mmf_treasury_bills_level"].notna().all()
 
