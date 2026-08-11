@@ -9,421 +9,421 @@
   },
   "shock_alignment": {
     "overlap_rows": 68,
-    "shock_corr": 0.41818956226857457,
+    "shock_corr": 0.41952806244711505,
     "same_sign_share": 0.7205882352941176,
     "largest_gap_quarters": [
       {
         "quarter": "2020Q3",
         "period_bucket": "covid_post",
-        "baseline_shock": 0.581904236918328,
+        "baseline_shock": 0.5642548803951691,
         "toc_row_excluded_shock": -8.869170411795452,
-        "shock_gap": -9.45107464871378,
-        "abs_shock_gap": 9.45107464871378,
-        "baseline_minus_excluded_target_qoq": 17.896000000000015,
+        "shock_gap": -9.43342529219062,
+        "abs_shock_gap": 9.43342529219062,
+        "baseline_minus_excluded_target_qoq": 18.01037497178004,
         "row_leg_qoq": 77.543,
         "toc_signed_contribution_qoq": -59.647
       },
       {
         "quarter": "2020Q1",
         "period_bucket": "covid_post",
-        "baseline_shock": 3.810380466186416,
+        "baseline_shock": 3.802756966543948,
         "toc_row_excluded_shock": 13.09521127559779,
-        "shock_gap": 9.284830809411375,
-        "abs_shock_gap": 9.284830809411375,
-        "baseline_minus_excluded_target_qoq": -367.053,
+        "shock_gap": 9.292454309053843,
+        "abs_shock_gap": 9.292454309053843,
+        "baseline_minus_excluded_target_qoq": -368.5647175392601,
         "row_leg_qoq": -255.649,
         "toc_signed_contribution_qoq": -111.404
       },
       {
         "quarter": "2021Q1",
         "period_bucket": "covid_post",
-        "baseline_shock": 5.58228501055368,
+        "baseline_shock": 5.600573017229302,
         "toc_row_excluded_shock": 0.6017768725534413,
-        "shock_gap": -4.980508138000239,
-        "abs_shock_gap": 4.980508138000239,
-        "baseline_minus_excluded_target_qoq": 827.2830000000001,
+        "shock_gap": -4.998796144675861,
+        "abs_shock_gap": 4.998796144675861,
+        "baseline_minus_excluded_target_qoq": 827.8335426137301,
         "row_leg_qoq": 220.665,
         "toc_signed_contribution_qoq": 606.618
       },
       {
-        "quarter": "2009Q2",
-        "period_bucket": "post_gfc_early",
-        "baseline_shock": 0.321361895525654,
-        "toc_row_excluded_shock": 3.957372766258473,
-        "shock_gap": 3.636010870732819,
-        "abs_shock_gap": 3.636010870732819,
-        "baseline_minus_excluded_target_qoq": 70.08200000000002,
-        "row_leg_qoq": 119.119,
-        "toc_signed_contribution_qoq": -49.037
-      },
-      {
         "quarter": "2009Q4",
         "period_bucket": "post_gfc_early",
-        "baseline_shock": -0.2810596542553419,
+        "baseline_shock": -0.027015420752758378,
         "toc_row_excluded_shock": -3.4428656402507976,
-        "shock_gap": -3.1618059859954557,
-        "abs_shock_gap": 3.1618059859954557,
-        "baseline_minus_excluded_target_qoq": 208.777,
+        "shock_gap": -3.415850219498039,
+        "abs_shock_gap": 3.415850219498039,
+        "baseline_minus_excluded_target_qoq": 228.041,
         "row_leg_qoq": 127.107,
         "toc_signed_contribution_qoq": 81.67
       },
       {
+        "quarter": "2009Q2",
+        "period_bucket": "post_gfc_early",
+        "baseline_shock": 0.6535534839196431,
+        "toc_row_excluded_shock": 3.9573727662584735,
+        "shock_gap": 3.3038192823388304,
+        "abs_shock_gap": 3.3038192823388304,
+        "baseline_minus_excluded_target_qoq": 78.03800000000001,
+        "row_leg_qoq": 119.119,
+        "toc_signed_contribution_qoq": -49.037
+      },
+      {
         "quarter": "2017Q1",
         "period_bucket": "pre_covid",
-        "baseline_shock": 2.3745109958432185,
-        "toc_row_excluded_shock": -0.7392047418827576,
-        "shock_gap": -3.1137157377259763,
-        "abs_shock_gap": 3.1137157377259763,
-        "baseline_minus_excluded_target_qoq": 378.875,
+        "baseline_shock": 2.3683828314543156,
+        "toc_row_excluded_shock": -0.7392047418827578,
+        "shock_gap": -3.1075875733370735,
+        "abs_shock_gap": 3.1075875733370735,
+        "baseline_minus_excluded_target_qoq": 379.47806103073,
         "row_leg_qoq": 71.89,
         "toc_signed_contribution_qoq": 306.985
       },
       {
         "quarter": "2011Q3",
         "period_bucket": "post_gfc_early",
-        "baseline_shock": -0.2304563584612872,
-        "toc_row_excluded_shock": -2.806746272970191,
-        "shock_gap": -2.5762899145089038,
-        "abs_shock_gap": 2.5762899145089038,
-        "baseline_minus_excluded_target_qoq": 192.19799999999998,
+        "baseline_shock": -0.2711721369027875,
+        "toc_row_excluded_shock": -2.8067462729701913,
+        "shock_gap": -2.535574136067404,
+        "abs_shock_gap": 2.535574136067404,
+        "baseline_minus_excluded_target_qoq": 194.267,
         "row_leg_qoq": 113.305,
         "toc_signed_contribution_qoq": 78.893
       },
       {
-        "quarter": "2021Q3",
-        "period_bucket": "covid_post",
-        "baseline_shock": 2.907084490706761,
-        "toc_row_excluded_shock": 0.4675287532172712,
-        "shock_gap": -2.4395557374894894,
-        "abs_shock_gap": 2.4395557374894894,
-        "baseline_minus_excluded_target_qoq": 713.26,
-        "row_leg_qoq": 76.491,
-        "toc_signed_contribution_qoq": 636.769
-      },
-      {
         "quarter": "2009Q1",
         "period_bucket": "post_gfc_early",
-        "baseline_shock": 3.5535865285918655,
+        "baseline_shock": 3.804520419705219,
         "toc_row_excluded_shock": 1.3030569011949609,
-        "shock_gap": -2.2505296273969044,
-        "abs_shock_gap": 2.2505296273969044,
-        "baseline_minus_excluded_target_qoq": 307.50300000000004,
+        "shock_gap": -2.501463518510258,
+        "abs_shock_gap": 2.501463518510258,
+        "baseline_minus_excluded_target_qoq": 309.708,
         "row_leg_qoq": 209.681,
         "toc_signed_contribution_qoq": 97.822
       },
       {
+        "quarter": "2021Q3",
+        "period_bucket": "covid_post",
+        "baseline_shock": 2.921589998627,
+        "toc_row_excluded_shock": 0.4675287532172712,
+        "shock_gap": -2.454061245409729,
+        "abs_shock_gap": 2.454061245409729,
+        "baseline_minus_excluded_target_qoq": 713.94932389685,
+        "row_leg_qoq": 76.491,
+        "toc_signed_contribution_qoq": 636.769
+      },
+      {
         "quarter": "2021Q4",
         "period_bucket": "covid_post",
-        "baseline_shock": -1.9284236294714705,
-        "toc_row_excluded_shock": 0.2975793964411211,
-        "shock_gap": 2.2260030259125916,
-        "abs_shock_gap": 2.2260030259125916,
-        "baseline_minus_excluded_target_qoq": -16.87299999999999,
+        "baseline_shock": -1.9224418545883368,
+        "toc_row_excluded_shock": 0.297579396441121,
+        "shock_gap": 2.2200212510294577,
+        "abs_shock_gap": 2.2200212510294577,
+        "baseline_minus_excluded_target_qoq": -17.87347608581001,
         "row_leg_qoq": 174.075,
         "toc_signed_contribution_qoq": -190.948
       }
     ]
   },
   "quarter_concentration": {
-    "total_abs_gap": 91.2399570439757,
-    "top3_abs_gap_share": 0.2599345107614922,
-    "top5_abs_gap_share": 0.3344393338342593,
+    "total_abs_gap": 93.19009136898964,
+    "top3_abs_gap_share": 0.25458367297851,
+    "top5_abs_gap_share": 0.32669079727813205,
     "dominant_period_bucket": "covid_post",
     "period_bucket_abs_gap_breakdown": [
       {
         "period_bucket": "covid_post",
         "quarter_count": 24,
-        "abs_gap_sum": 46.25590709380013,
-        "abs_gap_share": 0.5069698473389874,
+        "abs_gap_sum": 46.27672529311389,
+        "abs_gap_share": 0.4965841820014906,
         "top_quarter": "2020Q3",
-        "top_abs_gap": 9.45107464871378
+        "top_abs_gap": 9.43342529219062
       },
       {
         "period_bucket": "post_gfc_early",
         "quarter_count": 20,
-        "abs_gap_sum": 24.64464246017507,
-        "abs_gap_share": 0.2701080015666478,
-        "top_quarter": "2009Q2",
-        "top_abs_gap": 3.636010870732819
+        "abs_gap_sum": 26.624670594538546,
+        "abs_gap_share": 0.28570280598950343,
+        "top_quarter": "2009Q4",
+        "top_abs_gap": 3.415850219498039
       },
       {
         "period_bucket": "pre_covid",
         "quarter_count": 24,
-        "abs_gap_sum": 20.339407490000518,
-        "abs_gap_share": 0.22292215109436492,
+        "abs_gap_sum": 20.28869548133719,
+        "abs_gap_share": 0.2177130120090058,
         "top_quarter": "2017Q1",
-        "top_abs_gap": 3.1137157377259763
+        "top_abs_gap": 3.1075875733370735
       }
     ]
   },
   "gap_driver_alignment": {
     "shock_gap_driver_correlations": {
-      "baseline_minus_excluded_target_qoq": -0.46856752210382374,
-      "row_leg_qoq": -0.42961918664438814,
-      "toc_signed_contribution_qoq": -0.3309218507695352
+      "baseline_minus_excluded_target_qoq": -0.4762046647441906,
+      "row_leg_qoq": -0.44256831443546857,
+      "toc_signed_contribution_qoq": -0.3332149547341698
     },
     "dominant_driver_by_abs_corr": "baseline_minus_excluded_target_qoq"
   },
   "component_alignment": {
     "other_component_qoq": {
-      "baseline_shock_corr": -0.46090665401567193,
-      "toc_row_excluded_shock_corr": 0.07427967606245828,
-      "excluded_minus_baseline_corr": 0.5351863300781302
+      "baseline_shock_corr": -0.4689203277681274,
+      "toc_row_excluded_shock_corr": 0.07352239247541337,
+      "excluded_minus_baseline_corr": 0.5424427202435408
     },
     "other_component_no_toc_no_row_bank_only_qoq": {
-      "baseline_shock_corr": 0.03206483875983937,
-      "toc_row_excluded_shock_corr": -0.0007667487859652105,
-      "excluded_minus_baseline_corr": -0.03283158754580458
+      "baseline_shock_corr": 0.008861939993371884,
+      "toc_row_excluded_shock_corr": -0.0008350173002486037,
+      "excluded_minus_baseline_corr": -0.009696957293620488
     },
     "total_deposits_bank_qoq": {
-      "baseline_shock_corr": 0.3007626130705636,
-      "toc_row_excluded_shock_corr": 0.3496015811680941,
-      "excluded_minus_baseline_corr": 0.048838968097530466
+      "baseline_shock_corr": 0.27962088248974193,
+      "toc_row_excluded_shock_corr": 0.3495699908748441,
+      "excluded_minus_baseline_corr": 0.06994910838510215
     },
     "strict_loan_core_min_qoq": {
-      "baseline_shock_corr": -0.4941998702424231,
-      "toc_row_excluded_shock_corr": -0.19649810184009528,
-      "excluded_minus_baseline_corr": 0.29770176840232787
+      "baseline_shock_corr": -0.5015274346708468,
+      "toc_row_excluded_shock_corr": -0.19653323063906578,
+      "excluded_minus_baseline_corr": 0.304994204031781
     },
     "strict_loan_source_qoq": {
-      "baseline_shock_corr": -0.37741817301900166,
-      "toc_row_excluded_shock_corr": 0.18754879779953657,
-      "excluded_minus_baseline_corr": 0.5649669708185382
+      "baseline_shock_corr": -0.39304585073102943,
+      "toc_row_excluded_shock_corr": 0.18750088784148933,
+      "excluded_minus_baseline_corr": 0.5805467385725187
     },
     "strict_non_treasury_securities_qoq": {
-      "baseline_shock_corr": 0.40212714419620255,
-      "toc_row_excluded_shock_corr": 0.0159311382846054,
-      "excluded_minus_baseline_corr": -0.38619600591159714
+      "baseline_shock_corr": 0.3932003014624525,
+      "toc_row_excluded_shock_corr": 0.015981257676689353,
+      "excluded_minus_baseline_corr": -0.37721904378576315
     },
     "strict_identifiable_total_qoq": {
-      "baseline_shock_corr": -0.10845626299170096,
-      "toc_row_excluded_shock_corr": 0.1931563396225955,
-      "excluded_minus_baseline_corr": 0.30161260261429645
+      "baseline_shock_corr": -0.12925530008941832,
+      "toc_row_excluded_shock_corr": 0.1932345505006084,
+      "excluded_minus_baseline_corr": 0.3224898505900267
     },
     "strict_identifiable_net_after_funding_qoq": {
-      "baseline_shock_corr": -0.04074050157310587,
-      "toc_row_excluded_shock_corr": 0.11735015202303758,
-      "excluded_minus_baseline_corr": 0.15809065359614344
+      "baseline_shock_corr": -0.05275500329800636,
+      "toc_row_excluded_shock_corr": 0.11764322551808178,
+      "excluded_minus_baseline_corr": 0.17039822881608813
     }
   },
   "h0_strict_context": {
     "baseline": {
       "residual_response": {
-        "beta": -81.17833439216739,
-        "se": 20.0820892829219,
-        "lower95": -120.5392293866943,
-        "upper95": -41.81743939764046,
-        "n": 68,
+        "beta": -56.223002789186694,
+        "se": 12.517283696834168,
+        "lower95": -80.75687883498166,
+        "upper95": -31.689126743391725,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "strict_headline_direct_core_response": {
-        "beta": -20.959164939095665,
-        "se": 3.154984044707311,
-        "lower95": -27.142933666721994,
-        "upper95": -14.775396211469335,
-        "n": 68,
+        "beta": -12.936216667743267,
+        "se": 3.630426658560682,
+        "lower95": -20.051852918522204,
+        "upper95": -5.82058041696433,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "strict_loan_source_response": {
-        "beta": -19.97313706640162,
-        "se": 8.896555846407024,
-        "lower95": -37.410386525359385,
-        "upper95": -2.535887607443854,
-        "n": 68,
+        "beta": -14.361312827632876,
+        "se": 5.346581169933267,
+        "lower95": -24.84061192070208,
+        "upper95": -3.8820137345636727,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "strict_loan_core_plus_private_borrower_response": {
-        "beta": -18.024897659337825,
-        "se": 10.509068730802262,
-        "lower95": -38.62267237171026,
-        "upper95": 2.5728770530346097,
-        "n": 68,
-        "ci_excludes_zero": false
+        "beta": -12.557371580970514,
+        "se": 6.1882725137476084,
+        "lower95": -24.686385707915825,
+        "upper95": -0.42835745402520153,
+        "n": 119,
+        "ci_excludes_zero": true
       },
       "strict_loan_noncore_system_response": {
-        "beta": -0.9745232374736701,
-        "se": 5.23729803124129,
-        "lower95": -11.239627378706597,
-        "upper95": 9.290580903759256,
-        "n": 68,
+        "beta": -2.499428461735584,
+        "se": 3.8219458183540613,
+        "lower95": -9.990442265709543,
+        "upper95": 4.991585342238376,
+        "n": 119,
         "ci_excludes_zero": false
       },
       "strict_non_treasury_securities_response": {
-        "beta": 15.30465101167281,
-        "se": 6.050671529441859,
-        "lower95": 3.4453348139667668,
-        "upper95": 27.163967209378853,
-        "n": 68,
+        "beta": 10.512832325809482,
+        "se": 3.8376637009437307,
+        "lower95": 2.9910114719597702,
+        "upper95": 18.034653179659195,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "strict_identifiable_total_response": {
-        "beta": -2.0654490673922083,
-        "se": 12.647084899431377,
-        "lower95": -26.853735470277705,
-        "upper95": 22.72283733549329,
-        "n": 68,
+        "beta": -3.3212742360073477,
+        "se": 7.0574160358523566,
+        "lower95": -17.153809666277965,
+        "upper95": 10.511261194263271,
+        "n": 119,
         "ci_excludes_zero": false
       },
       "strict_identifiable_gap_response": {
-        "beta": -75.57860724607202,
-        "se": 15.835634841558793,
-        "lower95": -106.61645153552726,
-        "upper95": -44.54076295661679,
-        "n": 68,
+        "beta": -51.45101110629406,
+        "se": 11.612583938530694,
+        "lower95": -74.21167562581422,
+        "upper95": -28.690346586773902,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "strict_funding_offset_total_response": {
-        "beta": -1.6095374553041522,
-        "se": 5.625696398582565,
-        "lower95": -12.635902396525978,
-        "upper95": 9.416827485917675,
-        "n": 68,
+        "beta": -5.336247784922859,
+        "se": 4.135892291292697,
+        "lower95": -13.442596675856544,
+        "upper95": 2.7701011060108254,
+        "n": 119,
         "ci_excludes_zero": false
       },
       "strict_identifiable_net_after_funding_response": {
-        "beta": -3.9068288087150442,
-        "se": 9.42648023483478,
-        "lower95": -22.382730068991215,
-        "upper95": 14.569072451561127,
-        "n": 68,
+        "beta": 1.5529270871549983,
+        "se": 5.238687546409818,
+        "lower95": -8.714900503808245,
+        "upper95": 11.820754678118242,
+        "n": 119,
         "ci_excludes_zero": false
       },
       "strict_gap_after_funding_response": {
-        "beta": -74.42656001270831,
-        "se": 19.081291982559193,
-        "lower95": -111.82589229852432,
-        "upper95": -37.02722772689229,
-        "n": 68,
+        "beta": -55.34389158661477,
+        "se": 12.35342035859386,
+        "lower95": -79.55659548945873,
+        "upper95": -31.1311876837708,
+        "n": 119,
         "ci_excludes_zero": true
       },
-      "strict_headline_direct_core_share_of_residual_abs": 0.2581866836272258,
-      "strict_loan_share_of_residual_abs": 0.24604024233747715,
-      "strict_securities_share_of_residual_abs": 0.18853122728210966,
-      "strict_identifiable_share_of_residual_abs": 0.025443353609771728,
-      "strict_gap_share_of_residual_abs": 0.9310194377844286,
-      "strict_funding_offset_share_of_identifiable_total_beta": 0.7792675601225644,
-      "strict_net_after_funding_share_of_residual_abs": 0.04812649628706844,
-      "strict_gap_after_funding_share_of_residual_abs": 0.9168278774131816
+      "strict_headline_direct_core_share_of_residual_abs": 0.23008761585091422,
+      "strict_loan_share_of_residual_abs": 0.255434824096499,
+      "strict_securities_share_of_residual_abs": 0.18698454021085126,
+      "strict_identifiable_share_of_residual_abs": 0.059073227526832216,
+      "strict_gap_share_of_residual_abs": 0.915123855963623,
+      "strict_funding_offset_share_of_identifiable_total_beta": 1.6066868935634178,
+      "strict_net_after_funding_share_of_residual_abs": 0.02762084929860187,
+      "strict_gap_after_funding_share_of_residual_abs": 0.9843638518229232
     },
     "toc_row_excluded": {
       "residual_response": {
-        "beta": -5.501727161440379,
-        "se": 10.900899392583606,
-        "lower95": -26.867489970904245,
-        "upper95": 15.864035648023489,
+        "beta": -5.504170356594226,
+        "se": 10.901466170309819,
+        "lower95": -26.87104405040147,
+        "upper95": 15.862703337213016,
         "n": 68,
         "ci_excludes_zero": false
       },
       "strict_headline_direct_core_response": {
-        "beta": -10.658905058923462,
-        "se": 2.160432283109402,
-        "lower95": -14.89335233381789,
-        "upper95": -6.424457784029035,
+        "beta": -10.660168482962053,
+        "se": 2.1604570831038097,
+        "lower95": -14.89466436584552,
+        "upper95": -6.425672600078586,
         "n": 68,
         "ci_excludes_zero": true
       },
       "strict_loan_source_response": {
-        "beta": 5.5796698433974985,
-        "se": 6.302476257768174,
-        "lower95": -6.773183621828123,
-        "upper95": 17.932523308623118,
+        "beta": 5.577051082427268,
+        "se": 6.303473595598549,
+        "lower95": -6.777757164945887,
+        "upper95": 17.931859329800425,
         "n": 68,
         "ci_excludes_zero": false
       },
       "strict_loan_core_plus_private_borrower_response": {
-        "beta": 8.485186147303903,
-        "se": 7.570896097479698,
-        "lower95": -6.353770203756305,
-        "upper95": 23.32414249836411,
+        "beta": 8.484413965462522,
+        "se": 7.570834190715191,
+        "lower95": -6.354421048339251,
+        "upper95": 23.323248979264296,
         "n": 68,
         "ci_excludes_zero": false
       },
       "strict_loan_noncore_system_response": {
-        "beta": 4.315368496420372,
-        "se": 3.1914413049194974,
-        "lower95": -1.9398564612218427,
-        "upper95": 10.570593454062585,
+        "beta": 4.309823464037196,
+        "se": 3.2005543434771315,
+        "lower95": -1.9632630491779821,
+        "upper95": 10.582909977252374,
         "n": 68,
         "ci_excludes_zero": false
       },
       "strict_non_treasury_securities_response": {
-        "beta": 3.483514563980094,
-        "se": 1.6631083972620497,
-        "lower95": 0.22382210534647662,
-        "upper95": 6.743207022613712,
+        "beta": 3.4592100670400394,
+        "se": 1.6621708096191425,
+        "lower95": 0.20135528018652016,
+        "upper95": 6.717064853893559,
         "n": 68,
         "ci_excludes_zero": true
       },
       "strict_identifiable_total_response": {
-        "beta": 10.83191286873921,
-        "se": 5.571229269005378,
-        "lower95": -0.0876964985113311,
-        "upper95": 21.75152223598975,
+        "beta": 10.8730931023671,
+        "se": 5.581636922678874,
+        "lower95": -0.06691526608349285,
+        "upper95": 21.813101470817692,
         "n": 68,
         "ci_excludes_zero": false
       },
       "strict_identifiable_gap_response": {
-        "beta": -16.310112119609276,
-        "se": 7.007382610800299,
-        "lower95": -30.04458203677786,
-        "upper95": -2.57564220244069,
+        "beta": -16.33062170061628,
+        "se": 7.010049266784699,
+        "lower95": -30.070318263514288,
+        "upper95": -2.590925137718271,
         "n": 68,
         "ci_excludes_zero": true
       },
       "strict_funding_offset_total_response": {
-        "beta": 1.0272327406553474,
-        "se": 5.910456204919941,
-        "lower95": -10.557261420987736,
-        "upper95": 12.611726902298432,
+        "beta": 1.0213169749189035,
+        "se": 5.903494442258843,
+        "lower95": -10.549532131908428,
+        "upper95": 12.592166081746235,
         "n": 68,
         "ci_excludes_zero": false
       },
       "strict_identifiable_net_after_funding_response": {
-        "beta": 9.903810997234197,
-        "se": 5.2007520590926575,
-        "lower95": -0.2896630385874115,
-        "upper95": 20.097285033055805,
+        "beta": 9.906040510669959,
+        "se": 5.202229423242397,
+        "lower95": -0.2903291588851378,
+        "upper95": 20.102410180225057,
         "n": 68,
         "ci_excludes_zero": false
       },
       "strict_gap_after_funding_response": {
-        "beta": -15.63591831244996,
-        "se": 9.200705750054997,
-        "lower95": -33.66930158255775,
-        "upper95": 2.397464957657835,
+        "beta": -15.65127078076165,
+        "se": 9.20987589385761,
+        "lower95": -33.702627532722566,
+        "upper95": 2.4000859711992675,
         "n": 68,
         "ci_excludes_zero": false
       },
-      "strict_headline_direct_core_share_of_residual_abs": 1.9373743455742194,
-      "strict_loan_share_of_residual_abs": 1.0141669478820017,
-      "strict_securities_share_of_residual_abs": 0.6331674511951068,
-      "strict_identifiable_share_of_residual_abs": 1.96882043599984,
-      "strict_gap_share_of_residual_abs": 2.9645439770116133,
-      "strict_funding_offset_share_of_identifiable_total_beta": 0.09483391835803358,
-      "strict_net_after_funding_share_of_residual_abs": 1.800127615677934,
-      "strict_gap_after_funding_share_of_residual_abs": 2.8420017666518382
+      "strict_headline_direct_core_share_of_residual_abs": 1.936743921850225,
+      "strict_loan_share_of_residual_abs": 1.013241001115768,
+      "strict_securities_share_of_residual_abs": 0.6284707490740654,
+      "strict_identifiable_share_of_residual_abs": 1.9754281568230678,
+      "strict_gap_share_of_residual_abs": 2.966954262426037,
+      "strict_funding_offset_share_of_identifiable_total_beta": 0.09393067504375183,
+      "strict_net_after_funding_share_of_residual_abs": 1.7997336326631148,
+      "strict_gap_after_funding_share_of_residual_abs": 2.8435294997747973
     },
     "excluded_minus_baseline_beta": {
-      "residual_response": 75.676607230727,
-      "strict_headline_direct_core_response": 10.300259880172202,
-      "strict_loan_source_response": 25.552806909799116,
-      "strict_non_treasury_securities_response": -11.821136447692716,
-      "strict_identifiable_total_response": 12.897361936131418,
-      "strict_funding_offset_total_response": 2.6367701959594996,
-      "strict_identifiable_net_after_funding_response": 13.810639805949242,
-      "strict_identifiable_gap_response": 59.26849512646275,
-      "strict_gap_after_funding_response": 58.79064170025835,
-      "strict_identifiable_share_of_residual_abs": 1.9433770823900682,
-      "strict_gap_after_funding_share_of_residual_abs": 1.9251738892386565
+      "residual_response": 50.718832432592464,
+      "strict_headline_direct_core_response": 2.2760481847812137,
+      "strict_loan_source_response": 19.938363910060144,
+      "strict_non_treasury_securities_response": -7.053622258769442,
+      "strict_identifiable_total_response": 14.194367338374448,
+      "strict_funding_offset_total_response": 6.357564759841763,
+      "strict_identifiable_net_after_funding_response": 8.35311342351496,
+      "strict_identifiable_gap_response": 35.120389405677784,
+      "strict_gap_after_funding_response": 39.69262080585312,
+      "strict_identifiable_share_of_residual_abs": 1.9163549292962356,
+      "strict_gap_after_funding_share_of_residual_abs": 1.8591656479518741
     },
     "interpretation": "toc_row_exclusion_exposes_sign_mismatch_in_direct_counts"
   },
   "interpretation": "excluded_shock_only_partially_aligned_with_baseline",
   "takeaways": [
     "The TOC/ROW-excluded shock is not just a small perturbation of baseline: overlap correlation \u2248 0.42, same-sign share \u2248 0.72.",
-    "The excluded shock rotates materially toward positive direct-count channels: headline direct-core corr goes from -0.49 to -0.20, strict identifiable total corr goes from -0.11 to 0.19.",
+    "The excluded shock rotates materially toward positive direct-count channels: headline direct-core corr goes from -0.50 to -0.20, strict identifiable total corr goes from -0.13 to 0.19.",
     "The rotation is concentrated rather than diffuse: the top five shock-gap quarters explain about 0.33 of absolute gap mass, with the largest share in `covid_post`.",
-    "The shock-gap lines up with the TOC/ROW target bundle itself: corr with baseline-minus-excluded target \u2248 -0.47, ROW leg \u2248 -0.43, TOC signed contribution \u2248 -0.33.",
-    "At h0 this shows up as a sign mismatch in the strict surface: TOC/ROW-excluded residual \u2248 -5.50, strict identifiable total \u2248 10.83."
+    "The shock-gap lines up with the TOC/ROW target bundle itself: corr with baseline-minus-excluded target \u2248 -0.48, ROW leg \u2248 -0.44, TOC signed contribution \u2248 -0.33.",
+    "At h0 this shows up as a sign mismatch in the strict surface: TOC/ROW-excluded residual \u2248 -5.50, strict identifiable total \u2248 10.87."
   ]
 }

@@ -17,11 +17,11 @@
   "fitted_column": "tdc_fitted",
   "train_start_obs_column": "train_start_obs",
   "usable_sample": {
-    "rows": 68,
-    "start_quarter": "2009Q1",
+    "rows": 119,
+    "start_quarter": "1996Q2",
     "end_quarter": "2025Q4"
   },
-  "analysis_source_commit": "2555ae553dfdc7006674d24d53a644cb0c9b6598",
+  "analysis_source_commit": "b6ffad7a5234be43f0b4d11ab7169d1578193a97",
   "analysis_tree": {
     "status": "clean",
     "tracked_change_count": 0,
@@ -29,18 +29,18 @@
   },
   "config_hashes": {
     "files": {
-      "config/shock_specs.yml": "f2bc13ca92fb37ad91f1cd78960bbaa1bf62a6d15e7a4aeacea746652f7943ea",
-      "config/lp_specs.yml": "6565e5f2feea1bdeeb8c565e2e7d9f15ffbf4e2599b965b942875b37a2fd5304",
+      "config/shock_specs.yml": "05d23f01d2ab1a801f1c94010249d8f7841fa5360431ff26114d689775c4b4fb",
+      "config/lp_specs.yml": "4efaa0698a5a004b764789ca2773000e5fd714ad92dae136fa255bdf9a7b13b0",
       "config/regime_specs.yml": "74527837dfb4238ba824125722e82f435495a0fecf8ca1c227ad5bd145299179",
-      "config/output_contract.yml": "5123e29e9d719657ee331c7bf3277690d8f6821f9a6d3fe489b43cf4ee4605f4"
+      "config/output_contract.yml": "f6916079e07b1d3450758929e1167e8fd76d65717ccd0446bc420acdfaaf8f79"
     },
-    "combined_sha256": "31ec8402a793176703ac1c1374cd92436e046e1dfe865adfd92bdeaf98d29c6c"
+    "combined_sha256": "b914d046683388a7f007ee5d7c80d19a37836b17842b1bfc50dd7753202f7a6c"
   },
   "upstream_input": {
     "source_kind": "tdcest_processed_csv",
     "source_locator": "tdcest:data/processed/tdc_estimates.csv",
-    "sha256": "144cfbc0031fba343ca46025dea23a7531c0b08c968863a5123887ebf0f15abc",
+    "sha256": "384813385c1425bd2885da917c48bae4151f2d67b31e4d8b7049fd0925c37730",
     "source_repo_locator": "tdcest",
-    "source_repo_commit": "bfd2dde0b2629c89bbfefea3ebf0693241c7bbba"
+    "source_repo_commit": "7a89cfaf4651f6edecbfc22e696fad57ea819c4f"
   }
 }

@@ -63,284 +63,284 @@
     "h0": {
       "baseline": {
         "core_residual_response": {
-          "beta": -81.17833439216739,
-          "se": 20.0820892829219,
-          "lower95": -120.5392293866943,
-          "upper95": -41.81743939764046,
-          "n": 68,
+          "beta": -56.223002789186694,
+          "se": 12.517283696834168,
+          "lower95": -80.75687883498166,
+          "upper95": -31.689126743391725,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "current_broad_loan_source_response": {
-          "beta": -19.97313706640162,
-          "se": 8.896555846407024,
-          "lower95": -37.410386525359385,
-          "upper95": -2.535887607443854,
-          "n": 68,
+          "beta": -14.361312827632876,
+          "se": 5.346581169933267,
+          "lower95": -24.84061192070208,
+          "upper95": -3.8820137345636727,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "redesigned_direct_min_core_response": {
-          "beta": -20.959164939095665,
-          "se": 3.154984044707311,
-          "lower95": -27.142933666721994,
-          "upper95": -14.775396211469335,
-          "n": 68,
+          "beta": -12.936216667743267,
+          "se": 3.630426658560682,
+          "lower95": -20.051852918522204,
+          "upper95": -5.82058041696433,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "private_borrower_augmented_core_response": {
-          "beta": -18.024897659337825,
-          "se": 10.509068730802262,
-          "lower95": -38.62267237171026,
-          "upper95": 2.5728770530346097,
-          "n": 68,
-          "ci_excludes_zero": false
+          "beta": -12.557371580970514,
+          "se": 6.1882725137476084,
+          "lower95": -24.686385707915825,
+          "upper95": -0.42835745402520153,
+          "n": 119,
+          "ci_excludes_zero": true
         },
         "noncore_system_diagnostic_response": {
-          "beta": -0.9745232374736701,
-          "se": 5.23729803124129,
-          "lower95": -11.239627378706597,
-          "upper95": 9.290580903759256,
-          "n": 68,
+          "beta": -2.499428461735584,
+          "se": 3.8219458183540613,
+          "lower95": -9.990442265709543,
+          "upper95": 4.991585342238376,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "private_borrower_component_response": {
-          "beta": 1.8116428704396705,
-          "se": 11.41477840511276,
-          "lower95": -20.561322803581337,
-          "upper95": 24.184608544460676,
-          "n": 68,
+          "beta": -1.0742494463261876,
+          "se": 6.572609331508989,
+          "lower95": -13.956563736083805,
+          "upper95": 11.808064843431431,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "noncore_system_component_response": {
-          "beta": -1.3315857468437755,
-          "se": 5.177131161147097,
-          "lower95": -11.478762822692085,
-          "upper95": 8.815591329004535,
-          "n": 68,
+          "beta": -2.699559961082934,
+          "se": 3.761820125721609,
+          "lower95": -10.072727407497286,
+          "upper95": 4.673607485331419,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "candidate_abs_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 61.205197325765766,
-          "redesigned_direct_min_core": 60.21916945307172,
-          "private_borrower_augmented_core": 63.15343673282956,
-          "noncore_system_diagnostic": 80.20381115469371
+          "current_broad_loan_source": 41.86168996155382,
+          "redesigned_direct_min_core": 43.28678612144343,
+          "private_borrower_augmented_core": 43.66563120821618,
+          "noncore_system_diagnostic": 53.72357432745111
         },
         "candidate_signed_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 61.205197325765766,
-          "redesigned_direct_min_core": 60.21916945307172,
-          "private_borrower_augmented_core": 63.15343673282956,
-          "noncore_system_diagnostic": 80.20381115469371
+          "current_broad_loan_source": 41.86168996155382,
+          "redesigned_direct_min_core": 43.28678612144343,
+          "private_borrower_augmented_core": 43.66563120821618,
+          "noncore_system_diagnostic": 53.72357432745111
         }
       },
       "core_deposit_proximate": {
         "core_residual_response": {
-          "beta": -5.501727161440379,
-          "se": 10.900899392583606,
-          "lower95": -26.867489970904245,
-          "upper95": 15.864035648023489,
+          "beta": -5.504170356594226,
+          "se": 10.901466170309819,
+          "lower95": -26.87104405040147,
+          "upper95": 15.862703337213016,
           "n": 68,
           "ci_excludes_zero": false
         },
         "current_broad_loan_source_response": {
-          "beta": 5.5796698433974985,
-          "se": 6.302476257768174,
-          "lower95": -6.773183621828123,
-          "upper95": 17.932523308623118,
+          "beta": 5.577051082427268,
+          "se": 6.303473595598549,
+          "lower95": -6.777757164945887,
+          "upper95": 17.931859329800425,
           "n": 68,
           "ci_excludes_zero": false
         },
         "redesigned_direct_min_core_response": {
-          "beta": -10.658905058923462,
-          "se": 2.160432283109402,
-          "lower95": -14.89335233381789,
-          "upper95": -6.424457784029035,
+          "beta": -10.660168482962053,
+          "se": 2.1604570831038097,
+          "lower95": -14.89466436584552,
+          "upper95": -6.425672600078586,
           "n": 68,
           "ci_excludes_zero": true
         },
         "private_borrower_augmented_core_response": {
-          "beta": 8.485186147303903,
-          "se": 7.570896097479698,
-          "lower95": -6.353770203756305,
-          "upper95": 23.32414249836411,
+          "beta": 8.484413965462522,
+          "se": 7.570834190715191,
+          "lower95": -6.354421048339251,
+          "upper95": 23.323248979264296,
           "n": 68,
           "ci_excludes_zero": false
         },
         "noncore_system_diagnostic_response": {
-          "beta": 4.315368496420372,
-          "se": 3.1914413049194974,
-          "lower95": -1.9398564612218427,
-          "upper95": 10.570593454062585,
+          "beta": 4.309823464037196,
+          "se": 3.2005543434771315,
+          "lower95": -1.9632630491779821,
+          "upper95": 10.582909977252374,
           "n": 68,
           "ci_excludes_zero": false
         },
         "private_borrower_component_response": {
-          "beta": 20.823558766114274,
-          "se": 6.85578524163978,
-          "lower95": 7.386219692500305,
-          "upper95": 34.260897839728244,
+          "beta": 20.82380289860989,
+          "se": 6.8550448450365,
+          "lower95": 7.387915002338351,
+          "upper95": 34.25969079488143,
           "n": 68,
           "ci_excludes_zero": true
         },
         "noncore_system_component_response": {
-          "beta": 4.129044622815956,
-          "se": 3.1038686528724346,
-          "lower95": -1.9545379368140159,
-          "upper95": 10.212627182445928,
+          "beta": 4.1239521729882025,
+          "se": 3.112834197150577,
+          "lower95": -1.9772028534269284,
+          "upper95": 10.225107199403332,
           "n": 68,
           "ci_excludes_zero": false
         },
         "candidate_abs_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 11.081397004837878,
-          "redesigned_direct_min_core": 5.157177897483083,
-          "private_borrower_augmented_core": 13.986913308744281,
-          "noncore_system_diagnostic": 9.817095657860751
+          "current_broad_loan_source": 11.081221439021494,
+          "redesigned_direct_min_core": 5.155998126367827,
+          "private_borrower_augmented_core": 13.988584322056749,
+          "noncore_system_diagnostic": 9.813993820631422
         },
         "candidate_signed_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 11.081397004837878,
-          "redesigned_direct_min_core": -5.157177897483083,
-          "private_borrower_augmented_core": 13.986913308744281,
-          "noncore_system_diagnostic": 9.817095657860751
+          "current_broad_loan_source": 11.081221439021494,
+          "redesigned_direct_min_core": -5.155998126367827,
+          "private_borrower_augmented_core": 13.988584322056749,
+          "noncore_system_diagnostic": 9.813993820631422
         }
       }
     },
     "h4": {
       "baseline": {
         "core_residual_response": {
-          "beta": -100.99420217322485,
-          "se": 48.95277771700572,
-          "lower95": -196.94164649855605,
-          "upper95": -5.04675784789363,
-          "n": 64,
+          "beta": -70.27564601632174,
+          "se": 31.87297979793321,
+          "lower95": -132.74668642027083,
+          "upper95": -7.804605612372654,
+          "n": 115,
           "ci_excludes_zero": true
         },
         "current_broad_loan_source_response": {
-          "beta": -35.94429115979122,
-          "se": 19.174791564821454,
-          "lower95": -73.52688262684127,
-          "upper95": 1.638300307258831,
-          "n": 64,
+          "beta": -23.7266209046791,
+          "se": 18.357054361780644,
+          "lower95": -59.70644745376916,
+          "upper95": 12.253205644410965,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "redesigned_direct_min_core_response": {
-          "beta": -39.60708317233478,
-          "se": 21.704975154811446,
-          "lower95": -82.14883447576523,
-          "upper95": 2.9346681310956555,
-          "n": 64,
+          "beta": -24.85888739376021,
+          "se": 14.989609358550272,
+          "lower95": -54.23852173651874,
+          "upper95": 4.5207469489983225,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "private_borrower_augmented_core_response": {
-          "beta": -36.09446880211357,
-          "se": 18.505539205304284,
-          "lower95": -72.36532564450997,
-          "upper95": 0.17638804028283062,
-          "n": 64,
+          "beta": -23.494321757484773,
+          "se": 17.974479114678246,
+          "lower95": -58.724300822254136,
+          "upper95": 11.735657307284587,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "noncore_system_diagnostic_response": {
-          "beta": -6.588510473401262,
-          "se": 10.22291777123132,
-          "lower95": -26.625429305014645,
-          "upper95": 13.448408358212124,
-          "n": 64,
+          "beta": -5.87268099863966,
+          "se": 8.198360948037223,
+          "lower95": -21.941468456792617,
+          "upper95": 10.196106459513299,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "private_borrower_component_response": {
-          "beta": -13.088924455680957,
-          "se": 11.362875676779849,
-          "lower95": -35.36016078216946,
-          "upper95": 9.182311870807546,
-          "n": 64,
+          "beta": -13.198418915784673,
+          "se": 9.528349690437107,
+          "lower95": -31.873984309041404,
+          "upper95": 5.477146477472056,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "noncore_system_component_response": {
-          "beta": -6.947588427267108,
-          "se": 10.31916296729635,
-          "lower95": -27.173147843167953,
-          "upper95": 13.27797098863374,
-          "n": 64,
+          "beta": -6.0490713501123885,
+          "se": 8.237867375714048,
+          "lower95": -22.195291406511924,
+          "upper95": 10.097148706287147,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "candidate_abs_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 65.04991101343363,
-          "redesigned_direct_min_core": 61.38711900089007,
-          "private_borrower_augmented_core": 64.89973337111128,
-          "noncore_system_diagnostic": 94.40569169982359
+          "current_broad_loan_source": 46.54902511164265,
+          "redesigned_direct_min_core": 45.41675862256153,
+          "private_borrower_augmented_core": 46.781324258836975,
+          "noncore_system_diagnostic": 64.40296501768208
         },
         "candidate_signed_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 65.04991101343363,
-          "redesigned_direct_min_core": 61.38711900089007,
-          "private_borrower_augmented_core": 64.89973337111128,
-          "noncore_system_diagnostic": 94.40569169982359
+          "current_broad_loan_source": 46.54902511164265,
+          "redesigned_direct_min_core": 45.41675862256153,
+          "private_borrower_augmented_core": 46.781324258836975,
+          "noncore_system_diagnostic": 64.40296501768208
         }
       },
       "core_deposit_proximate": {
         "core_residual_response": {
-          "beta": -43.435870973152745,
-          "se": 19.209068844634533,
-          "lower95": -81.08564590863642,
-          "upper95": -5.786096037669061,
+          "beta": -43.43473621018577,
+          "se": 19.208019516461672,
+          "lower95": -81.08245446245064,
+          "upper95": -5.787017957920895,
           "n": 64,
           "ci_excludes_zero": true
         },
         "current_broad_loan_source_response": {
-          "beta": -32.900385114414085,
-          "se": 12.831401321199078,
-          "lower95": -58.049931703964276,
-          "upper95": -7.7508385248638945,
+          "beta": -32.90038511441453,
+          "se": 12.831401321198994,
+          "lower95": -58.04993170396456,
+          "upper95": -7.7508385248645055,
           "n": 64,
           "ci_excludes_zero": true
         },
         "redesigned_direct_min_core_response": {
-          "beta": -39.144251193418825,
-          "se": 8.210890028884647,
-          "lower95": -55.23759565003273,
-          "upper95": -23.05090673680492,
+          "beta": -39.144475184113645,
+          "se": 8.210696721741352,
+          "lower95": -55.23744075872669,
+          "upper95": -23.051509609500595,
           "n": 64,
           "ci_excludes_zero": true
         },
         "private_borrower_augmented_core_response": {
-          "beta": -37.93114952299555,
-          "se": 13.728557188202304,
-          "lower95": -64.83912161187206,
-          "upper95": -11.023177434119031,
+          "beta": -37.93200667607069,
+          "se": 13.726774600661216,
+          "lower95": -64.83648489336667,
+          "upper95": -11.02752845877471,
           "n": 64,
           "ci_excludes_zero": true
         },
         "noncore_system_diagnostic_response": {
-          "beta": -2.569821315186207,
-          "se": 4.80739814483423,
-          "lower95": -11.992321679061298,
-          "upper95": 6.852679048688884,
+          "beta": -2.5499427120307434,
+          "se": 4.801388019150088,
+          "lower95": -11.960663229564915,
+          "upper95": 6.860777805503428,
           "n": 64,
           "ci_excludes_zero": false
         },
         "private_borrower_component_response": {
-          "beta": 7.684600638857804,
-          "se": 6.378977906140083,
-          "lower95": -4.818196057176758,
-          "upper95": 20.187397334892367,
+          "beta": 7.685449899189553,
+          "se": 6.377800850959741,
+          "lower95": -4.815039768691538,
+          "upper95": 20.185939567070644,
           "n": 64,
           "ci_excludes_zero": false
         },
         "noncore_system_component_response": {
-          "beta": -2.457142823895772,
-          "se": 4.803102544173345,
-          "lower95": -11.871223810475527,
-          "upper95": 6.956938162683983,
+          "beta": -2.436015390608295,
+          "se": 4.797019679600691,
+          "lower95": -11.83817396262565,
+          "upper95": 6.966143181409059,
           "n": 64,
           "ci_excludes_zero": false
         },
         "candidate_abs_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 10.53548585873866,
-          "redesigned_direct_min_core": 4.291619779733921,
-          "private_borrower_augmented_core": 5.504721450157199,
-          "noncore_system_diagnostic": 40.86604965796654
+          "current_broad_loan_source": 10.534351095771235,
+          "redesigned_direct_min_core": 4.290261026072123,
+          "private_borrower_augmented_core": 5.502729534115076,
+          "noncore_system_diagnostic": 40.88479349815503
         },
         "candidate_signed_gap_to_core_residual_beta": {
-          "current_broad_loan_source": 10.53548585873866,
-          "redesigned_direct_min_core": 4.291619779733921,
-          "private_borrower_augmented_core": 5.504721450157199,
-          "noncore_system_diagnostic": 40.86604965796654
+          "current_broad_loan_source": 10.534351095771235,
+          "redesigned_direct_min_core": 4.290261026072123,
+          "private_borrower_augmented_core": 5.502729534115076,
+          "noncore_system_diagnostic": 40.88479349815503
         }
       }
     }
@@ -348,7 +348,7 @@
   "takeaways": [
     "This artifact turns the strict-redesign plan into a concrete loan-core comparison under both the baseline and core-deposit-proximate shocks.",
     "The redesigned direct minimum core is intentionally conservative: mortgages plus consumer credit only, with the broad DI-loans-n.e.c. bucket removed from the headline direct core until it is subdivided.",
-    "Under the core-deposit-proximate shock at h0, the strict loan-core redesign comparison is now explicit: core residual \u2248 -5.50, current broad loan source \u2248 5.58, direct minimum core \u2248 -10.66, private-borrower-augmented core \u2248 8.49, noncore/system diagnostic \u2248 4.32.",
+    "Under the core-deposit-proximate shock at h0, the strict loan-core redesign comparison is now explicit: core residual \u2248 -5.50, current broad loan source \u2248 5.58, direct minimum core \u2248 -10.66, private-borrower-augmented core \u2248 8.48, noncore/system diagnostic \u2248 4.31.",
     "At h0, the redesigned direct minimum core should be read as the safer headline direct core because it keeps same-scope direct measurement explicit while the broad current loan source still embeds the unresolved DI-loans-n.e.c. bucket (direct-core abs gap to core residual \u2248 5.16, current broad-loan abs gap \u2248 11.08).",
     "The published role design should now be explicit: `strict_loan_core_min_qoq` is the headline direct core, `strict_loan_core_plus_private_borrower_qoq` is the standard secondary comparison, and both `strict_loan_source_qoq` and `strict_loan_di_loans_nec_qoq` remain diagnostic-only until the DI bucket is redesigned more fully."
   ]

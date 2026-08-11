@@ -20,48 +20,48 @@
   },
   "quarterly_gate": {
     "status": "fails",
-    "best_in_scope_corr": 0.2520808011751136,
+    "best_in_scope_corr": 0.2520811347550335,
     "best_support_corr": 0.9472142089908314,
     "best_in_scope_same_sign_share": 0.532608695652174
   },
   "key_horizons": {
     "h0": {
-      "core_residual_beta": -5.508313542362046,
-      "headline_direct_core_beta": -10.658905058923445,
-      "baseline_abs_gap_to_direct_core": 5.1505915165613985,
-      "toc_leg_beta": 70.4411590878622,
+      "core_residual_beta": -5.510705208475613,
+      "headline_direct_core_beta": -10.660168482962053,
+      "baseline_abs_gap_to_direct_core": 5.14946327448644,
+      "toc_leg_beta": 42.82519255161599,
       "candidates": {
         "h0_private_checkable_share_candidate": {
           "label": "h0_private_checkable_share_candidate",
-          "share": 0.40679164607684437,
-          "candidate_increment_beta": 28.65487505691233,
-          "implied_residual_beta": -34.16318859927438,
-          "abs_gap_to_direct_core": 23.504283540350933,
+          "share": 0.39917442073603265,
+          "candidate_increment_beta": 17.094721429700375,
+          "implied_residual_beta": -22.605426638175988,
+          "abs_gap_to_direct_core": 11.945258155213935,
           "improves_vs_core_residual_gap": false
         },
         "h0_deposits_only_share_candidate": {
           "label": "h0_deposits_only_share_candidate",
-          "share": 0.6638359960227482,
-          "candidate_increment_beta": 46.76137700408787,
-          "implied_residual_beta": -52.269690546449915,
-          "abs_gap_to_direct_core": 41.61078548752647,
+          "share": 0.6853927164419539,
+          "candidate_increment_beta": 29.352075055101814,
+          "implied_residual_beta": -34.86278026357743,
+          "abs_gap_to_direct_core": 24.202611780615374,
           "improves_vs_core_residual_gap": false
         },
         "h0_total_deposits_upper_envelope": {
           "label": "h0_total_deposits_upper_envelope",
-          "share": 0.7914454556110087,
-          "candidate_increment_beta": 55.750335248060644,
-          "implied_residual_beta": -61.25864879042269,
-          "abs_gap_to_direct_core": 50.599743731499245,
+          "share": 0.8868073344026971,
+          "candidate_increment_beta": 37.977694851980814,
+          "implied_residual_beta": -43.48840006045643,
+          "abs_gap_to_direct_core": 32.82823157749438,
           "improves_vs_core_residual_gap": false
         }
       },
       "best_candidate": {
         "label": "h0_private_checkable_share_candidate",
-        "share": 0.40679164607684437,
-        "candidate_increment_beta": 28.65487505691233,
-        "implied_residual_beta": -34.16318859927438,
-        "abs_gap_to_direct_core": 23.504283540350933,
+        "share": 0.39917442073603265,
+        "candidate_increment_beta": 17.094721429700375,
+        "implied_residual_beta": -22.605426638175988,
+        "abs_gap_to_direct_core": 11.945258155213935,
         "improves_vs_core_residual_gap": false
       }
     }
@@ -82,7 +82,7 @@
     "This summary tests the only remaining reincorporation question after the raw-incidence gate: whether any narrow TOC share can be added back to the strict object without violating the strict standard.",
     "The rule is strict, not fit-chasing: a candidate must both clear the quarterly incidence gate and improve the direct-core comparison relative to the current core residual.",
     "The baseline comparison benchmark is the current core residual versus the headline direct strict core: core residual \u2248 -5.51, direct core \u2248 -10.66, abs gap \u2248 5.15.",
-    "Even the best narrow TOC candidate does not help under the current evidence: `h0_private_checkable_share_candidate` implies residual \u2248 -34.16 with abs gap to the direct core \u2248 23.50.",
+    "Even the best narrow TOC candidate does not help under the current evidence: `h0_private_checkable_share_candidate` implies residual \u2248 -22.61 with abs gap to the direct core \u2248 11.95.",
     "The quarterly gate still fails for TOC incidence stability: best in-scope deposit corr \u2248 0.25 versus best support corr \u2248 0.95.",
     "Current decision: keep TOC outside the strict object alongside ROW. Under the present evidence, TOC remains a real measured support leg, not a validated strict deposit component."
   ]

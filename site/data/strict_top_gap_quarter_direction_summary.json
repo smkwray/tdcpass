@@ -12,12 +12,12 @@
     {
       "quarter": "2020Q3",
       "period_bucket": "covid_post",
-      "baseline_shock": 0.581904236918328,
+      "baseline_shock": 0.5642548803951691,
       "toc_row_excluded_shock": -8.869170411795452,
-      "shock_gap": -9.45107464871378,
+      "shock_gap": -9.43342529219062,
       "shock_gap_sign": "negative",
-      "abs_shock_gap": 9.45107464871378,
-      "bundle_qoq": 17.896000000000015,
+      "abs_shock_gap": 9.43342529219062,
+      "bundle_qoq": 18.01037497178004,
       "bundle_sign": "positive",
       "gap_alignment_to_bundle": "opposed",
       "row_leg_qoq": 77.543,
@@ -29,12 +29,12 @@
     {
       "quarter": "2020Q1",
       "period_bucket": "covid_post",
-      "baseline_shock": 3.810380466186416,
+      "baseline_shock": 3.802756966543948,
       "toc_row_excluded_shock": 13.09521127559779,
-      "shock_gap": 9.284830809411375,
+      "shock_gap": 9.292454309053843,
       "shock_gap_sign": "positive",
-      "abs_shock_gap": 9.284830809411375,
-      "bundle_qoq": -367.053,
+      "abs_shock_gap": 9.292454309053843,
+      "bundle_qoq": -368.5647175392601,
       "bundle_sign": "negative",
       "gap_alignment_to_bundle": "opposed",
       "row_leg_qoq": -255.649,
@@ -46,12 +46,12 @@
     {
       "quarter": "2021Q1",
       "period_bucket": "covid_post",
-      "baseline_shock": 5.58228501055368,
+      "baseline_shock": 5.600573017229302,
       "toc_row_excluded_shock": 0.6017768725534413,
-      "shock_gap": -4.980508138000239,
+      "shock_gap": -4.998796144675861,
       "shock_gap_sign": "negative",
-      "abs_shock_gap": 4.980508138000239,
-      "bundle_qoq": 827.2830000000001,
+      "abs_shock_gap": 4.998796144675861,
+      "bundle_qoq": 827.8335426137301,
       "bundle_sign": "positive",
       "gap_alignment_to_bundle": "opposed",
       "row_leg_qoq": 220.665,
@@ -61,31 +61,14 @@
       "directional_driver": "both_legs_oppose_gap"
     },
     {
-      "quarter": "2009Q2",
-      "period_bucket": "post_gfc_early",
-      "baseline_shock": 0.321361895525654,
-      "toc_row_excluded_shock": 3.9573727662584726,
-      "shock_gap": 3.6360108707328185,
-      "shock_gap_sign": "positive",
-      "abs_shock_gap": 3.6360108707328185,
-      "bundle_qoq": 70.08200000000002,
-      "bundle_sign": "positive",
-      "gap_alignment_to_bundle": "aligned",
-      "row_leg_qoq": 119.119,
-      "row_leg_alignment_to_gap": "aligned",
-      "toc_signed_contribution_qoq": -49.037,
-      "toc_leg_alignment_to_gap": "opposed",
-      "directional_driver": "row_driven_gap_direction"
-    },
-    {
       "quarter": "2009Q4",
       "period_bucket": "post_gfc_early",
-      "baseline_shock": -0.2810596542553419,
+      "baseline_shock": -0.027015420752758378,
       "toc_row_excluded_shock": -3.4428656402507976,
-      "shock_gap": -3.1618059859954557,
+      "shock_gap": -3.415850219498039,
       "shock_gap_sign": "negative",
-      "abs_shock_gap": 3.1618059859954557,
-      "bundle_qoq": 208.777,
+      "abs_shock_gap": 3.415850219498039,
+      "bundle_qoq": 228.041,
       "bundle_sign": "positive",
       "gap_alignment_to_bundle": "opposed",
       "row_leg_qoq": 127.107,
@@ -93,41 +76,58 @@
       "toc_signed_contribution_qoq": 81.67,
       "toc_leg_alignment_to_gap": "opposed",
       "directional_driver": "both_legs_oppose_gap"
+    },
+    {
+      "quarter": "2009Q2",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": 0.6535534839196431,
+      "toc_row_excluded_shock": 3.9573727662584735,
+      "shock_gap": 3.3038192823388304,
+      "shock_gap_sign": "positive",
+      "abs_shock_gap": 3.3038192823388304,
+      "bundle_qoq": 78.03800000000001,
+      "bundle_sign": "positive",
+      "gap_alignment_to_bundle": "aligned",
+      "row_leg_qoq": 119.119,
+      "row_leg_alignment_to_gap": "aligned",
+      "toc_signed_contribution_qoq": -49.037,
+      "toc_leg_alignment_to_gap": "opposed",
+      "directional_driver": "row_driven_gap_direction"
     }
   ],
   "gap_bundle_alignment_summary": [
     {
       "gap_alignment_to_bundle": "opposed",
-      "abs_gap_weight": 26.87821958212085,
-      "abs_gap_share": 0.880842124583457
+      "abs_gap_weight": 27.140525965418366,
+      "abs_gap_share": 0.8914800349473038
     },
     {
       "gap_alignment_to_bundle": "aligned",
-      "abs_gap_weight": 3.6360108707328185,
-      "abs_gap_share": 0.11915787541654296
+      "abs_gap_weight": 3.3038192823388304,
+      "abs_gap_share": 0.10851996505269626
     }
   ],
   "directional_driver_summary": [
     {
       "directional_driver": "both_legs_oppose_gap",
-      "abs_gap_weight": 17.42714493340707,
-      "abs_gap_share": 0.5711153345431098
+      "abs_gap_weight": 17.707100673227743,
+      "abs_gap_share": 0.5816219901964292
     },
     {
       "directional_driver": "toc_driven_gap_direction",
-      "abs_gap_weight": 9.45107464871378,
-      "abs_gap_share": 0.3097267900403473
+      "abs_gap_weight": 9.43342529219062,
+      "abs_gap_share": 0.3098580447508744
     },
     {
       "directional_driver": "row_driven_gap_direction",
-      "abs_gap_weight": 3.6360108707328185,
-      "abs_gap_share": 0.11915787541654296
+      "abs_gap_weight": 3.3038192823388304,
+      "abs_gap_share": 0.10851996505269626
     }
   ],
   "interpretation": "top_gap_gap_direction_often_opposes_both_toc_and_row_legs",
   "takeaways": [
-    "Across the top-gap quarters, the leading gap-versus-bundle alignment is `opposed` with abs-gap share \u2248 0.88.",
-    "Across the top-gap quarters, the leading directional-driver bucket is `both_legs_oppose_gap` with abs-gap share \u2248 0.57.",
+    "Across the top-gap quarters, the leading gap-versus-bundle alignment is `opposed` with abs-gap share \u2248 0.89.",
+    "Across the top-gap quarters, the leading directional-driver bucket is `both_legs_oppose_gap` with abs-gap share \u2248 0.58.",
     "The largest top-gap quarter is `2020Q3` with gap-versus-bundle alignment `opposed` and directional driver `toc_driven_gap_direction`."
   ]
 }

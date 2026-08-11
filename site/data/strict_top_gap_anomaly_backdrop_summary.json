@@ -11,12 +11,12 @@
   "anomaly_quarter": {
     "quarter": "2009Q4",
     "period_bucket": "post_gfc_early",
-    "baseline_shock": -0.2810596542553419,
+    "baseline_shock": -0.027015420752758378,
     "toc_row_excluded_shock": -3.4428656402507976,
-    "shock_gap": -3.1618059859954557,
+    "shock_gap": -3.415850219498039,
     "shock_gap_sign": "negative",
-    "abs_shock_gap": 3.1618059859954557,
-    "bundle_qoq": 208.777,
+    "abs_shock_gap": 3.415850219498039,
+    "bundle_qoq": 228.041,
     "bundle_sign": "positive",
     "gap_alignment_to_bundle": "opposed",
     "row_leg_qoq": 127.107,
@@ -25,28 +25,28 @@
     "toc_leg_alignment_to_gap": "opposed",
     "directional_driver": "both_legs_oppose_gap",
     "excluded_other_component_qoq": 73.64099999999998,
-    "strict_identifiable_total_qoq": -68.394,
-    "excluded_strict_gap_qoq": 142.03499999999997,
-    "strict_identifiable_net_after_funding_qoq": 97.46699999999998,
-    "excluded_strict_gap_after_funding_qoq": -23.826000000000008,
+    "strict_identifiable_total_qoq": -68.44800000000001,
+    "excluded_strict_gap_qoq": 142.089,
+    "strict_identifiable_net_after_funding_qoq": 97.41299999999998,
+    "excluded_strict_gap_after_funding_qoq": -23.772000000000006,
     "foreign_nonts_qoq": 43.228,
     "tga_qoq": 80.613,
     "reserves_qoq": 142.356,
     "residual_strict_pattern": "positive_residual_negative_strict",
     "strict_loan_source_qoq": -114.68,
-    "strict_non_treasury_securities_qoq": 46.285999999999994,
+    "strict_non_treasury_securities_qoq": 46.23199999999999,
     "strict_funding_offset_total_qoq": -165.861
   },
   "peer_quarters": [
     {
       "quarter": "2020Q1",
       "period_bucket": "covid_post",
-      "baseline_shock": 3.810380466186416,
+      "baseline_shock": 3.802756966543948,
       "toc_row_excluded_shock": 13.09521127559779,
-      "shock_gap": 9.284830809411375,
+      "shock_gap": 9.292454309053843,
       "shock_gap_sign": "positive",
-      "abs_shock_gap": 9.284830809411375,
-      "bundle_qoq": -367.053,
+      "abs_shock_gap": 9.292454309053843,
+      "bundle_qoq": -368.5647175392601,
       "bundle_sign": "negative",
       "gap_alignment_to_bundle": "opposed",
       "row_leg_qoq": -255.649,
@@ -55,27 +55,27 @@
       "toc_leg_alignment_to_gap": "opposed",
       "directional_driver": "both_legs_oppose_gap",
       "excluded_other_component_qoq": 171.72799999999904,
-      "strict_identifiable_total_qoq": 515.764,
-      "excluded_strict_gap_qoq": -344.03600000000097,
-      "strict_identifiable_net_after_funding_qoq": 338.824,
-      "excluded_strict_gap_after_funding_qoq": -167.09600000000097,
+      "strict_identifiable_total_qoq": 515.265,
+      "excluded_strict_gap_qoq": -343.53700000000094,
+      "strict_identifiable_net_after_funding_qoq": 338.325,
+      "excluded_strict_gap_after_funding_qoq": -166.59700000000095,
       "foreign_nonts_qoq": 559.303,
       "tga_qoq": 22.432,
       "reserves_qoq": 535.044,
       "residual_strict_pattern": "positive_residual_positive_strict",
       "strict_loan_source_qoq": 408.623,
-      "strict_non_treasury_securities_qoq": 107.141,
+      "strict_non_treasury_securities_qoq": 106.642,
       "strict_funding_offset_total_qoq": 176.94
     },
     {
       "quarter": "2021Q1",
       "period_bucket": "covid_post",
-      "baseline_shock": 5.58228501055368,
+      "baseline_shock": 5.600573017229302,
       "toc_row_excluded_shock": 0.6017768725534413,
-      "shock_gap": -4.980508138000239,
+      "shock_gap": -4.998796144675861,
       "shock_gap_sign": "negative",
-      "abs_shock_gap": 4.980508138000239,
-      "bundle_qoq": 827.2830000000001,
+      "abs_shock_gap": 4.998796144675861,
+      "bundle_qoq": 827.8335426137301,
       "bundle_sign": "positive",
       "gap_alignment_to_bundle": "opposed",
       "row_leg_qoq": 220.665,
@@ -84,131 +84,131 @@
       "toc_leg_alignment_to_gap": "opposed",
       "directional_driver": "both_legs_oppose_gap",
       "excluded_other_component_qoq": 255.70499999999703,
-      "strict_identifiable_total_qoq": 313.971,
-      "excluded_strict_gap_qoq": -58.266000000002975,
-      "strict_identifiable_net_after_funding_qoq": 339.497,
-      "excluded_strict_gap_after_funding_qoq": -83.79200000000299,
+      "strict_identifiable_total_qoq": 313.89799999999997,
+      "excluded_strict_gap_qoq": -58.19300000000294,
+      "strict_identifiable_net_after_funding_qoq": 339.424,
+      "excluded_strict_gap_after_funding_qoq": -83.71900000000295,
       "foreign_nonts_qoq": 30.291,
       "tga_qoq": -565.328,
       "reserves_qoq": 754.006,
       "residual_strict_pattern": "positive_residual_positive_strict",
       "strict_loan_source_qoq": -60.055,
-      "strict_non_treasury_securities_qoq": 374.026,
+      "strict_non_treasury_securities_qoq": 373.953,
       "strict_funding_offset_total_qoq": -25.526
     }
   ],
-  "peer_bucket_weight": 14.265338947411614,
+  "peer_bucket_weight": 14.291250453729704,
   "backdrop_rows": [
     {
       "metric": "strict_di_loans_nec_nonfinancial_corporate_qoq",
       "label": "Nonfinancial corporate DI loans n.e.c.",
       "anomaly_value": -39.829,
-      "weighted_peer_mean": 306.0581110835949,
-      "anomaly_minus_peer_delta": -345.8871110835949,
-      "abs_delta": 345.8871110835949
+      "weighted_peer_mean": 305.75618587097773,
+      "anomaly_minus_peer_delta": -345.58518587097774,
+      "abs_delta": 345.58518587097774
     },
     {
       "metric": "strict_loan_di_loans_nec_qoq",
       "label": "U.S.-chartered DI loans n.e.c.",
-      "anomaly_value": -58.809,
-      "weighted_peer_mean": 293.68493987372295,
-      "anomaly_minus_peer_delta": -352.493939873723,
-      "abs_delta": 352.493939873723
+      "anomaly_value": -58.755,
+      "weighted_peer_mean": 293.77272746154705,
+      "anomaly_minus_peer_delta": -352.52772746154704,
+      "abs_delta": 352.52772746154704
     },
     {
       "metric": "strict_loan_source_qoq",
       "label": "Strict loan source",
       "anomaly_value": -114.68,
-      "weighted_peer_mean": 244.99179560262976,
-      "anomaly_minus_peer_delta": -359.6717956026298,
-      "abs_delta": 359.6717956026298
+      "weighted_peer_mean": 244.68872517361717,
+      "anomaly_minus_peer_delta": -359.3687251736172,
+      "abs_delta": 359.3687251736172
     },
     {
       "metric": "reserves_qoq",
       "label": "Reserves",
       "anomaly_value": 142.356,
-      "weighted_peer_mean": 611.4909759136485,
-      "anomaly_minus_peer_delta": -469.13497591364853,
-      "abs_delta": 469.13497591364853
+      "weighted_peer_mean": 611.6325675976564,
+      "anomaly_minus_peer_delta": -469.27656759765637,
+      "abs_delta": 469.27656759765637
     },
     {
       "metric": "foreign_nonts_qoq",
       "label": "Foreign NONTS",
       "anomaly_value": 43.228,
-      "weighted_peer_mean": 374.6071732262628,
-      "anomaly_minus_peer_delta": -331.37917322626276,
-      "abs_delta": 331.37917322626276
+      "weighted_peer_mean": 374.2650878418564,
+      "anomaly_minus_peer_delta": -331.0370878418564,
+      "abs_delta": 331.0370878418564
     },
     {
       "metric": "tga_qoq",
       "label": "TGA",
       "anomaly_value": 80.613,
-      "weighted_peer_mean": -182.77472337211972,
-      "anomaly_minus_peer_delta": 263.3877233721197,
-      "abs_delta": 263.3877233721197
+      "weighted_peer_mean": -183.15479812569558,
+      "anomaly_minus_peer_delta": 263.76779812569555,
+      "abs_delta": 263.76779812569555
     },
     {
       "metric": "other_component_no_toc_no_row_bank_only_qoq",
       "label": "TOC/ROW-excluded residual",
       "anomaly_value": 73.64099999999998,
-      "weighted_peer_mean": 201.04718641727837,
-      "anomaly_minus_peer_delta": -127.40618641727839,
-      "abs_delta": 127.40618641727839
+      "weighted_peer_mean": 201.10149010854866,
+      "anomaly_minus_peer_delta": -127.46049010854868,
+      "abs_delta": 127.46049010854868
     }
   ],
   "corporate_credit_row": {
     "metric": "strict_di_loans_nec_nonfinancial_corporate_qoq",
     "label": "Nonfinancial corporate DI loans n.e.c.",
     "anomaly_value": -39.829,
-    "weighted_peer_mean": 306.0581110835949,
-    "anomaly_minus_peer_delta": -345.8871110835949,
-    "abs_delta": 345.8871110835949
+    "weighted_peer_mean": 305.75618587097773,
+    "anomaly_minus_peer_delta": -345.58518587097774,
+    "abs_delta": 345.58518587097774
   },
   "loan_source_row": {
     "metric": "strict_loan_source_qoq",
     "label": "Strict loan source",
     "anomaly_value": -114.68,
-    "weighted_peer_mean": 244.99179560262976,
-    "anomaly_minus_peer_delta": -359.6717956026298,
-    "abs_delta": 359.6717956026298
+    "weighted_peer_mean": 244.68872517361717,
+    "anomaly_minus_peer_delta": -359.3687251736172,
+    "abs_delta": 359.3687251736172
   },
   "reserves_row": {
     "metric": "reserves_qoq",
     "label": "Reserves",
     "anomaly_value": 142.356,
-    "weighted_peer_mean": 611.4909759136485,
-    "anomaly_minus_peer_delta": -469.13497591364853,
-    "abs_delta": 469.13497591364853
+    "weighted_peer_mean": 611.6325675976564,
+    "anomaly_minus_peer_delta": -469.27656759765637,
+    "abs_delta": 469.27656759765637
   },
   "foreign_nonts_row": {
     "metric": "foreign_nonts_qoq",
     "label": "Foreign NONTS",
     "anomaly_value": 43.228,
-    "weighted_peer_mean": 374.6071732262628,
-    "anomaly_minus_peer_delta": -331.37917322626276,
-    "abs_delta": 331.37917322626276
+    "weighted_peer_mean": 374.2650878418564,
+    "anomaly_minus_peer_delta": -331.0370878418564,
+    "abs_delta": 331.0370878418564
   },
   "tga_row": {
     "metric": "tga_qoq",
     "label": "TGA",
     "anomaly_value": 80.613,
-    "weighted_peer_mean": -182.77472337211972,
-    "anomaly_minus_peer_delta": 263.3877233721197,
-    "abs_delta": 263.3877233721197
+    "weighted_peer_mean": -183.15479812569558,
+    "anomaly_minus_peer_delta": 263.76779812569555,
+    "abs_delta": 263.76779812569555
   },
   "residual_row": {
     "metric": "other_component_no_toc_no_row_bank_only_qoq",
     "label": "TOC/ROW-excluded residual",
     "anomaly_value": 73.64099999999998,
-    "weighted_peer_mean": 201.04718641727837,
-    "anomaly_minus_peer_delta": -127.40618641727839,
-    "abs_delta": 127.40618641727839
+    "weighted_peer_mean": 201.10149010854866,
+    "anomaly_minus_peer_delta": -127.46049010854868,
+    "abs_delta": 127.46049010854868
   },
-  "liquidity_external_abs_to_corporate_abs_ratio": 2.3143798178314916,
+  "liquidity_external_abs_to_corporate_abs_ratio": 2.3158216502321523,
   "interpretation": "anomaly_combines_corporate_credit_shortfall_with_even_larger_liquidity_external_shortfall",
   "takeaways": [
-    "Relative to same-bucket peers, the `2009Q4` anomaly shows nonfinancial-corporate DI loans delta \u2248 -345.89, reserves delta \u2248 -469.13, and foreign NONTS delta \u2248 -331.38.",
-    "The TGA delta is \u2248 263.39, while the TOC/ROW-excluded residual delta is \u2248 -127.41.",
-    "The combined liquidity/external shortfall is about 2.31 times the absolute nonfinancial-corporate DI-loans shortfall."
+    "Relative to same-bucket peers, the `2009Q4` anomaly shows nonfinancial-corporate DI loans delta \u2248 -345.59, reserves delta \u2248 -469.28, and foreign NONTS delta \u2248 -331.04.",
+    "The TGA delta is \u2248 263.77, while the TOC/ROW-excluded residual delta is \u2248 -127.46.",
+    "The combined liquidity/external shortfall is about 2.32 times the absolute nonfinancial-corporate DI-loans shortfall."
   ]
 }

@@ -52,16 +52,16 @@
     "strict_object_scope": "toc_and_row_excluded_under_current_evidence"
   },
   "h0_snapshot": {
-    "toc_row_support_bundle_beta": 65.3966245435534,
-    "core_residual_beta": -5.508313542362046,
-    "headline_direct_core_beta": -10.658905058923445,
-    "standard_bridge_beta": 9.437768587339647,
-    "toc_deposits_only_share": 0.6638359960227482,
-    "toc_reserve_share": 1.2615781222068045,
-    "row_checkable_share": 0.019049876218032797,
-    "row_external_share": 2.261390009711832,
-    "best_toc_candidate_implied_residual_beta": -34.16318859927438,
-    "best_toc_candidate_abs_gap_to_direct_core": 23.504283540350933
+    "toc_row_support_bundle_beta": 22.990651393911513,
+    "core_residual_beta": -5.510705208475613,
+    "headline_direct_core_beta": -10.660168482962053,
+    "standard_bridge_beta": 9.48112132496901,
+    "toc_deposits_only_share": 0.6853927164419539,
+    "toc_reserve_share": 1.8058019069981788,
+    "row_checkable_share": 0.01930784457247663,
+    "row_external_share": 1.209489750336419,
+    "best_toc_candidate_implied_residual_beta": -22.605426638175988,
+    "best_toc_candidate_abs_gap_to_direct_core": 11.945258155213935
   },
   "recommendation": {
     "status": "strict_release_framing_finalized",
@@ -75,8 +75,8 @@
     "Full TDC remains in the repo as the broad Treasury-attributed object, but TOC and ROW stay outside the strict object under current evidence.",
     "The strict evidence hierarchy is now fixed around `strict_loan_core_min_qoq` as the headline direct benchmark and `strict_loan_core_plus_nonfinancial_corporate_qoq` as the standard bridge comparison; `strict_loan_core_plus_private_borrower_qoq` stays diagnostic.",
     "The direct-core rule is horizon-specific rather than one-size-fits-all: multihorizon benchmark = `strict_loan_core_min_qoq`, impact-horizon candidate = `strict_loan_mortgages_qoq`.",
-    "The h0 release snapshot is now explicit: TOC/ROW support bundle \u2248 65.40, core residual \u2248 -5.51, headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.44.",
-    "The raw incidence gate is what keeps the support bundle outside the strict object: TOC deposits-only share \u2248 0.66 versus reserves share \u2248 1.26, ROW-checkable share \u2248 0.02 versus foreign-NONTS share \u2248 2.26.",
-    "The narrow-TOC rescue branch is closed too: even the best candidate implies residual \u2248 -34.16 with abs gap \u2248 23.50 to the headline direct core."
+    "The h0 release snapshot is now explicit: TOC/ROW support bundle \u2248 22.99, core residual \u2248 -5.51, headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.48.",
+    "The raw incidence gate is what keeps the support bundle outside the strict object: TOC deposits-only share \u2248 0.69 versus reserves share \u2248 1.81, ROW-checkable share \u2248 0.02 versus foreign-NONTS share \u2248 1.21.",
+    "The narrow-TOC rescue branch is closed too: even the best candidate implies residual \u2248 -22.61 with abs gap \u2248 11.95 to the headline direct core."
   ]
 }

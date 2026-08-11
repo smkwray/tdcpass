@@ -10,21 +10,21 @@
   },
   "latest_common_broad_comparison": {
     "quarter": "2025Q4",
-    "headline_bank_only_beta": 68.996,
-    "tier2_bank_only_beta": -49.489696572643446,
-    "tier3_bank_only_beta": -51.56566095216345,
-    "tier3_broad_depository_beta": -51.34766095216344,
-    "tier2_minus_headline_beta": -118.48569657264343,
-    "tier3_minus_headline_beta": -120.56166095216344,
-    "tier3_broad_minus_headline_beta": -120.34366095216343
+    "headline_bank_only_beta": 70.73121016844999,
+    "tier2_bank_only_beta": -59.76573733748397,
+    "tier3_bank_only_beta": -61.84170171700397,
+    "tier3_broad_depository_beta": -61.62370171700397,
+    "tier2_minus_headline_beta": -130.49694750593397,
+    "tier3_minus_headline_beta": -132.57291188545395,
+    "tier3_broad_minus_headline_beta": -132.35491188545396
   },
   "supplemental_surfaces": {
     "historical_bank_receipt_overlay": {
       "available": true,
       "latest_quarter": "2024Q4",
-      "latest_value": 102.26300228318732,
+      "latest_value": 94.08033113317664,
       "latest_nonzero_quarter": "2024Q4",
-      "latest_nonzero_value": 102.26300228318732
+      "latest_nonzero_value": 94.08033113317664
     },
     "row_mrv_nondefault_pilot": {
       "available": true,
@@ -55,7 +55,7 @@
     "The sibling tdcest ladder is now fully visible inside tdcpass as broad-object comparison rows rather than a replacement strict framework.",
     "Tier 2 and Tier 3 stay in the broad-object comparison tier; they are not promoted into the strict deposit-component object.",
     "The historical bank-receipt overlay and the MRV ROW pilot are now live in the quarterly panel, but they remain fenced to historical-only and nondefault-sensitivity roles.",
-    "Latest common broad-object quarter 2025Q4: headline \u2248 69.00, Tier 2 \u2248 -49.49, Tier 3 \u2248 -51.57, Tier 3 broad-depository \u2248 -51.35.",
+    "Latest common broad-object quarter 2025Q4: headline \u2248 70.73, Tier 2 \u2248 -59.77, Tier 3 \u2248 -61.84, Tier 3 broad-depository \u2248 -61.62.",
     "Historical overlay remains active only in a narrow historical window: latest nonzero quarter = 2024Q4.",
     "The bounded ROW MRV pilot is live but explicitly nondefault: latest nonzero quarter = 2025Q3."
   ]

@@ -1,7 +1,7 @@
 {
   "status": "insufficient_history",
   "headline_question": "Do the corrected tdcest broad-treatment variants materially change the broad deposit and residual LP results?",
-  "reason": "corrected_tdcest_variants_do_not_clear_current_shock_history_gate",
+  "reason": "some_corrected_tdcest_variants_do_not_clear_current_shock_history_gate",
   "estimation_path": {
     "summary_artifact": "tdcest_broad_treatment_sensitivity_summary.json",
     "source_artifacts": [
@@ -10,23 +10,30 @@
   },
   "baseline_reference": {
     "h0_total_deposits": {
-      "beta": 28.768499881256375,
-      "se": 13.69466304984466,
-      "lower95": 1.9269603035608398,
-      "upper95": 55.61003945895191,
+      "beta": 28.95006368418275,
+      "se": 13.625048119004301,
+      "lower95": 2.244969370934321,
+      "upper95": 55.65515799743118,
       "n": 119,
       "ci_excludes_zero": true
     },
     "h0_other_component": {
-      "beta": -56.69351156923962,
-      "se": 12.497468749378598,
-      "lower95": -81.18855031802167,
-      "upper95": -32.19847282045757,
+      "beta": -56.223002789186694,
+      "se": 12.517283696834168,
+      "lower95": -80.75687883498166,
+      "upper95": -31.689126743391725,
       "n": 119,
       "ci_excludes_zero": true
     }
   },
   "missing_variants": {
+    "tier2_bank_only": {
+      "label": "Legacy Tier 2 H15/WAMEST bank-only",
+      "target_column": "tdc_tier2_bank_only_qoq",
+      "shock_column": "tdc_tier2_bank_only_residual_z",
+      "target_nonnull_count": 16,
+      "usable_shock_count": 0
+    },
     "tier3_bank_only": {
       "label": "Tier 3 fiscal-corrected bank-only",
       "target_column": "tdc_tier3_bank_only_qoq",
@@ -43,13 +50,13 @@
     }
   },
   "recommendation": {
-    "status": "use_tdcest_ladder_as_level_comparison_only",
-    "why": "The corrected tdcest broad-treatment variants currently add value as broad-object level/ladder diagnostics, but there is not enough history to run the frozen LP sensitivity design on them."
+    "status": "use_available_long_history_rows_and_keep_short_rows_as_level_comparison",
+    "why": "The long-history regression/MMF-RRP rows can enter the frozen LP sensitivity design; short modern canonical rows remain level/benchmark diagnostics."
   },
   "takeaways": [
-    "Baseline h0 broad-object read remains total deposits up and other component down: total \u2248 28.77, residual \u2248 -56.69.",
-    "Corrected tdcest broad-treatment LP sensitivity is not currently estimable under the frozen shock-design gate because the corrected series do not have enough history to enter the sensitivity ladder.",
-    "Current availability by corrected variant: Tier 3 fiscal-corrected bank-only: target non-null count = 16, usable shock count = 0; Tier 3 fiscal-corrected broad-depository: target non-null count = 16, usable shock count = 0.",
+    "Baseline h0 broad-object read remains total deposits up and other component down: total \u2248 28.95, residual \u2248 -56.22.",
+    "Corrected tdcest broad-treatment LP sensitivity is not fully estimable under the frozen shock-design gate because at least one corrected comparison row lacks enough history.",
+    "Current availability by corrected variant: Legacy Tier 2 H15/WAMEST bank-only: target non-null count = 16, usable shock count = 0; Tier 3 fiscal-corrected bank-only: target non-null count = 16, usable shock count = 0; Tier 3 fiscal-corrected broad-depository: target non-null count = 16, usable shock count = 0.",
     "A separate short-history exploratory h0 check is available, but it is not comparable to the frozen rolling-shock LP design."
   ],
   "exploratory_short_history": {
@@ -79,57 +86,95 @@
     "baseline": {
       "label": "Canonical bank-only headline",
       "total_deposits": {
-        "beta": 79.48440609286114,
-        "se": 25.68655727860288,
-        "lower95": 29.138753826799494,
-        "upper95": 129.83005835892277,
+        "beta": 79.62840598966923,
+        "se": 25.648927889416782,
+        "lower95": 29.35650732641234,
+        "upper95": 129.90030465292614,
         "n": 15,
         "ci_excludes_zero": true
       },
       "other_component": {
-        "beta": -122.68197021733661,
-        "se": 26.8329925243603,
-        "lower95": -175.2746355650828,
-        "upper95": -70.08930486959042,
+        "beta": -122.67325493353326,
+        "se": 26.833360509227134,
+        "lower95": -175.26664153161843,
+        "upper95": -70.07986833544808,
         "n": 15,
         "ci_excludes_zero": true
       }
     },
     "variants": {
       "tier2_bank_only": {
-        "label": "Tier 2 interest-corrected bank-only",
+        "label": "Legacy Tier 2 H15/WAMEST bank-only",
         "total_deposits": {
-          "beta": 73.25680848934685,
-          "se": 25.97440874769844,
-          "lower95": 22.346967343857912,
-          "upper95": 124.16664963483579,
+          "beta": 66.79310126238116,
+          "se": 26.57876945821079,
+          "lower95": 14.698713124288012,
+          "upper95": 118.8874894004743,
           "n": 15,
           "ci_excludes_zero": true
         },
         "other_component": {
-          "beta": -129.13873106778522,
-          "se": 25.020819961672498,
-          "lower95": -178.1795381926633,
-          "upper95": -80.09792394290713,
+          "beta": -135.36225092355997,
+          "se": 23.519398399096044,
+          "lower95": -181.46027178578822,
+          "upper95": -89.26423006133172,
           "n": 15,
           "ci_excludes_zero": true
+        }
+      },
+      "tier2_regression_mmf_rrp_bank_only": {
+        "label": "Long-history Tier 2 regression/MMF-RRP bank-only",
+        "total_deposits": {
+          "beta": 88.87043403023824,
+          "se": 34.38825620546889,
+          "lower95": 21.46945186751921,
+          "upper95": 156.27141619295728,
+          "n": 15,
+          "ci_excludes_zero": true
+        },
+        "other_component": {
+          "beta": -85.2563423656508,
+          "se": 48.99705767445156,
+          "lower95": -181.29057540757586,
+          "upper95": 10.777890676274268,
+          "n": 15,
+          "ci_excludes_zero": false
+        }
+      },
+      "tier2_regression_mmf_rrp_di_np_cu": {
+        "label": "Long-history Tier 2 regression/MMF-RRP DI NP-CU",
+        "total_deposits": {
+          "beta": 88.0140023544757,
+          "se": 34.12333020513506,
+          "lower95": 21.132275152410983,
+          "upper95": 154.89572955654043,
+          "n": 15,
+          "ci_excludes_zero": true
+        },
+        "other_component": {
+          "beta": -87.15179066024726,
+          "se": 48.054734036811205,
+          "lower95": -181.3390693723972,
+          "upper95": 7.035488051902703,
+          "n": 15,
+          "ci_excludes_zero": false
         }
       },
       "tier3_bank_only": {
         "label": "Tier 3 fiscal-corrected bank-only",
         "total_deposits": {
-          "beta": 72.81035821137326,
-          "se": 26.045476846034898,
-          "lower95": 21.761223593144855,
-          "upper95": 123.85949282960166,
+          "beta": 66.35030573191247,
+          "se": 26.66920109478905,
+          "lower95": 14.078671586125935,
+          "upper95": 118.621939877699,
           "n": 15,
           "ci_excludes_zero": true
         },
         "other_component": {
-          "beta": -129.4619547562015,
-          "se": 24.891897005861985,
-          "lower95": -178.25007288769098,
-          "upper95": -80.67383662471201,
+          "beta": -135.6575354944747,
+          "se": 23.400519817723275,
+          "lower95": -181.5225543372123,
+          "upper95": -89.79251665173709,
           "n": 15,
           "ci_excludes_zero": true
         }
@@ -137,26 +182,26 @@
       "tier3_broad_depository": {
         "label": "Tier 3 fiscal-corrected broad-depository",
         "total_deposits": {
-          "beta": 72.31967785471278,
-          "se": 25.89050791474193,
-          "lower95": 21.574282341818595,
-          "upper95": 123.06507336760697,
+          "beta": 65.91074973908067,
+          "se": 26.590179603689187,
+          "lower95": 13.79399771584987,
+          "upper95": 118.02750176231147,
           "n": 15,
           "ci_excludes_zero": true
         },
         "other_component": {
-          "beta": -130.13413527101122,
-          "se": 24.711798888581804,
-          "lower95": -178.56926109263156,
-          "upper95": -81.69900944939089,
+          "beta": -136.18805427838956,
+          "se": 23.343679466725327,
+          "lower95": -181.9416660331712,
+          "upper95": -90.43444252360791,
           "n": 15,
           "ci_excludes_zero": true
         }
       }
     },
     "takeaways": [
-      "Short-history common-sample baseline h0 read is total \u2248 79.48, residual \u2248 -122.68 over 2022Q1 to 2025Q4.",
-      "Short-history corrected-variant h0 reads: Tier 2 interest-corrected bank-only: total \u2248 73.26, residual \u2248 -129.14; Tier 3 fiscal-corrected bank-only: total \u2248 72.81, residual \u2248 -129.46; Tier 3 fiscal-corrected broad-depository: total \u2248 72.32, residual \u2248 -130.13."
+      "Short-history common-sample baseline h0 read is total \u2248 79.63, residual \u2248 -122.67 over 2022Q1 to 2025Q4.",
+      "Short-history corrected-variant h0 reads: Legacy Tier 2 H15/WAMEST bank-only: total \u2248 66.79, residual \u2248 -135.36; Long-history Tier 2 regression/MMF-RRP bank-only: total \u2248 88.87, residual \u2248 -85.26; Long-history Tier 2 regression/MMF-RRP DI NP-CU: total \u2248 88.01, residual \u2248 -87.15; Tier 3 fiscal-corrected bank-only: total \u2248 66.35, residual \u2248 -135.66; Tier 3 fiscal-corrected broad-depository: total \u2248 65.91, residual \u2248 -136.19."
     ]
   }
 }

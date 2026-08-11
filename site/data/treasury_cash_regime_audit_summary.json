@@ -107,31 +107,31 @@
       },
       "rows": 64,
       "toc_vs_tga_corr": 0.9688013306622916,
-      "toc_vs_broad_cash_proxy_corr": 0.9999913148932609,
-      "toc_vs_total_checkable_corr": 0.9999684024725213,
+      "toc_vs_broad_cash_proxy_corr": 0.9999912882724201,
+      "toc_vs_total_checkable_corr": 0.9999683723544942,
       "toc_vs_ttl_bank_component_corr": -0.01900544259914023,
-      "toc_vs_implied_fed_side_checkable_corr": 0.999969651336868,
-      "tga_vs_broad_cash_proxy_corr": 0.9689291679549762,
+      "toc_vs_implied_fed_side_checkable_corr": 0.9999696414447424,
+      "tga_vs_broad_cash_proxy_corr": 0.9689306541990438,
       "ttl_bank_share_of_cash_balance_proxy_abs": {
-        "mean": 0.009859784352585435,
+        "mean": 0.00986366090514167,
         "median": 0.0033692855761373935,
         "p10": 0.0003652877207436292,
         "p90": 0.026355273024202274
       },
       "ttl_bank_share_of_total_checkable_abs": {
-        "mean": 0.00985086364812371,
+        "mean": 0.00985478469157514,
         "median": 0.003371642430736693,
         "p10": 0.0003646520609938295,
         "p90": 0.026450442833640973
       },
       "time_savings_share_of_cash_balance_proxy_abs": {
-        "mean": 0.006518259703683062,
+        "mean": 0.006518791564500537,
         "median": 0.002837672089455542,
         "p10": 0.0003139324643845331,
         "p90": 0.012387261807242093
       },
       "tga_over_broad_cash_proxy": {
-        "mean": 0.7109973983614912,
+        "mean": 0.7108194717271917,
         "median": 0.9100500081455642,
         "p10": -0.7135962143232424,
         "p90": 1.6884466650322112
@@ -142,31 +142,31 @@
   "full_sample": {
     "rows": 92,
     "toc_vs_tga_corr": 0.9467815933251763,
-    "toc_vs_broad_cash_proxy_corr": 0.9998582880789806,
-    "toc_vs_total_checkable_corr": 0.9998920588953345,
+    "toc_vs_broad_cash_proxy_corr": 0.9998582484509349,
+    "toc_vs_total_checkable_corr": 0.9998920244451802,
     "toc_vs_ttl_bank_component_corr": 0.030822932799669276,
-    "toc_vs_implied_fed_side_checkable_corr": 0.9985154046468353,
-    "tga_vs_broad_cash_proxy_corr": 0.9464571642693809,
+    "toc_vs_implied_fed_side_checkable_corr": 0.9985153980644316,
+    "tga_vs_broad_cash_proxy_corr": 0.9464585955684944,
     "ttl_bank_share_of_cash_balance_proxy_abs": {
-      "mean": 0.325819065765991,
+      "mean": 0.32582176249820405,
       "median": 0.005959105952275549,
       "p10": 0.0003979043708285268,
       "p90": 0.9272332419467447
     },
     "ttl_bank_share_of_total_checkable_abs": {
-      "mean": 0.3748295133492469,
+      "mean": 0.3748322410316479,
       "median": 0.005966937031186295,
       "p10": 0.00039603148809585386,
       "p90": 0.9780301348999473
     },
     "time_savings_share_of_cash_balance_proxy_abs": {
-      "mean": 0.07323205259210902,
+      "mean": 0.07323242258224291,
       "median": 0.004012324364650852,
       "p10": 0.0005079526898201206,
       "p90": 0.14337996813116546
     },
     "tga_over_broad_cash_proxy": {
-      "mean": 0.2585067679487749,
+      "mean": 0.2583829928988274,
       "median": 0.3846007604711428,
       "p10": -0.2974961029393048,
       "p90": 1.6457242985142924

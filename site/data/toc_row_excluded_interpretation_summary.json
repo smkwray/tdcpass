@@ -20,396 +20,396 @@
     "h0": {
       "baseline": {
         "tdc_response": {
-          "beta": 128.49398892100785,
-          "se": 35.35607638823668,
-          "lower95": 121.98116262105009,
-          "upper95": 240.37795249062742,
-          "n": 68,
+          "beta": 86.08814077380539,
+          "se": 30.20526940799892,
+          "lower95": 76.97912941522767,
+          "upper95": 178.33105873186076,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 55.75033524806063,
-          "se": 36.700432038480976,
-          "lower95": 33.18018695954889,
-          "upper95": 169.774253047445,
-          "n": 68,
+          "beta": 37.977694851980814,
+          "se": 22.551257606845624,
+          "lower95": 30.0900235720967,
+          "upper95": 106.14704303452187,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "residual_response": {
-          "beta": -72.74365367294723,
-          "se": 44.01638149973874,
-          "lower95": -158.17601344442144,
-          "upper95": -13.353135923430095,
-          "n": 68,
+          "beta": -48.11044592182458,
+          "se": 30.88944589286153,
+          "lower95": -113.81642249137263,
+          "upper95": -14.845392337204265,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "strict_identifiable_total_response": {
-          "beta": -2.065449067392155,
-          "se": 12.647084899431508,
-          "lower95": -26.85373547027791,
-          "upper95": 22.7228373354936,
-          "n": 68,
+          "beta": -3.3212742360073477,
+          "se": 7.0574160358523566,
+          "lower95": -17.153809666277965,
+          "upper95": 10.511261194263271,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -75.57860724607262,
-          "se": 15.835634841559054,
-          "lower95": -106.61645153552837,
-          "upper95": -44.540762956616874,
-          "n": 68,
+          "beta": -51.45101110629406,
+          "se": 11.612583938530694,
+          "lower95": -74.21167562581422,
+          "upper95": -28.690346586773902,
+          "n": 119,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 1.038971833692479
+        "strict_gap_share_of_residual": 1.0694353402979806
       },
       "toc_row_excluded": {
         "tdc_response": {
-          "beta": 63.097364377454454,
-          "se": 39.15868256544408,
-          "lower95": 43.05924464805982,
-          "upper95": 199.79164559597874,
+          "beta": 63.09748937989388,
+          "se": 39.16113995131595,
+          "lower95": 43.0592446480598,
+          "upper95": 199.7920602823256,
           "n": 68,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 57.58905083509241,
-          "se": 45.65445174036686,
-          "lower95": 25.771085834067428,
-          "upper95": 210.96848324957452,
+          "beta": 57.586784171418266,
+          "se": 45.66149193857693,
+          "lower95": 25.70650100935956,
+          "upper95": 210.95209331750425,
           "n": 68,
           "ci_excludes_zero": true
         },
         "residual_response": {
-          "beta": -5.508313542362046,
-          "se": 20.62351808208141,
-          "lower95": -41.1931724771377,
-          "upper95": 31.338433858638396,
+          "beta": -5.510705208475613,
+          "se": 20.6382659726148,
+          "lower95": -41.19491558058557,
+          "upper95": 31.338685918633587,
           "n": 68,
           "ci_excludes_zero": false
         },
         "strict_identifiable_total_response": {
-          "beta": 10.831912868739106,
-          "se": 5.571229269005423,
-          "lower95": -0.08769649851152295,
-          "upper95": 21.751522235989736,
+          "beta": 10.8730931023671,
+          "se": 5.581636922678874,
+          "lower95": -0.06691526608349285,
+          "upper95": 21.813101470817692,
           "n": 68,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -16.31011211960928,
-          "se": 7.00738261080026,
-          "lower95": -30.04458203677779,
-          "upper95": -2.57564220244077,
+          "beta": -16.33062170061628,
+          "se": 7.010049266784699,
+          "lower95": -30.070318263514288,
+          "upper95": -2.590925137718271,
           "n": 68,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 2.960999223115259
+        "strict_gap_share_of_residual": 2.9634359093459297
       },
       "excluded_minus_baseline_beta": {
-        "tdc_response": -65.3966245435534,
-        "total_deposits_response": 1.8387155870317784,
-        "residual_response": 67.23534013058519,
-        "strict_identifiable_total_response": 12.897361936131261,
-        "strict_identifiable_gap_response": 59.26849512646334,
-        "strict_gap_share_of_residual": 1.92202738942278
+        "tdc_response": -22.990651393911513,
+        "total_deposits_response": 19.60908931943745,
+        "residual_response": 42.599740713348965,
+        "strict_identifiable_total_response": 14.194367338374448,
+        "strict_identifiable_gap_response": 35.120389405677784,
+        "strict_gap_share_of_residual": 1.8940005690479491
       },
       "interpretation": "toc_row_exclusion_removes_most_residual_but_strict_gap_remains"
     },
     "h1": {
       "baseline": {
         "tdc_response": {
-          "beta": 177.53974642600284,
-          "se": 66.84375294787888,
-          "lower95": 130.28064867498605,
-          "upper95": 377.23093707775735,
-          "n": 67,
+          "beta": 115.95916898888741,
+          "se": 43.62886436083331,
+          "lower95": 102.80362433580325,
+          "upper95": 251.50092254521834,
+          "n": 118,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 95.8047337449417,
-          "se": 129.6567128146508,
-          "lower95": -48.19924594822437,
-          "upper95": 389.9392213275949,
-          "n": 67,
-          "ci_excludes_zero": false
+          "beta": 54.73477407890318,
+          "se": 53.96065717846514,
+          "lower95": 12.160566998881617,
+          "upper95": 215.73763191099562,
+          "n": 118,
+          "ci_excludes_zero": true
         },
         "residual_response": {
-          "beta": -81.73501268106114,
-          "se": 112.61015434916627,
-          "lower95": -266.14262750869676,
-          "upper95": 127.77060584629773,
-          "n": 67,
+          "beta": -61.224394909984234,
+          "se": 60.25819048188139,
+          "lower95": -174.88135481031847,
+          "upper95": 62.59419880870689,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "strict_identifiable_total_response": {
-          "beta": 7.344266170371981,
-          "se": 17.65812250254253,
-          "lower95": -27.26565393461138,
-          "upper95": 41.95418627535534,
-          "n": 67,
+          "beta": -1.55093125282648,
+          "se": 10.590284003470053,
+          "lower95": -22.307887899627783,
+          "upper95": 19.206025393974823,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -95.96925375260935,
-          "se": 39.92070589883488,
-          "lower95": -174.2138373143257,
-          "upper95": -17.72467019089298,
-          "n": 67,
+          "beta": -67.5818703711079,
+          "se": 24.5227004267397,
+          "lower95": -115.64636320751771,
+          "upper95": -19.517377534698085,
+          "n": 118,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 1.174151084151559
+        "strict_gap_share_of_residual": 1.1038389267949615
       },
       "toc_row_excluded": {
         "tdc_response": {
-          "beta": 141.60401990915378,
-          "se": 95.06604119464917,
-          "lower95": 74.5681927356211,
-          "upper95": 374.3635568121932,
+          "beta": 141.60356157148144,
+          "se": 95.0658045646848,
+          "lower95": 74.57646471475921,
+          "upper95": 374.37193579577496,
           "n": 67,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 117.88686757981259,
-          "se": 105.14112180190034,
-          "lower95": 40.52656026961234,
-          "upper95": 399.46983149703203,
+          "beta": 117.88693172787245,
+          "se": 105.14154076980172,
+          "lower95": 40.53261082749195,
+          "upper95": 399.46945042809097,
           "n": 67,
           "ci_excludes_zero": true
         },
         "residual_response": {
-          "beta": -23.71715232934119,
-          "se": 36.725495470798755,
-          "lower95": -118.08535829298857,
-          "upper95": 41.15885710783235,
+          "beta": -23.716629843608985,
+          "se": 36.729718037356996,
+          "lower95": -118.11137574892409,
+          "upper95": 41.15868823931264,
           "n": 67,
           "ci_excludes_zero": false
         },
         "strict_identifiable_total_response": {
-          "beta": 10.939907534566082,
-          "se": 8.771361863073357,
-          "lower95": -6.2519617170577,
-          "upper95": 28.131776786189864,
+          "beta": 10.973397061563231,
+          "se": 8.817984015811932,
+          "lower95": -6.309851609428156,
+          "upper95": 28.256645732554617,
           "n": 67,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -32.64748374916893,
-          "se": 9.372834225880327,
-          "lower95": -51.018238831894365,
-          "upper95": -14.276728666443486,
+          "beta": -32.64462546178456,
+          "se": 9.367020970530305,
+          "lower95": -51.003986564023954,
+          "upper95": -14.28526435954516,
           "n": 67,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 1.376534724566396
+        "strict_gap_share_of_residual": 1.3764445318347553
       },
       "excluded_minus_baseline_beta": {
-        "tdc_response": -35.93572651684906,
-        "total_deposits_response": 22.082133834870888,
-        "residual_response": 58.017860351719946,
-        "strict_identifiable_total_response": 3.595641364194101,
-        "strict_identifiable_gap_response": 63.32177000344042,
-        "strict_gap_share_of_residual": 0.20238364041483692
+        "tdc_response": 25.644392582594023,
+        "total_deposits_response": 63.15215764896927,
+        "residual_response": 37.50776506637525,
+        "strict_identifiable_total_response": 12.524328314389711,
+        "strict_identifiable_gap_response": 34.93724490932334,
+        "strict_gap_share_of_residual": 0.2726056050397938
       },
       "interpretation": "toc_row_exclusion_materially_relaxes_residual"
     },
     "h4": {
       "baseline": {
         "tdc_response": {
-          "beta": 278.13971316628357,
-          "se": 135.53925372460046,
-          "lower95": 99.95004110815775,
-          "upper95": 573.0392517689081,
-          "n": 64,
+          "beta": 172.8674661880664,
+          "se": 82.60355575091555,
+          "lower95": 82.34485568850477,
+          "upper95": 375.19249980584107,
+          "n": 115,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 167.33069747889854,
-          "se": 152.74365379169456,
-          "lower95": -19.120245604652105,
-          "upper95": 536.756697768065,
-          "n": 64,
-          "ci_excludes_zero": false
+          "beta": 95.30474128450595,
+          "se": 78.37031348999614,
+          "lower95": 25.9184913456442,
+          "upper95": 317.2743693774807,
+          "n": 115,
+          "ci_excludes_zero": true
         },
         "residual_response": {
-          "beta": -110.80901568738503,
-          "se": 92.32284109082977,
-          "lower95": -261.5544251737914,
-          "upper95": 66.58556432590852,
-          "n": 64,
+          "beta": -77.56272490356045,
+          "se": 50.308850005762885,
+          "lower95": -152.74838539780265,
+          "upper95": 21.889122598004846,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_identifiable_total_response": {
-          "beta": 9.627031230490715,
-          "se": 41.77812349712697,
-          "lower95": -72.25809082387815,
-          "upper95": 91.51215328485958,
-          "n": 64,
+          "beta": 1.6242148598417572,
+          "se": 26.983616569507834,
+          "lower95": -51.263673616393596,
+          "upper95": 54.51210333607711,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -125.08905760855576,
-          "se": 43.556683142392345,
-          "lower95": -210.46015656764476,
-          "upper95": -39.717958649466766,
-          "n": 64,
+          "beta": -74.73928102867838,
+          "se": 29.50488312747682,
+          "lower95": -132.56885195853295,
+          "upper95": -16.90971009882381,
+          "n": 115,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 1.128870758688604
+        "strict_gap_share_of_residual": 0.963597928278143
       },
       "toc_row_excluded": {
         "tdc_response": {
-          "beta": 212.64368952952745,
-          "se": 146.4849514976082,
-          "lower95": 73.71823429200727,
-          "upper95": 591.940608624181,
+          "beta": 212.64273586591287,
+          "se": 146.4863221835776,
+          "lower95": 73.69828168411681,
+          "upper95": 591.9411804980735,
           "n": 64,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 169.47198317892202,
-          "se": 146.23979712776645,
-          "lower95": 39.37137700694605,
-          "upper95": 501.43647471875977,
+          "beta": 169.47215383011346,
+          "se": 146.23966742185488,
+          "lower95": 39.371702128384776,
+          "upper95": 501.4365235323343,
           "n": 64,
           "ci_excludes_zero": true
         },
         "residual_response": {
-          "beta": -43.17170635060543,
-          "se": 61.45250160127709,
-          "lower95": -216.34937386767612,
-          "upper95": 26.193522889776798,
+          "beta": -43.17058203579941,
+          "se": 61.453543391484715,
+          "lower95": -216.3444644123795,
+          "upper95": 26.16817033426987,
           "n": 64,
           "ci_excludes_zero": false
         },
         "strict_identifiable_total_response": {
-          "beta": 19.53446047118806,
-          "se": 16.46559053181894,
-          "lower95": -12.738096971177061,
-          "upper95": 51.80701791355318,
+          "beta": 19.56041083021755,
+          "se": 16.511618962738492,
+          "lower95": -12.802362336749894,
+          "upper95": 51.92318399718499,
           "n": 64,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -58.42375848257299,
-          "se": 18.955979947283623,
-          "lower95": -95.5774791792489,
-          "upper95": -21.270037785897088,
+          "beta": -58.45977039125296,
+          "se": 18.966701912473166,
+          "lower95": -95.63450613970036,
+          "upper95": -21.285034642805556,
           "n": 64,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 1.3532881468270634
+        "strict_gap_share_of_residual": 1.3541575682897884
       },
       "excluded_minus_baseline_beta": {
-        "tdc_response": -65.49602363675612,
-        "total_deposits_response": 2.1412857000234737,
-        "residual_response": 67.6373093367796,
-        "strict_identifiable_total_response": 9.907429240697343,
-        "strict_identifiable_gap_response": 66.66529912598277,
-        "strict_gap_share_of_residual": 0.22441738813845946
+        "tdc_response": 39.77526967784647,
+        "total_deposits_response": 74.1674125456075,
+        "residual_response": 34.39214286776104,
+        "strict_identifiable_total_response": 17.936195970375792,
+        "strict_identifiable_gap_response": 16.279510637425417,
+        "strict_gap_share_of_residual": 0.39055964001164545
       },
       "interpretation": "toc_row_exclusion_materially_relaxes_residual"
     },
     "h8": {
       "baseline": {
         "tdc_response": {
-          "beta": 347.6946386730543,
-          "se": 221.9754872462717,
-          "lower95": 96.67772805372198,
-          "upper95": 906.744733598528,
-          "n": 60,
+          "beta": 219.83216429237058,
+          "se": 155.57831018897951,
+          "lower95": 103.94108249408443,
+          "upper95": 659.8157864995725,
+          "n": 111,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 114.22386198654391,
-          "se": 199.2946323242194,
-          "lower95": -45.5137585282062,
-          "upper95": 577.7039433044013,
-          "n": 60,
-          "ci_excludes_zero": false
+          "beta": 73.7367745406378,
+          "se": 148.4967539834957,
+          "lower95": 8.109865678127505,
+          "upper95": 499.5942647626776,
+          "n": 111,
+          "ci_excludes_zero": true
         },
         "residual_response": {
-          "beta": -233.47077668651042,
-          "se": 133.2200731355854,
-          "lower95": -458.00648056390077,
-          "upper95": -9.031112216537359,
-          "n": 60,
+          "beta": -146.0953897517328,
+          "se": 66.7636951509911,
+          "lower95": -308.7777156732237,
+          "upper95": -51.153067166951814,
+          "n": 111,
           "ci_excludes_zero": true
         },
         "strict_identifiable_total_response": {
-          "beta": 9.626948380965104,
-          "se": 63.93759559971269,
-          "lower95": -115.69073899447176,
-          "upper95": 134.94463575640196,
-          "n": 60,
+          "beta": 9.15206279903046,
+          "se": 44.76379442273261,
+          "lower95": -78.58497426952545,
+          "upper95": 96.88909986758637,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -249.82357659783204,
-          "se": 66.88782681202392,
-          "lower95": -380.92371714939895,
-          "upper95": -118.72343604626516,
-          "n": 60,
+          "beta": -145.1436729824548,
+          "se": 46.820325900599066,
+          "lower95": -236.91151174762896,
+          "upper95": -53.37583421728064,
+          "n": 111,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 1.070042170345281
+        "strict_gap_share_of_residual": 0.993485648172093
       },
       "toc_row_excluded": {
         "tdc_response": {
-          "beta": 250.44523079159632,
-          "se": 200.0191271326977,
-          "lower95": 60.61701857010138,
-          "upper95": 708.9228047446226,
+          "beta": 250.4456137045933,
+          "se": 200.02035821872573,
+          "lower95": 60.616306060573926,
+          "upper95": 708.9228047446302,
           "n": 60,
           "ci_excludes_zero": true
         },
         "total_deposits_response": {
-          "beta": 183.10946429682852,
-          "se": 193.76948385660515,
-          "lower95": -35.57955087700274,
-          "upper95": 575.3526375213031,
+          "beta": 183.10945008110096,
+          "se": 193.76926470005927,
+          "lower95": -35.579571671925656,
+          "upper95": 575.3526375213014,
           "n": 60,
           "ci_excludes_zero": false
         },
         "residual_response": {
-          "beta": -67.3357664947678,
-          "se": 65.98447937749266,
-          "lower95": -250.830708969113,
-          "upper95": -4.830711058909321,
+          "beta": -67.33616362349235,
+          "se": 65.98413244218939,
+          "lower95": -250.83055743955708,
+          "upper95": -4.830711058909176,
           "n": 60,
           "ci_excludes_zero": true
         },
         "strict_identifiable_total_response": {
-          "beta": 31.120247707269446,
-          "se": 26.365149749724928,
-          "lower95": -20.55544580219141,
-          "upper95": 82.7959412167303,
+          "beta": 31.306888123833996,
+          "se": 26.404311736257913,
+          "lower95": -20.445562879231513,
+          "upper95": 83.0593391268995,
           "n": 60,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap_response": {
-          "beta": -95.89414155088384,
-          "se": 20.828121001005034,
-          "lower95": -136.71725871285372,
-          "upper95": -55.071024388913976,
+          "beta": -96.12091298829502,
+          "se": 20.83642309994788,
+          "lower95": -136.96030226419288,
+          "upper95": -55.281523712397174,
           "n": 60,
           "ci_excludes_zero": true
         },
-        "strict_gap_share_of_residual": 1.4241189570231614
+        "strict_gap_share_of_residual": 1.4274783090666037
       },
       "excluded_minus_baseline_beta": {
-        "tdc_response": -97.24940788145801,
-        "total_deposits_response": 68.88560231028461,
-        "residual_response": 166.13501019174262,
-        "strict_identifiable_total_response": 21.493299326304342,
-        "strict_identifiable_gap_response": 153.92943504694819,
-        "strict_gap_share_of_residual": 0.35407678667788045
+        "tdc_response": 30.613449412222735,
+        "total_deposits_response": 109.37267554046316,
+        "residual_response": 78.75922612824044,
+        "strict_identifiable_total_response": 22.154825324803536,
+        "strict_identifiable_gap_response": 49.022759994159784,
+        "strict_gap_share_of_residual": 0.4339926608945107
       },
       "interpretation": "toc_row_exclusion_materially_relaxes_residual"
     }
   },
   "takeaways": [
     "This is a secondary comparison surface only: it excludes the combined TOC/ROW bundle from the treatment object to test how much of the current residual and strict-gap story is tied to that suspect block, without relabeling the headline treatment.",
-    "At h0, excluding TOC/ROW changes the non-TDC residual response from about -72.74 to about -5.51.",
-    "At h0, the strict direct-count gap share moves from about 1.04 under the baseline treatment to about 2.96 under the TOC/ROW-excluded comparison.",
+    "At h0, excluding TOC/ROW changes the non-TDC residual response from about -48.11 to about -5.51.",
+    "At h0, the strict direct-count gap share moves from about 1.07 under the baseline treatment to about 2.96 under the TOC/ROW-excluded comparison.",
     "At h4, the TOC/ROW-excluded strict gap share is about 1.35, which helps separate treatment-object-definition risk from missing direct-count channels."
   ]
 }

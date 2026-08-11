@@ -7,266 +7,266 @@
   },
   "quarterly_alignment": {
     "status": "available",
-    "rows": 92,
+    "rows": 143,
     "counterparts": {
       "foreign_nonts_qoq": {
-        "contemporaneous_corr": -0.17456304904597456,
+        "contemporaneous_corr": -0.1117943346674605,
         "lead_lag_correlations": {
-          "shift_-2q": 0.18044516265851146,
-          "shift_-1q": 0.06993991380443462,
-          "shift_+0q": -0.17456304904597456,
-          "shift_+1q": 0.09776369068568722,
-          "shift_+2q": -0.0012623818567131023
+          "shift_-2q": 0.18316803417666044,
+          "shift_-1q": 0.09872361143494518,
+          "shift_+0q": -0.1117943346674605,
+          "shift_+1q": 0.12237563541861524,
+          "shift_+2q": 0.02705279658566776
         },
-        "sign_match_share": 0.6086956521739131
+        "sign_match_share": 0.6153846153846154
       },
       "checkable_rest_of_world_bank_qoq": {
-        "contemporaneous_corr": 0.01755465440801652,
+        "contemporaneous_corr": 0.044624130957762353,
         "lead_lag_correlations": {
-          "shift_-2q": 0.07109655270570017,
-          "shift_-1q": 0.07881718872857198,
-          "shift_+0q": 0.01755465440801652,
-          "shift_+1q": 0.06384465542582442,
-          "shift_+2q": 0.06923378152180154
+          "shift_-2q": 0.10509020244114212,
+          "shift_-1q": 0.1142238852803424,
+          "shift_+0q": 0.044624130957762353,
+          "shift_+1q": 0.08634005919914152,
+          "shift_+2q": 0.08954838011951417
         },
-        "sign_match_share": 0.6195652173913043
+        "sign_match_share": 0.5524475524475524
       },
       "interbank_transactions_foreign_banks_liability_qoq": {
-        "contemporaneous_corr": -0.10429022856383244,
+        "contemporaneous_corr": -0.12007187578642539,
         "lead_lag_correlations": {
-          "shift_-2q": 0.044133339633536224,
-          "shift_-1q": 0.00687744922267111,
-          "shift_+0q": -0.10429022856383244,
-          "shift_+1q": 0.12201287481934613,
-          "shift_+2q": -0.10969650489704792
+          "shift_-2q": -0.0007844784843195128,
+          "shift_-1q": -0.0354657278261881,
+          "shift_+0q": -0.12007187578642539,
+          "shift_+1q": 0.07056158782431717,
+          "shift_+2q": -0.12738476287147946
         },
-        "sign_match_share": 0.5217391304347826
+        "sign_match_share": 0.5244755244755245
       },
       "interbank_transactions_foreign_banks_asset_qoq": {
-        "contemporaneous_corr": 0.040948488206963916,
+        "contemporaneous_corr": 0.059444917134670726,
         "lead_lag_correlations": {
-          "shift_-2q": -0.02133701533276476,
-          "shift_-1q": -0.06780108746998968,
-          "shift_+0q": 0.040948488206963916,
-          "shift_+1q": 0.002335822676882188,
-          "shift_+2q": 0.0431640396519104
+          "shift_-2q": -0.009205821082797123,
+          "shift_-1q": -0.05648668987416041,
+          "shift_+0q": 0.059444917134670726,
+          "shift_+1q": 0.019643758954972147,
+          "shift_+2q": 0.04863619143903528
         },
-        "sign_match_share": 0.5
+        "sign_match_share": 0.5034965034965035
       },
       "deposits_at_foreign_banks_asset_qoq": {
-        "contemporaneous_corr": -0.013271214959323626,
+        "contemporaneous_corr": 0.024234602881997018,
         "lead_lag_correlations": {
-          "shift_-2q": -0.12713828774784086,
-          "shift_-1q": 0.0007045156393606978,
-          "shift_+0q": -0.013271214959323626,
-          "shift_+1q": 0.013790661847833357,
-          "shift_+2q": -0.0985490430404002
+          "shift_-2q": -0.07716601552314148,
+          "shift_-1q": 0.009676804114028919,
+          "shift_+0q": 0.024234602881997018,
+          "shift_+1q": 0.034587783865483515,
+          "shift_+2q": -0.05334860044331123
         },
-        "sign_match_share": 0.45652173913043476
+        "sign_match_share": 0.46853146853146854
       }
     }
   },
   "key_horizons": {
     "h0": {
       "rest_of_world_treasury_response": {
-        "beta": 11.756792842555717,
-        "se": 10.114287407003827,
-        "lower95": -8.067210475171786,
-        "upper95": 31.58079616028322,
-        "n": 68,
-        "ci_excludes_zero": false
+        "beta": 15.301394302217892,
+        "se": 6.169618658533019,
+        "lower95": 3.2089417314931747,
+        "upper95": 27.39384687294261,
+        "n": 119,
+        "ci_excludes_zero": true
       },
       "foreign_nonts_response": {
-        "beta": 26.58669388040707,
-        "se": 12.835216475201248,
-        "lower95": 1.4296695890126223,
-        "upper95": 51.74371817180152,
-        "n": 68,
+        "beta": 18.506879574388623,
+        "se": 8.189075371277855,
+        "lower95": 2.456291846684028,
+        "upper95": 34.557467302093215,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "checkable_rest_of_world_bank_response": {
-        "beta": 0.22396544837174034,
-        "se": 0.5412190543641806,
-        "lower95": -0.8368238981820535,
-        "upper95": 1.2847547949255342,
-        "n": 68,
+        "beta": 0.29543694292940254,
+        "se": 0.32189753966547446,
+        "lower95": -0.3354822348149274,
+        "upper95": 0.9263561206737325,
+        "n": 119,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_liability_response": {
-        "beta": 2.728236987121721,
-        "se": 2.9888151915386656,
-        "lower95": -3.1298407882940635,
-        "upper95": 8.586314762537505,
-        "n": 68,
+        "beta": 2.5556250411351744,
+        "se": 2.2424080530141715,
+        "lower95": -1.8394947427726018,
+        "upper95": 6.950744825042951,
+        "n": 119,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_asset_response": {
-        "beta": 4.997581988112529,
-        "se": 2.7473496074068193,
-        "lower95": -0.3872232424048372,
-        "upper95": 10.382387218629894,
-        "n": 68,
-        "ci_excludes_zero": false
+        "beta": 4.1739512125362435,
+        "se": 2.114638919335112,
+        "lower95": 0.02925893063942464,
+        "upper95": 8.318643494433061,
+        "n": 119,
+        "ci_excludes_zero": true
       },
       "deposits_at_foreign_banks_asset_response": {
-        "beta": 0.02529650965602481,
-        "se": 0.21699059003210122,
-        "lower95": -0.4000050468068936,
-        "upper95": 0.4505980661189432,
-        "n": 68,
+        "beta": 0.28207201615616834,
+        "se": 0.15825092014756856,
+        "lower95": -0.028099787333066006,
+        "upper95": 0.5922438196454027,
+        "n": 119,
         "ci_excludes_zero": false
       },
       "interpretation": "external_asset_support_pattern"
     },
     "h1": {
       "rest_of_world_treasury_response": {
-        "beta": 12.207052405526355,
-        "se": 11.716769221640384,
-        "lower95": -10.757815268888798,
-        "upper95": 35.17192007994151,
-        "n": 67,
-        "ci_excludes_zero": false
+        "beta": 17.445014307244328,
+        "se": 8.080830444318515,
+        "lower95": 1.6065866363800385,
+        "upper95": 33.28344197810862,
+        "n": 118,
+        "ci_excludes_zero": true
       },
       "foreign_nonts_response": {
-        "beta": 23.84630624208157,
-        "se": 12.325503293192112,
-        "lower95": -0.3116802125749665,
-        "upper95": 48.004292696738105,
-        "n": 67,
+        "beta": 13.532417186335131,
+        "se": 8.178395399885849,
+        "lower95": -2.4972377974411337,
+        "upper95": 29.562072170111396,
+        "n": 118,
         "ci_excludes_zero": false
       },
       "checkable_rest_of_world_bank_response": {
-        "beta": 0.12694081051066647,
-        "se": 0.6300632339148259,
-        "lower95": -1.1079831279623924,
-        "upper95": 1.3618647489837252,
-        "n": 67,
+        "beta": -0.29089543851887145,
+        "se": 0.5318276691470524,
+        "lower95": -1.333277670047094,
+        "upper95": 0.7514867930093513,
+        "n": 118,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_liability_response": {
-        "beta": 3.1143333838406644,
-        "se": 3.22785528854113,
-        "lower95": -3.2122629816999506,
-        "upper95": 9.44092974938128,
-        "n": 67,
+        "beta": 3.2023577150363804,
+        "se": 2.6257525109195208,
+        "lower95": -1.9441172063658803,
+        "upper95": 8.34883263643864,
+        "n": 118,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_asset_response": {
-        "beta": 1.5793663501633712,
-        "se": 2.840922144562137,
-        "lower95": -3.988841053178417,
-        "upper95": 7.14757375350516,
-        "n": 67,
+        "beta": 3.8312791461268736,
+        "se": 2.1545320256808775,
+        "lower95": -0.3916036242076464,
+        "upper95": 8.054161916461393,
+        "n": 118,
         "ci_excludes_zero": false
       },
       "deposits_at_foreign_banks_asset_response": {
-        "beta": 0.02435385505248658,
-        "se": 0.2795336006184585,
-        "lower95": -0.5235320021596921,
-        "upper95": 0.5722397122646652,
-        "n": 67,
+        "beta": 0.2656229296602383,
+        "se": 0.22924859106188544,
+        "lower95": -0.18370430882105715,
+        "upper95": 0.7149501681415338,
+        "n": 118,
         "ci_excludes_zero": false
       },
       "interpretation": "external_asset_support_pattern"
     },
     "h4": {
       "rest_of_world_treasury_response": {
-        "beta": 34.66439319115928,
-        "se": 16.63271023043862,
-        "lower95": 2.0642811394995846,
-        "upper95": 67.26450524281897,
-        "n": 64,
+        "beta": 35.99236809372251,
+        "se": 12.874698695839816,
+        "lower95": 10.757958649876471,
+        "upper95": 61.22677753756855,
+        "n": 115,
         "ci_excludes_zero": true
       },
       "foreign_nonts_response": {
-        "beta": 37.180623383636,
-        "se": 10.082016793718493,
-        "lower95": 17.41987046794775,
-        "upper95": 56.94137629932425,
-        "n": 64,
+        "beta": 26.395473983381727,
+        "se": 8.484845735329841,
+        "lower95": 9.765176342135238,
+        "upper95": 43.02577162462822,
+        "n": 115,
         "ci_excludes_zero": true
       },
       "checkable_rest_of_world_bank_response": {
-        "beta": 0.47127245135364093,
-        "se": 1.3143410413755017,
-        "lower95": -2.1048359897423423,
-        "upper95": 3.0473808924496244,
-        "n": 64,
+        "beta": -0.087648381176883,
+        "se": 0.9343118261609527,
+        "lower95": -1.91889956045235,
+        "upper95": 1.7436027980985842,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_liability_response": {
-        "beta": 6.6487516054974165,
-        "se": 5.557087000798886,
-        "lower95": -4.2431389160684,
-        "upper95": 17.540642127063233,
-        "n": 64,
+        "beta": 7.6407372571714465,
+        "se": 4.694954563939654,
+        "lower95": -1.561373688150276,
+        "upper95": 16.84284820249317,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_asset_response": {
-        "beta": 13.841833945081827,
-        "se": 4.037398226062955,
-        "lower95": 5.928533421998436,
-        "upper95": 21.755134468165217,
-        "n": 64,
+        "beta": 12.31562410612013,
+        "se": 3.224103562686513,
+        "lower95": 5.996381123254564,
+        "upper95": 18.634867088985693,
+        "n": 115,
         "ci_excludes_zero": true
       },
       "deposits_at_foreign_banks_asset_response": {
-        "beta": 0.16709779747567072,
-        "se": 0.5230612436417152,
-        "lower95": -0.8581022400620912,
-        "upper95": 1.1922978350134326,
-        "n": 64,
+        "beta": 0.31959598005817724,
+        "se": 0.37679266021740665,
+        "lower95": -0.4189176339679398,
+        "upper95": 1.0581095940842942,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "interpretation": "external_asset_support_pattern"
     },
     "h8": {
       "rest_of_world_treasury_response": {
-        "beta": 66.95416192387711,
-        "se": 22.44664774376,
-        "lower95": 22.95873234610751,
-        "upper95": 110.94959150164671,
-        "n": 60,
+        "beta": 66.02801701498248,
+        "se": 20.84866337863218,
+        "lower95": 25.164636792863405,
+        "upper95": 106.89139723710156,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "foreign_nonts_response": {
-        "beta": 30.5520160930477,
-        "se": 13.07883022774292,
-        "lower95": 4.917508846671581,
-        "upper95": 56.18652333942382,
-        "n": 60,
+        "beta": 26.274539225087214,
+        "se": 9.088610485350857,
+        "lower95": 8.460862673799532,
+        "upper95": 44.088215776374895,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "checkable_rest_of_world_bank_response": {
-        "beta": 0.29083525190956716,
-        "se": 0.9022979483963455,
-        "lower95": -1.47766872694727,
-        "upper95": 2.0593392307664042,
-        "n": 60,
+        "beta": -0.03805752133289353,
+        "se": 0.8533129139028673,
+        "lower95": -1.7105508325825134,
+        "upper95": 1.6344357899167263,
+        "n": 111,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_liability_response": {
-        "beta": 3.8267430046359117,
-        "se": 6.706393833752905,
-        "lower95": -9.317788909519782,
-        "upper95": 16.971274918791607,
-        "n": 60,
+        "beta": 7.752652109287238,
+        "se": 5.526919516211117,
+        "lower95": -3.08011014248655,
+        "upper95": 18.585414361061027,
+        "n": 111,
         "ci_excludes_zero": false
       },
       "interbank_transactions_foreign_banks_asset_response": {
-        "beta": 13.68320027572712,
-        "se": 5.437167809461205,
-        "lower95": 3.0263513691831587,
-        "upper95": 24.34004918227108,
-        "n": 60,
+        "beta": 13.355998779782151,
+        "se": 4.080841780253124,
+        "lower95": 5.3575488904860284,
+        "upper95": 21.354448669078273,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "deposits_at_foreign_banks_asset_response": {
-        "beta": 0.1596363605334491,
-        "se": 0.49469737273619285,
-        "lower95": -0.8099704900294888,
-        "upper95": 1.129243211096387,
-        "n": 60,
+        "beta": 0.4011917117740047,
+        "se": 0.3427388269929905,
+        "lower95": -0.2705763891322567,
+        "upper95": 1.0729598126802662,
+        "n": 111,
         "ci_excludes_zero": false
       },
       "interpretation": "external_asset_support_pattern"
@@ -274,8 +274,8 @@
   },
   "takeaways": [
     "This audit checks whether the ROW Treasury leg behaves like a clean external deposit counterpart or a broader external-asset / nontransaction support channel.",
-    "Quarter by quarter, the ROW Treasury leg is not a simple same-quarter liability counterpart: corr with `foreign_nonts_qoq` \u2248 -0.17, corr with `checkable_rest_of_world_bank_qoq` \u2248 0.02.",
-    "At h0, the baseline TDC shock loads positively on the ROW Treasury leg and broader external support variables: ROW \u2248 11.76, foreign NONTS \u2248 26.59, foreign-bank interbank assets \u2248 5.00.",
-    "The direct ROW bank-deposit-liability response is comparatively small at h0: checkable ROW deposits \u2248 0.22."
+    "Quarter by quarter, the ROW Treasury leg is not a simple same-quarter liability counterpart: corr with `foreign_nonts_qoq` \u2248 -0.11, corr with `checkable_rest_of_world_bank_qoq` \u2248 0.04.",
+    "At h0, the baseline TDC shock loads positively on the ROW Treasury leg and broader external support variables: ROW \u2248 15.30, foreign NONTS \u2248 18.51, foreign-bank interbank assets \u2248 4.17.",
+    "The direct ROW bank-deposit-liability response is comparatively small at h0: checkable ROW deposits \u2248 0.30."
   ]
 }

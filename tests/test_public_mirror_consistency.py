@@ -55,9 +55,25 @@ def test_committed_site_data_mirror_is_self_consistent() -> None:
     assert direct_identification["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
     assert direct_identification["answer_ready"] is False
     assert readiness["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
-    assert readiness["status"] == "provisional"
+    expected_readiness_status = (
+        "not_ready"
+        if readiness["reasons"]
+        else "provisional"
+        if readiness["warnings"]
+        else "ready_for_interpretation"
+    )
+    assert readiness["status"] == expected_readiness_status
+    assert readiness["diagnostics"]["structural_proxy_status"] == "weak"
+    assert readiness["diagnostics"]["proxy_coverage_large_gap_key_horizons"] > 0
+    assert readiness["treatment_quality_status"] == "pass"
+    assert readiness["key_estimates"]["total_deposits_h0"]["ci_excludes_zero"] is True
+    assert readiness["key_estimates"]["other_component_h0"]["ci_excludes_zero"] is True
     assert pass_through["estimation_path"]["primary_decomposition_mode"] == "exact_identity_baseline"
     assert pass_through["estimation_path"]["measurement_variant_artifact"] == "identity_measurement_ladder.csv"
+    assert pass_through["status"] == readiness["status"]
+    assert pass_through["readiness_reasons"] == readiness["reasons"]
+    assert pass_through["baseline_horizons"]["h0"]["assessment"] == "crowd_out_signal"
+    assert pass_through["interpretation_scope"] == "deposit_response_only"
 
     for summary in [direct_identification, readiness, pass_through]:
         horizons = summary["ratio_reporting_gate"]["horizons"]

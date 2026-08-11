@@ -1,13 +1,16 @@
 {
-  "status": "provisional",
+  "status": "not_ready",
   "estimation_path": {
     "primary_decomposition_mode": "exact_identity_baseline",
     "primary_artifact": "lp_irf_identity_baseline.csv",
+    "treatment_variant_artifact": "identity_treatment_sensitivity.csv",
+    "control_variant_artifact": "identity_control_sensitivity.csv",
+    "sample_variant_artifact": "identity_sample_sensitivity.csv",
     "approximate_robustness_artifact": "total_minus_other_contrast.csv",
     "approximate_dynamic_robustness": {
       "status": "divergent_secondary_check",
       "artifact": "total_minus_other_contrast.csv",
-      "max_abs_gap_h0_h4": 34.841407895902734,
+      "max_abs_gap_h0_h4": 30.798483741755632,
       "key_horizon_consistent": false,
       "note": "Primary decomposition uses the exact identity-preserving baseline; the approximate dynamic path is retained only as a secondary robustness check."
     }
@@ -19,32 +22,32 @@
     "status": "pass",
     "checks": {
       "min_usable_observations": {
-        "observed": 68,
+        "observed": 119,
         "threshold": 60,
         "passed": true
       },
       "min_shock_target_correlation": {
-        "observed": 0.7657956791364907,
+        "observed": 0.6728111730001165,
         "threshold": 0.5,
         "passed": true
       },
       "max_flagged_share": {
-        "observed": 0.058823529411764705,
+        "observed": 0.05042016806722689,
         "threshold": 0.2,
         "passed": true
       },
       "max_realized_scale_ratio_p95": {
-        "observed": 4.817056239502941,
+        "observed": 4.987872582467498,
         "threshold": 25.0,
         "passed": true
       },
       "max_realized_scale_ratio_p99": {
-        "observed": 27.895931796070258,
+        "observed": 18.03497205801086,
         "threshold": 100.0,
         "passed": true
       },
       "max_initial_train_to_usable_volatility_ratio": {
-        "observed": 0.29671349936729485,
+        "observed": 0.1223118458667576,
         "threshold": 2.0,
         "passed": true
       }
@@ -56,12 +59,12 @@
       "tdc_ci_excludes_zero == true",
       "dimensionally_coherent_denominator_gate_resolved == true"
     ],
-    "diagnostic_reference_usable_target_sd": 263.42967242082716,
+    "diagnostic_reference_usable_target_sd": 216.78711915770077,
     "horizons": {
       "h0": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 0.9305308145201421,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 0.9306455678921861,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
@@ -70,8 +73,8 @@
       },
       "h4": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 2.2108641620062723,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 2.177232368214211,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
@@ -80,8 +83,8 @@
       },
       "h8": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 2.7824498362130194,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 2.6507736943679956,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
@@ -90,30 +93,32 @@
       }
     }
   },
-  "headline_assessment": "Current outputs support an exploratory deposit-response read, but persistence and mechanism attribution remain sensitive or incomplete.",
-  "reasons": [],
+  "headline_assessment": "Current backend outputs are not yet strong enough to distinguish deposit-response patterns or support broad mechanism attribution with confidence.",
+  "reasons": [
+    "Structural proxy cross-checks do not yet corroborate the non-TDC residual at key horizons.",
+    "The structural proxy bundle still leaves a large uncovered remainder at key horizons."
+  ],
   "warnings": [
-    "Structural proxy cross-checks are mixed across key horizons.",
-    "4 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 3 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern.",
+    "6 unexpected-TDC shock windows are scale-ratio flagged (1 severe tail and 5 milder threshold breaches), but the published sample-sensitivity trims do not overturn the headline sign pattern.",
     "The exact identity baseline is primary, but the secondary approximate dynamic path still diverges materially at key horizons."
   ],
   "diagnostics": {
     "primary_decomposition_mode": "exact_identity_baseline",
-    "shock_usable_obs": 68,
-    "shock_start_quarter": "2009Q1",
+    "shock_usable_obs": 119,
+    "shock_start_quarter": "1996Q2",
     "shock_end_quarter": "2025Q4",
-    "flagged_shock_obs": 4,
-    "flagged_shock_share": 0.058823529411764705,
-    "share_other_negative": 0.44565217391304346,
-    "regime_row_count": 144,
+    "flagged_shock_obs": 6,
+    "flagged_shock_share": 0.05042016806722689,
+    "share_other_negative": 0.4755244755244755,
+    "regime_row_count": 1179,
     "informative_regime_count": 1,
     "stable_regime_count": 1,
-    "sensitivity_variant_count": 11,
+    "sensitivity_variant_count": 15,
     "control_set_variant_count": 3,
     "control_set_core_variant_count": 2,
     "control_set_exploratory_variant_count": 1,
     "sensitivity_core_variant_count": 1,
-    "sensitivity_exploratory_variant_count": 10,
+    "sensitivity_exploratory_variant_count": 14,
     "exploratory_variant_sign_disagreement": false,
     "control_set_sign_disagreement": false,
     "exploratory_control_set_sign_disagreement": false,
@@ -121,17 +126,28 @@
     "sample_variant_sign_disagreement": false,
     "sample_variant_magnitude_instability": false,
     "direct_identification_status": "provisional",
-    "contrast_max_abs_gap_h0_h4": 34.841407895902734,
+    "contrast_max_abs_gap_h0_h4": 30.798483741755632,
     "contrast_rows_missing": false,
-    "structural_proxy_status": "mixed",
+    "structural_proxy_status": "weak",
     "structural_proxy_supportive_key_horizons": 0,
-    "structural_proxy_discordant_key_horizons": 2,
-    "structural_proxy_weak_key_horizons": 0,
-    "proxy_coverage_status": "mixed",
-    "proxy_coverage_large_gap_key_horizons": 0,
+    "structural_proxy_discordant_key_horizons": 0,
+    "structural_proxy_weak_key_horizons": 2,
+    "proxy_coverage_status": "weak",
+    "proxy_coverage_large_gap_key_horizons": 1,
     "proxy_coverage_partial_support_key_horizons": 0,
     "proxy_coverage_same_sign_not_decisive_key_horizons": 0,
     "proxy_coverage_published_regime_count": 1,
+    "counterpart_channel_status": "available",
+    "counterpart_creator_outcome_count": 22,
+    "counterpart_h0_decisive_positive_creator_count": 1,
+    "counterpart_h0_decisive_negative_creator_count": 0,
+    "counterpart_h4_decisive_positive_creator_count": 2,
+    "counterpart_h4_decisive_negative_creator_count": 1,
+    "counterpart_h0_decisive_positive_reallocation_proxy_count": 0,
+    "counterpart_h0_decisive_negative_reallocation_proxy_count": 1,
+    "counterpart_h4_decisive_positive_reallocation_proxy_count": 0,
+    "counterpart_h4_decisive_negative_reallocation_proxy_count": 1,
+    "counterpart_legacy_private_credit_proxy_role": "coarse_legacy_creator_proxy",
     "treatment_freeze_status": "frozen",
     "treatment_candidate_count": 0,
     "treatment_quality_status": "pass",
@@ -141,52 +157,299 @@
   },
   "key_estimates": {
     "tdc_h0": {
-      "beta": 128.49398892100785,
-      "se": 35.018290469572285,
-      "lower95": 119.41873548043742,
-      "upper95": 248.5482159371078,
-      "n": 68,
+      "beta": 86.08814077380539,
+      "se": 25.27141995473617,
+      "lower95": 76.91378655770903,
+      "upper95": 178.46273021278503,
+      "n": 119,
       "ci_excludes_zero": true
     },
     "tdc_h4": {
-      "beta": 278.13971316628357,
-      "se": 141.57570011679425,
-      "lower95": 78.32278678356286,
-      "upper95": 597.5909020053358,
-      "n": 64,
+      "beta": 172.8674661880664,
+      "se": 87.14792130590925,
+      "lower95": 76.43912886345232,
+      "upper95": 431.5929761708225,
+      "n": 115,
       "ci_excludes_zero": true
     },
     "total_deposits_h0": {
-      "beta": 55.75033524806063,
-      "se": 40.86113535471181,
-      "lower95": 8.738139880568623,
-      "upper95": 168.6573860829989,
-      "n": 68,
+      "beta": 37.977694851980814,
+      "se": 23.64868644238564,
+      "lower95": 18.533147755076495,
+      "upper95": 105.12950063583395,
+      "n": 119,
       "ci_excludes_zero": true
     },
     "total_deposits_h4": {
-      "beta": 167.33069747889854,
-      "se": 154.8910510638327,
-      "lower95": -27.18884889021173,
-      "upper95": 550.7057101571328,
-      "n": 64,
+      "beta": 95.30474128450595,
+      "se": 94.14123531701945,
+      "lower95": -11.18126164236589,
+      "upper95": 363.2075355524613,
+      "n": 115,
       "ci_excludes_zero": false
     },
     "other_component_h0": {
-      "beta": -72.74365367294723,
-      "se": 42.946700439267694,
-      "lower95": -170.48932979728906,
-      "upper95": -1.8809331488254672,
-      "n": 68,
+      "beta": -48.11044592182458,
+      "se": 25.543877643105976,
+      "lower95": -110.90302316729972,
+      "upper95": -14.172921571377426,
+      "n": 119,
       "ci_excludes_zero": true
     },
     "other_component_h4": {
-      "beta": -110.80901568738503,
-      "se": 84.23711570896954,
-      "lower95": -242.41233479835054,
-      "upper95": 62.23408515351409,
-      "n": 64,
+      "beta": -77.56272490356045,
+      "se": 52.91667363732913,
+      "lower95": -177.1315877678902,
+      "upper95": 19.960987662159766,
+      "n": 115,
       "ci_excludes_zero": false
+    }
+  },
+  "counterpart_channel_context": {
+    "status": "available",
+    "artifact": "counterpart_channel_scorecard.json",
+    "legacy_private_credit_proxy_role": "coarse_legacy_creator_proxy",
+    "creator_channel_outcomes_present": [
+      "agency_gse_backed_securities_bank_qoq",
+      "auto_loans_qoq",
+      "closed_end_residential_loans_ex_chargeoffs_qoq",
+      "closed_end_residential_loans_qoq",
+      "commercial_industrial_loans_ex_chargeoffs_qoq",
+      "commercial_industrial_loans_qoq",
+      "construction_land_development_loans_qoq",
+      "consumer_loans_ex_chargeoffs_qoq",
+      "consumer_loans_qoq",
+      "corporate_foreign_bonds_bank_qoq",
+      "cre_multifamily_loans_qoq",
+      "cre_nonfarm_nonresidential_loans_qoq",
+      "credit_card_revolving_loans_ex_chargeoffs_qoq",
+      "credit_card_revolving_loans_qoq",
+      "heloc_loans_qoq",
+      "loans_for_purchasing_or_carrying_securities_qoq",
+      "loans_to_commercial_banks_qoq",
+      "loans_to_nondepository_financial_institutions_qoq",
+      "municipal_securities_bank_qoq",
+      "other_consumer_loans_ex_chargeoffs_qoq",
+      "other_consumer_loans_qoq",
+      "treasury_securities_bank_qoq"
+    ],
+    "key_horizons": {
+      "h0": {
+        "decisive_positive_creator_channels": [
+          "agency_gse_backed_securities_bank_qoq"
+        ],
+        "decisive_negative_creator_channels": [],
+        "decisive_positive_asset_purchase_channels": [
+          "agency_gse_backed_securities_bank_qoq"
+        ],
+        "decisive_positive_counterpart_reallocation_proxy_channels": [],
+        "decisive_negative_counterpart_reallocation_proxy_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "counterpart_reallocation_proxy_context": {
+          "channels": {
+            "domestic_nonfinancial_mmf_reallocation_qoq": {
+              "beta": -13.460242201299241,
+              "se": 8.302582811657416,
+              "lower95": -29.733304512147775,
+              "upper95": 2.8128201095492926,
+              "n": 119,
+              "ci_excludes_zero": false
+            },
+            "domestic_nonfinancial_repo_reallocation_qoq": {
+              "beta": -0.06445707988976607,
+              "se": 0.5194506220873366,
+              "lower95": -1.082580299180946,
+              "upper95": 0.9536661394014136,
+              "n": 119,
+              "ci_excludes_zero": false
+            },
+            "on_rrp_reallocation_qoq": {
+              "beta": -0.02426734325880216,
+              "se": 0.011314240373510802,
+              "lower95": -0.04644325439088333,
+              "upper95": -0.0020914321267209886,
+              "n": 52,
+              "ci_excludes_zero": true
+            },
+            "household_treasury_securities_reallocation_qoq": {
+              "beta": 13.214138247412777,
+              "se": 9.708589217203372,
+              "lower95": -5.814696618305831,
+              "upper95": 32.242973113131384,
+              "n": 119,
+              "ci_excludes_zero": false
+            },
+            "mmf_treasury_bills_reallocation_qoq": {
+              "beta": 7.774628604347347,
+              "se": 7.093969308352124,
+              "lower95": -6.129551240022815,
+              "upper95": 21.67880844871751,
+              "n": 119,
+              "ci_excludes_zero": false
+            },
+            "currency_reallocation_qoq": {
+              "beta": -0.13167019849948747,
+              "se": 0.6837072597211051,
+              "lower95": -1.4717364275528535,
+              "upper95": 1.2083960305538786,
+              "n": 119,
+              "ci_excludes_zero": false
+            }
+          },
+          "decisive_positive_channels": [],
+          "decisive_negative_channels": [
+            "on_rrp_reallocation_qoq"
+          ],
+          "interpretation": "sign_normalized_movement_toward_named_channel"
+        },
+        "asset_purchase_plumbing_context": {
+          "channels": {
+            "tga_qoq": {
+              "beta": -42.29419828467739,
+              "se": 17.856373029736048,
+              "lower95": -77.29268942296005,
+              "upper95": -7.29570714639474,
+              "n": 91,
+              "ci_excludes_zero": true
+            },
+            "reserves_qoq": {
+              "beta": 77.19113151416232,
+              "se": 12.967388462921063,
+              "lower95": 51.775050126837044,
+              "upper95": 102.6072129014876,
+              "n": 91,
+              "ci_excludes_zero": true
+            },
+            "cb_nonts_qoq": {
+              "beta": 34.76027494833025,
+              "se": 12.124580448836053,
+              "lower95": 10.996097268611585,
+              "upper95": 58.52445262804891,
+              "n": 91,
+              "ci_excludes_zero": true
+            }
+          },
+          "decisive_positive_channels": [
+            "cb_nonts_qoq",
+            "reserves_qoq"
+          ],
+          "decisive_negative_channels": [
+            "tga_qoq"
+          ],
+          "treasury_drain_signal": false,
+          "reserve_support_signal": true,
+          "interpretation": "reserve_support_context"
+        }
+      },
+      "h4": {
+        "decisive_positive_creator_channels": [
+          "auto_loans_qoq",
+          "treasury_securities_bank_qoq"
+        ],
+        "decisive_negative_creator_channels": [
+          "cre_multifamily_loans_qoq"
+        ],
+        "decisive_positive_asset_purchase_channels": [
+          "treasury_securities_bank_qoq"
+        ],
+        "decisive_positive_counterpart_reallocation_proxy_channels": [],
+        "decisive_negative_counterpart_reallocation_proxy_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "counterpart_reallocation_proxy_context": {
+          "channels": {
+            "domestic_nonfinancial_mmf_reallocation_qoq": {
+              "beta": 1.6416501347845127,
+              "se": 16.928404685845425,
+              "lower95": -31.53802304947252,
+              "upper95": 34.82132331904155,
+              "n": 115,
+              "ci_excludes_zero": false
+            },
+            "domestic_nonfinancial_repo_reallocation_qoq": {
+              "beta": -0.8034077574350139,
+              "se": 0.8713877620325763,
+              "lower95": -2.5113277710188635,
+              "upper95": 0.9045122561488356,
+              "n": 115,
+              "ci_excludes_zero": false
+            },
+            "on_rrp_reallocation_qoq": {
+              "beta": -0.1494131812226473,
+              "se": 0.03943081838591652,
+              "lower95": -0.22669758525904365,
+              "upper95": -0.07212877718625092,
+              "n": 45,
+              "ci_excludes_zero": true
+            },
+            "household_treasury_securities_reallocation_qoq": {
+              "beta": 37.806380093147084,
+              "se": 28.978306794427976,
+              "lower95": -18.99110122393175,
+              "upper95": 94.60386141022592,
+              "n": 115,
+              "ci_excludes_zero": false
+            },
+            "mmf_treasury_bills_reallocation_qoq": {
+              "beta": -0.275733647620235,
+              "se": 30.371927640041267,
+              "lower95": -59.80471182210112,
+              "upper95": 59.25324452686065,
+              "n": 115,
+              "ci_excludes_zero": false
+            },
+            "currency_reallocation_qoq": {
+              "beta": -1.6585084451759666,
+              "se": 3.3146914105626752,
+              "lower95": -8.15530360987881,
+              "upper95": 4.838286719526876,
+              "n": 115,
+              "ci_excludes_zero": false
+            }
+          },
+          "decisive_positive_channels": [],
+          "decisive_negative_channels": [
+            "on_rrp_reallocation_qoq"
+          ],
+          "interpretation": "sign_normalized_movement_toward_named_channel"
+        },
+        "asset_purchase_plumbing_context": {
+          "channels": {
+            "tga_qoq": {
+              "beta": -19.585588158059608,
+              "se": 30.179191591386218,
+              "lower95": -78.7368036771766,
+              "upper95": 39.56562736105738,
+              "n": 87,
+              "ci_excludes_zero": false
+            },
+            "reserves_qoq": {
+              "beta": 100.33488395872514,
+              "se": 49.34698169845432,
+              "lower95": 3.6147998297546735,
+              "upper95": 197.0549680876956,
+              "n": 87,
+              "ci_excludes_zero": true
+            },
+            "cb_nonts_qoq": {
+              "beta": 80.28002986236913,
+              "se": 66.28204844599338,
+              "lower95": -49.63278509177789,
+              "upper95": 210.19284481651616,
+              "n": 87,
+              "ci_excludes_zero": false
+            }
+          },
+          "decisive_positive_channels": [
+            "reserves_qoq"
+          ],
+          "decisive_negative_channels": [],
+          "treasury_drain_signal": false,
+          "reserve_support_signal": true,
+          "interpretation": "reserve_support_context"
+        }
+      }
     }
   },
   "answer_ready_when": [

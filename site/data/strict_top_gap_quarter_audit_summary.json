@@ -12,11 +12,11 @@
     {
       "quarter": "2020Q3",
       "period_bucket": "covid_post",
-      "baseline_shock": 0.581904236918328,
+      "baseline_shock": 0.5642548803951691,
       "toc_row_excluded_shock": -8.869170411795452,
-      "shock_gap": -9.45107464871378,
-      "abs_shock_gap": 9.45107464871378,
-      "bundle_qoq": 17.896000000000015,
+      "shock_gap": -9.43342529219062,
+      "abs_shock_gap": 9.43342529219062,
+      "bundle_qoq": 18.01037497178004,
       "bundle_sign": "positive",
       "row_leg_qoq": 77.543,
       "toc_signed_contribution_qoq": -59.647,
@@ -30,11 +30,11 @@
     {
       "quarter": "2020Q1",
       "period_bucket": "covid_post",
-      "baseline_shock": 3.810380466186416,
+      "baseline_shock": 3.802756966543948,
       "toc_row_excluded_shock": 13.09521127559779,
-      "shock_gap": 9.284830809411375,
-      "abs_shock_gap": 9.284830809411375,
-      "bundle_qoq": -367.053,
+      "shock_gap": 9.292454309053843,
+      "abs_shock_gap": 9.292454309053843,
+      "bundle_qoq": -368.5647175392601,
       "bundle_sign": "negative",
       "row_leg_qoq": -255.649,
       "toc_signed_contribution_qoq": -111.404,
@@ -48,11 +48,11 @@
     {
       "quarter": "2021Q1",
       "period_bucket": "covid_post",
-      "baseline_shock": 5.58228501055368,
+      "baseline_shock": 5.600573017229302,
       "toc_row_excluded_shock": 0.6017768725534413,
-      "shock_gap": -4.980508138000239,
-      "abs_shock_gap": 4.980508138000239,
-      "bundle_qoq": 827.2830000000001,
+      "shock_gap": -4.998796144675861,
+      "abs_shock_gap": 4.998796144675861,
+      "bundle_qoq": 827.8335426137301,
       "bundle_sign": "positive",
       "row_leg_qoq": 220.665,
       "toc_signed_contribution_qoq": 606.618,
@@ -64,31 +64,13 @@
       "contribution_pattern": "reinforcing"
     },
     {
-      "quarter": "2009Q2",
-      "period_bucket": "post_gfc_early",
-      "baseline_shock": 0.321361895525654,
-      "toc_row_excluded_shock": 3.9573727662584726,
-      "shock_gap": 3.6360108707328185,
-      "abs_shock_gap": 3.6360108707328185,
-      "bundle_qoq": 70.08200000000002,
-      "bundle_sign": "positive",
-      "row_leg_qoq": 119.119,
-      "toc_signed_contribution_qoq": -49.037,
-      "row_leg_abs_share": 0.708383881633721,
-      "toc_leg_abs_share": 0.29161611836627893,
-      "row_leg_alignment_to_bundle": "positive",
-      "toc_leg_alignment_to_bundle": "negative",
-      "dominant_leg": "row_dominant",
-      "contribution_pattern": "offsetting"
-    },
-    {
       "quarter": "2009Q4",
       "period_bucket": "post_gfc_early",
-      "baseline_shock": -0.2810596542553419,
+      "baseline_shock": -0.027015420752758378,
       "toc_row_excluded_shock": -3.4428656402507976,
-      "shock_gap": -3.1618059859954557,
-      "abs_shock_gap": 3.1618059859954557,
-      "bundle_qoq": 208.777,
+      "shock_gap": -3.415850219498039,
+      "abs_shock_gap": 3.415850219498039,
+      "bundle_qoq": 228.041,
       "bundle_sign": "positive",
       "row_leg_qoq": 127.107,
       "toc_signed_contribution_qoq": 81.67,
@@ -98,41 +80,59 @@
       "toc_leg_alignment_to_bundle": "positive",
       "dominant_leg": "mixed",
       "contribution_pattern": "reinforcing"
+    },
+    {
+      "quarter": "2009Q2",
+      "period_bucket": "post_gfc_early",
+      "baseline_shock": 0.6535534839196431,
+      "toc_row_excluded_shock": 3.9573727662584735,
+      "shock_gap": 3.3038192823388304,
+      "abs_shock_gap": 3.3038192823388304,
+      "bundle_qoq": 78.03800000000001,
+      "bundle_sign": "positive",
+      "row_leg_qoq": 119.119,
+      "toc_signed_contribution_qoq": -49.037,
+      "row_leg_abs_share": 0.708383881633721,
+      "toc_leg_abs_share": 0.29161611836627893,
+      "row_leg_alignment_to_bundle": "positive",
+      "toc_leg_alignment_to_bundle": "negative",
+      "dominant_leg": "row_dominant",
+      "contribution_pattern": "offsetting"
     }
   ],
   "dominant_leg_summary": [
     {
-      "dominant_leg": "row_dominant",
-      "abs_gap_weight": 12.920841680144193,
-      "abs_gap_share": 0.4234365896956725
+      "dominant_leg": "mixed",
+      "abs_gap_weight": 12.84927551168866,
+      "abs_gap_share": 0.4220578700944555
     },
     {
-      "dominant_leg": "mixed",
-      "abs_gap_weight": 12.612880634709235,
-      "abs_gap_share": 0.4133442150604748
+      "dominant_leg": "row_dominant",
+      "abs_gap_weight": 12.596273591392674,
+      "abs_gap_share": 0.41374756096357923
     },
     {
       "dominant_leg": "toc_dominant",
-      "abs_gap_weight": 4.980508138000239,
-      "abs_gap_share": 0.16321919524385273
+      "abs_gap_weight": 4.998796144675861,
+      "abs_gap_share": 0.16419456894196527
     }
   ],
   "contribution_pattern_summary": [
     {
       "contribution_pattern": "reinforcing",
-      "abs_gap_weight": 17.42714493340707,
-      "abs_gap_share": 0.5711153345431098
+      "abs_gap_weight": 17.707100673227743,
+      "abs_gap_share": 0.5816219901964292
     },
     {
       "contribution_pattern": "offsetting",
-      "abs_gap_weight": 13.087085519446598,
-      "abs_gap_share": 0.42888466545689025
+      "abs_gap_weight": 12.73724457452945,
+      "abs_gap_share": 0.4183780098035707
     }
   ],
   "interpretation": "top_gap_quarters_are_mixed_or_offsetting_toc_row_bundles",
   "takeaways": [
-    "Across the top-gap quarters, the largest dominant-leg bucket is `row_dominant` with abs-gap share \u2248 0.42.",
-    "Across the top-gap quarters, the largest contribution pattern is `reinforcing` with abs-gap share \u2248 0.57.",
+    "Across the top-gap quarters, the largest dominant-leg bucket is `mixed` with abs-gap share \u2248 0.42.",
+    "Across the top-gap quarters, the largest contribution pattern is `reinforcing` with abs-gap share \u2248 0.58.",
     "The largest top-gap quarter is `2020Q3` with dominant leg `mixed` and contribution pattern `offsetting`."
   ]
 }

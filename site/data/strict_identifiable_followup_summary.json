@@ -17,6 +17,8 @@
       "credit_union_sensitive",
       "domestic_bank_only",
       "no_remit_bank_only",
+      "tier2_regression_mmf_rrp_bank_only",
+      "tier2_regression_mmf_rrp_di_np_cu",
       "us_chartered_bank_only"
     ],
     "key_horizons": {
@@ -24,28 +26,28 @@
         "baseline_bank_only": {
           "target": "tdc_bank_only_qoq",
           "target_response": {
-            "beta": 128.49398892100783,
-            "se": 35.018290469572285,
-            "lower95": 119.41873548043742,
-            "upper95": 248.5482159371078,
-            "n": 68,
+            "beta": 86.08814077380539,
+            "se": 25.27141995473617,
+            "lower95": 76.91378655770903,
+            "upper95": 178.46273021278503,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "outcomes": {
             "total_deposits_bank_qoq": {
-              "beta": 55.75033524806063,
-              "se": 40.86113535471181,
-              "lower95": 8.738139880568623,
-              "upper95": 168.6573860829989,
-              "n": 68,
+              "beta": 37.977694851980814,
+              "se": 23.64868644238564,
+              "lower95": 18.533147755076495,
+              "upper95": 105.12950063583395,
+              "n": 119,
               "ci_excludes_zero": true
             },
             "other_component_qoq": {
-              "beta": -72.74365367294723,
-              "se": 42.946700439267694,
-              "lower95": -170.48932979728906,
-              "upper95": -1.8809331488254672,
-              "n": 68,
+              "beta": -48.11044592182458,
+              "se": 25.543877643105976,
+              "lower95": -110.90302316729972,
+              "upper95": -14.172921571377426,
+              "n": 119,
               "ci_excludes_zero": true
             }
           }
@@ -54,205 +56,273 @@
           "broad_depository": {
             "target": "tdc_broad_depository_qoq",
             "target_response": {
-              "beta": 45.49063341095628,
-              "se": 22.02815948112312,
-              "lower95": 16.823795380939785,
-              "upper95": 87.42891747884154,
+              "beta": 44.763999175858444,
+              "se": 22.04978474342404,
+              "lower95": 16.79437752690452,
+              "upper95": 86.7855706467259,
               "n": 67,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 29.71910918144276,
-                "se": 13.01530390664308,
-                "lower95": 11.63505152031106,
-                "upper95": 59.93162196789428,
+                "beta": 29.388253938046024,
+                "se": 13.059553705638164,
+                "lower95": 11.419521519761961,
+                "upper95": 60.16205602191386,
                 "n": 67,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -15.771524229513515,
-                "se": 19.48130977405726,
-                "lower95": -66.92463443537663,
-                "upper95": 3.90935223754599,
+                "beta": -15.37574523781242,
+                "se": 19.38295171436612,
+                "lower95": -66.45205117713527,
+                "upper95": 4.299721629908531,
                 "n": 67,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -26.03122606661787,
-              "other_component_qoq": 56.972129443433715,
-              "target_response": -83.00335551005155
+              "total_deposits_bank_qoq": -8.58944091393479,
+              "other_component_qoq": 32.734700684012154,
+              "target_response": -41.32414159794695
             }
           },
           "core_deposit_proximate": {
             "target": "tdc_core_deposit_proximate_bank_only_qoq",
             "target_response": {
-              "beta": 63.097364377454454,
-              "se": 9.647244239219836,
-              "lower95": 45.98154529078385,
-              "upper95": 81.87109234230489,
+              "beta": 63.09748937989388,
+              "se": 9.647099650171421,
+              "lower95": 45.979089751173355,
+              "upper95": 81.87067316969394,
               "n": 68,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 57.58905083509241,
-                "se": 25.620019756564155,
-                "lower95": -14.965363977167865,
-                "upper95": 84.1131265087176,
+                "beta": 57.586784171418266,
+                "se": 25.621839782440098,
+                "lower95": -14.974425269217232,
+                "upper95": 84.10880157097037,
                 "n": 68,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -5.508313542362046,
-                "se": 19.185628513663566,
-                "lower95": -60.94690926795171,
-                "upper95": 11.387883382473534,
+                "beta": -5.510705208475613,
+                "se": 19.187558647105583,
+                "lower95": -60.95351502039059,
+                "upper95": 11.388015353672298,
                 "n": 68,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 1.8387155870317784,
-              "other_component_qoq": 67.23534013058519,
-              "target_response": -65.39662454355337
+              "total_deposits_bank_qoq": 19.60908931943745,
+              "other_component_qoq": 42.599740713348965,
+              "target_response": -22.990651393911513
             }
           },
           "credit_union_sensitive": {
             "target": "tdc_credit_union_sensitive_qoq",
             "target_response": {
-              "beta": 128.4552531049536,
-              "se": 12.33339399857254,
-              "lower95": 104.33881818864656,
-              "upper95": 152.24591946688614,
-              "n": 68,
+              "beta": 110.20466533005569,
+              "se": 18.445982677733667,
+              "lower95": 87.34518984916107,
+              "upper95": 146.81142541188845,
+              "n": 72,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 55.53500436904736,
-                "se": 22.44685110212693,
-                "lower95": 13.0262800909444,
-                "upper95": 102.96776675409816,
-                "n": 68,
+                "beta": 53.736800482290256,
+                "se": 18.38524703016176,
+                "lower95": 16.449416094868873,
+                "upper95": 96.81131231588796,
+                "n": 72,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -72.92024873590626,
-                "se": 21.048202205833334,
-                "lower95": -108.54652219677598,
-                "upper95": -37.16487502263431,
-                "n": 68,
+                "beta": -56.46786484776543,
+                "se": 21.782577969590182,
+                "lower95": -89.7397795433079,
+                "upper95": -12.071309008201832,
+                "n": 72,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -0.21533087901327264,
-              "other_component_qoq": -0.1765950629590236,
-              "target_response": -0.0387358160542135
+              "total_deposits_bank_qoq": 15.759105630309442,
+              "other_component_qoq": -8.357418925940856,
+              "target_response": 24.116524556250297
             }
           },
           "domestic_bank_only": {
             "target": "tdc_domestic_bank_only_qoq",
             "target_response": {
-              "beta": 121.43506301279888,
-              "se": 20.15367752001472,
-              "lower95": 83.33716169722652,
-              "upper95": 155.87455391161288,
-              "n": 68,
+              "beta": 94.65948511952615,
+              "se": 14.351472104730002,
+              "lower95": 67.41206354308348,
+              "upper95": 117.72666917964558,
+              "n": 72,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 68.66197083010917,
-                "se": 25.091265224322868,
-                "lower95": 22.575479175553912,
-                "upper95": 99.26512521038356,
-                "n": 68,
+                "beta": 44.16324362164723,
+                "se": 19.15447740328824,
+                "lower95": 11.959165863723381,
+                "upper95": 75.91987922896618,
+                "n": 72,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -52.77309218268971,
-                "se": 23.648678870841305,
-                "lower95": -100.36758674323065,
-                "upper95": -29.22653635723652,
-                "n": 68,
+                "beta": -50.49624149787892,
+                "se": 14.767117524540277,
+                "lower95": -78.45788811563614,
+                "upper95": -28.945939598108186,
+                "n": 72,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 12.91163558204854,
-              "other_component_qoq": 19.970561490257523,
-              "target_response": -7.058925908208948
+              "total_deposits_bank_qoq": 6.185548769666418,
+              "other_component_qoq": -2.385795576054342,
+              "target_response": 8.57134434572076
             }
           },
           "no_remit_bank_only": {
             "target": "tdc_no_remit_bank_only_qoq",
             "target_response": {
-              "beta": 128.08452006768587,
-              "se": 13.48334002577382,
-              "lower95": 105.06665348028444,
-              "upper95": 154.6613976990471,
-              "n": 68,
+              "beta": 110.67394390018134,
+              "se": 18.803874550056616,
+              "lower95": 82.40680354457302,
+              "upper95": 148.91803480605566,
+              "n": 72,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 54.88202161955895,
-                "se": 23.2802059030833,
-                "lower95": 15.248364906165476,
-                "upper95": 98.14047873530274,
-                "n": 68,
+                "beta": 53.694921325550396,
+                "se": 23.73939184862991,
+                "lower95": 22.975777883110915,
+                "upper95": 110.45915489158398,
+                "n": 72,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -73.20249844812693,
-                "se": 23.48667201226645,
-                "lower95": -114.61898481069298,
-                "upper95": -39.98201829867487,
-                "n": 68,
+                "beta": -56.979022574630946,
+                "se": 28.376000620119342,
+                "lower95": -101.87865763070116,
+                "upper95": -0.023502607950092735,
+                "n": 72,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -0.8683136285016815,
-              "other_component_qoq": -0.4588447751796991,
-              "target_response": -0.40946885332195393
+              "total_deposits_bank_qoq": 15.717226473569582,
+              "other_component_qoq": -8.868576652806368,
+              "target_response": 24.58580312637595
+            }
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+            "target_response": {
+              "beta": 110.08322476781075,
+              "se": 17.208917729645293,
+              "lower95": 86.6004062810092,
+              "upper95": 143.65234782293268,
+              "n": 71,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 63.547847682686694,
+                "se": 21.487962726672535,
+                "lower95": 24.906316867844847,
+                "upper95": 113.34067342831636,
+                "n": 71,
+                "ci_excludes_zero": true
+              },
+              "other_component_qoq": {
+                "beta": -46.535377085124054,
+                "se": 23.43677796781147,
+                "lower95": -96.12698161175243,
+                "upper95": -8.31620988735238,
+                "n": 71,
+                "ci_excludes_zero": true
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 25.57015283070588,
+              "other_component_qoq": 1.5750688367005239,
+              "target_response": 23.995083994005356
+            }
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
+            "target_response": {
+              "beta": 110.20741074490327,
+              "se": 19.448819572851402,
+              "lower95": 80.58589014183505,
+              "upper95": 146.74876313055083,
+              "n": 71,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 63.36853735280554,
+                "se": 25.10827435943334,
+                "lower95": 17.63834886013838,
+                "upper95": 101.5627747900198,
+                "n": 71,
+                "ci_excludes_zero": true
+              },
+              "other_component_qoq": {
+                "beta": -46.83887339209773,
+                "se": 25.953820458708204,
+                "lower95": -96.03755728510642,
+                "upper95": -13.453488431070058,
+                "n": 71,
+                "ci_excludes_zero": true
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 25.390842500824725,
+              "other_component_qoq": 1.2715725297268463,
+              "target_response": 24.11926997109788
             }
           },
           "us_chartered_bank_only": {
             "target": "tdc_us_chartered_bank_only_qoq",
             "target_response": {
-              "beta": 120.3152568784267,
-              "se": 15.41756271651815,
-              "lower95": 91.33410406360385,
-              "upper95": 146.75935522916362,
+              "beta": 120.31046973358676,
+              "se": 15.418466533386972,
+              "lower95": 91.3223680836745,
+              "upper95": 146.74542900341854,
               "n": 68,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 57.20166588252789,
-                "se": 22.73302224746962,
-                "lower95": 20.24232698770676,
-                "upper95": 96.71129261937286,
+                "beta": 57.196438848552916,
+                "se": 22.734230202453148,
+                "lower95": 20.235863704332193,
+                "upper95": 96.71135324857228,
                 "n": 68,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -63.11359099589881,
-                "se": 21.464278613325156,
-                "lower95": -100.5438118897028,
-                "upper95": -26.370570298216805,
+                "beta": -63.11403088503384,
+                "se": 21.463645856022264,
+                "lower95": -100.54492747501804,
+                "upper95": -26.370829767199105,
                 "n": 68,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 1.4513306344672614,
-              "other_component_qoq": 9.630062677048421,
-              "target_response": -8.178732042581132
+              "total_deposits_bank_qoq": 19.2187439965721,
+              "other_component_qoq": -15.003584963209263,
+              "target_response": 34.222328959781365
             }
           }
         }
@@ -261,28 +331,28 @@
         "baseline_bank_only": {
           "target": "tdc_bank_only_qoq",
           "target_response": {
-            "beta": 177.53974642600284,
-            "se": 60.97139949220642,
-            "lower95": 120.18172491704128,
-            "upper95": 370.3797319171723,
-            "n": 67,
+            "beta": 115.95916898888741,
+            "se": 40.54165065428436,
+            "lower95": 81.64442436688431,
+            "upper95": 239.23190477466022,
+            "n": 118,
             "ci_excludes_zero": true
           },
           "outcomes": {
             "total_deposits_bank_qoq": {
-              "beta": 95.8047337449417,
-              "se": 92.94036095191366,
-              "lower95": -3.2817543244428027,
-              "upper95": 352.7698207685705,
-              "n": 67,
+              "beta": 54.73477407890318,
+              "se": 58.76473001241558,
+              "lower95": -2.509598122727199,
+              "upper95": 227.63820545891053,
+              "n": 118,
               "ci_excludes_zero": false
             },
             "other_component_qoq": {
-              "beta": -81.73501268106114,
-              "se": 92.74643991909174,
-              "lower95": -237.79391094663603,
-              "upper95": 130.9775120055627,
-              "n": 67,
+              "beta": -61.224394909984234,
+              "se": 53.374915331781295,
+              "lower95": -155.62502451946935,
+              "upper95": 53.190240177903334,
+              "n": 118,
               "ci_excludes_zero": false
             }
           }
@@ -291,205 +361,273 @@
           "broad_depository": {
             "target": "tdc_broad_depository_qoq",
             "target_response": {
-              "beta": 64.79601148063094,
-              "se": 41.47687872706341,
-              "lower95": 20.70713629347749,
-              "upper95": 139.73228953722236,
+              "beta": 63.42541222426287,
+              "se": 41.30345313575511,
+              "lower95": 19.937312663093568,
+              "upper95": 138.14577151326498,
               "n": 66,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 57.870954482420835,
-                "se": 47.41756530111173,
-                "lower95": 12.492535236493124,
-                "upper95": 171.71647355238116,
+                "beta": 56.83903291013173,
+                "se": 47.434437752324314,
+                "lower95": 11.895439685548556,
+                "upper95": 170.4775992492542,
                 "n": 66,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -6.925056998210103,
-                "se": 33.1982754563121,
-                "lower95": -79.50907800399611,
-                "upper95": 51.54280911666583,
+                "beta": -6.586379314131143,
+                "se": 33.176120856540805,
+                "lower95": -77.97699031599922,
+                "upper95": 52.11820522959634,
                 "n": 66,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -37.933779262520865,
-              "other_component_qoq": 74.80995568285104,
-              "target_response": -112.7437349453719
+              "total_deposits_bank_qoq": 2.104258831228549,
+              "other_component_qoq": 54.63801559585309,
+              "target_response": -52.53375676462454
             }
           },
           "core_deposit_proximate": {
             "target": "tdc_core_deposit_proximate_bank_only_qoq",
             "target_response": {
-              "beta": 141.60401990915378,
-              "se": 21.106875089047985,
-              "lower95": 85.72766710386023,
-              "upper95": 158.94351638677682,
+              "beta": 141.60356157148144,
+              "se": 21.107932131038222,
+              "lower95": 85.71851837028512,
+              "upper95": 158.94875919823374,
               "n": 67,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 117.8868675798126,
-                "se": 40.15619337583213,
-                "lower95": 15.879389428034132,
-                "upper95": 147.75253988834697,
+                "beta": 117.88693172787245,
+                "se": 40.156010182441754,
+                "lower95": 15.879424760371904,
+                "upper95": 147.75250113146134,
                 "n": 67,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -23.71715232934119,
-                "se": 22.05190171079951,
-                "lower95": -89.74884107423152,
-                "upper95": -3.7678093356827858,
+                "beta": -23.716629843608985,
+                "se": 22.050510670694727,
+                "lower95": -89.73838298772162,
+                "upper95": -3.768171941542086,
                 "n": 67,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 22.082133834870902,
-              "other_component_qoq": 58.017860351719946,
-              "target_response": -35.93572651684906
+              "total_deposits_bank_qoq": 63.15215764896927,
+              "other_component_qoq": 37.50776506637525,
+              "target_response": 25.644392582594023
             }
           },
           "credit_union_sensitive": {
             "target": "tdc_credit_union_sensitive_qoq",
             "target_response": {
-              "beta": 178.46663121383128,
-              "se": 24.68464092993492,
-              "lower95": 117.4076377928111,
-              "upper95": 212.31033960781104,
-              "n": 67,
+              "beta": 156.08045872972363,
+              "se": 27.83529310209517,
+              "lower95": 86.44883533549407,
+              "upper95": 195.72690550728908,
+              "n": 71,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 95.36203019159652,
-                "se": 48.1743509108525,
-                "lower95": -11.631630234986606,
-                "upper95": 199.44735026587225,
-                "n": 67,
+                "beta": 74.75328128448753,
+                "se": 41.8324955907285,
+                "lower95": -15.64409091202496,
+                "upper95": 143.0688769661442,
+                "n": 71,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -83.10460102223475,
-                "se": 44.39397951219364,
-                "lower95": -159.92984243645623,
-                "upper95": -9.064219386087656,
-                "n": 67,
+                "beta": -81.3271774452361,
+                "se": 38.141095293965186,
+                "lower95": -143.9790217328098,
+                "upper95": -13.724400501925478,
+                "n": 71,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -0.44270355334518285,
-              "other_component_qoq": -1.3695883411736105,
-              "target_response": 0.9268847878284419
+              "total_deposits_bank_qoq": 20.01850720558435,
+              "other_component_qoq": -20.10278253525187,
+              "target_response": 40.12128974083622
             }
           },
           "domestic_bank_only": {
             "target": "tdc_domestic_bank_only_qoq",
             "target_response": {
-              "beta": 165.03303216835923,
-              "se": 37.199713703806225,
-              "lower95": 106.05339296940048,
-              "upper95": 236.95429675444325,
-              "n": 67,
+              "beta": 129.63557552671045,
+              "se": 32.57143013607167,
+              "lower95": 87.19368033985877,
+              "upper95": 188.1489130474654,
+              "n": 71,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 140.7622987757545,
-                "se": 58.5145066491033,
-                "lower95": 22.135808521609754,
-                "upper95": 227.60784058984348,
-                "n": 67,
-                "ci_excludes_zero": true
+                "beta": 82.25867117256216,
+                "se": 50.31509257007533,
+                "lower95": -10.198924911626086,
+                "upper95": 165.78060389407966,
+                "n": 71,
+                "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -24.27073339260474,
-                "se": 63.67048068712889,
-                "lower95": -134.1352639669848,
-                "upper95": 64.96697487551133,
-                "n": 67,
+                "beta": -47.376904354148294,
+                "se": 39.71021128740363,
+                "lower95": -121.74068291395812,
+                "upper95": 10.421404324543417,
+                "n": 71,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 44.95756503081279,
-              "other_component_qoq": 57.464279288456396,
-              "target_response": -12.506714257643608
+              "total_deposits_bank_qoq": 27.52389709365898,
+              "other_component_qoq": 13.84749055583594,
+              "target_response": 13.676406537823041
             }
           },
           "no_remit_bank_only": {
             "target": "tdc_no_remit_bank_only_qoq",
             "target_response": {
-              "beta": 177.2086840949548,
-              "se": 27.948172257608594,
-              "lower95": 110.47061324238472,
-              "upper95": 205.62147922219987,
-              "n": 67,
+              "beta": 156.41723216513793,
+              "se": 30.372867988411638,
+              "lower95": 99.9915611684903,
+              "upper95": 207.5966182269734,
+              "n": 71,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 94.26243912666294,
-                "se": 70.38754093529593,
-                "lower95": -20.172900584463772,
-                "upper95": 226.78737544760975,
-                "n": 67,
+                "beta": 75.45275105858569,
+                "se": 70.29212033096661,
+                "lower95": -7.396858179340892,
+                "upper95": 253.59364339121635,
+                "n": 71,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -82.94624496829186,
-                "se": 57.97642430218923,
-                "lower95": -142.32751133182967,
-                "upper95": 74.59973907236483,
-                "n": 67,
+                "beta": -80.96448110655224,
+                "se": 54.84074847724247,
+                "lower95": -142.83829663201183,
+                "upper95": 83.54021259238093,
+                "n": 71,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -1.5422946182787598,
-              "other_component_qoq": -1.2112322872307288,
-              "target_response": -0.33106233104803096
+              "total_deposits_bank_qoq": 20.71797697968251,
+              "other_component_qoq": -19.740086196568008,
+              "target_response": 40.45806317625052
+            }
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+            "target_response": {
+              "beta": 160.2647507638109,
+              "se": 28.68305551309992,
+              "lower95": 102.66734685853129,
+              "upper95": 205.11695167755167,
+              "n": 70,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 85.35544609191966,
+                "se": 57.165753768722546,
+                "lower95": 1.7916456323063985,
+                "upper95": 185.50023692661037,
+                "n": 70,
+                "ci_excludes_zero": true
+              },
+              "other_component_qoq": {
+                "beta": -74.90930467189123,
+                "se": 45.07753721808265,
+                "lower95": -122.97402060557,
+                "upper95": 13.6021470055155,
+                "n": 70,
+                "ci_excludes_zero": false
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 30.62067201301648,
+              "other_component_qoq": -13.684909761907,
+              "target_response": 44.30558177492348
+            }
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
+            "target_response": {
+              "beta": 160.91246398933495,
+              "se": 29.419847269766542,
+              "lower95": 105.22429547716973,
+              "upper95": 210.4605199746296,
+              "n": 70,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 84.83858444834142,
+                "se": 61.256104502269395,
+                "lower95": 0.1673845341835946,
+                "upper95": 208.91951739579977,
+                "n": 70,
+                "ci_excludes_zero": true
+              },
+              "other_component_qoq": {
+                "beta": -76.07387954099353,
+                "se": 47.37650078026131,
+                "lower95": -128.87501155932085,
+                "upper95": 27.732398543312126,
+                "n": 70,
+                "ci_excludes_zero": false
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 30.103810369438243,
+              "other_component_qoq": -14.849484631009297,
+              "target_response": 44.95329500044754
             }
           },
           "us_chartered_bank_only": {
             "target": "tdc_us_chartered_bank_only_qoq",
             "target_response": {
-              "beta": 165.9520681082538,
-              "se": 29.6908198647901,
-              "lower95": 121.50264343534823,
-              "upper95": 237.61507448125107,
+              "beta": 165.958821839889,
+              "se": 29.69306471835332,
+              "lower95": 121.50264343534785,
+              "upper95": 237.63924006995612,
               "n": 67,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 122.47465349781676,
-                "se": 60.442574733757986,
-                "lower95": 15.29504515015584,
-                "upper95": 211.56973722432917,
+                "beta": 122.47333514549469,
+                "se": 60.44240948742666,
+                "lower95": 15.294815733533719,
+                "upper95": 211.56812684314798,
                 "n": 67,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -43.47741461043705,
-                "se": 63.59136998847192,
-                "lower95": -151.73652717647653,
-                "upper95": 67.55225753925049,
+                "beta": -43.48548669439431,
+                "se": 63.59147935064922,
+                "lower95": -151.75320741967468,
+                "upper95": 67.55199848734856,
                 "n": 67,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 26.66991975287506,
-              "other_component_qoq": 38.257598070624084,
-              "target_response": -11.587678317749038
+              "total_deposits_bank_qoq": 67.7385610665915,
+              "other_component_qoq": 17.738908215589923,
+              "target_response": 49.999652851001585
             }
           }
         }
@@ -498,28 +636,28 @@
         "baseline_bank_only": {
           "target": "tdc_bank_only_qoq",
           "target_response": {
-            "beta": 278.13971316628357,
-            "se": 141.57570011679425,
-            "lower95": 78.32278678356286,
-            "upper95": 597.5909020053358,
-            "n": 64,
+            "beta": 172.8674661880664,
+            "se": 87.14792130590925,
+            "lower95": 76.43912886345232,
+            "upper95": 431.5929761708225,
+            "n": 115,
             "ci_excludes_zero": true
           },
           "outcomes": {
             "total_deposits_bank_qoq": {
-              "beta": 167.33069747889854,
-              "se": 154.8910510638327,
-              "lower95": -27.18884889021173,
-              "upper95": 550.7057101571328,
-              "n": 64,
+              "beta": 95.30474128450595,
+              "se": 94.14123531701945,
+              "lower95": -11.18126164236589,
+              "upper95": 363.2075355524613,
+              "n": 115,
               "ci_excludes_zero": false
             },
             "other_component_qoq": {
-              "beta": -110.80901568738504,
-              "se": 84.23711570896954,
-              "lower95": -242.41233479835057,
-              "upper95": 62.23408515351409,
-              "n": 64,
+              "beta": -77.56272490356045,
+              "se": 52.91667363732913,
+              "lower95": -177.1315877678902,
+              "upper95": 19.960987662159766,
+              "n": 115,
               "ci_excludes_zero": false
             }
           }
@@ -528,205 +666,273 @@
           "broad_depository": {
             "target": "tdc_broad_depository_qoq",
             "target_response": {
-              "beta": 94.71158499488996,
-              "se": 41.773103042041605,
-              "lower95": 22.51739950172049,
-              "upper95": 171.89491798064734,
+              "beta": 92.91147368864301,
+              "se": 41.609395068964375,
+              "lower95": 19.56780960105108,
+              "upper95": 172.0803148499795,
               "n": 63,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 106.81316907537072,
-                "se": 42.34369965952405,
-                "lower95": 20.807319180417927,
-                "upper95": 155.15185542960265,
+                "beta": 104.53789362121545,
+                "se": 41.76266255846329,
+                "lower95": 21.726855223631134,
+                "upper95": 152.42856100158772,
                 "n": 63,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": 12.101584080480777,
-                "se": 21.12326464672393,
-                "lower95": -40.67604217995696,
-                "upper95": 36.530727886003355,
+                "beta": 11.626419932572432,
+                "se": 21.10848065552032,
+                "lower95": -41.49866139022452,
+                "upper95": 35.39506252185414,
                 "n": 63,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -60.51752840352782,
-              "other_component_qoq": 122.91059976786582,
-              "target_response": -183.4281281713936
+              "total_deposits_bank_qoq": 9.233152336709495,
+              "other_component_qoq": 89.18914483613288,
+              "target_response": -79.95599249942339
             }
           },
           "core_deposit_proximate": {
             "target": "tdc_core_deposit_proximate_bank_only_qoq",
             "target_response": {
-              "beta": 212.64368952952745,
-              "se": 73.64666440404697,
-              "lower95": 32.32426522500467,
-              "upper95": 234.81722890320552,
+              "beta": 212.64273586591287,
+              "se": 73.6469812715025,
+              "lower95": 32.324265225004346,
+              "upper95": 234.8163841577352,
               "n": 64,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 169.47198317892202,
-                "se": 95.15398044443256,
-                "lower95": -54.63859301160528,
-                "upper95": 216.4157218756471,
+                "beta": 169.47215383011346,
+                "se": 95.15389047633046,
+                "lower95": -54.63859111777944,
+                "upper95": 216.41588377739498,
                 "n": 64,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -43.17170635060543,
-                "se": 35.960239555476164,
-                "lower95": -128.87161118822846,
-                "upper95": -17.00922976960978,
+                "beta": -43.17058203579941,
+                "se": 35.95910754989845,
+                "lower95": -128.8710934293721,
+                "upper95": -17.008171090680364,
                 "n": 64,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 2.1412857000234737,
-              "other_component_qoq": 67.63730933677961,
-              "target_response": -65.49602363675612
+              "total_deposits_bank_qoq": 74.1674125456075,
+              "other_component_qoq": 34.39214286776104,
+              "target_response": 39.77526967784647
             }
           },
           "credit_union_sensitive": {
             "target": "tdc_credit_union_sensitive_qoq",
             "target_response": {
-              "beta": 280.707437698315,
-              "se": 76.22207539532661,
-              "lower95": 126.3491409808147,
-              "upper95": 407.38400318768095,
-              "n": 64,
+              "beta": 235.94921659144745,
+              "se": 75.39015785489259,
+              "lower95": 93.56265845622953,
+              "upper95": 368.87080000424385,
+              "n": 68,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 166.62271119547825,
-                "se": 85.0040873580066,
-                "lower95": 9.993565371117196,
-                "upper95": 316.29643496500387,
-                "n": 64,
-                "ci_excludes_zero": true
+                "beta": 119.42570957187321,
+                "se": 94.10971031266216,
+                "lower95": -65.8204379663366,
+                "upper95": 330.0071242038243,
+                "n": 68,
+                "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -114.08472650283676,
-                "se": 39.5532723782601,
-                "lower95": -175.5658647288115,
-                "upper95": -39.55167403897889,
-                "n": 64,
+                "beta": -116.52350701957424,
+                "se": 43.75573408703566,
+                "lower95": -176.13123917950298,
+                "upper95": -33.0624359076955,
+                "n": 68,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -0.707986283420297,
-              "other_component_qoq": -3.275710815451717,
-              "target_response": 2.567724532031434
+              "total_deposits_bank_qoq": 24.120968287367262,
+              "other_component_qoq": -38.96078211601379,
+              "target_response": 63.08175040338105
             }
           },
           "domestic_bank_only": {
             "target": "tdc_domestic_bank_only_qoq",
             "target_response": {
-              "beta": 257.69534690282995,
-              "se": 71.37116705849414,
-              "lower95": 141.4008612620621,
-              "upper95": 373.4728180007352,
-              "n": 64,
+              "beta": 189.44625699256096,
+              "se": 80.2176970166882,
+              "lower95": 32.224583278903296,
+              "upper95": 304.99880877926694,
+              "n": 68,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 230.3985232137405,
-                "se": 77.77216349309471,
-                "lower95": 78.72277827629613,
-                "upper95": 361.422258821378,
-                "n": 64,
-                "ci_excludes_zero": true
+                "beta": 148.2414402461469,
+                "se": 97.3778875955866,
+                "lower95": -65.02467412308246,
+                "upper95": 293.04739820361743,
+                "n": 68,
+                "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -27.29682368908945,
-                "se": 43.9479310868509,
-                "lower95": -123.5219191048018,
-                "upper95": 31.59890901542471,
-                "n": 64,
+                "beta": -41.20481674641405,
+                "se": 37.23223618652524,
+                "lower95": -133.27537151913046,
+                "upper95": 14.087139009831589,
+                "n": 68,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 63.06782573484196,
-              "other_component_qoq": 83.51219199829559,
-              "target_response": -20.444366263453617
+              "total_deposits_bank_qoq": 52.93669896164096,
+              "other_component_qoq": 36.3579081571464,
+              "target_response": 16.57879080449456
             }
           },
           "no_remit_bank_only": {
             "target": "tdc_no_remit_bank_only_qoq",
             "target_response": {
-              "beta": 279.5363606646536,
-              "se": 67.83833184354016,
-              "lower95": 105.00458548250631,
-              "upper95": 367.86622265468753,
-              "n": 64,
+              "beta": 235.3864020931662,
+              "se": 76.37329724275541,
+              "lower95": 76.42911626078795,
+              "upper95": 397.4671221176897,
+              "n": 68,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 166.63999787985875,
-                "se": 84.01188616815854,
-                "lower95": -27.706773614083776,
-                "upper95": 301.52182845116977,
-                "n": 64,
+                "beta": 121.5117395014953,
+                "se": 96.92547731080228,
+                "lower95": -68.82853691189366,
+                "upper95": 314.34093903092037,
+                "n": 68,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -112.89636278479486,
-                "se": 44.92231329849165,
-                "lower95": -159.79531214739316,
-                "upper95": 1.325675348132293,
-                "n": 64,
-                "ci_excludes_zero": false
+                "beta": -113.8746625916709,
+                "se": 43.95717131253892,
+                "lower95": -179.17176715118478,
+                "upper95": -24.219180891493018,
+                "n": 68,
+                "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -0.6906995990397888,
-              "other_component_qoq": -2.0873470974098183,
-              "target_response": 1.3966474983700436
+              "total_deposits_bank_qoq": 26.206998216989348,
+              "other_component_qoq": -36.31193768811045,
+              "target_response": 62.518935905099795
+            }
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+            "target_response": {
+              "beta": 250.5846656002741,
+              "se": 78.2709645130001,
+              "lower95": 112.24028241178351,
+              "upper95": 437.5283004409661,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 131.75542433422095,
+                "se": 107.14417056016885,
+                "lower95": -60.05298599949274,
+                "upper95": 339.3357885327623,
+                "n": 67,
+                "ci_excludes_zero": false
+              },
+              "other_component_qoq": {
+                "beta": -118.82924126605315,
+                "se": 48.70168764784523,
+                "lower95": -192.19901781670123,
+                "upper95": -11.993752500181914,
+                "n": 67,
+                "ci_excludes_zero": true
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 36.450683049714996,
+              "other_component_qoq": -41.266516362492695,
+              "target_response": 77.71719941220769
+            }
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
+            "target_response": {
+              "beta": 252.19263997589738,
+              "se": 82.76403531389293,
+              "lower95": 111.46945939330128,
+              "upper95": 439.548394455238,
+              "n": 67,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 131.13905007559822,
+                "se": 96.01583163561938,
+                "lower95": -38.27151712956235,
+                "upper95": 361.17984198687594,
+                "n": 67,
+                "ci_excludes_zero": false
+              },
+              "other_component_qoq": {
+                "beta": -121.05358990029916,
+                "se": 44.24852473935402,
+                "lower95": -182.79310931334047,
+                "upper95": -31.051800421782875,
+                "n": 67,
+                "ci_excludes_zero": true
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 35.83430879109227,
+              "other_component_qoq": -43.49086499673871,
+              "target_response": 79.32517378783098
             }
           },
           "us_chartered_bank_only": {
             "target": "tdc_us_chartered_bank_only_qoq",
             "target_response": {
-              "beta": 241.19566407599865,
-              "se": 69.25718718570637,
-              "lower95": 69.22711650929705,
-              "upper95": 312.985420413419,
+              "beta": 241.19036809969694,
+              "se": 69.25634276880213,
+              "lower95": 69.22711628848835,
+              "upper95": 312.9706056550615,
               "n": 64,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 194.00377720462467,
-                "se": 84.43106321141617,
-                "lower95": 30.51910475085662,
-                "upper95": 305.2922693136241,
+                "beta": 194.00470671180636,
+                "se": 84.43110723348282,
+                "lower95": 30.52169867083406,
+                "upper95": 305.2922732296016,
                 "n": 64,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -47.19188687137398,
-                "se": 36.09475303435071,
-                "lower95": -108.42517331411736,
-                "upper95": 4.64369719805758,
+                "beta": -47.185661387890576,
+                "se": 36.09297968208786,
+                "lower95": -108.41890860023707,
+                "upper95": 4.6542265998590535,
                 "n": 64,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 26.673079725726126,
-              "other_component_qoq": 63.61712881601106,
-              "target_response": -36.94404909028492
+              "total_deposits_bank_qoq": 98.69996542730041,
+              "other_component_qoq": 30.377063515669875,
+              "target_response": 68.32290191163054
             }
           }
         }
@@ -735,28 +941,28 @@
         "baseline_bank_only": {
           "target": "tdc_bank_only_qoq",
           "target_response": {
-            "beta": 347.6946386730543,
-            "se": 270.7611316749685,
-            "lower95": 21.075804641888197,
-            "upper95": 971.367561901552,
-            "n": 60,
+            "beta": 219.83216429237058,
+            "se": 152.76951437011186,
+            "lower95": 15.934003773352826,
+            "upper95": 624.3976382409303,
+            "n": 111,
             "ci_excludes_zero": true
           },
           "outcomes": {
             "total_deposits_bank_qoq": {
-              "beta": 114.22386198654392,
-              "se": 248.53089249335375,
-              "lower95": -230.74012129989265,
-              "upper95": 685.5523861147914,
-              "n": 60,
+              "beta": 73.7367745406378,
+              "se": 126.78086601814343,
+              "lower95": -55.16919570755509,
+              "upper95": 423.75101811982984,
+              "n": 111,
               "ci_excludes_zero": false
             },
             "other_component_qoq": {
-              "beta": -233.4707766865104,
-              "se": 130.44794059486154,
-              "lower95": -529.4765352545235,
-              "upper95": -30.381588860860656,
-              "n": 60,
+              "beta": -146.0953897517328,
+              "se": 75.22175523032966,
+              "lower95": -287.85194515058447,
+              "upper95": -2.869222724029355,
+              "n": 111,
               "ci_excludes_zero": true
             }
           }
@@ -765,205 +971,273 @@
           "broad_depository": {
             "target": "tdc_broad_depository_qoq",
             "target_response": {
-              "beta": 139.51966400058018,
-              "se": 92.42634216283771,
-              "lower95": -6.565063429639425,
-              "upper95": 300.2194975192488,
+              "beta": 137.12249149961025,
+              "se": 91.70071307502316,
+              "lower95": -9.236159721336735,
+              "upper95": 299.10582502876235,
               "n": 59,
               "ci_excludes_zero": false
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 120.1005790236276,
-                "se": 69.70237934810821,
-                "lower95": 4.4042916643054415,
-                "upper95": 282.296148120242,
+                "beta": 117.5557917881725,
+                "se": 68.93555851396691,
+                "lower95": 4.171589762196812,
+                "upper95": 282.5762518558641,
                 "n": 59,
                 "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -19.419084976952576,
-                "se": 49.27259244820236,
-                "lower95": -153.01496707509642,
-                "upper95": 13.5508211735235,
+                "beta": -19.56669971143775,
+                "se": 49.35711271632217,
+                "lower95": -151.47549159791546,
+                "upper95": 14.24770476054792,
                 "n": 59,
                 "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 5.876717037083679,
-              "other_component_qoq": 214.05169170955782,
-              "target_response": -208.17497467247415
+              "total_deposits_bank_qoq": 43.8190172475347,
+              "other_component_qoq": 126.52869004029505,
+              "target_response": -82.70967279276033
             }
           },
           "core_deposit_proximate": {
             "target": "tdc_core_deposit_proximate_bank_only_qoq",
             "target_response": {
-              "beta": 250.44523079159632,
-              "se": 103.72537355837612,
-              "lower95": 33.634701911646154,
-              "upper95": 335.58787236428594,
+              "beta": 250.4456137045933,
+              "se": 103.72717300531967,
+              "lower95": 33.63361628932802,
+              "upper95": 335.5860521580217,
               "n": 60,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 183.10946429682852,
-                "se": 114.67288005160384,
-                "lower95": -80.15193608086979,
-                "upper95": 270.9188943104073,
+                "beta": 183.10945008110096,
+                "se": 114.67251791295242,
+                "lower95": -80.15189404619412,
+                "upper95": 270.919200613226,
                 "n": 60,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -67.3357664947678,
-                "se": 39.910644214139744,
-                "lower95": -159.42795553432006,
-                "upper95": -8.766072597796597,
+                "beta": -67.33616362349235,
+                "se": 39.908401194901074,
+                "lower95": -159.41639990710436,
+                "upper95": -8.766291365336517,
                 "n": 60,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 68.8856023102846,
-              "other_component_qoq": 166.1350101917426,
-              "target_response": -97.24940788145801
+              "total_deposits_bank_qoq": 109.37267554046316,
+              "other_component_qoq": 78.75922612824044,
+              "target_response": 30.613449412222735
             }
           },
           "credit_union_sensitive": {
             "target": "tdc_credit_union_sensitive_qoq",
             "target_response": {
-              "beta": 351.6499497749224,
-              "se": 124.59721661537192,
-              "lower95": 167.4970592420423,
-              "upper95": 560.5641229430173,
-              "n": 60,
+              "beta": 309.0901798091072,
+              "se": 98.82620349953879,
+              "lower95": 59.02386487285043,
+              "upper95": 421.2021003563904,
+              "n": 64,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 113.52438800414204,
-                "se": 107.09806370600116,
-                "lower95": -63.3901836645209,
-                "upper95": 293.3909711885779,
-                "n": 60,
+                "beta": 91.5842596385737,
+                "se": 114.09950252108567,
+                "lower95": -100.97681630275156,
+                "upper95": 292.8442978847702,
+                "n": 64,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -238.1255617707803,
-                "se": 73.11504423773297,
-                "lower95": -351.6576073035877,
-                "upper95": -92.6779944557571,
-                "n": 60,
+                "beta": -217.5059201705335,
+                "se": 62.28812602463077,
+                "lower95": -300.2715057176956,
+                "upper95": -93.42347025655084,
+                "n": 64,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": -0.6994739824018836,
-              "other_component_qoq": -4.654785084269918,
-              "target_response": 3.9553111018680625
+              "total_deposits_bank_qoq": 17.847485097935902,
+              "other_component_qoq": -71.4105304188007,
+              "target_response": 89.25801551673663
             }
           },
           "domestic_bank_only": {
             "target": "tdc_domestic_bank_only_qoq",
             "target_response": {
-              "beta": 325.69744295586025,
-              "se": 103.10483176989833,
-              "lower95": 38.76818437981781,
-              "upper95": 403.05768095135954,
-              "n": 60,
+              "beta": 258.08093389771716,
+              "se": 107.94357425764919,
+              "lower95": 32.30461769720974,
+              "upper95": 415.2452828011681,
+              "n": 64,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 218.1399780513748,
-                "se": 94.6966901392698,
-                "lower95": -19.04265784877181,
-                "upper95": 314.7195418927033,
-                "n": 60,
-                "ci_excludes_zero": false
+                "beta": 199.27169521393702,
+                "se": 99.10675107236253,
+                "lower95": 6.213612740430435,
+                "upper95": 332.8155138645264,
+                "n": 64,
+                "ci_excludes_zero": true
               },
               "other_component_qoq": {
-                "beta": -107.55746490448549,
-                "se": 50.473083602209144,
-                "lower95": -180.51337590832384,
-                "upper95": -13.734374625767671,
-                "n": 60,
-                "ci_excludes_zero": true
+                "beta": -58.80923868378014,
+                "se": 46.4899750067038,
+                "lower95": -166.04972957369696,
+                "upper95": 4.295309855182861,
+                "n": 64,
+                "ci_excludes_zero": false
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 103.91611606483089,
-              "other_component_qoq": 125.9133117820249,
-              "target_response": -21.997195717194074
+              "total_deposits_bank_qoq": 125.53492067329923,
+              "other_component_qoq": 87.28615106795266,
+              "target_response": 38.24876960534658
             }
           },
           "no_remit_bank_only": {
             "target": "tdc_no_remit_bank_only_qoq",
             "target_response": {
-              "beta": 353.0788711989502,
-              "se": 120.72424266193362,
-              "lower95": 95.96635357736646,
-              "upper95": 579.6615518223093,
-              "n": 60,
+              "beta": 308.46835367003735,
+              "se": 97.16085914110221,
+              "lower95": 133.1338077231681,
+              "upper95": 472.39808855667616,
+              "n": 64,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 115.07076041647258,
-                "se": 120.68179463192486,
-                "lower95": -54.173121976853025,
-                "upper95": 350.87413314146426,
-                "n": 60,
+                "beta": 95.79417975807594,
+                "se": 104.84746935301698,
+                "lower95": -70.02851278953443,
+                "upper95": 245.52447469871424,
+                "n": 64,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -238.0081107824776,
-                "se": 64.45387815013255,
-                "lower95": -319.6458745492668,
-                "upper95": -88.65162231228351,
-                "n": 60,
+                "beta": -212.67417391196142,
+                "se": 81.93752604061972,
+                "lower95": -368.242338457697,
+                "upper95": -100.24675837684946,
+                "n": 64,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 0.8468984299286575,
-              "other_component_qoq": -4.537334095967196,
-              "target_response": 5.384232525895868
+              "total_deposits_bank_qoq": 22.057405217438145,
+              "other_component_qoq": -66.57878416022862,
+              "target_response": 88.63618937766677
+            }
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+            "target_response": {
+              "beta": 301.9311726109536,
+              "se": 101.68790164090663,
+              "lower95": 86.62075305660125,
+              "upper95": 459.3799022889975,
+              "n": 63,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 78.77497368503035,
+                "se": 114.46542544162942,
+                "lower95": -87.35859831706783,
+                "upper95": 295.7676102913599,
+                "n": 63,
+                "ci_excludes_zero": false
+              },
+              "other_component_qoq": {
+                "beta": -223.15619892592323,
+                "se": 77.34460267736961,
+                "lower95": -310.4829600501474,
+                "upper95": -59.248661239780304,
+                "n": 63,
+                "ci_excludes_zero": true
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 5.03819914439255,
+              "other_component_qoq": -77.06080917419044,
+              "target_response": 82.099008318583
+            }
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "target": "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
+            "target_response": {
+              "beta": 304.9649171564281,
+              "se": 119.78858034976963,
+              "lower95": 93.61051203995255,
+              "upper95": 476.92842232107137,
+              "n": 63,
+              "ci_excludes_zero": true
+            },
+            "outcomes": {
+              "total_deposits_bank_qoq": {
+                "beta": 78.59532807251509,
+                "se": 122.9116110908116,
+                "lower95": -89.89375008148686,
+                "upper95": 327.7196738913198,
+                "n": 63,
+                "ci_excludes_zero": false
+              },
+              "other_component_qoq": {
+                "beta": -226.369589083913,
+                "se": 76.02780610556361,
+                "lower95": -336.5299639843022,
+                "upper95": -111.27536022679743,
+                "n": 63,
+                "ci_excludes_zero": true
+              }
+            },
+            "differences_vs_baseline_beta": {
+              "total_deposits_bank_qoq": 4.858553531877291,
+              "other_component_qoq": -80.27419933218022,
+              "target_response": 85.13275286405752
             }
           },
           "us_chartered_bank_only": {
             "target": "tdc_us_chartered_bank_only_qoq",
             "target_response": {
-              "beta": 295.325649221157,
-              "se": 108.63279177514336,
-              "lower95": 48.02438217636605,
-              "upper95": 459.260216175829,
+              "beta": 295.32406174402684,
+              "se": 108.63283117700286,
+              "lower95": 48.02222421024342,
+              "upper95": 459.2611125826095,
               "n": 60,
               "ci_excludes_zero": true
             },
             "outcomes": {
               "total_deposits_bank_qoq": {
-                "beta": 169.38808890502816,
-                "se": 103.25604215962072,
-                "lower95": -20.502780243537664,
-                "upper95": 314.29479900060477,
+                "beta": 169.38853036753068,
+                "se": 103.25603729659383,
+                "lower95": -20.50213557309939,
+                "upper95": 314.2966766352245,
                 "n": 60,
                 "ci_excludes_zero": false
               },
               "other_component_qoq": {
-                "beta": -125.93756031612884,
-                "se": 58.64955674891033,
-                "lower95": -276.17676171220774,
-                "upper95": -47.01413922261565,
+                "beta": -125.93553137649616,
+                "se": 58.64848298438561,
+                "lower95": -276.1767294632362,
+                "upper95": -47.01389157680968,
                 "n": 60,
                 "ci_excludes_zero": true
               }
             },
             "differences_vs_baseline_beta": {
-              "total_deposits_bank_qoq": 55.16422691848423,
-              "other_component_qoq": 107.53321637038155,
-              "target_response": -52.368989451897335
+              "total_deposits_bank_qoq": 95.65175582689288,
+              "other_component_qoq": 20.159858375236638,
+              "target_response": 75.49189745165626
             }
           }
         }
@@ -976,229 +1250,293 @@
     "baseline_variant": "bank_only",
     "preferred_variant": "us_chartered_bank_only",
     "secondary_variant": "domestic_bank_only",
-    "headline_read": "Use the U.S.-chartered bank-leg match as the standard scope-check comparison: at h0 it makes `other_component_qoq` about 9.63 less negative than baseline, versus about 19.97 for the no-ROW sensitivity.",
+    "headline_read": "Use the U.S.-chartered bank-leg match as the standard scope-check comparison: at h0 it makes `other_component_qoq` about 15.00 more negative than baseline, versus about 2.39 for the no-ROW sensitivity.",
     "rationale": "The U.S.-chartered bank-leg-matched variant isolates bank-scope matching directly, while `domestic_bank_only` changes the treatment by removing the rest-of-world term only. That makes the former the cleaner standard scope comparison for the current headline outcome."
   },
   "scope_check_gap_assessment": {
     "assumption": "Descriptive only: this block holds the baseline strict identifiable total fixed and asks how much the residual-side scope-check shift could mechanically relieve the current strict gap on its own.",
     "key_horizons": {
       "h0": {
-        "baseline_strict_gap_beta": -75.57860724607202,
-        "baseline_residual_beta": -81.17833439216739,
-        "strict_identifiable_total_beta": -2.0654490673922083,
+        "baseline_strict_gap_beta": -51.45101110629406,
+        "baseline_residual_beta": -56.223002789186694,
+        "strict_identifiable_total_beta": -3.3212742360073477,
         "variant_gap_assessments": {
           "broad_depository": {
-            "residual_shift_vs_baseline_beta": 56.972129443433715,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -24.20620494873367,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -22.140755881341462,
-            "relief_share_of_baseline_strict_gap": 0.7070499617801285,
-            "remaining_share_of_baseline_strict_gap": 0.2929500382198716,
+            "residual_shift_vs_baseline_beta": 32.734700684012154,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -23.48830210517454,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -20.167027869167192,
+            "relief_share_of_baseline_strict_gap": 0.608034372201091,
+            "remaining_share_of_baseline_strict_gap": 0.39196562779890903,
             "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
           },
           "core_deposit_proximate": {
-            "residual_shift_vs_baseline_beta": 67.23534013058519,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -13.9429942615822,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -11.877545194189992,
-            "relief_share_of_baseline_strict_gap": 0.8428451432623179,
-            "remaining_share_of_baseline_strict_gap": 0.1571548567376821,
+            "residual_shift_vs_baseline_beta": 42.599740713348965,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -13.62326207583773,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -10.301987839830382,
+            "relief_share_of_baseline_strict_gap": 0.7997709351416394,
+            "remaining_share_of_baseline_strict_gap": 0.20022906485836053,
             "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
           },
           "credit_union_sensitive": {
-            "residual_shift_vs_baseline_beta": -0.1765950629590236,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -81.35492945512641,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -79.2894803877342,
-            "relief_share_of_baseline_strict_gap": -0.04909951740153346,
-            "remaining_share_of_baseline_strict_gap": 1.0490995174015334,
+            "residual_shift_vs_baseline_beta": -8.357418925940856,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -64.58042171512756,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -61.25914747912021,
+            "relief_share_of_baseline_strict_gap": -0.19063058552072473,
+            "remaining_share_of_baseline_strict_gap": 1.1906305855207246,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "domestic_bank_only": {
-            "residual_shift_vs_baseline_beta": 19.970561490257523,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -61.20777290190986,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -59.142323834517654,
-            "relief_share_of_baseline_strict_gap": 0.21747269512443415,
-            "remaining_share_of_baseline_strict_gap": 0.7825273048755659,
-            "interpretation": "scope_check_relief_partial_but_incomplete"
+            "residual_shift_vs_baseline_beta": -2.385795576054342,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -58.608798365241036,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -55.28752412923369,
+            "relief_share_of_baseline_strict_gap": -0.0745663290273085,
+            "remaining_share_of_baseline_strict_gap": 1.0745663290273084,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "no_remit_bank_only": {
-            "residual_shift_vs_baseline_beta": -0.4588447751796991,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -81.63717916734709,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -79.57173009995488,
-            "relief_share_of_baseline_strict_gap": -0.05283403597107676,
-            "remaining_share_of_baseline_strict_gap": 1.0528340359710768,
+            "residual_shift_vs_baseline_beta": -8.868576652806368,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -65.09157944199306,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -61.770305205985714,
+            "relief_share_of_baseline_strict_gap": -0.20056542870212482,
+            "remaining_share_of_baseline_strict_gap": 1.2005654287021248,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "residual_shift_vs_baseline_beta": 1.5750688367005239,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -54.64793395248617,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -51.32665971647882,
+            "relief_share_of_baseline_strict_gap": 0.0024168891367039934,
+            "remaining_share_of_baseline_strict_gap": 0.997583110863296,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "residual_shift_vs_baseline_beta": 1.2715725297268463,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -54.95143025945985,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -51.6301560234525,
+            "relief_share_of_baseline_strict_gap": -0.0034818541619782463,
+            "remaining_share_of_baseline_strict_gap": 1.0034818541619783,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "us_chartered_bank_only": {
-            "residual_shift_vs_baseline_beta": 9.630062677048421,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -71.54827171511897,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -69.48282264772676,
-            "relief_share_of_baseline_strict_gap": 0.0806548945589636,
-            "remaining_share_of_baseline_strict_gap": 0.9193451054410364,
+            "residual_shift_vs_baseline_beta": -15.003584963209263,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -71.22658775239596,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -67.90531351638862,
+            "relief_share_of_baseline_strict_gap": -0.319805229407468,
+            "remaining_share_of_baseline_strict_gap": 1.319805229407468,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           }
         }
       },
       "h1": {
-        "baseline_strict_gap_beta": -95.96925375260912,
-        "baseline_residual_beta": -88.82606789492539,
-        "strict_identifiable_total_beta": 7.344266170371938,
+        "baseline_strict_gap_beta": -67.5818703711079,
+        "baseline_residual_beta": -68.99579094659518,
+        "strict_identifiable_total_beta": -1.55093125282648,
         "variant_gap_assessments": {
           "broad_depository": {
-            "residual_shift_vs_baseline_beta": 74.80995568285104,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -14.016112212074347,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -21.360378382446285,
-            "relief_share_of_baseline_strict_gap": 0.7774247735893689,
-            "remaining_share_of_baseline_strict_gap": 0.22257522641063113,
+            "residual_shift_vs_baseline_beta": 54.63801559585309,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -14.357775350742088,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -12.806844097915608,
+            "relief_share_of_baseline_strict_gap": 0.8104988212431792,
+            "remaining_share_of_baseline_strict_gap": 0.1895011787568208,
             "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
           },
           "core_deposit_proximate": {
-            "residual_shift_vs_baseline_beta": 58.017860351719946,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -30.80820754320544,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -38.15247371357738,
-            "relief_share_of_baseline_strict_gap": 0.6024510744667521,
-            "remaining_share_of_baseline_strict_gap": 0.39754892553324794,
-            "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
+            "residual_shift_vs_baseline_beta": 37.50776506637525,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -31.48802588021993,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -29.93709462739345,
+            "relief_share_of_baseline_strict_gap": 0.5570247691725334,
+            "remaining_share_of_baseline_strict_gap": 0.44297523082746665,
+            "interpretation": "scope_check_relief_partial_but_incomplete"
           },
           "credit_union_sensitive": {
-            "residual_shift_vs_baseline_beta": -1.3695883411736105,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -90.195656236099,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -97.53992240647094,
-            "relief_share_of_baseline_strict_gap": -0.016366373525324135,
-            "remaining_share_of_baseline_strict_gap": 1.016366373525324,
+            "residual_shift_vs_baseline_beta": -20.10278253525187,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -89.09857348184704,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -87.54764222902057,
+            "relief_share_of_baseline_strict_gap": -0.2954308862462068,
+            "remaining_share_of_baseline_strict_gap": 1.2954308862462067,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "domestic_bank_only": {
-            "residual_shift_vs_baseline_beta": 57.464279288456396,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -31.36178860646899,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -38.70605477684093,
-            "relief_share_of_baseline_strict_gap": 0.5966827576192482,
-            "remaining_share_of_baseline_strict_gap": 0.40331724238075184,
+            "residual_shift_vs_baseline_beta": 13.84749055583594,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -55.14830039075924,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -53.59736913793276,
+            "relief_share_of_baseline_strict_gap": 0.20692681567383328,
+            "remaining_share_of_baseline_strict_gap": 0.7930731843261667,
             "interpretation": "scope_check_relief_partial_but_incomplete"
           },
           "no_remit_bank_only": {
-            "residual_shift_vs_baseline_beta": -1.2112322872307288,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -90.03730018215612,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -97.38156635252805,
-            "relief_share_of_baseline_strict_gap": -0.01471630282298134,
-            "remaining_share_of_baseline_strict_gap": 1.0147163028229813,
+            "residual_shift_vs_baseline_beta": -19.740086196568008,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -88.73587714316318,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -87.1849458903367,
+            "relief_share_of_baseline_strict_gap": -0.29006411647951924,
+            "remaining_share_of_baseline_strict_gap": 1.2900641164795192,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "residual_shift_vs_baseline_beta": -13.684909761907,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -82.68070070850217,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -81.1297694556757,
+            "relief_share_of_baseline_strict_gap": -0.20046647140975993,
+            "remaining_share_of_baseline_strict_gap": 1.20046647140976,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "residual_shift_vs_baseline_beta": -14.849484631009297,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -83.84527557760447,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -82.294344324778,
+            "relief_share_of_baseline_strict_gap": -0.217698531764221,
+            "remaining_share_of_baseline_strict_gap": 1.217698531764221,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "us_chartered_bank_only": {
-            "residual_shift_vs_baseline_beta": 38.257598070624084,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -50.5684698243013,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -57.91273599467324,
-            "relief_share_of_baseline_strict_gap": 0.39654906409961777,
-            "remaining_share_of_baseline_strict_gap": 0.6034509359003822,
+            "residual_shift_vs_baseline_beta": 17.738908215589923,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -51.256882731005255,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -49.705951478178775,
+            "relief_share_of_baseline_strict_gap": 0.2645076082500863,
+            "remaining_share_of_baseline_strict_gap": 0.7354923917499138,
             "interpretation": "scope_check_relief_partial_but_incomplete"
           }
         }
       },
       "h4": {
-        "baseline_strict_gap_beta": -125.0890576085553,
-        "baseline_residual_beta": -100.99420217322485,
-        "strict_identifiable_total_beta": 9.627031230490644,
+        "baseline_strict_gap_beta": -74.73928102867838,
+        "baseline_residual_beta": -70.27564601632174,
+        "strict_identifiable_total_beta": 1.6242148598417572,
         "variant_gap_assessments": {
           "broad_depository": {
-            "residual_shift_vs_baseline_beta": 122.91059976786582,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": 21.91639759464097,
-            "descriptive_gap_if_strict_total_held_fixed_beta": 12.289366364150325,
-            "relief_share_of_baseline_strict_gap": 0.9017550647586795,
-            "remaining_share_of_baseline_strict_gap": 0.09824493524132051,
+            "residual_shift_vs_baseline_beta": 89.18914483613288,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": 18.91349881981114,
+            "descriptive_gap_if_strict_total_held_fixed_beta": 17.28928395996938,
+            "relief_share_of_baseline_strict_gap": 0.7686720594310337,
+            "remaining_share_of_baseline_strict_gap": 0.2313279405689663,
             "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
           },
           "core_deposit_proximate": {
-            "residual_shift_vs_baseline_beta": 67.63730933677961,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -33.35689283644524,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -42.983924066935884,
-            "relief_share_of_baseline_strict_gap": 0.6563734279504552,
-            "remaining_share_of_baseline_strict_gap": 0.3436265720495448,
-            "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
+            "residual_shift_vs_baseline_beta": 34.39214286776104,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -35.883503148560706,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -37.50771800840246,
+            "relief_share_of_baseline_strict_gap": 0.4981525445232703,
+            "remaining_share_of_baseline_strict_gap": 0.5018474554767297,
+            "interpretation": "scope_check_relief_partial_but_incomplete"
           },
           "credit_union_sensitive": {
-            "residual_shift_vs_baseline_beta": -3.275710815451717,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -104.26991298867657,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -113.89694421916721,
-            "relief_share_of_baseline_strict_gap": 0.08947316098912407,
-            "remaining_share_of_baseline_strict_gap": 0.9105268390108759,
+            "residual_shift_vs_baseline_beta": -38.96078211601379,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -109.23642813233553,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -110.86064299217729,
+            "relief_share_of_baseline_strict_gap": -0.48329822639902975,
+            "remaining_share_of_baseline_strict_gap": 1.4832982263990298,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "domestic_bank_only": {
-            "residual_shift_vs_baseline_beta": 83.51219199829559,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -17.482010174929258,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -27.1090414054199,
-            "relief_share_of_baseline_strict_gap": 0.7832820717999732,
-            "remaining_share_of_baseline_strict_gap": 0.2167179282000268,
-            "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
+            "residual_shift_vs_baseline_beta": 36.3579081571464,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -33.91773785917535,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -35.541952719017104,
+            "relief_share_of_baseline_strict_gap": 0.5244541795180071,
+            "remaining_share_of_baseline_strict_gap": 0.4755458204819929,
+            "interpretation": "scope_check_relief_partial_but_incomplete"
           },
           "no_remit_bank_only": {
-            "residual_shift_vs_baseline_beta": -2.0873470974098183,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -103.08154927063467,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -112.70858050112531,
-            "relief_share_of_baseline_strict_gap": 0.09897330225456297,
-            "remaining_share_of_baseline_strict_gap": 0.9010266977454371,
+            "residual_shift_vs_baseline_beta": -36.31193768811045,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -106.58758370443219,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -108.21179856427395,
+            "relief_share_of_baseline_strict_gap": -0.44785709836774795,
+            "remaining_share_of_baseline_strict_gap": 1.447857098367748,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "residual_shift_vs_baseline_beta": -41.266516362492695,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -111.54216237881444,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -113.1663772386562,
+            "relief_share_of_baseline_strict_gap": -0.5141485933646174,
+            "remaining_share_of_baseline_strict_gap": 1.5141485933646173,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "residual_shift_vs_baseline_beta": -43.49086499673871,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -113.76651101306045,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -115.39072587290221,
+            "relief_share_of_baseline_strict_gap": -0.5439100334484804,
+            "remaining_share_of_baseline_strict_gap": 1.5439100334484803,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "us_chartered_bank_only": {
-            "residual_shift_vs_baseline_beta": 63.61712881601106,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -37.37707335721379,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -47.00410458770443,
-            "relief_share_of_baseline_strict_gap": 0.6242348812412057,
-            "remaining_share_of_baseline_strict_gap": 0.3757651187587942,
-            "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
+            "residual_shift_vs_baseline_beta": 30.377063515669875,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -39.89858250065187,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -41.52279736049363,
+            "relief_share_of_baseline_strict_gap": 0.4444314048918825,
+            "remaining_share_of_baseline_strict_gap": 0.5555685951081175,
+            "interpretation": "scope_check_relief_partial_but_incomplete"
           }
         }
       },
       "h8": {
-        "baseline_strict_gap_beta": -249.82357659783344,
-        "baseline_residual_beta": -230.24311066594336,
-        "strict_identifiable_total_beta": 9.626948380965132,
+        "baseline_strict_gap_beta": -145.1436729824548,
+        "baseline_residual_beta": -137.14820495288674,
+        "strict_identifiable_total_beta": 9.15206279903046,
         "variant_gap_assessments": {
           "broad_depository": {
-            "residual_shift_vs_baseline_beta": 214.05169170955782,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -16.191418956385547,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -25.81836733735068,
-            "relief_share_of_baseline_strict_gap": 0.8966535997564667,
-            "remaining_share_of_baseline_strict_gap": 0.10334640024353324,
+            "residual_shift_vs_baseline_beta": 126.52869004029505,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -10.619514912591697,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -19.771577711622157,
+            "relief_share_of_baseline_strict_gap": 0.8637792657072129,
+            "remaining_share_of_baseline_strict_gap": 0.1362207342927871,
             "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
           },
           "core_deposit_proximate": {
-            "residual_shift_vs_baseline_beta": 166.1350101917426,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -64.10810047420077,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -73.7350488551659,
-            "relief_share_of_baseline_strict_gap": 0.7048515201835224,
-            "remaining_share_of_baseline_strict_gap": 0.2951484798164776,
-            "interpretation": "scope_check_relief_eliminates_most_of_baseline_strict_gap"
+            "residual_shift_vs_baseline_beta": 78.75922612824044,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -58.3889788246463,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -67.54104162367676,
+            "relief_share_of_baseline_strict_gap": 0.5346607934343701,
+            "remaining_share_of_baseline_strict_gap": 0.4653392065656298,
+            "interpretation": "scope_check_relief_partial_but_incomplete"
           },
           "credit_union_sensitive": {
-            "residual_shift_vs_baseline_beta": -4.654785084269918,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -234.89789575021328,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -244.5248441311784,
-            "relief_share_of_baseline_strict_gap": 0.02120989755576567,
-            "remaining_share_of_baseline_strict_gap": 0.9787901024442344,
+            "residual_shift_vs_baseline_beta": -71.4105304188007,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -208.55873537168745,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -217.7107981707179,
+            "relief_share_of_baseline_strict_gap": -0.4999675404179356,
+            "remaining_share_of_baseline_strict_gap": 1.4999675404179356,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "domestic_bank_only": {
-            "residual_shift_vs_baseline_beta": 125.9133117820249,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -104.32979888391846,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -113.95674726488359,
-            "relief_share_of_baseline_strict_gap": 0.5438511095838988,
-            "remaining_share_of_baseline_strict_gap": 0.4561488904161012,
+            "residual_shift_vs_baseline_beta": 87.28615106795266,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -49.862053884934085,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -59.014116683964545,
+            "relief_share_of_baseline_strict_gap": 0.593408961814696,
+            "remaining_share_of_baseline_strict_gap": 0.4065910381853039,
             "interpretation": "scope_check_relief_partial_but_incomplete"
           },
           "no_remit_bank_only": {
-            "residual_shift_vs_baseline_beta": -4.537334095967196,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -234.78044476191056,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -244.4073931428757,
-            "relief_share_of_baseline_strict_gap": 0.021680033280752884,
-            "remaining_share_of_baseline_strict_gap": 0.9783199667192471,
+            "residual_shift_vs_baseline_beta": -66.57878416022862,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -203.72698911311537,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -212.87905191214583,
+            "relief_share_of_baseline_strict_gap": -0.4666781371715664,
+            "remaining_share_of_baseline_strict_gap": 1.4666781371715665,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_bank_only": {
+            "residual_shift_vs_baseline_beta": -77.06080917419044,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -214.20901412707718,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -223.36107692610764,
+            "relief_share_of_baseline_strict_gap": -0.5388964075141456,
+            "remaining_share_of_baseline_strict_gap": 1.5388964075141456,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
+          },
+          "tier2_regression_mmf_rrp_di_np_cu": {
+            "residual_shift_vs_baseline_beta": -80.27419933218022,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -217.42240428506696,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -226.57446708409742,
+            "relief_share_of_baseline_strict_gap": -0.5610357821900105,
+            "remaining_share_of_baseline_strict_gap": 1.5610357821900105,
             "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           },
           "us_chartered_bank_only": {
-            "residual_shift_vs_baseline_beta": 107.53321637038155,
-            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -122.70989429556181,
-            "descriptive_gap_if_strict_total_held_fixed_beta": -132.33684267652694,
-            "relief_share_of_baseline_strict_gap": 0.4702788084346295,
-            "remaining_share_of_baseline_strict_gap": 0.5297211915653706,
-            "interpretation": "scope_check_relief_partial_but_incomplete"
+            "residual_shift_vs_baseline_beta": 20.159858375236638,
+            "descriptive_residual_if_shift_applied_to_strict_baseline_beta": -116.9883465776501,
+            "descriptive_gap_if_strict_total_held_fixed_beta": -126.14040937668057,
+            "relief_share_of_baseline_strict_gap": 0.13092726134932098,
+            "remaining_share_of_baseline_strict_gap": 0.869072738650679,
+            "interpretation": "scope_check_relief_small_relative_to_baseline_strict_gap"
           }
         }
       }
@@ -1208,439 +1546,439 @@
     "key_horizons": {
       "h0": {
         "other_component": {
-          "beta": -81.17833439216739,
-          "se": 20.0820892829219,
-          "lower95": -120.5392293866943,
-          "upper95": -41.81743939764046,
-          "n": 68,
+          "beta": -56.223002789186694,
+          "se": 12.517283696834168,
+          "lower95": -80.75687883498166,
+          "upper95": -31.689126743391725,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "strict_headline_direct_core": {
-          "beta": -20.959164939095665,
-          "se": 3.154984044707311,
-          "lower95": -27.142933666721994,
-          "upper95": -14.775396211469335,
-          "n": 68,
+          "beta": -12.936216667743267,
+          "se": 3.630426658560682,
+          "lower95": -20.051852918522204,
+          "upper95": -5.82058041696433,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "strict_loan_source": {
-          "beta": -19.97313706640162,
-          "se": 8.896555846407024,
-          "lower95": -37.410386525359385,
-          "upper95": -2.535887607443854,
-          "n": 68,
+          "beta": -14.361312827632876,
+          "se": 5.346581169933267,
+          "lower95": -24.84061192070208,
+          "upper95": -3.8820137345636727,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "strict_loan_core_plus_private_borrower": {
-          "beta": -18.024897659337825,
-          "se": 10.509068730802262,
-          "lower95": -38.62267237171026,
-          "upper95": 2.5728770530346097,
-          "n": 68,
-          "ci_excludes_zero": false
+          "beta": -12.557371580970514,
+          "se": 6.1882725137476084,
+          "lower95": -24.686385707915825,
+          "upper95": -0.42835745402520153,
+          "n": 119,
+          "ci_excludes_zero": true
         },
         "strict_loan_noncore_system": {
-          "beta": -0.9745232374736701,
-          "se": 5.23729803124129,
-          "lower95": -11.239627378706597,
-          "upper95": 9.290580903759256,
-          "n": 68,
+          "beta": -2.499428461735584,
+          "se": 3.8219458183540613,
+          "lower95": -9.990442265709543,
+          "upper95": 4.991585342238376,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "strict_non_treasury_securities": {
-          "beta": 15.30465101167281,
-          "se": 6.050671529441859,
-          "lower95": 3.4453348139667668,
-          "upper95": 27.163967209378853,
-          "n": 68,
+          "beta": 10.512832325809482,
+          "se": 3.8376637009437307,
+          "lower95": 2.9910114719597702,
+          "upper95": 18.034653179659195,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "strict_identifiable_total": {
-          "beta": -2.0654490673922083,
-          "se": 12.647084899431377,
-          "lower95": -26.853735470277705,
-          "upper95": 22.72283733549329,
-          "n": 68,
+          "beta": -3.3212742360073477,
+          "se": 7.0574160358523566,
+          "lower95": -17.153809666277965,
+          "upper95": 10.511261194263271,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap": {
-          "beta": -75.57860724607202,
-          "se": 15.835634841558793,
-          "lower95": -106.61645153552726,
-          "upper95": -44.54076295661679,
-          "n": 68,
+          "beta": -51.45101110629406,
+          "se": 11.612583938530694,
+          "lower95": -74.21167562581422,
+          "upper95": -28.690346586773902,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "loan_components": {
           "strict_loan_mortgages_qoq": {
-            "beta": -7.6343332804585655,
-            "se": 1.9249105010993577,
-            "lower95": -11.407157862613307,
-            "upper95": -3.8615086983038247,
-            "n": 68,
-            "ci_excludes_zero": true
+            "beta": -3.978042275219278,
+            "se": 2.059968682069893,
+            "lower95": -8.015580892076269,
+            "upper95": 0.059496341637712113,
+            "n": 119,
+            "ci_excludes_zero": false
           },
           "strict_loan_consumer_credit_qoq": {
-            "beta": -9.614618825387861,
-            "se": 2.1407940307057847,
-            "lower95": -13.810575125571198,
-            "upper95": -5.418662525204524,
-            "n": 68,
+            "beta": -4.727049310636028,
+            "se": 2.0861980177621144,
+            "lower95": -8.815997425449773,
+            "upper95": -0.6381011958222835,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "strict_loan_di_loans_nec_qoq": {
-            "beta": -0.26454114113574967,
-            "se": 9.534274569487632,
-            "lower95": -18.951719297331508,
-            "upper95": 18.422637015060012,
-            "n": 68,
+            "beta": -3.0570197270342403,
+            "se": 5.662204476086389,
+            "lower95": -14.154940500163562,
+            "upper95": 8.040901046095083,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "strict_loan_other_advances_qoq": {
-            "beta": 0.21516102692308578,
-            "se": 0.1339037061144795,
-            "lower95": -0.04729023706129401,
-            "upper95": 0.4776122909074656,
-            "n": 68,
+            "beta": 0.15295182331822602,
+            "se": 0.08233193282024996,
+            "lower95": -0.008418765009463897,
+            "upper95": 0.3143224116459159,
+            "n": 119,
             "ci_excludes_zero": false
           }
         },
         "loan_component_shares_of_loan_source_beta": {
-          "strict_loan_mortgages_qoq": 0.3822300550523371,
-          "strict_loan_consumer_credit_qoq": 0.4813775018628078,
-          "strict_loan_di_loans_nec_qoq": 0.013244846828831664,
-          "strict_loan_other_advances_qoq": -0.010772520421192373
+          "strict_loan_mortgages_qoq": 0.27699711878464556,
+          "strict_loan_consumer_credit_qoq": 0.3291516149930682,
+          "strict_loan_di_loans_nec_qoq": 0.21286492145426777,
+          "strict_loan_other_advances_qoq": -0.010650267503673375
         },
-        "strict_loan_di_loans_nec_share_of_loan_source_beta": 0.013244846828831664,
+        "strict_loan_di_loans_nec_share_of_loan_source_beta": 0.21286492145426777,
         "dominant_loan_component": "strict_loan_consumer_credit_qoq",
-        "strict_non_treasury_securities_share_of_identifiable_total_beta": -7.409841885375626
+        "strict_non_treasury_securities_share_of_identifiable_total_beta": -3.1653008992257825
       },
       "h1": {
         "other_component": {
-          "beta": -88.82606789492539,
-          "se": 46.7856406435434,
-          "lower95": -180.52592355627047,
-          "upper95": 2.8737877664196816,
-          "n": 67,
-          "ci_excludes_zero": false
+          "beta": -68.99579094659518,
+          "se": 27.36359299323923,
+          "lower95": -122.62843321334407,
+          "upper95": -15.36314867984629,
+          "n": 118,
+          "ci_excludes_zero": true
         },
         "strict_headline_direct_core": {
-          "beta": -23.68311505374398,
-          "se": 8.159767418916271,
-          "lower95": -39.67625919481987,
-          "upper95": -7.6899709126680875,
-          "n": 67,
+          "beta": -16.311852037522378,
+          "se": 5.695566103212528,
+          "lower95": -27.475161599818932,
+          "upper95": -5.148542475225824,
+          "n": 118,
           "ci_excludes_zero": true
         },
         "strict_loan_source": {
-          "beta": -16.80509310603452,
-          "se": 10.034464624999032,
-          "lower95": -36.47264377103262,
-          "upper95": 2.862457558963584,
-          "n": 67,
-          "ci_excludes_zero": false
+          "beta": -16.059645508791995,
+          "se": 6.610266419263587,
+          "lower95": -29.015767690548625,
+          "upper95": -3.103523327035365,
+          "n": 118,
+          "ci_excludes_zero": true
         },
         "strict_loan_core_plus_private_borrower": {
-          "beta": -15.180127719479106,
-          "se": 11.864278110274233,
-          "lower95": -38.4341128156166,
-          "upper95": 8.073857376658388,
-          "n": 67,
-          "ci_excludes_zero": false
+          "beta": -15.738976800479406,
+          "se": 7.509039539400578,
+          "lower95": -30.456694297704537,
+          "upper95": -1.0212593032542738,
+          "n": 118,
+          "ci_excludes_zero": true
         },
         "strict_loan_noncore_system": {
-          "beta": -3.7923173310458287,
-          "se": 7.425856242514777,
-          "lower95": -18.34699556637479,
-          "upper95": 10.762360904283135,
-          "n": 67,
+          "beta": -7.678893501632208,
+          "se": 7.496467694648282,
+          "lower95": -22.371970183142842,
+          "upper95": 7.014183179878424,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "strict_non_treasury_securities": {
-          "beta": 20.851274479627072,
-          "se": 9.40121819163145,
-          "lower95": 2.4248868240294286,
-          "upper95": 39.277662135224716,
-          "n": 67,
+          "beta": 14.222523995260342,
+          "se": 5.837296169831269,
+          "lower95": 2.781423502391055,
+          "upper95": 25.663624488129628,
+          "n": 118,
           "ci_excludes_zero": true
         },
         "strict_identifiable_total": {
-          "beta": 7.344266170371938,
-          "se": 17.658122502542483,
-          "lower95": -27.26565393461133,
-          "upper95": 41.954186275355205,
-          "n": 67,
+          "beta": -1.55093125282648,
+          "se": 10.590284003470053,
+          "lower95": -22.307887899627783,
+          "upper95": 19.206025393974823,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap": {
-          "beta": -95.96925375260912,
-          "se": 39.920705898833845,
-          "lower95": -174.21383731432346,
-          "upper95": -17.724670190894784,
-          "n": 67,
+          "beta": -67.5818703711079,
+          "se": 24.5227004267397,
+          "lower95": -115.64636320751771,
+          "upper95": -19.517377534698085,
+          "n": 118,
           "ci_excludes_zero": true
         },
         "loan_components": {
           "strict_loan_mortgages_qoq": {
-            "beta": -8.617923708234224,
-            "se": 2.9239283468209494,
-            "lower95": -14.348823268003285,
-            "upper95": -2.887024148465164,
-            "n": 67,
-            "ci_excludes_zero": true
-          },
-          "strict_loan_consumer_credit_qoq": {
-            "beta": -9.78294520776889,
-            "se": 5.524806326353476,
-            "lower95": -20.611565607421703,
-            "upper95": 1.045675191883923,
-            "n": 67,
+            "beta": -2.8935524836688646,
+            "se": 3.477198064430388,
+            "lower95": -9.708860689952425,
+            "upper95": 3.921755722614696,
+            "n": 118,
             "ci_excludes_zero": false
           },
+          "strict_loan_consumer_credit_qoq": {
+            "beta": -7.303482537870657,
+            "se": 3.178816914792057,
+            "lower95": -13.53396369086309,
+            "upper95": -1.0730013848782258,
+            "n": 118,
+            "ci_excludes_zero": true
+          },
           "strict_loan_di_loans_nec_qoq": {
-            "beta": 3.5265012685932255,
-            "se": 12.704268092290631,
-            "lower95": -21.37386419229641,
-            "upper95": 28.42686672948286,
-            "n": 67,
+            "beta": -3.3807175717467874,
+            "se": 7.944511148946434,
+            "lower95": -18.9519594236818,
+            "upper95": 12.190524280188223,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "strict_loan_other_advances_qoq": {
-            "beta": 0.26048789506103986,
-            "se": 0.17760050379305112,
-            "lower95": -0.0876090923733403,
-            "upper95": 0.6085848824954201,
-            "n": 67,
+            "beta": 0.2195264950654465,
+            "se": 0.11536152935670124,
+            "lower95": -0.0065821024736879286,
+            "upper95": 0.4456350926045809,
+            "n": 118,
             "ci_excludes_zero": false
           }
         },
         "loan_component_shares_of_loan_source_beta": {
-          "strict_loan_mortgages_qoq": 0.5128161833949986,
-          "strict_loan_consumer_credit_qoq": 0.5821416844311291,
-          "strict_loan_di_loans_nec_qoq": -0.20984717230319294,
-          "strict_loan_other_advances_qoq": -0.015500532690741333
+          "strict_loan_mortgages_qoq": 0.18017536452375388,
+          "strict_loan_consumer_credit_qoq": 0.45477233814857876,
+          "strict_loan_di_loans_nec_qoq": 0.21051009936028686,
+          "strict_loan_other_advances_qoq": -0.013669448366420341
         },
-        "strict_loan_di_loans_nec_share_of_loan_source_beta": -0.20984717230319294,
+        "strict_loan_di_loans_nec_share_of_loan_source_beta": 0.21051009936028686,
         "dominant_loan_component": "strict_loan_consumer_credit_qoq",
-        "strict_non_treasury_securities_share_of_identifiable_total_beta": 2.8391229288155135
+        "strict_non_treasury_securities_share_of_identifiable_total_beta": -9.170312332890731
       },
       "h4": {
         "other_component": {
-          "beta": -100.99420217322485,
-          "se": 48.95277771700572,
-          "lower95": -196.94164649855605,
-          "upper95": -5.04675784789363,
-          "n": 64,
+          "beta": -70.27564601632174,
+          "se": 31.87297979793321,
+          "lower95": -132.74668642027083,
+          "upper95": -7.804605612372654,
+          "n": 115,
           "ci_excludes_zero": true
         },
         "strict_headline_direct_core": {
-          "beta": -39.60708317233478,
-          "se": 21.704975154811446,
-          "lower95": -82.14883447576523,
-          "upper95": 2.9346681310956555,
-          "n": 64,
+          "beta": -24.85888739376021,
+          "se": 14.989609358550272,
+          "lower95": -54.23852173651874,
+          "upper95": 4.5207469489983225,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_loan_source": {
-          "beta": -35.94429115979122,
-          "se": 19.174791564821454,
-          "lower95": -73.52688262684127,
-          "upper95": 1.638300307258831,
-          "n": 64,
+          "beta": -23.7266209046791,
+          "se": 18.357054361780644,
+          "lower95": -59.70644745376916,
+          "upper95": 12.253205644410965,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_loan_core_plus_private_borrower": {
-          "beta": -36.09446880211357,
-          "se": 18.505539205304284,
-          "lower95": -72.36532564450997,
-          "upper95": 0.17638804028283062,
-          "n": 64,
+          "beta": -23.494321757484773,
+          "se": 17.974479114678246,
+          "lower95": -58.724300822254136,
+          "upper95": 11.735657307284587,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_loan_noncore_system": {
-          "beta": -6.588510473401262,
-          "se": 10.22291777123132,
-          "lower95": -26.625429305014645,
-          "upper95": 13.448408358212124,
-          "n": 64,
+          "beta": -5.87268099863966,
+          "se": 8.198360948037223,
+          "lower95": -21.941468456792617,
+          "upper95": 10.196106459513299,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_non_treasury_securities": {
-          "beta": 43.740795858104896,
-          "se": 29.03941137689402,
-          "lower95": -13.176450440607383,
-          "upper95": 100.65804215681717,
-          "n": 64,
+          "beta": 26.443065297344976,
+          "se": 16.872458899332056,
+          "lower95": -6.626954145345852,
+          "upper95": 59.51308474003581,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_identifiable_total": {
-          "beta": 9.627031230490644,
-          "se": 41.77812349712699,
-          "lower95": -72.25809082387826,
-          "upper95": 91.51215328485955,
-          "n": 64,
+          "beta": 1.6242148598417572,
+          "se": 26.983616569507834,
+          "lower95": -51.263673616393596,
+          "upper95": 54.51210333607711,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap": {
-          "beta": -125.0890576085553,
-          "se": 43.55668314239158,
-          "lower95": -210.4601565676428,
-          "upper95": -39.7179586494678,
-          "n": 64,
+          "beta": -74.73928102867838,
+          "se": 29.50488312747682,
+          "lower95": -132.56885195853295,
+          "upper95": -16.90971009882381,
+          "n": 115,
           "ci_excludes_zero": true
         },
         "loan_components": {
           "strict_loan_mortgages_qoq": {
-            "beta": -15.114894056479715,
-            "se": 11.663081919578346,
-            "lower95": -37.97453461885327,
-            "upper95": 7.744746505893842,
-            "n": 64,
+            "beta": -2.7723501785221565,
+            "se": 9.742659941859554,
+            "lower95": -21.867963664566883,
+            "upper95": 16.32326330752257,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_loan_consumer_credit_qoq": {
-            "beta": -13.698680490305549,
-            "se": 9.312658022572286,
-            "lower95": -31.951490214547228,
-            "upper95": 4.554129233936131,
-            "n": 64,
+            "beta": -9.050428927665745,
+            "se": 5.399794509873013,
+            "lower95": -19.63402616701685,
+            "upper95": 1.53316831168536,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_loan_di_loans_nec_qoq": {
-            "beta": -9.39031488156056,
-            "se": 10.03485908443932,
-            "lower95": -29.058638687061627,
-            "upper95": 10.278008923940508,
-            "n": 64,
+            "beta": -12.188680634789879,
+            "se": 9.823259937200394,
+            "lower95": -31.44227011170265,
+            "upper95": 7.064908842122893,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_loan_other_advances_qoq": {
-            "beta": 0.11900051200720675,
-            "se": 0.21530177316259574,
-            "lower95": -0.3029909633914809,
-            "upper95": 0.5409919874058944,
-            "n": 64,
+            "beta": 0.19849107280168377,
+            "se": 0.15541539734723256,
+            "lower95": -0.10612310599889202,
+            "upper95": 0.5031052516022596,
+            "n": 115,
             "ci_excludes_zero": false
           }
         },
         "loan_component_shares_of_loan_source_beta": {
-          "strict_loan_mortgages_qoq": 0.4205088921989332,
-          "strict_loan_consumer_credit_qoq": 0.3811086558754972,
-          "strict_loan_di_loans_nec_qoq": 0.261246350354099,
-          "strict_loan_other_advances_qoq": -0.0033106929686883262
+          "strict_loan_mortgages_qoq": 0.11684555460552011,
+          "strict_loan_consumer_credit_qoq": 0.38144618081207343,
+          "strict_loan_di_loans_nec_qoq": 0.5137132962910097,
+          "strict_loan_other_advances_qoq": -0.00836575396046133
         },
-        "strict_loan_di_loans_nec_share_of_loan_source_beta": 0.261246350354099,
-        "dominant_loan_component": "strict_loan_mortgages_qoq",
-        "strict_non_treasury_securities_share_of_identifiable_total_beta": 4.543539416343582
+        "strict_loan_di_loans_nec_share_of_loan_source_beta": 0.5137132962910097,
+        "dominant_loan_component": "strict_loan_di_loans_nec_qoq",
+        "strict_non_treasury_securities_share_of_identifiable_total_beta": 16.280521716148595
       },
       "h8": {
         "other_component": {
-          "beta": -230.24311066594336,
-          "se": 57.831467849285815,
-          "lower95": -343.5927876505435,
-          "upper95": -116.89343368134317,
-          "n": 60,
+          "beta": -137.14820495288674,
+          "se": 48.01420550118734,
+          "lower95": -231.25604773521394,
+          "upper95": -43.04036217055956,
+          "n": 111,
           "ci_excludes_zero": true
         },
         "strict_headline_direct_core": {
-          "beta": -27.699009281406582,
-          "se": 34.68650038016017,
-          "lower95": -95.6845500265205,
-          "upper95": 40.28653146370734,
-          "n": 60,
+          "beta": -20.179364374136664,
+          "se": 26.025711976548905,
+          "lower95": -71.18975984817251,
+          "upper95": 30.83103109989919,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_loan_source": {
-          "beta": -29.731649959892096,
-          "se": 39.098823599599555,
-          "lower95": -106.36534421510723,
-          "upper95": 46.90204429532304,
-          "n": 60,
+          "beta": -17.516864309908087,
+          "se": 33.777073927193335,
+          "lower95": -83.71992920720702,
+          "upper95": 48.68620058739084,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_loan_core_plus_private_borrower": {
-          "beta": -26.83044935709205,
-          "se": 35.836796354185175,
-          "lower95": -97.07057021129499,
-          "upper95": 43.40967149711089,
-          "n": 60,
+          "beta": -13.029783252305677,
+          "se": 34.16364273887717,
+          "lower95": -79.99052302050494,
+          "upper95": 53.930956515893584,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_loan_noncore_system": {
-          "beta": -7.808924723792707,
-          "se": 11.458946618947886,
-          "lower95": -30.268460096930564,
-          "upper95": 14.65061064934515,
-          "n": 60,
+          "beta": -0.3585530091814455,
+          "se": 10.626226118926363,
+          "lower95": -21.185956202277115,
+          "upper95": 20.468850183914224,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_non_treasury_securities": {
-          "beta": 44.71846401566029,
-          "se": 44.28293685418197,
-          "lower95": -42.076092218536374,
-          "upper95": 131.51302024985694,
-          "n": 60,
+          "beta": 30.833509805595828,
+          "se": 26.154298752017,
+          "lower95": -20.428915748357486,
+          "upper95": 82.09593535954915,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_identifiable_total": {
-          "beta": 9.626948380965132,
-          "se": 63.937595599711315,
-          "lower95": -115.69073899446904,
-          "upper95": 134.9446357563993,
-          "n": 60,
+          "beta": 9.15206279903046,
+          "se": 44.76379442273261,
+          "lower95": -78.58497426952545,
+          "upper95": 96.88909986758637,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_identifiable_gap": {
-          "beta": -249.82357659783344,
-          "se": 66.88782681202387,
-          "lower95": -380.9237171494002,
-          "upper95": -118.72343604626664,
-          "n": 60,
+          "beta": -145.1436729824548,
+          "se": 46.820325900599066,
+          "lower95": -236.91151174762896,
+          "upper95": -53.37583421728064,
+          "n": 111,
           "ci_excludes_zero": true
         },
         "loan_components": {
           "strict_loan_mortgages_qoq": {
-            "beta": -4.0944568179221505,
-            "se": 24.426486286172334,
-            "lower95": -51.97036993881993,
-            "upper95": 43.78145630297563,
-            "n": 60,
+            "beta": 6.643857080006978,
+            "se": 19.70033795679215,
+            "lower95": -31.968805315305634,
+            "upper95": 45.25651947531959,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_loan_consumer_credit_qoq": {
-            "beta": -6.925480264059906,
-            "se": 9.731899505476942,
-            "lower95": -26.000003294794713,
-            "upper95": 12.1490427666749,
-            "n": 60,
+            "beta": -7.191490548742362,
+            "se": 6.382903732070525,
+            "lower95": -19.70198186360059,
+            "upper95": 5.319000766115867,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_loan_di_loans_nec_qoq": {
-            "beta": -17.25786996993061,
-            "se": 10.594077743799078,
-            "lower95": -38.0222623477768,
-            "upper95": 3.5065224079155826,
-            "n": 60,
+            "beta": -16.82313368312014,
+            "se": 13.207213150034928,
+            "lower95": -42.7092714571886,
+            "upper95": 9.063004090948318,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_loan_other_advances_qoq": {
-            "beta": 0.004839987163186843,
-            "se": 0.21390409679197872,
-            "lower95": -0.4144120425490914,
-            "upper95": 0.4240920168754651,
-            "n": 60,
+            "beta": 0.07963168554030665,
+            "se": 0.17598212909506744,
+            "lower95": -0.26529328748602554,
+            "upper95": 0.4245566585666388,
+            "n": 111,
             "ci_excludes_zero": false
           }
         },
         "loan_component_shares_of_loan_source_beta": {
-          "strict_loan_mortgages_qoq": 0.13771374355091495,
-          "strict_loan_consumer_credit_qoq": 0.23293292748308142,
-          "strict_loan_di_loans_nec_qoq": 0.5804544985969976,
-          "strict_loan_other_advances_qoq": -0.00016278905374292953
+          "strict_loan_mortgages_qoq": -0.37928347005856544,
+          "strict_loan_consumer_credit_qoq": 0.4105466835565216,
+          "strict_loan_di_loans_nec_qoq": 0.9603964148768596,
+          "strict_loan_other_advances_qoq": -0.004546001163876373
         },
-        "strict_loan_di_loans_nec_share_of_loan_source_beta": 0.5804544985969976,
+        "strict_loan_di_loans_nec_share_of_loan_source_beta": 0.9603964148768596,
         "dominant_loan_component": "strict_loan_di_loans_nec_qoq",
-        "strict_non_treasury_securities_share_of_identifiable_total_beta": 4.645133872752429
+        "strict_non_treasury_securities_share_of_identifiable_total_beta": 3.369022971396375
       }
     }
   },
@@ -1648,387 +1986,387 @@
     "key_horizons": {
       "h0": {
         "strict_loan_di_loans_nec": {
-          "beta": -0.26454114113574967,
-          "se": 9.534274569487632,
-          "lower95": -18.951719297331508,
-          "upper95": 18.422637015060012,
-          "n": 68,
+          "beta": -3.0570197270342403,
+          "se": 5.662204476086389,
+          "lower95": -14.154940500163562,
+          "upper95": 8.040901046095083,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "strict_di_loans_nec_systemwide_liability_total": {
-          "beta": 1.4082818809715363,
-          "se": 14.485908928975322,
-          "lower95": -26.984099619820093,
-          "upper95": 29.800663381763165,
-          "n": 68,
+          "beta": -2.098947283839943,
+          "se": 9.051449351100564,
+          "lower95": -19.839788011997047,
+          "upper95": 15.64189344431716,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "borrower_components": {
           "strict_di_loans_nec_households_nonprofits_qoq": {
-            "beta": -1.0250293506610628,
-            "se": 1.0198846684298233,
-            "lower95": -3.0240033007835163,
-            "upper95": 0.9739445994613907,
-            "n": 68,
+            "beta": -0.7425296923580293,
+            "se": 0.6939751757211339,
+            "lower95": -2.1027210367714515,
+            "upper95": 0.617661652055393,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_corporate_qoq": {
-            "beta": 6.802884737561426,
-            "se": 10.375400383193238,
-            "lower95": -13.53290001349732,
-            "upper95": 27.138669488620174,
-            "n": 68,
+            "beta": 2.273710847456367,
+            "se": 6.058232257229347,
+            "lower95": -9.600424376713153,
+            "upper95": 14.147846071625889,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_noncorporate_qoq": {
-            "beta": -3.560438085975945,
-            "se": 1.4964725480331789,
-            "lower95": -6.493524280120976,
-            "upper95": -0.6273518918309144,
-            "n": 68,
+            "beta": -2.0698253778271636,
+            "se": 0.9332400254657621,
+            "lower95": -3.898975827740057,
+            "upper95": -0.24067492791426992,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "strict_di_loans_nec_state_local_qoq": {
-            "beta": -0.17573297750917072,
-            "se": 0.17143198014316083,
-            "lower95": -0.511739658589766,
-            "upper95": 0.1602737035714245,
-            "n": 68,
-            "ci_excludes_zero": false
+            "beta": -0.20986553063467228,
+            "se": 0.10027562629717762,
+            "lower95": -0.4064057581771404,
+            "upper95": -0.013325303092204144,
+            "n": 119,
+            "ci_excludes_zero": true
           },
           "strict_di_loans_nec_domestic_financial_qoq": {
-            "beta": -3.074404345622587,
-            "se": 3.5857837092858023,
-            "lower95": -10.102540415822759,
-            "upper95": 3.953731724577586,
-            "n": 68,
+            "beta": -3.9196500825673573,
+            "se": 2.9323691558162923,
+            "lower95": -9.66709362796729,
+            "upper95": 1.8277934628325756,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_rest_of_world_qoq": {
-            "beta": 1.8340197512904433,
-            "se": 1.4739892162218537,
-            "lower95": -1.0549991125043898,
-            "upper95": 4.723038615085276,
-            "n": 68,
+            "beta": 1.3096652636278543,
+            "se": 0.9484871111844289,
+            "lower95": -0.5493694742936261,
+            "upper95": 3.1687000015493347,
+            "n": 119,
             "ci_excludes_zero": false
           }
         },
         "borrower_component_shares_of_systemwide_liability_total_beta": {
-          "strict_di_loans_nec_households_nonprofits_qoq": -0.7278580833220138,
-          "strict_di_loans_nec_nonfinancial_corporate_qoq": 4.830627184430077,
-          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": -2.528214084185826,
-          "strict_di_loans_nec_state_local_qoq": -0.12478537136893163,
-          "strict_di_loans_nec_domestic_financial_qoq": -2.183088760257028,
-          "strict_di_loans_nec_rest_of_world_qoq": 1.3023101241813901
+          "strict_di_loans_nec_households_nonprofits_qoq": 0.35376290680326183,
+          "strict_di_loans_nec_nonfinancial_corporate_qoq": -1.0832624835134979,
+          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": 0.9861254704980003,
+          "strict_di_loans_nec_state_local_qoq": 0.09998608933652274,
+          "strict_di_loans_nec_domestic_financial_qoq": 1.8674361727639528,
+          "strict_di_loans_nec_rest_of_world_qoq": -0.6239629140336828
         },
         "systemwide_borrower_total": {
-          "beta": 1.4082818809715505,
-          "se": 14.4859089289753,
-          "lower95": -26.98409961982004,
-          "upper95": 29.80066338176314,
-          "n": 68,
+          "beta": -2.098947283839909,
+          "se": 9.051449351100594,
+          "lower95": -19.839788011997072,
+          "upper95": 15.641893444317255,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "systemwide_borrower_gap": {
-          "beta": -5.790705071028689e-17,
-          "se": 5.977988998868099e-16,
-          "lower95": -1.2295928944884344e-15,
-          "upper95": 1.1137787930678605e-15,
-          "n": 68,
+          "beta": -1.401676754788427e-15,
+          "se": 1.43324180723727e-15,
+          "lower95": -4.210830696973476e-15,
+          "upper95": 1.4074771873966218e-15,
+          "n": 119,
           "ci_excludes_zero": false
         },
-        "systemwide_borrower_total_share_of_systemwide_liability_beta": 1.00000000000001,
-        "systemwide_borrower_gap_share_of_systemwide_liability_beta": -4.111893470527246e-17,
-        "us_chartered_share_of_systemwide_liability_beta": -0.18784672636223207,
-        "dominant_borrower_component": "strict_di_loans_nec_nonfinancial_corporate_qoq"
+        "systemwide_borrower_total_share_of_systemwide_liability_beta": 0.9999999999999837,
+        "systemwide_borrower_gap_share_of_systemwide_liability_beta": 6.677998850090763e-16,
+        "us_chartered_share_of_systemwide_liability_beta": 1.4564537902264705,
+        "dominant_borrower_component": "strict_di_loans_nec_domestic_financial_qoq"
       },
       "h1": {
         "strict_loan_di_loans_nec": {
-          "beta": 3.5265012685932255,
-          "se": 12.704268092290631,
-          "lower95": -21.37386419229641,
-          "upper95": 28.42686672948286,
-          "n": 67,
+          "beta": -3.3807175717467874,
+          "se": 7.944511148946434,
+          "lower95": -18.9519594236818,
+          "upper95": 12.190524280188223,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "strict_di_loans_nec_systemwide_liability_total": {
-          "beta": 2.8180869116075176,
-          "se": 17.711551999790746,
-          "lower95": -31.896555007982343,
-          "upper95": 37.532728831197375,
-          "n": 67,
+          "beta": -8.98392785837102,
+          "se": 14.109472258845962,
+          "lower95": -36.638493485709105,
+          "upper95": 18.67063776896706,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "borrower_components": {
           "strict_di_loans_nec_households_nonprofits_qoq": {
-            "beta": -0.043369642254783125,
-            "se": 1.197661131101578,
-            "lower95": -2.390785459213876,
-            "upper95": 2.3040461747043093,
-            "n": 67,
+            "beta": -0.7534487733247153,
+            "se": 0.8292018848330412,
+            "lower95": -2.378684467597476,
+            "upper95": 0.8717869209480456,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_corporate_qoq": {
-            "beta": 8.094507975448144,
-            "se": 13.157687808255673,
-            "lower95": -17.694560128732974,
-            "upper95": 33.883576079629265,
-            "n": 67,
+            "beta": 0.3106926586942991,
+            "se": 7.812536059585951,
+            "lower95": -15.001878018094166,
+            "upper95": 15.623263335482763,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_noncorporate_qoq": {
-            "beta": -4.333475511809345,
-            "se": 2.7984872263149256,
-            "lower95": -9.8185104753866,
-            "upper95": 1.151559451767909,
-            "n": 67,
+            "beta": -3.0179094394614374,
+            "se": 1.8861729251700348,
+            "lower95": -6.714808372794705,
+            "upper95": 0.6789894938718306,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_state_local_qoq": {
-            "beta": -0.3580062593549093,
-            "se": 0.3030922513032804,
-            "lower95": -0.9520670719093389,
-            "upper95": 0.23605455319952023,
-            "n": 67,
-            "ci_excludes_zero": false
+            "beta": -0.43754141757287324,
+            "se": 0.2179528168092438,
+            "lower95": -0.8647289385189911,
+            "upper95": -0.010353896626755399,
+            "n": 118,
+            "ci_excludes_zero": true
           },
           "strict_di_loans_nec_domestic_financial_qoq": {
-            "beta": -5.106529445354498,
-            "se": 5.692561089487619,
-            "lower95": -16.26394918075023,
-            "upper95": 6.0508902900412345,
-            "n": 67,
+            "beta": -8.140009085716006,
+            "se": 6.558255242439388,
+            "lower95": -20.994189360897206,
+            "upper95": 4.714171189465194,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_rest_of_world_qoq": {
-            "beta": 1.7033811344919965,
-            "se": 1.5396347152531735,
-            "lower95": -1.3143029074042234,
-            "upper95": 4.721065176388216,
-            "n": 67,
+            "beta": 1.329227090319549,
+            "se": 1.080892146942835,
+            "lower95": -0.7893215176884074,
+            "upper95": 3.4477756983275056,
+            "n": 118,
             "ci_excludes_zero": false
           }
         },
         "borrower_component_shares_of_systemwide_liability_total_beta": {
-          "strict_di_loans_nec_households_nonprofits_qoq": -0.01538974617005117,
-          "strict_di_loans_nec_nonfinancial_corporate_qoq": 2.872341495965717,
-          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": -1.5377366446577783,
-          "strict_di_loans_nec_state_local_qoq": -0.1270387573499968,
-          "strict_di_loans_nec_domestic_financial_qoq": -1.8120553430488726,
-          "strict_di_loans_nec_rest_of_world_qoq": 0.6044459194909425
+          "strict_di_loans_nec_households_nonprofits_qoq": 0.08386629826091811,
+          "strict_di_loans_nec_nonfinancial_corporate_qoq": -0.03458316491319582,
+          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": 0.3359231604525205,
+          "strict_di_loans_nec_state_local_qoq": 0.04870268600444983,
+          "strict_di_loans_nec_domestic_financial_qoq": 0.9060634962836807,
+          "strict_di_loans_nec_rest_of_world_qoq": -0.14795611800032493
         },
         "systemwide_borrower_total": {
-          "beta": 2.8180869116073595,
-          "se": 17.71155199979037,
-          "lower95": -31.896555007981767,
-          "upper95": 37.532728831196486,
-          "n": 67,
+          "beta": -8.98392785837094,
+          "se": 14.109472258846006,
+          "lower95": -36.63849348570911,
+          "upper95": 18.670637768967232,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "systemwide_borrower_gap": {
-          "beta": 1.1806228669318873e-15,
-          "se": 8.026825175895679e-16,
-          "lower95": -3.9263486754366556e-16,
-          "upper95": 2.7538806014074403e-15,
-          "n": 67,
+          "beta": -1.6632839292828333e-15,
+          "se": 1.8664654416203587e-15,
+          "lower95": -5.321556194858737e-15,
+          "upper95": 1.9949883362930696e-15,
+          "n": 118,
           "ci_excludes_zero": false
         },
-        "systemwide_borrower_total_share_of_systemwide_liability_beta": 0.9999999999999439,
-        "systemwide_borrower_gap_share_of_systemwide_liability_beta": 4.18944803323481e-16,
-        "us_chartered_share_of_systemwide_liability_beta": 1.2513813019988118,
-        "dominant_borrower_component": "strict_di_loans_nec_nonfinancial_corporate_qoq"
+        "systemwide_borrower_total_share_of_systemwide_liability_beta": 0.9999999999999911,
+        "systemwide_borrower_gap_share_of_systemwide_liability_beta": 1.851399471928109e-16,
+        "us_chartered_share_of_systemwide_liability_beta": 0.3763072928726505,
+        "dominant_borrower_component": "strict_di_loans_nec_domestic_financial_qoq"
       },
       "h4": {
         "strict_loan_di_loans_nec": {
-          "beta": -9.39031488156056,
-          "se": 10.03485908443932,
-          "lower95": -29.058638687061627,
-          "upper95": 10.278008923940508,
-          "n": 64,
+          "beta": -12.188680634789879,
+          "se": 9.823259937200394,
+          "lower95": -31.44227011170265,
+          "upper95": 7.064908842122893,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_di_loans_nec_systemwide_liability_total": {
-          "beta": -12.334859341667183,
-          "se": 15.10101531401085,
-          "lower95": -41.93284935712845,
-          "upper95": 17.26313067379408,
-          "n": 64,
+          "beta": -18.40571375303596,
+          "se": 18.06490688933832,
+          "lower95": -53.812931256139066,
+          "upper95": 17.001503750067144,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "borrower_components": {
           "strict_di_loans_nec_households_nonprofits_qoq": {
-            "beta": 2.3948798625686667,
-            "se": 1.521683986874846,
-            "lower95": -0.5876207517060315,
-            "upper95": 5.377380476843365,
-            "n": 64,
+            "beta": 1.718297918091992,
+            "se": 1.2891148509805053,
+            "lower95": -0.8083671898297982,
+            "upper95": 4.244963026013782,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_corporate_qoq": {
-            "beta": -5.0964231617537195,
-            "se": 9.175178874092135,
-            "lower95": -23.0797737549743,
-            "upper95": 12.886927431466862,
-            "n": 64,
+            "beta": -7.953336035100651,
+            "se": 7.428942750892559,
+            "lower95": -22.514063826850066,
+            "upper95": 6.607391756648764,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_noncorporate_qoq": {
-            "beta": -7.733300611663638,
-            "se": 2.7393944676919157,
-            "lower95": -13.102513768339794,
-            "upper95": -2.364087454987483,
-            "n": 64,
-            "ci_excludes_zero": true
+            "beta": -5.420006864613125,
+            "se": 3.434900010108204,
+            "lower95": -12.152410884425205,
+            "upper95": 1.3123971551989548,
+            "n": 115,
+            "ci_excludes_zero": false
           },
           "strict_di_loans_nec_state_local_qoq": {
-            "beta": -0.6597717539866491,
-            "se": 0.6226015456624183,
-            "lower95": -1.8800707834849888,
-            "upper95": 0.5605272755116907,
-            "n": 64,
+            "beta": -0.7080132675836778,
+            "se": 0.3742138520000627,
+            "lower95": -1.4414724175038005,
+            "upper95": 0.02544588233644507,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_domestic_financial_qoq": {
-            "beta": -10.25172222849478,
-            "se": 8.072097640659342,
-            "lower95": -26.07303360418709,
-            "upper95": 5.569589147197529,
-            "n": 64,
+            "beta": -7.490819111160883,
+            "se": 6.4262151836498065,
+            "lower95": -20.086200871114503,
+            "upper95": 5.1045626487927365,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_rest_of_world_qoq": {
-            "beta": 4.667790907062026,
-            "se": 4.12417357643594,
-            "lower95": -3.415589302752416,
-            "upper95": 12.751171116876467,
-            "n": 64,
+            "beta": 2.9032885259143004,
+            "se": 3.0901858130205544,
+            "lower95": -3.153475667605986,
+            "upper95": 8.960052719434586,
+            "n": 115,
             "ci_excludes_zero": false
           }
         },
         "borrower_component_shares_of_systemwide_liability_total_beta": {
-          "strict_di_loans_nec_households_nonprofits_qoq": -0.19415542538687547,
-          "strict_di_loans_nec_nonfinancial_corporate_qoq": 0.4131723776158509,
-          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": 0.6269468015367253,
-          "strict_di_loans_nec_state_local_qoq": 0.05348838893994831,
-          "strict_di_loans_nec_domestic_financial_qoq": 0.8311178866762136,
-          "strict_di_loans_nec_rest_of_world_qoq": -0.3784227106096149
+          "strict_di_loans_nec_households_nonprofits_qoq": -0.09335676633613649,
+          "strict_di_loans_nec_nonfinancial_corporate_qoq": 0.43211233977757446,
+          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": 0.29447414739453465,
+          "strict_di_loans_nec_state_local_qoq": 0.038467036762803795,
+          "strict_di_loans_nec_domestic_financial_qoq": 0.40698335373847144,
+          "strict_di_loans_nec_rest_of_world_qoq": -0.15773843736081208
         },
         "systemwide_borrower_total": {
-          "beta": -12.334859341667062,
-          "se": 15.101015314010965,
-          "lower95": -41.93284935712855,
-          "upper95": 17.26313067379443,
-          "n": 64,
+          "beta": -18.40571375303598,
+          "se": 18.064906889338257,
+          "lower95": -53.81293125613897,
+          "upper95": 17.001503750067005,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "systemwide_borrower_gap": {
-          "beta": 7.029417539450013e-16,
-          "se": 2.0656273437769486e-15,
-          "lower95": -3.345687839857818e-15,
-          "upper95": 4.75157134774782e-15,
-          "n": 64,
+          "beta": -2.500265897607805e-15,
+          "se": 2.3814519810630103e-15,
+          "lower95": -7.167911780491306e-15,
+          "upper95": 2.167379985275695e-15,
+          "n": 115,
           "ci_excludes_zero": false
         },
-        "systemwide_borrower_total_share_of_systemwide_liability_beta": 0.9999999999999902,
-        "systemwide_borrower_gap_share_of_systemwide_liability_beta": -5.698822617056219e-17,
-        "us_chartered_share_of_systemwide_liability_beta": 0.7612826884729893,
-        "dominant_borrower_component": "strict_di_loans_nec_domestic_financial_qoq"
+        "systemwide_borrower_total_share_of_systemwide_liability_beta": 1.0000000000000009,
+        "systemwide_borrower_gap_share_of_systemwide_liability_beta": 1.3584183320222474e-16,
+        "us_chartered_share_of_systemwide_liability_beta": 0.6622226553305708,
+        "dominant_borrower_component": "strict_di_loans_nec_nonfinancial_corporate_qoq"
       },
       "h8": {
         "strict_loan_di_loans_nec": {
-          "beta": -17.25786996993061,
-          "se": 10.594077743799078,
-          "lower95": -38.0222623477768,
-          "upper95": 3.5065224079155826,
-          "n": 60,
+          "beta": -16.82313368312014,
+          "se": 13.207213150034928,
+          "lower95": -42.7092714571886,
+          "upper95": 9.063004090948318,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_di_loans_nec_systemwide_liability_total": {
-          "beta": -19.439946589921313,
-          "se": 18.55481354195168,
-          "lower95": -55.80738113214661,
-          "upper95": 16.927487952303984,
-          "n": 60,
+          "beta": -16.322243583975755,
+          "se": 23.53109351491253,
+          "lower95": -62.44318687320431,
+          "upper95": 29.7986997052528,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "borrower_components": {
           "strict_di_loans_nec_households_nonprofits_qoq": {
-            "beta": 3.8846955226710467,
-            "se": 2.363789684624681,
-            "lower95": -0.7483322591933286,
-            "upper95": 8.517723304535423,
-            "n": 60,
+            "beta": 2.738599770096396,
+            "se": 1.7901160316556,
+            "lower95": -0.7700276519485798,
+            "upper95": 6.247227192141372,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_corporate_qoq": {
-            "beta": -11.208259897261371,
-            "se": 8.594745535780337,
-            "lower95": -28.053961147390833,
-            "upper95": 5.637441352868091,
-            "n": 60,
+            "beta": -10.376274972624362,
+            "se": 9.520884879913746,
+            "lower95": -29.037209337255305,
+            "upper95": 8.284659392006581,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_nonfinancial_noncorporate_qoq": {
-            "beta": -9.497585489469628,
-            "se": 5.646008883722823,
-            "lower95": -20.563762901566363,
-            "upper95": 1.568591922627105,
-            "n": 60,
+            "beta": -5.165379311083916,
+            "se": 5.849418899265298,
+            "lower95": -16.6302403536439,
+            "upper95": 6.299481731476067,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_state_local_qoq": {
-            "beta": -1.2909264878555122,
-            "se": 0.5500498432525109,
-            "lower95": -2.3690241806304337,
-            "upper95": -0.21282879508059072,
-            "n": 60,
+            "beta": -1.1596912908640404,
+            "se": 0.4065875648784905,
+            "lower95": -1.9566029180258817,
+            "upper95": -0.36277966370219905,
+            "n": 111,
             "ci_excludes_zero": true
           },
           "strict_di_loans_nec_domestic_financial_qoq": {
-            "beta": -14.7604751753437,
-            "se": 8.891257723533451,
-            "lower95": -32.187340313469264,
-            "upper95": 2.6663899627818637,
-            "n": 60,
+            "beta": -1.3805333789978627,
+            "se": 9.071409236843543,
+            "lower95": -19.160495483211207,
+            "upper95": 16.39942872521548,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_di_loans_nec_rest_of_world_qoq": {
-            "beta": 8.657508535176664,
-            "se": 4.735991598287001,
-            "lower95": -0.6250349974658569,
-            "upper95": 17.940052067819185,
-            "n": 60,
+            "beta": 4.093488216287675,
+            "se": 4.436093728411261,
+            "lower95": -4.601255491398396,
+            "upper95": 12.788231923973745,
+            "n": 111,
             "ci_excludes_zero": false
           }
         },
         "borrower_component_shares_of_systemwide_liability_total_beta": {
-          "strict_di_loans_nec_households_nonprofits_qoq": -0.19983056561920168,
-          "strict_di_loans_nec_nonfinancial_corporate_qoq": 0.5765581631315962,
-          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": 0.4885602666415593,
-          "strict_di_loans_nec_state_local_qoq": 0.0664058659772654,
-          "strict_di_loans_nec_domestic_financial_qoq": 0.7592857885214718,
-          "strict_di_loans_nec_rest_of_world_qoq": -0.44534631281678366
+          "strict_di_loans_nec_households_nonprofits_qoq": -0.16778329253614355,
+          "strict_di_loans_nec_nonfinancial_corporate_qoq": 0.6357137681005567,
+          "strict_di_loans_nec_nonfinancial_noncorporate_qoq": 0.31646257970043956,
+          "strict_di_loans_nec_state_local_qoq": 0.07104974784242032,
+          "strict_di_loans_nec_domestic_financial_qoq": 0.08457987848883664,
+          "strict_di_loans_nec_rest_of_world_qoq": -0.2507920063333957
         },
         "systemwide_borrower_total": {
-          "beta": -19.43994658992137,
-          "se": 18.554813541951674,
-          "lower95": -55.80738113214665,
-          "upper95": 16.927487952303913,
-          "n": 60,
+          "beta": -16.322243583975542,
+          "se": 23.531093514912524,
+          "lower95": -62.443186873204084,
+          "upper95": 29.798699705253,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "systemwide_borrower_gap": {
-          "beta": 1.9385366498892234e-15,
-          "se": 1.3259302161109086e-15,
-          "lower95": -6.602865736881576e-16,
-          "upper95": 4.537359873466604e-15,
-          "n": 60,
+          "beta": -6.030130229438968e-16,
+          "se": 1.78280135405148e-15,
+          "lower95": -4.097303676884797e-15,
+          "upper95": 2.8912776309970034e-15,
+          "n": 111,
           "ci_excludes_zero": false
         },
-        "systemwide_borrower_total_share_of_systemwide_liability_beta": 1.0000000000000029,
-        "systemwide_borrower_gap_share_of_systemwide_liability_beta": -9.971923744349495e-17,
-        "us_chartered_share_of_systemwide_liability_beta": 0.8877529518974088,
-        "dominant_borrower_component": "strict_di_loans_nec_domestic_financial_qoq"
+        "systemwide_borrower_total_share_of_systemwide_liability_beta": 0.9999999999999869,
+        "systemwide_borrower_gap_share_of_systemwide_liability_beta": 3.6944248493871305e-17,
+        "us_chartered_share_of_systemwide_liability_beta": 1.0306875765312147,
+        "dominant_borrower_component": "strict_di_loans_nec_nonfinancial_corporate_qoq"
       }
     }
   },
@@ -2036,271 +2374,271 @@
     "key_horizons": {
       "h0": {
         "strict_identifiable_total": {
-          "beta": -2.0654490673922083,
-          "se": 12.647084899431377,
-          "lower95": -26.853735470277705,
-          "upper95": 22.72283733549329,
-          "n": 68,
+          "beta": -3.3212742360073477,
+          "se": 7.0574160358523566,
+          "lower95": -17.153809666277965,
+          "upper95": 10.511261194263271,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "funding_components": {
           "strict_funding_fedfunds_repo_qoq": {
-            "beta": 0.31161155736879365,
-            "se": 1.5289730238873882,
-            "lower95": -2.685175569450487,
-            "upper95": 3.3083986841880746,
-            "n": 68,
+            "beta": 0.025502521954184565,
+            "se": 1.5429489206174247,
+            "lower95": -2.9986773624559677,
+            "upper95": 3.049682406364337,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "strict_funding_debt_securities_qoq": {
-            "beta": -1.3788410000274396,
-            "se": 2.0059548057515886,
-            "lower95": -5.3105124193005535,
-            "upper95": 2.552830419245674,
-            "n": 68,
+            "beta": -0.4464304718753729,
+            "se": 1.291862696396096,
+            "lower95": -2.978481356811721,
+            "upper95": 2.0856204130609752,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "strict_funding_fhlb_advances_qoq": {
-            "beta": -1.4769926714301642,
-            "se": 4.217656102852116,
-            "lower95": -9.74359863302031,
-            "upper95": 6.789613290159982,
-            "n": 68,
+            "beta": -5.287972399866888,
+            "se": 3.153427910716827,
+            "lower95": -11.46869110487187,
+            "upper95": 0.8927463051380933,
+            "n": 119,
             "ci_excludes_zero": false
           }
         },
         "funding_component_shares_of_offset_total_beta": {
-          "strict_funding_fedfunds_repo_qoq": -0.19360317235358082,
-          "strict_funding_debt_securities_qoq": 0.8566690979967794,
-          "strict_funding_fhlb_advances_qoq": 0.9176503886646483
+          "strict_funding_fedfunds_repo_qoq": -0.004779111274824962,
+          "strict_funding_debt_securities_qoq": 0.08365999666221018,
+          "strict_funding_fhlb_advances_qoq": 0.9909533089538365
         },
         "strict_funding_offset_total": {
-          "beta": -1.6095374553041522,
-          "se": 5.625696398582565,
-          "lower95": -12.635902396525978,
-          "upper95": 9.416827485917675,
-          "n": 68,
+          "beta": -5.336247784922859,
+          "se": 4.135892291292697,
+          "lower95": -13.442596675856544,
+          "upper95": 2.7701011060108254,
+          "n": 119,
           "ci_excludes_zero": false
         },
-        "strict_funding_offset_share_of_identifiable_total_beta": 0.7792675601225644,
+        "strict_funding_offset_share_of_identifiable_total_beta": 1.6066868935634178,
         "strict_identifiable_net_after_funding": {
-          "beta": -3.9068288087150442,
-          "se": 9.42648023483478,
-          "lower95": -22.382730068991215,
-          "upper95": 14.569072451561127,
-          "n": 68,
+          "beta": 1.5529270871549983,
+          "se": 5.238687546409818,
+          "lower95": -8.714900503808245,
+          "upper95": 11.820754678118242,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "strict_gap_after_funding": {
-          "beta": -74.42656001270831,
-          "se": 19.081291982559193,
-          "lower95": -111.82589229852432,
-          "upper95": -37.02722772689229,
-          "n": 68,
+          "beta": -55.34389158661477,
+          "se": 12.35342035859386,
+          "lower95": -79.55659548945873,
+          "upper95": -31.1311876837708,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "dominant_funding_component": "strict_funding_fhlb_advances_qoq"
       },
       "h1": {
         "strict_identifiable_total": {
-          "beta": 7.344266170371938,
-          "se": 17.658122502542483,
-          "lower95": -27.26565393461133,
-          "upper95": 41.954186275355205,
-          "n": 67,
+          "beta": -1.55093125282648,
+          "se": 10.590284003470053,
+          "lower95": -22.307887899627783,
+          "upper95": 19.206025393974823,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "funding_components": {
           "strict_funding_fedfunds_repo_qoq": {
-            "beta": -0.6767541109767699,
-            "se": 1.5549294271724088,
-            "lower95": -3.724415788234691,
-            "upper95": 2.370907566281151,
-            "n": 67,
+            "beta": -1.4059708687942065,
+            "se": 1.9041785713708108,
+            "lower95": -5.138160868680996,
+            "upper95": 2.326219131092583,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "strict_funding_debt_securities_qoq": {
-            "beta": -4.1877217575113574,
-            "se": 3.6865734560500196,
-            "lower95": -11.413405731369396,
-            "upper95": 3.0379622163466813,
-            "n": 67,
+            "beta": -1.906641850978598,
+            "se": 2.4364003209903258,
+            "lower95": -6.681986480119637,
+            "upper95": 2.86870277816244,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "strict_funding_fhlb_advances_qoq": {
-            "beta": -5.4204865548818795,
-            "se": 3.773066314530962,
-            "lower95": -12.815696531362565,
-            "upper95": 1.9747234215988065,
-            "n": 67,
-            "ci_excludes_zero": false
+            "beta": -10.219478360602324,
+            "se": 3.538737867191748,
+            "lower95": -17.15540458029815,
+            "upper95": -3.2835521409064974,
+            "n": 118,
+            "ci_excludes_zero": true
           }
         },
         "funding_component_shares_of_offset_total_beta": {
-          "strict_funding_fedfunds_repo_qoq": 0.07011053376749042,
-          "strict_funding_debt_securities_qoq": 0.43384059723714413,
-          "strict_funding_fhlb_advances_qoq": 0.5615528586797439
+          "strict_funding_fedfunds_repo_qoq": 0.10705026172850414,
+          "strict_funding_debt_securities_qoq": 0.1451712220359338,
+          "strict_funding_fhlb_advances_qoq": 0.7781084640604975
         },
         "strict_funding_offset_total": {
-          "beta": -9.652673779679228,
-          "se": 6.584362636434313,
-          "lower95": -22.558024547090483,
-          "upper95": 3.252676987732025,
-          "n": 67,
-          "ci_excludes_zero": false
+          "beta": -13.13374527154323,
+          "se": 5.353613564906987,
+          "lower95": -23.626827858760926,
+          "upper95": -2.6406626843255356,
+          "n": 118,
+          "ci_excludes_zero": true
         },
-        "strict_funding_offset_share_of_identifiable_total_beta": -1.3143142630940872,
+        "strict_funding_offset_share_of_identifiable_total_beta": 8.46829622370931,
         "strict_identifiable_net_after_funding": {
-          "beta": 12.673144107964568,
-          "se": 18.533520753420277,
-          "lower95": -23.652556568739172,
-          "upper95": 48.99884478466831,
-          "n": 67,
+          "beta": 10.664211669372794,
+          "se": 9.834637665893617,
+          "lower95": -8.611678155778694,
+          "upper95": 29.94010149452428,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "strict_gap_after_funding": {
-          "beta": -102.9538933843051,
-          "se": 42.836928505445286,
-          "lower95": -186.91427325497784,
-          "upper95": -18.99351351363235,
-          "n": 67,
+          "beta": -78.71353651092026,
+          "se": 26.467275118772907,
+          "lower95": -130.58939574371516,
+          "upper95": -26.83767727812537,
+          "n": 118,
           "ci_excludes_zero": true
         },
         "dominant_funding_component": "strict_funding_fhlb_advances_qoq"
       },
       "h4": {
         "strict_identifiable_total": {
-          "beta": 9.627031230490644,
-          "se": 41.77812349712699,
-          "lower95": -72.25809082387826,
-          "upper95": 91.51215328485955,
-          "n": 64,
+          "beta": 1.6242148598417572,
+          "se": 26.983616569507834,
+          "lower95": -51.263673616393596,
+          "upper95": 54.51210333607711,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "funding_components": {
           "strict_funding_fedfunds_repo_qoq": {
-            "beta": 0.02967573263283363,
-            "se": 1.7079148411845768,
-            "lower95": -3.317837356088937,
-            "upper95": 3.377188821354604,
-            "n": 64,
+            "beta": -2.094078491459003,
+            "se": 3.8930783379476175,
+            "lower95": -9.724512033836334,
+            "upper95": 5.536355050918327,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_funding_debt_securities_qoq": {
-            "beta": 2.7721498292191127,
-            "se": 5.358356458348424,
-            "lower95": -7.730228829143798,
-            "upper95": 13.274528487582025,
-            "n": 64,
+            "beta": 3.754336608701289,
+            "se": 3.3647930637472645,
+            "lower95": -2.8406577962433497,
+            "upper95": 10.349331013645926,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "strict_funding_fhlb_advances_qoq": {
-            "beta": -20.914848749818724,
-            "se": 9.317899734289082,
-            "lower95": -39.17793222902532,
-            "upper95": -2.651765270612124,
-            "n": 64,
+            "beta": -17.639333307635418,
+            "se": 7.98192504173956,
+            "lower95": -33.28390638944495,
+            "upper95": -1.9947602258258819,
+            "n": 115,
             "ci_excludes_zero": true
           }
         },
         "funding_component_shares_of_offset_total_beta": {
-          "strict_funding_fedfunds_repo_qoq": -0.0013342796630171742,
-          "strict_funding_debt_securities_qoq": -0.12464134199238495,
-          "strict_funding_fhlb_advances_qoq": 0.9403729871554185
+          "strict_funding_fedfunds_repo_qoq": 0.12491965515096524,
+          "strict_funding_debt_securities_qoq": -0.22396029393953168,
+          "strict_funding_fhlb_advances_qoq": 1.0522525506422218
         },
         "strict_funding_offset_total": {
-          "beta": -22.241013975832185,
-          "se": 11.504138958145784,
-          "lower95": -44.789126333797924,
-          "upper95": 0.30709838213354956,
-          "n": 64,
+          "beta": -16.763402756182057,
+          "se": 10.643785953647724,
+          "lower95": -37.625223225331595,
+          "upper95": 4.098417712967482,
+          "n": 115,
           "ci_excludes_zero": false
         },
-        "strict_funding_offset_share_of_identifiable_total_beta": -2.3102671470921017,
+        "strict_funding_offset_share_of_identifiable_total_beta": -10.320926849428819,
         "strict_identifiable_net_after_funding": {
-          "beta": 25.902662927486475,
-          "se": 44.37370902708535,
-          "lower95": -61.0698067656008,
-          "upper95": 112.87513262057375,
-          "n": 64,
+          "beta": 18.947649503453988,
+          "se": 24.037903214200124,
+          "lower95": -28.166640796378253,
+          "upper95": 66.06193980328624,
+          "n": 115,
           "ci_excludes_zero": false
         },
         "strict_gap_after_funding": {
-          "beta": -152.22544416073958,
-          "se": 43.84110024829063,
-          "lower95": -238.1540006473892,
-          "upper95": -66.29688767408996,
-          "n": 64,
+          "beta": -91.72250541034254,
+          "se": 30.977597934256725,
+          "lower95": -152.4385973614857,
+          "upper95": -31.006413459199358,
+          "n": 115,
           "ci_excludes_zero": true
         },
         "dominant_funding_component": "strict_funding_fhlb_advances_qoq"
       },
       "h8": {
         "strict_identifiable_total": {
-          "beta": 9.626948380965132,
-          "se": 63.937595599711315,
-          "lower95": -115.69073899446904,
-          "upper95": 134.9446357563993,
-          "n": 60,
+          "beta": 9.15206279903046,
+          "se": 44.76379442273261,
+          "lower95": -78.58497426952545,
+          "upper95": 96.88909986758637,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "funding_components": {
           "strict_funding_fedfunds_repo_qoq": {
-            "beta": 6.715137097761156,
-            "se": 6.307203198962042,
-            "lower95": -5.6469811722044465,
-            "upper95": 19.077255367726757,
-            "n": 60,
+            "beta": 2.6457859121151017,
+            "se": 6.250724970838105,
+            "lower95": -9.605635030727584,
+            "upper95": 14.897206854957787,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_funding_debt_securities_qoq": {
-            "beta": 2.439910472889884,
-            "se": 3.693860379015637,
-            "lower95": -4.800055869980764,
-            "upper95": 9.679876815760533,
-            "n": 60,
+            "beta": 2.9718467451223836,
+            "se": 3.0384425570323166,
+            "lower95": -2.983500666660957,
+            "upper95": 8.927194156905724,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "strict_funding_fhlb_advances_qoq": {
-            "beta": -0.7581428111547668,
-            "se": 18.512586547434402,
-            "lower95": -37.0428124441262,
-            "upper95": 35.52652682181666,
-            "n": 60,
+            "beta": -4.8190380432372395,
+            "se": 15.447022817909046,
+            "lower95": -35.09520276633897,
+            "upper95": 25.45712667986449,
+            "n": 111,
             "ci_excludes_zero": false
           }
         },
         "funding_component_shares_of_offset_total_beta": {
-          "strict_funding_fedfunds_repo_qoq": 1.3185701905113822,
-          "strict_funding_debt_securities_qoq": 0.4790956863921292,
-          "strict_funding_fhlb_advances_qoq": -0.1488673271127207
+          "strict_funding_fedfunds_repo_qoq": -42.237434514817515,
+          "strict_funding_debt_securities_qoq": -47.4426829889778,
+          "strict_funding_fhlb_advances_qoq": 76.93132042302307
         },
         "strict_funding_offset_total": {
-          "beta": 5.092741475640988,
-          "se": 24.489502862379684,
-          "lower95": -42.90668413462319,
-          "upper95": 53.092167085905174,
-          "n": 60,
+          "beta": -0.06264078163144404,
+          "se": 20.263335421552704,
+          "lower95": -39.778778207874744,
+          "upper95": 39.653496644611856,
+          "n": 111,
           "ci_excludes_zero": false
         },
-        "strict_funding_offset_share_of_identifiable_total_beta": 0.5290089106232877,
+        "strict_funding_offset_share_of_identifiable_total_beta": -0.00684444403485518,
         "strict_identifiable_net_after_funding": {
-          "beta": 4.768038554736648,
-          "se": 55.277161298156464,
-          "lower95": -103.57519758965002,
-          "upper95": 113.11127469912331,
-          "n": 60,
+          "beta": 12.869410490424201,
+          "se": 34.317217269314305,
+          "lower95": -54.39233535743183,
+          "upper95": 80.13115633828023,
+          "n": 111,
           "ci_excludes_zero": false
         },
         "strict_gap_after_funding": {
-          "beta": -254.34334938508556,
-          "se": 56.976908550778184,
-          "lower95": -366.0180901446108,
-          "upper95": -142.66860862556032,
-          "n": 60,
+          "beta": -145.42979307994756,
+          "se": 44.42477736022275,
+          "lower95": -232.50235670598414,
+          "upper95": -58.357229453910975,
+          "n": 111,
           "ci_excludes_zero": true
         },
-        "dominant_funding_component": "strict_funding_fedfunds_repo_qoq"
+        "dominant_funding_component": "strict_funding_fhlb_advances_qoq"
       }
     }
   },
@@ -2308,16 +2646,16 @@
     "This follow-up artifact is meant to answer the next diagnostic question after the strict lane: is the big strict gap coming from treatment measurement, from missing direct-count channels, or from both?",
     "The measurement-variant comparison uses the exact identity-preserving baseline and its measurement-family variants; the strict component block uses the direct source-side strict lane only.",
     "Strict source kind: z1_transactions_via_fred.",
-    "At h0, the upstream no-ROW `domestic_bank_only` treatment makes `other_component_qoq` less negative than the baseline bank-only treatment by about 19.97.",
-    "At h0, the local U.S.-chartered bank-leg-matched treatment makes `other_component_qoq` less negative than the baseline bank-only treatment by about 9.63.",
+    "At h0, the upstream no-ROW `domestic_bank_only` treatment makes `other_component_qoq` more negative than the baseline bank-only treatment by about 2.39.",
+    "At h0, the local U.S.-chartered bank-leg-matched treatment makes `other_component_qoq` more negative than the baseline bank-only treatment by about 15.00.",
     "For the current headline outcome, the U.S.-chartered bank-leg match should be read as the standard scope check, while the no-ROW variant remains secondary.",
-    "Even after applying the standard U.S.-chartered scope-check shift at h0, about 0.92 of the baseline strict gap remains if the direct-count strict total is held fixed.",
+    "Even after applying the standard U.S.-chartered scope-check shift at h0, about 1.32 of the baseline strict gap remains if the direct-count strict total is held fixed.",
     "So the current strict-gap story still looks dominated by missing direct-count channels or remaining treatment misspecification, not by the headline bank-leg scope mismatch alone.",
-    "At h0, the strict loan-core redesign is already visible inside the strict lane: headline direct core \u2248 -20.96, current broad loan source \u2248 -19.97, private-borrower-augmented core \u2248 -18.02, noncore/system diagnostic \u2248 -0.97.",
+    "At h0, the strict loan-core redesign is already visible inside the strict lane: headline direct core \u2248 -12.94, current broad loan source \u2248 -14.36, private-borrower-augmented core \u2248 -12.56, noncore/system diagnostic \u2248 -2.50.",
     "At h0, the dominant strict loan subcomponent is `strict_loan_consumer_credit_qoq`.",
-    "At h0, `strict_loan_di_loans_nec_qoq` contributes about 0.01 of the signed strict loan-source response.",
-    "At h0, the U.S.-chartered DI-loans-n.e.c. asset response is about -0.19 of the signed systemwide borrower-liability total, so the borrower-side block should be read as a cross-scope counterpart diagnostic rather than as a same-scope decomposition.",
-    "At h0, the named borrower rows leave about -0.00 of the signed systemwide borrower-liability total outside the explicitly materialized borrower buckets.",
-    "At h0, the strict funding-offset block is about 0.78 of the signed strict identifiable total, so netting funding can materially change the direct-count read even before any closure-oriented reconstruction."
+    "At h0, `strict_loan_di_loans_nec_qoq` contributes about 0.21 of the signed strict loan-source response.",
+    "At h0, the U.S.-chartered DI-loans-n.e.c. asset response is about 1.46 of the signed systemwide borrower-liability total, so the borrower-side block should be read as a cross-scope counterpart diagnostic rather than as a same-scope decomposition.",
+    "At h0, the named borrower rows leave about 0.00 of the signed systemwide borrower-liability total outside the explicitly materialized borrower buckets.",
+    "At h0, the strict funding-offset block is about 1.61 of the signed strict identifiable total, so netting funding can materially change the direct-count read even before any closure-oriented reconstruction."
   ]
 }

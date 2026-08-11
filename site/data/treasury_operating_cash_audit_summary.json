@@ -107,157 +107,157 @@
   "key_horizons": {
     "h0": {
       "treasury_operating_cash_response": {
-        "beta": -70.4411590878622,
-        "se": 19.51500183613834,
-        "lower95": -108.69056268669334,
-        "upper95": -32.19175548903106,
-        "n": 68,
+        "beta": -42.82519255161599,
+        "se": 14.128120483235008,
+        "lower95": -70.5163086987566,
+        "upper95": -15.134076404475376,
+        "n": 119,
         "ci_excludes_zero": true
       },
-      "treasury_operating_cash_signed_contribution_beta": 70.4411590878622,
+      "treasury_operating_cash_signed_contribution_beta": 42.82519255161599,
       "tga_response": {
-        "beta": -61.18612833262557,
-        "se": 19.904469139441925,
-        "lower95": -100.19888784593175,
-        "upper95": -22.1733688193194,
-        "n": 68,
+        "beta": -41.67083938075586,
+        "se": 17.838044643553168,
+        "lower95": -76.63340688212007,
+        "upper95": -6.708271879391646,
+        "n": 92,
         "ci_excludes_zero": true
       },
       "reserves_response": {
-        "beta": 88.86702520813598,
-        "se": 15.355046836769874,
-        "lower95": 58.77113340806703,
-        "upper95": 118.96291700820494,
-        "n": 68,
+        "beta": 77.33381437727236,
+        "se": 13.143165255850834,
+        "lower95": 51.57321047580473,
+        "upper95": 103.09441827874,
+        "n": 92,
         "ci_excludes_zero": true
       },
       "cb_nonts_response": {
-        "beta": 27.680896875510427,
-        "se": 14.454812688822598,
-        "lower95": -0.6505359945818618,
-        "upper95": 56.01232974560271,
-        "n": 68,
-        "ci_excludes_zero": false
+        "beta": 35.66297499651651,
+        "se": 13.61137727480262,
+        "lower95": 8.984675537903374,
+        "upper95": 62.34127445512965,
+        "n": 92,
+        "ci_excludes_zero": true
       },
-      "toc_minus_tga_beta_gap": -9.255030755236632,
+      "toc_minus_tga_beta_gap": -1.1543531708601336,
       "interpretation": "treasury_cash_release_pattern"
     },
     "h1": {
       "treasury_operating_cash_response": {
-        "beta": -54.242652928956154,
-        "se": 42.01580098473353,
-        "lower95": -136.59362285903387,
-        "upper95": 28.10831700112157,
-        "n": 67,
+        "beta": -34.5821120947394,
+        "se": 25.26850289776859,
+        "lower95": -84.10837777436583,
+        "upper95": 14.94415358488704,
+        "n": 118,
         "ci_excludes_zero": false
       },
-      "treasury_operating_cash_signed_contribution_beta": 54.242652928956154,
+      "treasury_operating_cash_signed_contribution_beta": 34.5821120947394,
       "tga_response": {
-        "beta": -48.09224413774307,
-        "se": 43.36577996251905,
-        "lower95": -133.0891728642804,
-        "upper95": 36.90468458879426,
-        "n": 67,
+        "beta": -33.352243346378,
+        "se": 32.95529811989373,
+        "lower95": -97.94462766136972,
+        "upper95": 31.240140968613716,
+        "n": 91,
         "ci_excludes_zero": false
       },
       "reserves_response": {
-        "beta": 122.10460290680561,
-        "se": 31.047632117091556,
-        "lower95": 61.25124395730616,
-        "upper95": 182.95796185630508,
-        "n": 67,
+        "beta": 90.74483726198588,
+        "se": 27.6751703908293,
+        "lower95": 36.50150329596045,
+        "upper95": 144.9881712280113,
+        "n": 91,
         "ci_excludes_zero": true
       },
       "cb_nonts_response": {
-        "beta": 74.01235876906254,
-        "se": 61.27419916014067,
-        "lower95": -46.085071584813164,
-        "upper95": 194.10978912293825,
-        "n": 67,
+        "beta": 57.39259391560787,
+        "se": 45.995107312692426,
+        "lower95": -32.75781641726929,
+        "upper95": 147.54300424848503,
+        "n": 91,
         "ci_excludes_zero": false
       },
-      "toc_minus_tga_beta_gap": -6.150408791213081,
+      "toc_minus_tga_beta_gap": -1.2298687483613975,
       "interpretation": "treasury_cash_release_pattern"
     },
     "h4": {
       "treasury_operating_cash_response": {
-        "beta": -48.04547363643368,
-        "se": 38.54605530474574,
-        "lower95": -123.59574203373532,
-        "upper95": 27.504794760867973,
-        "n": 64,
+        "beta": -27.817404782401855,
+        "se": 23.871002901691906,
+        "lower95": -74.60457046971798,
+        "upper95": 18.969760904914278,
+        "n": 115,
         "ci_excludes_zero": false
       },
-      "treasury_operating_cash_signed_contribution_beta": 48.04547363643368,
+      "treasury_operating_cash_signed_contribution_beta": 27.817404782401855,
       "tga_response": {
-        "beta": -33.402583825968584,
-        "se": 38.94916785464519,
-        "lower95": -109.74295282107315,
-        "upper95": 42.937785169135985,
-        "n": 64,
+        "beta": -20.16383933713532,
+        "se": 28.754476644871946,
+        "lower95": -76.52261356108434,
+        "upper95": 36.19493488681369,
+        "n": 88,
         "ci_excludes_zero": false
       },
       "reserves_response": {
-        "beta": 142.630462811334,
-        "se": 62.589620235282396,
-        "lower95": 19.954807150180514,
-        "upper95": 265.3061184724875,
-        "n": 64,
+        "beta": 99.79880107791584,
+        "se": 49.50699497955639,
+        "lower95": 2.7650909179853187,
+        "upper95": 196.83251123784635,
+        "n": 88,
         "ci_excludes_zero": true
       },
       "cb_nonts_response": {
-        "beta": 109.22787898536542,
-        "se": 88.63839332074122,
-        "lower95": -64.50337192328736,
-        "upper95": 282.9591298940182,
-        "n": 64,
+        "beta": 79.63496174078054,
+        "se": 66.07948618090836,
+        "lower95": -49.880831173799834,
+        "upper95": 209.1507546553609,
+        "n": 88,
         "ci_excludes_zero": false
       },
-      "toc_minus_tga_beta_gap": -14.642889810465093,
+      "toc_minus_tga_beta_gap": -7.653565445266533,
       "interpretation": "treasury_cash_release_pattern"
     },
     "h8": {
       "treasury_operating_cash_response": {
-        "beta": -108.72102920527956,
-        "se": 42.041452715879146,
-        "lower95": -191.1222765284027,
-        "upper95": -26.319781882156434,
-        "n": 60,
+        "beta": -61.348436884462984,
+        "se": 28.403131426705112,
+        "lower95": -117.018574480805,
+        "upper95": -5.678299288120968,
+        "n": 111,
         "ci_excludes_zero": true
       },
-      "treasury_operating_cash_signed_contribution_beta": 108.72102920527956,
+      "treasury_operating_cash_signed_contribution_beta": 61.348436884462984,
       "tga_response": {
-        "beta": -92.74816054911531,
-        "se": 42.595845322678805,
-        "lower95": -176.23601738156577,
-        "upper95": -9.26030371666485,
-        "n": 60,
-        "ci_excludes_zero": true
+        "beta": -65.4777680571594,
+        "se": 34.33272066285749,
+        "lower95": -132.76990055636008,
+        "upper95": 1.8143644420412812,
+        "n": 84,
+        "ci_excludes_zero": false
       },
       "reserves_response": {
-        "beta": 117.44367842763964,
-        "se": 73.08356173628034,
-        "lower95": -25.800102575469822,
-        "upper95": 260.6874594307491,
-        "n": 60,
+        "beta": 78.43458728548035,
+        "se": 57.7415181745283,
+        "lower95": -34.73878833659512,
+        "upper95": 191.60796290755582,
+        "n": 84,
         "ci_excludes_zero": false
       },
       "cb_nonts_response": {
-        "beta": 24.695517878524342,
-        "se": 91.18998745751693,
-        "lower95": -154.03685753820884,
-        "upper95": 203.42789329525755,
-        "n": 60,
+        "beta": 12.956819228320942,
+        "se": 69.50793695799726,
+        "lower95": -123.2787372093537,
+        "upper95": 149.19237566599557,
+        "n": 84,
         "ci_excludes_zero": false
       },
-      "toc_minus_tga_beta_gap": -15.972868656164252,
+      "toc_minus_tga_beta_gap": 4.129331172696411,
       "interpretation": "treasury_cash_release_pattern"
     }
   },
   "takeaways": [
     "This audit checks whether the Treasury-operating-cash leg behaves like genuine TGA plumbing or like a sign/timing/object-definition bug.",
     "Quarter by quarter, the Z.1 Treasury-operating-cash flow and `tga_qoq` move together tightly: correlation \u2248 0.95, TGA-on-TOC slope \u2248 0.93.",
-    "At h0, the baseline TDC shock lines up with a Treasury-cash-release pattern: TOC \u2248 -70.44, TGA \u2248 -61.19, reserves \u2248 88.87.",
-    "Because the TDC identity subtracts the Treasury-operating-cash leg, the h0 signed TDC contribution from that leg is about 70.44."
+    "At h0, the baseline TDC shock lines up with a Treasury-cash-release pattern: TOC \u2248 -42.83, TGA \u2248 -41.67, reserves \u2248 77.33.",
+    "Because the TDC identity subtracts the Treasury-operating-cash leg, the h0 signed TDC contribution from that leg is about 42.83."
   ]
 }

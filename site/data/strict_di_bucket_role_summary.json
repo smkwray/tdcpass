@@ -48,66 +48,66 @@
   "key_horizons": {
     "h0": {
       "core_residual_response": {
-        "beta": -5.501727161440379,
-        "se": 10.900899392583606,
-        "lower95": -26.867489970904245,
-        "upper95": 15.864035648023489,
+        "beta": -5.504170356594226,
+        "se": 10.901466170309819,
+        "lower95": -26.87104405040147,
+        "upper95": 15.862703337213016,
         "n": 68,
         "ci_excludes_zero": false
       },
       "headline_direct_core_response": {
-        "beta": -10.658905058923462,
-        "se": 2.160432283109402,
-        "lower95": -14.89335233381789,
-        "upper95": -6.424457784029035,
+        "beta": -10.660168482962053,
+        "se": 2.1604570831038097,
+        "lower95": -14.89466436584552,
+        "upper95": -6.425672600078586,
         "n": 68,
         "ci_excludes_zero": true
       },
       "standard_secondary_comparison_response": {
-        "beta": 8.485186147303903,
-        "se": 7.570896097479698,
-        "lower95": -6.353770203756305,
-        "upper95": 23.32414249836411,
+        "beta": 8.484413965462522,
+        "se": 7.570834190715191,
+        "lower95": -6.354421048339251,
+        "upper95": 23.323248979264296,
         "n": 68,
         "ci_excludes_zero": false
       },
       "broad_loan_subtotal_response": {
-        "beta": 5.5796698433974985,
-        "se": 6.302476257768174,
-        "lower95": -6.773183621828123,
-        "upper95": 17.932523308623118,
+        "beta": 5.577051082427268,
+        "se": 6.303473595598549,
+        "lower95": -6.777757164945887,
+        "upper95": 17.931859329800425,
         "n": 68,
         "ci_excludes_zero": false
       },
       "noncore_system_diagnostic_response": {
-        "beta": 4.315368496420372,
-        "se": 3.1914413049194974,
-        "lower95": -1.9398564612218427,
-        "upper95": 10.570593454062585,
+        "beta": 4.309823464037196,
+        "se": 3.2005543434771315,
+        "lower95": -1.9632630491779821,
+        "upper95": 10.582909977252374,
         "n": 68,
         "ci_excludes_zero": false
       },
-      "private_borrower_increment_beta": 19.144091206227365,
-      "secondary_minus_core_residual_beta": 13.986913308744281,
+      "private_borrower_increment_beta": 19.144582448424575,
+      "secondary_minus_core_residual_beta": 13.988584322056749,
       "di_bucket_response": {
-        "beta": -0.26454114113574967,
-        "se": 9.534274569487632,
-        "lower95": -18.951719297331508,
-        "upper95": 18.422637015060012,
-        "n": 68,
+        "beta": -3.0570197270342403,
+        "se": 5.662204476086389,
+        "lower95": -14.154940500163562,
+        "upper95": 8.040901046095083,
+        "n": 119,
         "ci_excludes_zero": false
       },
-      "dominant_borrower_component": "strict_di_loans_nec_nonfinancial_corporate_qoq",
-      "us_chartered_share_of_systemwide_liability_beta": -0.18784672636223207,
-      "systemwide_borrower_gap_share_of_systemwide_liability_beta": -4.111893470527246e-17
+      "dominant_borrower_component": "strict_di_loans_nec_domestic_financial_qoq",
+      "us_chartered_share_of_systemwide_liability_beta": 1.4564537902264705,
+      "systemwide_borrower_gap_share_of_systemwide_liability_beta": 6.677998850090763e-16
     }
   },
   "takeaways": [
     "This surface fixes the published role of the broad DI-loans-n.e.c. bucket inside the redesigned strict loan lane.",
     "It is not a same-scope decomposition: the headline and secondary rows are strict source-side loan objects, while the borrower diagnostics remain systemwide F.215 counterpart rows.",
-    "At h0 under the core-deposit-proximate shock, the role bridge is now explicit: core residual \u2248 -5.50, headline direct core \u2248 -10.66, standard secondary comparison \u2248 8.49, broad loan subtotal \u2248 5.58, noncore/system diagnostic \u2248 4.32.",
+    "At h0 under the core-deposit-proximate shock, the role bridge is now explicit: core residual \u2248 -5.50, headline direct core \u2248 -10.66, standard secondary comparison \u2248 8.48, broad loan subtotal \u2248 5.58, noncore/system diagnostic \u2248 4.31.",
     "The private-borrower increment relative to the headline direct core is about 19.14 at h0, which is why `strict_loan_core_plus_private_borrower_qoq` is the bounded secondary comparison rather than the headline.",
-    "The broad DI bucket should remain diagnostic because the borrower-side bridge is cross-scope: the U.S.-chartered DI-loans-n.e.c. asset response is about -0.19 of the signed systemwide borrower-liability total at h0, and the dominant borrower counterpart is `strict_di_loans_nec_nonfinancial_corporate_qoq`.",
-    "The remaining named-borrower gap is about -0.00 of the signed systemwide borrower-liability total at h0, which is another reason not to publish the broad DI bucket as if it were already decomposed cleanly."
+    "The broad DI bucket should remain diagnostic because the borrower-side bridge is cross-scope: the U.S.-chartered DI-loans-n.e.c. asset response is about 1.46 of the signed systemwide borrower-liability total at h0, and the dominant borrower counterpart is `strict_di_loans_nec_domestic_financial_qoq`.",
+    "The remaining named-borrower gap is about 0.00 of the signed systemwide borrower-liability total at h0, which is another reason not to publish the broad DI bucket as if it were already decomposed cleanly."
   ]
 }

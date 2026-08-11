@@ -26,17 +26,17 @@
     "private_offset_role": "diagnostic_only"
   },
   "h0_snapshot": {
-    "toc_row_support_bundle_beta": 65.3966245435534,
-    "core_residual_beta": -5.508313542362046,
-    "headline_direct_core_beta": -10.658905058923445,
-    "standard_secondary_beta": 9.437768587339647,
-    "narrowing_diagnostic_beta": 8.485186147303951
+    "toc_row_support_bundle_beta": 22.990651393911513,
+    "core_residual_beta": -5.510705208475613,
+    "headline_direct_core_beta": -10.660168482962053,
+    "standard_secondary_beta": 9.48112132496901,
+    "narrowing_diagnostic_beta": 8.484413965462522
   },
   "classification": {
     "strict_deposit_component_goal": "mechanical_or_near_mechanical_component_of_deposits",
     "tdc_measurement_status": "mechanically_coherent_but_not_yet_settled_as_strict_component",
     "independent_verification_status": "partial_and_not_fully_validated",
-    "project_interpretation": "treatment_side_problem_dominates_residual_but_independent_lane_still_not_validated",
+    "project_interpretation": "treatment_side_problem_dominates_but_independent_lane_read_remains_unsettled",
     "framework_state": "external_critique_incorporated_and_toc_candidate_gate_built",
     "external_critique_readiness": "critique_incorporated",
     "raw_incidence_decision_gate": "full_reincorporation_not_supported",
@@ -60,8 +60,8 @@
     "TOC/ROW is now frozen as a real measured Treasury support bundle with unresolved strict deposit incidence, not just as vague specification risk.",
     "The headline strict direct evidence is frozen as `strict_loan_core_min_qoq`.",
     "The standard bridge comparison is frozen as `strict_loan_core_plus_nonfinancial_corporate_qoq`, while `strict_loan_core_plus_private_borrower_qoq` becomes the wider diagnostic envelope and the private-offset block stays `diagnostic_only`.",
-    "The split-treatment read stays central to the framing: h0 TOC/ROW support bundle \u2248 65.40, core residual \u2248 -5.51.",
-    "The strict comparison roles are frozen off the direct h0 comparison under the core-deposit-proximate shock: headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.44, wider diagnostic envelope \u2248 8.49.",
+    "The split-treatment read stays central to the framing: h0 TOC/ROW support bundle \u2248 22.99, core residual \u2248 -5.51.",
+    "The strict comparison roles are frozen off the direct h0 comparison under the core-deposit-proximate shock: headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.48, wider diagnostic envelope \u2248 8.48.",
     "The role assignment is no longer based on raw h0 fit alone: fit-preferred bridge = `strict_loan_core_plus_private_borrower_qoq`, but the frozen strict-design bridge stays `strict_loan_core_plus_nonfinancial_corporate_qoq`.",
     "The direct-core headline is now explicitly horizon-aware: multihorizon benchmark = `strict_loan_core_min_qoq`, impact-horizon candidate = `strict_loan_mortgages_qoq`.",
     "Current horizon winners = {'h0': 'strict_loan_mortgages_qoq', 'h4': 'strict_loan_core_min_qoq', 'h8': 'strict_loan_core_min_qoq'}.",

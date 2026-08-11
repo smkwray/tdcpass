@@ -7,46 +7,46 @@
       "column": "reserve_drain_pressure",
       "publication_role": "published",
       "threshold_rule": "median",
-      "threshold_value": 10.218,
-      "high_rows": 34,
-      "low_rows": 34,
-      "high_share": 0.5,
-      "low_share": 0.5,
+      "threshold_value": 1.243,
+      "high_rows": 46,
+      "low_rows": 45,
+      "high_share": 0.5054945054945055,
+      "low_share": 0.4945054945054945,
       "informative": true,
       "stable_for_interpretation": true,
       "stability_warnings": [],
-      "full_sample_shock_std": 1.5614747232100081,
-      "high_shock_std": 1.1830628174941256,
-      "low_shock_std": 1.8838354081364177,
-      "high_shock_support_ratio": 0.7576573606404843,
-      "low_shock_support_ratio": 1.2064463036991822,
+      "full_sample_shock_std": 1.607275233338735,
+      "high_shock_std": 1.1783028535103321,
+      "low_shock_std": 1.9332991970665176,
+      "high_shock_support_ratio": 0.7331058359324595,
+      "low_shock_support_ratio": 1.2028426475847231,
       "total_deposits_h0_high": {
-        "beta": 37.00725800955061,
-        "se": 25.779352662726968,
-        "lower95": -13.520273209394247,
-        "upper95": 87.53478922849547,
-        "n": 34
+        "beta": 24.365009845934253,
+        "se": 21.270219738940852,
+        "lower95": -17.32462084238982,
+        "upper95": 66.05464053425833,
+        "n": 46
       },
       "total_deposits_h0_low": {
-        "beta": 51.931257848882325,
-        "se": 26.70058985426981,
-        "lower95": -0.4018982654865013,
-        "upper95": 104.26441396325114,
-        "n": 34
+        "beta": 35.621489087590355,
+        "se": 19.443589413052102,
+        "lower95": -2.487946161991765,
+        "upper95": 73.73092433717247,
+        "n": 45
       },
       "total_deposits_h4_high": {
-        "beta": 172.45154683853286,
-        "se": 82.0980052625317,
-        "lower95": 11.539456523970728,
-        "upper95": 333.363637153095,
-        "n": 32
+        "beta": 87.42589095130248,
+        "se": 77.31324872128083,
+        "lower95": -64.10807654240796,
+        "upper95": 238.9598584450129,
+        "n": 44
       },
       "total_deposits_h4_low": {
-        "beta": 138.74405791330113,
-        "se": 100.77547755936932,
-        "lower95": -58.77587810306272,
-        "upper95": 336.263993929665,
-        "n": 32
+        "beta": 54.27066159860961,
+        "se": 84.79989187321344,
+        "lower95": -111.93712647288872,
+        "upper95": 220.47844967010792,
+        "n": 43
       }
     }
   ],

@@ -7,9 +7,9 @@
       "scale_divisor": 1.0,
       "output_units": "billions_usd",
       "raw_start_date": "1973Q1",
-      "raw_end_date": "2026Q1",
-      "latest_raw_level": 19345.367,
-      "latest_scaled_level": 19345.367
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 19753.3662,
+      "latest_scaled_level": 19753.3662
     },
     {
       "series_key": "treasury_agency_level",
@@ -17,9 +17,9 @@
       "scale_divisor": 1.0,
       "output_units": "billions_usd",
       "raw_start_date": "2009Q3",
-      "raw_end_date": "2026Q1",
-      "latest_raw_level": 2029.3965,
-      "latest_scaled_level": 2029.3965
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 2082.3762,
+      "latest_scaled_level": 2082.3762
     },
     {
       "series_key": "tga_level",
@@ -27,9 +27,9 @@
       "scale_divisor": 1000.0,
       "output_units": "billions_usd",
       "raw_start_date": "2002Q4",
-      "raw_end_date": "2026Q1",
-      "latest_raw_level": 874077.0,
-      "latest_scaled_level": 874.077
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 907324.0,
+      "latest_scaled_level": 907.324
     },
     {
       "series_key": "reserves_level",
@@ -37,9 +37,139 @@
       "scale_divisor": 1000.0,
       "output_units": "billions_usd",
       "raw_start_date": "2002Q4",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 2993349.0,
+      "latest_scaled_level": 2993.349
+    },
+    {
+      "series_key": "commercial_industrial_loans_level",
+      "series_id": "TOTCINSA",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "1973Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 2904.363,
+      "latest_scaled_level": 2904.363
+    },
+    {
+      "series_key": "construction_land_development_loans_level",
+      "series_id": "CLDACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2015Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 457.1212,
+      "latest_scaled_level": 457.1212
+    },
+    {
+      "series_key": "cre_multifamily_loans_level",
+      "series_id": "SMPACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2015Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 636.572,
+      "latest_scaled_level": 636.572
+    },
+    {
+      "series_key": "cre_nonfarm_nonresidential_loans_level",
+      "series_id": "SNFACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2015Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 1907.3468,
+      "latest_scaled_level": 1907.3468
+    },
+    {
+      "series_key": "consumer_loans_level",
+      "series_id": "CLSACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "1973Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 1913.2409,
+      "latest_scaled_level": 1913.2409
+    },
+    {
+      "series_key": "credit_card_revolving_loans_level",
+      "series_id": "CCLACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2000Q2",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 1088.3478,
+      "latest_scaled_level": 1088.3478
+    },
+    {
+      "series_key": "auto_loans_level",
+      "series_id": "CARACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2015Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 522.6329,
+      "latest_scaled_level": 522.6329
+    },
+    {
+      "series_key": "other_consumer_loans_level",
+      "series_id": "OCLACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2000Q2",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 824.8931,
+      "latest_scaled_level": 824.8931
+    },
+    {
+      "series_key": "heloc_loans_level",
+      "series_id": "RHEACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "1987Q2",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 287.693,
+      "latest_scaled_level": 287.693
+    },
+    {
+      "series_key": "closed_end_residential_loans_level",
+      "series_id": "CRLACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2004Q2",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 2404.6042,
+      "latest_scaled_level": 2404.6042
+    },
+    {
+      "series_key": "loans_to_commercial_banks_level",
+      "series_id": "LCBACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "1973Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 14.2372,
+      "latest_scaled_level": 14.2372
+    },
+    {
+      "series_key": "loans_to_nondepository_financial_institutions_level",
+      "series_id": "LNFACBW027SBOG",
+      "scale_divisor": 1.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "2015Q1",
+      "raw_end_date": "2026Q3",
+      "latest_raw_level": 2002.4852,
+      "latest_scaled_level": 2002.4852
+    },
+    {
+      "series_key": "loans_for_purchasing_or_carrying_securities_level",
+      "series_id": "BOGZ1FL763067003Q",
+      "scale_divisor": 1000.0,
+      "output_units": "billions_usd",
+      "raw_start_date": "1945Q4",
       "raw_end_date": "2026Q1",
-      "latest_raw_level": 2993955.0,
-      "latest_scaled_level": 2993.955
+      "latest_raw_level": 536428.0,
+      "latest_scaled_level": 536.428
     }
   ],
   "derived_proxies": [
@@ -49,7 +179,7 @@
       "start_quarter": "2009Q4",
       "end_quarter": "2025Q4",
       "non_missing_obs": 65,
-      "median_abs_qoq": 135.592200000001
+      "median_abs_qoq": 135.8153
     },
     {
       "proxy": "cb_nonts_qoq",
@@ -62,30 +192,411 @@
     {
       "proxy": "foreign_nonts_qoq",
       "units": "billions_usd",
-      "start_quarter": "2003Q1",
+      "start_quarter": "1990Q2",
       "end_quarter": "2025Q4",
-      "non_missing_obs": 92,
-      "median_abs_qoq": 43.528000000000006
+      "non_missing_obs": 143,
+      "median_abs_qoq": 34.784
     },
     {
       "proxy": "domestic_nonfinancial_mmf_reallocation_qoq",
       "units": "billions_usd",
-      "start_quarter": "2003Q1",
+      "start_quarter": "1990Q2",
       "end_quarter": "2025Q4",
-      "non_missing_obs": 92,
-      "median_abs_qoq": 71.321
+      "non_missing_obs": 143,
+      "median_abs_qoq": 53.683
     },
     {
       "proxy": "domestic_nonfinancial_repo_reallocation_qoq",
       "units": "billions_usd",
-      "start_quarter": "2003Q1",
+      "start_quarter": "1990Q2",
       "end_quarter": "2025Q4",
-      "non_missing_obs": 92,
-      "median_abs_qoq": 5.997999999999999
+      "non_missing_obs": 143,
+      "median_abs_qoq": 4.771
+    }
+  ],
+  "creator_channels": [
+    {
+      "channel": "commercial_industrial_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 23.175
+    },
+    {
+      "channel": "construction_land_development_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2015Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 43,
+      "median_abs_qoq": 5.9367
+    },
+    {
+      "channel": "cre_multifamily_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2015Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 43,
+      "median_abs_qoq": 7.0241
+    },
+    {
+      "channel": "cre_nonfarm_nonresidential_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2015Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 43,
+      "median_abs_qoq": 17.2253
+    },
+    {
+      "channel": "consumer_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 10.0419
+    },
+    {
+      "channel": "credit_card_revolving_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2000Q3",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 102,
+      "median_abs_qoq": 8.37545
+    },
+    {
+      "channel": "auto_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2015Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 43,
+      "median_abs_qoq": 5.0596
+    },
+    {
+      "channel": "other_consumer_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2000Q3",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 102,
+      "median_abs_qoq": 6.7446
+    },
+    {
+      "channel": "heloc_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 5.0139
+    },
+    {
+      "channel": "closed_end_residential_loans_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2004Q3",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 86,
+      "median_abs_qoq": 20.787950000000002
+    },
+    {
+      "channel": "loans_to_commercial_banks_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 2.0803
+    },
+    {
+      "channel": "loans_to_nondepository_financial_institutions_qoq",
+      "units": "billions_usd",
+      "start_quarter": "2015Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 43,
+      "median_abs_qoq": 20.0966
+    },
+    {
+      "channel": "loans_for_purchasing_or_carrying_securities_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 2.085
+    },
+    {
+      "channel": "treasury_securities_bank_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 10.645
+    },
+    {
+      "channel": "agency_gse_backed_securities_bank_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 20.126
+    },
+    {
+      "channel": "municipal_securities_bank_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 3.183
+    },
+    {
+      "channel": "corporate_foreign_bonds_bank_qoq",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 9.285
+    }
+  ],
+  "creator_channel_adjustments": [
+    {
+      "channel": "commercial_industrial_loans_ex_chargeoffs_qoq",
+      "construction": "raw_qoq_plus_lagged_balance_times_annualized_chargeoff_rate_div_400",
+      "base_level_series_id": "TOTCINSA",
+      "chargeoff_rate_series_id": "CORBLACBS",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 22.952311
+    },
+    {
+      "channel": "consumer_loans_ex_chargeoffs_qoq",
+      "construction": "raw_qoq_plus_lagged_balance_times_annualized_chargeoff_rate_div_400",
+      "base_level_series_id": "CLSACBW027SBOG",
+      "chargeoff_rate_series_id": "CORCACBS",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 13.9006753375
+    },
+    {
+      "channel": "credit_card_revolving_loans_ex_chargeoffs_qoq",
+      "construction": "raw_qoq_plus_lagged_balance_times_annualized_chargeoff_rate_div_400",
+      "base_level_series_id": "CCLACBW027SBOG",
+      "chargeoff_rate_series_id": "CORCCACBS",
+      "units": "billions_usd",
+      "start_quarter": "2000Q3",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 102,
+      "median_abs_qoq": 11.5121933175
+    },
+    {
+      "channel": "other_consumer_loans_ex_chargeoffs_qoq",
+      "construction": "raw_qoq_plus_lagged_balance_times_annualized_chargeoff_rate_div_400",
+      "base_level_series_id": "OCLACBW027SBOG",
+      "chargeoff_rate_series_id": "COROCLACBS",
+      "units": "billions_usd",
+      "start_quarter": "2000Q3",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 102,
+      "median_abs_qoq": 7.93044633
+    },
+    {
+      "channel": "closed_end_residential_loans_ex_chargeoffs_qoq",
+      "construction": "raw_qoq_plus_lagged_balance_times_annualized_chargeoff_rate_div_400",
+      "base_level_series_id": "CRLACBW027SBOG",
+      "chargeoff_rate_series_id": "CORSFRMACBS",
+      "units": "billions_usd",
+      "start_quarter": "2004Q3",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 86,
+      "median_abs_qoq": 21.957605524999998
+    }
+  ],
+  "strict_source_channels": [
+    {
+      "channel": "strict_loan_source_qoq",
+      "series_id": "BOGZ1FU764023005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 71.015
+    },
+    {
+      "channel": "strict_loan_mortgages_qoq",
+      "series_id": "BOGZ1FU763065005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 32.674
+    },
+    {
+      "channel": "strict_loan_consumer_credit_qoq",
+      "series_id": "BOGZ1FU763066000Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 20.171
+    },
+    {
+      "channel": "strict_loan_di_loans_nec_qoq",
+      "series_id": "BOGZ1FU763068005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 24.773
+    },
+    {
+      "channel": "strict_di_loans_nec_systemwide_liability_total_qoq",
+      "series_id": "BOGZ1FU793068005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 30.947
+    },
+    {
+      "channel": "strict_di_loans_nec_households_nonprofits_qoq",
+      "series_id": "BOGZ1FU153168005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 5.531
+    },
+    {
+      "channel": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+      "series_id": "BOGZ1FU103168005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 16.498
+    },
+    {
+      "channel": "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+      "series_id": "BOGZ1FU113168005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 9.26
+    },
+    {
+      "channel": "strict_di_loans_nec_state_local_qoq",
+      "series_id": "BOGZ1FU213168003Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 0.879
+    },
+    {
+      "channel": "strict_di_loans_nec_domestic_financial_qoq",
+      "series_id": "BOGZ1FU793168005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 5.614
+    },
+    {
+      "channel": "strict_di_loans_nec_rest_of_world_qoq",
+      "series_id": "BOGZ1FU263168005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 3.799
+    },
+    {
+      "channel": "strict_loan_other_advances_qoq",
+      "series_id": "BOGZ1FU763069005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 0.403
+    },
+    {
+      "channel": "strict_non_treasury_agency_gse_qoq",
+      "series_id": "BOGZ1FU763061705Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 18.45
+    },
+    {
+      "channel": "strict_non_treasury_municipal_qoq",
+      "series_id": "BOGZ1FU763062005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 3.555
+    },
+    {
+      "channel": "strict_non_treasury_corporate_foreign_bonds_qoq",
+      "series_id": "BOGZ1FU763063005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 9.285
+    },
+    {
+      "channel": "strict_funding_fedfunds_repo_qoq",
+      "series_id": "BOGZ1FU762150005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 15.035
+    },
+    {
+      "channel": "strict_funding_debt_securities_qoq",
+      "series_id": "BOGZ1FU764122005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 4.365
+    },
+    {
+      "channel": "strict_funding_fhlb_advances_qoq",
+      "series_id": "BOGZ1FU763169305Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 15.676
+    },
+    {
+      "channel": "broad_strict_loan_foreign_offices_qoq",
+      "series_id": "BOGZ1FU754023005Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 10.025
+    },
+    {
+      "channel": "broad_strict_loan_affiliated_areas_qoq",
+      "series_id": "BOGZ1FU744023003Q",
+      "units": "billions_usd",
+      "start_quarter": "1990Q2",
+      "end_quarter": "2025Q4",
+      "non_missing_obs": 143,
+      "median_abs_qoq": 0.741
     }
   ],
   "takeaways": [
     "FRED level series are now scaled with an explicit per-series divisor rather than a blanket /1000 rule.",
-    "TOTBKCR and TNMACBW027SBOG are treated as already being in billions_usd, while WTREGEN and WRESBAL are converted from millions_usd to billions_usd."
+    "TOTBKCR and TNMACBW027SBOG are treated as already being in billions_usd, while WTREGEN and WRESBAL are converted from millions_usd to billions_usd.",
+    "The creator-lane lending series are H.8/FRED balance levels quarterlyized by taking the last observation in each quarter and then differencing q/q, except for the securities-purpose lane that comes from quarterly Z.1 levels.",
+    "The first asset-purchase creator lanes come from quarterly Z.1 L.111 holdings for Treasury, agency/GSE-backed, municipal, and corporate/foreign bond assets.",
+    "The strict independent lane uses quarterly Z.1 transaction series accessed through FRED, scaled from millions_usd to billions_usd, with an explicit fallback for the consumer-credit series code transition.",
+    "Charge-off-adjusted creator lanes add back an approximate quarterly destruction flow computed from lagged balances and official annualized charge-off rates."
   ]
 }

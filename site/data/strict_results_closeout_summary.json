@@ -58,10 +58,10 @@
     "Whether any genuinely new same-scope mechanical deposit-creation channel appears beyond the current direct core."
   ],
   "h0_snapshot": {
-    "toc_row_support_bundle_beta": 65.3966245435534,
-    "core_residual_beta": -5.508313542362046,
-    "headline_direct_core_beta": -10.658905058923445,
-    "standard_bridge_beta": 9.437768587339647
+    "toc_row_support_bundle_beta": 22.990651393911513,
+    "core_residual_beta": -5.510705208475613,
+    "headline_direct_core_beta": -10.660168482962053,
+    "standard_bridge_beta": 9.48112132496901
   },
   "classification": {
     "branch_state": "strict_empirical_expansion_effectively_complete",
@@ -78,8 +78,8 @@
     "This is the final closeout surface for the strict branch: it summarizes what is settled, what remains unresolved, and whether further empirical expansion is still justified.",
     "The repo now has a frozen broad-vs-strict split rather than an open-ended TDC redesign loop.",
     "The strict side is intentionally narrow: direct core first, bridge second, support bundle outside.",
-    "Current h0 snapshot: TOC/ROW support bundle \u2248 65.40, core residual \u2248 -5.51, headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.44.",
-    "The unresolved DI bucket still does not yield a promotable same-scope transaction split: best cross-scope bridge = `strict_di_loans_nec_nonfinancial_corporate_qoq`, best same-scope proxy = `loans_to_nondepository_financial_institutions_qoq`.",
+    "Current h0 snapshot: TOC/ROW support bundle \u2248 22.99, core residual \u2248 -5.51, headline direct core \u2248 -10.66, standard bridge comparison \u2248 9.48.",
+    "The unresolved DI bucket still does not yield a promotable same-scope transaction split: best cross-scope bridge = `strict_di_loans_nec_private_domestic_borrower_qoq`, best same-scope proxy = `loans_to_nondepository_financial_institutions_qoq`.",
     "The remaining creator-channel search is also exhausted for now: best extension candidate = `cre_multifamily_loans_qoq`, but no additional extension candidate is supported."
   ]
 }

@@ -38,14 +38,14 @@
       "rows": 92,
       "in_scope_counterparts": {
         "total_deposits_bank_qoq": {
-          "same_quarter_corr": -0.23189355426003144,
-          "next_quarter_corr": -0.23511813181033467,
-          "prior_quarter_corr": -0.23511813181033467,
-          "same_quarter_ols_slope": -0.2733915087167163,
-          "next_quarter_ols_slope": -0.2757930736252059,
+          "same_quarter_corr": -0.2318906109099551,
+          "next_quarter_corr": -0.23511795014327772,
+          "prior_quarter_corr": -0.23511795014327772,
+          "same_quarter_ols_slope": -0.2733900470977536,
+          "next_quarter_ols_slope": -0.2757928925893851,
           "same_quarter_sign_match_share": 0.5217391304347826,
           "same_quarter_ratio": {
-            "mean": 2.2126274669502037,
+            "mean": 2.212728630264313,
             "median": 0.11869726166002091,
             "p10": -7.163715120547007,
             "p90": 14.223915040973461
@@ -53,14 +53,14 @@
           "preferred_timing": "next_quarter"
         },
         "deposits_only_bank_qoq": {
-          "same_quarter_corr": -0.24995312331501865,
-          "next_quarter_corr": -0.2520808011751136,
-          "prior_quarter_corr": -0.2520808011751136,
-          "same_quarter_ols_slope": -0.27734857782850125,
-          "next_quarter_ols_slope": -0.278515934981654,
+          "same_quarter_corr": -0.24995133064275996,
+          "next_quarter_corr": -0.2520811347550335,
+          "prior_quarter_corr": -0.2520811347550335,
+          "same_quarter_ols_slope": -0.2773480648464972,
+          "next_quarter_ols_slope": -0.27851634732999914,
           "same_quarter_sign_match_share": 0.532608695652174,
           "same_quarter_ratio": {
-            "mean": 0.6115368507218265,
+            "mean": 0.6116110971585129,
             "median": 0.17702112606280473,
             "p10": -8.871580246940217,
             "p90": 12.333000992119812
@@ -68,15 +68,15 @@
           "preferred_timing": "next_quarter"
         },
         "checkable_private_domestic_bank_qoq": {
-          "same_quarter_corr": -0.10214829620440995,
-          "next_quarter_corr": -0.12963398161127945,
-          "prior_quarter_corr": -0.12963398161127945,
-          "same_quarter_ols_slope": -0.09861899742356477,
-          "next_quarter_ols_slope": -0.10584250842896635,
+          "same_quarter_corr": -0.10212530375843694,
+          "next_quarter_corr": -0.12963590419357868,
+          "prior_quarter_corr": -0.12963590419357868,
+          "same_quarter_ols_slope": -0.09861554445070407,
+          "next_quarter_ols_slope": -0.1058441055451603,
           "same_quarter_sign_match_share": 0.5,
           "same_quarter_ratio": {
-            "mean": 1.1539185843129958,
-            "median": -0.028469979871958675,
+            "mean": 1.1542996444934075,
+            "median": -0.02848150472530492,
             "p10": -2.8158397310412213,
             "p90": 4.120748262097312
           },
@@ -130,459 +130,459 @@
           "preferred_timing": "same_quarter"
         }
       },
-      "best_in_scope_corr": 0.2520808011751136,
+      "best_in_scope_corr": 0.2520811347550335,
       "best_support_corr": 0.9472142089908314
     },
     "row_leg": {
       "status": "available",
-      "rows": 92,
+      "rows": 143,
       "in_scope_counterparts": {
         "total_deposits_bank_qoq": {
-          "same_quarter_corr": -0.11246255486115861,
-          "next_quarter_corr": -0.10193655853488301,
-          "prior_quarter_corr": -0.10193655853488301,
-          "same_quarter_ols_slope": -0.29110854250890267,
-          "next_quarter_ols_slope": -0.2643645617435147,
-          "same_quarter_sign_match_share": 0.75,
+          "same_quarter_corr": 0.0348435120995777,
+          "next_quarter_corr": 0.039032333590863624,
+          "prior_quarter_corr": 0.039032333590863624,
+          "same_quarter_ols_slope": 0.08342992997600109,
+          "next_quarter_ols_slope": 0.09314594010268705,
+          "same_quarter_sign_match_share": 0.6853146853146853,
           "same_quarter_ratio": {
-            "mean": 2.7827258905551226,
-            "median": 1.1321519956716306,
-            "p10": -1.587055888913419,
-            "p90": 5.875177952173982
+            "mean": 2.198084766419836,
+            "median": 1.0557272467761292,
+            "p10": -3.2774690668214763,
+            "p90": 5.810975101236744
           },
-          "preferred_timing": "same_quarter"
+          "preferred_timing": "next_quarter"
         },
         "deposits_only_bank_qoq": {
-          "same_quarter_corr": -0.14258400535292529,
-          "next_quarter_corr": -0.1367900760887687,
-          "prior_quarter_corr": -0.1367900760887687,
-          "same_quarter_ols_slope": -0.34736723022230703,
-          "next_quarter_ols_slope": -0.334149569388276,
-          "same_quarter_sign_match_share": 0.782608695652174,
+          "same_quarter_corr": 0.02413055774106546,
+          "next_quarter_corr": 0.02787445671072545,
+          "prior_quarter_corr": 0.02787445671072545,
+          "same_quarter_ols_slope": 0.05472902955531062,
+          "next_quarter_ols_slope": 0.06304517808914338,
+          "same_quarter_sign_match_share": 0.7272727272727273,
           "same_quarter_ratio": {
-            "mean": 2.570734354205966,
-            "median": 1.0703664793022174,
-            "p10": -1.4017253200362247,
-            "p90": 5.954640491729886
+            "mean": 1.964698117123777,
+            "median": 0.9844707269927596,
+            "p10": -2.6513346472729133,
+            "p90": 6.12448981894541
           },
-          "preferred_timing": "same_quarter"
+          "preferred_timing": "next_quarter"
         },
         "checkable_private_domestic_bank_qoq": {
-          "same_quarter_corr": -0.05353006491895139,
-          "next_quarter_corr": -0.0025379873792201212,
-          "prior_quarter_corr": -0.0025379873792201212,
-          "same_quarter_ols_slope": -0.11346917206586143,
-          "next_quarter_ols_slope": -0.004581490169248347,
-          "same_quarter_sign_match_share": 0.6847826086956522,
+          "same_quarter_corr": 0.05512959948948015,
+          "next_quarter_corr": 0.10104220977159813,
+          "prior_quarter_corr": 0.10104220977159813,
+          "same_quarter_ols_slope": 0.10545102265994637,
+          "next_quarter_ols_slope": 0.16453416731179257,
+          "same_quarter_sign_match_share": 0.6573426573426573,
           "same_quarter_ratio": {
-            "mean": 1.821624363854881,
-            "median": 0.30308058879586863,
-            "p10": -0.8509989643509647,
-            "p90": 3.4332232225675416
+            "mean": 1.1912388744872224,
+            "median": 0.3149147616699966,
+            "p10": -1.4066244130576286,
+            "p90": 3.525903203528359
           },
-          "preferred_timing": "same_quarter"
+          "preferred_timing": "next_quarter"
         },
         "checkable_rest_of_world_bank_qoq": {
-          "same_quarter_corr": 0.01755465440801652,
-          "next_quarter_corr": -0.0014425598066798461,
-          "prior_quarter_corr": -0.0014425598066798461,
-          "same_quarter_ols_slope": 0.0015352619356431448,
-          "next_quarter_ols_slope": -0.00012019001621903313,
-          "same_quarter_sign_match_share": 0.6195652173913043,
+          "same_quarter_corr": 0.044624130957762353,
+          "next_quarter_corr": 0.04598635156946207,
+          "prior_quarter_corr": 0.04598635156946207,
+          "same_quarter_ols_slope": 0.003454745807492949,
+          "next_quarter_ols_slope": 0.0035718559657024816,
+          "same_quarter_sign_match_share": 0.5524475524475524,
           "same_quarter_ratio": {
-            "mean": 0.03679949220431732,
-            "median": 0.013120943296558746,
-            "p10": -0.09285623812684084,
-            "p90": 0.12042076956510685
+            "mean": 0.03373618723093251,
+            "median": 0.008133646983772577,
+            "p10": -0.1058090446846946,
+            "p90": 0.14564051533256012
           },
-          "preferred_timing": "same_quarter"
+          "preferred_timing": "next_quarter"
         }
       },
       "support_counterparts": {
         "foreign_nonts_qoq": {
-          "same_quarter_corr": -0.17456304904597456,
-          "next_quarter_corr": -0.17032890598018308,
-          "prior_quarter_corr": -0.17032890598018308,
-          "same_quarter_ols_slope": -0.19502494080823293,
-          "next_quarter_ols_slope": -0.1911855296608374,
-          "same_quarter_sign_match_share": 0.6086956521739131,
+          "same_quarter_corr": -0.1117943346674605,
+          "next_quarter_corr": -0.10882307013516818,
+          "prior_quarter_corr": -0.10882307013516818,
+          "same_quarter_ols_slope": -0.11399614252733803,
+          "next_quarter_ols_slope": -0.11099560163730327,
+          "same_quarter_sign_match_share": 0.6153846153846154,
           "same_quarter_ratio": {
-            "mean": 0.3602363367042653,
-            "median": 0.15042703042197264,
-            "p10": -1.3391981019378074,
-            "p90": 1.7871974219346471
+            "mean": 0.19637769701921692,
+            "median": 0.20239705362159013,
+            "p10": -1.4086250176422306,
+            "p90": 2.1364623048543065
           },
           "preferred_timing": "same_quarter"
         },
         "interbank_transactions_foreign_banks_asset_qoq": {
-          "same_quarter_corr": 0.040948488206963916,
-          "next_quarter_corr": 0.07217718232092009,
-          "prior_quarter_corr": 0.07217718232092009,
-          "same_quarter_ols_slope": 0.01844247872504508,
-          "next_quarter_ols_slope": 0.030786666834607748,
-          "same_quarter_sign_match_share": 0.5,
+          "same_quarter_corr": 0.059444917134670726,
+          "next_quarter_corr": 0.06000681226149775,
+          "prior_quarter_corr": 0.06000681226149775,
+          "same_quarter_ols_slope": 0.023925423448894378,
+          "next_quarter_ols_slope": 0.024203162703236733,
+          "same_quarter_sign_match_share": 0.5034965034965035,
           "same_quarter_ratio": {
-            "mean": 0.2933507221207753,
-            "median": -0.0004793987885324917,
-            "p10": -0.649979179361731,
-            "p90": 0.7599993351004264
+            "mean": 0.184424725835567,
+            "median": 0.006702376172573641,
+            "p10": -0.7360322441753033,
+            "p90": 0.7686249388761114
           },
           "preferred_timing": "next_quarter"
         },
         "interbank_transactions_foreign_banks_liability_qoq": {
-          "same_quarter_corr": -0.10429022856383244,
-          "next_quarter_corr": -0.08070080106713773,
-          "prior_quarter_corr": -0.08070080106713773,
-          "same_quarter_ols_slope": -0.04831084539405703,
-          "next_quarter_ols_slope": -0.035631374507473855,
-          "same_quarter_sign_match_share": 0.5217391304347826,
+          "same_quarter_corr": -0.12007187578642539,
+          "next_quarter_corr": -0.11648157404326803,
+          "prior_quarter_corr": -0.11648157404326803,
+          "same_quarter_ols_slope": -0.051349231730229664,
+          "next_quarter_ols_slope": -0.04987867381473598,
+          "same_quarter_sign_match_share": 0.5244755244755245,
           "same_quarter_ratio": {
-            "mean": 0.2490216538983246,
-            "median": 0.009639666096600373,
-            "p10": -0.6856335063184518,
-            "p90": 0.678339993863976
+            "mean": 0.3045792740535581,
+            "median": 0.011977815003515227,
+            "p10": -0.7410740836027262,
+            "p90": 0.8673162946802253
           },
           "preferred_timing": "same_quarter"
         },
         "deposits_at_foreign_banks_asset_qoq": {
-          "same_quarter_corr": -0.013271214959323626,
-          "next_quarter_corr": -0.019728434673868565,
-          "prior_quarter_corr": -0.019728434673868565,
-          "same_quarter_ols_slope": -0.00040016593737308157,
-          "next_quarter_ols_slope": -0.0005958310499906216,
-          "same_quarter_sign_match_share": 0.45652173913043476,
+          "same_quarter_corr": 0.024234602881997018,
+          "next_quarter_corr": 0.023731916175684053,
+          "prior_quarter_corr": 0.023731916175684053,
+          "same_quarter_ols_slope": 0.0007612810333008037,
+          "next_quarter_ols_slope": 0.0007481780897613094,
+          "same_quarter_sign_match_share": 0.46853146853146854,
           "same_quarter_ratio": {
-            "mean": -0.02962039248045667,
-            "median": -0.002053511274295918,
-            "p10": -0.06167318089103847,
-            "p90": 0.025112522357332318
+            "mean": -0.03892809718401336,
+            "median": -0.0014242470622247165,
+            "p10": -0.1034604489241423,
+            "p90": 0.047604934968136725
           },
-          "preferred_timing": "next_quarter"
+          "preferred_timing": "same_quarter"
         }
       },
-      "best_in_scope_corr": 0.14258400535292529,
-      "best_support_corr": 0.17456304904597456
+      "best_in_scope_corr": 0.10104220977159813,
+      "best_support_corr": 0.12007187578642539
     }
   },
   "key_horizons": {
     "h0": {
       "toc_leg": {
         "leg_response": {
-          "beta": 70.4411590878622,
-          "se": 19.51500183613834,
-          "lower95": 32.19175548903106,
-          "upper95": 108.69056268669334,
-          "n": 68,
+          "beta": 42.82519255161599,
+          "se": 14.128120483235008,
+          "lower95": 15.134076404475376,
+          "upper95": 70.5163086987566,
+          "n": 119,
           "ci_excludes_zero": true
         },
         "counterpart_responses": {
           "total_deposits_bank_qoq": {
-            "beta": 55.750335248060644,
-            "se": 22.082505066850118,
-            "lower95": 12.468625317034416,
-            "upper95": 99.03204517908688,
-            "n": 68,
+            "beta": 37.977694851980814,
+            "se": 13.81664790851249,
+            "lower95": 10.897064951296336,
+            "upper95": 65.0583247526653,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "deposits_only_bank_qoq": {
-            "beta": 46.76137700408787,
-            "se": 22.181533733734323,
-            "lower95": 3.285570885968596,
-            "upper95": 90.23718312220714,
-            "n": 68,
+            "beta": 29.352075055101814,
+            "se": 13.832947871065244,
+            "lower95": 2.239497227813935,
+            "upper95": 56.46465288238969,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "checkable_private_domestic_bank_qoq": {
-            "beta": 28.65487505691233,
-            "se": 10.83670883878345,
-            "lower95": 7.414925732896769,
-            "upper95": 49.89482438092789,
-            "n": 68,
+            "beta": 17.094721429700375,
+            "se": 6.509087048850007,
+            "lower95": 4.336910813954361,
+            "upper95": 29.852532045446388,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "reserves_qoq": {
-            "beta": 88.86702520813598,
-            "se": 15.355046836769874,
-            "lower95": 58.77113340806703,
-            "upper95": 118.96291700820494,
-            "n": 68,
+            "beta": 77.33381437727236,
+            "se": 13.143165255850834,
+            "lower95": 51.57321047580473,
+            "upper95": 103.09441827874,
+            "n": 92,
             "ci_excludes_zero": true
           },
           "tga_release_qoq": {
-            "beta": 61.18612833262557,
-            "se": 19.904469139441925,
-            "lower95": 22.1733688193194,
-            "upper95": 100.19888784593175,
-            "n": 68,
+            "beta": 41.67083938075586,
+            "se": 17.838044643553168,
+            "lower95": 6.708271879391646,
+            "upper95": 76.63340688212007,
+            "n": 92,
             "ci_excludes_zero": true
           },
           "cb_nonts_qoq": {
-            "beta": 27.680896875510427,
-            "se": 14.454812688822598,
-            "lower95": -0.6505359945818618,
-            "upper95": 56.01232974560271,
-            "n": 68,
-            "ci_excludes_zero": false
+            "beta": 35.66297499651651,
+            "se": 13.61137727480262,
+            "lower95": 8.984675537903374,
+            "upper95": 62.34127445512965,
+            "n": 92,
+            "ci_excludes_zero": true
           }
         },
         "counterpart_share_of_leg_beta": {
-          "total_deposits_bank_qoq": 0.7914454556110087,
-          "deposits_only_bank_qoq": 0.6638359960227482,
-          "checkable_private_domestic_bank_qoq": 0.40679164607684437,
-          "reserves_qoq": 1.2615781222068045,
-          "tga_release_qoq": 0.8686133096746362,
-          "cb_nonts_qoq": 0.3929648125321685
+          "total_deposits_bank_qoq": 0.8868073344026971,
+          "deposits_only_bank_qoq": 0.6853927164419539,
+          "checkable_private_domestic_bank_qoq": 0.39917442073603265,
+          "reserves_qoq": 1.8058019069981788,
+          "tga_release_qoq": 0.9730449975334302,
+          "cb_nonts_qoq": 0.8327569094647488
         },
-        "best_in_scope_share_abs": 0.7914454556110087,
-        "best_support_share_abs": 1.2615781222068045
+        "best_in_scope_share_abs": 0.8868073344026971,
+        "best_support_share_abs": 1.8058019069981788
       },
       "row_leg": {
         "leg_response": {
-          "beta": 11.756792842555717,
-          "se": 10.114287407003827,
-          "lower95": -8.067210475171786,
-          "upper95": 31.58079616028322,
-          "n": 68,
-          "ci_excludes_zero": false
+          "beta": 15.301394302217892,
+          "se": 6.169618658533019,
+          "lower95": 3.2089417314931747,
+          "upper95": 27.39384687294261,
+          "n": 119,
+          "ci_excludes_zero": true
         },
         "counterpart_responses": {
           "total_deposits_bank_qoq": {
-            "beta": 55.750335248060644,
-            "se": 22.082505066850118,
-            "lower95": 12.468625317034416,
-            "upper95": 99.03204517908688,
-            "n": 68,
+            "beta": 37.977694851980814,
+            "se": 13.81664790851249,
+            "lower95": 10.897064951296336,
+            "upper95": 65.0583247526653,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "deposits_only_bank_qoq": {
-            "beta": 46.76137700408787,
-            "se": 22.181533733734323,
-            "lower95": 3.285570885968596,
-            "upper95": 90.23718312220714,
-            "n": 68,
+            "beta": 29.352075055101814,
+            "se": 13.832947871065244,
+            "lower95": 2.239497227813935,
+            "upper95": 56.46465288238969,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "checkable_private_domestic_bank_qoq": {
-            "beta": 28.65487505691233,
-            "se": 10.83670883878345,
-            "lower95": 7.414925732896769,
-            "upper95": 49.89482438092789,
-            "n": 68,
+            "beta": 17.094721429700375,
+            "se": 6.509087048850007,
+            "lower95": 4.336910813954361,
+            "upper95": 29.852532045446388,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "checkable_rest_of_world_bank_qoq": {
-            "beta": 0.22396544837174034,
-            "se": 0.5412190543641806,
-            "lower95": -0.8368238981820535,
-            "upper95": 1.2847547949255342,
-            "n": 68,
+            "beta": 0.29543694292940254,
+            "se": 0.32189753966547446,
+            "lower95": -0.3354822348149274,
+            "upper95": 0.9263561206737325,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "foreign_nonts_qoq": {
-            "beta": 26.58669388040707,
-            "se": 12.835216475201248,
-            "lower95": 1.4296695890126223,
-            "upper95": 51.74371817180152,
-            "n": 68,
+            "beta": 18.506879574388623,
+            "se": 8.189075371277855,
+            "lower95": 2.456291846684028,
+            "upper95": 34.557467302093215,
+            "n": 119,
             "ci_excludes_zero": true
           },
           "interbank_transactions_foreign_banks_asset_qoq": {
-            "beta": 4.997581988112529,
-            "se": 2.7473496074068193,
-            "lower95": -0.3872232424048372,
-            "upper95": 10.382387218629894,
-            "n": 68,
-            "ci_excludes_zero": false
+            "beta": 4.1739512125362435,
+            "se": 2.114638919335112,
+            "lower95": 0.02925893063942464,
+            "upper95": 8.318643494433061,
+            "n": 119,
+            "ci_excludes_zero": true
           },
           "interbank_transactions_foreign_banks_liability_qoq": {
-            "beta": 2.728236987121721,
-            "se": 2.9888151915386656,
-            "lower95": -3.1298407882940635,
-            "upper95": 8.586314762537505,
-            "n": 68,
+            "beta": 2.5556250411351744,
+            "se": 2.2424080530141715,
+            "lower95": -1.8394947427726018,
+            "upper95": 6.950744825042951,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "deposits_at_foreign_banks_asset_qoq": {
-            "beta": 0.02529650965602481,
-            "se": 0.21699059003210122,
-            "lower95": -0.4000050468068936,
-            "upper95": 0.4505980661189432,
-            "n": 68,
+            "beta": 0.28207201615616834,
+            "se": 0.15825092014756856,
+            "lower95": -0.028099787333066006,
+            "upper95": 0.5922438196454027,
+            "n": 119,
             "ci_excludes_zero": false
           }
         },
         "counterpart_share_of_leg_beta": {
-          "total_deposits_bank_qoq": 4.741967983501657,
-          "deposits_only_bank_qoq": 3.9773922727316493,
-          "checkable_private_domestic_bank_qoq": 2.4373037307581984,
-          "checkable_rest_of_world_bank_qoq": 0.019049876218032797,
-          "foreign_nonts_qoq": 2.261390009711832,
-          "interbank_transactions_foreign_banks_asset_qoq": 0.4250803816175895,
-          "interbank_transactions_foreign_banks_liability_qoq": 0.23205622686881086,
-          "deposits_at_foreign_banks_asset_qoq": 0.0021516505389513863
+          "total_deposits_bank_qoq": 2.481976093281647,
+          "deposits_only_bank_qoq": 1.9182614652866843,
+          "checkable_private_domestic_bank_qoq": 1.1172002428054904,
+          "checkable_rest_of_world_bank_qoq": 0.01930784457247663,
+          "foreign_nonts_qoq": 1.209489750336419,
+          "interbank_transactions_foreign_banks_asset_qoq": 0.27278240989654395,
+          "interbank_transactions_foreign_banks_liability_qoq": 0.16701909581957144,
+          "deposits_at_foreign_banks_asset_qoq": 0.01843439954457502
         },
-        "best_in_scope_share_abs": 4.741967983501657,
-        "best_support_share_abs": 2.261390009711832
+        "best_in_scope_share_abs": 2.481976093281647,
+        "best_support_share_abs": 1.209489750336419
       }
     },
     "h1": {
       "toc_leg": {
         "leg_response": {
-          "beta": 54.242652928956154,
-          "se": 42.01580098473353,
-          "lower95": -28.10831700112157,
-          "upper95": 136.59362285903387,
-          "n": 67,
+          "beta": 34.5821120947394,
+          "se": 25.26850289776859,
+          "lower95": -14.94415358488704,
+          "upper95": 84.10837777436583,
+          "n": 118,
           "ci_excludes_zero": false
         },
         "counterpart_responses": {
           "total_deposits_bank_qoq": {
-            "beta": 95.8047337449415,
-            "se": 52.27654265032382,
-            "lower95": -6.657289849693186,
-            "upper95": 198.2667573395762,
-            "n": 67,
+            "beta": 54.73477407890318,
+            "se": 32.34646512689118,
+            "lower95": -8.664297569803537,
+            "upper95": 118.1338457276099,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "deposits_only_bank_qoq": {
-            "beta": 89.37120170943712,
-            "se": 49.05462387314489,
-            "lower95": -6.7758610819268625,
-            "upper95": 185.51826450080108,
-            "n": 67,
+            "beta": 50.164942051177285,
+            "se": 30.709619422327815,
+            "lower95": -10.025912016585231,
+            "upper95": 110.3557961189398,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "checkable_private_domestic_bank_qoq": {
-            "beta": 51.72997192074123,
-            "se": 24.90616778380633,
-            "lower95": 2.913883064480828,
-            "upper95": 100.54606077700163,
-            "n": 67,
-            "ci_excludes_zero": true
+            "beta": 28.306330606131663,
+            "se": 15.54252873536154,
+            "lower95": -2.157025715176953,
+            "upper95": 58.769686927440276,
+            "n": 118,
+            "ci_excludes_zero": false
           },
           "reserves_qoq": {
-            "beta": 122.10460290680561,
-            "se": 31.047632117091556,
-            "lower95": 61.25124395730616,
-            "upper95": 182.95796185630508,
-            "n": 67,
+            "beta": 90.74483726198588,
+            "se": 27.6751703908293,
+            "lower95": 36.50150329596045,
+            "upper95": 144.9881712280113,
+            "n": 91,
             "ci_excludes_zero": true
           },
           "tga_release_qoq": {
-            "beta": 48.09224413774307,
-            "se": 43.36577996251905,
-            "lower95": -36.90468458879426,
-            "upper95": 133.0891728642804,
-            "n": 67,
+            "beta": 33.352243346378,
+            "se": 32.95529811989373,
+            "lower95": -31.240140968613716,
+            "upper95": 97.94462766136972,
+            "n": 91,
             "ci_excludes_zero": false
           },
           "cb_nonts_qoq": {
-            "beta": 74.01235876906254,
-            "se": 61.27419916014067,
-            "lower95": -46.085071584813164,
-            "upper95": 194.10978912293825,
-            "n": 67,
+            "beta": 57.39259391560787,
+            "se": 45.995107312692426,
+            "lower95": -32.75781641726929,
+            "upper95": 147.54300424848503,
+            "n": 91,
             "ci_excludes_zero": false
           }
         },
         "counterpart_share_of_leg_beta": {
-          "total_deposits_bank_qoq": 1.766225075134524,
-          "deposits_only_bank_qoq": 1.6476185600009328,
-          "checkable_private_domestic_bank_qoq": 0.9536770258728701,
-          "reserves_qoq": 2.2510809540737444,
-          "tga_release_qoq": 0.8866130533978763,
-          "cb_nonts_qoq": 1.3644679006758684
+          "total_deposits_bank_qoq": 1.5827481539865051,
+          "deposits_only_bank_qoq": 1.4506037662982514,
+          "checkable_private_domestic_bank_qoq": 0.818525211201244,
+          "reserves_qoq": 2.624039764066056,
+          "tga_release_qoq": 0.9644362743087492,
+          "cb_nonts_qoq": 1.6596034897573066
         },
-        "best_in_scope_share_abs": 1.766225075134524,
-        "best_support_share_abs": 2.2510809540737444
+        "best_in_scope_share_abs": 1.5827481539865051,
+        "best_support_share_abs": 2.624039764066056
       },
       "row_leg": {
         "leg_response": {
-          "beta": 12.207052405526355,
-          "se": 11.716769221640384,
-          "lower95": -10.757815268888798,
-          "upper95": 35.17192007994151,
-          "n": 67,
-          "ci_excludes_zero": false
+          "beta": 17.445014307244328,
+          "se": 8.080830444318515,
+          "lower95": 1.6065866363800385,
+          "upper95": 33.28344197810862,
+          "n": 118,
+          "ci_excludes_zero": true
         },
         "counterpart_responses": {
           "total_deposits_bank_qoq": {
-            "beta": 95.8047337449415,
-            "se": 52.27654265032382,
-            "lower95": -6.657289849693186,
-            "upper95": 198.2667573395762,
-            "n": 67,
+            "beta": 54.73477407890318,
+            "se": 32.34646512689118,
+            "lower95": -8.664297569803537,
+            "upper95": 118.1338457276099,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "deposits_only_bank_qoq": {
-            "beta": 89.37120170943712,
-            "se": 49.05462387314489,
-            "lower95": -6.7758610819268625,
-            "upper95": 185.51826450080108,
-            "n": 67,
+            "beta": 50.164942051177285,
+            "se": 30.709619422327815,
+            "lower95": -10.025912016585231,
+            "upper95": 110.3557961189398,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "checkable_private_domestic_bank_qoq": {
-            "beta": 51.72997192074123,
-            "se": 24.90616778380633,
-            "lower95": 2.913883064480828,
-            "upper95": 100.54606077700163,
-            "n": 67,
-            "ci_excludes_zero": true
+            "beta": 28.306330606131663,
+            "se": 15.54252873536154,
+            "lower95": -2.157025715176953,
+            "upper95": 58.769686927440276,
+            "n": 118,
+            "ci_excludes_zero": false
           },
           "checkable_rest_of_world_bank_qoq": {
-            "beta": 0.12694081051066647,
-            "se": 0.6300632339148259,
-            "lower95": -1.1079831279623924,
-            "upper95": 1.3618647489837252,
-            "n": 67,
+            "beta": -0.29089543851887145,
+            "se": 0.5318276691470524,
+            "lower95": -1.333277670047094,
+            "upper95": 0.7514867930093513,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "foreign_nonts_qoq": {
-            "beta": 23.84630624208157,
-            "se": 12.325503293192112,
-            "lower95": -0.3116802125749665,
-            "upper95": 48.004292696738105,
-            "n": 67,
+            "beta": 13.532417186335131,
+            "se": 8.178395399885849,
+            "lower95": -2.4972377974411337,
+            "upper95": 29.562072170111396,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "interbank_transactions_foreign_banks_asset_qoq": {
-            "beta": 1.5793663501633712,
-            "se": 2.840922144562137,
-            "lower95": -3.988841053178417,
-            "upper95": 7.14757375350516,
-            "n": 67,
+            "beta": 3.8312791461268736,
+            "se": 2.1545320256808775,
+            "lower95": -0.3916036242076464,
+            "upper95": 8.054161916461393,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "interbank_transactions_foreign_banks_liability_qoq": {
-            "beta": 3.1143333838406644,
-            "se": 3.22785528854113,
-            "lower95": -3.2122629816999506,
-            "upper95": 9.44092974938128,
-            "n": 67,
+            "beta": 3.2023577150363804,
+            "se": 2.6257525109195208,
+            "lower95": -1.9441172063658803,
+            "upper95": 8.34883263643864,
+            "n": 118,
             "ci_excludes_zero": false
           },
           "deposits_at_foreign_banks_asset_qoq": {
-            "beta": 0.02435385505248658,
-            "se": 0.2795336006184585,
-            "lower95": -0.5235320021596921,
-            "upper95": 0.5722397122646652,
-            "n": 67,
+            "beta": 0.2656229296602383,
+            "se": 0.22924859106188544,
+            "lower95": -0.18370430882105715,
+            "upper95": 0.7149501681415338,
+            "n": 118,
             "ci_excludes_zero": false
           }
         },
         "counterpart_share_of_leg_beta": {
-          "total_deposits_bank_qoq": 7.848310186787512,
-          "deposits_only_bank_qoq": 7.3212761558209705,
-          "checkable_private_domestic_bank_qoq": 4.237711955534993,
-          "checkable_rest_of_world_bank_qoq": 0.01039897317498187,
-          "foreign_nonts_qoq": 1.9534860218414327,
-          "interbank_transactions_foreign_banks_asset_qoq": 0.12938146717944485,
-          "interbank_transactions_foreign_banks_liability_qoq": 0.25512574865581383,
-          "deposits_at_foreign_banks_asset_qoq": 0.0019950643483320468
+          "total_deposits_bank_qoq": 3.1375597127583705,
+          "deposits_only_bank_qoq": 2.8756033768539515,
+          "checkable_private_domestic_bank_qoq": 1.622602888572983,
+          "checkable_rest_of_world_bank_qoq": -0.01667498996536061,
+          "foreign_nonts_qoq": 0.7757183197445457,
+          "interbank_transactions_foreign_banks_asset_qoq": 0.21962029257470267,
+          "interbank_transactions_foreign_banks_liability_qoq": 0.18356864939380124,
+          "deposits_at_foreign_banks_asset_qoq": 0.015226294744277398
         },
-        "best_in_scope_share_abs": 7.848310186787512,
-        "best_support_share_abs": 1.9534860218414327
+        "best_in_scope_share_abs": 3.1375597127583705,
+        "best_support_share_abs": 0.7757183197445457
       }
     }
   },
@@ -603,9 +603,9 @@
     "This is the raw-units liability-incidence audit for the TOC and ROW legs. It asks whether each measured leg lands in the in-scope bank-deposit aggregate strongly enough to count toward a strict deposit component.",
     "The audit is scope matched to the bank-deposit outcomes and timing matched across same-quarter and next-quarter raw mappings, with h0/h1 shock overlays kept separate.",
     "TOC still looks only partially deposit-incidence-valid in raw units: best in-scope deposit corr \u2248 0.25, best support corr \u2248 0.95.",
-    "The h0 TOC overlay points the same way: deposits-only share \u2248 0.66, total-deposits share \u2248 0.79, reserves share \u2248 1.26.",
-    "ROW looks weaker as a strict deposit leg in raw units: best in-scope deposit corr \u2248 0.14, best support/external corr \u2248 0.17.",
-    "The h0 ROW overlay is even less supportive of strict incidence: deposits-only share \u2248 3.98, ROW-checkable share \u2248 0.02, foreign-NONTS share \u2248 2.26.",
+    "The h0 TOC overlay points the same way: deposits-only share \u2248 0.69, total-deposits share \u2248 0.89, reserves share \u2248 1.81.",
+    "ROW looks weaker as a strict deposit leg in raw units: best in-scope deposit corr \u2248 0.10, best support/external corr \u2248 0.12.",
+    "The h0 ROW overlay is even less supportive of strict incidence: deposits-only share \u2248 1.92, ROW-checkable share \u2248 0.02, foreign-NONTS share \u2248 1.21.",
     "Current binary-gate verdict: do not reincorporate the full TOC/ROW block into the strict object. At most, TOC remains a candidate for a narrower validated share in a later branch."
   ]
 }

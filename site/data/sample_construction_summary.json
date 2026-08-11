@@ -1,12 +1,12 @@
 {
   "full_panel": {
-    "rows": 319,
-    "start_quarter": "1945Q4",
-    "end_quarter": "2026Q1"
+    "rows": 431,
+    "start_quarter": "1919Q1",
+    "end_quarter": "2026Q3"
   },
   "headline_sample": {
-    "rows": 92,
-    "start_quarter": "2003Q1",
+    "rows": 143,
+    "start_quarter": "1990Q2",
     "end_quarter": "2025Q4",
     "required_columns": [
       "quarter",
@@ -24,8 +24,8 @@
   },
   "usable_shock_sample": {
     "shock_column": "tdc_residual_z",
-    "rows": 68,
-    "start_quarter": "2009Q1",
+    "rows": 119,
+    "start_quarter": "1996Q2",
     "end_quarter": "2025Q4"
   },
   "shock_definition": {
@@ -41,225 +41,1945 @@
     "min_train_obs": 24
   },
   "headline_sample_truncation": {
-    "dropped_rows_from_full_panel": 227,
+    "dropped_rows_from_full_panel": 288,
     "columns": [
       {
         "column": "tdc_bank_only_qoq",
-        "full_panel_non_missing_obs": 93,
-        "first_available_quarter": "2002Q4",
+        "full_panel_non_missing_obs": 144,
+        "first_available_quarter": "1990Q1",
         "last_available_quarter": "2025Q4",
-        "missing_rows_in_full_panel": 226,
-        "dropped_rows_with_column_missing": 226
+        "missing_rows_in_full_panel": 287,
+        "dropped_rows_with_column_missing": 287
       },
       {
         "column": "total_deposits_bank_qoq",
-        "full_panel_non_missing_obs": 302,
+        "full_panel_non_missing_obs": 303,
         "first_available_quarter": "1946Q4",
-        "last_available_quarter": "2025Q4",
-        "missing_rows_in_full_panel": 17,
-        "dropped_rows_with_column_missing": 17
+        "last_available_quarter": "2026Q1",
+        "missing_rows_in_full_panel": 128,
+        "dropped_rows_with_column_missing": 128
       },
       {
         "column": "other_component_qoq",
-        "full_panel_non_missing_obs": 93,
-        "first_available_quarter": "2002Q4",
+        "full_panel_non_missing_obs": 144,
+        "first_available_quarter": "1990Q1",
         "last_available_quarter": "2025Q4",
-        "missing_rows_in_full_panel": 226,
-        "dropped_rows_with_column_missing": 226
+        "missing_rows_in_full_panel": 287,
+        "dropped_rows_with_column_missing": 287
       },
       {
         "column": "fedfunds",
-        "full_panel_non_missing_obs": 287,
+        "full_panel_non_missing_obs": 289,
         "first_available_quarter": "1954Q3",
-        "last_available_quarter": "2026Q1",
-        "missing_rows_in_full_panel": 32,
-        "dropped_rows_with_column_missing": 32
+        "last_available_quarter": "2026Q3",
+        "missing_rows_in_full_panel": 142,
+        "dropped_rows_with_column_missing": 142
       },
       {
         "column": "unemployment",
-        "full_panel_non_missing_obs": 313,
+        "full_panel_non_missing_obs": 315,
         "first_available_quarter": "1948Q1",
-        "last_available_quarter": "2026Q1",
-        "missing_rows_in_full_panel": 6,
-        "dropped_rows_with_column_missing": 6
+        "last_available_quarter": "2026Q3",
+        "missing_rows_in_full_panel": 116,
+        "dropped_rows_with_column_missing": 116
       },
       {
         "column": "inflation",
-        "full_panel_non_missing_obs": 316,
+        "full_panel_non_missing_obs": 317,
         "first_available_quarter": "1947Q2",
-        "last_available_quarter": "2026Q1",
-        "missing_rows_in_full_panel": 3,
-        "dropped_rows_with_column_missing": 3
+        "last_available_quarter": "2026Q2",
+        "missing_rows_in_full_panel": 114,
+        "dropped_rows_with_column_missing": 114
       },
       {
         "column": "lag_tdc_bank_only_qoq",
-        "full_panel_non_missing_obs": 93,
-        "first_available_quarter": "2003Q1",
+        "full_panel_non_missing_obs": 144,
+        "first_available_quarter": "1990Q2",
         "last_available_quarter": "2026Q1",
-        "missing_rows_in_full_panel": 226,
-        "dropped_rows_with_column_missing": 226
+        "missing_rows_in_full_panel": 287,
+        "dropped_rows_with_column_missing": 287
       },
       {
         "column": "lag_fedfunds",
-        "full_panel_non_missing_obs": 286,
+        "full_panel_non_missing_obs": 288,
         "first_available_quarter": "1954Q4",
-        "last_available_quarter": "2026Q1",
-        "missing_rows_in_full_panel": 33,
-        "dropped_rows_with_column_missing": 33
+        "last_available_quarter": "2026Q3",
+        "missing_rows_in_full_panel": 143,
+        "dropped_rows_with_column_missing": 143
       },
       {
         "column": "lag_unemployment",
-        "full_panel_non_missing_obs": 312,
+        "full_panel_non_missing_obs": 314,
         "first_available_quarter": "1948Q2",
-        "last_available_quarter": "2026Q1",
-        "missing_rows_in_full_panel": 7,
-        "dropped_rows_with_column_missing": 7
+        "last_available_quarter": "2026Q3",
+        "missing_rows_in_full_panel": 117,
+        "dropped_rows_with_column_missing": 117
       },
       {
         "column": "lag_inflation",
-        "full_panel_non_missing_obs": 315,
+        "full_panel_non_missing_obs": 317,
         "first_available_quarter": "1947Q3",
-        "last_available_quarter": "2026Q1",
-        "missing_rows_in_full_panel": 4,
-        "dropped_rows_with_column_missing": 4
+        "last_available_quarter": "2026Q3",
+        "missing_rows_in_full_panel": 114,
+        "dropped_rows_with_column_missing": 114
       }
     ]
   },
   "extended_column_coverage": [
     {
+      "column": "tdc_tier2_bank_only_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_di_np_cu_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_modern_canonical_di_mmf_rrp_prop_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_mmf_rrp_prop_bank_only_qoq",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_mmf_rrp_lb_bank_only_qoq",
+      "headline_sample_non_missing_obs": 95,
+      "headline_sample_missing_obs": 48,
+      "coverage_share_within_headline_sample": 0.6643356643356644,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_mmf_rrp_ub_bank_only_qoq",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_mmf_rrp_prop_di_np_cu_qoq",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_mmf_rrp_lb_di_np_cu_qoq",
+      "headline_sample_non_missing_obs": 95,
+      "headline_sample_missing_obs": 48,
+      "coverage_share_within_headline_sample": 0.6643356643356644,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_mmf_rrp_ub_di_np_cu_qoq",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_bank_row_method_tier",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_regression_di_method_tier",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_mmf_rrp_prop_bank_only_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_mmf_rrp_lb_bank_only_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_mmf_rrp_ub_bank_only_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_mmf_rrp_prop_di_np_cu_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier2_treasury_interest_robust_bank_only_qoq",
+      "headline_sample_non_missing_obs": 0,
+      "headline_sample_missing_obs": 143,
+      "coverage_share_within_headline_sample": 0.0,
+      "first_available_quarter": null,
+      "last_available_quarter": null
+    },
+    {
+      "column": "tdc_tier2_treasury_interest_robust_mmf_rrp_prop_bank_only_qoq",
+      "headline_sample_non_missing_obs": 0,
+      "headline_sample_missing_obs": 143,
+      "coverage_share_within_headline_sample": 0.0,
+      "first_available_quarter": null,
+      "last_available_quarter": null
+    },
+    {
+      "column": "tdc_tier2_treasury_interest_robust_di_np_cu_qoq",
+      "headline_sample_non_missing_obs": 0,
+      "headline_sample_missing_obs": 143,
+      "coverage_share_within_headline_sample": 0.0,
+      "first_available_quarter": null,
+      "last_available_quarter": null
+    },
+    {
+      "column": "tdc_tier2_treasury_interest_robust_mmf_rrp_prop_di_np_cu_qoq",
+      "headline_sample_non_missing_obs": 0,
+      "headline_sample_missing_obs": 143,
+      "coverage_share_within_headline_sample": 0.0,
+      "first_available_quarter": null,
+      "last_available_quarter": null
+    },
+    {
+      "column": "tdc_tier3_bank_only_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_tier3_broad_depository_qoq",
+      "headline_sample_non_missing_obs": 16,
+      "headline_sample_missing_obs": 127,
+      "coverage_share_within_headline_sample": 0.11188811188811189,
+      "first_available_quarter": "2022Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_bank_receipt_historical_overlay_qoq",
+      "headline_sample_non_missing_obs": 10,
+      "headline_sample_missing_obs": 133,
+      "coverage_share_within_headline_sample": 0.06993006993006994,
+      "first_available_quarter": "2022Q3",
+      "last_available_quarter": "2024Q4"
+    },
+    {
+      "column": "tdc_row_mrv_nondefault_pilot_qoq",
+      "headline_sample_non_missing_obs": 14,
+      "headline_sample_missing_obs": 129,
+      "coverage_share_within_headline_sample": 0.0979020979020979,
+      "first_available_quarter": "2022Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "deposits_only_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "broad_bank_deposits_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "checkable_deposits_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "checkable_deposits_foreign_offices_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "checkable_deposits_affiliated_areas_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "interbank_transactions_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "time_savings_deposits_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "time_savings_deposits_foreign_offices_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "time_savings_deposits_affiliated_areas_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "checkable_federal_govt_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "checkable_state_local_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "checkable_rest_of_world_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "checkable_private_domestic_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "z1_households_nonprofits_nonfinancial_business_currency_deposit_assets_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "interbank_transactions_foreign_banks_liability_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "interbank_transactions_foreign_banks_asset_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "deposits_at_foreign_banks_asset_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "accounting_deposit_substitution_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "accounting_bank_balance_sheet_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "accounting_public_liquidity_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "accounting_external_flow_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "accounting_identity_total_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "accounting_identity_gap_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_source_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_mortgages_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_consumer_credit_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_di_loans_nec_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_households_nonprofits_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_nonfinancial_corporate_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_state_local_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_domestic_financial_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_rest_of_world_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_systemwide_liability_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_systemwide_borrower_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_systemwide_borrower_gap_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_private_domestic_borrower_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_di_loans_nec_noncore_system_borrower_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_other_advances_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_core_min_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_core_plus_private_borrower_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_core_plus_nonfinancial_corporate_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_loan_noncore_system_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_non_treasury_agency_gse_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_non_treasury_municipal_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_non_treasury_corporate_foreign_bonds_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_non_treasury_securities_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_identifiable_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_identifiable_gap_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_funding_fedfunds_repo_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_funding_debt_securities_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_funding_fhlb_advances_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_funding_offset_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_identifiable_net_after_funding_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "strict_gap_after_funding_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
       "column": "bank_credit_private_qoq",
       "headline_sample_non_missing_obs": 65,
-      "headline_sample_missing_obs": 27,
-      "coverage_share_within_headline_sample": 0.7065217391304348,
+      "headline_sample_missing_obs": 78,
+      "coverage_share_within_headline_sample": 0.45454545454545453,
       "first_available_quarter": "2009Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "commercial_industrial_loans_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "construction_land_development_loans_qoq",
+      "headline_sample_non_missing_obs": 43,
+      "headline_sample_missing_obs": 100,
+      "coverage_share_within_headline_sample": 0.3006993006993007,
+      "first_available_quarter": "2015Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "cre_multifamily_loans_qoq",
+      "headline_sample_non_missing_obs": 43,
+      "headline_sample_missing_obs": 100,
+      "coverage_share_within_headline_sample": 0.3006993006993007,
+      "first_available_quarter": "2015Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "cre_nonfarm_nonresidential_loans_qoq",
+      "headline_sample_non_missing_obs": 43,
+      "headline_sample_missing_obs": 100,
+      "coverage_share_within_headline_sample": 0.3006993006993007,
+      "first_available_quarter": "2015Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "consumer_loans_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "credit_card_revolving_loans_qoq",
+      "headline_sample_non_missing_obs": 102,
+      "headline_sample_missing_obs": 41,
+      "coverage_share_within_headline_sample": 0.7132867132867133,
+      "first_available_quarter": "2000Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "auto_loans_qoq",
+      "headline_sample_non_missing_obs": 43,
+      "headline_sample_missing_obs": 100,
+      "coverage_share_within_headline_sample": 0.3006993006993007,
+      "first_available_quarter": "2015Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "other_consumer_loans_qoq",
+      "headline_sample_non_missing_obs": 102,
+      "headline_sample_missing_obs": 41,
+      "coverage_share_within_headline_sample": 0.7132867132867133,
+      "first_available_quarter": "2000Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "heloc_loans_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "closed_end_residential_loans_qoq",
+      "headline_sample_non_missing_obs": 86,
+      "headline_sample_missing_obs": 57,
+      "coverage_share_within_headline_sample": 0.6013986013986014,
+      "first_available_quarter": "2004Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "loans_to_commercial_banks_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "loans_to_nondepository_financial_institutions_qoq",
+      "headline_sample_non_missing_obs": 43,
+      "headline_sample_missing_obs": 100,
+      "coverage_share_within_headline_sample": 0.3006993006993007,
+      "first_available_quarter": "2015Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "loans_for_purchasing_or_carrying_securities_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "treasury_securities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "agency_gse_backed_securities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "municipal_securities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "corporate_foreign_bonds_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "fedfunds_repo_liabilities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "commercial_bank_borrowings_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "fed_borrowings_depository_institutions_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "debt_securities_bank_liability_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "fhlb_advances_sallie_mae_loans_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "holding_company_parent_funding_bank_qoq",
+      "headline_sample_non_missing_obs": 0,
+      "headline_sample_missing_obs": 143,
+      "coverage_share_within_headline_sample": 0.0,
+      "first_available_quarter": null,
+      "last_available_quarter": null
+    },
+    {
+      "column": "commercial_industrial_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "consumer_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "credit_card_revolving_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 102,
+      "headline_sample_missing_obs": 41,
+      "coverage_share_within_headline_sample": 0.7132867132867133,
+      "first_available_quarter": "2000Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "other_consumer_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 102,
+      "headline_sample_missing_obs": 41,
+      "coverage_share_within_headline_sample": 0.7132867132867133,
+      "first_available_quarter": "2000Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "closed_end_residential_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 86,
+      "headline_sample_missing_obs": 57,
+      "coverage_share_within_headline_sample": 0.6013986013986014,
+      "first_available_quarter": "2004Q3",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "cb_nonts_qoq",
       "headline_sample_non_missing_obs": 92,
-      "headline_sample_missing_obs": 0,
-      "coverage_share_within_headline_sample": 1.0,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
       "first_available_quarter": "2003Q1",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "foreign_nonts_qoq",
-      "headline_sample_non_missing_obs": 92,
+      "headline_sample_non_missing_obs": 143,
       "headline_sample_missing_obs": 0,
       "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "first_available_quarter": "1990Q2",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "domestic_nonfinancial_mmf_reallocation_qoq",
-      "headline_sample_non_missing_obs": 92,
+      "headline_sample_non_missing_obs": 143,
       "headline_sample_missing_obs": 0,
       "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "first_available_quarter": "1990Q2",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "domestic_nonfinancial_repo_reallocation_qoq",
-      "headline_sample_non_missing_obs": 92,
+      "headline_sample_non_missing_obs": 143,
       "headline_sample_missing_obs": 0,
       "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "on_rrp_reallocation_qoq",
+      "headline_sample_non_missing_obs": 58,
+      "headline_sample_missing_obs": 85,
+      "coverage_share_within_headline_sample": 0.40559440559440557,
+      "first_available_quarter": "2003Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "household_treasury_securities_reallocation_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "mmf_treasury_bills_reallocation_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "currency_reallocation_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "other_component_no_foreign_bank_sectors_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "other_component_no_toc_bank_only_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "other_component_no_toc_no_row_bank_only_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "other_component_core_deposit_proximate_bank_only_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "broad_bank_other_component_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "broad_strict_loan_foreign_offices_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "broad_strict_loan_affiliated_areas_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "broad_strict_loan_source_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "broad_strict_gap_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "bill_share",
-      "headline_sample_non_missing_obs": 92,
-      "headline_sample_missing_obs": 0,
-      "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "headline_sample_non_missing_obs": 104,
+      "headline_sample_missing_obs": 39,
+      "coverage_share_within_headline_sample": 0.7272727272727273,
+      "first_available_quarter": "2000Q1",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "reserve_drain_pressure",
       "headline_sample_non_missing_obs": 91,
-      "headline_sample_missing_obs": 1,
-      "coverage_share_within_headline_sample": 0.9891304347826086,
+      "headline_sample_missing_obs": 52,
+      "coverage_share_within_headline_sample": 0.6363636363636364,
       "first_available_quarter": "2003Q2",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "tga_qoq",
       "headline_sample_non_missing_obs": 92,
-      "headline_sample_missing_obs": 0,
-      "coverage_share_within_headline_sample": 1.0,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
       "first_available_quarter": "2003Q1",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "reserves_qoq",
       "headline_sample_non_missing_obs": 92,
-      "headline_sample_missing_obs": 0,
-      "coverage_share_within_headline_sample": 1.0,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
       "first_available_quarter": "2003Q1",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "tdc_domestic_bank_only_qoq",
-      "headline_sample_non_missing_obs": 92,
-      "headline_sample_missing_obs": 0,
-      "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_us_chartered_bank_only_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_no_foreign_bank_sectors_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_no_toc_bank_only_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_no_toc_no_row_bank_only_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_core_deposit_proximate_bank_only_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "tdc_toc_row_support_bundle_qoq",
+      "headline_sample_non_missing_obs": 93,
+      "headline_sample_missing_obs": 50,
+      "coverage_share_within_headline_sample": 0.6503496503496503,
+      "first_available_quarter": "2002Q4",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "tdc_no_remit_bank_only_qoq",
-      "headline_sample_non_missing_obs": 92,
-      "headline_sample_missing_obs": 0,
-      "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "tdc_credit_union_sensitive_qoq",
+      "headline_sample_non_missing_obs": 96,
+      "headline_sample_missing_obs": 47,
+      "coverage_share_within_headline_sample": 0.6713286713286714,
+      "first_available_quarter": "2002Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_tdc_us_chartered_bank_only_qoq",
       "headline_sample_non_missing_obs": 92,
-      "headline_sample_missing_obs": 0,
-      "coverage_share_within_headline_sample": 1.0,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_tdc_no_foreign_bank_sectors_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_tdc_no_toc_bank_only_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_tdc_no_toc_no_row_bank_only_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_tdc_core_deposit_proximate_bank_only_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
+      "first_available_quarter": "2003Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_tdc_toc_row_support_bundle_qoq",
+      "headline_sample_non_missing_obs": 92,
+      "headline_sample_missing_obs": 51,
+      "coverage_share_within_headline_sample": 0.6433566433566433,
       "first_available_quarter": "2003Q1",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "lag_total_deposits_bank_qoq",
-      "headline_sample_non_missing_obs": 92,
+      "headline_sample_non_missing_obs": 143,
       "headline_sample_missing_obs": 0,
       "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_deposits_only_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_broad_bank_deposits_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_checkable_deposits_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_checkable_deposits_foreign_offices_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_checkable_deposits_affiliated_areas_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_interbank_transactions_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_time_savings_deposits_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_time_savings_deposits_foreign_offices_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_time_savings_deposits_affiliated_areas_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_checkable_federal_govt_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_checkable_state_local_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_checkable_rest_of_world_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_checkable_private_domestic_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_interbank_transactions_foreign_banks_liability_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_interbank_transactions_foreign_banks_asset_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_deposits_at_foreign_banks_asset_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_source_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_mortgages_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_consumer_credit_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_di_loans_nec_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_households_nonprofits_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_nonfinancial_corporate_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_nonfinancial_noncorporate_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_state_local_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_domestic_financial_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_rest_of_world_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_systemwide_liability_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_systemwide_borrower_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_systemwide_borrower_gap_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_private_domestic_borrower_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_di_loans_nec_noncore_system_borrower_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_other_advances_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_core_min_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_core_plus_private_borrower_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_core_plus_nonfinancial_corporate_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_loan_noncore_system_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_non_treasury_agency_gse_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_non_treasury_municipal_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_non_treasury_corporate_foreign_bonds_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_non_treasury_securities_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_identifiable_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_identifiable_gap_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_broad_strict_loan_foreign_offices_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_broad_strict_loan_affiliated_areas_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_broad_strict_loan_source_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_broad_strict_gap_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_funding_fedfunds_repo_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_funding_debt_securities_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_funding_fhlb_advances_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_funding_offset_total_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_identifiable_net_after_funding_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_strict_gap_after_funding_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "lag_bank_credit_private_qoq",
       "headline_sample_non_missing_obs": 64,
-      "headline_sample_missing_obs": 28,
-      "coverage_share_within_headline_sample": 0.6956521739130435,
+      "headline_sample_missing_obs": 79,
+      "coverage_share_within_headline_sample": 0.44755244755244755,
       "first_available_quarter": "2010Q1",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_commercial_industrial_loans_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_construction_land_development_loans_qoq",
+      "headline_sample_non_missing_obs": 42,
+      "headline_sample_missing_obs": 101,
+      "coverage_share_within_headline_sample": 0.2937062937062937,
+      "first_available_quarter": "2015Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_cre_multifamily_loans_qoq",
+      "headline_sample_non_missing_obs": 42,
+      "headline_sample_missing_obs": 101,
+      "coverage_share_within_headline_sample": 0.2937062937062937,
+      "first_available_quarter": "2015Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_cre_nonfarm_nonresidential_loans_qoq",
+      "headline_sample_non_missing_obs": 42,
+      "headline_sample_missing_obs": 101,
+      "coverage_share_within_headline_sample": 0.2937062937062937,
+      "first_available_quarter": "2015Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_consumer_loans_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_credit_card_revolving_loans_qoq",
+      "headline_sample_non_missing_obs": 101,
+      "headline_sample_missing_obs": 42,
+      "coverage_share_within_headline_sample": 0.7062937062937062,
+      "first_available_quarter": "2000Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_auto_loans_qoq",
+      "headline_sample_non_missing_obs": 42,
+      "headline_sample_missing_obs": 101,
+      "coverage_share_within_headline_sample": 0.2937062937062937,
+      "first_available_quarter": "2015Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_other_consumer_loans_qoq",
+      "headline_sample_non_missing_obs": 101,
+      "headline_sample_missing_obs": 42,
+      "coverage_share_within_headline_sample": 0.7062937062937062,
+      "first_available_quarter": "2000Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_heloc_loans_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_closed_end_residential_loans_qoq",
+      "headline_sample_non_missing_obs": 85,
+      "headline_sample_missing_obs": 58,
+      "coverage_share_within_headline_sample": 0.5944055944055944,
+      "first_available_quarter": "2004Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_loans_to_commercial_banks_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_loans_to_nondepository_financial_institutions_qoq",
+      "headline_sample_non_missing_obs": 42,
+      "headline_sample_missing_obs": 101,
+      "coverage_share_within_headline_sample": 0.2937062937062937,
+      "first_available_quarter": "2015Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_loans_for_purchasing_or_carrying_securities_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_treasury_securities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_agency_gse_backed_securities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_municipal_securities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_corporate_foreign_bonds_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_fedfunds_repo_liabilities_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_commercial_bank_borrowings_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_fed_borrowings_depository_institutions_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_debt_securities_bank_liability_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_fhlb_advances_sallie_mae_loans_bank_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_holding_company_parent_funding_bank_qoq",
+      "headline_sample_non_missing_obs": 0,
+      "headline_sample_missing_obs": 143,
+      "coverage_share_within_headline_sample": 0.0,
+      "first_available_quarter": null,
+      "last_available_quarter": null
+    },
+    {
+      "column": "lag_commercial_industrial_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_consumer_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_credit_card_revolving_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 101,
+      "headline_sample_missing_obs": 42,
+      "coverage_share_within_headline_sample": 0.7062937062937062,
+      "first_available_quarter": "2000Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_other_consumer_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 101,
+      "headline_sample_missing_obs": 42,
+      "coverage_share_within_headline_sample": 0.7062937062937062,
+      "first_available_quarter": "2000Q4",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_closed_end_residential_loans_ex_chargeoffs_qoq",
+      "headline_sample_non_missing_obs": 85,
+      "headline_sample_missing_obs": 58,
+      "coverage_share_within_headline_sample": 0.5944055944055944,
+      "first_available_quarter": "2004Q4",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "lag_tga_qoq",
       "headline_sample_non_missing_obs": 91,
-      "headline_sample_missing_obs": 1,
-      "coverage_share_within_headline_sample": 0.9891304347826086,
+      "headline_sample_missing_obs": 52,
+      "coverage_share_within_headline_sample": 0.6363636363636364,
       "first_available_quarter": "2003Q2",
       "last_available_quarter": "2025Q4"
     },
     {
       "column": "lag_reserves_qoq",
       "headline_sample_non_missing_obs": 91,
-      "headline_sample_missing_obs": 1,
-      "coverage_share_within_headline_sample": 0.9891304347826086,
+      "headline_sample_missing_obs": 52,
+      "coverage_share_within_headline_sample": 0.6363636363636364,
       "first_available_quarter": "2003Q2",
       "last_available_quarter": "2025Q4"
     },
     {
-      "column": "lag_bill_share",
-      "headline_sample_non_missing_obs": 92,
+      "column": "lag_on_rrp_reallocation_qoq",
+      "headline_sample_non_missing_obs": 57,
+      "headline_sample_missing_obs": 86,
+      "coverage_share_within_headline_sample": 0.3986013986013986,
+      "first_available_quarter": "2003Q3",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_household_treasury_securities_reallocation_qoq",
+      "headline_sample_non_missing_obs": 143,
       "headline_sample_missing_obs": 0,
       "coverage_share_within_headline_sample": 1.0,
-      "first_available_quarter": "2003Q1",
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_mmf_treasury_bills_reallocation_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_currency_reallocation_qoq",
+      "headline_sample_non_missing_obs": 143,
+      "headline_sample_missing_obs": 0,
+      "coverage_share_within_headline_sample": 1.0,
+      "first_available_quarter": "1990Q2",
+      "last_available_quarter": "2025Q4"
+    },
+    {
+      "column": "lag_bill_share",
+      "headline_sample_non_missing_obs": 103,
+      "headline_sample_missing_obs": 40,
+      "coverage_share_within_headline_sample": 0.7202797202797203,
+      "first_available_quarter": "2000Q2",
       "last_available_quarter": "2025Q4"
     }
   ],

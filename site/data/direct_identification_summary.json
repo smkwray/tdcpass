@@ -4,13 +4,14 @@
   "estimation_path": {
     "primary_decomposition_mode": "exact_identity_baseline",
     "primary_artifact": "lp_irf_identity_baseline.csv",
+    "sample_variant_artifact": "identity_sample_sensitivity.csv",
     "approximate_robustness_mode": "approximate_with_outcome_specific_lags",
     "approximate_robustness_artifact": "total_minus_other_contrast.csv",
     "approximate_dynamic_robustness": {
       "status": "divergent_secondary_check",
       "identity_check_mode": "approximate_with_outcome_specific_lags",
       "artifact": "total_minus_other_contrast.csv",
-      "max_abs_gap_key_horizons": 34.841407895902734,
+      "max_abs_gap_key_horizons": 30.798483741755632,
       "key_horizon_consistent": false,
       "note": "Primary decomposition uses the exact identity-preserving baseline; the approximate dynamic path is retained only as a secondary robustness check."
     }
@@ -45,12 +46,12 @@
       "tdc_ci_excludes_zero == true",
       "dimensionally_coherent_denominator_gate_resolved == true"
     ],
-    "diagnostic_reference_usable_target_sd": 263.42967242082716,
+    "diagnostic_reference_usable_target_sd": 216.78711915770077,
     "horizons": {
       "h0": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 0.9305308145201421,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 0.9306455678921861,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
@@ -59,8 +60,8 @@
       },
       "h4": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 2.2108641620062723,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 2.177232368214211,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
@@ -69,8 +70,8 @@
       },
       "h8": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 2.7824498362130194,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 2.6507736943679956,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
@@ -82,150 +83,150 @@
   "horizon_evidence": {
     "h0": {
       "tdc": {
-        "beta": 128.49398892100785,
-        "se": 35.018290469572285,
-        "lower95": 119.41873548043742,
-        "upper95": 248.5482159371078,
-        "n": 68,
+        "beta": 86.08814077380539,
+        "se": 25.27141995473617,
+        "lower95": 76.91378655770903,
+        "upper95": 178.46273021278503,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "raw_unit_tdc": {
-        "beta": 0.9305308145201421,
-        "se": 0.017236852863253205,
-        "lower95": 0.8967465829081658,
-        "upper95": 0.9643150461321184,
-        "n": 68,
+        "beta": 0.9306455678921861,
+        "se": 0.016984303257280595,
+        "lower95": 0.8973563335079161,
+        "upper95": 0.9639348022764561,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 55.75033524806063,
-        "se": 40.86113535471181,
-        "lower95": 8.738139880568623,
-        "upper95": 168.6573860829989,
-        "n": 68,
+        "beta": 37.977694851980814,
+        "se": 23.64868644238564,
+        "lower95": 18.533147755076495,
+        "upper95": 105.12950063583395,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "other": {
-        "beta": -72.74365367294723,
-        "se": 42.946700439267694,
-        "lower95": -170.48932979728906,
-        "upper95": -1.8809331488254672,
-        "n": 68,
+        "beta": -48.11044592182458,
+        "se": 25.543877643105976,
+        "lower95": -110.90302316729972,
+        "upper95": -14.172921571377426,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "pass_through_ratio_total_over_tdc": null,
       "crowd_out_ratio_neg_other_over_tdc": null,
       "ratio_reporting_gate": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 0.9305308145201421,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 0.9306455678921861,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
         "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
-      "beta_gap_total_minus_other": 128.49398892100785,
+      "beta_gap_total_minus_other": 86.08814077380539,
       "direct_vs_identity_tdc_gap": 0.0,
       "identity_check_mode": "approximate_with_outcome_specific_lags",
       "contrast_consistent": false
     },
     "h4": {
       "tdc": {
-        "beta": 278.13971316628357,
-        "se": 141.57570011679425,
-        "lower95": 78.32278678356286,
-        "upper95": 597.5909020053358,
-        "n": 64,
+        "beta": 172.8674661880664,
+        "se": 87.14792130590925,
+        "lower95": 76.43912886345232,
+        "upper95": 431.5929761708225,
+        "n": 115,
         "ci_excludes_zero": true
       },
       "raw_unit_tdc": {
-        "beta": 2.2108641620062723,
-        "se": 0.3431532533364172,
-        "lower95": 1.5382837854668945,
-        "upper95": 2.88344453854565,
-        "n": 64,
+        "beta": 2.177232368214211,
+        "se": 0.35056424944601083,
+        "lower95": 1.49012643930003,
+        "upper95": 2.864338297128392,
+        "n": 115,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 167.33069747889854,
-        "se": 154.8910510638327,
-        "lower95": -27.18884889021173,
-        "upper95": 550.7057101571328,
-        "n": 64,
+        "beta": 95.30474128450595,
+        "se": 94.14123531701945,
+        "lower95": -11.18126164236589,
+        "upper95": 363.2075355524613,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "other": {
-        "beta": -110.80901568738503,
-        "se": 84.23711570896954,
-        "lower95": -242.41233479835054,
-        "upper95": 62.23408515351409,
-        "n": 64,
+        "beta": -77.56272490356045,
+        "se": 52.91667363732913,
+        "lower95": -177.1315877678902,
+        "upper95": 19.960987662159766,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "pass_through_ratio_total_over_tdc": null,
       "crowd_out_ratio_neg_other_over_tdc": null,
       "ratio_reporting_gate": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 2.2108641620062723,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 2.177232368214211,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
         "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
-      "beta_gap_total_minus_other": 278.13971316628357,
+      "beta_gap_total_minus_other": 172.8674661880664,
       "direct_vs_identity_tdc_gap": 0.0,
       "identity_check_mode": "approximate_with_outcome_specific_lags",
       "contrast_consistent": false
     },
     "h8": {
       "tdc": {
-        "beta": 347.6946386730543,
-        "se": 270.7611316749685,
-        "lower95": 21.075804641888197,
-        "upper95": 971.3675619015519,
-        "n": 60,
+        "beta": 219.83216429237058,
+        "se": 152.76951437011186,
+        "lower95": 15.934003773352826,
+        "upper95": 624.3976382409303,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "raw_unit_tdc": {
-        "beta": 2.7824498362130194,
-        "se": 0.787235764329649,
-        "lower95": 1.2394677381269075,
-        "upper95": 4.325431934299131,
-        "n": 60,
+        "beta": 2.6507736943679956,
+        "se": 0.8485334398149964,
+        "lower95": 0.9876481523306027,
+        "upper95": 4.313899236405389,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 114.22386198654391,
-        "se": 248.53089249335375,
-        "lower95": -230.74012129989265,
-        "upper95": 685.5523861147914,
-        "n": 60,
+        "beta": 73.7367745406378,
+        "se": 126.78086601814343,
+        "lower95": -55.16919570755509,
+        "upper95": 423.75101811982984,
+        "n": 111,
         "ci_excludes_zero": false
       },
       "other": {
-        "beta": -233.47077668651042,
-        "se": 130.44794059486154,
-        "lower95": -529.4765352545235,
-        "upper95": -30.381588860860656,
-        "n": 60,
+        "beta": -146.0953897517328,
+        "se": 75.22175523032966,
+        "lower95": -287.85194515058447,
+        "upper95": -2.869222724029355,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "pass_through_ratio_total_over_tdc": null,
       "crowd_out_ratio_neg_other_over_tdc": null,
       "ratio_reporting_gate": {
         "allowed": false,
-        "diagnostic_reference_usable_target_sd": 263.42967242082716,
-        "abs_raw_tdc_beta": 2.7824498362130194,
+        "diagnostic_reference_usable_target_sd": 216.78711915770077,
+        "abs_raw_tdc_beta": 2.6507736943679956,
         "conditions": {
           "tdc_ci_excludes_zero": true,
           "dimensionally_coherent_denominator_gate_resolved": false
         },
         "explanation": "Headline pass-through and crowd-out ratios are out of scope in the current release because the repo has not resolved a dimensionally coherent first-stage denominator gate for raw-unit treatment responses."
       },
-      "beta_gap_total_minus_other": 347.6946386730543,
+      "beta_gap_total_minus_other": 219.83216429237058,
       "direct_vs_identity_tdc_gap": 0.0,
       "identity_check_mode": "approximate_with_outcome_specific_lags",
       "contrast_consistent": false

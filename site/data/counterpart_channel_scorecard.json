@@ -1,6 +1,6 @@
 {
   "status": "available",
-  "headline_question": "Which first-wave creator and escape counterpart channels line up with the exact non-TDC deposit response?",
+  "headline_question": "Which first-wave creator and counterpart-reallocation proxy channels line up with the exact non-TDC deposit response?",
   "estimation_path": {
     "primary_decomposition_mode": "exact_identity_baseline",
     "primary_artifact": "lp_irf_identity_baseline.csv",
@@ -78,7 +78,7 @@
       ],
       "interpretation": "Potential creator evidence from quarterly bank asset accumulation; pair with TGA and Fed context rather than treating raw securities growth as direct deposit creation by itself."
     },
-    "destroyer_escape_lane": {
+    "counterpart_reallocation_proxy_lane": {
       "status": "materialized",
       "outcomes": [
         "domestic_nonfinancial_mmf_reallocation_qoq",
@@ -88,9 +88,9 @@
         "mmf_treasury_bills_reallocation_qoq",
         "currency_reallocation_qoq"
       ],
-      "interpretation": "Sign-normalized reallocation support channels spanning MMFs, repo, ON RRP, direct Treasury / bill absorption, and public currency; positive means less deposit escape / more retention support, negative means escape pressure out of bank deposits."
+      "interpretation": "A positive value records a decline in the named channel's balance or holdings under the chosen sign convention; a negative value records an increase. The series does not identify the source or destination of funds and therefore does not establish a debit from, credit to, retention in, or escape from covered deposits."
     },
-    "external_escape_lane": {
+    "external_counterpart_reallocation_proxy_lane": {
       "status": "expanded",
       "outcomes": [
         "foreign_nonts_qoq",
@@ -99,7 +99,7 @@
         "interbank_transactions_foreign_banks_asset_qoq",
         "deposits_at_foreign_banks_asset_qoq"
       ],
-      "interpretation": "External banking context now spans broad foreign nontransaction liabilities plus bank-specific foreign interbank liabilities, foreign interbank assets, and deposits at foreign banks; keep these separate from the domestic escape-support subtotal."
+      "interpretation": "External banking context spans broad foreign nontransaction liabilities plus bank-specific foreign interbank liabilities, foreign interbank assets, and deposits at foreign banks; keep these separate from the domestic counterpart-asset reallocation proxies."
     },
     "funding_accommodation_lane": {
       "status": "materialized_with_cleanup_candidate",
@@ -118,145 +118,759 @@
     }
   },
   "legacy_private_credit_proxy_role": "coarse_legacy_creator_proxy",
-  "creator_channel_outcomes_present": [],
-  "funding_accommodation_outcomes_present": [],
+  "creator_channel_outcomes_present": [
+    "agency_gse_backed_securities_bank_qoq",
+    "auto_loans_qoq",
+    "closed_end_residential_loans_ex_chargeoffs_qoq",
+    "closed_end_residential_loans_qoq",
+    "commercial_industrial_loans_ex_chargeoffs_qoq",
+    "commercial_industrial_loans_qoq",
+    "construction_land_development_loans_qoq",
+    "consumer_loans_ex_chargeoffs_qoq",
+    "consumer_loans_qoq",
+    "corporate_foreign_bonds_bank_qoq",
+    "cre_multifamily_loans_qoq",
+    "cre_nonfarm_nonresidential_loans_qoq",
+    "credit_card_revolving_loans_ex_chargeoffs_qoq",
+    "credit_card_revolving_loans_qoq",
+    "heloc_loans_qoq",
+    "loans_for_purchasing_or_carrying_securities_qoq",
+    "loans_to_commercial_banks_qoq",
+    "loans_to_nondepository_financial_institutions_qoq",
+    "municipal_securities_bank_qoq",
+    "other_consumer_loans_ex_chargeoffs_qoq",
+    "other_consumer_loans_qoq",
+    "treasury_securities_bank_qoq"
+  ],
+  "funding_accommodation_outcomes_present": [
+    "commercial_bank_borrowings_qoq",
+    "debt_securities_bank_liability_qoq",
+    "fed_borrowings_depository_institutions_qoq",
+    "fedfunds_repo_liabilities_bank_qoq",
+    "fhlb_advances_sallie_mae_loans_bank_qoq",
+    "interbank_transactions_bank_qoq"
+  ],
   "funding_accommodation_cleanup_candidates": [
     "holding_company_parent_funding_bank_qoq"
   ],
   "horizons": {
     "h0": {
       "tdc": {
-        "beta": 128.49398892100783,
-        "se": 35.018290469572285,
-        "lower95": 119.41873548043742,
-        "upper95": 248.5482159371078,
-        "n": 68,
+        "beta": 86.08814077380539,
+        "se": 25.27141995473617,
+        "lower95": 76.91378655770903,
+        "upper95": 178.46273021278503,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 55.75033524806063,
-        "se": 40.86113535471181,
-        "lower95": 8.738139880568623,
-        "upper95": 168.6573860829989,
-        "n": 68,
+        "beta": 37.977694851980814,
+        "se": 23.64868644238564,
+        "lower95": 18.533147755076495,
+        "upper95": 105.12950063583395,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "other_component": {
-        "beta": -72.74365367294723,
-        "se": 42.946700439267694,
-        "lower95": -170.48932979728906,
-        "upper95": -1.8809331488254672,
-        "n": 68,
+        "beta": -48.11044592182458,
+        "se": 25.543877643105976,
+        "lower95": -110.90302316729972,
+        "upper95": -14.172921571377426,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "legacy_private_credit_proxy": {
         "role": "coarse_legacy_creator_proxy",
         "snapshot": {
-          "beta": 14.021813174704516,
-          "se": 13.4008997593926,
-          "lower95": -12.243950353704982,
-          "upper95": 40.28757670311401,
+          "beta": 13.417303271228572,
+          "se": 12.79506019172449,
+          "lower95": -11.661014704551427,
+          "upper95": 38.49562124700857,
           "n": 64,
           "ci_excludes_zero": false
         }
       },
-      "creator_lending_channels": {},
-      "core_domestic_creator_lending_channels": {},
-      "noncore_creator_lending_channels": {},
-      "creator_asset_purchase_channels": {},
-      "funding_accommodation_channels": {},
+      "creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -0.8482291577015069,
+          "se": 5.239195687364588,
+          "lower95": -11.1170527049361,
+          "upper95": 9.420594389533086,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": 0.20531975845538308,
+          "se": 0.23514318828046066,
+          "lower95": -0.2555608905743198,
+          "upper95": 0.666200407485086,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -0.7345683611962199,
+          "se": 0.5186733911975492,
+          "lower95": -1.7511682079434163,
+          "upper95": 0.28203148555097646,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -0.4333775432123832,
+          "se": 0.6956905551072083,
+          "lower95": -1.7969310312225115,
+          "upper95": 0.9301759447977451,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -2.373205911897445,
+          "se": 1.4116417766443938,
+          "lower95": -5.140023794120458,
+          "upper95": 0.39361197032556694,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -1.3833290984699913,
+          "se": 1.2787238995789536,
+          "lower95": -3.88962794164474,
+          "upper95": 1.1229697447047575,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 0.14241427584634014,
+          "se": 0.19718543778368997,
+          "lower95": -0.2440691822096922,
+          "upper95": 0.5288977339023725,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -1.3025975877171594,
+          "se": 0.8531545962609817,
+          "lower95": -2.9747805963886833,
+          "upper95": 0.36958542095436475,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.6313234677084043,
+          "se": 0.43233011437625685,
+          "lower95": -0.21604355646905915,
+          "upper95": 1.4786904918858679,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.14665345425522947,
+          "se": 2.414650144126408,
+          "lower95": -4.58606082823253,
+          "upper95": 4.8793677367429895,
+          "n": 85,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -0.741666124414313,
+          "se": 5.2571500304890995,
+          "lower95": -11.045680184172948,
+          "upper95": 9.56234793534432,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -2.1341118362228793,
+          "se": 1.3544063671212598,
+          "lower95": -4.788748315780548,
+          "upper95": 0.5205246433347899,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": -1.222955173845182,
+          "se": 1.2147994114343172,
+          "lower95": -3.6039620202564437,
+          "upper95": 1.1580516725660797,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -1.2374532448811641,
+          "se": 0.8528820420810547,
+          "lower95": -2.9091020473600313,
+          "upper95": 0.434195557597703,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 0.1386753105015823,
+          "se": 2.4857732336649723,
+          "lower95": -4.733440227481764,
+          "upper95": 5.010790848484928,
+          "n": 85,
+          "ci_excludes_zero": false
+        },
+        "loans_to_commercial_banks_qoq": {
+          "beta": 0.1554756815911831,
+          "se": 0.616034791330759,
+          "lower95": -1.0519525094171045,
+          "upper95": 1.3629038725994707,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 7.3671089978686775,
+          "se": 4.893646512230938,
+          "lower95": -2.224438166103961,
+          "upper95": 16.958656161841315,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.2830368763020709,
+          "se": 0.7804813314215118,
+          "lower95": -1.246706533284092,
+          "upper95": 1.812780285888234,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "treasury_securities_bank_qoq": {
+          "beta": 2.4719848201926267,
+          "se": 1.5586106836400313,
+          "lower95": -0.5828921197418344,
+          "upper95": 5.526861760127088,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 10.684665127032899,
+          "se": 3.3358664698390808,
+          "lower95": 4.1463668461483,
+          "upper95": 17.222963407917497,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.314740985310187,
+          "se": 0.5360459182721133,
+          "lower95": -1.365390985123529,
+          "upper95": 0.735909014503155,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 2.2066446571615432,
+          "se": 2.0228940967636984,
+          "lower95": -1.7582277724953053,
+          "upper95": 6.171517086818392,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
+      "core_domestic_creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -0.8482291577015069,
+          "se": 5.239195687364588,
+          "lower95": -11.1170527049361,
+          "upper95": 9.420594389533086,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": 0.20531975845538308,
+          "se": 0.23514318828046066,
+          "lower95": -0.2555608905743198,
+          "upper95": 0.666200407485086,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -0.7345683611962199,
+          "se": 0.5186733911975492,
+          "lower95": -1.7511682079434163,
+          "upper95": 0.28203148555097646,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -0.4333775432123832,
+          "se": 0.6956905551072083,
+          "lower95": -1.7969310312225115,
+          "upper95": 0.9301759447977451,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -2.373205911897445,
+          "se": 1.4116417766443938,
+          "lower95": -5.140023794120458,
+          "upper95": 0.39361197032556694,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -1.3833290984699913,
+          "se": 1.2787238995789536,
+          "lower95": -3.88962794164474,
+          "upper95": 1.1229697447047575,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 0.14241427584634014,
+          "se": 0.19718543778368997,
+          "lower95": -0.2440691822096922,
+          "upper95": 0.5288977339023725,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -1.3025975877171594,
+          "se": 0.8531545962609817,
+          "lower95": -2.9747805963886833,
+          "upper95": 0.36958542095436475,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.6313234677084043,
+          "se": 0.43233011437625685,
+          "lower95": -0.21604355646905915,
+          "upper95": 1.4786904918858679,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.14665345425522947,
+          "se": 2.414650144126408,
+          "lower95": -4.58606082823253,
+          "upper95": 4.8793677367429895,
+          "n": 85,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -0.741666124414313,
+          "se": 5.2571500304890995,
+          "lower95": -11.045680184172948,
+          "upper95": 9.56234793534432,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -2.1341118362228793,
+          "se": 1.3544063671212598,
+          "lower95": -4.788748315780548,
+          "upper95": 0.5205246433347899,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": -1.222955173845182,
+          "se": 1.2147994114343172,
+          "lower95": -3.6039620202564437,
+          "upper95": 1.1580516725660797,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -1.2374532448811641,
+          "se": 0.8528820420810547,
+          "lower95": -2.9091020473600313,
+          "upper95": 0.434195557597703,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 0.1386753105015823,
+          "se": 2.4857732336649723,
+          "lower95": -4.733440227481764,
+          "upper95": 5.010790848484928,
+          "n": 85,
+          "ci_excludes_zero": false
+        }
+      },
+      "noncore_creator_lending_channels": {
+        "loans_to_commercial_banks_qoq": {
+          "beta": 0.1554756815911831,
+          "se": 0.616034791330759,
+          "lower95": -1.0519525094171045,
+          "upper95": 1.3629038725994707,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 7.3671089978686775,
+          "se": 4.893646512230938,
+          "lower95": -2.224438166103961,
+          "upper95": 16.958656161841315,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.2830368763020709,
+          "se": 0.7804813314215118,
+          "lower95": -1.246706533284092,
+          "upper95": 1.812780285888234,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_asset_purchase_channels": {
+        "treasury_securities_bank_qoq": {
+          "beta": 2.4719848201926267,
+          "se": 1.5586106836400313,
+          "lower95": -0.5828921197418344,
+          "upper95": 5.526861760127088,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 10.684665127032899,
+          "se": 3.3358664698390808,
+          "lower95": 4.1463668461483,
+          "upper95": 17.222963407917497,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.314740985310187,
+          "se": 0.5360459182721133,
+          "lower95": -1.365390985123529,
+          "upper95": 0.735909014503155,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 2.2066446571615432,
+          "se": 2.0228940967636984,
+          "lower95": -1.7582277724953053,
+          "upper95": 6.171517086818392,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_channels": {
+        "interbank_transactions_bank_qoq": {
+          "beta": 8.150221225811842,
+          "se": 3.8960918982530295,
+          "lower95": 0.5138811052359049,
+          "upper95": 15.78656134638778,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "fedfunds_repo_liabilities_bank_qoq": {
+          "beta": 0.025509352459609946,
+          "se": 1.5429498705435662,
+          "lower95": -2.99867239380578,
+          "upper95": 3.049691098725,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "commercial_bank_borrowings_qoq": {
+          "beta": 6.362247145391219,
+          "se": 5.0615652708966365,
+          "lower95": -3.558420785566188,
+          "upper95": 16.282915076348626,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "fed_borrowings_depository_institutions_qoq": {
+          "beta": 2.0188049098270557,
+          "se": 2.528463530571852,
+          "lower95": -2.9369836100937743,
+          "upper95": 6.974593429747886,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "debt_securities_bank_liability_qoq": {
+          "beta": -0.800799742877936,
+          "se": 1.854287617151412,
+          "lower95": -4.435203472494703,
+          "upper95": 2.833603986738831,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "fhlb_advances_sallie_mae_loans_bank_qoq": {
+          "beta": -5.282797335142851,
+          "se": 3.1528720135117196,
+          "lower95": -11.46242648162582,
+          "upper95": 0.8968318113401192,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
       "funding_accommodation_cleanup_candidates": {},
-      "deposit_retention_support_channels": {
+      "counterpart_reallocation_proxy_channels": {
         "domestic_nonfinancial_mmf_reallocation_qoq": {
-          "beta": -14.977538562329684,
-          "se": 11.828190798252104,
-          "lower95": -38.160792526903805,
-          "upper95": 8.20571540224444,
-          "n": 68,
+          "beta": -13.460242201299241,
+          "se": 8.302582811657416,
+          "lower95": -29.733304512147775,
+          "upper95": 2.8128201095492926,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "domestic_nonfinancial_repo_reallocation_qoq": {
-          "beta": 0.0287923822070103,
-          "se": 0.7154641657141337,
-          "lower95": -1.3735173825926918,
-          "upper95": 1.4311021470067122,
-          "n": 68,
+          "beta": -0.06445707988976607,
+          "se": 0.5194506220873366,
+          "lower95": -1.082580299180946,
+          "upper95": 0.9536661394014136,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "on_rrp_reallocation_qoq": {
+          "beta": -0.02426734325880216,
+          "se": 0.011314240373510802,
+          "lower95": -0.04644325439088333,
+          "upper95": -0.0020914321267209886,
+          "n": 52,
+          "ci_excludes_zero": true
+        },
+        "household_treasury_securities_reallocation_qoq": {
+          "beta": 13.214138247412777,
+          "se": 9.708589217203372,
+          "lower95": -5.814696618305831,
+          "upper95": 32.242973113131384,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "mmf_treasury_bills_reallocation_qoq": {
+          "beta": 7.774628604347347,
+          "se": 7.093969308352124,
+          "lower95": -6.129551240022815,
+          "upper95": 21.67880844871751,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "currency_reallocation_qoq": {
+          "beta": -0.13167019849948747,
+          "se": 0.6837072597211051,
+          "lower95": -1.4717364275528535,
+          "upper95": 1.2083960305538786,
+          "n": 119,
           "ci_excludes_zero": false
         }
       },
-      "external_escape_channels": {
+      "external_counterpart_reallocation_proxy_channels": {
         "foreign_nonts_qoq": {
-          "beta": 27.0343911579461,
-          "se": 13.111973747146076,
-          "lower95": 1.334922613539792,
-          "upper95": 52.7338597023524,
-          "n": 68,
+          "beta": 20.77386320365451,
+          "se": 8.691620953966337,
+          "lower95": 3.7382861338804894,
+          "upper95": 37.809440273428535,
+          "n": 119,
           "ci_excludes_zero": true
+        },
+        "checkable_rest_of_world_bank_qoq": {
+          "beta": 0.38759473406740835,
+          "se": 0.3440159812522735,
+          "lower95": -0.2866765891870477,
+          "upper95": 1.0618660573218643,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_liability_qoq": {
+          "beta": 3.383398610757385,
+          "se": 2.3650764706785363,
+          "lower95": -1.2521512717725463,
+          "upper95": 8.018948493287315,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_asset_qoq": {
+          "beta": 4.475787216068066,
+          "se": 2.204820042427781,
+          "lower95": 0.15433993290961556,
+          "upper95": 8.797234499226516,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "deposits_at_foreign_banks_asset_qoq": {
+          "beta": 0.2779378878578994,
+          "se": 0.15999825382980823,
+          "lower95": -0.0356586896485247,
+          "upper95": 0.5915344653643235,
+          "n": 119,
+          "ci_excludes_zero": false
         }
       },
       "funding_accommodation_context": {
-        "channels": {},
-        "decisive_positive_channels": [],
+        "channels": {
+          "interbank_transactions_bank_qoq": {
+            "beta": 8.150221225811842,
+            "se": 3.8960918982530295,
+            "lower95": 0.5138811052359049,
+            "upper95": 15.78656134638778,
+            "n": 119,
+            "ci_excludes_zero": true
+          },
+          "fedfunds_repo_liabilities_bank_qoq": {
+            "beta": 0.025509352459609946,
+            "se": 1.5429498705435662,
+            "lower95": -2.99867239380578,
+            "upper95": 3.049691098725,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "commercial_bank_borrowings_qoq": {
+            "beta": 6.362247145391219,
+            "se": 5.0615652708966365,
+            "lower95": -3.558420785566188,
+            "upper95": 16.282915076348626,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "fed_borrowings_depository_institutions_qoq": {
+            "beta": 2.0188049098270557,
+            "se": 2.528463530571852,
+            "lower95": -2.9369836100937743,
+            "upper95": 6.974593429747886,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "debt_securities_bank_liability_qoq": {
+            "beta": -0.800799742877936,
+            "se": 1.854287617151412,
+            "lower95": -4.435203472494703,
+            "upper95": 2.833603986738831,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "fhlb_advances_sallie_mae_loans_bank_qoq": {
+            "beta": -5.282797335142851,
+            "se": 3.1528720135117196,
+            "lower95": -11.46242648162582,
+            "upper95": 0.8968318113401192,
+            "n": 119,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [
+          "interbank_transactions_bank_qoq"
+        ],
         "decisive_negative_channels": [],
-        "interpretation": "funding_accommodation_unresolved"
+        "interpretation": "positive_funding_accommodation_signal"
       },
-      "escape_support_context": {
+      "counterpart_reallocation_proxy_context": {
         "channels": {
           "domestic_nonfinancial_mmf_reallocation_qoq": {
-            "beta": -14.977538562329684,
-            "se": 11.828190798252104,
-            "lower95": -38.160792526903805,
-            "upper95": 8.20571540224444,
-            "n": 68,
+            "beta": -13.460242201299241,
+            "se": 8.302582811657416,
+            "lower95": -29.733304512147775,
+            "upper95": 2.8128201095492926,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "domestic_nonfinancial_repo_reallocation_qoq": {
-            "beta": 0.0287923822070103,
-            "se": 0.7154641657141337,
-            "lower95": -1.3735173825926918,
-            "upper95": 1.4311021470067122,
-            "n": 68,
+            "beta": -0.06445707988976607,
+            "se": 0.5194506220873366,
+            "lower95": -1.082580299180946,
+            "upper95": 0.9536661394014136,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "on_rrp_reallocation_qoq": {
+            "beta": -0.02426734325880216,
+            "se": 0.011314240373510802,
+            "lower95": -0.04644325439088333,
+            "upper95": -0.0020914321267209886,
+            "n": 52,
+            "ci_excludes_zero": true
+          },
+          "household_treasury_securities_reallocation_qoq": {
+            "beta": 13.214138247412777,
+            "se": 9.708589217203372,
+            "lower95": -5.814696618305831,
+            "upper95": 32.242973113131384,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "mmf_treasury_bills_reallocation_qoq": {
+            "beta": 7.774628604347347,
+            "se": 7.093969308352124,
+            "lower95": -6.129551240022815,
+            "upper95": 21.67880844871751,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "currency_reallocation_qoq": {
+            "beta": -0.13167019849948747,
+            "se": 0.6837072597211051,
+            "lower95": -1.4717364275528535,
+            "upper95": 1.2083960305538786,
+            "n": 119,
             "ci_excludes_zero": false
           }
         },
         "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "escape_support_unresolved"
+        "decisive_negative_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "interpretation": "sign_normalized_movement_toward_named_channel"
       },
       "asset_purchase_plumbing_context": {
         "channels": {
+          "tga_qoq": {
+            "beta": -42.29419828467739,
+            "se": 17.856373029736048,
+            "lower95": -77.29268942296005,
+            "upper95": -7.29570714639474,
+            "n": 91,
+            "ci_excludes_zero": true
+          },
+          "reserves_qoq": {
+            "beta": 77.19113151416232,
+            "se": 12.967388462921063,
+            "lower95": 51.775050126837044,
+            "upper95": 102.6072129014876,
+            "n": 91,
+            "ci_excludes_zero": true
+          },
           "cb_nonts_qoq": {
-            "beta": 26.523641651135975,
-            "se": 14.452809474715338,
-            "lower95": -1.8038649193060865,
-            "upper95": 54.85114822157803,
-            "n": 68,
-            "ci_excludes_zero": false
+            "beta": 34.76027494833025,
+            "se": 12.124580448836053,
+            "lower95": 10.996097268611585,
+            "upper95": 58.52445262804891,
+            "n": 91,
+            "ci_excludes_zero": true
           }
         },
-        "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
+        "decisive_positive_channels": [
+          "cb_nonts_qoq",
+          "reserves_qoq"
+        ],
+        "decisive_negative_channels": [
+          "tga_qoq"
+        ],
         "treasury_drain_signal": false,
-        "reserve_support_signal": false,
-        "interpretation": "no_decisive_asset_purchase_creator_signal"
+        "reserve_support_signal": true,
+        "interpretation": "reserve_support_context"
       },
-      "decisive_positive_creator_channels": [],
+      "decisive_positive_creator_channels": [
+        "agency_gse_backed_securities_bank_qoq"
+      ],
       "decisive_negative_creator_channels": [],
       "decisive_positive_core_creator_channels": [],
       "decisive_negative_core_creator_channels": [],
       "decisive_positive_noncore_creator_channels": [],
       "decisive_negative_noncore_creator_channels": [],
-      "decisive_positive_asset_purchase_channels": [],
-      "decisive_negative_asset_purchase_channels": [],
-      "decisive_positive_retention_support_channels": [],
-      "decisive_negative_retention_support_channels": [],
-      "decisive_positive_external_escape_channels": [
-        "foreign_nonts_qoq"
+      "decisive_positive_asset_purchase_channels": [
+        "agency_gse_backed_securities_bank_qoq"
       ],
-      "decisive_negative_external_escape_channels": [],
-      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_counterpart_reallocation_proxy_channels": [],
+      "decisive_negative_counterpart_reallocation_proxy_channels": [
+        "on_rrp_reallocation_qoq"
+      ],
+      "decisive_positive_external_counterpart_reallocation_proxy_channels": [
+        "foreign_nonts_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq"
+      ],
+      "decisive_negative_external_counterpart_reallocation_proxy_channels": [],
+      "decisive_positive_funding_accommodation_channels": [
+        "interbank_transactions_bank_qoq"
+      ],
       "decisive_negative_funding_accommodation_channels": [],
-      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "proxy_coverage_label": "proxy_bundle_uncovered_remainder_large",
       "uncovered_channel_families": [
         "within_bank_deposit_substitution_across_holders_or_products",
         "omitted_bank_asset_side_channels_outside_private_credit",
@@ -266,137 +880,725 @@
     },
     "h4": {
       "tdc": {
-        "beta": 278.13971316628357,
-        "se": 141.57570011679425,
-        "lower95": 78.32278678356286,
-        "upper95": 597.5909020053358,
-        "n": 64,
+        "beta": 172.8674661880664,
+        "se": 87.14792130590925,
+        "lower95": 76.43912886345232,
+        "upper95": 431.5929761708225,
+        "n": 115,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 167.33069747889854,
-        "se": 154.8910510638327,
-        "lower95": -27.18884889021173,
-        "upper95": 550.7057101571328,
-        "n": 64,
+        "beta": 95.30474128450595,
+        "se": 94.14123531701945,
+        "lower95": -11.18126164236589,
+        "upper95": 363.2075355524613,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "other_component": {
-        "beta": -110.80901568738504,
-        "se": 84.23711570896954,
-        "lower95": -242.41233479835057,
-        "upper95": 62.23408515351409,
-        "n": 64,
+        "beta": -77.56272490356045,
+        "se": 52.91667363732913,
+        "lower95": -177.1315877678902,
+        "upper95": 19.960987662159766,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "legacy_private_credit_proxy": {
         "role": "coarse_legacy_creator_proxy",
         "snapshot": {
-          "beta": 54.572977783498914,
-          "se": 19.24512973374704,
-          "lower95": 16.852523505354718,
-          "upper95": 92.2934320616431,
+          "beta": 50.72042121880935,
+          "se": 20.002187345397477,
+          "lower95": 11.516134021830297,
+          "upper95": 89.9247084157884,
           "n": 60,
           "ci_excludes_zero": true
         }
       },
-      "creator_lending_channels": {},
-      "core_domestic_creator_lending_channels": {},
-      "noncore_creator_lending_channels": {},
-      "creator_asset_purchase_channels": {},
-      "funding_accommodation_channels": {},
-      "funding_accommodation_cleanup_candidates": {},
-      "deposit_retention_support_channels": {
-        "domestic_nonfinancial_mmf_reallocation_qoq": {
-          "beta": -6.051493186644944,
-          "se": 14.562904506654425,
-          "lower95": -34.59478601968762,
-          "upper95": 22.491799646397727,
-          "n": 64,
+      "creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.965140023410362,
+          "se": 8.65213540576553,
+          "lower95": -30.923325418710803,
+          "upper95": 2.9930453718900782,
+          "n": 115,
           "ci_excludes_zero": false
         },
-        "domestic_nonfinancial_repo_reallocation_qoq": {
-          "beta": -0.7003132154383085,
-          "se": 1.2009103178726588,
-          "lower95": -3.0540974384687196,
-          "upper95": 1.6534710075921026,
-          "n": 64,
+        "construction_land_development_loans_qoq": {
+          "beta": -0.7042878264910684,
+          "se": 1.0265060394462888,
+          "lower95": -2.7162396638057946,
+          "upper95": 1.307664010823658,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -3.1215938207285854,
+          "se": 1.5382773062314645,
+          "lower95": -6.136617340942256,
+          "upper95": -0.10657030051491478,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -2.3941701016098467,
+          "se": 1.9632360877304356,
+          "lower95": -6.2421128335615,
+          "upper95": 1.453772630341807,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -0.5082111658192847,
+          "se": 4.570374256368577,
+          "lower95": -9.466144708301696,
+          "upper95": 8.449722376663127,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -0.0847068391351753,
+          "se": 4.671426875177517,
+          "lower95": -9.240703514483108,
+          "upper95": 9.07128983621276,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 3.020643982939922,
+          "se": 0.8947702154410155,
+          "lower95": 1.2668943606755316,
+          "upper95": 4.774393605204312,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -0.1673015633782473,
+          "se": 1.8753750541978094,
+          "lower95": -3.8430366696059535,
+          "upper95": 3.508433542849459,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.7236433764632113,
+          "se": 1.585806967097538,
+          "lower95": -2.3845382790479634,
+          "upper95": 3.831825031974386,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.7620595531267522,
+          "se": 4.492702729685752,
+          "lower95": -8.043637797057322,
+          "upper95": 9.567756903310826,
+          "n": 81,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.562485411869812,
+          "se": 8.352155036412526,
+          "lower95": -29.932709283238363,
+          "upper95": 2.80773845949874,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.19489081989737933,
+          "se": 4.453031592651906,
+          "lower95": -8.533051101700357,
+          "upper95": 8.922832741495116,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 0.030137658464322925,
+          "se": 4.612276732179692,
+          "lower95": -9.009924736607873,
+          "upper95": 9.070200053536519,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -0.0592908363127953,
+          "se": 1.8206747812283162,
+          "lower95": -3.627813407520295,
+          "upper95": 3.5092317348947044,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 1.117111395951806,
+          "se": 4.595890695153008,
+          "lower95": -7.89083436654809,
+          "upper95": 10.125057158451702,
+          "n": 81,
+          "ci_excludes_zero": false
+        },
+        "loans_to_commercial_banks_qoq": {
+          "beta": -0.8855690466377424,
+          "se": 0.6966365717247162,
+          "lower95": -2.2509767272181858,
+          "upper95": 0.4798386339427012,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 10.7171603759039,
+          "se": 5.523476769348668,
+          "lower95": -0.10885409201948981,
+          "upper95": 21.543174843827288,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 4.140218014132167,
+          "se": 2.987415780115834,
+          "lower95": -1.7151169148948675,
+          "upper95": 9.995552943159202,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "treasury_securities_bank_qoq": {
+          "beta": 18.069314785003165,
+          "se": 8.269112072615377,
+          "lower95": 1.861855122677028,
+          "upper95": 34.2767744473293,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 14.026988855762818,
+          "se": 13.542638541164443,
+          "lower95": -12.51658268491949,
+          "upper95": 40.570560396445124,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.8104021985486707,
+          "se": 2.0112495967345074,
+          "lower95": -4.752451408148305,
+          "upper95": 3.1316470110509638,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 6.891161966940179,
+          "se": 4.805975351854612,
+          "lower95": -2.5285497226948612,
+          "upper95": 16.310873656575218,
+          "n": 115,
           "ci_excludes_zero": false
         }
       },
-      "external_escape_channels": {
-        "foreign_nonts_qoq": {
-          "beta": 38.11141757510377,
-          "se": 9.926775458602927,
-          "lower95": 18.65493767624203,
-          "upper95": 57.56789747396552,
-          "n": 64,
+      "core_domestic_creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.965140023410362,
+          "se": 8.65213540576553,
+          "lower95": -30.923325418710803,
+          "upper95": 2.9930453718900782,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": -0.7042878264910684,
+          "se": 1.0265060394462888,
+          "lower95": -2.7162396638057946,
+          "upper95": 1.307664010823658,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -3.1215938207285854,
+          "se": 1.5382773062314645,
+          "lower95": -6.136617340942256,
+          "upper95": -0.10657030051491478,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -2.3941701016098467,
+          "se": 1.9632360877304356,
+          "lower95": -6.2421128335615,
+          "upper95": 1.453772630341807,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -0.5082111658192847,
+          "se": 4.570374256368577,
+          "lower95": -9.466144708301696,
+          "upper95": 8.449722376663127,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -0.0847068391351753,
+          "se": 4.671426875177517,
+          "lower95": -9.240703514483108,
+          "upper95": 9.07128983621276,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 3.020643982939922,
+          "se": 0.8947702154410155,
+          "lower95": 1.2668943606755316,
+          "upper95": 4.774393605204312,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -0.1673015633782473,
+          "se": 1.8753750541978094,
+          "lower95": -3.8430366696059535,
+          "upper95": 3.508433542849459,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.7236433764632113,
+          "se": 1.585806967097538,
+          "lower95": -2.3845382790479634,
+          "upper95": 3.831825031974386,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.7620595531267522,
+          "se": 4.492702729685752,
+          "lower95": -8.043637797057322,
+          "upper95": 9.567756903310826,
+          "n": 81,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.562485411869812,
+          "se": 8.352155036412526,
+          "lower95": -29.932709283238363,
+          "upper95": 2.80773845949874,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.19489081989737933,
+          "se": 4.453031592651906,
+          "lower95": -8.533051101700357,
+          "upper95": 8.922832741495116,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 0.030137658464322925,
+          "se": 4.612276732179692,
+          "lower95": -9.009924736607873,
+          "upper95": 9.070200053536519,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -0.0592908363127953,
+          "se": 1.8206747812283162,
+          "lower95": -3.627813407520295,
+          "upper95": 3.5092317348947044,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 1.117111395951806,
+          "se": 4.595890695153008,
+          "lower95": -7.89083436654809,
+          "upper95": 10.125057158451702,
+          "n": 81,
+          "ci_excludes_zero": false
+        }
+      },
+      "noncore_creator_lending_channels": {
+        "loans_to_commercial_banks_qoq": {
+          "beta": -0.8855690466377424,
+          "se": 0.6966365717247162,
+          "lower95": -2.2509767272181858,
+          "upper95": 0.4798386339427012,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 10.7171603759039,
+          "se": 5.523476769348668,
+          "lower95": -0.10885409201948981,
+          "upper95": 21.543174843827288,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 4.140218014132167,
+          "se": 2.987415780115834,
+          "lower95": -1.7151169148948675,
+          "upper95": 9.995552943159202,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_asset_purchase_channels": {
+        "treasury_securities_bank_qoq": {
+          "beta": 18.069314785003165,
+          "se": 8.269112072615377,
+          "lower95": 1.861855122677028,
+          "upper95": 34.2767744473293,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 14.026988855762818,
+          "se": 13.542638541164443,
+          "lower95": -12.51658268491949,
+          "upper95": 40.570560396445124,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.8104021985486707,
+          "se": 2.0112495967345074,
+          "lower95": -4.752451408148305,
+          "upper95": 3.1316470110509638,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 6.891161966940179,
+          "se": 4.805975351854612,
+          "lower95": -2.5285497226948612,
+          "upper95": 16.310873656575218,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_channels": {
+        "interbank_transactions_bank_qoq": {
+          "beta": 0.02054105838801057,
+          "se": 7.974118674906088,
+          "lower95": -15.608731544427922,
+          "upper95": 15.649813661203943,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "fedfunds_repo_liabilities_bank_qoq": {
+          "beta": -2.094110760487397,
+          "se": 3.8930787581273756,
+          "lower95": -9.724545126417052,
+          "upper95": 5.536323605442258,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "commercial_bank_borrowings_qoq": {
+          "beta": -21.703456639282884,
+          "se": 13.718462379527281,
+          "lower95": -48.591642903156355,
+          "upper95": 5.184729624590588,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "fed_borrowings_depository_institutions_qoq": {
+          "beta": -11.817260900021157,
+          "se": 7.533692270117969,
+          "lower95": -26.583297749452377,
+          "upper95": 2.948775949410061,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "debt_securities_bank_liability_qoq": {
+          "beta": 7.69475828037992,
+          "se": 6.613202086843997,
+          "lower95": -5.267117809834314,
+          "upper95": 20.656634370594155,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "fhlb_advances_sallie_mae_loans_bank_qoq": {
+          "beta": -17.625783715177405,
+          "se": 7.98465825679702,
+          "lower95": -33.27571389849956,
+          "upper95": -1.9758535318552468,
+          "n": 115,
           "ci_excludes_zero": true
         }
       },
-      "funding_accommodation_context": {
-        "channels": {},
-        "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "funding_accommodation_unresolved"
+      "funding_accommodation_cleanup_candidates": {},
+      "counterpart_reallocation_proxy_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": 1.6416501347845127,
+          "se": 16.928404685845425,
+          "lower95": -31.53802304947252,
+          "upper95": 34.82132331904155,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -0.8034077574350139,
+          "se": 0.8713877620325763,
+          "lower95": -2.5113277710188635,
+          "upper95": 0.9045122561488356,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "on_rrp_reallocation_qoq": {
+          "beta": -0.1494131812226473,
+          "se": 0.03943081838591652,
+          "lower95": -0.22669758525904365,
+          "upper95": -0.07212877718625092,
+          "n": 45,
+          "ci_excludes_zero": true
+        },
+        "household_treasury_securities_reallocation_qoq": {
+          "beta": 37.806380093147084,
+          "se": 28.978306794427976,
+          "lower95": -18.99110122393175,
+          "upper95": 94.60386141022592,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "mmf_treasury_bills_reallocation_qoq": {
+          "beta": -0.275733647620235,
+          "se": 30.371927640041267,
+          "lower95": -59.80471182210112,
+          "upper95": 59.25324452686065,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "currency_reallocation_qoq": {
+          "beta": -1.6585084451759666,
+          "se": 3.3146914105626752,
+          "lower95": -8.15530360987881,
+          "upper95": 4.838286719526876,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
       },
-      "escape_support_context": {
+      "external_counterpart_reallocation_proxy_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 31.024846623730987,
+          "se": 8.11848988345604,
+          "lower95": 15.11260645215715,
+          "upper95": 46.93708679530482,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "checkable_rest_of_world_bank_qoq": {
+          "beta": 0.01867944063776039,
+          "se": 0.931243735497383,
+          "lower95": -1.8065582809371104,
+          "upper95": 1.8439171622126311,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_liability_qoq": {
+          "beta": 7.691604152995312,
+          "se": 4.490841147241659,
+          "lower95": -1.1104444955983404,
+          "upper95": 16.493652801588965,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_asset_qoq": {
+          "beta": 12.996131614022651,
+          "se": 3.050435594850381,
+          "lower95": 7.017277848115905,
+          "upper95": 18.9749853799294,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "deposits_at_foreign_banks_asset_qoq": {
+          "beta": 0.3719255334996131,
+          "se": 0.3609880714493531,
+          "lower95": -0.33561108654111893,
+          "upper95": 1.0794621535403452,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {
+          "interbank_transactions_bank_qoq": {
+            "beta": 0.02054105838801057,
+            "se": 7.974118674906088,
+            "lower95": -15.608731544427922,
+            "upper95": 15.649813661203943,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "fedfunds_repo_liabilities_bank_qoq": {
+            "beta": -2.094110760487397,
+            "se": 3.8930787581273756,
+            "lower95": -9.724545126417052,
+            "upper95": 5.536323605442258,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "commercial_bank_borrowings_qoq": {
+            "beta": -21.703456639282884,
+            "se": 13.718462379527281,
+            "lower95": -48.591642903156355,
+            "upper95": 5.184729624590588,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "fed_borrowings_depository_institutions_qoq": {
+            "beta": -11.817260900021157,
+            "se": 7.533692270117969,
+            "lower95": -26.583297749452377,
+            "upper95": 2.948775949410061,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "debt_securities_bank_liability_qoq": {
+            "beta": 7.69475828037992,
+            "se": 6.613202086843997,
+            "lower95": -5.267117809834314,
+            "upper95": 20.656634370594155,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "fhlb_advances_sallie_mae_loans_bank_qoq": {
+            "beta": -17.625783715177405,
+            "se": 7.98465825679702,
+            "lower95": -33.27571389849956,
+            "upper95": -1.9758535318552468,
+            "n": 115,
+            "ci_excludes_zero": true
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [
+          "fhlb_advances_sallie_mae_loans_bank_qoq"
+        ],
+        "interpretation": "negative_funding_accommodation_signal"
+      },
+      "counterpart_reallocation_proxy_context": {
         "channels": {
           "domestic_nonfinancial_mmf_reallocation_qoq": {
-            "beta": -6.051493186644944,
-            "se": 14.562904506654425,
-            "lower95": -34.59478601968762,
-            "upper95": 22.491799646397727,
-            "n": 64,
+            "beta": 1.6416501347845127,
+            "se": 16.928404685845425,
+            "lower95": -31.53802304947252,
+            "upper95": 34.82132331904155,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "domestic_nonfinancial_repo_reallocation_qoq": {
-            "beta": -0.7003132154383085,
-            "se": 1.2009103178726588,
-            "lower95": -3.0540974384687196,
-            "upper95": 1.6534710075921026,
-            "n": 64,
+            "beta": -0.8034077574350139,
+            "se": 0.8713877620325763,
+            "lower95": -2.5113277710188635,
+            "upper95": 0.9045122561488356,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "on_rrp_reallocation_qoq": {
+            "beta": -0.1494131812226473,
+            "se": 0.03943081838591652,
+            "lower95": -0.22669758525904365,
+            "upper95": -0.07212877718625092,
+            "n": 45,
+            "ci_excludes_zero": true
+          },
+          "household_treasury_securities_reallocation_qoq": {
+            "beta": 37.806380093147084,
+            "se": 28.978306794427976,
+            "lower95": -18.99110122393175,
+            "upper95": 94.60386141022592,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "mmf_treasury_bills_reallocation_qoq": {
+            "beta": -0.275733647620235,
+            "se": 30.371927640041267,
+            "lower95": -59.80471182210112,
+            "upper95": 59.25324452686065,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "currency_reallocation_qoq": {
+            "beta": -1.6585084451759666,
+            "se": 3.3146914105626752,
+            "lower95": -8.15530360987881,
+            "upper95": 4.838286719526876,
+            "n": 115,
             "ci_excludes_zero": false
           }
         },
         "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "escape_support_unresolved"
+        "decisive_negative_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "interpretation": "sign_normalized_movement_toward_named_channel"
       },
       "asset_purchase_plumbing_context": {
         "channels": {
+          "tga_qoq": {
+            "beta": -19.585588158059608,
+            "se": 30.179191591386218,
+            "lower95": -78.7368036771766,
+            "upper95": 39.56562736105738,
+            "n": 87,
+            "ci_excludes_zero": false
+          },
+          "reserves_qoq": {
+            "beta": 100.33488395872514,
+            "se": 49.34698169845432,
+            "lower95": 3.6147998297546735,
+            "upper95": 197.0549680876956,
+            "n": 87,
+            "ci_excludes_zero": true
+          },
           "cb_nonts_qoq": {
-            "beta": 109.21565891280892,
-            "se": 89.44754513553232,
-            "lower95": -66.10152955283442,
-            "upper95": 284.5328473784523,
-            "n": 64,
+            "beta": 80.28002986236913,
+            "se": 66.28204844599338,
+            "lower95": -49.63278509177789,
+            "upper95": 210.19284481651616,
+            "n": 87,
             "ci_excludes_zero": false
           }
         },
-        "decisive_positive_channels": [],
+        "decisive_positive_channels": [
+          "reserves_qoq"
+        ],
         "decisive_negative_channels": [],
         "treasury_drain_signal": false,
-        "reserve_support_signal": false,
-        "interpretation": "no_decisive_asset_purchase_creator_signal"
+        "reserve_support_signal": true,
+        "interpretation": "reserve_support_context"
       },
-      "decisive_positive_creator_channels": [],
-      "decisive_negative_creator_channels": [],
-      "decisive_positive_core_creator_channels": [],
-      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_creator_channels": [
+        "auto_loans_qoq",
+        "treasury_securities_bank_qoq"
+      ],
+      "decisive_negative_creator_channels": [
+        "cre_multifamily_loans_qoq"
+      ],
+      "decisive_positive_core_creator_channels": [
+        "auto_loans_qoq"
+      ],
+      "decisive_negative_core_creator_channels": [
+        "cre_multifamily_loans_qoq"
+      ],
       "decisive_positive_noncore_creator_channels": [],
       "decisive_negative_noncore_creator_channels": [],
-      "decisive_positive_asset_purchase_channels": [],
-      "decisive_negative_asset_purchase_channels": [],
-      "decisive_positive_retention_support_channels": [],
-      "decisive_negative_retention_support_channels": [],
-      "decisive_positive_external_escape_channels": [
-        "foreign_nonts_qoq"
+      "decisive_positive_asset_purchase_channels": [
+        "treasury_securities_bank_qoq"
       ],
-      "decisive_negative_external_escape_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_counterpart_reallocation_proxy_channels": [],
+      "decisive_negative_counterpart_reallocation_proxy_channels": [
+        "on_rrp_reallocation_qoq"
+      ],
+      "decisive_positive_external_counterpart_reallocation_proxy_channels": [
+        "foreign_nonts_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq"
+      ],
+      "decisive_negative_external_counterpart_reallocation_proxy_channels": [],
       "decisive_positive_funding_accommodation_channels": [],
-      "decisive_negative_funding_accommodation_channels": [],
-      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "decisive_negative_funding_accommodation_channels": [
+        "fhlb_advances_sallie_mae_loans_bank_qoq"
+      ],
+      "proxy_coverage_label": "other_component_not_decisive",
       "uncovered_channel_families": [
         "within_bank_deposit_substitution_across_holders_or_products",
         "omitted_bank_asset_side_channels_outside_private_credit",
@@ -406,111 +1608,681 @@
     },
     "h8": {
       "tdc": {
-        "beta": 347.6946386730543,
-        "se": 270.7611316749685,
-        "lower95": 21.075804641888197,
-        "upper95": 971.367561901552,
-        "n": 60,
+        "beta": 219.83216429237058,
+        "se": 152.76951437011186,
+        "lower95": 15.934003773352826,
+        "upper95": 624.3976382409303,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 114.22386198654392,
-        "se": 248.53089249335375,
-        "lower95": -230.74012129989265,
-        "upper95": 685.5523861147914,
-        "n": 60,
+        "beta": 73.7367745406378,
+        "se": 126.78086601814343,
+        "lower95": -55.16919570755509,
+        "upper95": 423.75101811982984,
+        "n": 111,
         "ci_excludes_zero": false
       },
       "other_component": {
-        "beta": -233.4707766865104,
-        "se": 130.44794059486154,
-        "lower95": -529.4765352545235,
-        "upper95": -30.381588860860656,
-        "n": 60,
+        "beta": -146.0953897517328,
+        "se": 75.22175523032966,
+        "lower95": -287.85194515058447,
+        "upper95": -2.869222724029355,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "legacy_private_credit_proxy": {
         "role": "coarse_legacy_creator_proxy",
         "snapshot": {
-          "beta": 79.6870552422084,
-          "se": 30.0419239929606,
-          "lower95": 20.804884216005625,
-          "upper95": 138.56922626841117,
+          "beta": 73.23477235763156,
+          "se": 31.326014858683212,
+          "lower95": 11.835783234612464,
+          "upper95": 134.63376148065066,
           "n": 56,
           "ci_excludes_zero": true
         }
       },
-      "creator_lending_channels": {},
-      "core_domestic_creator_lending_channels": {},
-      "noncore_creator_lending_channels": {},
-      "creator_asset_purchase_channels": {},
-      "funding_accommodation_channels": {},
-      "funding_accommodation_cleanup_candidates": {},
-      "deposit_retention_support_channels": {
-        "domestic_nonfinancial_mmf_reallocation_qoq": {
-          "beta": -28.06167360138172,
-          "se": 21.060724923948644,
-          "lower95": -69.34069445232106,
-          "upper95": 13.21734724955762,
-          "n": 60,
+      "creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.599101562242353,
+          "se": 11.616697093722014,
+          "lower95": -36.3678278659375,
+          "upper95": 9.169624741452793,
+          "n": 111,
           "ci_excludes_zero": false
         },
-        "domestic_nonfinancial_repo_reallocation_qoq": {
-          "beta": -2.099738160365989,
-          "se": 1.607468321927399,
-          "lower95": -5.250376071343691,
-          "upper95": 1.0508997506117137,
-          "n": 60,
+        "construction_land_development_loans_qoq": {
+          "beta": 1.5808380043550008,
+          "se": 0.8379202709993713,
+          "lower95": -0.06148572680376696,
+          "upper95": 3.2231617355137683,
+          "n": 34,
           "ci_excludes_zero": false
-        }
-      },
-      "external_escape_channels": {
-        "foreign_nonts_qoq": {
-          "beta": 31.305272756279713,
-          "se": 13.00063006617244,
-          "lower95": 5.82403782658173,
-          "upper95": 56.786507685977696,
-          "n": 60,
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": 2.425655070234475,
+          "se": 1.0363218921290722,
+          "lower95": 0.3944641616614937,
+          "upper95": 4.456845978807456,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": 3.509345832299161,
+          "se": 1.6325077552837346,
+          "lower95": 0.3096306319430413,
+          "upper95": 6.70906103265528,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "consumer_loans_qoq": {
+          "beta": 2.1298136023858447,
+          "se": 5.783664907500948,
+          "lower95": -9.206169616316012,
+          "upper95": 13.465796821087702,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": 2.7653536961467857,
+          "se": 6.9424938926043005,
+          "lower95": -10.841934333357644,
+          "upper95": 16.372641725651214,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 4.953845938930109,
+          "se": 1.678166318522084,
+          "lower95": 1.6646399546268245,
+          "upper95": 8.243051923233393,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": 0.17807307050740206,
+          "se": 3.045351505460459,
+          "lower95": -5.7908158801950975,
+          "upper95": 6.146962021209902,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 2.937299450317689,
+          "se": 3.1447045655411627,
+          "lower95": -3.22632149814299,
+          "upper95": 9.100920398778367,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 4.573766587154067,
+          "se": 5.924672425237663,
+          "lower95": -7.038591366311753,
+          "upper95": 16.186124540619886,
+          "n": 77,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.473951114612756,
+          "se": 11.066518746872205,
+          "lower95": -35.16432785848228,
+          "upper95": 8.216425629256765,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 2.778292006843854,
+          "se": 6.0186150296563,
+          "lower95": -9.018193451282494,
+          "upper95": 14.574777464970202,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 2.576414794558122,
+          "se": 7.435936871975504,
+          "lower95": -11.998021474513866,
+          "upper95": 17.15085106363011,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.289083448325429,
+          "se": 2.8475682258158974,
+          "lower95": -5.292150274273729,
+          "upper95": 5.870317170924587,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 5.564251530797044,
+          "se": 5.175488914473972,
+          "lower95": -4.57970674157194,
+          "upper95": 15.708209803166028,
+          "n": 77,
+          "ci_excludes_zero": false
+        },
+        "loans_to_commercial_banks_qoq": {
+          "beta": -1.3922823289839332,
+          "se": 1.0550659089585954,
+          "lower95": -3.46021151054278,
+          "upper95": 0.6756468525749137,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 4.953740425375528,
+          "se": 4.786714428988749,
+          "lower95": -4.4282198554424195,
+          "upper95": 14.335700706193476,
+          "n": 34,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.08204381438028063,
+          "se": 1.6337711667711714,
+          "lower95": -3.1201476724912154,
+          "upper95": 3.2842353012517767,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "treasury_securities_bank_qoq": {
+          "beta": 13.376129247012747,
+          "se": 11.37212943528376,
+          "lower95": -8.913244446143421,
+          "upper95": 35.66550294016891,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 5.995262550908464,
+          "se": 18.15477322120832,
+          "lower95": -29.588092962659843,
+          "upper95": 41.57861806447677,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.5638143199906454,
+          "se": 3.021164553831607,
+          "lower95": -6.485296845500595,
+          "upper95": 5.357668205519304,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 12.987996033280508,
+          "se": 6.536634985689097,
+          "lower95": 0.1761914613298785,
+          "upper95": 25.799800605231137,
+          "n": 111,
           "ci_excludes_zero": true
         }
       },
-      "funding_accommodation_context": {
-        "channels": {},
-        "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "funding_accommodation_unresolved"
+      "core_domestic_creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.599101562242353,
+          "se": 11.616697093722014,
+          "lower95": -36.3678278659375,
+          "upper95": 9.169624741452793,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": 1.5808380043550008,
+          "se": 0.8379202709993713,
+          "lower95": -0.06148572680376696,
+          "upper95": 3.2231617355137683,
+          "n": 34,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": 2.425655070234475,
+          "se": 1.0363218921290722,
+          "lower95": 0.3944641616614937,
+          "upper95": 4.456845978807456,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": 3.509345832299161,
+          "se": 1.6325077552837346,
+          "lower95": 0.3096306319430413,
+          "upper95": 6.70906103265528,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "consumer_loans_qoq": {
+          "beta": 2.1298136023858447,
+          "se": 5.783664907500948,
+          "lower95": -9.206169616316012,
+          "upper95": 13.465796821087702,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": 2.7653536961467857,
+          "se": 6.9424938926043005,
+          "lower95": -10.841934333357644,
+          "upper95": 16.372641725651214,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 4.953845938930109,
+          "se": 1.678166318522084,
+          "lower95": 1.6646399546268245,
+          "upper95": 8.243051923233393,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": 0.17807307050740206,
+          "se": 3.045351505460459,
+          "lower95": -5.7908158801950975,
+          "upper95": 6.146962021209902,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 2.937299450317689,
+          "se": 3.1447045655411627,
+          "lower95": -3.22632149814299,
+          "upper95": 9.100920398778367,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 4.573766587154067,
+          "se": 5.924672425237663,
+          "lower95": -7.038591366311753,
+          "upper95": 16.186124540619886,
+          "n": 77,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.473951114612756,
+          "se": 11.066518746872205,
+          "lower95": -35.16432785848228,
+          "upper95": 8.216425629256765,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 2.778292006843854,
+          "se": 6.0186150296563,
+          "lower95": -9.018193451282494,
+          "upper95": 14.574777464970202,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 2.576414794558122,
+          "se": 7.435936871975504,
+          "lower95": -11.998021474513866,
+          "upper95": 17.15085106363011,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.289083448325429,
+          "se": 2.8475682258158974,
+          "lower95": -5.292150274273729,
+          "upper95": 5.870317170924587,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 5.564251530797044,
+          "se": 5.175488914473972,
+          "lower95": -4.57970674157194,
+          "upper95": 15.708209803166028,
+          "n": 77,
+          "ci_excludes_zero": false
+        }
       },
-      "escape_support_context": {
+      "noncore_creator_lending_channels": {
+        "loans_to_commercial_banks_qoq": {
+          "beta": -1.3922823289839332,
+          "se": 1.0550659089585954,
+          "lower95": -3.46021151054278,
+          "upper95": 0.6756468525749137,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 4.953740425375528,
+          "se": 4.786714428988749,
+          "lower95": -4.4282198554424195,
+          "upper95": 14.335700706193476,
+          "n": 34,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.08204381438028063,
+          "se": 1.6337711667711714,
+          "lower95": -3.1201476724912154,
+          "upper95": 3.2842353012517767,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_asset_purchase_channels": {
+        "treasury_securities_bank_qoq": {
+          "beta": 13.376129247012747,
+          "se": 11.37212943528376,
+          "lower95": -8.913244446143421,
+          "upper95": 35.66550294016891,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 5.995262550908464,
+          "se": 18.15477322120832,
+          "lower95": -29.588092962659843,
+          "upper95": 41.57861806447677,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.5638143199906454,
+          "se": 3.021164553831607,
+          "lower95": -6.485296845500595,
+          "upper95": 5.357668205519304,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 12.987996033280508,
+          "se": 6.536634985689097,
+          "lower95": 0.1761914613298785,
+          "upper95": 25.799800605231137,
+          "n": 111,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_channels": {
+        "interbank_transactions_bank_qoq": {
+          "beta": 20.418393025091618,
+          "se": 10.197069428327055,
+          "lower95": 0.43213694557059057,
+          "upper95": 40.404649104612645,
+          "n": 111,
+          "ci_excludes_zero": true
+        },
+        "fedfunds_repo_liabilities_bank_qoq": {
+          "beta": 2.645785101811433,
+          "se": 6.2507290746698425,
+          "lower95": -9.605643884541458,
+          "upper95": 14.897214088164326,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "commercial_bank_borrowings_qoq": {
+          "beta": 2.2139603488987127,
+          "se": 26.80851629836669,
+          "lower95": -50.330731595900005,
+          "upper95": 54.75865229369742,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "fed_borrowings_depository_institutions_qoq": {
+          "beta": 5.222235335145548,
+          "se": 9.904724701905726,
+          "lower95": -14.191025080589675,
+          "upper95": 24.63549575088077,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "debt_securities_bank_liability_qoq": {
+          "beta": 5.77691302388884,
+          "se": 9.025915081297653,
+          "lower95": -11.913880535454558,
+          "upper95": 23.467706583232236,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "fhlb_advances_sallie_mae_loans_bank_qoq": {
+          "beta": -4.797218585205416,
+          "se": 15.44518102209492,
+          "lower95": -35.06977338851146,
+          "upper95": 25.47533621810063,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_cleanup_candidates": {},
+      "counterpart_reallocation_proxy_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -11.463474477775122,
+          "se": 27.532042591974918,
+          "lower95": -65.42627795804596,
+          "upper95": 42.49932900249571,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -2.0014426599487383,
+          "se": 1.1655268905173632,
+          "lower95": -4.28587536536277,
+          "upper95": 0.2829900454652936,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "on_rrp_reallocation_qoq": {
+          "beta": -0.3887789255424701,
+          "se": 0.07146055681815296,
+          "lower95": -0.5288416169060499,
+          "upper95": -0.24871623417889033,
+          "n": 41,
+          "ci_excludes_zero": true
+        },
+        "household_treasury_securities_reallocation_qoq": {
+          "beta": 4.806206696170985,
+          "se": 36.04209339465843,
+          "lower95": -65.83629635735953,
+          "upper95": 75.44870974970151,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "mmf_treasury_bills_reallocation_qoq": {
+          "beta": 45.58614012436324,
+          "se": 32.76120705436983,
+          "lower95": -18.625825702201624,
+          "upper95": 109.7981059509281,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "currency_reallocation_qoq": {
+          "beta": 0.31631718689908617,
+          "se": 5.1854004348124105,
+          "lower95": -9.847067665333238,
+          "upper95": 10.47970203913141,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_counterpart_reallocation_proxy_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 31.584778081997413,
+          "se": 9.344040160834545,
+          "lower95": 13.270459366761706,
+          "upper95": 49.89909679723312,
+          "n": 111,
+          "ci_excludes_zero": true
+        },
+        "checkable_rest_of_world_bank_qoq": {
+          "beta": 0.17528980348046896,
+          "se": 0.7827538737603579,
+          "lower95": -1.3589077890898325,
+          "upper95": 1.7094873960507702,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_liability_qoq": {
+          "beta": 9.047408097248638,
+          "se": 5.709609837823366,
+          "lower95": -2.1434271848851587,
+          "upper95": 20.238243379382435,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_asset_qoq": {
+          "beta": 13.913245809530899,
+          "se": 3.990380043556314,
+          "lower95": 6.0921009241605235,
+          "upper95": 21.734390694901276,
+          "n": 111,
+          "ci_excludes_zero": true
+        },
+        "deposits_at_foreign_banks_asset_qoq": {
+          "beta": 0.4750435090049359,
+          "se": 0.32483323093560645,
+          "lower95": -0.16162962362885275,
+          "upper95": 1.1117166416387245,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {
+          "interbank_transactions_bank_qoq": {
+            "beta": 20.418393025091618,
+            "se": 10.197069428327055,
+            "lower95": 0.43213694557059057,
+            "upper95": 40.404649104612645,
+            "n": 111,
+            "ci_excludes_zero": true
+          },
+          "fedfunds_repo_liabilities_bank_qoq": {
+            "beta": 2.645785101811433,
+            "se": 6.2507290746698425,
+            "lower95": -9.605643884541458,
+            "upper95": 14.897214088164326,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "commercial_bank_borrowings_qoq": {
+            "beta": 2.2139603488987127,
+            "se": 26.80851629836669,
+            "lower95": -50.330731595900005,
+            "upper95": 54.75865229369742,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "fed_borrowings_depository_institutions_qoq": {
+            "beta": 5.222235335145548,
+            "se": 9.904724701905726,
+            "lower95": -14.191025080589675,
+            "upper95": 24.63549575088077,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "debt_securities_bank_liability_qoq": {
+            "beta": 5.77691302388884,
+            "se": 9.025915081297653,
+            "lower95": -11.913880535454558,
+            "upper95": 23.467706583232236,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "fhlb_advances_sallie_mae_loans_bank_qoq": {
+            "beta": -4.797218585205416,
+            "se": 15.44518102209492,
+            "lower95": -35.06977338851146,
+            "upper95": 25.47533621810063,
+            "n": 111,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [
+          "interbank_transactions_bank_qoq"
+        ],
+        "decisive_negative_channels": [],
+        "interpretation": "positive_funding_accommodation_signal"
+      },
+      "counterpart_reallocation_proxy_context": {
         "channels": {
           "domestic_nonfinancial_mmf_reallocation_qoq": {
-            "beta": -28.06167360138172,
-            "se": 21.060724923948644,
-            "lower95": -69.34069445232106,
-            "upper95": 13.21734724955762,
-            "n": 60,
+            "beta": -11.463474477775122,
+            "se": 27.532042591974918,
+            "lower95": -65.42627795804596,
+            "upper95": 42.49932900249571,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "domestic_nonfinancial_repo_reallocation_qoq": {
-            "beta": -2.099738160365989,
-            "se": 1.607468321927399,
-            "lower95": -5.250376071343691,
-            "upper95": 1.0508997506117137,
-            "n": 60,
+            "beta": -2.0014426599487383,
+            "se": 1.1655268905173632,
+            "lower95": -4.28587536536277,
+            "upper95": 0.2829900454652936,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "on_rrp_reallocation_qoq": {
+            "beta": -0.3887789255424701,
+            "se": 0.07146055681815296,
+            "lower95": -0.5288416169060499,
+            "upper95": -0.24871623417889033,
+            "n": 41,
+            "ci_excludes_zero": true
+          },
+          "household_treasury_securities_reallocation_qoq": {
+            "beta": 4.806206696170985,
+            "se": 36.04209339465843,
+            "lower95": -65.83629635735953,
+            "upper95": 75.44870974970151,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "mmf_treasury_bills_reallocation_qoq": {
+            "beta": 45.58614012436324,
+            "se": 32.76120705436983,
+            "lower95": -18.625825702201624,
+            "upper95": 109.7981059509281,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "currency_reallocation_qoq": {
+            "beta": 0.31631718689908617,
+            "se": 5.1854004348124105,
+            "lower95": -9.847067665333238,
+            "upper95": 10.47970203913141,
+            "n": 111,
             "ci_excludes_zero": false
           }
         },
         "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "escape_support_unresolved"
+        "decisive_negative_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "interpretation": "sign_normalized_movement_toward_named_channel"
       },
       "asset_purchase_plumbing_context": {
         "channels": {
+          "tga_qoq": {
+            "beta": -65.10481715959298,
+            "se": 34.772942511877375,
+            "lower95": -133.25978448287265,
+            "upper95": 3.0501501636866664,
+            "n": 83,
+            "ci_excludes_zero": false
+          },
+          "reserves_qoq": {
+            "beta": 79.39252122955592,
+            "se": 58.6663668649233,
+            "lower95": -35.593557825693736,
+            "upper95": 194.3786002848056,
+            "n": 83,
+            "ci_excludes_zero": false
+          },
           "cb_nonts_qoq": {
-            "beta": 25.151068626318896,
-            "se": 94.31939068681434,
-            "lower95": -159.7149371198372,
-            "upper95": 210.017074372475,
-            "n": 60,
+            "beta": 14.622011710454036,
+            "se": 71.59713124536769,
+            "lower95": -125.70836553046665,
+            "upper95": 154.95238895137473,
+            "n": 83,
             "ci_excludes_zero": false
           }
         },
@@ -518,23 +2290,39 @@
         "decisive_negative_channels": [],
         "treasury_drain_signal": false,
         "reserve_support_signal": false,
-        "interpretation": "no_decisive_asset_purchase_creator_signal"
+        "interpretation": "mixed_or_nondecisive_plumbing_context"
       },
-      "decisive_positive_creator_channels": [],
+      "decisive_positive_creator_channels": [
+        "auto_loans_qoq",
+        "corporate_foreign_bonds_bank_qoq",
+        "cre_multifamily_loans_qoq",
+        "cre_nonfarm_nonresidential_loans_qoq"
+      ],
       "decisive_negative_creator_channels": [],
-      "decisive_positive_core_creator_channels": [],
+      "decisive_positive_core_creator_channels": [
+        "auto_loans_qoq",
+        "cre_multifamily_loans_qoq",
+        "cre_nonfarm_nonresidential_loans_qoq"
+      ],
       "decisive_negative_core_creator_channels": [],
       "decisive_positive_noncore_creator_channels": [],
       "decisive_negative_noncore_creator_channels": [],
-      "decisive_positive_asset_purchase_channels": [],
-      "decisive_negative_asset_purchase_channels": [],
-      "decisive_positive_retention_support_channels": [],
-      "decisive_negative_retention_support_channels": [],
-      "decisive_positive_external_escape_channels": [
-        "foreign_nonts_qoq"
+      "decisive_positive_asset_purchase_channels": [
+        "corporate_foreign_bonds_bank_qoq"
       ],
-      "decisive_negative_external_escape_channels": [],
-      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_counterpart_reallocation_proxy_channels": [],
+      "decisive_negative_counterpart_reallocation_proxy_channels": [
+        "on_rrp_reallocation_qoq"
+      ],
+      "decisive_positive_external_counterpart_reallocation_proxy_channels": [
+        "foreign_nonts_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq"
+      ],
+      "decisive_negative_external_counterpart_reallocation_proxy_channels": [],
+      "decisive_positive_funding_accommodation_channels": [
+        "interbank_transactions_bank_qoq"
+      ],
       "decisive_negative_funding_accommodation_channels": [],
       "proxy_coverage_label": null,
       "uncovered_channel_families": [
@@ -548,137 +2336,721 @@
   "key_horizons": {
     "h0": {
       "tdc": {
-        "beta": 128.49398892100783,
-        "se": 35.018290469572285,
-        "lower95": 119.41873548043742,
-        "upper95": 248.5482159371078,
-        "n": 68,
+        "beta": 86.08814077380539,
+        "se": 25.27141995473617,
+        "lower95": 76.91378655770903,
+        "upper95": 178.46273021278503,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 55.75033524806063,
-        "se": 40.86113535471181,
-        "lower95": 8.738139880568623,
-        "upper95": 168.6573860829989,
-        "n": 68,
+        "beta": 37.977694851980814,
+        "se": 23.64868644238564,
+        "lower95": 18.533147755076495,
+        "upper95": 105.12950063583395,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "other_component": {
-        "beta": -72.74365367294723,
-        "se": 42.946700439267694,
-        "lower95": -170.48932979728906,
-        "upper95": -1.8809331488254672,
-        "n": 68,
+        "beta": -48.11044592182458,
+        "se": 25.543877643105976,
+        "lower95": -110.90302316729972,
+        "upper95": -14.172921571377426,
+        "n": 119,
         "ci_excludes_zero": true
       },
       "legacy_private_credit_proxy": {
         "role": "coarse_legacy_creator_proxy",
         "snapshot": {
-          "beta": 14.021813174704516,
-          "se": 13.4008997593926,
-          "lower95": -12.243950353704982,
-          "upper95": 40.28757670311401,
+          "beta": 13.417303271228572,
+          "se": 12.79506019172449,
+          "lower95": -11.661014704551427,
+          "upper95": 38.49562124700857,
           "n": 64,
           "ci_excludes_zero": false
         }
       },
-      "creator_lending_channels": {},
-      "core_domestic_creator_lending_channels": {},
-      "noncore_creator_lending_channels": {},
-      "creator_asset_purchase_channels": {},
-      "funding_accommodation_channels": {},
+      "creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -0.8482291577015069,
+          "se": 5.239195687364588,
+          "lower95": -11.1170527049361,
+          "upper95": 9.420594389533086,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": 0.20531975845538308,
+          "se": 0.23514318828046066,
+          "lower95": -0.2555608905743198,
+          "upper95": 0.666200407485086,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -0.7345683611962199,
+          "se": 0.5186733911975492,
+          "lower95": -1.7511682079434163,
+          "upper95": 0.28203148555097646,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -0.4333775432123832,
+          "se": 0.6956905551072083,
+          "lower95": -1.7969310312225115,
+          "upper95": 0.9301759447977451,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -2.373205911897445,
+          "se": 1.4116417766443938,
+          "lower95": -5.140023794120458,
+          "upper95": 0.39361197032556694,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -1.3833290984699913,
+          "se": 1.2787238995789536,
+          "lower95": -3.88962794164474,
+          "upper95": 1.1229697447047575,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 0.14241427584634014,
+          "se": 0.19718543778368997,
+          "lower95": -0.2440691822096922,
+          "upper95": 0.5288977339023725,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -1.3025975877171594,
+          "se": 0.8531545962609817,
+          "lower95": -2.9747805963886833,
+          "upper95": 0.36958542095436475,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.6313234677084043,
+          "se": 0.43233011437625685,
+          "lower95": -0.21604355646905915,
+          "upper95": 1.4786904918858679,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.14665345425522947,
+          "se": 2.414650144126408,
+          "lower95": -4.58606082823253,
+          "upper95": 4.8793677367429895,
+          "n": 85,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -0.741666124414313,
+          "se": 5.2571500304890995,
+          "lower95": -11.045680184172948,
+          "upper95": 9.56234793534432,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -2.1341118362228793,
+          "se": 1.3544063671212598,
+          "lower95": -4.788748315780548,
+          "upper95": 0.5205246433347899,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": -1.222955173845182,
+          "se": 1.2147994114343172,
+          "lower95": -3.6039620202564437,
+          "upper95": 1.1580516725660797,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -1.2374532448811641,
+          "se": 0.8528820420810547,
+          "lower95": -2.9091020473600313,
+          "upper95": 0.434195557597703,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 0.1386753105015823,
+          "se": 2.4857732336649723,
+          "lower95": -4.733440227481764,
+          "upper95": 5.010790848484928,
+          "n": 85,
+          "ci_excludes_zero": false
+        },
+        "loans_to_commercial_banks_qoq": {
+          "beta": 0.1554756815911831,
+          "se": 0.616034791330759,
+          "lower95": -1.0519525094171045,
+          "upper95": 1.3629038725994707,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 7.3671089978686775,
+          "se": 4.893646512230938,
+          "lower95": -2.224438166103961,
+          "upper95": 16.958656161841315,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.2830368763020709,
+          "se": 0.7804813314215118,
+          "lower95": -1.246706533284092,
+          "upper95": 1.812780285888234,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "treasury_securities_bank_qoq": {
+          "beta": 2.4719848201926267,
+          "se": 1.5586106836400313,
+          "lower95": -0.5828921197418344,
+          "upper95": 5.526861760127088,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 10.684665127032899,
+          "se": 3.3358664698390808,
+          "lower95": 4.1463668461483,
+          "upper95": 17.222963407917497,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.314740985310187,
+          "se": 0.5360459182721133,
+          "lower95": -1.365390985123529,
+          "upper95": 0.735909014503155,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 2.2066446571615432,
+          "se": 2.0228940967636984,
+          "lower95": -1.7582277724953053,
+          "upper95": 6.171517086818392,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
+      "core_domestic_creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -0.8482291577015069,
+          "se": 5.239195687364588,
+          "lower95": -11.1170527049361,
+          "upper95": 9.420594389533086,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": 0.20531975845538308,
+          "se": 0.23514318828046066,
+          "lower95": -0.2555608905743198,
+          "upper95": 0.666200407485086,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -0.7345683611962199,
+          "se": 0.5186733911975492,
+          "lower95": -1.7511682079434163,
+          "upper95": 0.28203148555097646,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -0.4333775432123832,
+          "se": 0.6956905551072083,
+          "lower95": -1.7969310312225115,
+          "upper95": 0.9301759447977451,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -2.373205911897445,
+          "se": 1.4116417766443938,
+          "lower95": -5.140023794120458,
+          "upper95": 0.39361197032556694,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -1.3833290984699913,
+          "se": 1.2787238995789536,
+          "lower95": -3.88962794164474,
+          "upper95": 1.1229697447047575,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 0.14241427584634014,
+          "se": 0.19718543778368997,
+          "lower95": -0.2440691822096922,
+          "upper95": 0.5288977339023725,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -1.3025975877171594,
+          "se": 0.8531545962609817,
+          "lower95": -2.9747805963886833,
+          "upper95": 0.36958542095436475,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.6313234677084043,
+          "se": 0.43233011437625685,
+          "lower95": -0.21604355646905915,
+          "upper95": 1.4786904918858679,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.14665345425522947,
+          "se": 2.414650144126408,
+          "lower95": -4.58606082823253,
+          "upper95": 4.8793677367429895,
+          "n": 85,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -0.741666124414313,
+          "se": 5.2571500304890995,
+          "lower95": -11.045680184172948,
+          "upper95": 9.56234793534432,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -2.1341118362228793,
+          "se": 1.3544063671212598,
+          "lower95": -4.788748315780548,
+          "upper95": 0.5205246433347899,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": -1.222955173845182,
+          "se": 1.2147994114343172,
+          "lower95": -3.6039620202564437,
+          "upper95": 1.1580516725660797,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -1.2374532448811641,
+          "se": 0.8528820420810547,
+          "lower95": -2.9091020473600313,
+          "upper95": 0.434195557597703,
+          "n": 101,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 0.1386753105015823,
+          "se": 2.4857732336649723,
+          "lower95": -4.733440227481764,
+          "upper95": 5.010790848484928,
+          "n": 85,
+          "ci_excludes_zero": false
+        }
+      },
+      "noncore_creator_lending_channels": {
+        "loans_to_commercial_banks_qoq": {
+          "beta": 0.1554756815911831,
+          "se": 0.616034791330759,
+          "lower95": -1.0519525094171045,
+          "upper95": 1.3629038725994707,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 7.3671089978686775,
+          "se": 4.893646512230938,
+          "lower95": -2.224438166103961,
+          "upper95": 16.958656161841315,
+          "n": 42,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.2830368763020709,
+          "se": 0.7804813314215118,
+          "lower95": -1.246706533284092,
+          "upper95": 1.812780285888234,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_asset_purchase_channels": {
+        "treasury_securities_bank_qoq": {
+          "beta": 2.4719848201926267,
+          "se": 1.5586106836400313,
+          "lower95": -0.5828921197418344,
+          "upper95": 5.526861760127088,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 10.684665127032899,
+          "se": 3.3358664698390808,
+          "lower95": 4.1463668461483,
+          "upper95": 17.222963407917497,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.314740985310187,
+          "se": 0.5360459182721133,
+          "lower95": -1.365390985123529,
+          "upper95": 0.735909014503155,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 2.2066446571615432,
+          "se": 2.0228940967636984,
+          "lower95": -1.7582277724953053,
+          "upper95": 6.171517086818392,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_channels": {
+        "interbank_transactions_bank_qoq": {
+          "beta": 8.150221225811842,
+          "se": 3.8960918982530295,
+          "lower95": 0.5138811052359049,
+          "upper95": 15.78656134638778,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "fedfunds_repo_liabilities_bank_qoq": {
+          "beta": 0.025509352459609946,
+          "se": 1.5429498705435662,
+          "lower95": -2.99867239380578,
+          "upper95": 3.049691098725,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "commercial_bank_borrowings_qoq": {
+          "beta": 6.362247145391219,
+          "se": 5.0615652708966365,
+          "lower95": -3.558420785566188,
+          "upper95": 16.282915076348626,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "fed_borrowings_depository_institutions_qoq": {
+          "beta": 2.0188049098270557,
+          "se": 2.528463530571852,
+          "lower95": -2.9369836100937743,
+          "upper95": 6.974593429747886,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "debt_securities_bank_liability_qoq": {
+          "beta": -0.800799742877936,
+          "se": 1.854287617151412,
+          "lower95": -4.435203472494703,
+          "upper95": 2.833603986738831,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "fhlb_advances_sallie_mae_loans_bank_qoq": {
+          "beta": -5.282797335142851,
+          "se": 3.1528720135117196,
+          "lower95": -11.46242648162582,
+          "upper95": 0.8968318113401192,
+          "n": 119,
+          "ci_excludes_zero": false
+        }
+      },
       "funding_accommodation_cleanup_candidates": {},
-      "deposit_retention_support_channels": {
+      "counterpart_reallocation_proxy_channels": {
         "domestic_nonfinancial_mmf_reallocation_qoq": {
-          "beta": -14.977538562329684,
-          "se": 11.828190798252104,
-          "lower95": -38.160792526903805,
-          "upper95": 8.20571540224444,
-          "n": 68,
+          "beta": -13.460242201299241,
+          "se": 8.302582811657416,
+          "lower95": -29.733304512147775,
+          "upper95": 2.8128201095492926,
+          "n": 119,
           "ci_excludes_zero": false
         },
         "domestic_nonfinancial_repo_reallocation_qoq": {
-          "beta": 0.0287923822070103,
-          "se": 0.7154641657141337,
-          "lower95": -1.3735173825926918,
-          "upper95": 1.4311021470067122,
-          "n": 68,
+          "beta": -0.06445707988976607,
+          "se": 0.5194506220873366,
+          "lower95": -1.082580299180946,
+          "upper95": 0.9536661394014136,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "on_rrp_reallocation_qoq": {
+          "beta": -0.02426734325880216,
+          "se": 0.011314240373510802,
+          "lower95": -0.04644325439088333,
+          "upper95": -0.0020914321267209886,
+          "n": 52,
+          "ci_excludes_zero": true
+        },
+        "household_treasury_securities_reallocation_qoq": {
+          "beta": 13.214138247412777,
+          "se": 9.708589217203372,
+          "lower95": -5.814696618305831,
+          "upper95": 32.242973113131384,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "mmf_treasury_bills_reallocation_qoq": {
+          "beta": 7.774628604347347,
+          "se": 7.093969308352124,
+          "lower95": -6.129551240022815,
+          "upper95": 21.67880844871751,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "currency_reallocation_qoq": {
+          "beta": -0.13167019849948747,
+          "se": 0.6837072597211051,
+          "lower95": -1.4717364275528535,
+          "upper95": 1.2083960305538786,
+          "n": 119,
           "ci_excludes_zero": false
         }
       },
-      "external_escape_channels": {
+      "external_counterpart_reallocation_proxy_channels": {
         "foreign_nonts_qoq": {
-          "beta": 27.0343911579461,
-          "se": 13.111973747146076,
-          "lower95": 1.334922613539792,
-          "upper95": 52.7338597023524,
-          "n": 68,
+          "beta": 20.77386320365451,
+          "se": 8.691620953966337,
+          "lower95": 3.7382861338804894,
+          "upper95": 37.809440273428535,
+          "n": 119,
           "ci_excludes_zero": true
+        },
+        "checkable_rest_of_world_bank_qoq": {
+          "beta": 0.38759473406740835,
+          "se": 0.3440159812522735,
+          "lower95": -0.2866765891870477,
+          "upper95": 1.0618660573218643,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_liability_qoq": {
+          "beta": 3.383398610757385,
+          "se": 2.3650764706785363,
+          "lower95": -1.2521512717725463,
+          "upper95": 8.018948493287315,
+          "n": 119,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_asset_qoq": {
+          "beta": 4.475787216068066,
+          "se": 2.204820042427781,
+          "lower95": 0.15433993290961556,
+          "upper95": 8.797234499226516,
+          "n": 119,
+          "ci_excludes_zero": true
+        },
+        "deposits_at_foreign_banks_asset_qoq": {
+          "beta": 0.2779378878578994,
+          "se": 0.15999825382980823,
+          "lower95": -0.0356586896485247,
+          "upper95": 0.5915344653643235,
+          "n": 119,
+          "ci_excludes_zero": false
         }
       },
       "funding_accommodation_context": {
-        "channels": {},
-        "decisive_positive_channels": [],
+        "channels": {
+          "interbank_transactions_bank_qoq": {
+            "beta": 8.150221225811842,
+            "se": 3.8960918982530295,
+            "lower95": 0.5138811052359049,
+            "upper95": 15.78656134638778,
+            "n": 119,
+            "ci_excludes_zero": true
+          },
+          "fedfunds_repo_liabilities_bank_qoq": {
+            "beta": 0.025509352459609946,
+            "se": 1.5429498705435662,
+            "lower95": -2.99867239380578,
+            "upper95": 3.049691098725,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "commercial_bank_borrowings_qoq": {
+            "beta": 6.362247145391219,
+            "se": 5.0615652708966365,
+            "lower95": -3.558420785566188,
+            "upper95": 16.282915076348626,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "fed_borrowings_depository_institutions_qoq": {
+            "beta": 2.0188049098270557,
+            "se": 2.528463530571852,
+            "lower95": -2.9369836100937743,
+            "upper95": 6.974593429747886,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "debt_securities_bank_liability_qoq": {
+            "beta": -0.800799742877936,
+            "se": 1.854287617151412,
+            "lower95": -4.435203472494703,
+            "upper95": 2.833603986738831,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "fhlb_advances_sallie_mae_loans_bank_qoq": {
+            "beta": -5.282797335142851,
+            "se": 3.1528720135117196,
+            "lower95": -11.46242648162582,
+            "upper95": 0.8968318113401192,
+            "n": 119,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [
+          "interbank_transactions_bank_qoq"
+        ],
         "decisive_negative_channels": [],
-        "interpretation": "funding_accommodation_unresolved"
+        "interpretation": "positive_funding_accommodation_signal"
       },
-      "escape_support_context": {
+      "counterpart_reallocation_proxy_context": {
         "channels": {
           "domestic_nonfinancial_mmf_reallocation_qoq": {
-            "beta": -14.977538562329684,
-            "se": 11.828190798252104,
-            "lower95": -38.160792526903805,
-            "upper95": 8.20571540224444,
-            "n": 68,
+            "beta": -13.460242201299241,
+            "se": 8.302582811657416,
+            "lower95": -29.733304512147775,
+            "upper95": 2.8128201095492926,
+            "n": 119,
             "ci_excludes_zero": false
           },
           "domestic_nonfinancial_repo_reallocation_qoq": {
-            "beta": 0.0287923822070103,
-            "se": 0.7154641657141337,
-            "lower95": -1.3735173825926918,
-            "upper95": 1.4311021470067122,
-            "n": 68,
+            "beta": -0.06445707988976607,
+            "se": 0.5194506220873366,
+            "lower95": -1.082580299180946,
+            "upper95": 0.9536661394014136,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "on_rrp_reallocation_qoq": {
+            "beta": -0.02426734325880216,
+            "se": 0.011314240373510802,
+            "lower95": -0.04644325439088333,
+            "upper95": -0.0020914321267209886,
+            "n": 52,
+            "ci_excludes_zero": true
+          },
+          "household_treasury_securities_reallocation_qoq": {
+            "beta": 13.214138247412777,
+            "se": 9.708589217203372,
+            "lower95": -5.814696618305831,
+            "upper95": 32.242973113131384,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "mmf_treasury_bills_reallocation_qoq": {
+            "beta": 7.774628604347347,
+            "se": 7.093969308352124,
+            "lower95": -6.129551240022815,
+            "upper95": 21.67880844871751,
+            "n": 119,
+            "ci_excludes_zero": false
+          },
+          "currency_reallocation_qoq": {
+            "beta": -0.13167019849948747,
+            "se": 0.6837072597211051,
+            "lower95": -1.4717364275528535,
+            "upper95": 1.2083960305538786,
+            "n": 119,
             "ci_excludes_zero": false
           }
         },
         "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "escape_support_unresolved"
+        "decisive_negative_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "interpretation": "sign_normalized_movement_toward_named_channel"
       },
       "asset_purchase_plumbing_context": {
         "channels": {
+          "tga_qoq": {
+            "beta": -42.29419828467739,
+            "se": 17.856373029736048,
+            "lower95": -77.29268942296005,
+            "upper95": -7.29570714639474,
+            "n": 91,
+            "ci_excludes_zero": true
+          },
+          "reserves_qoq": {
+            "beta": 77.19113151416232,
+            "se": 12.967388462921063,
+            "lower95": 51.775050126837044,
+            "upper95": 102.6072129014876,
+            "n": 91,
+            "ci_excludes_zero": true
+          },
           "cb_nonts_qoq": {
-            "beta": 26.523641651135975,
-            "se": 14.452809474715338,
-            "lower95": -1.8038649193060865,
-            "upper95": 54.85114822157803,
-            "n": 68,
-            "ci_excludes_zero": false
+            "beta": 34.76027494833025,
+            "se": 12.124580448836053,
+            "lower95": 10.996097268611585,
+            "upper95": 58.52445262804891,
+            "n": 91,
+            "ci_excludes_zero": true
           }
         },
-        "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
+        "decisive_positive_channels": [
+          "cb_nonts_qoq",
+          "reserves_qoq"
+        ],
+        "decisive_negative_channels": [
+          "tga_qoq"
+        ],
         "treasury_drain_signal": false,
-        "reserve_support_signal": false,
-        "interpretation": "no_decisive_asset_purchase_creator_signal"
+        "reserve_support_signal": true,
+        "interpretation": "reserve_support_context"
       },
-      "decisive_positive_creator_channels": [],
+      "decisive_positive_creator_channels": [
+        "agency_gse_backed_securities_bank_qoq"
+      ],
       "decisive_negative_creator_channels": [],
       "decisive_positive_core_creator_channels": [],
       "decisive_negative_core_creator_channels": [],
       "decisive_positive_noncore_creator_channels": [],
       "decisive_negative_noncore_creator_channels": [],
-      "decisive_positive_asset_purchase_channels": [],
-      "decisive_negative_asset_purchase_channels": [],
-      "decisive_positive_retention_support_channels": [],
-      "decisive_negative_retention_support_channels": [],
-      "decisive_positive_external_escape_channels": [
-        "foreign_nonts_qoq"
+      "decisive_positive_asset_purchase_channels": [
+        "agency_gse_backed_securities_bank_qoq"
       ],
-      "decisive_negative_external_escape_channels": [],
-      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_counterpart_reallocation_proxy_channels": [],
+      "decisive_negative_counterpart_reallocation_proxy_channels": [
+        "on_rrp_reallocation_qoq"
+      ],
+      "decisive_positive_external_counterpart_reallocation_proxy_channels": [
+        "foreign_nonts_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq"
+      ],
+      "decisive_negative_external_counterpart_reallocation_proxy_channels": [],
+      "decisive_positive_funding_accommodation_channels": [
+        "interbank_transactions_bank_qoq"
+      ],
       "decisive_negative_funding_accommodation_channels": [],
-      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "proxy_coverage_label": "proxy_bundle_uncovered_remainder_large",
       "uncovered_channel_families": [
         "within_bank_deposit_substitution_across_holders_or_products",
         "omitted_bank_asset_side_channels_outside_private_credit",
@@ -688,137 +3060,725 @@
     },
     "h4": {
       "tdc": {
-        "beta": 278.13971316628357,
-        "se": 141.57570011679425,
-        "lower95": 78.32278678356286,
-        "upper95": 597.5909020053358,
-        "n": 64,
+        "beta": 172.8674661880664,
+        "se": 87.14792130590925,
+        "lower95": 76.43912886345232,
+        "upper95": 431.5929761708225,
+        "n": 115,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 167.33069747889854,
-        "se": 154.8910510638327,
-        "lower95": -27.18884889021173,
-        "upper95": 550.7057101571328,
-        "n": 64,
+        "beta": 95.30474128450595,
+        "se": 94.14123531701945,
+        "lower95": -11.18126164236589,
+        "upper95": 363.2075355524613,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "other_component": {
-        "beta": -110.80901568738504,
-        "se": 84.23711570896954,
-        "lower95": -242.41233479835057,
-        "upper95": 62.23408515351409,
-        "n": 64,
+        "beta": -77.56272490356045,
+        "se": 52.91667363732913,
+        "lower95": -177.1315877678902,
+        "upper95": 19.960987662159766,
+        "n": 115,
         "ci_excludes_zero": false
       },
       "legacy_private_credit_proxy": {
         "role": "coarse_legacy_creator_proxy",
         "snapshot": {
-          "beta": 54.572977783498914,
-          "se": 19.24512973374704,
-          "lower95": 16.852523505354718,
-          "upper95": 92.2934320616431,
+          "beta": 50.72042121880935,
+          "se": 20.002187345397477,
+          "lower95": 11.516134021830297,
+          "upper95": 89.9247084157884,
           "n": 60,
           "ci_excludes_zero": true
         }
       },
-      "creator_lending_channels": {},
-      "core_domestic_creator_lending_channels": {},
-      "noncore_creator_lending_channels": {},
-      "creator_asset_purchase_channels": {},
-      "funding_accommodation_channels": {},
-      "funding_accommodation_cleanup_candidates": {},
-      "deposit_retention_support_channels": {
-        "domestic_nonfinancial_mmf_reallocation_qoq": {
-          "beta": -6.051493186644944,
-          "se": 14.562904506654425,
-          "lower95": -34.59478601968762,
-          "upper95": 22.491799646397727,
-          "n": 64,
+      "creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.965140023410362,
+          "se": 8.65213540576553,
+          "lower95": -30.923325418710803,
+          "upper95": 2.9930453718900782,
+          "n": 115,
           "ci_excludes_zero": false
         },
-        "domestic_nonfinancial_repo_reallocation_qoq": {
-          "beta": -0.7003132154383085,
-          "se": 1.2009103178726588,
-          "lower95": -3.0540974384687196,
-          "upper95": 1.6534710075921026,
-          "n": 64,
+        "construction_land_development_loans_qoq": {
+          "beta": -0.7042878264910684,
+          "se": 1.0265060394462888,
+          "lower95": -2.7162396638057946,
+          "upper95": 1.307664010823658,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -3.1215938207285854,
+          "se": 1.5382773062314645,
+          "lower95": -6.136617340942256,
+          "upper95": -0.10657030051491478,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -2.3941701016098467,
+          "se": 1.9632360877304356,
+          "lower95": -6.2421128335615,
+          "upper95": 1.453772630341807,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -0.5082111658192847,
+          "se": 4.570374256368577,
+          "lower95": -9.466144708301696,
+          "upper95": 8.449722376663127,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -0.0847068391351753,
+          "se": 4.671426875177517,
+          "lower95": -9.240703514483108,
+          "upper95": 9.07128983621276,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 3.020643982939922,
+          "se": 0.8947702154410155,
+          "lower95": 1.2668943606755316,
+          "upper95": 4.774393605204312,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -0.1673015633782473,
+          "se": 1.8753750541978094,
+          "lower95": -3.8430366696059535,
+          "upper95": 3.508433542849459,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.7236433764632113,
+          "se": 1.585806967097538,
+          "lower95": -2.3845382790479634,
+          "upper95": 3.831825031974386,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.7620595531267522,
+          "se": 4.492702729685752,
+          "lower95": -8.043637797057322,
+          "upper95": 9.567756903310826,
+          "n": 81,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.562485411869812,
+          "se": 8.352155036412526,
+          "lower95": -29.932709283238363,
+          "upper95": 2.80773845949874,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.19489081989737933,
+          "se": 4.453031592651906,
+          "lower95": -8.533051101700357,
+          "upper95": 8.922832741495116,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 0.030137658464322925,
+          "se": 4.612276732179692,
+          "lower95": -9.009924736607873,
+          "upper95": 9.070200053536519,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -0.0592908363127953,
+          "se": 1.8206747812283162,
+          "lower95": -3.627813407520295,
+          "upper95": 3.5092317348947044,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 1.117111395951806,
+          "se": 4.595890695153008,
+          "lower95": -7.89083436654809,
+          "upper95": 10.125057158451702,
+          "n": 81,
+          "ci_excludes_zero": false
+        },
+        "loans_to_commercial_banks_qoq": {
+          "beta": -0.8855690466377424,
+          "se": 0.6966365717247162,
+          "lower95": -2.2509767272181858,
+          "upper95": 0.4798386339427012,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 10.7171603759039,
+          "se": 5.523476769348668,
+          "lower95": -0.10885409201948981,
+          "upper95": 21.543174843827288,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 4.140218014132167,
+          "se": 2.987415780115834,
+          "lower95": -1.7151169148948675,
+          "upper95": 9.995552943159202,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "treasury_securities_bank_qoq": {
+          "beta": 18.069314785003165,
+          "se": 8.269112072615377,
+          "lower95": 1.861855122677028,
+          "upper95": 34.2767744473293,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 14.026988855762818,
+          "se": 13.542638541164443,
+          "lower95": -12.51658268491949,
+          "upper95": 40.570560396445124,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.8104021985486707,
+          "se": 2.0112495967345074,
+          "lower95": -4.752451408148305,
+          "upper95": 3.1316470110509638,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 6.891161966940179,
+          "se": 4.805975351854612,
+          "lower95": -2.5285497226948612,
+          "upper95": 16.310873656575218,
+          "n": 115,
           "ci_excludes_zero": false
         }
       },
-      "external_escape_channels": {
-        "foreign_nonts_qoq": {
-          "beta": 38.11141757510377,
-          "se": 9.926775458602927,
-          "lower95": 18.65493767624203,
-          "upper95": 57.56789747396552,
-          "n": 64,
+      "core_domestic_creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.965140023410362,
+          "se": 8.65213540576553,
+          "lower95": -30.923325418710803,
+          "upper95": 2.9930453718900782,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": -0.7042878264910684,
+          "se": 1.0265060394462888,
+          "lower95": -2.7162396638057946,
+          "upper95": 1.307664010823658,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": -3.1215938207285854,
+          "se": 1.5382773062314645,
+          "lower95": -6.136617340942256,
+          "upper95": -0.10657030051491478,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": -2.3941701016098467,
+          "se": 1.9632360877304356,
+          "lower95": -6.2421128335615,
+          "upper95": 1.453772630341807,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_qoq": {
+          "beta": -0.5082111658192847,
+          "se": 4.570374256368577,
+          "lower95": -9.466144708301696,
+          "upper95": 8.449722376663127,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": -0.0847068391351753,
+          "se": 4.671426875177517,
+          "lower95": -9.240703514483108,
+          "upper95": 9.07128983621276,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 3.020643982939922,
+          "se": 0.8947702154410155,
+          "lower95": 1.2668943606755316,
+          "upper95": 4.774393605204312,
+          "n": 38,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": -0.1673015633782473,
+          "se": 1.8753750541978094,
+          "lower95": -3.8430366696059535,
+          "upper95": 3.508433542849459,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 0.7236433764632113,
+          "se": 1.585806967097538,
+          "lower95": -2.3845382790479634,
+          "upper95": 3.831825031974386,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 0.7620595531267522,
+          "se": 4.492702729685752,
+          "lower95": -8.043637797057322,
+          "upper95": 9.567756903310826,
+          "n": 81,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.562485411869812,
+          "se": 8.352155036412526,
+          "lower95": -29.932709283238363,
+          "upper95": 2.80773845949874,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.19489081989737933,
+          "se": 4.453031592651906,
+          "lower95": -8.533051101700357,
+          "upper95": 8.922832741495116,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 0.030137658464322925,
+          "se": 4.612276732179692,
+          "lower95": -9.009924736607873,
+          "upper95": 9.070200053536519,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": -0.0592908363127953,
+          "se": 1.8206747812283162,
+          "lower95": -3.627813407520295,
+          "upper95": 3.5092317348947044,
+          "n": 97,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 1.117111395951806,
+          "se": 4.595890695153008,
+          "lower95": -7.89083436654809,
+          "upper95": 10.125057158451702,
+          "n": 81,
+          "ci_excludes_zero": false
+        }
+      },
+      "noncore_creator_lending_channels": {
+        "loans_to_commercial_banks_qoq": {
+          "beta": -0.8855690466377424,
+          "se": 0.6966365717247162,
+          "lower95": -2.2509767272181858,
+          "upper95": 0.4798386339427012,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 10.7171603759039,
+          "se": 5.523476769348668,
+          "lower95": -0.10885409201948981,
+          "upper95": 21.543174843827288,
+          "n": 38,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 4.140218014132167,
+          "se": 2.987415780115834,
+          "lower95": -1.7151169148948675,
+          "upper95": 9.995552943159202,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_asset_purchase_channels": {
+        "treasury_securities_bank_qoq": {
+          "beta": 18.069314785003165,
+          "se": 8.269112072615377,
+          "lower95": 1.861855122677028,
+          "upper95": 34.2767744473293,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 14.026988855762818,
+          "se": 13.542638541164443,
+          "lower95": -12.51658268491949,
+          "upper95": 40.570560396445124,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.8104021985486707,
+          "se": 2.0112495967345074,
+          "lower95": -4.752451408148305,
+          "upper95": 3.1316470110509638,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 6.891161966940179,
+          "se": 4.805975351854612,
+          "lower95": -2.5285497226948612,
+          "upper95": 16.310873656575218,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_channels": {
+        "interbank_transactions_bank_qoq": {
+          "beta": 0.02054105838801057,
+          "se": 7.974118674906088,
+          "lower95": -15.608731544427922,
+          "upper95": 15.649813661203943,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "fedfunds_repo_liabilities_bank_qoq": {
+          "beta": -2.094110760487397,
+          "se": 3.8930787581273756,
+          "lower95": -9.724545126417052,
+          "upper95": 5.536323605442258,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "commercial_bank_borrowings_qoq": {
+          "beta": -21.703456639282884,
+          "se": 13.718462379527281,
+          "lower95": -48.591642903156355,
+          "upper95": 5.184729624590588,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "fed_borrowings_depository_institutions_qoq": {
+          "beta": -11.817260900021157,
+          "se": 7.533692270117969,
+          "lower95": -26.583297749452377,
+          "upper95": 2.948775949410061,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "debt_securities_bank_liability_qoq": {
+          "beta": 7.69475828037992,
+          "se": 6.613202086843997,
+          "lower95": -5.267117809834314,
+          "upper95": 20.656634370594155,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "fhlb_advances_sallie_mae_loans_bank_qoq": {
+          "beta": -17.625783715177405,
+          "se": 7.98465825679702,
+          "lower95": -33.27571389849956,
+          "upper95": -1.9758535318552468,
+          "n": 115,
           "ci_excludes_zero": true
         }
       },
-      "funding_accommodation_context": {
-        "channels": {},
-        "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "funding_accommodation_unresolved"
+      "funding_accommodation_cleanup_candidates": {},
+      "counterpart_reallocation_proxy_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": 1.6416501347845127,
+          "se": 16.928404685845425,
+          "lower95": -31.53802304947252,
+          "upper95": 34.82132331904155,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -0.8034077574350139,
+          "se": 0.8713877620325763,
+          "lower95": -2.5113277710188635,
+          "upper95": 0.9045122561488356,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "on_rrp_reallocation_qoq": {
+          "beta": -0.1494131812226473,
+          "se": 0.03943081838591652,
+          "lower95": -0.22669758525904365,
+          "upper95": -0.07212877718625092,
+          "n": 45,
+          "ci_excludes_zero": true
+        },
+        "household_treasury_securities_reallocation_qoq": {
+          "beta": 37.806380093147084,
+          "se": 28.978306794427976,
+          "lower95": -18.99110122393175,
+          "upper95": 94.60386141022592,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "mmf_treasury_bills_reallocation_qoq": {
+          "beta": -0.275733647620235,
+          "se": 30.371927640041267,
+          "lower95": -59.80471182210112,
+          "upper95": 59.25324452686065,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "currency_reallocation_qoq": {
+          "beta": -1.6585084451759666,
+          "se": 3.3146914105626752,
+          "lower95": -8.15530360987881,
+          "upper95": 4.838286719526876,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
       },
-      "escape_support_context": {
+      "external_counterpart_reallocation_proxy_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 31.024846623730987,
+          "se": 8.11848988345604,
+          "lower95": 15.11260645215715,
+          "upper95": 46.93708679530482,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "checkable_rest_of_world_bank_qoq": {
+          "beta": 0.01867944063776039,
+          "se": 0.931243735497383,
+          "lower95": -1.8065582809371104,
+          "upper95": 1.8439171622126311,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_liability_qoq": {
+          "beta": 7.691604152995312,
+          "se": 4.490841147241659,
+          "lower95": -1.1104444955983404,
+          "upper95": 16.493652801588965,
+          "n": 115,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_asset_qoq": {
+          "beta": 12.996131614022651,
+          "se": 3.050435594850381,
+          "lower95": 7.017277848115905,
+          "upper95": 18.9749853799294,
+          "n": 115,
+          "ci_excludes_zero": true
+        },
+        "deposits_at_foreign_banks_asset_qoq": {
+          "beta": 0.3719255334996131,
+          "se": 0.3609880714493531,
+          "lower95": -0.33561108654111893,
+          "upper95": 1.0794621535403452,
+          "n": 115,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {
+          "interbank_transactions_bank_qoq": {
+            "beta": 0.02054105838801057,
+            "se": 7.974118674906088,
+            "lower95": -15.608731544427922,
+            "upper95": 15.649813661203943,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "fedfunds_repo_liabilities_bank_qoq": {
+            "beta": -2.094110760487397,
+            "se": 3.8930787581273756,
+            "lower95": -9.724545126417052,
+            "upper95": 5.536323605442258,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "commercial_bank_borrowings_qoq": {
+            "beta": -21.703456639282884,
+            "se": 13.718462379527281,
+            "lower95": -48.591642903156355,
+            "upper95": 5.184729624590588,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "fed_borrowings_depository_institutions_qoq": {
+            "beta": -11.817260900021157,
+            "se": 7.533692270117969,
+            "lower95": -26.583297749452377,
+            "upper95": 2.948775949410061,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "debt_securities_bank_liability_qoq": {
+            "beta": 7.69475828037992,
+            "se": 6.613202086843997,
+            "lower95": -5.267117809834314,
+            "upper95": 20.656634370594155,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "fhlb_advances_sallie_mae_loans_bank_qoq": {
+            "beta": -17.625783715177405,
+            "se": 7.98465825679702,
+            "lower95": -33.27571389849956,
+            "upper95": -1.9758535318552468,
+            "n": 115,
+            "ci_excludes_zero": true
+          }
+        },
+        "decisive_positive_channels": [],
+        "decisive_negative_channels": [
+          "fhlb_advances_sallie_mae_loans_bank_qoq"
+        ],
+        "interpretation": "negative_funding_accommodation_signal"
+      },
+      "counterpart_reallocation_proxy_context": {
         "channels": {
           "domestic_nonfinancial_mmf_reallocation_qoq": {
-            "beta": -6.051493186644944,
-            "se": 14.562904506654425,
-            "lower95": -34.59478601968762,
-            "upper95": 22.491799646397727,
-            "n": 64,
+            "beta": 1.6416501347845127,
+            "se": 16.928404685845425,
+            "lower95": -31.53802304947252,
+            "upper95": 34.82132331904155,
+            "n": 115,
             "ci_excludes_zero": false
           },
           "domestic_nonfinancial_repo_reallocation_qoq": {
-            "beta": -0.7003132154383085,
-            "se": 1.2009103178726588,
-            "lower95": -3.0540974384687196,
-            "upper95": 1.6534710075921026,
-            "n": 64,
+            "beta": -0.8034077574350139,
+            "se": 0.8713877620325763,
+            "lower95": -2.5113277710188635,
+            "upper95": 0.9045122561488356,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "on_rrp_reallocation_qoq": {
+            "beta": -0.1494131812226473,
+            "se": 0.03943081838591652,
+            "lower95": -0.22669758525904365,
+            "upper95": -0.07212877718625092,
+            "n": 45,
+            "ci_excludes_zero": true
+          },
+          "household_treasury_securities_reallocation_qoq": {
+            "beta": 37.806380093147084,
+            "se": 28.978306794427976,
+            "lower95": -18.99110122393175,
+            "upper95": 94.60386141022592,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "mmf_treasury_bills_reallocation_qoq": {
+            "beta": -0.275733647620235,
+            "se": 30.371927640041267,
+            "lower95": -59.80471182210112,
+            "upper95": 59.25324452686065,
+            "n": 115,
+            "ci_excludes_zero": false
+          },
+          "currency_reallocation_qoq": {
+            "beta": -1.6585084451759666,
+            "se": 3.3146914105626752,
+            "lower95": -8.15530360987881,
+            "upper95": 4.838286719526876,
+            "n": 115,
             "ci_excludes_zero": false
           }
         },
         "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "escape_support_unresolved"
+        "decisive_negative_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "interpretation": "sign_normalized_movement_toward_named_channel"
       },
       "asset_purchase_plumbing_context": {
         "channels": {
+          "tga_qoq": {
+            "beta": -19.585588158059608,
+            "se": 30.179191591386218,
+            "lower95": -78.7368036771766,
+            "upper95": 39.56562736105738,
+            "n": 87,
+            "ci_excludes_zero": false
+          },
+          "reserves_qoq": {
+            "beta": 100.33488395872514,
+            "se": 49.34698169845432,
+            "lower95": 3.6147998297546735,
+            "upper95": 197.0549680876956,
+            "n": 87,
+            "ci_excludes_zero": true
+          },
           "cb_nonts_qoq": {
-            "beta": 109.21565891280892,
-            "se": 89.44754513553232,
-            "lower95": -66.10152955283442,
-            "upper95": 284.5328473784523,
-            "n": 64,
+            "beta": 80.28002986236913,
+            "se": 66.28204844599338,
+            "lower95": -49.63278509177789,
+            "upper95": 210.19284481651616,
+            "n": 87,
             "ci_excludes_zero": false
           }
         },
-        "decisive_positive_channels": [],
+        "decisive_positive_channels": [
+          "reserves_qoq"
+        ],
         "decisive_negative_channels": [],
         "treasury_drain_signal": false,
-        "reserve_support_signal": false,
-        "interpretation": "no_decisive_asset_purchase_creator_signal"
+        "reserve_support_signal": true,
+        "interpretation": "reserve_support_context"
       },
-      "decisive_positive_creator_channels": [],
-      "decisive_negative_creator_channels": [],
-      "decisive_positive_core_creator_channels": [],
-      "decisive_negative_core_creator_channels": [],
+      "decisive_positive_creator_channels": [
+        "auto_loans_qoq",
+        "treasury_securities_bank_qoq"
+      ],
+      "decisive_negative_creator_channels": [
+        "cre_multifamily_loans_qoq"
+      ],
+      "decisive_positive_core_creator_channels": [
+        "auto_loans_qoq"
+      ],
+      "decisive_negative_core_creator_channels": [
+        "cre_multifamily_loans_qoq"
+      ],
       "decisive_positive_noncore_creator_channels": [],
       "decisive_negative_noncore_creator_channels": [],
-      "decisive_positive_asset_purchase_channels": [],
-      "decisive_negative_asset_purchase_channels": [],
-      "decisive_positive_retention_support_channels": [],
-      "decisive_negative_retention_support_channels": [],
-      "decisive_positive_external_escape_channels": [
-        "foreign_nonts_qoq"
+      "decisive_positive_asset_purchase_channels": [
+        "treasury_securities_bank_qoq"
       ],
-      "decisive_negative_external_escape_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_counterpart_reallocation_proxy_channels": [],
+      "decisive_negative_counterpart_reallocation_proxy_channels": [
+        "on_rrp_reallocation_qoq"
+      ],
+      "decisive_positive_external_counterpart_reallocation_proxy_channels": [
+        "foreign_nonts_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq"
+      ],
+      "decisive_negative_external_counterpart_reallocation_proxy_channels": [],
       "decisive_positive_funding_accommodation_channels": [],
-      "decisive_negative_funding_accommodation_channels": [],
-      "proxy_coverage_label": "proxy_bundle_opposite_direction",
+      "decisive_negative_funding_accommodation_channels": [
+        "fhlb_advances_sallie_mae_loans_bank_qoq"
+      ],
+      "proxy_coverage_label": "other_component_not_decisive",
       "uncovered_channel_families": [
         "within_bank_deposit_substitution_across_holders_or_products",
         "omitted_bank_asset_side_channels_outside_private_credit",
@@ -828,111 +3788,681 @@
     },
     "h8": {
       "tdc": {
-        "beta": 347.6946386730543,
-        "se": 270.7611316749685,
-        "lower95": 21.075804641888197,
-        "upper95": 971.367561901552,
-        "n": 60,
+        "beta": 219.83216429237058,
+        "se": 152.76951437011186,
+        "lower95": 15.934003773352826,
+        "upper95": 624.3976382409303,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "total": {
-        "beta": 114.22386198654392,
-        "se": 248.53089249335375,
-        "lower95": -230.74012129989265,
-        "upper95": 685.5523861147914,
-        "n": 60,
+        "beta": 73.7367745406378,
+        "se": 126.78086601814343,
+        "lower95": -55.16919570755509,
+        "upper95": 423.75101811982984,
+        "n": 111,
         "ci_excludes_zero": false
       },
       "other_component": {
-        "beta": -233.4707766865104,
-        "se": 130.44794059486154,
-        "lower95": -529.4765352545235,
-        "upper95": -30.381588860860656,
-        "n": 60,
+        "beta": -146.0953897517328,
+        "se": 75.22175523032966,
+        "lower95": -287.85194515058447,
+        "upper95": -2.869222724029355,
+        "n": 111,
         "ci_excludes_zero": true
       },
       "legacy_private_credit_proxy": {
         "role": "coarse_legacy_creator_proxy",
         "snapshot": {
-          "beta": 79.6870552422084,
-          "se": 30.0419239929606,
-          "lower95": 20.804884216005625,
-          "upper95": 138.56922626841117,
+          "beta": 73.23477235763156,
+          "se": 31.326014858683212,
+          "lower95": 11.835783234612464,
+          "upper95": 134.63376148065066,
           "n": 56,
           "ci_excludes_zero": true
         }
       },
-      "creator_lending_channels": {},
-      "core_domestic_creator_lending_channels": {},
-      "noncore_creator_lending_channels": {},
-      "creator_asset_purchase_channels": {},
-      "funding_accommodation_channels": {},
-      "funding_accommodation_cleanup_candidates": {},
-      "deposit_retention_support_channels": {
-        "domestic_nonfinancial_mmf_reallocation_qoq": {
-          "beta": -28.06167360138172,
-          "se": 21.060724923948644,
-          "lower95": -69.34069445232106,
-          "upper95": 13.21734724955762,
-          "n": 60,
+      "creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.599101562242353,
+          "se": 11.616697093722014,
+          "lower95": -36.3678278659375,
+          "upper95": 9.169624741452793,
+          "n": 111,
           "ci_excludes_zero": false
         },
-        "domestic_nonfinancial_repo_reallocation_qoq": {
-          "beta": -2.099738160365989,
-          "se": 1.607468321927399,
-          "lower95": -5.250376071343691,
-          "upper95": 1.0508997506117137,
-          "n": 60,
+        "construction_land_development_loans_qoq": {
+          "beta": 1.5808380043550008,
+          "se": 0.8379202709993713,
+          "lower95": -0.06148572680376696,
+          "upper95": 3.2231617355137683,
+          "n": 34,
           "ci_excludes_zero": false
-        }
-      },
-      "external_escape_channels": {
-        "foreign_nonts_qoq": {
-          "beta": 31.305272756279713,
-          "se": 13.00063006617244,
-          "lower95": 5.82403782658173,
-          "upper95": 56.786507685977696,
-          "n": 60,
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": 2.425655070234475,
+          "se": 1.0363218921290722,
+          "lower95": 0.3944641616614937,
+          "upper95": 4.456845978807456,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": 3.509345832299161,
+          "se": 1.6325077552837346,
+          "lower95": 0.3096306319430413,
+          "upper95": 6.70906103265528,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "consumer_loans_qoq": {
+          "beta": 2.1298136023858447,
+          "se": 5.783664907500948,
+          "lower95": -9.206169616316012,
+          "upper95": 13.465796821087702,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": 2.7653536961467857,
+          "se": 6.9424938926043005,
+          "lower95": -10.841934333357644,
+          "upper95": 16.372641725651214,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 4.953845938930109,
+          "se": 1.678166318522084,
+          "lower95": 1.6646399546268245,
+          "upper95": 8.243051923233393,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": 0.17807307050740206,
+          "se": 3.045351505460459,
+          "lower95": -5.7908158801950975,
+          "upper95": 6.146962021209902,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 2.937299450317689,
+          "se": 3.1447045655411627,
+          "lower95": -3.22632149814299,
+          "upper95": 9.100920398778367,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 4.573766587154067,
+          "se": 5.924672425237663,
+          "lower95": -7.038591366311753,
+          "upper95": 16.186124540619886,
+          "n": 77,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.473951114612756,
+          "se": 11.066518746872205,
+          "lower95": -35.16432785848228,
+          "upper95": 8.216425629256765,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 2.778292006843854,
+          "se": 6.0186150296563,
+          "lower95": -9.018193451282494,
+          "upper95": 14.574777464970202,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 2.576414794558122,
+          "se": 7.435936871975504,
+          "lower95": -11.998021474513866,
+          "upper95": 17.15085106363011,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.289083448325429,
+          "se": 2.8475682258158974,
+          "lower95": -5.292150274273729,
+          "upper95": 5.870317170924587,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 5.564251530797044,
+          "se": 5.175488914473972,
+          "lower95": -4.57970674157194,
+          "upper95": 15.708209803166028,
+          "n": 77,
+          "ci_excludes_zero": false
+        },
+        "loans_to_commercial_banks_qoq": {
+          "beta": -1.3922823289839332,
+          "se": 1.0550659089585954,
+          "lower95": -3.46021151054278,
+          "upper95": 0.6756468525749137,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 4.953740425375528,
+          "se": 4.786714428988749,
+          "lower95": -4.4282198554424195,
+          "upper95": 14.335700706193476,
+          "n": 34,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.08204381438028063,
+          "se": 1.6337711667711714,
+          "lower95": -3.1201476724912154,
+          "upper95": 3.2842353012517767,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "treasury_securities_bank_qoq": {
+          "beta": 13.376129247012747,
+          "se": 11.37212943528376,
+          "lower95": -8.913244446143421,
+          "upper95": 35.66550294016891,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 5.995262550908464,
+          "se": 18.15477322120832,
+          "lower95": -29.588092962659843,
+          "upper95": 41.57861806447677,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.5638143199906454,
+          "se": 3.021164553831607,
+          "lower95": -6.485296845500595,
+          "upper95": 5.357668205519304,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 12.987996033280508,
+          "se": 6.536634985689097,
+          "lower95": 0.1761914613298785,
+          "upper95": 25.799800605231137,
+          "n": 111,
           "ci_excludes_zero": true
         }
       },
-      "funding_accommodation_context": {
-        "channels": {},
-        "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "funding_accommodation_unresolved"
+      "core_domestic_creator_lending_channels": {
+        "commercial_industrial_loans_qoq": {
+          "beta": -13.599101562242353,
+          "se": 11.616697093722014,
+          "lower95": -36.3678278659375,
+          "upper95": 9.169624741452793,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "construction_land_development_loans_qoq": {
+          "beta": 1.5808380043550008,
+          "se": 0.8379202709993713,
+          "lower95": -0.06148572680376696,
+          "upper95": 3.2231617355137683,
+          "n": 34,
+          "ci_excludes_zero": false
+        },
+        "cre_multifamily_loans_qoq": {
+          "beta": 2.425655070234475,
+          "se": 1.0363218921290722,
+          "lower95": 0.3944641616614937,
+          "upper95": 4.456845978807456,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "cre_nonfarm_nonresidential_loans_qoq": {
+          "beta": 3.509345832299161,
+          "se": 1.6325077552837346,
+          "lower95": 0.3096306319430413,
+          "upper95": 6.70906103265528,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "consumer_loans_qoq": {
+          "beta": 2.1298136023858447,
+          "se": 5.783664907500948,
+          "lower95": -9.206169616316012,
+          "upper95": 13.465796821087702,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_qoq": {
+          "beta": 2.7653536961467857,
+          "se": 6.9424938926043005,
+          "lower95": -10.841934333357644,
+          "upper95": 16.372641725651214,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "auto_loans_qoq": {
+          "beta": 4.953845938930109,
+          "se": 1.678166318522084,
+          "lower95": 1.6646399546268245,
+          "upper95": 8.243051923233393,
+          "n": 34,
+          "ci_excludes_zero": true
+        },
+        "other_consumer_loans_qoq": {
+          "beta": 0.17807307050740206,
+          "se": 3.045351505460459,
+          "lower95": -5.7908158801950975,
+          "upper95": 6.146962021209902,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "heloc_loans_qoq": {
+          "beta": 2.937299450317689,
+          "se": 3.1447045655411627,
+          "lower95": -3.22632149814299,
+          "upper95": 9.100920398778367,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_qoq": {
+          "beta": 4.573766587154067,
+          "se": 5.924672425237663,
+          "lower95": -7.038591366311753,
+          "upper95": 16.186124540619886,
+          "n": 77,
+          "ci_excludes_zero": false
+        },
+        "commercial_industrial_loans_ex_chargeoffs_qoq": {
+          "beta": -13.473951114612756,
+          "se": 11.066518746872205,
+          "lower95": -35.16432785848228,
+          "upper95": 8.216425629256765,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 2.778292006843854,
+          "se": 6.0186150296563,
+          "lower95": -9.018193451282494,
+          "upper95": 14.574777464970202,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "credit_card_revolving_loans_ex_chargeoffs_qoq": {
+          "beta": 2.576414794558122,
+          "se": 7.435936871975504,
+          "lower95": -11.998021474513866,
+          "upper95": 17.15085106363011,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "other_consumer_loans_ex_chargeoffs_qoq": {
+          "beta": 0.289083448325429,
+          "se": 2.8475682258158974,
+          "lower95": -5.292150274273729,
+          "upper95": 5.870317170924587,
+          "n": 93,
+          "ci_excludes_zero": false
+        },
+        "closed_end_residential_loans_ex_chargeoffs_qoq": {
+          "beta": 5.564251530797044,
+          "se": 5.175488914473972,
+          "lower95": -4.57970674157194,
+          "upper95": 15.708209803166028,
+          "n": 77,
+          "ci_excludes_zero": false
+        }
       },
-      "escape_support_context": {
+      "noncore_creator_lending_channels": {
+        "loans_to_commercial_banks_qoq": {
+          "beta": -1.3922823289839332,
+          "se": 1.0550659089585954,
+          "lower95": -3.46021151054278,
+          "upper95": 0.6756468525749137,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "loans_to_nondepository_financial_institutions_qoq": {
+          "beta": 4.953740425375528,
+          "se": 4.786714428988749,
+          "lower95": -4.4282198554424195,
+          "upper95": 14.335700706193476,
+          "n": 34,
+          "ci_excludes_zero": false
+        },
+        "loans_for_purchasing_or_carrying_securities_qoq": {
+          "beta": 0.08204381438028063,
+          "se": 1.6337711667711714,
+          "lower95": -3.1201476724912154,
+          "upper95": 3.2842353012517767,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "creator_asset_purchase_channels": {
+        "treasury_securities_bank_qoq": {
+          "beta": 13.376129247012747,
+          "se": 11.37212943528376,
+          "lower95": -8.913244446143421,
+          "upper95": 35.66550294016891,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "agency_gse_backed_securities_bank_qoq": {
+          "beta": 5.995262550908464,
+          "se": 18.15477322120832,
+          "lower95": -29.588092962659843,
+          "upper95": 41.57861806447677,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "municipal_securities_bank_qoq": {
+          "beta": -0.5638143199906454,
+          "se": 3.021164553831607,
+          "lower95": -6.485296845500595,
+          "upper95": 5.357668205519304,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "corporate_foreign_bonds_bank_qoq": {
+          "beta": 12.987996033280508,
+          "se": 6.536634985689097,
+          "lower95": 0.1761914613298785,
+          "upper95": 25.799800605231137,
+          "n": 111,
+          "ci_excludes_zero": true
+        }
+      },
+      "funding_accommodation_channels": {
+        "interbank_transactions_bank_qoq": {
+          "beta": 20.418393025091618,
+          "se": 10.197069428327055,
+          "lower95": 0.43213694557059057,
+          "upper95": 40.404649104612645,
+          "n": 111,
+          "ci_excludes_zero": true
+        },
+        "fedfunds_repo_liabilities_bank_qoq": {
+          "beta": 2.645785101811433,
+          "se": 6.2507290746698425,
+          "lower95": -9.605643884541458,
+          "upper95": 14.897214088164326,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "commercial_bank_borrowings_qoq": {
+          "beta": 2.2139603488987127,
+          "se": 26.80851629836669,
+          "lower95": -50.330731595900005,
+          "upper95": 54.75865229369742,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "fed_borrowings_depository_institutions_qoq": {
+          "beta": 5.222235335145548,
+          "se": 9.904724701905726,
+          "lower95": -14.191025080589675,
+          "upper95": 24.63549575088077,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "debt_securities_bank_liability_qoq": {
+          "beta": 5.77691302388884,
+          "se": 9.025915081297653,
+          "lower95": -11.913880535454558,
+          "upper95": 23.467706583232236,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "fhlb_advances_sallie_mae_loans_bank_qoq": {
+          "beta": -4.797218585205416,
+          "se": 15.44518102209492,
+          "lower95": -35.06977338851146,
+          "upper95": 25.47533621810063,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_cleanup_candidates": {},
+      "counterpart_reallocation_proxy_channels": {
+        "domestic_nonfinancial_mmf_reallocation_qoq": {
+          "beta": -11.463474477775122,
+          "se": 27.532042591974918,
+          "lower95": -65.42627795804596,
+          "upper95": 42.49932900249571,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "domestic_nonfinancial_repo_reallocation_qoq": {
+          "beta": -2.0014426599487383,
+          "se": 1.1655268905173632,
+          "lower95": -4.28587536536277,
+          "upper95": 0.2829900454652936,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "on_rrp_reallocation_qoq": {
+          "beta": -0.3887789255424701,
+          "se": 0.07146055681815296,
+          "lower95": -0.5288416169060499,
+          "upper95": -0.24871623417889033,
+          "n": 41,
+          "ci_excludes_zero": true
+        },
+        "household_treasury_securities_reallocation_qoq": {
+          "beta": 4.806206696170985,
+          "se": 36.04209339465843,
+          "lower95": -65.83629635735953,
+          "upper95": 75.44870974970151,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "mmf_treasury_bills_reallocation_qoq": {
+          "beta": 45.58614012436324,
+          "se": 32.76120705436983,
+          "lower95": -18.625825702201624,
+          "upper95": 109.7981059509281,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "currency_reallocation_qoq": {
+          "beta": 0.31631718689908617,
+          "se": 5.1854004348124105,
+          "lower95": -9.847067665333238,
+          "upper95": 10.47970203913141,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "external_counterpart_reallocation_proxy_channels": {
+        "foreign_nonts_qoq": {
+          "beta": 31.584778081997413,
+          "se": 9.344040160834545,
+          "lower95": 13.270459366761706,
+          "upper95": 49.89909679723312,
+          "n": 111,
+          "ci_excludes_zero": true
+        },
+        "checkable_rest_of_world_bank_qoq": {
+          "beta": 0.17528980348046896,
+          "se": 0.7827538737603579,
+          "lower95": -1.3589077890898325,
+          "upper95": 1.7094873960507702,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_liability_qoq": {
+          "beta": 9.047408097248638,
+          "se": 5.709609837823366,
+          "lower95": -2.1434271848851587,
+          "upper95": 20.238243379382435,
+          "n": 111,
+          "ci_excludes_zero": false
+        },
+        "interbank_transactions_foreign_banks_asset_qoq": {
+          "beta": 13.913245809530899,
+          "se": 3.990380043556314,
+          "lower95": 6.0921009241605235,
+          "upper95": 21.734390694901276,
+          "n": 111,
+          "ci_excludes_zero": true
+        },
+        "deposits_at_foreign_banks_asset_qoq": {
+          "beta": 0.4750435090049359,
+          "se": 0.32483323093560645,
+          "lower95": -0.16162962362885275,
+          "upper95": 1.1117166416387245,
+          "n": 111,
+          "ci_excludes_zero": false
+        }
+      },
+      "funding_accommodation_context": {
+        "channels": {
+          "interbank_transactions_bank_qoq": {
+            "beta": 20.418393025091618,
+            "se": 10.197069428327055,
+            "lower95": 0.43213694557059057,
+            "upper95": 40.404649104612645,
+            "n": 111,
+            "ci_excludes_zero": true
+          },
+          "fedfunds_repo_liabilities_bank_qoq": {
+            "beta": 2.645785101811433,
+            "se": 6.2507290746698425,
+            "lower95": -9.605643884541458,
+            "upper95": 14.897214088164326,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "commercial_bank_borrowings_qoq": {
+            "beta": 2.2139603488987127,
+            "se": 26.80851629836669,
+            "lower95": -50.330731595900005,
+            "upper95": 54.75865229369742,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "fed_borrowings_depository_institutions_qoq": {
+            "beta": 5.222235335145548,
+            "se": 9.904724701905726,
+            "lower95": -14.191025080589675,
+            "upper95": 24.63549575088077,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "debt_securities_bank_liability_qoq": {
+            "beta": 5.77691302388884,
+            "se": 9.025915081297653,
+            "lower95": -11.913880535454558,
+            "upper95": 23.467706583232236,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "fhlb_advances_sallie_mae_loans_bank_qoq": {
+            "beta": -4.797218585205416,
+            "se": 15.44518102209492,
+            "lower95": -35.06977338851146,
+            "upper95": 25.47533621810063,
+            "n": 111,
+            "ci_excludes_zero": false
+          }
+        },
+        "decisive_positive_channels": [
+          "interbank_transactions_bank_qoq"
+        ],
+        "decisive_negative_channels": [],
+        "interpretation": "positive_funding_accommodation_signal"
+      },
+      "counterpart_reallocation_proxy_context": {
         "channels": {
           "domestic_nonfinancial_mmf_reallocation_qoq": {
-            "beta": -28.06167360138172,
-            "se": 21.060724923948644,
-            "lower95": -69.34069445232106,
-            "upper95": 13.21734724955762,
-            "n": 60,
+            "beta": -11.463474477775122,
+            "se": 27.532042591974918,
+            "lower95": -65.42627795804596,
+            "upper95": 42.49932900249571,
+            "n": 111,
             "ci_excludes_zero": false
           },
           "domestic_nonfinancial_repo_reallocation_qoq": {
-            "beta": -2.099738160365989,
-            "se": 1.607468321927399,
-            "lower95": -5.250376071343691,
-            "upper95": 1.0508997506117137,
-            "n": 60,
+            "beta": -2.0014426599487383,
+            "se": 1.1655268905173632,
+            "lower95": -4.28587536536277,
+            "upper95": 0.2829900454652936,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "on_rrp_reallocation_qoq": {
+            "beta": -0.3887789255424701,
+            "se": 0.07146055681815296,
+            "lower95": -0.5288416169060499,
+            "upper95": -0.24871623417889033,
+            "n": 41,
+            "ci_excludes_zero": true
+          },
+          "household_treasury_securities_reallocation_qoq": {
+            "beta": 4.806206696170985,
+            "se": 36.04209339465843,
+            "lower95": -65.83629635735953,
+            "upper95": 75.44870974970151,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "mmf_treasury_bills_reallocation_qoq": {
+            "beta": 45.58614012436324,
+            "se": 32.76120705436983,
+            "lower95": -18.625825702201624,
+            "upper95": 109.7981059509281,
+            "n": 111,
+            "ci_excludes_zero": false
+          },
+          "currency_reallocation_qoq": {
+            "beta": 0.31631718689908617,
+            "se": 5.1854004348124105,
+            "lower95": -9.847067665333238,
+            "upper95": 10.47970203913141,
+            "n": 111,
             "ci_excludes_zero": false
           }
         },
         "decisive_positive_channels": [],
-        "decisive_negative_channels": [],
-        "interpretation": "escape_support_unresolved"
+        "decisive_negative_channels": [
+          "on_rrp_reallocation_qoq"
+        ],
+        "interpretation": "sign_normalized_movement_toward_named_channel"
       },
       "asset_purchase_plumbing_context": {
         "channels": {
+          "tga_qoq": {
+            "beta": -65.10481715959298,
+            "se": 34.772942511877375,
+            "lower95": -133.25978448287265,
+            "upper95": 3.0501501636866664,
+            "n": 83,
+            "ci_excludes_zero": false
+          },
+          "reserves_qoq": {
+            "beta": 79.39252122955592,
+            "se": 58.6663668649233,
+            "lower95": -35.593557825693736,
+            "upper95": 194.3786002848056,
+            "n": 83,
+            "ci_excludes_zero": false
+          },
           "cb_nonts_qoq": {
-            "beta": 25.151068626318896,
-            "se": 94.31939068681434,
-            "lower95": -159.7149371198372,
-            "upper95": 210.017074372475,
-            "n": 60,
+            "beta": 14.622011710454036,
+            "se": 71.59713124536769,
+            "lower95": -125.70836553046665,
+            "upper95": 154.95238895137473,
+            "n": 83,
             "ci_excludes_zero": false
           }
         },
@@ -940,23 +4470,39 @@
         "decisive_negative_channels": [],
         "treasury_drain_signal": false,
         "reserve_support_signal": false,
-        "interpretation": "no_decisive_asset_purchase_creator_signal"
+        "interpretation": "mixed_or_nondecisive_plumbing_context"
       },
-      "decisive_positive_creator_channels": [],
+      "decisive_positive_creator_channels": [
+        "auto_loans_qoq",
+        "corporate_foreign_bonds_bank_qoq",
+        "cre_multifamily_loans_qoq",
+        "cre_nonfarm_nonresidential_loans_qoq"
+      ],
       "decisive_negative_creator_channels": [],
-      "decisive_positive_core_creator_channels": [],
+      "decisive_positive_core_creator_channels": [
+        "auto_loans_qoq",
+        "cre_multifamily_loans_qoq",
+        "cre_nonfarm_nonresidential_loans_qoq"
+      ],
       "decisive_negative_core_creator_channels": [],
       "decisive_positive_noncore_creator_channels": [],
       "decisive_negative_noncore_creator_channels": [],
-      "decisive_positive_asset_purchase_channels": [],
-      "decisive_negative_asset_purchase_channels": [],
-      "decisive_positive_retention_support_channels": [],
-      "decisive_negative_retention_support_channels": [],
-      "decisive_positive_external_escape_channels": [
-        "foreign_nonts_qoq"
+      "decisive_positive_asset_purchase_channels": [
+        "corporate_foreign_bonds_bank_qoq"
       ],
-      "decisive_negative_external_escape_channels": [],
-      "decisive_positive_funding_accommodation_channels": [],
+      "decisive_negative_asset_purchase_channels": [],
+      "decisive_positive_counterpart_reallocation_proxy_channels": [],
+      "decisive_negative_counterpart_reallocation_proxy_channels": [
+        "on_rrp_reallocation_qoq"
+      ],
+      "decisive_positive_external_counterpart_reallocation_proxy_channels": [
+        "foreign_nonts_qoq",
+        "interbank_transactions_foreign_banks_asset_qoq"
+      ],
+      "decisive_negative_external_counterpart_reallocation_proxy_channels": [],
+      "decisive_positive_funding_accommodation_channels": [
+        "interbank_transactions_bank_qoq"
+      ],
       "decisive_negative_funding_accommodation_channels": [],
       "proxy_coverage_label": null,
       "uncovered_channel_families": [
@@ -969,6 +4515,15 @@
   },
   "takeaways": [
     "This scorecard reframes the non-TDC question around counterpart creator channels rather than deposit types.",
-    "No creator-channel LP outcomes are materialized yet."
+    "First-wave creator outcomes currently present: agency_gse_backed_securities_bank_qoq, auto_loans_qoq, closed_end_residential_loans_ex_chargeoffs_qoq, closed_end_residential_loans_qoq, commercial_industrial_loans_ex_chargeoffs_qoq, commercial_industrial_loans_qoq, construction_land_development_loans_qoq, consumer_loans_ex_chargeoffs_qoq, consumer_loans_qoq, corporate_foreign_bonds_bank_qoq, cre_multifamily_loans_qoq, cre_nonfarm_nonresidential_loans_qoq, credit_card_revolving_loans_ex_chargeoffs_qoq, credit_card_revolving_loans_qoq, heloc_loans_qoq, loans_for_purchasing_or_carrying_securities_qoq, loans_to_commercial_banks_qoq, loans_to_nondepository_financial_institutions_qoq, municipal_securities_bank_qoq, other_consumer_loans_ex_chargeoffs_qoq, other_consumer_loans_qoq, treasury_securities_bank_qoq.",
+    "Charge-off-adjusted creator lanes add back an approximate quarterly destruction flow using lagged balances and official annualized charge-off rates.",
+    "Intermediary, depository, and securities-purpose lending channels are now separated from the core domestic nonfinancial creator lanes.",
+    "The first bank asset-purchase creator lane is now live via quarterly Z.1 holdings for Treasury, agency/GSE-backed, municipal, and corporate/foreign bond assets.",
+    "Asset-purchase creator signals are now paired with raw TGA, reserves, and combined central-bank plumbing responses so positive securities accumulation is not interpreted without Treasury/Fed context.",
+    "The counterpart-reallocation proxy block tracks sign-normalized MMF, repo, ON RRP, direct Treasury or bill, and currency movements without assigning a source or destination of funds.",
+    "Funding accommodations are tracked separately from creator and counterpart-reallocation proxy lanes so borrowing-side absorption remains visible without being mislabeled as deposit creation.",
+    "Holding-company / parent funding remains a cleanup candidate rather than an active interpreted accommodation lane.",
+    "The external banking lane now includes broad foreign liabilities plus bank-specific foreign interbank positions and deposits at foreign banks.",
+    "The biggest remaining creator-target gap is ci_us_qoq: the live public path still uses all-commercial-bank C&I rather than exact U.S.-addressee domestic nonfinancial C&I."
   ]
 }
