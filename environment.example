@@ -1,7 +1,7 @@
 UV_PROJECT_ENVIRONMENT=$HOME/venvs/tdcpass
 PYTHONDONTWRITEBYTECODE=1
 PYTHONPYCACHEPREFIX=/tmp/tdcpass-pycache
-PYTEST_ADDOPTS=-p no:cacheprovider
+PYTEST_ADDOPTS='-p no:cacheprovider'
 UV_CACHE_DIR=/tmp/uv-cache-tdcpass
 RUFF_CACHE_DIR=/tmp/ruff-cache-tdcpass
 FRED_API_KEY=

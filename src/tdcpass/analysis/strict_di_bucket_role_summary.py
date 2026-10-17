@@ -41,7 +41,6 @@ def build_strict_di_bucket_role_summary(
     if core_residual.get("beta") is not None and secondary.get("beta") is not None:
         residual_gap_vs_secondary_beta = float(secondary["beta"]) - float(core_residual["beta"])
 
-    di_bucket = dict(followup_h0.get("strict_loan_di_loans_nec", {}) or {})
     us_chartered_share = followup_h0.get("us_chartered_share_of_systemwide_liability_beta")
     borrower_gap_share = followup_h0.get("systemwide_borrower_gap_share_of_systemwide_liability_beta")
     dominant_borrower_component = followup_h0.get("dominant_borrower_component")

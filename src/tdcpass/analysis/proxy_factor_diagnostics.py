@@ -4,7 +4,6 @@ from typing import Any
 
 import pandas as pd
 
-from tdcpass.analysis.structural_proxy_evidence import PROXY_OUTCOMES
 
 PROXY_FAMILIES: dict[str, tuple[str, ...]] = {
     "funding_side": (

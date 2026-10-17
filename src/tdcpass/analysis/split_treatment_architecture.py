@@ -131,8 +131,6 @@ def build_split_treatment_architecture_summary(
             else support_bundle_beta - direct_support_bundle_signed_beta
         )
 
-        core_residual_beta = _safe_float(core_residual.get("beta"))
-        baseline_residual_beta = _safe_float(baseline_residual.get("beta"))
         support_bundle_residual_shift_beta = _safe_float(dict(no_toc_no_row).get("residual_shift_vs_baseline_beta"))
         support_bundle_share_of_baseline = (
             None

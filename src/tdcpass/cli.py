@@ -239,10 +239,10 @@ def _pipeline_closeout(args: argparse.Namespace) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="tdcpass", description="TDC pass-through repo scaffold CLI")
+    parser = argparse.ArgumentParser(prog="tdcpass", description="Treasury Deposit Component arithmetic and boundary comparisons")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    doctor = subparsers.add_parser("doctor", help="Validate the seed repo structure")
+    doctor = subparsers.add_parser("doctor", help="Validate public checkout configuration and schema files")
     doctor.set_defaults(func=_doctor)
 
     demo = subparsers.add_parser("demo", help="Run the synthetic demo pipeline")

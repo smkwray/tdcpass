@@ -11,7 +11,6 @@ def test_treasury_cash_regime_audit_flags_ttl_era_reestimate_when_broad_proxy_do
     quarters = pd.period_range("1990Q1", "2011Q4", freq="Q")
     quarter_labels = quarters.astype(str)
     pre_n = (quarters <= pd.Period("2008Q2", freq="Q")).sum()
-    transition_n = ((quarters >= pd.Period("2008Q3", freq="Q")) & (quarters <= pd.Period("2009Q4", freq="Q"))).sum()
     post_n = (quarters >= pd.Period("2010Q1", freq="Q")).sum()
 
     pre_ttl = [10.0 if i % 2 == 0 else -10.0 for i in range(pre_n)]

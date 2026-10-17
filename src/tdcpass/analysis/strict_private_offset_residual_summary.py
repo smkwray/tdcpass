@@ -125,7 +125,6 @@ def _offset_payload(
     nonfinancial_noncorporate: dict[str, Any] | None,
 ) -> dict[str, Any]:
     private_beta = None if private_total is None else float(private_total["beta"])
-    corporate_beta = None if nonfinancial_corporate is None else float(nonfinancial_corporate["beta"])
     offset_beta = None if offset_total is None else float(offset_total["beta"])
     minus_corp_beta = None if private_minus_corporate is None else float(private_minus_corporate["beta"])
     households_beta = None if households is None else float(households["beta"])

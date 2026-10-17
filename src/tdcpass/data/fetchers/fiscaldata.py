@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Dict, Iterable, Optional
+from typing import Dict, Optional
 from urllib.parse import urljoin
 
 import pandas as pd

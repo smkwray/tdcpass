@@ -383,7 +383,6 @@ def build_strict_missing_channel_summary(
             "At h0, the TOC/ROW-excluded comparison exposes a sign mismatch inside the strict lane: "
             f"the residual stays negative at about {float(excluded_residual):.2f}, while the strict identifiable total turns positive at about {float(excluded_total_beta):.2f}."
         )
-    excluded_gap_share = excluded_h0.get("strict_identifiable_gap_response")
     excluded_gap_after_funding_share = excluded_h0.get("strict_gap_after_funding_share_of_residual_abs")
     if excluded_h0.get("strict_gap_share_of_residual_abs") is not None and excluded_gap_after_funding_share is not None:
         takeaways.append(

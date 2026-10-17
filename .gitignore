@@ -51,3 +51,15 @@ data/bundles/
 
 output/*
 !output/.gitkeep
+
+.private-denylist
+
+.*-private-denylist
+
+.claude/
+
+.codex/
+
+.cursor/
+
+.env.*

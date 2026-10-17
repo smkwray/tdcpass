@@ -1,6 +1,10 @@
 # Output schema
 
-Canonical exported names follow the registry contract.
+Canonical exported names follow the registry contract. These are arithmetic and
+boundary comparison artifacts. Historical names such as `strict_*`, `shock`,
+and `pass_through` preserve the interface; they do not establish independent
+component measurement, causal identification, or retention. Read coverage and
+readiness summaries alongside the tables.
 Short aliases such as `tdc_qoq` and `total_deposits_qoq` are optional compatibility aliases only and are not the frozen external artifact contract.
 The live quarterly bundle is produced by `tdcpass pipeline run` and writes the bank-only contract to `data/derived/quarterly_panel.csv`, `output/*`, and mirrored `site/data/*` artifacts.
 For the public release, `site/data/*` is the committed preview mirror and `output/*` remains regenerated local analysis output.

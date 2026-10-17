@@ -1,271 +1,151 @@
-# tdcpass
+# TDCpass — Treasury Deposit Component comparisons
 
-[Live site](https://smkwray.github.io/tdcpass/)
+TDCpass builds quarterly comparisons between Treasury Deposit Component (TDC)
+proxies and named deposit outcomes. It checks arithmetic parity, measurement
+variants, and perimeter boundaries, and exports a reproducible comparison bundle.
+It is not an independent estimator or causal evidence chain.
 
-> In progress: this is a public methods-and-reproducibility release, and the design, estimates, and wording may still tighten.
+[TDCest](https://github.com/smkwray/tdcest) owns the quarterly proxy and its
+measurement ladder. [EA-TDC](https://github.com/smkwray/ea-tdc) owns conditional
+deposit projections and any admitted cumulative response ratio. TDCpass retains
+projection and diagnostic machinery to reproduce comparisons; that machinery does
+not confer independent empirical authority on the results.
 
-> Important: the broad TDC estimate and the independently confirmed non-TDC evidence are not the same object. The broad TDC result is the main matched-deposit empirical result; the independently confirmed non-TDC side is narrower and currently loan-led. Residual accounting is used for alignment and diagnostics, not as independent channel evidence.
+## Install and run
 
-`tdcpass` studies one question:
-
-**When the Treasury Contribution to Deposits (TDC) rises unexpectedly, do matched total bank deposits rise too, or does that increase mostly replace other deposit-creating channels?**
-
-Current stopping point:
-
-- the exact baseline shows positive impact effects on matched total bank deposits and negative effects on the non-TDC residual
-- full TDC remains the broad Treasury-attributed measure, not a validated strict deposit component
-- the repo now exposes a live `tdcest` comparison ladder with corrected broad-estimate variants, while keeping that ladder outside the independently confirmed core
-- the upstream DU fiscal-flow first-pass branch is intentionally not imported here because it remains exploratory proxy/residual research rather than a comparison-grade public measure
-- the independently confirmed core currently excludes Treasury other-checkable and rest-of-world deposit channels
-- the pre-`2002Q4` historical backfill now uses a TT&L-aware Treasury cash term; the post-`2002Q4` transaction-era headline is unchanged
-- the strongest independent evidence remains narrow and loan-led, with a nonfinancial-corporate bridge kept as comparison evidence rather than direct validation
-- the strict empirical expansion branch is effectively complete under current public data
-- trade flows, Fed MBS / QE incidence, and offshore/correspondent routing remain outside the independently confirmed core because same-scope domestic deposit settlement incidence is not identified tightly enough in public data
-- the repo is now in writeup and results-packaging mode unless new same-scope transaction or incidence evidence appears
-
-## Start here
-
-If you only read three things, read these:
-
-1. **Broad TDC result:** unexpected TDC is associated with higher matched total bank deposits on impact.
-2. **Independent non-TDC evidence:** the independently confirmed side is narrower, loan-led, and does not currently support a complete independently measured non-TDC deposit total.
-3. **Boundary rule:** Treasury other-checkable deposits, rest-of-world deposits, trade flows, Fed MBS/QE incidence, and offshore/correspondent routing remain outside the strict independently confirmed object under current public data.
-
-## Status
-
-Current posture:
-
-- reproducible public-data pipeline
-- canonical quarterly TDC imported from [`smkwray/tdcest`](https://github.com/smkwray/tdcest) outputs
-- reusable diagnostics for identification and mechanism caveats
-- committed `site/data/*` preview mirror; regenerated `output/*` stays local
-
-The current bundle is a diagnostics-heavy methods and reproducibility release built on canonical [`tdcest`](https://github.com/smkwray/tdcest) TDC. The reusable core is the panel builder, outcome construction, local-projection stack, diagnostics, and site/export wiring around that measure.
-
-Here, **TDC** means the canonically defined Treasury Contribution to Deposits from [`smkwray/tdcest`](https://github.com/smkwray/tdcest) / `tdcsim`. It is the project's measured Treasury-related deposit contribution, not a relabeling of literal Treasury deposit balances.
-
-In the upstream accounting, the preferred headline estimate is the bank-only transaction-flow series. In words, it measures RS settlement-side net acquisition of marketable Treasuries, minus Treasury operating-cash drain, plus positive Fed remittances. RS is the rest-of-system complement of DU; imported producer fields whose names contain `_ru_flow` retain that artifact name while public prose renders them as RS-coded settlement-side flows. In this repo, that imported quarterly series is the default headline treatment.
-
-### Z.1 holder-asset sensitivity
-
-TDCpass exports one auxiliary holder-side outcome: the quarterly change in L.203 checkable-deposits-and-currency plus L.204 time-and-savings-deposit assets held by households/nonprofits and nonfinancial corporate and noncorporate business. It is an unmatched legal-sector holder-asset sensitivity, not $\Delta D^{DU}$. EA-TDC owns any estimation using it; TDCpass supplies the arithmetic construction and boundary metadata. If an EA-TDC result is similar under this outcome, it supports the conditional interpretation that the result is not unique to the issuer-side outcome, assuming the currency, issuer, timing, and perimeter differences are not driving the comparison.
-
-The broader candidate that adds state/local governments and domestic financial sectors is parked. Its domestic-financial L.203 input contains monetary-authority coin, depository-institution vault cash, and other mixed claims, so it is neither a domestic-nonbank deposit measure nor a DU outcome. Subtracting a TDC proxy from either holder-side aggregation would be a descriptive arithmetic difference, not an accounting residual or non-TDC deposit component.
-
-The repo also imports a selective broad-estimate comparison ladder from sibling [`smkwray/tdcest`](https://github.com/smkwray/tdcest) processed outputs:
-
-- `tdc_tier2_bank_only_qoq`
-- `tdc_tier3_bank_only_qoq`
-- `tdc_tier3_broad_depository_qoq`
-- `tdc_bank_receipt_historical_overlay_qoq`
-- `tdc_row_mrv_nondefault_pilot_qoq`
-
-These rows are comparison or bounded-sensitivity measures only. They do not replace the frozen strict interpretation.
-
-The repo intentionally does **not** import upstream DU fiscal-flow first-pass rows. In current upstream form, they combine total MTS cash totals with DU-side Treasury-security proxies and coupon proxies, with fallback residual logic where direct coverage is incomplete. That makes them useful research context upstream, but not strong enough for `tdcpass`'s public comparison layer.
-
-### Why the canonical broad headline is retained
-
-The corrected `tdcest` ladder is important, but it is not treated as a direct replacement for the canonical broad headline.
-
-- Tier 2 and Tier 3 change the broad estimate materially, especially through interest and fiscal corrections.
-- Those corrected variants are kept as broad-estimate comparison rows rather than promoted into the independently confirmed non-TDC evidence hierarchy.
-- The sign difference between the canonical headline and the corrected ladder is therefore a broad-measurement issue, not a reason to widen the strict independent object.
-- Nothing in the corrected ladder promotes Treasury other-checkable deposits, rest-of-world deposits, or other excluded support channels into the independently confirmed core.
-
-For the historical extension before transaction coverage begins, the repo now uses a regime-aware TT&L-era cash-term refinement in the backfill path. That historical refinement is separate from the modern broad-versus-strict interpretation and does not alter the transaction-era headline after `2002Q4`.
-
-## Broad vs strict
-
-The repo now freezes a broad-versus-strict distinction.
-
-### Broad TDC
-
-Full TDC is kept as the **broad Treasury-attributed measure**.
-
-That means:
-
-- it is mechanically coherent
-- it is useful as the project's headline Treasury-related estimate
-- it is **not** currently claimed to be the strict deposit component
-
-### Strict non-TDC deposits
-
-The strict deposit component is the narrower target:
-
-- a mechanical or near-mechanical component inside deposits
-- something that should line up with independently measured deposit-creation channels
-
-Under current evidence:
-
-- the independently confirmed core excludes Treasury other-checkable and rest-of-world deposit channels
-- the main direct evidence is a narrow loan-led core
-- mortgage lending is the strongest impact-horizon subcomponent
-- the nonfinancial-corporate bridge is comparison evidence only
-- the broader private-borrower bridge remains diagnostic only
-
-This is the key release discipline of the repo:
-
-- **full TDC** and the **strict deposit component** are not treated as interchangeable labels
-
-### Minimal Defensible Independent Non-TDC Read
-
-If the question is the smallest independent non-TDC measure this repo can defend, the answer is narrower than the full residual.
-
-- minimum direct benchmark: `strict_loan_core_min_qoq`
-- impact-horizon subcomponent: `strict_loan_mortgages_qoq`
-- standard narrow bridge comparison: `strict_loan_core_plus_nonfinancial_corporate_qoq`
-- wider private-borrower and closure-style rows: diagnostic only
-
-In plain language: the most defensible partial independent non-TDC read is loan-led and starts with mortgages plus consumer credit, not with a full independently measured non-TDC deposit total.
-
-## What the repo does
-
-The package rebuilds a quarterly public-data bundle that includes:
-
-- canonical bank-only TDC imported from [`smkwray/tdcest`](https://github.com/smkwray/tdcest)
-- selective `tdcest` broad-object ladder comparisons:
-  - Tier 2 interest-corrected bank-only
-  - Tier 3 fiscal-corrected bank-only
-  - Tier 3 fiscal-corrected broad-depository
-  - historical bank-receipt overlay
-  - bounded MRV ROW pilot
-- matched total-deposit outcomes
-- the non-TDC residual, defined as matched total deposits minus the headline TDC series
-- matched-scope comparison surfaces for no-ROW, U.S.-chartered-bank, and deposits-only sensitivities
-- a strict source-side direct-count lane for non-TDC deposits, led by official Z.1 loan transactions and a separate non-Treasury securities add-on
-- an imported accounting-reconstruction lane for the non-TDC residual, bundled locally from the EA-TDC accounting export
-- a rolling unexpected-treatment shock plus exploratory sensitivity variants
-- public period-sensitivity tables because medium-horizon persistence differs across major usable-sample windows
-- local-projection response tables
-- structural-proxy cross-checks and readiness diagnostics
-- creator, counterpart-reallocation proxy, external, and funding scorecards
-- an accounting-reconstruction cross-check that lines up closely with the non-TDC residual after normalizing the imported EA bundle scale, but still remains a secondary closure-oriented read
-- a separate strict source-side comparison surface that shows how much of the non-TDC residual is covered by direct identifiable bank asset transactions before any closure-oriented reconstruction
-- follow-up diagnostic surfaces for scope variants, borrower-counterpart diagnostics, and funding-offset sensitivities
-- manifests for raw downloads and optional local cache reuse
-
-## What it does not do
-
-- It does not require prebuilt local caches to run.
-- It does not treat the residual alone as mechanism proof.
-- It does not claim a complete additive decomposition of the non-TDC residual.
-- It does not relabel the strict source-side lane as a full accounting closure of non-TDC deposits.
-- It does not currently claim a clean pass-through-versus-crowd-out answer.
-- It does not report headline pass-through or crowd-out ratios in the current release.
-- It does not treat bill-share-linked shock variants as co-equal headline designs; they remain exploratory stress tests only.
-
-## What the repo can currently say
-
-- Unexpected TDC increases are associated with higher matched total bank deposits on impact in the exact baseline.
-- The increase is less than one-for-one because the non-TDC component falls.
-- The strict source-side lane is a defensible independent count of directly identifiable non-Treasury bank asset support, but it is intentionally narrow and does not validate full TDC as the strict deposit component.
-- The repo now distinguishes the upstream no-ROW sensitivity from a true local U.S.-chartered bank-leg-matched treatment, so scope alignment is explicit rather than implicit.
-- Treasury other-checkable deposits look real in Treasury cash and reserve plumbing terms, but they are not validated as a strict in-scope deposit component.
-- Rest-of-world deposits look even weaker as a strict in-scope deposit component and remain outside the strict object under current evidence.
-- Trade flows and Fed MBS / QE incidence remain theoretically relevant but non-promotable under current public data because settlement incidence is not same-scope enough for the strict object.
-- The `tdcest` corrected ladder is now visible as a broad-estimate comparison layer, but it does not change the strict evidence hierarchy.
-- The final creator-channel search and the final DI loans n.e.c. audit do not support any new promoted strict component under current public data.
-- The strict empirical branch is effectively complete unless genuinely new same-scope transaction or incidence evidence appears.
-
-## Current Results Frame
-
-The current release should be read in this order:
-
-1. Full TDC is the project's broad Treasury-attributed measure.
-2. The strict independent non-TDC deposits question is narrower and is not assumed to equal full TDC.
-3. Treasury other-checkable and rest-of-world deposit channels remain outside the strict object because current incidence evidence does not validate them as clean in-scope deposit components.
-4. The strongest current strict evidence is narrow and loan-led, with mortgage lending strongest on impact and a nonfinancial-corporate bridge kept as comparison evidence only.
-5. Closure-style accounting remains descriptive only and is not independent verification.
-6. Historical TT&L-era handling is a separate backfill issue: the repo now refines the pre-`2002Q4` cash term, but that does not change the modern strict-component result.
-7. The `tdcest` corrected ladder is now part of the broad-estimate read only: at the latest common quarter (`2025Q4`), headline bank-only is about `68.996`, Tier 2 is about `-49.49`, Tier 3 is about `-51.57`, and Tier 3 broad-depository is about `-51.35`.
-
-The best concise summary is: the repo can defend full TDC as a broad Treasury Contribution to Deposits object, but it cannot yet defend full TDC as the strict deposit component of deposits.
-
-## Environment
-
-The repo uses an external virtualenv and external cache directories. It does not use a repo-local `.venv` or repo-local test/cache directories.
-
-For a precise public reproducibility guide, see [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
-
-Example setup:
+Use Python 3.11 or newer from a source checkout. The example configuration keeps
+the environment and caches outside the checkout:
 
 ```bash
-cp .env.example .env
+cp environment.example .env
 set -a
 source .env
 set +a
-
 python3 -m venv "$UV_PROJECT_ENVIRONMENT"
 "$UV_PROJECT_ENVIRONMENT/bin/pip" install -e '.[dev]'
 ```
 
-## Quick start
+Run the lightweight checks and synthetic example:
 
 ```bash
-set -a
-source .env
-set +a
-
 "$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass doctor
 "$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass demo
 "$UV_PROJECT_ENVIRONMENT/bin/python" -B -m pytest -q
+bash scripts/hygiene_check.sh
 ```
 
-To build the live quarterly bundle:
+`doctor` checks the public configuration and schema files. `demo` writes synthetic
+data and results to ignored local directories, including
+`output/demo/overview.json`; it leaves the committed public mirror unchanged.
+The tests use fixtures and do not establish that a fresh live-data rebuild passes.
+
+## What is compared
+
+| Object | Role and boundary |
+|---|---|
+| `tdc_bank_only_qoq` | Imported upstream Treasury-attributed flow proxy |
+| `total_deposits_bank_qoq` | Separately defined deposit outcome |
+| `other_component_qoq` | Arithmetic difference between that outcome and proxy |
+| Upstream measurement variants | Interest, fiscal, scope, and historical measurement comparisons |
+| Loan and securities series | Partial counterpart comparisons, not a complete independent deposit component |
+| Narrow holder-asset outcome | Unmatched legal-sector sensitivity for households/nonprofits and nonfinancial businesses |
+
+**DU** is the covered domestic nonbank deposit-claim perimeter. **RS** is its
+complement in the settlement system. Classification follows the claim debited or
+credited at settlement, not the holder's legal sector. Producer fields containing
+`ru_flow` retain their existing artifact names.
+
+For exact Treasury-attributed deposit-settlement flows on the same clock and
+perimeter, $\Delta D^P = F^{T,P} + N^P$. Subtracting a measured proxy from an
+outcome is an arithmetic comparison; it does not by itself recover the exact
+non-Treasury component $N^P$. Each comparison must retain its source-flow
+perimeter, deposit-outcome perimeter, clock, sample, units, and vintage.
+
+A conditional projection coefficient is separate from that accounting identity.
+It is not transaction-time incidence, a materialization ratio, a retention share,
+or a deposit multiplier. Direct projections of future deposit changes are not
+cumulative deposit-stock responses. Ratio reporting remains gated by denominator
+strength and appropriate joint inference.
+
+The holder-asset sensitivity combines Federal Reserve Financial Accounts (Z.1)
+checkable-deposit-and-currency and time-and-savings-deposit assets. Currency,
+issuer coverage, timing, and perimeter differences prevent treating it as the DU
+deposit outcome. The broader domestic-financial candidate includes explicit RS
+positions and is not admitted as a domestic nonbank deposit measure.
+
+## Rebuild a quarterly bundle
+
+A live rebuild downloads public source data and consumes the canonical TDCest
+outputs. Set `TDCEST_ROOT` in the ignored `.env` to the source or artifact root
+containing `data/processed/tdc_estimates.csv`. Supplemental comparison files are
+listed in [REPRODUCIBILITY.md](REPRODUCIBILITY.md). Set `FRED_API_KEY` when using the Federal Reserve Economic Data
+(FRED) API. See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for input and output
+boundaries.
+
+Use a separate ignored run root to inspect a rebuild without replacing the public
+mirror:
 
 ```bash
 set -a
 source .env
 set +a
-
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass pipeline run
+"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass pipeline run \
+  --root output/rebuild --reuse-mode rebuild
 ```
 
-## Main commands
+This is a full data build, not a smoke test. Public sources can revise their
+history or remove series; a current download need not reproduce a frozen mirror.
+The pipeline records manifests and readiness diagnostics. Missing coverage and
+failed identification checks remain limitations even if the command completes.
 
-- `tdcpass doctor`: check required repo/config files and environment visibility
-- `tdcpass demo`: run the synthetic demo pipeline
-- `tdcpass pipeline run`: build the live quarterly public-data bundle
-- `tdcpass discover-cache`: inspect optional sibling-cache candidates
+## Commands and contracts
 
-## Output policy
+| Command | Purpose |
+|---|---|
+| `tdcpass doctor` | Check checkout configuration and key availability |
+| `tdcpass demo` | Exercise the pipeline with synthetic data |
+| `tdcpass pipeline run` | Build or materialize the quarterly bundle |
+| `tdcpass pipeline closeout --root PATH` | Inspect validation and readiness from an existing run |
+| `tdcpass discover-cache` | Inspect optional reusable source artifacts |
 
-Generated data and build outputs are meant to be rebuilt locally. The repo does not commit:
+Use `--help` on a command for its options. The machine-readable output contract is
+[config/output_contract.yml](config/output_contract.yml), with column and artifact
+descriptions in [docs/output_schema.md](docs/output_schema.md). Historical field
+names such as `strict_*`, `shock`, and `pass_through` identify stored interfaces;
+they do not establish causal or independent-component claims.
 
-- raw downloads
-- derived quarterly datasets
-- demo datasets
-- `output/*` analysis working files
+## Outputs and public mirror
 
-The repo does commit the public `site/data/*` preview mirror that powers the public release.
+Raw downloads, caches, derived panels, demo files, and `output/` results are local
+and ignored. The tracked `site/data/` directory is a frozen preview mirror with
+producer and input provenance. Its vintage may differ from a newer local rebuild.
+The mirror's readiness status remains `not_ready` for the stronger identification
+and ratio claims because corroboration and outcome coverage are incomplete.
 
-## Repository layout
-
-```text
-tdcpass/
-  config/
-  data/
-  examples/
-  scripts/
-  src/tdcpass/
-  tests/
-```
-
-## Validation
-
-The current local validation path is:
+Serve the existing preview without downloading data or rerunning analysis:
 
 ```bash
-set -a
-source .env
-set +a
-
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass doctor
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m pytest -q
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass pipeline run --root /tmp/tdcpass-smoke
+python3 -m http.server 8000 --directory site
 ```
+
+Open `http://127.0.0.1:8000/`. This displays the committed comparison bundle; it
+does not refresh it. Replacing the mirror requires a clean, provenance-checked
+rebuild tied to reachable producer and input commits.
+
+## Interpretation limits
+
+- Arithmetic closure and residual agreement are descriptive checks, not
+  independent mechanism evidence.
+- Loan-led comparisons cover only part of the possible deposit counterparts.
+  They do not validate a complete independently measured non-TDC deposit total.
+- Treasury other-checkable deposits, foreign deposits, trade flows, and Federal
+  Reserve asset-purchase routing require same-perimeter settlement evidence
+  before they can support stronger deposit-component claims.
+- Measurement variants and time windows can change the comparison. Failed gates
+  and null results must remain visible.
+- A state-dependent association does not identify absorption behavior or select
+  a coefficient for scenario use.
 
 ## License
 
-MIT
+[MIT](LICENSE)

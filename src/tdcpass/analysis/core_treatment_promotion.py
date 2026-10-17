@@ -181,7 +181,6 @@ def build_core_treatment_promotion_summary(
 ) -> dict[str, Any]:
     baseline_spec = dict(shock_specs.get(baseline_shock_name, {}) or {})
     core_spec = dict(shock_specs.get(core_shock_name, {}) or {})
-    legacy_core_spec = dict(shock_specs.get(legacy_core_shock_name, {}) or {})
     if not baseline_spec or not core_spec:
         return {"status": "not_available", "reason": "missing_required_shock_specs"}
 

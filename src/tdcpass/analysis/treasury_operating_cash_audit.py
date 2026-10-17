@@ -43,7 +43,7 @@ def _quarterly_alignment_summary(shocked: pd.DataFrame) -> dict[str, Any]:
 
     toc = frame["tdc_treasury_operating_cash_qoq"].astype(float)
     tga = frame["tga_qoq"].astype(float)
-    reserves = frame["reserves_qoq"].astype(float)
+    frame["reserves_qoq"].astype(float)  # Preserve validation of the required comparison input.
     cb_nonts = frame["cb_nonts_qoq"].astype(float)
     valid_ratio = toc != 0.0
     ratio = (tga[valid_ratio] / toc[valid_ratio]).astype(float)
