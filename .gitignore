@@ -16,15 +16,8 @@ __pycache__/
 docs/
 prompts/
 
-# Commit the public preview mirror, but ignore any other ad hoc site output.
-site/*
-!site/data/
-!site/data/**
-!site/css/
-!site/css/**
-!site/js/
-!site/js/**
-!site/index.html
+# Local generated export bundles.
+/site/
 
 *.plan.md
 plan.md

@@ -7,7 +7,7 @@ component measurement, causal identification, or retention. Read coverage and
 readiness summaries alongside the tables.
 Short aliases such as `tdc_qoq` and `total_deposits_qoq` are optional compatibility aliases only and are not the frozen external artifact contract.
 The live quarterly bundle is produced by `tdcpass pipeline run` and writes the bank-only contract to `data/derived/quarterly_panel.csv`, `output/*`, and mirrored `site/data/*` artifacts.
-For the public release, `site/data/*` is the committed preview mirror and `output/*` remains regenerated local analysis output.
+The `site/data/*` paths are local generated JSON/CSV exports in the run root; all run outputs remain ignored.
 
 ## Required files
 
@@ -1188,7 +1188,7 @@ Minimum columns:
 - `evidence_label`
 - `proxy_share_of_other_beta`
 
-This file is the structural cross-check pack for the residual. It compares `other_component_qoq` to the baseline proxy outcomes at each horizon and records whether a proxy moves in the same direction, the opposite direction, or remains too weak to say much. In the current public bundle the proxy set includes bank private credit, Fed/liquidity plumbing, foreign deposits, and sign-normalized domestic nonfinancial MMF/repo reallocation channels. `proxy_share_of_other_beta` is diagnostic only and is not exact counterpart accounting.
+This file is the structural cross-check pack for the residual. It compares `other_component_qoq` to the baseline proxy outcomes at each horizon and records whether a proxy moves in the same direction, the opposite direction, or remains too weak to say much. In the generated comparison bundle the proxy set includes bank private credit, Fed/liquidity plumbing, foreign deposits, and sign-normalized domestic nonfinancial MMF/repo reallocation channels. `proxy_share_of_other_beta` is diagnostic only and is not exact counterpart accounting.
 
 ### `output/models/structural_proxy_evidence_summary.json`
 
@@ -1259,7 +1259,7 @@ Required keys:
 - `analysis_source_commit`
 - `analysis_tree`
 
-This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml`, record the `analysis_source_commit` used as the source anchor for the build, and record whether that source tree was clean or dirty at build time. That makes the committed public mirror validate against a satisfiable recorded state instead of the containing repo's later `HEAD`, while still surfacing whether the build came from uncommitted source changes.
+This is the machine-readable freeze record for the current headline unexpected-TDC shock. It should match the frozen default entry in `config/shock_specs.yml`, record the `analysis_source_commit` used as the source anchor for the build, and record whether that source tree was clean or dirty at build time. That makes a retained output bundle validate against a satisfiable recorded state instead of the containing repo's later `HEAD`, while still surfacing whether the build came from uncommitted source changes.
 
 ### `output/models/provenance_validation_summary.json`
 
@@ -1273,7 +1273,7 @@ Required keys:
 - `upstream_input_check`
 - `spec_metadata_check`
 
-This file is the recorded-state provenance verdict for the headline treatment fingerprint. It records whether the stored `analysis_source_commit` is present in repo history, whether the stored build tree was clean, whether the stored config hashes still match the current repo config files, and whether the upstream canonical-TDC source can be revalidated against its recorded source commit when the sibling repo is reachable. The publish path can still apply a stricter live current-HEAD gate before mirroring, but the committed public mirror should avoid an unsatisfiable “stored commit must equal containing repo HEAD” rule.
+This file is the recorded-state provenance verdict for the headline treatment fingerprint. It records whether the stored `analysis_source_commit` is present in repo history, whether the stored build tree was clean, whether the stored config hashes still match the current repo config files, and whether the upstream canonical-TDC source can be revalidated against its recorded source commit when the sibling repo is reachable. A new export can apply a stricter live current-HEAD gate, while a retained output bundle validates its recorded producer rather than requiring its stored commit to equal the containing checkout's later HEAD.
 
 ### `output/models/direct_identification_summary.json`
 
@@ -1448,7 +1448,7 @@ Recommended content:
 
 - `headline_metrics` should summarize headline accounting quantities and release context.
 - `sample` should state the quarterly sample span and row count.
-- `main_findings` and `caveats` should state that the public preview is a methods-and-reproducibility release around the frozen rolling 40-quarter ridge shock, report the usable shock span, and surface the current `not_ready` release posture honestly.
+- `main_findings` and `caveats` should state that the comparison uses the frozen rolling 40-quarter ridge shock, report the usable shock span, and preserve all failed readiness gates.
 - `evidence_tiers` should classify direct data, transparent transformations, model-based estimates, and inferred counterfactuals.
 
 ### `site/data/accounting_summary.csv`

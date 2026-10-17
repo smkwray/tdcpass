@@ -1,18 +1,8 @@
 # Reproducibility
 
-TDCpass separates inspection of its frozen public mirror from a fresh data build.
-Neither path establishes causal identification or an independent estimate.
-
-## Inspect the committed mirror
-
-```bash
-python3 -m http.server 8000 --directory site
-```
-
-Open `http://127.0.0.1:8000/`. The HTML, styles, scripts, and `site/data/` payloads
-are committed. Serving them does not download data, refresh the vintage, or rerun
-the comparison. Consult the mirror's treatment fingerprint and provenance summary
-for its producer and input identities.
+TDCpass builds reproducible arithmetic and boundary comparisons from public
+inputs. A completed build does not establish causal identification or an
+independent estimate.
 
 ## Validate the source checkout
 
@@ -28,9 +18,8 @@ set +a
 bash scripts/hygiene_check.sh
 ```
 
-The synthetic demo writes ignored local artifacts and does not alter the public
-mirror. Unit and fixture tests verify software behavior; they do not certify a
-current live-data rebuild.
+The synthetic demo writes ignored local artifacts. Unit and fixture tests verify
+software behavior; they do not certify a current live-data rebuild.
 
 ## Build from public inputs
 
@@ -61,8 +50,8 @@ set +a
   --root output/rebuild --reuse-mode rebuild
 ```
 
-The separate root contains its own `data/derived/`, `output/`, and `site/data/`.
-It lets a reader inspect a rebuild without modifying the committed mirror.
+The separate root contains its own derived data, analysis outputs, and local
+export bundle. It isolates the rebuild from other retained runs.
 `--source-root PATH` instead materializes an existing contract bundle, while
 `--raw-fixture-root PATH` supplies a frozen raw-data fixture. These are distinct
 from a fresh download; retain their source identities when reporting results.
@@ -72,10 +61,10 @@ The output contract and its column descriptions are
 [docs/output_schema.md](docs/output_schema.md). Read the download manifests,
 treatment fingerprint, provenance validation, coverage, and readiness summaries
 alongside the output tables. Command success does not override a failed evidence
-gate. Publication of a rebuilt mirror requires a clean, provenance-checked
-producer and reachable input commits.
+gate. Reproducible comparisons require a clean, provenance-checked producer and
+reachable input commits.
 
-Public sources revise observations and release layouts. Reproducing the numerical
-mirror requires its pinned input artifacts as well as its committed producer;
+Public sources revise observations and release layouts. Reproducing a numerical
+result requires its pinned input artifacts as well as its committed producer;
 installing the current package and downloading the latest data is a different
-rebuild. Local refreshes do not change the vintage of the committed mirror.
+rebuild.

@@ -1,7 +1,7 @@
 # Research design
 
 Current implementation posture:
-This repository analyzes quarterly pass-through using canonical TDC imported from `tdcest`. The public bundle is a methods and reproducibility release built around that broad treatment object and the separate strict independent non-TDC validation lane.
+This repository analyzes quarterly pass-through using canonical TDC imported from `tdcest`. The generated comparison bundle retains that broad treatment object and separate, incomplete loan-component and boundary diagnostics; it does not establish independent empirical authority.
 
 ## 0. Source of truth
 
@@ -156,7 +156,7 @@ At minimum also compare outcomes:
 - non-TDC component,
 - deposit-inclusive money robustness.
 
-The current public bundle keeps `period_sensitivity.csv` and `period_sensitivity_summary.json` on the preview surface because the medium-horizon pattern differs materially across the post-GFC early, pre-COVID, and COVID/post-COVID windows.
+The generated comparison bundle keeps `period_sensitivity.csv` and `period_sensitivity_summary.json` because the medium-horizon pattern differs materially across the post-GFC early, pre-COVID, and COVID/post-COVID windows.
 
 ## 7. Things not to do first
 

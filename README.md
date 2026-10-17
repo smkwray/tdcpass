@@ -36,7 +36,7 @@ bash scripts/hygiene_check.sh
 
 `doctor` checks the public configuration and schema files. `demo` writes synthetic
 data and results to ignored local directories, including
-`output/demo/overview.json`; it leaves the committed public mirror unchanged.
+`output/demo/overview.json`.
 The tests use fixtures and do not establish that a fresh live-data rebuild passes.
 
 ## What is compared
@@ -82,8 +82,7 @@ listed in [REPRODUCIBILITY.md](REPRODUCIBILITY.md). Set `FRED_API_KEY` when usin
 (FRED) API. See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for input and output
 boundaries.
 
-Use a separate ignored run root to inspect a rebuild without replacing the public
-mirror:
+Use a separate ignored run root for each rebuild:
 
 ```bash
 set -a
@@ -94,7 +93,7 @@ set +a
 ```
 
 This is a full data build, not a smoke test. Public sources can revise their
-history or remove series; a current download need not reproduce a frozen mirror.
+history or remove series; a current download need not reproduce an earlier run.
 The pipeline records manifests and readiness diagnostics. Missing coverage and
 failed identification checks remain limitations even if the command completes.
 
@@ -114,23 +113,13 @@ descriptions in [docs/output_schema.md](docs/output_schema.md). Historical field
 names such as `strict_*`, `shock`, and `pass_through` identify stored interfaces;
 they do not establish causal or independent-component claims.
 
-## Outputs and public mirror
+## Outputs
 
-Raw downloads, caches, derived panels, demo files, and `output/` results are local
-and ignored. The tracked `site/data/` directory is a frozen preview mirror with
-producer and input provenance. Its vintage may differ from a newer local rebuild.
-The mirror's readiness status remains `not_ready` for the stronger identification
-and ratio claims because corroboration and outcome coverage are incomplete.
-
-Serve the existing preview without downloading data or rerunning analysis:
-
-```bash
-python3 -m http.server 8000 --directory site
-```
-
-Open `http://127.0.0.1:8000/`. This displays the committed comparison bundle; it
-does not refresh it. Replacing the mirror requires a clean, provenance-checked
-rebuild tied to reachable producer and input commits.
+Raw downloads, caches, derived panels, demo files, and comparison bundles are local
+and ignored. Each run records its producer and input provenance. Inspect the
+coverage and readiness summaries alongside the numerical tables; incomplete
+corroboration and outcome coverage prevent stronger identification and ratio
+claims.
 
 ## Interpretation limits
 
