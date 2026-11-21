@@ -1,140 +1,99 @@
-# TDCpass — Treasury Deposit Component comparisons
+# tdcpass
 
-TDCpass builds quarterly comparisons between Treasury Deposit Component (TDC)
-proxies and named deposit outcomes. It checks arithmetic parity, measurement
-variants, and perimeter boundaries, and exports a reproducible comparison bundle.
-It is not an independent estimator or causal evidence chain.
+`tdcpass` compares quarterly Treasury Deposit Component (TDC) proxies from [tdcest](https://github.com/smkwray/tdcest) against quarterly US bank deposit changes and balance-sheet counterparts. It runs arithmetic accounting checks, comparisons across TDC definitions, and balance-sheet sensitivity tables, and writes reproducible CSV and JSON bundles under `output/`.
 
-[TDCest](https://github.com/smkwray/tdcest) owns the quarterly proxy and its
-measurement ladder. [EA-TDC](https://github.com/smkwray/ea-tdc) owns conditional
-deposit projections and any admitted cumulative response ratio. TDCpass retains
-projection and diagnostic machinery to reproduce comparisons; that machinery does
-not confer independent empirical authority on the results.
+[Reproducibility](REPRODUCIBILITY.md) | [Output schema](docs/output_schema.md)
 
-## Install and run
+## What it does
 
-Use Python 3.11 or newer from a source checkout. The example configuration keeps
-the environment and caches outside the checkout:
+Given a quarterly measured TDC series and a quarterly commercial-bank deposit change, `tdcpass` computes the arithmetic difference:
+
+```text
+other deposit change = total bank deposit change - measured TDC
+```
+
+It then builds a quarterly comparison bundle covering:
+
+- Exact-identity parity checks between `tdcest` TDC series and deposit totals across quarters.
+- Comparisons across bank-only, broad-depository, interest-adjusted, and MMF/ON RRP-adjusted TDC series.
+- Balance-sheet counterpart tables pairing TDC with partial bank loan and securities transactions and nonbank holder-asset comparisons.
+- Residual and local-projection comparison scripts exposed for sensitivity checks (`decompose`, `shock`, `lp`).
+
+## Data
+
+- Quarterly TDC series from `tdcest`: set `TDCEST_ROOT` to a directory containing `tdcest` processed outputs (`data/processed/tdc_estimates.csv` and optional sensitivity panels). If `TDCEST_ROOT` is unset, `tdcpass` looks in `../tdcest/data/processed/`.
+- Public Federal Reserve (Z.1, H.8, H.4.1), Treasury Fiscal Data, and FRED series listed in `config/data_sources.yml` and `config/series_registry.yml`. Export `FRED_API_KEY` to fetch via the FRED JSON API; if unset, downloads fall back to FRED's public `fredgraph.csv` endpoint.
+
+See `environment.example` for optional environment variables (`UV_PROJECT_ENVIRONMENT`, `TDCEST_ROOT`, `FRED_API_KEY`, and cache roots).
+
+## Install
+
+Requires Python 3.11 or later. From the repository root:
 
 ```bash
 cp environment.example .env
-set -a
-source .env
-set +a
-python3 -m venv "$UV_PROJECT_ENVIRONMENT"
-"$UV_PROJECT_ENVIRONMENT/bin/pip" install -e '.[dev]'
+set -a && source .env && set +a
+make install
 ```
 
-Run the lightweight checks and synthetic example:
+`make install` creates a virtual environment at `$HOME/venvs/tdcpass` (override with `VENV=/path/to/env`) and runs `pip install -e '.[dev]'`.
+
+## Usage
+
+Check required configuration and schema files (and whether `FRED_API_KEY` is set):
 
 ```bash
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass doctor
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass demo
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m pytest -q
+tdcpass doctor
+```
+
+Run the offline 96-quarter synthetic demo (writes `data/examples/synthetic_quarterly_panel.csv` and `output/demo/`):
+
+```bash
+tdcpass demo
+```
+
+Rebuild a full quarterly comparison bundle into an isolated output directory:
+
+```bash
+tdcpass pipeline run --root output/rebuild --reuse-mode rebuild
+```
+
+Validate an existing run's closeout artifacts and manifest:
+
+```bash
+tdcpass pipeline closeout --root output/rebuild
+```
+
+Additional commands include `discover-cache`, `fetch-fred`, `fetch-fiscaldata`, `decompose`, `shock`, and `lp` (`tdcpass --help` lists all options; `make doctor`, `make demo`, `make pipeline`, and `make test` wrap the common targets).
+
+## Output
+
+The demo writes quarterly accounting summaries, residual tables, local-projection tables, and manifests under `output/demo/`. Full pipeline runs follow the contract in `config/output_contract.yml` and schema in [docs/output_schema.md](docs/output_schema.md). Raw downloads, derived panels (`data/derived/`), caches, and generated bundles (`output/`) are local and ignored by Git.
+
+Core quarterly panel columns:
+
+| Description | Column |
+|---|---|
+| Quarterly measured TDC, banks | `tdc_bank_only_qoq` |
+| Quarterly commercial-bank deposit change | `total_deposits_bank_qoq` |
+| Quarterly residual deposit change | `other_component_qoq` |
+
+## Limits
+
+- Subtracting a measured TDC proxy from total deposit change leaves measurement error and scope differences inside the residual.
+- Bank loan and securities tables cover only those partial balance-sheet counterparts and leave other bank balance-sheet items outside the comparison.
+- CSV columns and command names such as `strict_*`, `shock`, and `pass_through` are interface identifiers for arithmetic and local-projection checks.
+- Public statistical releases revise history, so a fresh online rebuild can differ from an earlier snapshot.
+
+## Tests
+
+```bash
+pytest -q
 bash scripts/hygiene_check.sh
 ```
 
-`doctor` checks the public configuration and schema files. `demo` writes synthetic
-data and results to ignored local directories, including
-`output/demo/overview.json`.
-The tests use fixtures and do not establish that a fresh live-data rebuild passes.
-
-## What is compared
-
-| Object | Role and boundary |
-|---|---|
-| `tdc_bank_only_qoq` | Imported upstream Treasury-attributed flow proxy |
-| `total_deposits_bank_qoq` | Separately defined deposit outcome |
-| `other_component_qoq` | Arithmetic difference between that outcome and proxy |
-| Upstream measurement variants | Interest, fiscal, scope, and historical measurement comparisons |
-| Loan and securities series | Partial counterpart comparisons, not a complete independent deposit component |
-| Narrow holder-asset outcome | Unmatched legal-sector sensitivity for households/nonprofits and nonfinancial businesses |
-
-**DU** is the covered domestic nonbank deposit-claim perimeter. **RS** is its
-complement in the settlement system. Classification follows the claim debited or
-credited at settlement, not the holder's legal sector. Producer fields containing
-`ru_flow` retain their existing artifact names.
-
-For exact Treasury-attributed deposit-settlement flows on the same clock and
-perimeter, $\Delta D^P = F^{T,P} + N^P$. Subtracting a measured proxy from an
-outcome is an arithmetic comparison; it does not by itself recover the exact
-non-Treasury component $N^P$. Each comparison must retain its source-flow
-perimeter, deposit-outcome perimeter, clock, sample, units, and vintage.
-
-A conditional projection coefficient is separate from that accounting identity.
-It is not transaction-time incidence, a materialization ratio, a retention share,
-or a deposit multiplier. Direct projections of future deposit changes are not
-cumulative deposit-stock responses. Ratio reporting remains gated by denominator
-strength and appropriate joint inference.
-
-The holder-asset sensitivity combines Federal Reserve Financial Accounts (Z.1)
-checkable-deposit-and-currency and time-and-savings-deposit assets. Currency,
-issuer coverage, timing, and perimeter differences prevent treating it as the DU
-deposit outcome. The broader domestic-financial candidate includes explicit RS
-positions and is not admitted as a domestic nonbank deposit measure.
-
-## Rebuild a quarterly bundle
-
-A live rebuild downloads public source data and consumes the canonical TDCest
-outputs. Set `TDCEST_ROOT` in the ignored `.env` to the source or artifact root
-containing `data/processed/tdc_estimates.csv`. Supplemental comparison files are
-listed in [REPRODUCIBILITY.md](REPRODUCIBILITY.md). Set `FRED_API_KEY` when using the Federal Reserve Economic Data
-(FRED) API. See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for input and output
-boundaries.
-
-Use a separate ignored run root for each rebuild:
-
-```bash
-set -a
-source .env
-set +a
-"$UV_PROJECT_ENVIRONMENT/bin/python" -B -m tdcpass pipeline run \
-  --root output/rebuild --reuse-mode rebuild
-```
-
-This is a full data build, not a smoke test. Public sources can revise their
-history or remove series; a current download need not reproduce an earlier run.
-The pipeline records manifests and readiness diagnostics. Missing coverage and
-failed identification checks remain limitations even if the command completes.
-
-## Commands and contracts
-
-| Command | Purpose |
-|---|---|
-| `tdcpass doctor` | Check checkout configuration and key availability |
-| `tdcpass demo` | Exercise the pipeline with synthetic data |
-| `tdcpass pipeline run` | Build or materialize the quarterly bundle |
-| `tdcpass pipeline closeout --root PATH` | Inspect validation and readiness from an existing run |
-| `tdcpass discover-cache` | Inspect optional reusable source artifacts |
-
-Use `--help` on a command for its options. The machine-readable output contract is
-[config/output_contract.yml](config/output_contract.yml), with column and artifact
-descriptions in [docs/output_schema.md](docs/output_schema.md). Historical field
-names such as `strict_*`, `shock`, and `pass_through` identify stored interfaces;
-they do not establish causal or independent-component claims.
-
-## Outputs
-
-Raw downloads, caches, derived panels, demo files, and comparison bundles are local
-and ignored. Each run records its producer and input provenance. Inspect the
-coverage and readiness summaries alongside the numerical tables; incomplete
-corroboration and outcome coverage prevent stronger identification and ratio
-claims.
-
-## Interpretation limits
-
-- Arithmetic closure and residual agreement are descriptive checks, not
-  independent mechanism evidence.
-- Loan-led comparisons cover only part of the possible deposit counterparts.
-  They do not validate a complete independently measured non-TDC deposit total.
-- Treasury other-checkable deposits, foreign deposits, trade flows, and Federal
-  Reserve asset-purchase routing require same-perimeter settlement evidence
-  before they can support stronger deposit-component claims.
-- Measurement variants and time windows can change the comparison. Failed gates
-  and null results must remain visible.
-- A state-dependent association does not identify absorption behavior or select
-  a coefficient for scenario use.
+`pytest -q` runs unit and synthetic-panel tests offline; `scripts/hygiene_check.sh` checks that local artifacts, credentials, and private paths are not tracked by Git.
 
 ## License
 
-[MIT](LICENSE)
+MIT. See [LICENSE](LICENSE).
